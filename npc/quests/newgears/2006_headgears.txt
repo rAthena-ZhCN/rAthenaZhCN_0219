@@ -1,0 +1,1139 @@
+//===== rAthena Script =======================================
+//= 2006 Headgear Quests
+//===== By: ==================================================
+//= DiviniaRO members, cleaned by reddozen
+//===== Current Version: =====================================
+//= 1.4
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Censor Bar, Feather Beret, Valk. Helm, Hahoe Mask,
+//= Mythical Lion Mask, Bride Mask, Magistrate Hat and Ayam
+//===== Additional Comments: =================================
+//= NPC id's and dialog are custom, please replace
+//= 1.0a fixed typos, added missing names, more cleaned and
+//=     standartized stuff a bit [Lupus]
+//= 1.0b fixed Helm of Valkyries ingredients
+//= 1.0c corrected item names according to item_db [Lupus]
+//= 1.1 Full update. EuRO (?) dialogs, and positions. [L0ne_W0lf]
+//= 1.2 Fixed bugs in the Hahoe/Lion/Bride Mask NPC. [L0ne_W0lf]
+//=     Fixed some of the names to iRO.
+//= 1.3 Fixed some color code bugs in Ghenirhemin. Thanks to yyCC. [L0ne_W0lf]
+//= 1.3a Fixed wrong item names (due to copy/paste) [Lupus]
+//= 1.4 Chungwolmang now checks if the last item set should be deleted. (bugreport:4719) [L0ne_W0lf]
+//============================================================
+
+// Censor Bar
+//============================================================
+rachel,91,273,8	script	？	930,{
+	if (countitem(983) > 0 && countitem(7111) > 99 && countitem(938) > 98 && Zeny > 99999) {
+		mes "[?]";
+		mes "嘻嘻……是我的搭档吧，嗯？";
+		mes "那么，我要的东西都带来了吗？";
+		mes "很好，现在我可以制作能帮到你的物品了";
+		mes "用来掩盖你的身份！嘻嘻……";
+		next;
+		mes "- 嗡嗡 嗡嗡 咔嗒 咔嗒 -";
+		mes "- 窸窣 窸窣 窸窣 窸窣 -";
+		mes "- 嗡嗡 嗡嗡 咔嗒 咔嗒 -";
+		mes "- 窸窣 窸窣 窸窣 窸窣 -";
+		next;
+		mes "[?]";
+		mes "...Hey, don't look over my shoulder.";
+		mes "我不想分享";
+		mes "我的生意秘诀，你懂吗？";
+		next;
+		mes "- 嗡嗡 嗡嗡 咔嗒 咔嗒 -";
+		mes "- 窸窣 窸窣 窸窣 窸窣 -";
+		mes "- 嗡嗡 嗡嗡 咔嗒 咔嗒 -";
+		mes "- 窸窣 窸窣 窸窣 窸窣 -";
+		next;
+		delitem 983,1; //Black_Dyestuffs
+		delitem 7111,100; //Smooth_Paper
+		delitem 938,99; //Sticky_Mucus 
+		set Zeny,Zeny-100000;
+		getitem 5175,1; //Anonimity_Request
+		mes "[?]";
+		mes "呼……做好了。嗯，做起来倒不算太难，不过……";
+		mes "嘻嘻，重要的是";
+		mes "现在你可以隐藏身份了。来，拿着这个。";
+		mes "希望这个面具能帮你";
+		mes "避开你的敌人。啊哈哈哈！";
+		close;
+	}
+	mes "[?]";
+	mes "...No way! Don't you dare to find out about me!";
+	mes "别跟我说话！";
+	mes "嘘！别让我的敌人知道我在哪里！";
+	next;
+	mes "[?]";
+	mes "嗯？你是我的同类啊。";
+	mes "那么，你是在躲避什么，";
+	mes "想要隐藏自己的身份，我说得对吗？";
+	mes "是啊……我猜得没错……嘻嘻。";
+	next;
+	mes "[?]";
+	mes "嗯，我该对同伴友善一些。";
+	mes "虽然我不能向你透露我的身份，";
+	mes "但我能帮你安全地躲开敌人。";
+	next;
+	mes "[?]";
+	mes "给我带来 ^FF00001 黑色染料^000000，";
+	mes "^FF0000100 光滑纸^000000、^FF000099 粘稠黏液^000000，";
+	mes "以及 ^FF0000100,000 Zeny^000000。";
+	mes "然后我就会帮你，嘻嘻。";
+	next;
+	mes "[?]";
+	mes "你现在可以走了。";
+	mes "我们居然能这样互相帮助。";
+	mes "等你收集齐所有材料，";
+	mes "就悄悄回来，别让任何人知道。嘻嘻。";
+	close;
+}
+
+// Feather Beret
+//============================================================
+rachel,152,131,3	script	萨克朱尔	928,{
+	if (countitem(5172) > 0 && countitem(7063) > 99 && countitem(982) > 0) {
+		mes "[萨克朱尔]";
+		mes "很好，你把所有东西都带来了";
+		mes "用来制作 ^FF0000羽毛贝雷帽^000000！";
+		mes "为了犒赏你的辛劳，";
+		mes "我将亲自进行帽子的制作。";
+		next;
+		mes "[萨克朱尔]";
+		mes "站到我身边，庄重地观看制作过程。";
+		mes "挺直身子，保持仪态，";
+		mes "目光正视前方！";
+		next;
+		mes "[萨克朱尔]";
+		mes "如果你不照我刚才说的做，";
+		mes "^FF0000这次帽子制作可能会失败！";
+		mes "而且，如果制作失败，";
+		mes "你将失去所有材料，";
+		mes "我也不会为你的失误负责！^000000";
+		next;
+		mes "- 咚 咚 -";
+		mes "- 咚 咚 -";
+		mes "- 咚 咚 -";
+		mes "- 轰 -";
+		next;
+		mes "- 咚 咚 -";
+		mes "- 咚 咚 -";
+		mes "- 咚 咚 -";
+		mes "- 轰 -";
+		next;
+		set .@result,rand(1,10);
+		if (.@result == 4) {
+			delitem 5172,1; //Beret 
+			delitem 7063,100; //Soft_Feather 
+			delitem 982,1; //White_Dyestuffs
+			mes "[萨克朱尔]";
+			mes "我确实成功做出了帽子，";
+			mes "但我不能让它落到别人手里！";
+			mes "羽毛贝雷帽的关键在于";
+			mes "贝雷帽与羽毛的精确角度，";
+			mes "但这顶帽子的角度有些歪了，";
+			mes "质量也差得配不上我的作品！";
+			next;
+			mes "[萨克朱尔]";
+			mes "我明白你感到相当遗憾";
+			mes "面对这个结果。不过，我劝你不要";
+			mes "太失望，再试一次！";
+			mes "世上没有不可能的事，你一定能做到！";
+			next;
+			mes "[萨克朱尔]";
+			mes "好了，振作起来！";
+			mes "你已经做过一次，";
+			mes "再做一次轻而易举。";
+			mes "明白了就出发吧，再去收集材料！";
+			close;
+		}
+		delitem 5172,1; //Beret 
+		delitem 7063,100; //Soft_Feather 
+		delitem 982,1; //White_Dyestuffs
+		getitem 5170,1; //Feather_Beret 
+		mes "[萨克朱尔]";
+		mes "很好，我成功了！看看这美妙的搭配";
+		mes "羽毛与贝雷帽之间，";
+		mes "你能感受到其中的和谐分寸。";
+		mes "我不得不说，这顶帽子一定是";
+		mes "当今年轻人不可或缺的物件之一。";
+		next;
+		mes "[萨克朱尔]";
+		mes "既然我是用你的材料制作了这顶帽子，";
+		mes "它就属于你。";
+		mes "好好珍惜这顶帽子，做一个出色而自信的人。";
+		close;
+	}
+	mes "[萨克朱尔]";
+	mes "挺直身体，保持紧张感！";
+	mes "约束好自己，举止端正！";
+	mes "受人尊敬的人就该这样行事！";
+	mes "如今的年轻人太软弱娇气了。";
+	mes "你不同意吗，年轻的冒险者？";
+	next;
+	if (select("是的，先生！:不。") == 1) {
+		mes "[萨克朱尔]";
+		mes "啊！我喜欢你的回答！";
+		mes "最近我很少见到像你这样有纪律的年轻人。";
+		mes "可惜，就连你也还没达到我期望的纪律性！";
+		mes "嗯……哦，对了，也许 ^FF0000羽毛贝雷帽^000000";
+		mes "能让你看起来更有纪律。";
+		next;
+		mes "[萨克朱尔]";
+		mes "我很想称赞你的态度。";
+		mes "因此，我愿意为你制作羽毛贝雷帽";
+		mes "只要你把材料带给我。明白吗？";
+		next;
+		mes "[萨克朱尔]";
+		mes "材料是 ^FF00001 贝雷帽^000000、^FF0000100 柔软羽毛^000000，";
+		mes "以及 ^FF00001 白色染料^000000。";
+		mes "务必记住全部材料，并带给我";
+		mes "数量要分毫不差！";
+		next;
+		mes "[萨克朱尔]";
+		mes "感谢我提出这个提议吧";
+		mes "因为这顶帽子将完善你的形象";
+		mes "让你更加威严而优雅！";
+		mes "明白了就出发吧，";
+		mes "尽快去收集材料！";
+		close;
+	}
+	mes "[萨克朱尔]";
+	mes "我听不见！你的声音里毫无自信！";
+	mes "凭这种软弱的态度，你要怎么在这个严酷的世界生存？";
+	mes "立刻给我振作起来！";
+	close;
+}
+
+// Valkyrie Helm
+//============================================================
+hugel,147,103,3	script	格尼尔赫敏	897,{
+	if (moza_valkylie == 5) {
+		set .@val2,rand(1,10);
+		if (.@val2 == 3) {
+			specialeffect EF_LIGHTSPHERE;
+			mes "[盖尼赫敏]";
+			mes "材料仍在融合中。";
+			next;
+			mes "[盖尼赫敏]";
+			mes "嗯？！哦……哦？！这不是……";
+			mes "这不是……？！";
+			next;
+			specialeffect EF_FORESTLIGHT2;
+			mes "[盖尼赫敏]";
+			mes "啊……啊哈哈哈，我们成功了！我们成功了！";
+			mes "女武神头盔……我们重现了女武神头盔，";
+			mes "一件光辉的神之铠甲！";
+			mes "啊……这是说……？";
+			next;
+			mes "[盖尼赫敏]";
+			mes "我们正在书写新的历史！";
+			mes "是的，我们才刚刚开始书写新的历史。";
+			next;
+			mes "[盖尼赫敏]";
+			mes "非常感谢你给我参与此事的机会。";
+			mes "我确信天堂里的祖先们会很高兴";
+			mes "看到女武神头盔如此成功地重现。";
+			mes "哈哈哈哈哈哈！";
+			next;
+			mes "[盖尼赫敏]";
+			mes "请收下这顶头盔。";
+			mes "正如我承诺的，它属于你。";
+			mes "请为你自己感到自豪，并且";
+			mes "不要以邪恶之举玷污这顶头盔。";
+			next;
+			set moza_valkylie,0;
+			getitem 5171,1; //Valkyrie_Helm
+			mes "[盖尼赫敏]";
+			mes "愿神赐福这位冒险者";
+			mes "他书写了新的历史。";
+			mes "我，盖尼赫敏，向神祈求他旅途平安";
+			mes "他正朝着新的历史前行。";
+			close;
+		}
+		specialeffect EF_LIGHTSPHERE;
+		mes "[盖尼赫敏]";
+		mes "材料仍在融合中。";
+		close;
+	}
+	else if (moza_valkylie == 4) {
+		set .@val,rand(1,10);
+		if (.@val == 7) {
+			mes "[盖尼赫敏]";
+			mes "............";
+			next;
+			specialeffect EF_LIGHTSPHERE;
+			mes "[盖尼赫敏]";
+			mes "哦……哦？它们……它们刚开始融合！";
+			mes "看看这闪耀的光芒！";
+			mes "我无法……我无法相信";
+			mes "这就是瓦尔哈拉发生的事！";
+			next;
+			set moza_valkylie,5;
+			mes "[盖尼赫敏]";
+			mes "我们现在见证了神的恩典……啊……";
+			close;
+		}
+		mes "[盖尼赫敏]";
+		mes "....Let's wait a little longer.";
+		close;
+	}
+	else if (moza_valkylie == 3) {
+		set moza_valkylie,4;
+		mes "[盖尼赫敏]";
+		mes "你能别再焦虑了吗？";
+		mes "放轻松等着，好吗？";
+		mes "某种意义上，我们正在举行神圣的仪式，";
+		mes "它不会因此加快，";
+		mes "只因为你一个人类希望它更快发生。";
+		close;
+	}
+	else if (moza_valkylie == 2 && Zeny > 9999999 && countitem(4219) > 0 && countitem(4114) > 0 && countitem(4177) > 0 && countitem(4259) > 0 && countitem(4212) > 0 && countitem(4073) > 0 && countitem(4112) > 0 && countitem(4081) > 0 && countitem(4251) > 0 && countitem(4166) > 0 && countitem(7511) > 999 && countitem(7563) > 999) {
+		mes "[盖尼赫敏]";
+		mes "嗯……你把所有东西都带来了，我很佩服";
+		mes "尽管收集它们很困难。确实很难吧？";
+		mes "哈哈，看你的脸就知道了。";
+		mes "干得好，我的朋友，你做得很好。";
+		next;
+		mes "[盖尼赫敏]";
+		mes "现在，请把它们交给我。";
+		mes "如果我把它们放在一处，";
+		mes "我很确定它们会开始";
+		mes "凭借自身的神秘力量融合进头盔。";
+		next;
+		if (select("把物品交给他。:不要交给他。") == 1) {
+			mes "[盖尼赫敏]";
+			mes "太好了。现在，我们只需";
+			mes "等它们完全融合为一体。";
+			next;
+			delitem 4219,1; //Sageworm_Card
+			delitem 4114,1; //Argiope_Card
+			delitem 4177,1; //Dryad_Card
+			delitem 4259,1; //Wooden_Golem_Card
+			delitem 4212,1; //Bon_Gun_Card
+			delitem 4073,1; //Pirate_Skel_Card
+			delitem 4112,1; //Marduk_Card
+			delitem 4081,1; //Hode_Card
+			delitem 4251,1; //Elder_Card
+			delitem 4166,1; //Nightmare_Terror_Card
+			delitem 7511,1000; //Rune_Of_Darkness
+			delitem 7563,1000; //Bloody_Rune
+			set Zeny,Zeny-10000000;
+			set moza_valkylie,3;
+			mes "[盖尼赫敏]";
+			mes "我现在紧张极了";
+			mes "期待着好结果。哈哈哈哈。";
+			close;
+		}
+		mes "[盖尼赫敏]";
+		mes "？";
+		close;
+	}
+	else if (moza_valkylie == 2) {
+		mes "[盖尼赫敏]";
+		mes "请带给我";
+		mes "^FF00001 贤者虫卡片、1阿吉欧佩卡片，";
+		mes "^FF00001 树精卡片、1 木妖卡片，";
+		mes "^FF00001 僵尸卡片、1 海盗骷髅卡片，";
+		mes "^FF00001 马尔杜克卡片、1 霍德卡片，";
+		mes "^FF00001 长老卡片、1 梦魇恐惧卡片，^000000";
+		next;
+		mes "[盖尼赫敏]";
+		mes "^FF00001,000 黑暗符文，";
+		mes "^FF00001,000 血腥符文，";
+		mes "^FF0000以及头盔的费用 10,000,000 Zeny^000000。";
+		next;
+		mes "[盖尼赫敏]";
+		mes "考虑到";
+		mes "你即将获得神力，你不觉得吗？";
+		next;
+		set moza_valkylie,2;
+		mes "[盖尼赫敏]";
+		mes "我们之后再谈";
+		mes "等你备好钱和物品。";
+		mes "我现在累坏了";
+		mes "好久没说过这么多话了。";
+		mes "失陪了。";
+		close;
+	}
+	else if (moza_valkylie == 1) {
+		mes "[盖尼赫敏]";
+		mes "你现在一定很吃惊。";
+		mes "是的，这完全可以理解。";
+		mes "如果你走南闯北，";
+		mes "听过许多故事，就会知道这是什么。";
+		mes "没错，这就是 ^FF0000女武神头盔^000000。";
+		next;
+		mes "[盖尼赫敏]";
+		mes "传说中只允许";
+		mes "超越极限之人佩戴的头盔。";
+		mes "一件被不可思议之力祝福的神之铠甲。";
+		mes "现在你能看出我说的是真的了吧？";
+		next;
+		mes "[盖尼赫敏]";
+		mes "这么多年过去了，因此";
+		mes "它的力量已经减弱，";
+		mes "但你仍能感受到这头盔上的神圣气息。";
+		mes "你不觉得吗？";
+		next;
+		mes "[盖尼赫敏]";
+		mes "嗯……我无权佩戴这顶头盔。";
+		mes "所以，如果我找到完全适合这顶头盔的人，";
+		mes "我会毫无遗憾地把它交给他。";
+		next;
+		mes "[盖尼赫敏]";
+		mes "当然，我不能白白送出";
+		mes "如此珍贵的东西而毫无回报。";
+		mes "事情就是这样，你懂吧？";
+		mes "我也许会考虑把它给你";
+		mes "因为你看起来比别人富有，";
+		mes "而且我能从你身上感受到特别的气息。";
+		next;
+		mes "[盖尼赫敏]";
+		mes "那么，你怎么说？";
+		mes "我认为我看人很准。";
+		mes "我觉得你能完全重现这顶女武神头盔";
+		mes "并发挥出它的全部潜力。";
+		next;
+		if (select("好。:不，谢谢。") == 1) {
+			mes "[盖尼赫敏]";
+			mes "你正如我所料，是个有抱负的年轻人。";
+			mes "这无疑是很大的优势。";
+			mes "好，从现在起我把我知道的告诉你。";
+			mes "仔细听好。";
+			next;
+			mes "[盖尼赫敏]";
+			mes "首先，我们必须完全恢复头盔的力量。";
+			mes "为此，我们必须找到魔物卡片";
+			mes "它们拥有神秘的力量。";
+			next;
+			mes "[盖尼赫敏]";
+			mes "还不止这些。你知道，";
+			mes "我们不能只是把那些魔物卡片";
+			mes "贴在头盔上。因此，我们需要一种力量";
+			mes "能把卡片与头盔融合为一体。";
+			next;
+			mes "[盖尼赫敏]";
+			mes "古老符文最适合提供这种力量，";
+			mes "我们尤其需要黑暗符文和血腥符文。";
+			mes "也许，它们是因为被封印的黑暗力量";
+			mes "和血腥黏稠之力而被选中的？这只是我的猜测，哈哈哈哈！";
+			next;
+			mes "[盖尼赫敏]";
+			mes "一旦我们成功恢复头盔的力量，";
+			mes "你就得从我这里买下这顶头盔。";
+			mes "正如我之前所说，我不会";
+			mes "白白送出如此珍贵的东西。";
+			mes "这也能证明你有资格成为头盔的主人。";
+			next;
+			mes "[盖尼赫敏]";
+			mes "基本上，你必须带给我……";
+			mes "啊，你需要带的东西太多了。";
+			mes "我建议你记下来，并背熟。";
+			next;
+			mes "请带给我";
+			mes "^FF00001 贤者虫卡片、1阿吉欧佩卡片，";
+			mes "1 树精卡片、1 木妖卡片，";
+			mes "1 僵尸卡片、1 海盗骷髅卡片，";
+			mes "1 马尔杜克卡片、1 霍德卡片，";
+			mes "1 长老卡片、1 梦魇恐惧卡片，^000000";
+			next;
+			mes "[盖尼赫敏]";
+			mes "^FF00001,000 黑暗符文，";
+			mes "1,000 血腥符文，";
+			mes "以及头盔的费用 10,000,000 Zeny^000000。";
+			next;
+			mes "[盖尼赫敏]";
+			mes "考虑到";
+			mes "你即将获得神力，你不觉得吗？";
+			next;
+			set moza_valkylie,2;
+			mes "[盖尼赫敏]";
+			mes "我们之后再谈";
+			mes "等你备好钱和物品。";
+			mes "我现在累坏了";
+			mes "好久没说过这么多话了。";
+			mes "失陪了。";
+			close;
+		}
+		mes "[盖尼赫敏]";
+		mes "哈哈，我明白";
+		mes "这不是个容易的选择。";
+		mes "慢慢来，我的朋友。";
+		mes "如果你仍然不想要这顶头盔，我尊重你的决定。";
+		close;
+	}
+	else if (Zeny > 9999999) {
+		mes "[盖尼赫敏]";
+		mes "嗯……你看起来像个穷困的流浪者，";
+		mes "但你身上似乎带着一大笔钱。";
+		mes "我想那句老话说得对：";
+		mes "''不要以貌取人。''";
+		next;
+		mes "[盖尼赫敏]";
+		mes "你或许能理解我的故事。";
+		mes "你愿意听听我漫长的故事吗？";
+		mes "对你来说也许有趣，也许无趣，";
+		mes "但我保证无论如何都不会让你无聊。";
+		next;
+		if (select("听。:不听。") == 1) {
+			mes "[盖尼赫敏]";
+			mes "好，让我自我介绍一下。";
+			mes "我叫盖尼赫敏。";
+			mes "我和别人没什么不同，";
+			mes "若要说我唯一的优势，";
+			mes "我的钱比他们多一点。哈哈哈。";
+			next;
+			mes "[盖尼赫敏]";
+			mes "不过，我的钱不是自己赚的，";
+			mes "而是从祖先那里继承的财富，";
+			mes "他们都是极有天赋的商人。";
+			mes "我感谢他留下如此庞大的财产。";
+			next;
+			mes "[盖尼赫敏]";
+			mes "其实，我很惭愧地告诉你";
+			mes "我并不知道我的祖先究竟做了什么";
+			mes "才积累这么多财富。也许有人经营生意，";
+			mes "还有些人可能是伟大的艺术家……";
+			next;
+			mes "[盖尼赫敏]";
+			mes "我们家只是有幸拥有";
+			mes "如此伟大的祖先，为家族带来了财富。";
+			mes "要列出我每一位成功的祖先";
+			mes "我至少需要一周时间。";
+			next;
+			mes "[盖尼赫敏]";
+			mes "不过，我想告诉你一位了不起的祖先，";
+			mes "他成为了我们家族的英雄。";
+			next;
+			mes "[盖尼赫敏]";
+			mes "嗯，其实我并不清楚";
+			mes "他做了什么，但我知道";
+			mes "他为我们家族第一次带来了";
+			mes "荣耀与名声。";
+			mes "只是年代太过久远，我们没有";
+			mes "关于他的任何文献，所以……";
+			next;
+			mes "[盖尼赫敏]";
+			mes "不过我清楚地记得关于他的一件事。";
+			mes "他是唯一能够";
+			mes "接近神的人类，他展现了";
+			mes "他的神力，为我们人类带来光明。";
+			next;
+			mes "[盖尼赫敏]";
+			mes "我不知道他如何获得神力，";
+			mes "也不知道他如何接近神。";
+			mes "我记得这些，只是因为我从小就";
+			mes "反复听人讲述他的传奇故事……";
+			next;
+			mes "[盖尼赫敏]";
+			mes "我可以让你看出我不是在编故事。";
+			mes "我跟你说过我们没有关于他的任何文献，对吧？";
+			mes "不过，有样东西我可以给你看。";
+			mes "来，看看这个。";
+			next;
+			set moza_valkylie,1;
+			mes "[盖尼赫敏]";
+			mes "看到了吗？这足以说明";
+			mes "我不是在编故事！";
+			mes "这是我祖先用过的东西！";
+			close;
+		}
+		mes "[盖尼赫敏]";
+		mes "真可惜！不过，我不想强迫你";
+		mes "去做你不想做的事。哈哈哈。";
+		mes "记住，你只是为自己的人生又做了一个选择。";
+		close;
+	}
+	mes "[盖尼赫敏]";
+	mes "世间万物都有其存在的意义与理由。";
+	mes "你和我，今天注定会相遇。";
+	next;
+	mes "[盖尼赫敏]";
+	mes "嗯……虽然我说万物都有意义，";
+	mes "但可惜你对我来说毫无趣味。";
+	mes "尽管叫我财迷吧，";
+	mes "但我就是喜欢有钱人。";
+	next;
+	mes "[盖尼赫敏]";
+	mes "如果你能向我证明你很有钱，";
+	mes "我也许会改变主意，对你产生兴趣。";
+	mes "但我要等到你向我展示你的钱，";
+	mes "才会决定是否对你感兴趣。哈哈哈哈！";
+	close;
+}
+// Hahoe Mask / Mythical Lion Mask / Bride Mask
+//============================================================
+payon,135,320,3	script	青月望	97,{
+	if (moza_tal == 2) {
+		if (countitem(7015) > 19 && countitem(952) > 99 && countitem(1028) > 99) {
+			//Hahoe_Mask: Bookclip_In_Memory, Cactus_Needle, Wild_Boar's_Mane
+			callsub S_MakeMask,5176,7015,20,952,100,1028,100,0,0;
+		}
+		if (countitem(1048) > 499 && countitem(1053) > 1 && countitem(980) > 0) {
+			//Guardian_Lion_Mask: Slender_Snake, Tooth_Of_Ancient_Fishm Orange_Dyestuffs
+			callsub S_MakeMask,5177,1048,500,1053,2,980,1,0,0;
+		}
+		if (countitem(1049) > 19 && countitem(1059) > 499 && countitem(1054) > 1 && countitem(1024) > 99) {
+			//Bride_Mask: Skirt_Of_Virgin, Transparent_Cloth, Lip_Of_Ancient_Fish, Chinese_Ink
+			callsub S_MakeMask,5169,1049,20,1059,500,1054,2,1024,100;
+		}
+		mes "[青月望]";
+		mes "哎呀呀，你还没收集好材料吗？";
+		mes "你最好快点，我可等不了那么久！";
+		mes "等等，你到底让我做什么面具来着？";
+		next;
+		switch(select("河回面具:新娘面具:神话狮子面具")) {
+		case 1:
+			mes "[青月望]";
+			mes "哦，对，你要河回面具。";
+			mes "那你需要带……^FF000020 记忆中的书签^000000，";
+			mes "^FF0000100 仙人掌刺^000000，以及";
+			mes "^FF0000100 鬃毛^000000。";
+			break;
+		case 2:
+			mes "[青月望]";
+			mes "哦，对，你要新娘面具。";
+			mes "那你需要带……^FF000020 处女裙^000000，";
+			mes "^FF0000500 布料^000000、^FF00002 古老嘴唇^000000，";
+			mes "以及 ^FF0000100 乌贼墨^000000。";
+			break;
+		case 3:
+			mes "[青月望]";
+			mes "哦，对，你要神话狮子面具。";
+			mes "那你需要带……^FF0000500 可怕的毛发^000000，";
+			mes "^FF00002 古代牙齿^000000，以及";
+			mes "^FF00001 橙色染料^000000。";
+			break;
+		}
+		mes "带齐准确数量的材料，我马上就把面具给你。";
+		close;
+	}
+	if (countitem(7201) > 499) && (countitem(7200) > 9 && moza_tal == 1) {
+		mes "[青月望]";
+		mes "啊，四叶草一定会给我带来好运";
+		mes "因为你回来得比我想的还快！哇……";
+		mes "太感谢你了，现在我觉得";
+		mes "我有好运相伴。哈哈哈！";
+		next;
+		mes "[青月望]";
+		mes "好！我会按约定报答你的恩情。";
+		mes "我会把一切都告诉你。其实，";
+		mes "我是传统面具工匠。";
+		mes "我可以自豪地告诉你，没人比得上我";
+		mes "制作传统面具的！咳咳！";
+		next;
+		mes "[青月望]";
+		mes "我曾经历过情绪不稳定的时期";
+		mes "而且因为种种原因，做什么都不顺。";
+		mes "不过，那都是过去的事了！我回来了，哈哈哈哈！";
+		next;
+		mes "[青月望]";
+		mes "我感觉很好，好运又回到我身边了。";
+		mes "真的很感谢你让我心情变好了。";
+		mes "作为回报，我要为你做一个传统面具！哈哈哈！";
+		mes "你应该感谢我送给你这么好的礼物。";
+		next;
+		mes "[青月望]";
+		mes "你知道为什么吗？因为没有人能给你";
+		mes "除了我，没人能给你这么珍贵的东西。";
+		mes "总之，我能做三种不同的面具：";
+		mes "河回面具、新娘面具和灵狮面具。";
+		mes "你想要哪一个？选一个吧。";
+		next;
+		switch(select("河回面具:新娘面具:灵狮面具")) {
+		case 1:
+			mes "[青月望]";
+			mes "好，你想要河回面具，是吧？这很简单！";
+			mes "那么你需要带来……^FF000020 回忆书签^000000，";
+			mes "^FF0000100 仙人掌刺^000000，以及";
+			mes "^FF0000100 鬃毛^000000。";
+			mes "带来准确数量的材料，我就立刻把面具给你。";
+			break;
+		case 2:
+			mes "[青月望]";
+			mes "好，你想要新娘面具，是吧？这很简单！";
+			mes "那么你需要带来……^FF000020 韩服^000000，";
+			mes "^FF0000500 透明之布^000000、^FF00002 人鱼嘴巴^000000，";
+			mes "以及 ^FF0000100 墨汁^000000。";
+			mes "带来准确数量的材料，我就立刻把面具给你。";
+			break;
+		case 3:
+			mes "[青月望]";
+			mes "好，你想要灵狮面具，是吧？这很简单！";
+			mes "那么你需要带来……^FF0000500 蛇发^000000，";
+			mes "^FF00002 人鱼之牙^000000，以及";
+			mes "^FF00001 赤色染料^000000。";
+			mes "带来准确数量的材料，我就立刻把面具给你。";
+			break;
+		}
+		delitem 7201,500; //Log
+		delitem 7200,10; //Flexible_String
+		set moza_tal,2;
+		next;
+		mes "[青月望]";
+		mes "...Why are you eyeing at me?";
+		mes "什么，你以为我会免费给你做面具吗？";
+		mes "如果是这样，你得这样想。";
+		mes "我的报答方式就是施展我的技艺，";
+		mes "把我珍贵的面具交给你，";
+		mes "而不是免费替你制作面具，明白吗？";
+		next;
+		mes "[青月望]";
+		mes "至少我没有向你收取服务费，对吧？";
+		mes "你只要把材料带来，我会尽力";
+		mes "为你做出一张了不起的面具！";
+		next;
+		mes "[青月望]";
+		mes "在此期间，我要用这些";
+		mes "用这些木块和橡皮筋来做准备工作。";
+		mes "所以尽量快点回来，好吗？";
+		close;
+	}
+	if (moza_tal == 1) {
+		mes "[青月望]";
+		mes "嗯……我要你找的东西是";
+		mes "^FF0000500 木块^000000和^FF000010 橡皮筋^000000。";
+		mes "先谢谢你了。";
+		close;
+	}
+	if (countitem(706) > 0) {
+		mes "[青月望]";
+		mes "啊……！喂！我看得出你身上有些特别之处。";
+		mes "你身上碰巧有四叶草吗？";
+		mes "介意我请你把四叶草给我吗？";
+		next;
+		mes "[青月望]";
+		mes "我不是要你白白送给我。";
+		mes "虽然我不能保证，";
+		mes "我迟早能报答你的恩情。";
+		mes "那么，我可以拿走它吗？";
+		next;
+		if (select("当然。:不行。") == 1) {
+			mes "[青月望]";
+			mes "哦！太感谢你了！";
+			mes "哇哈哈哈！现在我就要成为幸运儿了！";
+			mes "有了四叶草，好运又会回到我身边！";
+			next;
+			mes "[青月望]";
+			mes "哦，对了！我差点忘了。";
+			mes "我答应过要报答你的恩情，对吧？";
+			mes "我知道这听起来可能有些自私，";
+			mes "不过，嘿，你能再帮我一个忙吗？";
+			mes "既然你已经帮过我一次，";
+			mes "我觉得这对你来说";
+			mes "再帮我一次有那么难吗？";
+			mes "求你大发慈悲～";
+			next;
+			mes "[青月望]";
+			mes "我需要……^FF0000500 木块^000000和";
+			mes "^FF000010 橡皮筋^000000。";
+			mes "能劳烦你把它们带来给我吗？";
+			mes "其实，没有它们我就无法报答你。";
+			next;
+			delitem 706,1; //Four_Leaf_Clover
+			set moza_tal,1;
+			mes "[青月望]";
+			mes "你想让我报答你，对吧？";
+			mes "所以，请把它们带来给我，拜托了～";
+			close;
+		}
+		mes "[青月望]";
+		mes "我明白……把幸运符送出去";
+		mes "毫不犹豫地送给陌生人。";
+		mes "...Haha, but that doesn't make me stop being upset.";
+		mes "你竟敢拒绝我的请求？哼！";
+		close;
+	}
+	mes "[青月望]";
+	mes "啊啊啊……我需……我需要……";
+	next;
+	mes "[青月望]";
+	mes "我想走运！谁来给我带来好运吧！";
+	mes "我要求的不多！我只需要一样东西！";
+	next;
+	mes "[青月望]";
+	mes "我需要一株^FF0000四叶草^000000！";
+	mes "谁来给我一株四叶草吧！";
+	close;
+
+S_MakeMask:
+	.@item_id = getarg(0);
+	mes "[青月望]";
+	mes "哦，你把所有东西都带来了";
+	mes "来制作一顶"+ getitemname(.@item_id) +". Excellent.";
+	mes "请把材料给我。我马上就做面具。";
+	next;
+	if (select("把物品交给他。:不要交给他。") == 1) {
+		mes "[青月望]";
+		mes "很好，我喜欢你这种毫不犹豫的态度！";
+		mes "那好吧，我会尽快把面具做出来！";
+		next;
+		mes "[青月望]";
+		mes "- 摸索 摸索 摸索 -";
+		mes "- 摸索 摸索 摸索 -";
+		mes "- 摸索 摸索 摸索 -";
+		mes "- 咚 咚 咚 咚 -";
+		next;
+		mes "[青月望]";
+		mes "- 摸索 摸索 摸索 -";
+		mes "- 摸索 摸索 摸索 -";
+		mes "- 摸索 摸索 摸索 -";
+		mes "- 咚 咚 咚 咚 -";
+		next;
+		delitem getarg(1),getarg(2);
+		delitem getarg(3),getarg(4);
+		delitem getarg(5),getarg(6);
+		if (.@item_id == 5169) 
+			delitem getarg(7),getarg(8);
+		getitem .@item_id,1;
+		set moza_tal,0;
+		mes "[青月望]";
+		mes "哇，简直小菜一碟！";
+		mes "你知道，我可不只是名义上的工匠。";
+		mes "哈哈哈，来，这是你的"+ getitemname(.@item_id) +".";
+		mes "希望你能自豪地戴上它，哈哈哈！";
+		next;
+		mes "[青月望]";
+		mes "好了，我得休息一下了";
+		mes "直到下一位客人来。哈哈哈，再见！";
+		close;
+	}
+	mes "[青月望]";
+	mes "呃？你不想要"+ getitemname(.@item_id) +"？";
+	mes "那好吧……胆小鬼。";
+	close;
+}
+
+
+// Magistrate Hat / Ayam
+//============================================================
+payon_in03,139,124,3	script	韩嘉岚	88,{
+	if (moza_korea == 2 && countitem(954) > 299 && countitem(733) > 4 && countitem(975) > 0 && countitem(7166) > 49) {
+		mes "[韩嘉岚]";
+		mes "你回来得比我预想的还快。";
+		mes "太好了，我也因为这件事干劲十足，";
+		mes "我的阿掩会属于像你这样的人，";
+		mes "既有能力又值得信赖的人。";
+		next;
+		mes "[韩嘉岚]";
+		mes "那好，我会尽快把帽子做出来。";
+		mes "现在，把材料都交给我吧。";
+		next;
+		if (select("把物品交给他。:不要交给他。") == 1) {
+			mes "[韩嘉岚]";
+			mes "太好了！这次的工作我不用";
+			mes "为这件工作被龙神附身";
+			mes "因为我自己就能完美地完成。";
+			mes "所以，就停在那里，好吗？";
+			next;
+			mes "[韩嘉岚]";
+			mes "是的……对……嗯嗯。";
+			next;
+			mes "[韩嘉岚]";
+			mes ".................";
+			next;
+			mes "- 韩嘉岚开始锤打， -";
+			mes "- 一言不发地组装着材料。 -";
+			next;
+			mes "[韩嘉岚]";
+			mes ".................";
+			next;
+			mes "[韩嘉岚]";
+			mes "呼，真不容易，";
+			mes "因为我已经很久没做这个了。";
+			next;
+			mes "[韩嘉岚]";
+			mes "我仍然很高兴有机会";
+			mes "施展我的技艺，你知道的。而且很有趣。";
+			mes "请收下这顶阿掩。";
+			mes "如我承诺的，这是我送给你的礼物。";
+			next;
+			delitem 954,300; //Shining_Scales
+			delitem 733,5; //Crystal_Jewel___
+			delitem 975,1; //Scarlet_Dyestuffs
+			delitem 7166,50; //Soft_Silk_Cloth
+			set moza_korea,0;
+			getitem 5174,1; //A_yam
+			mes "[韩嘉岚]";
+			mes "现在我得再去见龙神了，";
+			mes "如果我还想做另一顶帽子的话……嗯……";
+			mes "算了，这次多亏你帮忙，我总算做出来了一个，";
+			mes "所以我想时机到了自然就会实现。";
+			next;
+			mes "[韩嘉岚]";
+			mes "太感谢你了！请好好爱惜我的阿掩，";
+			mes "并为成为阿掩的主人而自豪吧！";
+			close;
+		}
+		mes "[韩嘉岚]";
+		mes "...? What? Do you need more time?";
+		mes "你就不能干脆把它们给我吗？";
+		close;
+	}
+	else if (moza_korea == 2 && countitem(954) > 299 && countitem(733) > 4 && countitem(983) > 0 && countitem(2221) > 0) {
+		mes "[韩嘉岚]";
+		mes "你回来得比我预想的还快。";
+		mes "太好了，我也因为这件事干劲十足，";
+		mes "我的纱帽会属于像你这样的人，";
+		mes "既有能力又值得信赖的人。";
+		next;
+		mes "[韩嘉岚]";
+		mes "那好，我会尽快把帽子做出来。";
+		mes "现在，把材料都交给我吧。";
+		next;
+		if (select("把物品交给他。:不要交给他。") == 1) {
+			mes "[韩嘉岚]";
+			mes "太好了！这次的工作我不用";
+			mes "为这件工作被龙神附身";
+			mes "因为我自己就能完美地完成。";
+			mes "所以，就停在那里，好吗？";
+			next;
+			mes "[韩嘉岚]";
+			mes "是的……对……嗯嗯。";
+			next;
+			mes "[韩嘉岚]";
+			mes ".................";
+			next;
+			mes "- 韩嘉岚开始锤打， -";
+			mes "- 一言不发地组装着材料。 -";
+			next;
+			mes "[韩嘉岚]";
+			mes ".................";
+			next;
+			mes "[韩嘉岚]";
+			mes "呼，真不容易，";
+			mes "因为我已经很久没做这个了。";
+			next;
+			mes "[韩嘉岚]";
+			mes "我仍然很高兴有机会";
+			mes "施展我的技艺，你知道的。而且很有趣。";
+			mes "请收下这顶纱帽。";
+			mes "如我承诺的，这是我送给你的礼物。";
+			next;
+			delitem 954,300; //Shining_Scales
+			delitem 733,5; //Crystal_Jewel___
+			delitem 983,1; //Black_Dyestuffs
+			delitem 2221,1; //Hat_
+			set moza_korea,0;
+			getitem 5173,1; //Judge_Hat
+			mes "[韩嘉岚]";
+			mes "现在我得再去见龙神了，";
+			mes "如果我还想做另一顶帽子的话……嗯……";
+			mes "算了，这次多亏你帮忙，我总算做出来了一个，";
+			mes "所以我想时机到了自然就会实现。";
+			next;
+			mes "[韩嘉岚]";
+			mes "太感谢你了！请好好爱惜我的纱帽，";
+			mes "并为成为纱帽的主人而自豪吧！";
+			close;
+		}
+		mes "[韩嘉岚]";
+		mes "...? What? Do you need more time?";
+		mes "你就不能干脆把它们给我吗？";
+		close;
+	}
+	else if (moza_korea == 2) {
+		mes "[韩嘉岚]";
+		mes "要做阿掩，我需要";
+		mes "^FF0000300 发亮鳞片^000000、^FF00005 裂开的钻石^000000，";
+		mes "^FF00001 红色染料^000000，以及";
+		mes "^FF000050 柔软的绸缎布^000000！";
+		next;
+		mes "[韩嘉岚]";
+		mes "要做纱帽，我需要";
+		mes "^FF0000300 发亮鳞片^000000、^FF00005 裂开的钻石^000000，";
+		mes "^FF00001 黑色染料^000000，以及 ^FF00001 开孔帽子^000000！";
+		next;
+		mes "[韩嘉岚]";
+		mes "...That's what I said.";
+		mes "那么，选一顶帽子，然后把";
+		mes "一样不差地带来它的材料。";
+		next;
+		mes "[韩嘉岚]";
+		mes "啊～好久没有感觉到龙神附在我身上了。";
+		mes "我感觉自己学到了某种超凡的东西。";
+		close;
+	}
+	else if (moza_korea == 1) {
+		mes "[韩嘉岚]";
+		mes ".............";
+		next;
+		mes "[韩嘉岚]";
+		mes ".............";
+		next;
+		mes "[韩嘉岚]";
+		mes ".............";
+		next;
+		mes "[韩嘉岚]";
+		mes "...*Tremble Tremble*...He...He's here...He's here!";
+		mes "*颤抖 颤抖* 我能感觉到";
+		mes "我体内的龙神！哇啊！";
+		mes "他摇着尾巴，向我展示未来！";
+		mes "啊啊啊啊啊！";
+		next;
+		specialeffect EF_LORD;
+		mes "[韩嘉岚]";
+		mes "哇啊啊啊！";
+		next;
+		mes "[韩嘉岚]";
+		mes ".............";
+		next;
+		mes "[韩嘉岚]";
+		mes ".............";
+		next;
+		mes "[韩嘉岚]";
+		mes "是的……是的，我能！我能做出 ^FF0000阿掩^000000";
+		mes "还有 ^FF0000纱帽^000000，现在就能做！";
+		mes "哦，我能看到该怎么做了，";
+		mes "我知道做它们需要什么！一切都在我的视野里！";
+		mes "我感觉自己已经在动手做了一样！";
+		next;
+		mes "[韩嘉岚]";
+		mes "要做阿掩，我需要";
+		mes "^FF0000300 发亮鳞片^000000、^FF00005 裂开的钻石^000000，";
+		mes "^FF00001 红色染料^000000，以及";
+		mes "^FF000050 柔软的绸缎布^000000！";
+		next;
+		mes "[韩嘉岚]";
+		mes "要做纱帽，我需要";
+		mes "^FF0000300 发亮鳞片^000000、^FF00005 裂开的钻石^000000，";
+		mes "^FF00001 黑色染料^000000，以及 ^FF00001 开孔帽子^000000！";
+		next;
+		mes "[韩嘉岚]";
+		mes "只要有人带来这些，我就为他做帽子！";
+		mes "啊啊～龙神！";
+		next;
+		specialeffect EF_EXIT;
+		mes "[韩嘉岚]";
+		mes ".............";
+		next;
+		mes "[韩嘉岚]";
+		mes ".............";
+		next;
+		mes "[韩嘉岚]";
+		mes "呼……龙神已经离开了。";
+		mes "不过，我仍然清楚地记得";
+		mes "我需要什么，以及如何制作这些帽子。";
+		mes "所以，你不用担心这个。";
+		mes "你说……它们就是阿掩和纱帽吗？";
+		next;
+		mes "[韩嘉岚]";
+		mes "你听到我需要什么材料了吧？";
+		mes "选一顶帽子，然后一样不差地把材料带来给我。";
+		next;
+		set moza_korea,2;
+		mes "[韩嘉岚]";
+		mes "那好吧，我等你回来。";
+		close;
+	}
+	if (countitem(7446) > 6 && countitem(7448) > 6 && countitem(7445) > 6 && countitem(7447) > 6) {
+		mes "[韩嘉岚]";
+		mes "我叫韩嘉岚，";
+		mes "而且是名门望族的自豪继承人……咦？";
+		mes "等等，我从你身上感觉到某种神秘的熟悉感……";
+		mes "喂，四种颜色的龙珠各有7颗吗？";
+		next;
+		mes "[韩嘉岚]";
+		mes "...Wow! This is crazy! You do have them, don't you?";
+		mes "哇，你是怎么集齐它们的？它们可难找了……";
+		next;
+		mes "[韩嘉岚]";
+		mes "........Umm.";
+		next;
+		mes "[韩嘉岚]";
+		mes "喂，如果你不介意，能把它们给我吗？";
+		mes "其实，我是唯一一个传统帽子工匠";
+		mes "在这个卢恩-米德加尔特王国里。";
+		mes "不过，我最近遇到了麻烦，";
+		mes "一直无法专心经营生意。";
+		next;
+		mes "[韩嘉岚]";
+		mes "麻烦的是，那些龙珠我已经用完了。";
+		mes "你知道，就是你身上那些彩色的珠子。";
+		mes "我就能重新开始我的生意，";
+		mes "只要我有它们……*叹气*";
+		next;
+		mes "[韩嘉岚]";
+		mes "能请你把它们给我吗？";
+		mes "我会用一顶我引以为傲的传统帽子报答你。";
+		mes "再说，既然只有我能做它们，";
+		mes "其实，你跟我做这笔生意并不亏，你不觉得吗？";
+		next;
+		mes "[韩嘉岚]";
+		mes "拜托了？我保证我能做传统帽子。";
+		next;
+		if (select("把物品交给他。:不要交给他。") == 1) {
+			mes "[韩嘉岚]";
+			mes "哇，哇，太感谢你了！";
+			mes "如我承诺的，我会做一顶帽子作为回报。";
+			mes "不过，你能等一会儿吗？";
+			mes "要做帽子，我得先联系龙神。";
+			next;
+			delitem 7446,7; //Blue_Orb
+			delitem 7448,7; //Yellow_Orb
+			delitem 7445,7; //Green_Orb
+			delitem 7447,7; //Red_Orb
+			set moza_korea,1;
+			mes "[韩嘉岚]";
+			mes "...Okay, give me some time to focus.";
+			close;
+		}
+		mes "[韩嘉岚]";
+		mes "呸，那是你的选择。";
+		mes "如果你改变主意，记得马上告诉我。";
+		mes "你应该知道";
+		mes "那些东西属于别人，不属于你。";
+		close;
+	}
+	mes "[韩嘉岚]";
+	mes "我是韩嘉岚，曾是名门望族的继承人。";
+	mes "你想知道为什么我说“曾经是名门”吗？";
+	mes "那是因为我祖父败光了我家的财产，";
+	mes "现在我们和其他普通人家一样了，哈哈哈哈！";
+	next;
+	mes "[韩嘉岚]";
+	mes "我继承到的只有这门传统帽子制作技艺。";
+	mes "即便如此，这也是相当了不起的传承，";
+	mes "因为在这个卢恩-米德加尔特王国里";
+	mes "能制作传统帽子的人。";
+	next;
+	mes "[韩嘉岚]";
+	mes "遗憾的是，我一直无法";
+	mes "施展我的技艺，因为我还没见到龙神……";
+	mes "咦？你问我说的是什么意思？";
+	mes "你知道灵媒是做什么的吧？";
+	mes "他们让灵魂进入自己的身体，";
+	mes "并与他们交流。";
+	next;
+	mes "[韩嘉岚]";
+	mes "所以，就我而言，是一位龙神进入我的身体，";
+	mes "赐予我力量与智慧。";
+	mes "我家富裕的时候，";
+	mes "我们有足够的召唤材料";
+	mes "来召唤龙神，";
+	mes "但现在，如你所见，";
+	mes "我们买不起那么昂贵的东西。";
+	next;
+	mes "[韩嘉岚]";
+	mes "说起来，我或许继承了我家的传家宝，";
+	mes "但我用不了它";
+	mes "因为我买不起召唤用的材料。";
+	next;
+	mes "[韩嘉岚]";
+	mes "要召唤龙神，";
+	mes "我必须准备^FF0000四种颜色的龙珠各7颗^000000。";
+	mes "^FF0000我需要蓝色、";
+	mes "^FF0000黄色、绿色和红色各7颗龙珠^000000。";
+	mes "总之我需要一共28颗龙珠……嗯。";
+	next;
+	mes "[韩嘉岚]";
+	mes "就像我刚才说的，它们不仅昂贵，";
+	mes "而且也很难找……";
+	mes "*叹气* 我怕我家传的技艺";
+	mes "也许会在我这一代失传……";
+	close;
+}

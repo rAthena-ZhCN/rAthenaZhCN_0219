@@ -1,0 +1,4987 @@
+//===== rAthena Script ======================================= 
+//= Quest NPCs related to Luoyang
+//===== By: ================================================== 
+//= Evera and The rAthena Dev Team
+//===== Current Version: ===================================== 
+//= 2.4
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Soup Quest
+//= - Variable in use: che_tre (max 5)
+//= Doctor Quest
+//= - Variable in use: che_par (max 18)
+//= Poison King Quest 
+//= - Variable in use: ch_poison (max 20)
+//= Revolution Quest
+//= - Variable in use: QL_REVO (max 9)
+//===== Additional Comments: ================================= 
+//= 1.0 Initial Release [Evera]
+//= 1.1 Fixed double levelup bug [Lupus]
+//= 1.2 Added Revolution Quest. [SinSloth]
+//= 1.3 Fixed experience gains to match upcoming rate adjustments. [SinSloth]
+//= 1.4 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 1.5 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
+//= 1.6 Rescripted Soup, Doctor, and Poison King quests [L0ne_W0lf]
+//=     to Aegis 10.3 standards. Attempted to save current
+//=     quest progress from the old scripts.
+//= 1.7 Added missing checkweights. And corrected [L0ne_W0lf]
+//=     a typo in Poison King quest.
+//= 1.8 Bug fixes. (bugreport:1025 bugreport:1062) [L0ne_W0lf]
+//= 1.9 Bug fixes/Typos. [Paradox924X]
+//= 2.0 Replaced effect numerics with constants. [L0ne_W0lf]
+//= 2.1 Fixed guard tower warper ALWAYS warping. (bugreport:2377) [L0ne_W0lf]
+//= 2.2 Removed unused "name" variable. [L0ne_W0lf]
+//= 2.3 Updated RE/Pre-RE EXP. [Euphy]
+//= 2.4 Added questlog support. [Euphy]
+//============================================================ 
+
+// Soup Quest :: lou_tre
+//============================================================
+lou_in02,53,174,7	script	职员#1	822,6,62,{
+	if (gettime(DT_HOUR) >= 10 && gettime(DT_HOUR) < 22) {
+		mes "[常派]";
+		mes "欢迎光临！";
+		mes "我们随时为您效劳～！";
+		mes "那么，请上楼吧～！";
+		close;
+	}
+	mes "[常派]";
+	mes "^666666*哈欠……*^000000";
+	close;
+
+OnTouch_:
+	if (ch_tre == 2 || ch_tre == 3) {
+		if (gettime(DT_HOUR) >= 10 && gettime(DT_HOUR) < 14) {
+			if (rand(1,10) < 9) {
+				mes "[常派]";
+				mes "等等，你是谁？！";
+				mes "把那个放下，马上";
+				mes "从这里滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+		else if (gettime(DT_HOUR) >= 14 && gettime(DT_HOUR) < 17) {
+			if (rand(1,10) < 10) {
+				mes "[常派]";
+				mes "等等，你是谁？！";
+				mes "把那个放下，马上";
+				mes "从这里滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+		else if (gettime(DT_HOUR) >= 17 && gettime(DT_HOUR) < 21) {
+			if (rand(1,10) < 6) {
+				mes "[常派]";
+				mes "等等，你是谁？！";
+				mes "把那个放下，马上";
+				mes "从这里滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+		else {
+			if (rand(1,10) < 5) {
+				mes "[常派]";
+				mes "^666666*哈欠……*^000000";
+				mes "So...";
+				mes "Sleepy...";
+				next;
+				mes "[常派]";
+				mes "嗯……？";
+				mes "你是谁！？";
+				mes "喂，这里有贼！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+	}
+	end;
+}
+
+lou_in02,76,181,3	script	职员#2	822,2,2,{
+	if (gettime(DT_HOUR) >= 10 && gettime(DT_HOUR) < 22) {
+		mes "[黄嘉贤]";
+		mes "欢迎光临～";
+		mes "抱歉让您久等了。如果您想休息，请上楼。";
+		next;
+		mes "[黄嘉贤]";
+		mes "最近来洛阳的游客很多，生意虽然兴隆，可我们如今";
+		mes "比以往任何时候都忙。";
+		next;
+		mes "[黄嘉贤]";
+		mes "^666666*叹气……*^000000";
+		mes "我连";
+		mes "吃饭的时间都没有。";
+		mes "我快饿死了……！";
+		close;
+	}
+	mes "[黄嘉贤]";
+	mes "Ehhhh...";
+	mes "请原谅我……";
+	mes "....................";
+	mes "...Zzzzz...Zzzz...";
+	close;
+
+OnTouch_:
+	if (ch_tre == 2 || ch_tre == 3) {
+		if (gettime(DT_HOUR) >= 10 && gettime(DT_HOUR) < 14) {
+			if (rand(1,10) < 9) {
+				mes "[黄嘉贤]";
+				mes "什么……？";
+				mes "喂，你";
+				mes "在干什么？";
+				mes "滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+		else if (gettime(DT_HOUR) >= 14 && gettime(DT_HOUR) < 17) {
+			if (rand(1,10) < 10) {
+				mes "[黄嘉贤]";
+				mes "什么……？";
+				mes "喂，你";
+				mes "在干什么？";
+				mes "滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+		else if (gettime(DT_HOUR) >= 17 && gettime(DT_HOUR) < 22) {
+			if (rand(1,10) < 6) {
+				mes "[黄嘉贤]";
+				mes "什么……？";
+				mes "喂，你";
+				mes "在干什么？";
+				mes "滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+		else {
+			if (rand(1,10) < 5) {
+				mes "[黄嘉贤]";
+				mes "*哈欠……*";
+				mes "好累啊……";
+				next;
+				mes "[黄嘉贤]";
+				mes "喂，你";
+				mes "在这里做什么？你是";
+				mes "盗贼？！来人啊！";
+				mes "有盗贼！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+	}
+	end;
+}
+
+lou_in02,61,175,3	script	职员#3	818,2,2,{
+	if (gettime(DT_HOUR) >= 10 && gettime(DT_HOUR) < 22) {
+		if (ch_tre == 5) {
+			mes "[雅华]";
+			mes "欢迎光临！";
+			mes "我们有很多房间";
+			mes "空着！不如";
+			mes "上楼看看？";
+			mes "哈哈哈！";
+			next;
+			emotion ET_SWEAT;
+			mes "[雅华]";
+			mes "哦，如果您是来品尝龙汤的，很抱歉，现在已经没有了。";
+			next;
+			mes "[雅华]";
+			mes "但也别太失望，我们还有许多其他美味可供您选择！";
+			close;
+		}
+		mes "[雅华]";
+		mes "欢迎光临！";
+		mes "我们有很多房间";
+		mes "空着！不如";
+		mes "上楼看看？";
+		mes "哈哈哈！";
+		close;
+	}
+	mes "[雅华]";
+	mes "^666666*哈欠……*^000000";
+	close;
+
+OnTouch_:
+	if (ch_tre == 2 || ch_tre == 3) {
+		if (gettime(DT_HOUR) >= 10 && gettime(DT_HOUR) < 14) {
+			if (rand(1,10) < 9) {
+				mes "[雅华]";
+				mes "你以为你";
+				mes "在这里干什么？！";
+				mes "把那个放下，";
+				mes "立刻离开！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+		else if (gettime(DT_HOUR) >= 14 && gettime(DT_HOUR) < 17) {
+			if (rand(1,10) < 10) {
+				mes "[雅华]";
+				mes "你以为你";
+				mes "在这里干什么？！";
+				mes "把那个放下，";
+				mes "立刻离开！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+		else if (gettime(DT_HOUR) >= 17 && gettime(DT_HOUR) < 22) {
+			if (rand(1,10) < 6) {
+				mes "[雅华]";
+				mes "你以为你";
+				mes "在这里干什么？！";
+				mes "把那个放下，";
+				mes "立刻离开！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+		else {
+			if (rand(1,10) < 5) {
+				mes "[雅华]";
+				mes "^666666*哈欠……*^000000";
+				mes "Eyelids...";
+				mes "Getting...";
+				mes "Heavier...";
+				next;
+				mes "[雅华]";
+				mes "等等……";
+				mes "你是盗贼？！";
+				mes "滚出去！！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+	}
+	end;
+}
+
+lou_in02,62,183,3	script	厨师长#1-2	820,2,2,{
+	if (ch_tre > 0 && ch_tre < 4) {
+		mes "[王世龙]";
+		mes "嗯？您不是客人吗？我是王世龙，这家餐厅的厨师长。";
+		next;
+		mes "[王世龙]";
+		mes "我家世代为白龙大人供奉膳食。这家餐厅由我家经营，而我是继承人。";
+		next;
+		mes "[王世龙]";
+		mes "我家做的每一道菜，都算得上是洛阳最可口的美食。";
+		next;
+		mes "[王世龙]";
+		mes "我们的龙汤尤其得到了白龙大人的高度赞赏。";
+		next;
+		mes "[王世龙]";
+		mes "我也很自豪地告诉您，我家做菜只选用最新鲜、最上等的食材。";
+		next;
+		mes "[王世龙]";
+		mes "数百年来，我们凭着上乘的美食在洛阳一直广受欢迎。";
+		next;
+		mes "[王世龙]";
+		mes "不过最近我总有种不好的预感，好像有人想夺走我们的餐厅……";
+		next;
+		mes "[王世龙]";
+		mes "唉，算了。也许我只是因为别的事情才心情不同吧。应该没什么。";
+		close;
+	}
+	else if (ch_tre > 3 && ch_tre < 6) {
+		mes "[王世龙]";
+		mes "^666666*呻吟与哀叹*^000000";
+		mes "看来就这样了……！";
+		mes "我家荣耀的终结。";
+		mes "有人偷走了";
+		mes "我龙汤的汤底！";
+		next;
+		mes "[王世龙]";
+		mes "现在我该怎么办？";
+		mes "没有了龙汤，我家的餐厅从此只能和其他店一样了……";
+		close;
+	}
+	mes "[王世龙]";
+	mes "您好，您是";
+	mes "我们的客人吗？";
+	mes "我是王世龙，";
+	mes "这家餐厅的";
+	mes "restaurant.";
+	next;
+	mes "[王世龙]";
+	mes "我家为";
+	mes "白龙大人供奉膳食已有很久。这家餐厅代代相传，而我是继承人～";
+	next;
+	mes "[王世龙]";
+	mes "我们的招牌菜龙汤，得到了白龙大人的高度赞赏，而白龙大人素以";
+	mes "极为挑剔的味觉闻名。";
+	next;
+	mes "[王世龙]";
+	mes "我也很自豪地说，我们做菜只选用最新鲜、最上等的食材。";
+	next;
+	mes "[王世龙]";
+	mes "数百年来，我们凭着高品质的美食在洛阳一直广受欢迎。";
+	next;
+	mes "[王世龙]";
+	mes "在这干燥炎热的天气里，";
+	mes "龙汤是最能开胃的美食。我建议您来一碗，您一定会满意的！";
+	close;
+
+OnTouch_:
+	if (ch_tre == 2 || ch_tre == 3) {
+		if (gettime(DT_HOUR) >= 10 && gettime(DT_HOUR) < 14) {
+			if (rand(1,10) < 9) {
+				mes "[王世龙]";
+				mes "喂，你";
+				mes "以为你在干什么？！";
+				mes "放开那个，";
+				mes "滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				warp "louyang",280,161;
+				close;
+			}
+		}
+		else if (gettime(DT_HOUR) >= 14 && gettime(DT_HOUR) < 17) {
+			if (rand(1,10) < 10) {
+				mes "[王世龙]";
+				mes "喂，你";
+				mes "以为你在干什么？！";
+				mes "放开那个，";
+				mes "滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				warp "louyang",280,161;
+				close;
+			}
+		}
+		else if (gettime(DT_HOUR) >= 17 && gettime(DT_HOUR) < 22) {
+			if (rand(1,10) < 6) {
+				mes "[王世龙]";
+				mes "喂，你";
+				mes "以为你在干什么？！";
+				mes "放开那个，";
+				mes "滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				warp "louyang",280,161;
+				close;
+			}
+		}
+		else {
+			if (rand(1,10) < 5) {
+				mes "[王世龙]";
+				mes "^666666*哈欠……*^000000";
+				mes "嗯……？";
+				mes "是谁？";
+				next;
+				mes "[王世龙]";
+				mes "等等……！";
+				mes "你在干什么？！";
+				mes "滚、滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				warp "louyang",280,161;
+				close;
+			}
+		}
+	}
+	end;
+}
+
+lou_fild01,195,177,5	script	九莲步#1-1	819,{
+	//Remove outdated variables and attempt to preserve prior quest progress.
+	if (QL_ACCEPTSOUP) set ch_tre,1;
+	if (QL_GOTDRAGONSOUP) set ch_tre,2;
+	if (QL_GOTFAKESOUP) set ch_tre,3;
+	if (QL_SOUPQUEST)  set ch_tre,4;
+	if (QL_SOUP2) set ch_tre,5;
+	set QL_ACCEPTSOUP,0; set QL_GOTDRAGONSOUP,0; set QL_GOTFAKESOUP,0; set QL_SOUPQUEST,0; set QL_SOUP2,0; 
+
+	if (ch_tre == 0) {
+		mes "[九连步]";
+		mes "嘿～";
+		mes "怎么了？";
+		next;
+		mes "[九连步]";
+		mes "我不喜欢和太多人待在一起，所以来了这里。听着这条溪流的声音，真让人心安。";
+		next;
+		mes "[九连步]";
+		mes "无意冒犯，但我实在不满";
+		mes "于涌来洛阳的游客数量。当然，我明白我们小镇很有魅力，风景也美。";
+		next;
+		mes "[九连步]";
+		mes "可我就是受不了人潮。人们像羊群一样";
+		mes "涌向任何听说热门的地方，这真让我恼火！";
+		next;
+		mes "[九连步]";
+		mes "说起来，洛阳甚至有";
+		mes "一个地方正是这样。唉，我讨厌那家餐厅！";
+		next;
+		if (select("哪家餐厅？:别理他。") == 1) {
+			mes "[九连步]";
+			mes "洛阳西边，有一家";
+			mes "建在池塘上的餐厅。它开了很久，卖的食物却贵得离谱！";
+			next;
+			mes "[九连步]";
+			mes "当然，那里的食物和味道";
+			mes "确实历史悠久，但我不认为这能成为他们那样向客人收费的理由！";
+			next;
+			mes "[九连步]";
+			mes "身为一个";
+			mes "热爱家乡的年轻人，";
+			mes "我不能让他们这样愚弄我的乡亲！";
+			next;
+			mes "[九连步]";
+			mes "可这里的人都认识我，所以我什么也做不了！我和这里的居民已经有过太多，怎么说呢，“摩擦”了。";
+			next;
+			mes "[九连步]";
+			mes "我被抓过涂鸦、顺手牵羊、行骗，还抢过几个人的女朋友……所以，我确实算不上什么良民。";
+			next;
+			mes "[九连步]";
+			mes "等等，说起来。这附近的本地人跟您不太熟吧。嗯……";
+			next;
+			mes "[九连步]";
+			mes "您能不能溜进那家餐厅，帮我偷出";
+			mes "^3131FF龙汤汤底^000000？";
+			next;
+			mes "[九连步]";
+			mes "龙汤汤底是那家餐厅";
+			mes "老板秘方的命脉。";
+			next;
+			mes "[九连步]";
+			mes "可他们一直往汤里兑水，再以离谱的价格卖给客人，欺骗顾客！秘方被偷也是活该！";
+			next;
+			mes "[九连步]";
+			mes "您要是能偷到一些汤底，我会报答您。怎么样？";
+			next;
+			if (select("我来做！:不行，偷窃是不对的。") == 1) {
+				mes "[九连步]";
+				mes "太棒了！";
+				mes "我就知道";
+				mes "你会认同我的！";
+				next;
+				mes "[九连步]";
+				mes "好，那家餐厅在洛阳西边。不过您得小心。那里的伙计看那锅汤底，看得跟鹰似的！";
+				next;
+				mes "[九连步]";
+				mes "偷到汤底后，一定要端稳，一滴都别洒。明白吗？祝您好运～";
+				set ch_tre,1;
+				close;
+			}
+			mes "[九连步]";
+			mes "偷窃？";
+			mes "你说的";
+			mes "也有道理。";
+			next;
+			mes "[九连步]";
+			mes "可那家餐厅多年来一直这样对待客人！所以严格说来，我们只是把东西偷回来而已。";
+			close;
+		}
+		mes "[九连步]";
+		mes "那家店根本没那么了不起。我是说，他们宰客也太明显了！龙汤？！倒不如说是……龙粪汤！";
+		close;
+	}
+	else if (ch_tre == 1) {
+		mes "[九连步]";
+		mes "嗯……？";
+		mes "哇，我还以为您已经在去餐厅的路上了。您最好快点动身。";
+		next;
+		mes "[九连步]";
+		mes "那就这样，朋友。千万别被那里的伙计抓住。祝您好运～";
+		close;
+	}
+	else if (ch_tre == 2) {
+		mes "[九连步]";
+		mes "哇！您成功了！";
+		mes "让我看看……";
+		next;
+		mes "^3355FF九连步";
+		mes "端起您为他偷来的汤底，";
+		mes "痛痛快快地";
+		mes "喝了一大口。^000000";
+		next;
+		mes "[九连步]";
+		mes "哦哦哦，天哪……";
+		mes "这根本不是龙汤汤底。抱歉，您能";
+		mes "再去弄一次吗？";
+		set ch_tre,1;
+		close;
+	}
+	else if (ch_tre == 3) {
+		mes "[九连步]";
+		mes "哇！";
+		mes "您成功了！";
+		mes "让我看看……";
+		next;
+		mes "^3355FF九连步";
+		mes "端起您为他偷来的汤底，";
+		mes "痛痛快快地";
+		mes "喝了一大口。^000000";
+		next;
+		mes "[九连步]";
+		mes "哦哦哦。哦，没错。";
+		mes "就是这个味道。";
+		mes "哇哈哈哈～！";
+		mes "这会让那厨师";
+		mes "痛苦一阵子了！";
+		next;
+		mes "[九连步]";
+		mes "干得好，伙计！嘿嘿嘿，既然您为我冒了这么大险，我就带您去个好地方！跟我来～";
+		set ch_tre,4;
+		close2;
+		warp "lou_fild01",180,170;
+		end;
+	}
+	else if (ch_tre > 3 && ch_tre < 6) {
+		mes "[九连步]";
+		mes "嘿～";
+		mes "近来怎么样啊，这位神偷？还想再去那个地方吗？";
+		next;
+		if (select("好啊，走吧～:算了，下次吧。") == 1) {
+			mes "[九连步]";
+			mes "好～";
+			mes "我们";
+			mes "去乐一乐吧。";
+			close2;
+			warp "lou_fild01",180,170;
+			end;
+		}
+		mes "[九连步]";
+		mes "没心情啊？";
+		mes "没问题。不过您随时";
+		mes "都可以来找我，";
+		mes "只要您愿意。";
+		close;
+	}
+	mes "[九连步]";
+	mes "什么……？";
+	mes "喂，你是谁？要是没什么事跟我说，就滚开！";
+	close;
+}
+
+lou_fild01,175,173,3	script	九莲步#1-2	819,{
+	emotion ET_SMILE;
+	if (ch_tre == 4) {
+		mes "[九连步]";
+		mes "So...";
+		mes "您觉得怎么样？";
+		mes "这是洛阳";
+		mes "最美的地方，对吧？";
+		next;
+		mes "[九连步]";
+		mes "每当我心情低落";
+		mes "或想放松时，我就坐在这里享受微风。这能让我忘掉所有烦恼。";
+		next;
+		mes "[九连步]";
+		mes "嘿嘿，最棒的是，这地方离我姐姐很远。唉，那女人能唠叨一整天。";
+		next;
+		mes "[九连步]";
+		mes "您不如坐下来闭上眼睛，感受那宜人的风。挺清爽的……";
+		next;
+		emotion ET_SCRATCH;
+		mes "[九连步]";
+		mes "Also...";
+		mes "我有点";
+		mes "不好意思";
+		mes "说出口，不过……";
+		next;
+		mes "[九连步]";
+		mes "我是那种有话直说的人。如果有话想说却说不出口，那就像心里有毒一样。";
+		next;
+		mes "[九连步]";
+		mes "您懂我的意思吧？把事憋在心里，只会给自己添不必要的焦虑。";
+		next;
+		mes "[九连步]";
+		mes "So...";
+		mes "你就这么做。";
+		mes "握紧拳头，";
+		mes "深吸一口气。";
+		next;
+		mes "[九连步]";
+		mes "然后大声喊出";
+		mes "你想喊的话！";
+		mes "要是不知道";
+		mes "该喊什么，就";
+		mes "直接大叫也行。";
+		mes "全都喊出来！";
+		next;
+		mes "[九连步]";
+		mes "准备好了～！";
+		mes "大声喊出来！";
+		next;
+		input .@input$;
+		mes "["+strcharinfo(0)+"]";
+		mes .@input$;
+		mapannounce "lou_fild01","'"+strcharinfo(0)+"' 喊道："+.@input$,bc_map,"0x9CFF00";
+		next;
+		mes "[九连步]";
+		mes "感觉如何？";
+		mes "现在是不是好多了？哈哈哈～";
+		next;
+		mes "[九连步]";
+		mes "所以从今往后，每当您";
+		mes "想解压时，就来找我，我们再来这地方。就当是我表达谢意的方式。";
+		set ch_tre,5;
+		close;
+	}
+	else if (ch_tre == 5) {
+		mes "[九连步]";
+		mes "So...";
+		mes "您想做什么？";
+		next;
+		if (select("大喊。:离开。") == 1) {
+			mes "[九连步]";
+			mes "好～！";
+			mes "大声喊出来！";
+			next;
+			input .@input$;
+			mes "["+strcharinfo(0)+"]";
+			mes .@input$;
+			mapannounce "lou_fild01","'"+strcharinfo(0)+"' 喊道："+.@input$,bc_map,"0x9CFF00";
+			next;
+			mes "[九连步]";
+			mes "感觉如何？现在是不是好多了？";
+			close;
+		}
+		mes "[九连步]";
+		mes "Ahhh...";
+		mes "好，我们";
+		mes "去乐一乐吧。";
+		close2;
+		warp "lou_fild01",200,174;
+		end;
+	}
+	mes "[九连步]";
+	mes "嘿，朋友～！这是我的地盘！你以为你在这儿干什么？！";
+	next;
+	mes "[九连步]";
+	mes "Now...";
+	mes "快给我";
+	mes "滚出去。";
+	close2;
+	warp "lou_fild01",200,174;
+	end;
+}
+
+lou_in02,50,185,5	script	锅#1	111,{
+	if (ch_tre == 1) {
+		mes "^3131FF在阴影之下，";
+		mes "您发现一口大锅，里面盛满了暗红色的液体。您想";
+		mes "怎么做？^000000";
+		next;
+		if (select("拿走这口锅。:另找一口锅。") == 1) {
+			mes "^3131FF您小心地环顾四周。";
+			mes "如果有人看着，现在偷走可不明智。^000000";
+			next;
+			if (gettime(DT_HOUR) >= 10 && gettime(DT_HOUR) < 14) {
+				mes "^3131FF餐厅现在似乎不忙，所以只有几位伙计和客人。^000000";
+			}
+			else if (gettime(DT_HOUR) >= 14 && gettime(DT_HOUR) < 17) {
+				mes "^3131FF只有餐厅的";
+				mes "伙计在附近，";
+				mes "他们正忙着";
+				mes "彼此闲聊。^000000";
+			}
+			else if (gettime(DT_HOUR) >= 17 && gettime(DT_HOUR) < 22) {
+				mes "^3131FF餐厅里坐满了";
+				mes "客人，还有餐厅伙计";
+				mes "忙碌穿梭的";
+				mes "喧闹身影。^000000";
+				next;
+				mes "^3131FF所有人似乎都很忙";
+				mes "心事重重，根本";
+				mes "没注意到您靠近锅边。^000000";
+			}
+			else {
+				mes "^3131FF由于餐厅";
+				mes "已经打烊，整间店";
+				mes "安静无声。伙计们";
+				mes "都已经睡着了。^000000";
+			}
+			next;
+			mes "^3131FF您小心地抬起锅，虽然很重，但您觉得";
+			mes "自己能搬得动。^000000";
+			next;
+			mes "^3131FF现在您";
+			mes "只要在";
+			mes "不被人发现的情况下";
+			mes "离开这家餐厅……^000000";
+			if (rand(1,4) < 4) {
+				set ch_tre,2;
+			}
+			else {
+				set ch_tre,3;
+			}
+			close;
+		}
+		mes "^3131FF您决定^000000";
+		mes "^3131FF另找一口锅。^000000";
+		close;
+	}
+	else if (ch_tre > 3 && ch_tre < 6) {
+		mes "^3131FF您找到了一口锅。^000000";
+		mes "^3131FF然而，它是空的。^000000";
+		close;
+	}
+	if (gettime(DT_HOUR) >= 10 && gettime(DT_HOUR) < 22) {
+		mes "[厨师长]";
+		mes "啊……！";
+		mes "请千万不要";
+		mes "碰这些锅！";
+		close;
+	}
+	mes "^3131FF在阴影之下，";
+	mes "您发现一口大锅，里面盛满了暗红色的液体。^000000";
+	close;
+}
+
+lou_in02,49,185,5	script	锅#2	111,{
+	if (ch_tre == 1) {
+		mes "^3131FF在阴影之下，";
+		mes "您发现一口大锅，里面盛满了暗红色的液体。您想";
+		mes "怎么做？^000000";
+		next;
+		if (select("拿走这口锅。:另找一口锅。") == 1) {
+			mes "^3131FF您小心地环顾四周。";
+			mes "如果有人看着，现在偷走可不明智。^000000";
+			next;
+			if (gettime(DT_HOUR) >= 10 && gettime(DT_HOUR) < 14) {
+				mes "^3131FF餐厅现在似乎不忙，所以只有几位伙计和客人。^000000";
+			}
+			else if (gettime(DT_HOUR) >= 14 && gettime(DT_HOUR) < 17) {
+				mes "^3131FF只有餐厅的";
+				mes "伙计在附近，";
+				mes "他们正忙着";
+				mes "彼此闲聊。^000000";
+			}
+			else if (gettime(DT_HOUR) >= 17 && gettime(DT_HOUR) < 22) {
+				mes "^3131FF餐厅里坐满了";
+				mes "客人，还有餐厅伙计";
+				mes "忙碌穿梭的";
+				mes "餐厅的员工。^000000";
+				next;
+				mes "^3131FF大家似乎都很忙碌";
+				mes "心事重重，根本没";
+				mes "注意到你靠近了那口锅。^000000";
+			}
+			else {
+				mes "^3131FF既然餐厅";
+				mes "已经打烊，整个地方";
+				mes "一片寂静。那些";
+				mes "员工全都睡着了。^000000";
+			}
+			next;
+			mes "^3131FF你小心翼翼地抬起那口锅，虽然很重，但你觉得";
+			mes "自己能搬得动。^000000";
+			next;
+			mes "^3131FF现在你";
+			mes "要做的只是";
+			mes "离开这家餐厅";
+			mes "而不被发现……^000000";
+			if (rand(1,4) < 4) {
+				set ch_tre,2;
+			}
+			else {
+				set ch_tre,3;
+			}
+			close;
+		}
+		mes "^3131FF你决定^000000";
+		mes "^3131FF另找一口锅。^000000";
+		close;
+	}
+	else if (ch_tre > 3 && ch_tre < 6) {
+		mes "^3131FF你找到";
+		mes "一口空锅。^000000";
+		close;
+	}
+	if (gettime(DT_HOUR) >= 10 && gettime(DT_HOUR) < 22) {
+		mes "[厨师]";
+		mes "啊……！";
+		mes "请、请不要";
+		mes "碰那些锅！";
+		close;
+	}
+	mes "^3131FF在阴影之下，";
+	mes "你发现一口大锅，里面盛满了暗红色的液体。^000000";
+	close;
+}
+
+lou_in02,58,183,5	script	厨师助手#lou1	823,5,5,{
+	mes "[金伟玲]";
+	mes "我曾经是";
+	mes "一个热心的";
+	mes "武术家。";
+	next;
+	mes "[金伟玲]";
+	mes "虽然我为了生计";
+	mes "当上了助理厨师，但我始终认为自己首先是一名武术家。";
+	next;
+	mes "[金伟玲]";
+	mes "所以，我决定把武术的精神融入我的厨艺。客人多的时候，我们常常忙得不可开交。";
+	next;
+	mes "[金伟玲]";
+	mes "忙碌的时候，我可以用武术让做菜快上许多！哈哈哈～武术可是很实用的！";
+	next;
+	specialeffect EF_BEGINSPELL3;
+	mes "[金伟玲]";
+	mes "哇啊——！！！！";
+	next;
+	specialeffect EF_ENDURE; 
+	mes "[金伟玲]";
+	mes "哇啊塔阿——！！！！！";
+	next;
+	specialeffect EF_SONICBLOW;
+	mes "[金伟玲]";
+	mes "Waaa...";
+	mes "哇啊塔阿——！！！！！";
+	next;
+	specialeffect EF_SONICBLOWHIT;
+	mes "^3355FF* 剁剁剁剁剁 *^000000";
+	next;
+	emotion ET_BEST;
+	mes "[金伟玲]";
+	mes "哈哈哈哈！看看这些完美的蔬菜切片！哇哈哈哈！！";
+	mes "我会继续在烹饪中磨练我的武术！";
+	close;
+
+OnTouch_:
+	if (ch_tre == 2 || ch_tre == 3) {
+		if (gettime(DT_HOUR) >= 10 && gettime(DT_HOUR) < 14) {
+			if (rand(1,10) < 9) {
+				mes "[金伟玲]";
+				mes "等等！你是谁！";
+				mes "把那口锅放下";
+				mes "然后马上";
+				mes "滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+		else if (gettime(DT_HOUR) >= 14 && gettime(DT_HOUR) < 17) {
+			if (rand(1,10) < 10) {
+				mes "[金伟玲]";
+				mes "等等！你是谁！";
+				mes "把那口锅放下";
+				mes "然后马上";
+				mes "滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+		else if (gettime(DT_HOUR) >= 17 && gettime(DT_HOUR) < 22) {
+			if (rand(1,10) < 6) {
+				mes "[金伟玲]";
+				mes "等等！你是谁！";
+				mes "把那口锅放下";
+				mes "然后马上";
+				mes "滚出去！";
+				next;
+				mes "^3131FF你未能^000000";
+				mes "^3131FF偷走那口锅。^000000";
+				set ch_tre,1;
+				close;
+			}
+		}
+	}
+	end;
+}
+
+lou_in02,80,173,3	script	李敏#lou	746,{
+	if (ch_tre == 5) {
+		mes "[李敏]";
+		mes "^666666*叹气*^000000 太失望了。我大老远跑到这里就想尝尝那道菜！没想到他们竟然不卖了！";
+		next;
+		mes "[李敏]";
+		mes "最糟糕的是，我已经迷上那个味道了！^666666*抽泣……*^000000";
+		close;
+	}
+	mes "[李敏]";
+	mes "其实，我并不";
+	mes "住在洛阳。";
+	mes "但我还是常来";
+	mes "这边走走。";
+	next;
+	mes "[李敏]";
+	mes "我刚回来";
+	mes "因为我实在";
+	mes "太想念";
+	mes "之前在这里尝到的";
+	mes "那道菜了。";
+	next;
+	mes "[李敏]";
+	mes "不知为何，我就是忘不了它。满脑子都是它的味道！";
+	next;
+	mes "[李敏]";
+	mes "那味道，那口感。";
+	mes "那甜味在口中化开，诱人的香气萦绕在唇边……";
+	next;
+	mes "[李敏]";
+	mes "Ummmmm...";
+	mes "蜂胶！";
+	mes "光是想到它";
+	mes "就让我流口水～";
+	close;
+}
+
+lou_in02,42,186,5	script	刘嘉琳#lou	816,{
+	if (ch_tre == 5) {
+		mes "[刘嘉琳]";
+		mes "你知道这家餐厅有史以来最棒的菜是什么吗？龙汤！";
+		next;
+		emotion ET_THROB;
+		mes "[刘嘉琳]";
+		mes "它细腻的味道来自";
+		mes "用纯瘦肉熬出的高汤，不含任何脂肪。所以它也是女士们非常喜欢的减肥食品。";
+		next;
+		mes "[刘嘉琳]";
+		mes "我不知道发生了什么，";
+		mes "但听说这家餐厅不再卖龙汤了。";
+		mes "是因为价格吗……？";
+		close;
+	}
+	mes "[刘嘉琳]";
+	mes "你知道这家餐厅最好吃的菜是什么吗？就是龙汤！从这家餐厅开业起，他们就在卖这道菜了。";
+	next;
+	mes "[刘嘉琳]";
+	mes "它细腻的味道来自";
+	mes "用纯瘦肉熬出的高汤，不含任何脂肪。所以它也是女士们非常喜欢的减肥食品。";
+	next;
+	mes "[刘嘉琳]";
+	mes "既美味又对健康大有好处。你何不点一碗呢？我还没见过谁尝过龙汤后不喜欢的！";
+	close;
+}
+
+lou_in02,43,169,1	script	江荣#lou	827,{
+	mes "[江荣]";
+	mes "龙汤以辛辣却又甘甜清爽的味道闻名。";
+	next;
+	mes "[江荣]";
+	mes "它是用各种药材熬制的，所以对";
+	mes "身体也很有好处。";
+	next;
+	mes "[江荣]";
+	mes "龙汤能驱出体内产生的多余热气";
+	mes "并促进血液循环。因此它有助于调理身体机能、延年益寿。";
+	next;
+	mes "[江荣]";
+	mes "我从小就常喝龙汤。看看我，你不觉得以我这把年纪，身体算是很硬朗吗？";
+	close;
+}
+
+louyang,261,123,3	script	迟武平#lou	824,{
+	mes "[池武平]";
+	mes "我感觉不太舒服……";
+	mes "整个人……完全没精神……";
+	next;
+	mes "[池武平]";
+	mes "哎，我这酸痛的身体！";
+	mes "全身肌肉都在痛……";
+	mes "只有一样东西能治好这折磨人的……疼痛……";
+	next;
+	emotion ET_SURPRISE;
+	mes "[池武平]";
+	mes "喂，小子～！";
+	mes "你看起来不像本地人！";
+	mes "你何不沿着前面的路走，去看看那家大餐厅？";
+	next;
+	mes "[池武平]";
+	mes "他们那儿卖的汤，大概是你所能找到的最健康的食物了。";
+	next;
+	mes "[池武平]";
+	if (BaseLevel < 80) {
+		mes "我想你可以去喝点";
+		mes "那种汤";
+		mes "补补身子。";
+	}
+	else {
+		mes "你看起来需要";
+		mes "那碗汤来缓解";
+		mes "你身心";
+		mes "的疲惫。";
+	}
+	close;
+}
+
+louyang,174,150,5	script	九尺绫#lou	815,{
+	if (ch_tre == 5) {
+		mes "[九池玲]";
+		mes "最近有奇怪的传言说，那家餐厅不再卖龙汤了……";
+		next;
+		mes "[九池玲]";
+		mes "你觉得";
+		mes "我弟弟又做了";
+		mes "什么坏事吗！？";
+		mes "希望没有！要是他真的做了……";
+		mes "我该怎么办才好？！";
+		close;
+	}
+	mes "[九池玲]";
+	mes "我很担心我弟弟。";
+	mes "他年纪小，又叛逆，谁的话都不听……";
+	next;
+	mes "[九池玲]";
+	mes "他刚刚离开";
+	mes "家，一边还";
+	mes "抱怨着";
+	mes "那家餐厅……";
+	next;
+	mes "[九池玲]";
+	mes "^666666*叹气～～*^000000";
+	mes "这次我绝不会让他";
+	mes "跑掉！";
+	close;
+}
+
+// Doctor Quest :: dr_china
+//============================================================
+lou_in02,265,69,5	script	医生#lyang	814,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FF等一下！你现在负重过高，无法再领取物品。请把一些东西存进卡普拉仓库后再试。^000000";
+		close;
+	}
+	if (ch_par == 0) {
+		mes "[华佗]";
+		mes "人体上有许多穴位。自古以来，人们一直认为每个穴位的作用";
+		mes "和功能都是固定的。";
+		next;
+		mes "[华佗]";
+		mes "然而，随着我对每个穴位的研究与试验，我得出结论：穴位的运用会因情况不同";
+		mes "而产生不同的效果。";
+		emotion ET_SURPRISE;
+		next;
+		mes "[华佗]";
+		mes "很少有穴位无论什么问题都表现出相同的症状。大多数情况下，穴位的作用会因身体状况或时辰不同而有所差异。";
+		next;
+		mes "[华佗]";
+		mes "例如，位于肚脐上方的穴位是最脆弱的要害。";
+		next;
+		mes "[华佗]";
+		mes "若按压不当，可能致人死亡。但在上午5:15到7:15之间，它只是个弱点。";
+		set ch_par,1;
+		close;
+	}
+	else if (ch_par == 1) {
+		if (BaseLevel < 40) {
+			mes "[华佗]";
+			mes "一个人的强大，并不单指肉体上的力量。";
+			next;
+			mes "[华佗]";
+			mes "智慧、经验与知识等因素";
+			mes "也是判断一个人强弱时所要考虑的。";
+			next;
+			mes "[华佗]";
+			mes "假设你非常强壮，还得到了最强的武器。";
+			next;
+			mes "[华佗]";
+			mes "若不懂得运用武器的力量，你就不算强大……而是弱小。";
+			next;
+			mes "[华佗]";
+			mes "当工具或武器";
+			mes "超出了你的能力，";
+			mes "便会酿成最糟的局面。";
+			close;
+		}
+		mes "[华佗]";
+		mes "Hmmm...";
+		mes "我遇到麻烦了……";
+		next;
+		mes "[华佗]";
+		mes "没有药我什么也做不了。可我有一位病人";
+		mes "需要立即治疗，而";
+		mes "我又离不开药铺……";
+		emotion ET_PROFUSELY_SWEAT;
+		next;
+		if (select("我可以帮你。:真遗憾！") == 1) {
+			mes "[华佗]";
+			mes "咦……？";
+			mes "Are...";
+			mes "你是认真的吗？";
+			next;
+			mes "[华佗]";
+			mes "这件事并不费力，但对你来说或许过于冒昧，毕竟我们才刚认识。";
+			next;
+			if (select("如果你觉得为难……:我不介意，我很乐意帮忙。") == 1) {
+				mes "[华佗]";
+				mes "听你这么说，";
+				mes "真是太感谢了。";
+				mes "向刚认识的人开口求助，实在让我过意不去。";
+				next;
+				mes "[华佗]";
+				mes "不过，若有缘";
+				mes "再见，我再来拜托你。";
+				mes "那么，恕我失陪了……";
+				emotion ET_THANKS;
+				close;
+			}
+			mes "[华佗]";
+			mes "嗯，我明白了。";
+			mes "那么，就让我";
+			mes "拜托你一件事吧。";
+			next;
+			mes "[华佗]";
+			mes "如你刚才所听到的，我需要";
+			mes "一种特殊的药来治疗这位病人。可我需要的药快用完了。";
+			next;
+			mes "[华佗]";
+			mes "我得请你去帮我取来，因为我现在无法丢下等着我的病人们。";
+			next;
+			mes "[华佗]";
+			mes "^666666*唉*^000000";
+			mes "不幸的事似乎总是";
+			mes "一件接一件地来，不是吗？我的伙计们现在都忙着办别的事。";
+			next;
+			mes "[华佗]";
+			mes "请你去城里的";
+			mes "工具店，帮我带回";
+			mes "我需要的药。你告诉店主是我派你去的，他会明白的。";
+			next;
+			mes "[华佗]";
+			mes "很抱歉给你添了";
+			mes "这么多麻烦，不过恕我失陪，还有别的病人在等我。请快些把";
+			mes "药带回来！";
+			set ch_par,2;
+			setquest 11044;
+			close;
+		}
+		mes "[华佗]";
+		mes "^666666*叹气*^000000 不知为何，我的药似乎总是不够用。难道就没人能帮我一把吗？";
+		close;
+	}
+	else if (ch_par < 4) {
+		mes "[华佗]";
+		mes "你还没取到";
+		mes "药吗……？";
+		mes "希望你能尽快";
+		mes "把药取回来……";
+		close;
+	}
+	else if (ch_par == 4) {
+		mes "[华佗]";
+		mes "为了开药";
+		mes "并为病人施行合适的";
+		mes "针灸，我必须先考虑许多与健康相关的因素。";
+		next;
+		mes "[华佗]";
+		mes "如果病人情况危急或出现异常症状，我必须格外谨慎。";
+		close;
+	}
+	else if (ch_par < 9) {
+		mes "[华佗]";
+		mes "Umm.....";
+		mes "是这样吗……？";
+		mes "我能理解你";
+		mes "慢慢把东西带来。不必着急。";
+		next;
+		mes "[华佗]";
+		mes "每个人都有自己的";
+		mes "烦恼，我也理解你的事必须先处理。";
+		next;
+		mes "[华佗]";
+		mes "不过，偶尔";
+		mes "设身处地";
+		mes "为别人想想也是好的。";
+		close;
+	}
+	else if (ch_par == 9) {
+		if (countitem(7252) < 1) {
+			mes "[华佗]";
+			mes "Umm.....";
+			mes "是这样吗……？";
+			mes "我能理解你";
+			mes "慢慢把我需要的东西带来。不必着急。";
+			next;
+			mes "[华佗]";
+			mes "每个人都有自己的";
+			mes "烦恼，我也理解你的事必须先处理。";
+			next;
+			mes "[华佗]";
+			mes "不过，偶尔";
+			mes "设身处地";
+			mes "为别人想想也是好的。";
+			close;
+		}
+		mes "[华佗]";
+		mes "Ah...";
+		mes "你终于";
+		mes "把它带来了！";
+		mes "真是太感谢你了，";
+		mes "我安心多了……";
+		next;
+		mes "[华佗]";
+		mes "我先向你";
+		mes "道个歉，";
+		mes "能再请你";
+		mes "帮一个忙吗？";
+		next;
+		mes "[华佗]";
+		mes "我再拜托你一次，";
+		mes "因为我看得出你值得信赖。当然，我会为你的辛劳给予报酬。";
+		next;
+		if (select("抱歉，我帮不了你。:没问题。") == 1) {
+			mes "[华佗]";
+			mes "Alright....";
+			mes "我明白了。";
+			mes "不过，还是让我";
+			mes "感谢你的帮忙。";
+			mes "请收下这个……";
+			next;
+			mes "[华佗]";
+			mes "这药虽然不算";
+			mes "什么好东西，却是我家祖传的秘方。希望你在身陷险境时能用得上。";
+			delitem 7252,1; //Herb_Medicine
+			set ch_par,10;
+			completequest 11056;
+			getitem 679,2; //Gold_Pill
+			getexp (checkre(3))?1000:10000,0;
+			next;
+			mes "[华佗]";
+			mes "那么，";
+			mes "我们";
+			mes "后会有期。";
+			mes "再次感谢";
+			mes "你的帮助。";
+			close;
+		}
+		mes "[华佗]";
+		mes "谢谢您，";
+		mes "真是太感谢你了！";
+		mes "我另外一些药又用完了，希望你能再帮我一次。";
+		next;
+		mes "[华佗]";
+		mes "希望我没有给你";
+		mes "添太多麻烦。嗯，我需要的药是……";
+		next;
+		mes "[华佗]";
+		mes "^0000ff2 花豹指甲^000000，能强健骨骼；^0000ff10 硬桃^000000，能强健肌肉；^0000ff5 牛蛙之皮^000000，能滋养皮肤……";
+		next;
+		mes "[华佗]";
+		mes "^0000ff20 褐色树根^000000，可调理心脏；^0000ff10 绿芽^000000，可舒缓腹部；^0000ff5 蜂蜜罐^000000，可补充营养。";
+		next;
+		mes "[华佗]";
+		mes "希望你都";
+		mes "记住了";
+		mes "这些。再说一遍，就是……";
+		next;
+		mes "[华佗]";
+		mes "^3355FF2 花豹指甲^000000，";
+		mes "^3355FF10 硬桃^000000，";
+		mes "^3355FF5 牛蛙之皮^000000，";
+		mes "^3355FF20 褐色树根^000000，";
+		mes "^3355FF10 绿芽^000000 以及";
+		mes "^3355FF5 蜂蜜罐^000000。";
+		set ch_par,17;
+		changequest 11056,11057;
+		close;
+	}
+	else if (ch_par == 10) {
+		mes "[华佗]";
+		mes "一个人的强大，并不单指肉体上的力量。";
+		next;
+		mes "[华佗]";
+		mes "智慧、经验与知识等因素";
+		mes "也是判断一个人强弱时所要考虑的。";
+		next;
+		mes "[华佗]";
+		mes "假设你非常强壮，还得到了最强的武器。";
+		next;
+		mes "[华佗]";
+		mes "若不懂得运用武器的力量，你就不算强大……而是弱小。";
+		next;
+		mes "[华佗]";
+		mes "当工具或武器";
+		mes "超出了你的能力，";
+		mes "便会酿成最糟的局面。";
+		close;
+	}
+	else if (ch_par < 15) {
+		mes "[华佗]";
+		mes "Ah...";
+		mes "你刚说很快就会把材料都收集齐？哦，谢谢你的好意。";
+		mes "感谢你为我";
+		mes "费心。";
+		close;
+	}
+	else if (ch_par == 15) {
+		mes "[华佗]";
+		mes "Ah....";
+		mes "你刚说很快就会把材料都收集齐？哦，谢谢你的好意。";
+		mes "感谢你为我";
+		mes "费心。";
+		close;
+	}
+	else if (ch_par == 16) {
+		if (countitem(7252) < 1) {
+			mes "[华佗]";
+			mes "Umm.....";
+			mes "是这样吗……？";
+			mes "就算你无法";
+			mes "马上把药";
+			mes "带来，我也理解。";
+			next;
+			mes "[华佗]";
+			mes "现在不急，";
+			mes "你不必赶。";
+			mes "每个人都有自己的难处，所以我理解你的事必须先处理。";
+			next;
+			mes "[华佗]";
+			mes "不过，看到你能体谅别人的难处，这很好。";
+			close;
+		}
+		mes "[华佗]";
+		mes "啊，终于……";
+		mes "你把我需要的东西带来了。真是太感谢了，这药重新备上，我安心多了。";
+		next;
+		mes "[华佗]";
+		mes "我先向你道个歉，";
+		mes "能再请你帮一个忙吗？";
+		mes "我再次请你帮忙，因为我知道可以信赖你。当然，我会为你的辛劳给予报酬。";
+		next;
+		if (select("抱歉……:没问题。") == 1) {
+			mes "[华佗]";
+			mes "Alright....";
+			mes "我明白了。";
+			mes "不过，谢谢你";
+			mes "帮了我。";
+			mes "请收下这个……";
+			next;
+			mes "[华佗]";
+			mes "这药虽不算什么，";
+			mes "却是我家祖传的秘方。希望它能在危险时帮到你。";
+			delitem 7252,1; //Herb_Medicine
+			set ch_par,10;
+			completequest 11056;
+			getitem 679,2; //Gold_Pill
+			getexp (checkre(3))?1000:10000,0;
+			next;
+			mes "[华佗]";
+			mes "那么，后会有期。再次感谢你的帮助。";
+			close;
+		}
+		mes "[华佗]";
+		mes "谢谢，真是太感谢你了！";
+		mes "我另外一些病人要用的药刚用完。不需要太多，但你会帮了我大忙。";
+		next;
+		mes "[华佗]";
+		mes "我需要的药是^0000ff2 花豹指甲^000000，能强健骨骼；^0000ff10 硬桃^000000，能强健肌肉；^0000ff5 牛蛙之皮^000000，能滋养皮肤……";
+		next;
+		mes "[华佗]";
+		mes "^0000ff20 褐色树根^000000，可调理心脏；^0000ff10 绿芽^000000，可舒缓腹部；^0000ff5 蜂蜜罐^000000，可补充营养。";
+		next;
+		mes "[华佗]";
+		mes "希望你都";
+		mes "记住了。";
+		mes "再说一遍，就是……";
+		next;
+		mes "[华佗]";
+		mes "^3355FF2 花豹指甲^000000，";
+		mes "^3355FF10 硬桃^000000，";
+		mes "^3355FF5 牛蛙之皮^000000，";
+		mes "^3355FF20 褐色树根^000000，";
+		mes "^3355FF10 绿芽^000000 以及";
+		mes "^3355FF5 蜂蜜罐^000000。";
+		set ch_par,17;
+		close;
+	}
+	else if (ch_par == 17) {
+		if (countitem(7172) > 1 && countitem(7164) > 9 && countitem(7155) > 4 && countitem(7188) > 19 && countitem(7193) > 9 && countitem(7121) > 4) {
+			mes "[华佗]";
+			mes "嗯？啊，你回来了。";
+			mes "抱歉，我刚才在照看其他病人。我需要的药你都收集齐了吗？";
+			next;
+			mes "[华佗]";
+			mes "我看看……";
+			mes "哦，你全带来了。";
+			mes "非常感谢你";
+			mes "慷慨相助。这些药重新备齐，我安心多了……";
+			next;
+			mes "[华佗]";
+			mes "请收下这个，聊表谢意。这药虽不算什么，却是我家祖传的秘方。希望它能在危险时帮到你。";
+			delitem 7172,2; //Leopard_Talon
+			delitem 7164,10; //Hard_Peach
+			delitem 7155,5; //Poison_Toad's_Skin
+			delitem 7188,20; //Browny_Root
+			delitem 7193,10; //Germinating_Sprout
+			delitem 7121,5; //Honey_Jar
+			delitem 7252,1; //Herb_Medicine
+			set ch_par,18;
+			completequest 11057;
+			getitem 679,5; //Gold_Pill
+			getexp (checkre(3))?10000:30000,0;
+			next;
+			mes "[华佗]";
+			mes "不过，请记住我给你这些药丸时不要超过建议用量。即便是药，用量不当也会变成毒药。";
+			close;
+		}
+		mes "[华佗]";
+		mes "Hmm...";
+		mes "很遗憾，你还没把我需要的东西收集齐。请再收集……";
+		next;
+		mes "[华佗]";
+		mes "^3355FF2 花豹指甲^000000，";
+		mes "^3355FF10 硬桃^000000，";
+		mes "^3355FF5 牛蛙之皮^000000，";
+		mes "^3355FF20 褐色树根^000000，";
+		mes "^3355FF10 绿芽^000000 以及";
+		mes "^3355FF5 蜂蜜罐^000000。";
+		close;
+	}
+	mes "[华佗]";
+	mes "你的健康受";
+	mes "许多因素影响。仅靠营养丰富的食物和药物，无法保证";
+	mes "健康的生活方式。";
+	next;
+	mes "[华佗]";
+	mes "看似微不足道的小事，比如日常的情绪与行为、你的想法与言语，也会影响你是生病还是健康。";
+	next;
+	mes "[华佗]";
+	mes "每个人都需要时间静下";
+	mes "心来放松。若能在日常生活中保持平和的心境，你的身体将大受裨益。";
+	next;
+	mes "[华佗]";
+	mes "Hahaha...";
+	mes "希望你在";
+	mes "你在此处的";
+	mes "洛阳之行。";
+	close;
+}
+
+lou_in02,272,55,0	script	似曾相识的病人	798,{
+	if (ch_par == 0 ) {
+		mes "[??????]";
+		mes "Awwww.....";
+		mes "Ummm....";
+		mes "^666666*咳……咳……*^000000";
+		emotion ET_HUK;
+		set ch_par,1;
+		close;
+	}
+	else if (ch_par < 18) {
+		mes "[??????]";
+		mes "^666666*咳咳……*^000000";
+		mes "Aww......www...";
+		mes "Aww...wwww..";
+		emotion ET_THINK;
+		close;
+	}
+	else {
+		mes "[??????]";
+		mes "呼……呼……";
+		mes "Zzzzz.....";
+		mes "Zzzzz.....";
+		close;
+	}
+}
+
+lou_in02,248,166,2	script	工具店老板#lou	824,{
+	if (ch_par < 2) {
+		mes "[王垂衣]";
+		mes "我的生意最近";
+		mes "不太好。而且这天气是怎么回事？真不知道这世道怎么了……";
+		close;
+	}
+	else if (ch_par == 2) {
+		mes "[王垂衣]";
+		mes "可恶！";
+		mes "我讨厌这";
+		mes "天气……！";
+		next;
+		mes "[王垂衣]";
+		mes "嗯？需要我";
+		mes "帮什么忙吗？";
+		emotion ET_QUESTION;
+		next;
+		if (select("我是来替医生取东西的……:我也觉得，这天气真糟糕。") == 1) {
+			mes "[王垂衣]";
+			mes "嗯？";
+			mes "替医生跑腿？";
+			mes "她一定是又";
+			mes "没药了。你进去";
+			mes "看看仓库吧。";
+			next;
+			mes "[王垂衣]";
+			mes "仓库就在这栋";
+			mes "建筑的另一侧。到那里你会看到一个叫江夏友的人，直接去找他要你需要的药材吧。";
+			set ch_par,3;
+			changequest 11044,11045;
+			close;
+		}
+		mes "[王垂衣]";
+		mes "可不是嘛。这天气一直让我心烦。可恶，";
+		mes "要是再这样被这天气气得";
+		mes "心烦，我恐怕活不长了……";
+		close;
+	}
+	else if (ch_par == 3) {
+		mes "[王垂衣]";
+		mes "我真不明白，天气这么差，外乡人为什么还不断来洛阳。我也厌烦在这里做生意了。迟早";
+		mes "我可能得离开。";
+		close;
+	}
+	else if (ch_par == 4) {
+		mes "[王垂衣]";
+		mes "什么？他没给你需要的东西？哼，看来你做了什么让他不高兴的事。那样的话我也帮不了你。";
+		close;
+	}
+	else if (ch_par < 10) {
+		mes "[王垂衣]";
+		mes "我真不明白，天气这么差，外乡人为什么还不断来洛阳。我也厌烦在这里做生意了。迟早";
+		mes "我可能得离开。";
+		close;
+	}
+	else {
+		mes "[王垂衣]";
+		mes "天啊，这天气到底怎么了？！真希望云神带来雨季，可看来不太可能。";
+		close;
+	}
+}
+
+lou_in02,201,166,4	script	仓库管理员#lou	819,{
+	if ((MaxWeight-Weight) < 2000 || checkweight(1201,1) == 0) {
+		mes "^3355FF * 请稍等！！ *";
+		mes "你目前负重过高，无法再接收物品进入背包。请将部分物品存入卡普拉仓库后再试。^000000";
+		close;
+	}
+	if (ch_par < 3) {
+		mes "[江夏友]";
+		mes "^666666*哈欠……*^000000";
+		mes "真无聊……";
+		mes "无聊得要命。我不想再在这里浪费时间了，我还有重要的事要做……";
+		close;
+	}
+	else if (ch_par == 3) {
+		mes "[江夏友]";
+		mes "嗯？";
+		mes "什、什么，你来这里做什么？";
+		mes "要是没什么事，最好赶紧走。";
+		next;
+		switch(select("抱歉打扰了。:天气很热吧？:我是替医生跑腿的。")) {
+		case 1:
+			mes "[江夏友]";
+			mes "没错！";
+			mes "这么热的天别来烦人！快走开，没看见我正忙吗！";
+			close;
+		case 2:
+			mes "[江夏友]";
+			mes "你不用";
+			mes "问我这个。我自己";
+			mes "能感觉到！行了，我";
+			mes "还有一堆事";
+			mes "要处理，别再来烦我。";
+			mes "可恶，真热！";
+			close;
+		case 3:
+			mes "[江夏友]";
+			mes "是吗？";
+			mes "那你怎么";
+			mes "不早说？让我看看。";
+			mes "Hmmm...";
+			next;
+			emotion ET_SURPRISE;
+			next;
+			mes "[江夏友]";
+			mes "其实，你能不能先";
+			mes "帮我个忙？别担心，不难，但对我很重要。你帮我之后，我";
+			mes "就给你需要的东西。";
+			next;
+			if (select("嗯，是什么事？:抱歉，我很忙。") == 1) {
+				mes "[江夏友]";
+				mes "太好了，谢谢。我得去";
+				mes "取一些官方文件";
+				mes "，就在市政厅，可我不能离开这仓库，因为没人能接我的班。";
+				next;
+				mes "[江夏友]";
+				mes "所以我想请你去市政厅帮我把文件取来。";
+				mes "我想不会占用你太多时间。";
+				next;
+				mes "[江夏友]";
+				mes "从这里一直往东走";
+				mes "，找那栋造型像量具一样的建筑。那就是市政厅。";
+				next;
+				mes "[江夏友]";
+				mes "我不懂政府为什么花那么多钱建那栋楼，不过总之，希望你能帮我这个忙。";
+				next;
+				mes "[江夏友]";
+				mes "哦，差点忘了。";
+				mes "你得说明要哪种文件，我现在就告诉你。";
+				next;
+				mes "[江夏友]";
+				mes "这很重要，";
+				mes "所以别忘了。";
+				set .@paper_j,rand(10,13);
+				if (.@paper_j == 10) {
+					mes "那人问你要什么时，你就说：“^ff0000居住地迁移申请书^000000。”就这样。";
+					set ch_par,5;
+					changequest 11045,11046;
+				}
+				else if (.@paper_j == 11) {
+					mes "那人问你要什么时，你就说：“^ff0000暑期SAT补习班申请书^000000。”记住了吗？";
+					set ch_par,6;
+					changequest 11045,11047;
+				}
+				else if (.@paper_j == 12) {
+					mes "那人问你要什么时，你就说：“^ff0000沙尘现象报告书^000000。”很简单吧？";
+					set ch_par,7;
+					changequest 11045,11048;
+				}
+				else if (.@paper_j == 13) {
+					mes "那人问你要什么时，你就说：“^ff0000沟通提案^000000。”就这样？";
+					set ch_par,8;
+					changequest 11045,11049;
+				}
+				next;
+				mes "[江夏友]";
+				mes "如果你不说明";
+				mes "需要的文件，他们什么都不会给你。所以要小心，别忘了！";
+				close;
+			}
+			mes "[江夏友]";
+			mes "呸～！";
+			mes "那就算了！";
+			next;
+			mes "[江夏友]";
+			mes "你要找的药也许就在这附近，自己找找吧。要不是看在医生的份上，我才不会让你在这里逗留，知道吗？";
+			emotion ET_HNG;
+			set ch_par,4;
+			changequest 11045,11050;
+			close;
+		}
+	}
+	else if (ch_par == 4) {
+		mes "[江夏友]";
+		mes "Hah...";
+		mes "抱歉，伙计，药你得自己找了。人命关天，我看你还是赶紧行动吧。";
+		close;
+	}
+	else if (ch_par < 9) {
+		mes "[江夏友]";
+		mes "嗯？";
+		mes "你还没去";
+		mes "市政厅吗？";
+		mes "真是懒虫一个。";
+		next;
+		mes "[江夏友]";
+		mes "你该赶紧把药送去给医生吧？这可是人命关天，你懂不懂？";
+		next;
+		mes "[江夏友]";
+		mes "看来你是";
+		mes "健忘的那种人……";
+		mes "那人问你";
+		mes "要什么时，你就说：";
+		if (ch_par == 5) {
+			mes "“^ff0000居住地迁移申请书^000000。”";
+		}
+		else if (ch_par == 6) {
+			mes "“^ff0000暑期SAT补习班申请书^000000。”";
+		}
+		else if (ch_par == 7) {
+			mes "“^ff0000沙尘现象报告书^000000”。";
+		}
+		else if (ch_par == 8) {
+			mes "^ff0000沟通提案^000000。”";
+		}
+		next;
+		mes "[江夏友]";
+		mes "就这样。";
+		mes "好了，去做吧，小子。";
+		close;
+	}
+	else if (ch_par == 9) {
+		mes "[江夏友]";
+		mes "Hmm...";
+		mes "你运气不错。";
+		mes "好吧，进去吧。";
+		mes "不过，事情";
+		mes "变得复杂了……";
+		close;
+	}
+	else if (ch_par == 10) {
+		mes "[江夏友]";
+		mes "^666666*哈欠～*^000000 真希望";
+		mes "天气能好转。唉，我干嘛要去想这热天？现在心情都糟透了……";
+		next;
+		mes "[江夏友]";
+		mes "嗯。看来我得";
+		mes "尽快把这些事";
+		mes "处理掉……";
+		close;
+	}
+	else if (ch_par < 15) {
+		mes "[江夏友]";
+		mes "嗯？";
+		mes "你还没去市政厅吗？真是懒虫一个。";
+		next;
+		mes "[江夏友]";
+		mes "要是我的话，就赶紧把药送去给医生。这可是人命关天，你总得在意吧！";
+		next;
+		mes "[江夏友]";
+		mes "看来你是";
+		mes "健忘的那种人……";
+		mes "那人问你";
+		mes "要什么时，你就说：";
+		if (ch_par == 11) {
+			mes "“^ff0000居住地迁移申请书^000000。”";
+		}
+		else if (ch_par == 12) {
+			mes "“^ff0000暑期SAT补习班申请书^000000。”";
+		}
+		else if (ch_par == 13) {
+			mes "“^ff0000沙尘现象报告书^000000。”";
+		}
+		else if (ch_par == 14) {
+			mes "“^ff0000沟通提案^000000。”";
+		}
+		next;
+		mes "[江夏友]";
+		mes "就这样。";
+		mes "好了，去做吧，小子。";
+		close;
+	}
+	else if (ch_par == 15) {
+		mes "[江夏友]";
+		mes "你终于拿来了！哈哈，";
+		mes "我也刚好把你要的东西都弄齐了。让我看看……";
+		mes "没错，就是这个！";
+		mes "好，好……";
+		next;
+		mes "^3355FF*翻找翻找*";
+		mes "......^000000";
+		next;
+		select("打扰一下。");
+		mes "[江夏友]";
+		mes "嗯？";
+		mes "Ah....";
+		mes "Haha...";
+		mes "那件事真是";
+		mes "抱歉。哈哈哈～";
+		next;
+		mes "[江夏友]";
+		mes "啊！给你。虽然这事有点烦人，不过";
+		mes "大家总得互相帮忙，对吧？那好，回头见。";
+		set ch_par,16;
+		changequest 11055,11056;
+		getitem 7252,1; //Herb_Medicine
+		close;
+	}
+	mes "[江夏友]";
+	mes "^666666*哈欠～*^000000 真希望";
+	mes "天气能好转。唉，我干嘛要去想这热天？现在心情都糟透了……";
+	next;
+	mes "[江夏友]";
+	mes "嗯。看来我得";
+	mes "尽快把这些事";
+	mes "处理掉……";
+	close;
+}
+
+lou_in02,210,47,0	script	市政厅官员#lou	825,{
+	if (ch_par < 5) {
+		mes "[金驰远]";
+		mes "^666666*哈欠～*^000000";
+		mes "唉，这大热天真是";
+		mes "难受。哦？你看起来像游客。在这儿玩得开心吗？";
+		next;
+		mes "[金驰远]";
+		mes "虽然最近天气不好，洛阳还是有很多值得一去的地方。";
+		mes "希望你玩得愉快。";
+		close;
+	}
+	else if (ch_par < 9) {
+		mes "[金驰远]";
+		mes "嗯？米德加尔特人？";
+		mes "那么，有什么能帮你的吗？";
+		next;
+		if (select("我需要一份文件。:我只是路过。") == 1) {
+			mes "[金驰远]";
+			mes "哦，是吗？";
+			mes "不巧，很多人排队申领政府表格，所以要";
+			mes "花些时间才能处理你的请求。";
+			next;
+			mes "[金驰远]";
+			mes "^333333*低语*";
+			mes "其实，有个办法可以，怎么说呢，加快我们处理你的请求……^000000";
+			next;
+			if (select("嗯？你说什么？:给点Zeny打通关节，是吧？") == 1) {
+				mes "[金驰远]";
+				mes "^666666*咳！*^000000 没什么。";
+				mes "没什么重要的。好了，我很忙，请你去那边填写申请表……";
+				close;
+			}
+			input .@input;
+			if (.@input < 10000) {
+				mes "[金驰远]";
+				mes "天哪，";
+				mes "你在想什么？";
+				mes "把我当什么了，乞丐吗？！";
+				mes "这点东西";
+				mes "也配叫贿赂！";
+				next;
+				mes "[金驰远]";
+				mes "我是说……";
+				mes "竟敢贿赂执法官员！希望其他外乡人不像你这样！请立刻离开！";
+				emotion ET_HNG;
+				close;
+			}
+			else {
+				if (Zeny > .@input) {
+					mes "[金驰远]";
+					mes "什么……？！";
+					mes "我不是那个意思，";
+					mes "但如果你坚持要给我们政府捐款……";
+					next;
+					mes "[金驰远]";
+					mes "^666666*低语*^000000";
+					mes "^333333你上楼后，另一位官员会给你想要的文件。^000000 ^666666*咳*^000000 洛阳感谢你！";
+					set Zeny, Zeny-.@input;
+					if (ch_par == 5) {
+						set ch_par,11;
+						changequest 11046,11051;
+					}
+					else if (ch_par == 6) {
+						set ch_par,12;
+						changequest 11047,11052;
+					}
+					else if (ch_par == 7) {
+						set ch_par,13;
+						changequest 11048,11053;
+					}
+					else if (ch_par == 8) {
+						set ch_par,14;
+						changequest 11049,11054;
+					}
+					close;
+				}
+				else {
+					mes "[金驰远]";
+					mes "天哪，你在想什么？把我当乞丐吗？！这点东西也配叫贿赂！";
+					next;
+					mes "[金驰远]";
+					mes "我是说……";
+					mes "竟敢贿赂执法官员！希望其他外乡人不像你这样！请立刻离开！";
+					emotion ET_HNG;
+					close;
+				}
+			}
+		}
+		mes "[金驰远]";
+		mes "罢了……";
+		mes "我告诉你，现在可不是游客来的时候。希望你别乱闯";
+		mes "不该去的地方。";
+		next;
+		mes "[金驰远]";
+		mes "说实话，";
+		mes "现在这种局势，好奇心可是很危险的。请";
+		mes "小心。";
+		close;
+	}
+	else if (ch_par == 9) {
+		mes "[金驰远]";
+		mes "罢了……";
+		mes "我告诉你，现在可不是游客来的时候。希望你别乱闯";
+		mes "不该去的地方。";
+		next;
+		mes "[金驰远]";
+		mes "说实话，";
+		mes "现在这种局势，好奇心可是很危险的。请";
+		mes "小心。";
+		close;
+	}
+	else if (ch_par == 10) {
+		mes "[金驰远]";
+		mes "罢了……";
+		mes "我告诉你，现在可不是游客来的时候。希望你别乱闯";
+		mes "不该去的地方。";
+		next;
+		mes "[金驰远]";
+		mes "说实话，";
+		mes "现在这种局势，好奇心可是很危险的。请";
+		mes "小心。";
+		close;
+	}
+	else if (ch_par < 15) {
+		mes "[金驰远]";
+		mes "你还没见到我提到的那个官员吗？我已经和他打过招呼了，你上楼去见他吧。";
+		next;
+		mes "[金驰远]";
+		mes "Hahahaha...";
+		mes "保重，";
+		mes "Midgardian.";
+	}
+	else if (ch_par == 15) {
+		mes "[金驰远]";
+		mes "啊~";
+		mes "你见到他了，";
+		mes "对吧？";
+		mes "Hahaha...";
+		mes "祝你在这";
+		mes "洛阳玩得愉快！";
+		emotion ET_SMILE;
+		close;
+	}
+	mes "[金驰远]";
+	mes "Welcome.";
+	mes "有什么可以为您效劳的？";
+	next;
+	mes "[金驰远]";
+	mes "如果没什么要问我的，请离开。这里不是";
+	mes "冒险者的游乐场。";
+	emotion ET_HNG;
+	close;
+}
+
+lou_in02,156,38,0	script	研读的官员#lou	822,{
+	if (ch_par < 5) {
+		mes "[黄志书]";
+		mes ".....";
+		mes "^666666*嘟囔嘟囔*^000000";
+		next;
+		mes "^3355FF他似乎在";
+		mes "翻找着";
+		mes "一些文件，完全";
+		mes "没有注意到你。^000000";
+		next;
+		if (select("打扰一下。:无视他。") == 1) {
+			mes "[黄志书]";
+			mes "嗯……？";
+			mes "Well...";
+			mes "...";
+			mes "我明白了……";
+			mes "^666666*嘟囔嘟囔……*^000000";
+			close;
+		}
+		mes "[黄志书]";
+		mes ".........";
+		mes "^666666*嘟囔嘟囔*^000000";
+		close;
+	}
+	else if (ch_par < 9) {
+		mes "[黄志书]";
+		mes "书中蕴含着作者的";
+		mes "精神与思想。任何艺术作品，都可以说是创作者灵魂的窗口。";
+		next;
+		mes "[黄志书]";
+		mes "^666666*嘟囔嘟囔……*^000000";
+		mes "嗯……我明白了……";
+		mes "啊，原来如此……";
+		mes "^666666*嘟囔嘟囔……*^000000";
+		close;
+	}
+	else if (ch_par == 9) {
+		mes "[黄志书]";
+		mes "书不仅仅是纸页的集合，文字也不只是毫无意义的字母排列。";
+		next;
+		mes "[黄志书]";
+		mes "对追求充实人生的人类而言，书籍是教育中重要的一环，因为书籍能传授各种各样的知识。";
+		next;
+		mes "[黄志书]";
+		mes "尽可能多读书吧。没有书籍与他人的";
+		mes "知识，你永远无法领悟生命的真谛。";
+		next;
+		mes "^3355FF*翻找翻找……*^000000";
+		close;
+	}
+	else if (ch_par == 10) {
+		mes "[黄志书]";
+		mes "书不仅仅是纸页的集合，文字也不只是简单的字母排列。";
+		next;
+		mes "[黄志书]";
+		mes "对追求充实人生的人类而言，书籍是教育中重要的一环，因为它们能传授各种各样的知识。";
+		next;
+		mes "[黄志书]";
+		mes "尽可能多读书吧。没有书籍与他人的知识，你永远无法领悟生命的真谛。";
+		next;
+		mes "[黄志书]";
+		mes "^3355FF*翻找翻找……*^000000";
+		close;
+	}
+	else if (ch_par < 15) {
+		mes "[黄志书]";
+		mes "嗯？";
+		mes "你在这里做什么？";
+		mes "请不要打扰我，";
+		mes "我正在读书。";
+		next;
+		mes "^3355FF*翻找翻找……*^000000";
+		next;
+		if (select("抱歉打扰了。:我来取我的文件。") == 1) {
+			mes "[黄志书]";
+			mes "接受你的道歉。";
+			mes "Hmmm....";
+			mes "哦，我明白了，明白了……";
+			next;
+			mes "^3355FF*翻找翻找……*";
+			mes ".........^000000";
+			emotion ET_SURPRISE;
+			close;
+		}
+		mes "[黄志书]";
+		mes "嗯？";
+		mes "Ah...";
+		mes "你就是我在等的人。";
+		mes "那么你需要";
+		mes "哪种文件？";
+		next;
+		input .@input$;
+		switch (ch_par) {
+		case 11:
+			if (.@input$ == "Residence Transfer Application")
+				set .@paper,1;
+			break;
+		case 12:
+			if (.@input$ == "Summer SAT Class Application")
+				set .@paper,1;
+			break;
+		case 13:
+			if (.@input$ == "Sandy Dust Phenomenon Report")
+				set .@paper,1;
+			break;
+		case 14:
+			if (.@input$ == "Communication Proposal")
+				set .@paper,1;
+			break;
+		}
+		mes "[黄志书]";
+		mes "让我看看。";
+		mes "你想要……";
+		mes "一份"+ .@input$ +"?";
+		next;
+		if (.@paper == 1) {
+			mes "[黄志书]";
+			mes "我把它放哪了？你想要一份"+.@input$+", huh? I think I'll need some time to find it. Ah, right, I think I know where I put that.";
+			next;
+			mes "...";
+			next;
+			mes "...";
+			mes "......";
+			next;
+			mes "...";
+			mes "......";
+			mes ".........";
+			next;
+			mes "...";
+			mes "......";
+			mes ".........";
+			mes "............";
+			next;
+			mes "...";
+			mes "......";
+			mes ".........";
+			mes "............";
+			mes "...............";
+			next;
+			mes "[黄志书]";
+			mes "找到了。几天前有人向我要过同样的文件，";
+			mes "所以这次很容易就找到了。希望它对你有用。";
+			set ch_par,15;
+			for(set .@i,11051; .@i<=11054; set .@i,.@i+1) {
+				if (checkquest(.@i) > -1 && checkquest(.@i < 2))
+					completequest .@i;
+			}
+			setquest 11055;
+			close;
+		}
+		mes "[黄志书]";
+		mes "嗯？";
+		mes "什……？";
+		next;
+		mes "[黄志书]";
+		mes "抱歉，我想我们没有那份文件。你也许该再核对一下";
+		mes "文件的名称，然后再来问我。";
+		close;
+	}
+	mes "[黄志书]";
+	mes "嗯……？";
+	mes "你觉得我是不是该多出门走走？嗯，不知怎么的，我总觉得不舒服。看来我真该去透透气。^666666*哈欠……*^000000";
+	emotion ET_OK;
+	next;
+	mes "[黄志书]";
+	mes "但你自己也该多出门走走！总待在家里可不好。年轻时不运动，";
+	mes "以后可能会影响健康。";
+	close;
+}
+
+lou_in02,204,169,0	script	补给堆#1lou	111,{
+	if (MaxWeight - Weight < 2000) {
+		mes "^3355FF* 请稍等！ *";
+		mes "你携带的物品太多了。请将部分物品存入卡普拉仓库后再试。 ^000000";
+		close;
+	}
+	if (ch_par == 4) {
+		if (rand(1,20) == 7) {
+			mes "^3355FF*翻找翻找*";
+			mes "这堆东西里似乎藏着什么。翻找一下，也许能找到些什么。^000000";
+			next;
+			if (rand(1,100) == 67) {
+				mes "^3355FF*翻找翻找*";
+				mes "*翻找翻找*";
+				mes "*翻找翻找*";
+				mes "你找到了一份药。^000000";
+				set ch_par,9;
+				changequest 11050,11056;
+				getitem 7252,1; //Herb_Medicine
+				next;
+				mes "[江夏友]";
+				mes "什么……！";
+				mes "你找到了……？！";
+				mes "呸，真不敢相信！";
+				mes "你只是运气好罢了！";
+				mes "^666666*咕哝咕哝*^000000";
+				close;
+			}
+			mes "^3355FF*翻找翻找*";
+			mes "*翻找翻找*";
+			mes "*翻找翻找*";
+			mes "你什么也没找到。^000000";
+			next;
+			mes "[江夏友]";
+			mes "喂，喂……";
+			mes "我说过了！还不算晚，你何不帮我这个忙？我只问你一次！";
+			emotion ET_FRET, getnpcid(0, "仓库管理员#lou");
+			close;
+		}
+		mes "^3355FF*翻找翻找*";
+		mes "你什么也没找到。你决定放弃寻找。^000000";
+		close;
+	}
+	mes "^3355FF这里的东西堆到了天花板。杂物混杂在一起，看来你在这里不可能找到什么。^000000";
+	next;
+	mes "[江夏友]";
+	mes "喂，什么都别碰！要是弄乱了，你得自己重新堆好，明白吗？不想收拾就别乱翻！";
+	close;
+}
+
+lou_in02,207,168,0	script	补给堆#5lou	111,{
+	if (MaxWeight - Weight < 2000) {
+		mes "^3355FF* 请稍等！！ *";
+		mes "你携带的物品太多了。请将部分物品存入卡普拉仓库后再试。^000000";
+		close;
+	}
+	if (ch_par == 4) {
+		if (rand(1,20) == 13) {
+			mes "^3355FF*翻找翻找*";
+			mes "这堆东西里似乎藏着什么。你决定翻找一下，看看能不能找到什么。^000000";
+			next;
+			if (rand(1,100) == 43) {
+				mes "^3355FF*翻找翻找*";
+				mes "*翻找翻找*";
+				mes "*翻找翻找*";
+				mes "你找到了一份药。^000000";
+				set ch_par,9;
+				changequest 11050,11056;
+				getitem 7252,1; //Herb_Medicine
+				next;
+				mes "[江夏友]";
+				mes "Err...";
+				mes "你找到了……？！";
+				mes "真不敢相信！";
+				mes "你只是运气好罢了。";
+				close;
+			}
+			mes "^3355FF*翻找翻找*";
+			mes "*翻找翻找*";
+			mes "*翻找翻找*";
+			mes "你什么也没找到。^000000";
+			next;
+			mes "[江夏友]";
+			mes "喂，喂……";
+			mes "我说过了！";
+			mes "你现在";
+			mes "帮我这个忙还不算晚。";
+			mes "我只问你一次！";
+			close;
+		}
+		mes "^3355FF*翻找翻找*";
+		mes "你什么也没找到。你决定放弃寻找。^000000";
+		close;
+	}
+	mes "^3355FF这里的东西堆到了天花板。杂物太多、杂乱无章，看来你在这堆东西里找不到什么。^000000";
+	next;
+	mes "[江夏友]";
+	mes "喂，什么都别碰！要是弄乱了，你得自己重新堆好，明白吗？不想收拾就别乱翻！";
+	emotion ET_ROCK, getnpcid(0, "仓库管理员#lou");
+	close;
+}
+
+lou_in02,206,163,0	script	补给堆#4lou	111,{
+	if (MaxWeight - Weight < 2000) {
+		mes "^3355FF* 等一下！！ *";
+		mes "你携带的物品太多了。请把一些物品放进卡普拉仓库后再试。^000000";
+		close;
+	}
+	if (ch_par == 4) {
+		if (rand(1,20) == 4) {
+			mes "^3355FF*翻找翻找*";
+			mes "这堆东西里似乎有什么。你决定翻找一下，看看能不能找到什么。^000000";
+			next;
+			if (rand(1,100) == 11) {
+				mes "^3355FF*翻找翻找*";
+				mes "*翻找翻找*";
+				mes "*翻找翻找*";
+				mes "你找到了一瓶药。^000000";
+				set ch_par,9;
+				changequest 11050,11056;
+				getitem 7252,1; //Herb_Medicine
+				next;
+				mes "[江夏攸]";
+				mes "Err...";
+				mes "你找到了……？！";
+				mes "真不敢相信！";
+				mes "你只是运气好罢了。";
+				emotion ET_KEK, getnpcid(0, "仓库管理员#lou");
+				close;
+			}
+			mes "^3355FF*翻找翻找*";
+			mes "*翻找翻找*";
+			mes "*翻找翻找*";
+			mes "你什么也没找到。^000000";
+			next;
+			mes "[江夏攸]";
+			mes "喂，喂……";
+			mes "我告诉过你！";
+			mes "你现在照我说的";
+			mes "帮我这个忙还不算晚。";
+			mes "我只问你一次！";
+			close;
+		}
+		mes "^3355FF*翻找翻找*";
+		mes "你什么也没找到，决定放弃搜寻。^000000";
+		close;
+	}
+	mes "^3355FF这里堆满了东西，一直堆到天花板。杂物实在太多太乱，看来你不可能在这堆东西里找到什么。^000000";
+	next;
+	mes "[江夏攸]";
+	mes "喂，什么都别碰！要是弄乱了，你得自己重新堆好，听见没有？不想收拾残局，就别乱翻！";
+	close;
+}
+
+lou_in02,198,170,0	script	补给堆#3lou	111,{
+	if (MaxWeight - Weight < 2000) {
+		mes "^3355FF* 等一下！！ *";
+		mes "你携带的物品太多了。请把一些物品放进卡普拉仓库后再试。^000000";
+		close;
+	}
+	if (ch_par == 4) {
+		if (rand(1,20) == 18) {
+			mes "^3355FF*翻找翻找*";
+			mes "这堆东西里似乎有什么。你决定翻找一下，看看能不能找到什么。^000000";
+			next;
+			if (rand(1,100) == 96) {
+				mes "^3355FF*翻找翻找*";
+				mes "*翻找翻找*";
+				mes "*翻找翻找*";
+				mes "你找到了一瓶药。^000000";
+				set ch_par,9;
+				changequest 11050,11056;
+				getitem 7252,1; //Herb_Medicine
+				next;
+				mes "[江夏攸]";
+				mes "Err...";
+				mes "你找到了……？！";
+				mes "真不敢相信！";
+				mes "你只是运气好罢了。";
+				close;
+			}
+			mes "^3355FF*翻找翻找*";
+			mes "*翻找翻找*";
+			mes "*翻找翻找*";
+			mes "你什么也没找到。^000000";
+			next;
+			mes "[江夏攸]";
+			mes "喂，喂……";
+			mes "我告诉过你！";
+			mes "你现在照我说的";
+			mes "帮我这个忙还不算晚。";
+			mes "我只问你一次！";
+			emotion ET_KIK, getnpcid(0, "仓库管理员#lou");
+			close;
+		}
+		mes "^3355FF*翻找翻找*";
+		mes "你什么也没找到，决定放弃搜寻。^000000";
+		close;
+	}
+	mes "^3355FF这里堆满了东西，一直堆到天花板。杂物实在太多太乱，看来你不可能在这堆东西里找到什么。^000000";
+	next;
+	mes "[江夏攸]";
+	mes "喂，什么都别碰！要是弄乱了，你得自己重新堆好，听见没有？不想收拾残局，就别乱翻！";
+	close;
+}
+
+lou_in02,192,170,0	script	补给堆#2	111,{
+	if (MaxWeight - Weight < 2000) {
+		mes "^3355FF* 等一下！！ *";
+		mes "你携带的物品太多了。请把一些物品放进卡普拉仓库后再试。^000000";
+		close;
+	}
+	if (ch_par == 4) {
+		if (rand(1,20) == 10) {
+			mes "^3355FF*翻找翻找*";
+			mes "这堆东西里似乎有什么。你决定翻找一下，看看能不能找到什么。^000000";
+			next;
+			if (rand(1,100) == 87) {
+				mes "^3355FF*翻找翻找*";
+				mes "*翻找翻找*";
+				mes "*翻找翻找*";
+				mes "你找到了一瓶药。^000000";
+				set ch_par,9;
+				changequest 11050,11056;
+				getitem 7252,1; //Herb_Medicine
+				next;
+				mes "[江夏攸]";
+				mes "Err...";
+				mes "你找到了……？！";
+				mes "真不敢相信！";
+				mes "你只是运气好罢了。";
+				close;
+			}
+			mes "^3355FF*翻找翻找*";
+			mes "*翻找翻找*";
+			mes "*翻找翻找*";
+			mes "你什么也没找到。^000000";
+			next;
+			mes "[江夏攸]";
+			mes "我告诉过你！现在别再来烦我，马上走！我不想跟不信任我的人打交道。";
+			emotion ET_HNG, getnpcid(0, "仓库管理员#lou");
+			close;
+		}
+		mes "^3355FF*翻找翻找*";
+		mes "你什么也没找到，决定放弃搜寻。^000000";
+		close;
+	}
+	mes "^3355FF这里堆满了东西，一直堆到天花板。杂物实在太多太乱，看来你不可能在这堆东西里找到什么。^000000";
+	next;
+	mes "[江夏攸]";
+	mes "喂，什么都别碰！要是弄乱了，你得自己重新堆好，听见没有？不想收拾残局，就别乱翻！";
+	close;
+}
+
+louyang,129,121,0	warp	仓库传送点#1	1,1,lou_in02,203,161
+louyang,125,121,0	warp	仓库传送点#2	1,1,lou_in02,198,161
+lou_in02,198,159,0	warp	仓库传送点#3	1,1,louyang,124,118
+lou_in02,203,159,0	warp	仓库传送点#4	1,1,louyang,129,118
+
+// Poison King Quest :: poison_king
+//============================================================
+lou_in02,123,39,4	script	毒王#lou	824,{
+	// Attempt to preserve prior quest progress.
+	if (ch_poison == 0 && CL_POISONKING != 0) {
+		if (QL_POISONKING <= 12) set ch_poison,QL_POISONKING;
+		else if (QL_POISONKING == 16) set ch_poison,19;
+		else if (QL_POISONKING >= 17) set ch_poison,20;
+		// Remove outdated variable.
+		set QL_POISONKING,0;
+	}
+	if (checkweight(1201,1) == 0) {
+		mes "^3355FF * 等一下！ *";
+		mes "你现在携带的物品太多了。请把一些物品放进卡普拉仓库后再试。^000000";
+		close;
+	}
+	if (ch_poison < 6) {
+		mes "[纳加西·阿塞斯]";
+		mes "我来这里已经四十年了。哈哈哈，可感觉并没有那么久。";
+		next;
+		mes "[纳加西·阿塞斯]";
+		mes "过去，我曾是";
+		mes "最负盛名的用毒";
+		mes "专家之一。我甚至以用毒为基础创出了一门武学，还创立了自己的门派。";
+		next;
+		mes "[纳加西·阿塞斯]";
+		mes "如今，那些记忆";
+		mes "甚至显得不太真实";
+		mes "了。这首诗是";
+		mes "我唯一还记得的东西……";
+		next;
+		mes "[纳加西·阿塞斯]";
+		mes "我躺在床上，";
+		mes "仰望月光，";
+		mes " ";
+		mes "它好似";
+		mes "地上的霜。";
+		next;
+		mes "[纳加西·阿塞斯]";
+		mes "我抬头望";
+		mes "向明月，";
+		mes " ";
+		mes "我低下头，";
+		mes "思念故乡。";
+		next;
+		if ((countitem(506) > 0 || countitem(511) > 0 || countitem(716) > 0) && (ch_poison > 0 && rand(1,300) > 99)) {
+			switch(select("询问那首诗。:询问他的故乡。:询问用毒之术。:询问他的近况。")) {
+			case 1:
+				mes "[纳加西·阿塞斯]";
+				mes "啊，你";
+				mes "听过这首诗吗？";
+				mes "随着年岁渐长，我的";
+				mes "记性也越来越差，";
+				mes "但我真的很喜欢这首诗，";
+				mes "不想把它忘记。";
+				next;
+				mes "[纳加西·阿塞斯]";
+				mes "希望你不介意";
+				mes "帮我";
+				mes "记住这首诗……";
+				next;
+				set .@question_poet,rand(1,4);
+				if (.@question_poet == 1) {
+					mes "[纳加西·阿塞斯]";
+					mes "'^3355FF我^000000 [ ] ^3355FF仰望月光^000000。'第一句中，[ ]里应该填什么词？";
+					next;
+					if (select("躺在地上:陪着你:躺在床上:躺在星空下") == 3)
+						set .@answer_poet,.@answer_poet + 10;
+					mes "[纳加西·阿塞斯]";
+					mes "'^3355FF好似^000000 [ ] ^3355FF铺在地上^000000。'第二句中，[ ]里应该填什么词？";
+					next;
+					if (select("霜:露水:石子:雪") == 1)
+						set .@answer_poet,.@answer_poet + 10;
+					mes "[纳加西·阿塞斯]";
+					mes "现在看看你是否真的读懂了这首诗。光知道字句没有用，它们还必须融入你的心里。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "你会如何描述这首诗中说话者的整体情绪与语调？";
+					next;
+					if (select("浪漫:惆怅:悔恨:热烈") == 2)
+						set .@answer_poet,.@answer_poet + 10;
+					mes "[纳加西·阿塞斯]";
+					mes "你认为这首诗的";
+					mes "主要主题是什么？";
+					next;
+					if (select("悲剧:离别:爱情:复仇:警匪搭档喜剧") == 2)
+						set .@answer_poet,.@answer_poet + 10;
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "哈哈哈！你把这首诗理解得很好！现在，再为我复述一遍第一句好吗？";
+					next;
+					if (.@answer_poet > 30) {
+						if (select("我躺在床上仰望月光:我躺在床上思念月光:我躺在床上仰望月光:我躺在床上思念月光") == 3) {
+							set ch_poison,2;
+						}
+					}
+					else {
+						select("我躺在床上仰望月光:我躺在床上思念月光:我躺在床上仰望月光:我躺在床上思念月光");
+					}
+					mes "[纳加西·阿塞斯]";
+					mes "多谢你抽出时间，";
+					mes "年轻人。哦，还有，这是";
+					mes "一首古老的名诗，出自";
+					mes "李太白之手。你知道吧，";
+					mes "是不是？";
+					close;
+				}
+				else if (.@question_poet == 2) {
+					mes "[纳加西·阿塞斯]";
+					mes "'^3355FF好似^000000 [ ] ^3355FF铺在地上^000000。'第二句中，[ ]里应该填什么词？";
+					next;
+					if (select("霜:露水:石子:雪") == 1)
+						set .@answer_poet,.@answer_poet + 10;
+					mes "[纳加西·阿塞斯]";
+					mes "'^3355FF我低头^000000 [ ]。'[ ]里应该填什么词？";
+					next;
+					if (select("思念故乡。:昏昏欲睡:孤独。:心碎。") == 1)
+						set .@answer_poet,.@answer_poet + 10;
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "现在看看你是否真的读懂了这首诗。光知道字句没有用，把这首诗记在心里，才算真正领会它。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "根据这首诗，";
+					mes "当说话者";
+					mes "凝望月亮时，";
+					mes "他身在何处？";
+					next;
+					if (select("在他的故乡。:在监狱里。:在宇宙深处。:在床上。") == 4)
+						set .@answer_poet,.@answer_poet + 10;
+					mes "[纳加西·阿塞斯]";
+					mes "这首诗虽然只有四行，结构却很容易归类。你会如何描述这首诗的结构？";
+					next;
+					if (select("哎呀，这是一首十四行诗。:这是节奏混乱的散文。:这当然是四行诗。:抑扬格五音步？") == 3)
+						set .@answer_poet,.@answer_poet + 10;
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "哈哈哈！你把这首诗理解得很好！现在，再为我复述一遍第一句好吗？";
+					next;
+					if (.@answer_poet > 30) {
+						if (select("好似地上的霜:好似地上的冰柱:好似闪闪发光:好似天上的霜") == 1) {
+							set ch_poison,2;
+						}
+					}
+					else {
+						select("好似地上的霜:好似地上的冰柱:好似闪闪发光:好似天上的霜");
+					}
+					mes "[纳加西·阿塞斯]";
+					mes "多谢你抽出时间，";
+					mes "年轻人。哦，还有，这是";
+					mes "一首古老的名诗，出自";
+					mes "李太白之手。你知道吧，";
+					mes "是不是？";
+					close;
+				}
+				else if (.@question_poet == 3) {
+					mes "[纳加西·阿塞斯]";
+					mes "'^3355FF好似^000000 [ ] ^3355FF铺在地上^000000。'第二句中，[ ]里应该填什么词？";
+					next;
+					if (select("霜:露水:石子:雪") == 1)
+						set .@answer_poet,.@answer_poet + 10;
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "'^3355FF我低头^000000 [ ]。'[ ]里应该填什么词？";
+					next;
+					if (select("思念故乡。:昏昏欲睡:孤独。:心碎。") == 1)
+						set .@answer_poet,.@answer_poet + 10;
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "现在看看你是否真的读懂了这首诗。光知道字句还不够，你必须明白它们真正的含义。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "在前两句中，诗人把哪两个意象联系在了一起？";
+					next;
+					if (select("床与地面:霜与故乡:阴沉:烟雾弥漫:月光与霜") == 5)
+						set .@answer_poet,.@answer_poet + 10;
+					mes "[纳加西·阿塞斯]";
+					mes "在这片土地上，月亮常常出现在表达离别、思念与乡愁的诗中。为什么凝望月亮能带来慰藉？";
+					next;
+					if (select("月兔会实现愿望。:它的纯粹之美能抚平一切焦虑。:因为它有阴晴圆缺。:所有地方、所有人都共享同一轮明月。") == 4)
+						set .@answer_poet,.@answer_poet + 10;
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "哈哈哈！你把这首诗理解得很好！现在，再为我复述一遍第三句好吗？";
+					next;
+					if (.@answer_poet > 30) {
+						if (select("我仰望明月:我抬头仰望明月:我转头仰望明月:我面向明月") == 2) {
+							set ch_poison,2;
+						}
+					}
+					else {
+						select("我仰望明月:我抬头仰望明月:我转头仰望明月:我面向明月");
+					}
+					mes "[纳加西·阿塞斯]";
+					mes "多谢你抽出时间，";
+					mes "年轻人。哦，还有，这是";
+					mes "一首古老的名诗，出自";
+					mes "李太白之手。你知道吧，";
+					mes "是不是？";
+					close;
+				}
+				else {
+					mes "[纳加西·阿塞斯]";
+					mes "'^3355FF好似^000000 [ ] ^3355FF铺在地上^000000。'第二句中，";
+					mes "[ ]里应该填什么词？";
+					next;
+					if (select("霜:露水:石子:雪") == 1)
+						set .@answer_poet,.@answer_poet + 10;
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "'^3355FF我抬^000000 [ ] ^3355FF望明月^000000。'第三句中，[ ]里应该填什么词？";
+					next;
+					if (select("眼:头:目光:视线") == 2)
+						set .@answer_poet,.@answer_poet + 10;
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "现在看看你是否真的读懂了这首诗。光";
+					mes "知道字句没有用，它们还必须融入你的心里。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "你认为这首诗的主要主题是什么？";
+					next;
+					if (select("悲剧:离别:爱情:复仇:警匪搭档喜剧") == 2)
+						set .@answer_poet,.@answer_poet + 10;
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "诗人为什么觉得明亮的月光好似地上的霜？";
+					next;
+					if (select("他透过结霜的窗户望去。:明月如冰柱般闪烁。:他思念故乡，所以月光显得寒冷:这叫作“诗的破格”。") == 3)
+						set .@answer_poet,.@answer_poet + 10;
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "哈哈哈！你把这首诗理解得很好！现在，再为我复述一遍最后一句好吗？";
+					next;
+					if (.@answer_poet > 30) {
+						if (select("我为故乡哭泣。:我低头思念故乡。:我思念故乡。:我低声抽泣，思念故乡。") == 2) {
+							set ch_poison,2;
+						}
+					}
+					else {
+						select("我为故乡哭泣。:我低头思念故乡。:我思念故乡。:我低声抽泣，思念故乡。");
+					}
+					mes "[纳加西·阿塞斯]";
+					mes "多谢你抽出时间，";
+					mes "年轻人。哦，还有，这是";
+					mes "一首古老的名诗，出自";
+					mes "李太白之手。你知道吧，";
+					mes "是不是？";
+					close;
+				}
+			case 2:
+				mes "[纳加西·阿塞斯]";
+				mes "你是在问我";
+				mes "关于我故乡的事吗……？";
+				mes "作为米德加尔特人，";
+				mes "我想你至少";
+				mes "听说过梦罗克吧……";
+				next;
+				mes "[纳加西·阿塞斯]";
+				mes "那是一座建在沙漠中央的城市，它的缔造者每天都要与严酷无情的自然之力抗争。";
+				next;
+				mes "[纳加西·阿塞斯]";
+				mes "是啊，烈日仿佛";
+				mes "从不离去，那里干燥";
+				mes "荒凉，可人们依然";
+				mes "在那里生活了下来。";
+				next;
+				if (ch_poison == 2) {
+					mes "[纳加西·阿塞斯]";
+					mes "啊～我想念梦罗克，我的故乡。";
+					mes "我曾是名为“沙漠之犬”的刺客组织成员。很久以前，我是他们的用毒专家。";
+					next;
+					switch(select("告诉他梦罗克的消息。:打听“沙漠之犬”的事。:只是听听。")) {
+					case 1:
+						mes "[纳加西·阿塞斯]";
+						mes "嗯？你有梦罗克最近的消息吗？";
+						next;
+						mes "["+strcharinfo(0)+"]";
+						mes "有，我有些你可能会感兴趣的消息。";
+						input .@input$;
+						mes "["+strcharinfo(0)+"]";
+						mes ""+.@input$+"";
+						next;
+						if (rand(1,50) > 25) {
+							mes "[纳加西·阿塞斯]";
+							mes "啊，原来如此。谢谢你告诉我这些消息。现在，让我继续讲我的故事吧。";
+							next;
+						}
+						else {
+							mes "[纳加西·阿塞斯]";
+							mes "原来如此！你刚才说，";
+							mes ""+.@input$+".";
+							next;
+							mes "[纳加西·阿塞斯]";
+							mes "感谢您";
+							mes "把消息告诉了我。";
+							close;
+						}
+						break;
+					case 2:
+						mes "[纳加西·阿塞斯]";
+						mes "我刚告诉过你“沙漠之犬”是什么。现在你来说说它是什么。如果你有在听，就应该答得出来。";
+						next;
+						input .@input$;
+						if (.@input$ == "Assassin Organization" || .@input$ == "Assassin" || .@input$ == "Assassins") {
+							mes "[纳加西·阿塞斯]";
+							mes "没错。你听得很认真。他们是刺客，是被社会遗弃的刺客。";
+							next;
+							mes "[纳加西·阿塞斯]";
+							mes "“沙漠之犬”就是那个刺客组织的名字。别忘了。";
+							next;
+							mes "[纳加西·阿塞斯]";
+							mes "...";
+							next;
+							mes "[纳加西·阿塞斯]";
+							mes "...";
+							mes "......";
+							next;
+							mes "[纳加西·阿塞斯]";
+							mes "呸！我忘了刚才在说什么了！我这糟糕的记性真让我恼火！";
+							close;
+						}
+						else {
+							if (BaseJob == Job_Assassin) {
+								mes "[纳加西·阿塞斯]";
+								mes "你怎么会不知道“沙漠之犬”是什么？！你到底当了多久刺客？！";
+								next;
+								mes "[纳加西·阿塞斯]";
+								mes "你本该清楚自己的出身和同伴！唉，真是丢脸……";
+								close;
+							}
+							mes "[纳加西·阿塞斯]";
+							mes "好吧，我想也不能怪你不知道或记不住。有机会的话，去找一个穿紫色套装的人……";
+							next;
+							mes "[纳加西·阿塞斯]";
+							mes "任何一个合格的刺客都该知道“沙漠之犬”是什么。";
+							close;
+						}
+					case 3:
+						if (rand(1,33) < 12) {
+							mes "[纳加西·阿塞斯]";
+							mes "Wait...";
+							mes "让我想想……";
+							mes "我当初是怎么对用毒产生兴趣的来着……？";
+							close;
+						}
+					}
+					mes "[纳加西·阿塞斯]";
+					mes "我年轻时尝试了许多方法来钻研用毒之术。";
+					mes "我试着从穆卡的毒刺和紫色蘑菇中提取毒素。最终，我成了";
+					mes "一名靠自身努力磨炼出来的毒素专家。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "有一次，我甚至把";
+					mes "一种毒注入自己体内";
+					mes "来彻底测试它。是啊……";
+					mes "那差点要了我的命。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "我被公认为";
+					mes "“沙漠之犬”中最精通用毒的人，并被派去执行最关键、最危险的任务。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "有一天，阿尔贝塔商人公会雇我去刺杀一个一直威胁他们的敌人。然而，我始终没能完成那次任务。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "我乘船前去执行任务时，遇到了狂风巨浪，船沉了。我相信我是那场事故中唯一的幸存者。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "我在海上无助地漂流，不知怎的竟";
+					mes "来到了这里——洛阳。那是四十年前的事了。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "我的到来似乎正是时候。当时洛阳遭到大批危险魔物的侵袭，它们甚至闯入了龙之城。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "身为“沙漠之犬”最优秀的刺客之一，我杀的魔物远远超出了我应尽的那一份。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "正是在战场上，";
+					mes "我遇见了如今统治这座城镇的白龙。但在那时，人们称他为“街头骑士”。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "我记得看见他被敌人";
+					mes "团团围住，便冲进战团深处，免得他死于非命。我们背靠背作战，才勉强活了下来。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "你得明白，在战斗中让别人掩护你的背后";
+					mes "并不容易，除非彼此有着坚实的信任。那些战斗……是我一生中最辉煌的时刻。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "遗憾的是，我们的许多同伴，";
+					mes "他们都是值得尊敬、武艺高强的武者，却都战死了。我们要对付的魔物数量实在多得令人绝望。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "尽管如此，即使在那些艰难的日子里，我仍设法继续研究毒术。我在这座城镇学医，并借助那些知识加深了对毒的理解。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "我根据自己所有的知识创出了一门新技艺，并学会了";
+					mes "如何把毒涂在武器上。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "我甚至在洛阳学习了武艺，并把那些";
+					mes "知识与我的用毒本领相结合，创出了自己独特的战斗风格。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "好了，这就是我的故事。";
+					mes "可现在，我只是想念我的";
+					mes "故乡。我想念沙漠的";
+					mes "酷热，也想念烈日";
+					mes "刺眼的光芒……";
+					set ch_poison,3;
+					close;
+				}
+				else {
+					mes "[纳加西·阿塞斯]";
+					mes "啊，梦罗克。";
+					mes "这个名字唤起了";
+					mes "我身为";
+					mes "“沙漠之犬”";
+					mes "刺客的记忆。";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "^666666*叹气……*^000000";
+					mes "我希望死前";
+					mes "能再看梦罗克一眼。";
+					next;
+					if (select("告诉他梦罗克的消息。:询问“沙漠之犬”的事。") == 1) {
+						mes "[纳加西·阿塞斯]";
+						mes "嗯……？";
+						mes "你有什么";
+						mes "想说的吗？";
+						next;
+						mes "["+strcharinfo(0)+"]";
+						mes "我有梦罗克的";
+						mes "消息……";
+						input .@input$;
+						mes "["+strcharinfo(0)+"]";
+						mes ""+.@input$+"";
+						next;
+						if (rand(1,50) > 30) {
+							mes "[纳加西·阿塞斯]";
+							mes "原来如此……";
+							mes "感谢您";
+							mes "告诉我那件事。";
+							close;
+						}
+						mes "[纳加西·阿塞斯]";
+						mes "原来如此！";
+						mes "你刚才说，"+.@input$+". Thank you.";
+						close;
+					}
+					mes "[纳加西·阿塞斯]";
+					mes "我刚告诉过你“沙漠之犬”是什么。如果你记不住我刚说的话，我再解释也没用。你自己来说说它是什么。";
+					next;
+					input .@input$;
+					if (.@input$ == "Assassin Organization" || .@input$ == "Assassin" || .@input$ == "Assassins") {
+						mes "[纳加西·阿塞斯]";
+						mes "没错。你听得很认真。他们是刺客，是被社会遗弃的刺客。";
+						next;
+						mes "[纳加西·阿塞斯]";
+						mes "“沙漠之犬”";
+						mes "是一个";
+						mes "刺客组织的名字。";
+						mes "别忘了。";
+						close;
+					}
+					else {
+						if (BaseJob == Job_Assassin) {
+							mes "[纳加西·阿塞斯]";
+							mes "你怎么会不知道“沙漠之犬”是什么？！你到底当了多久刺客？！";
+							next;
+							mes "[纳加西·阿塞斯]";
+							mes "你本该清楚自己的出身和同伴！唉，真是丢脸……";
+							close;
+						}
+						mes "[纳加西·阿塞斯]";
+						mes "好吧，我想也不能怪你不知道或记不住。有机会的话，去找一个穿紫色套装的人……";
+						next;
+						mes "[纳加西·阿塞斯]";
+						mes "任何一个合格的刺客都该知道“沙漠之犬”是什么。";
+						close;
+					}
+				}
+			case 3:
+				if (ch_poison == 4 || ch_poison == 5) {
+					mes "[纳加西·阿塞斯]";
+					mes "你刚才说你想";
+					mes "学习";
+					mes "用毒之术？";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "你为什么";
+					mes "想学这个？";
+					mes "就算我想教，";
+					mes "我也太老了，";
+					mes "记不全了。";
+					mes "clearly...";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "去找我最后一名弟子，";
+					mes "^0000FF宋剧毒^000000吧，他或许能告诉你一些有用的东西。他在医馆做事。要不是他，我现在早就饿死了。";
+					set ch_poison,5;
+					setquest 11070;
+					close;
+				}
+				else {
+					mes "[纳加西·阿塞斯]";
+					mes "你刚才说你想";
+					mes "学习";
+					mes "用毒之术？";
+					next;
+					mes "[纳加西·阿塞斯]";
+					mes "你为什么想";
+					mes "了解这件事？";
+					mes "就算我想";
+					mes "教你，我也太老了，";
+					mes "记不住那么多东西。";
+					mes "clearly...";
+					close;
+				}
+			case 4:
+				if (ch_poison == 3) {
+					mes "[纳加什·阿瑟斯]";
+					mes "你是在问我，";
+					mes "事情怎么会变成";
+					mes "这样？从前的生活可好了。";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "就像我跟你说过的，我在与魔物的战斗中表现突出，因此获得了洛阳的市民身份，还得到了";
+					mes "赏赐的钱财。";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "我曾受邀加入一个专精用毒的武学门派。我加入了他们，为能进一步拓宽见识而兴奋不已。";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "他们提供的毒物知识浩如烟海，令我震惊。我尽其所能地学习，希望能开创出自己独特的用毒技艺。";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "我在他们那里学习时，我们开始一起清理镇上残留的魔物。你猜猜我们清理城市的成果如何？";
+					next;
+					switch(select("...??:It must have been good.:I guess it was okay?:I don't know, but how did it go?")) {
+					case 1:
+						mes "[纳加什·阿瑟斯]";
+						mes "你到底有没有在听我说话？如果你根本不在乎我要说什么，那跟你说话也没用。";
+						next;
+						mes "[纳加什·阿瑟斯]";
+						mes "抱歉耽误了你做自己的事。保重，年轻人。";
+						close;
+					case 2:
+						mes "[纳加什·阿瑟斯]";
+						mes "你说得对！";
+						mes "我们清除了";
+						mes "城里的每一只魔物！";
+						next;
+						break;
+					case 3:
+						mes "[纳加什·阿瑟斯]";
+						mes "就只是“还行”……？";
+						mes "我看你根本不知道我们当年有多强！唉……";
+						next;
+						mes "[纳加什·阿瑟斯]";
+						mes "抱歉耽误了你做自己的事。保重，年轻人。";
+						close;
+					case 4:
+						mes "[纳加什·阿瑟斯]";
+						mes "我们清除了城里的每一只魔物！";
+						next;
+					}
+					mes "[纳加什·阿瑟斯]";
+					mes "我们设法消灭了在洛阳一带游荡的所有魔物。当时，只有我们有胆量承担这种任务。";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "不幸的是，其他武学门派嫉妒我们的成就，坚称我们用毒攻击敌人有失武德。";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "尽管我们能接受别人对我们用毒的批评，但最后，我们却被安上了根本不可能做过的罪名。";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "有人把毒下在领主之子的饭菜里，然后嫁祸给我们！";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "最终，我们的门派被解散，我也被关进了监狱。";
+					mes "为了越狱，我吃了很多苦……";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "然而，由于在狱中和越狱时受的伤，";
+					mes "我已经无法再施展";
+					mes "武功了。";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "直到今天，官府仍在追捕我。我真的很想告诉洛阳领主我是无辜的，但也许已经";
+					mes "太迟了……";
+					set ch_poison,4;
+					close;
+				}
+				else {
+					mes "[纳加什·阿瑟斯]";
+					mes "I...";
+					mes "我不想";
+					mes "谈那件事。";
+					mes "我们别谈这个了。";
+					close;
+				}
+			}
+		}
+		else {
+			switch(select("对他咧嘴一笑。:为他的悲痛叹息。:责备他。:再听一次那首诗。:露出悲伤的神情。")) {
+			case 1:
+				mes "[纳加什·阿瑟斯]";
+				mes "是啊，我不怪你。";
+				mes "我知道自己看起来像个傻瓜。毕竟从律法上说，";
+				mes "我是个罪犯。";
+				mes "我没有任何朋友，而且";
+				mes "也没有可以信任的人。";
+				close;
+			case 2:
+				mes "[纳加什·阿瑟斯]";
+				mes "你怎么能体会我的感受？";
+				mes "我怀疑没有人经历过";
+				mes "比我所经历的";
+				mes "更糟糕的事情……";
+				close;
+			case 3:
+				mes "[纳加什·阿瑟斯]";
+				mes "什么——？我可从来没有对不起你！你为什么要对老人家这么刻薄？你根本不知道我经历过什么。";
+				close;
+			case 4:
+				mes "[纳加什·阿瑟斯]";
+				mes "我躺在床上，望着";
+				mes "窗外的月光，";
+				mes " ";
+				mes "它看起来就像";
+				mes "地上的白霜。";
+				next;
+				mes "[纳加什·阿瑟斯]";
+				mes "我抬头仰望";
+				mes "明亮的月亮，";
+				mes " ";
+				mes "我低下头，";
+				mes "思念起故乡。";
+				close;
+			case 5:
+				mes "[纳加什·阿瑟斯]";
+				mes "你思念故乡吗，";
+				mes "像我一样？我真羡慕";
+				mes "你，年轻人。你可以";
+				mes "自由地去";
+				mes "任何想去的地方。";
+				next;
+				mes "[纳加什·阿瑟斯]";
+				mes "我是个通缉犯。";
+				mes "即使我能自由地";
+				mes "旅行，我可能也没有";
+				mes "力气去尝试了。";
+				next;
+				mes "[纳加什·阿瑟斯]";
+				mes "我们不要再谈这个了。这让我想起";
+				mes "我最糟糕的回忆。";
+				next;
+				set ch_poison,1;
+				if (BaseClass == Job_Thief) {
+					mes "[纳加什·阿瑟斯]";
+					mes "唉，你看起来就和我年轻时";
+					mes "一模一样。看来你对毒";
+					mes "多少有些了解。";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "不过，看来你的知识";
+					mes "还不够完善，";
+					mes "算了。我恐怕也无法";
+					mes "指出你需要掌握什么。";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "我太老了，什么都记不住了。哈哈哈。也许看到和毒有关的东西，我就能想起些什么……";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "...";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "不，不……";
+					mes "我想我太老了，";
+					mes "什么都记不住了。";
+					mes "一点都记不住。";
+					close;
+				}
+				mes "[纳加什·阿瑟斯]";
+				mes "我太老了，什么都记不住了。哈哈哈。也许看到和毒有关的东西，我就能想起些什么……";
+				next;
+				mes "[纳加什·阿瑟斯]";
+				mes "...";
+				next;
+				mes "[纳加什·阿瑟斯]";
+				mes "不，不……";
+				mes "我想我太老了，";
+				mes "什么都记不住了。";
+				mes "一点都记不住。";
+				close;
+			}
+		}
+	}
+	else if (ch_poison > 4 && ch_poison < 12) {
+		mes "[纳加什·阿瑟斯]";
+		mes "如果你想谈毒的事，最好去医馆。我最后一个弟子";
+		mes "就在那里工作。";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "好了，让我休息吧。";
+		mes "我很累了。";
+		mes "我……我希望他不要";
+		mes "有什么坏心思……";
+		close;
+	}
+	else if (ch_poison == 12) {
+		mes "[纳加什·阿瑟斯]";
+		mes "你不就是刚才";
+		mes "和我说话的那个年轻人吗？";
+		mes "你找到机会";
+		mes "去见我的弟子了吗？";
+		mes "他怎么样？";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "他小时候总是生病，让我操碎了心。但现在我为他感到骄傲，他和其他优秀的年轻人一样有出息。";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "我只为他而活，";
+		mes "希望他有一天能成为出色的医者。最近我发现，我唯一的慰藉就是为别人治病……";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "对了……";
+		mes "你脸色很差……";
+		mes "发生什么事了吗？";
+		next;
+		switch(select("没什么。:我想谈谈你的弟子。:我感觉不舒服。")) {
+		case 1:
+			mes "[纳加什·阿瑟斯]";
+			mes "Oh...";
+			mes "原来如此……";
+			mes "但你要";
+			mes "照顾好自己。";
+			next;
+			mes "[纳加什·阿瑟斯]";
+			mes "趁年轻，你该好好珍惜自己的身体。到了我这个年纪，一旦失去健康，就很难再恢复了。";
+			close;
+		case 2:
+			mes "[纳加什·阿瑟斯]";
+			mes "他出什么事了吗？";
+			mes "自从你上次来和我谈话之后，他就没来看过我，我一直很担心。";
+			next;
+			if (countitem(678) > 1) {
+				if (select("给他毒药瓶。:取消并前往宋志都处。") == 1) {
+					delitem 678,1; //Poison_Bottle
+					mes "[纳加什·阿瑟斯]";
+					mes "嗯！？";
+					mes "这不是……！？";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "我一直梦想着调制出";
+					mes "毒性如此猛烈的毒药！";
+					mes "你、你是在哪里找到这个的？";
+					next;
+					if (select("现在很常见了。:向他解释发生了什么。") == 1) {
+						mes "[纳加什·阿瑟斯]";
+						mes "真的……？";
+						mes "那么，终于有人";
+						mes "把它做出来了。";
+						next;
+						mes "[纳加什·阿瑟斯]";
+						mes "我把自己的知识都传给了别人，所以我猜也许是某位医生摸索出了制作方法。";
+						next;
+						mes "[纳加什·阿瑟斯]";
+						mes "^666666*叹气……*^000000";
+						mes "不知为何，";
+						mes "我现在觉得很沮丧……";
+						close;
+					}
+					mes "^3355FF你告诉纳加什·阿瑟斯，";
+					mes "宋志都如何制造了这瓶致命毒药，以及他打算如何向洛阳领主复仇。^000000";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "^666666*叹气……*^000000";
+					next;
+					mes "[纳加什·阿瑟斯]";
+					mes "你愿意……";
+					mes "容我失陪";
+					mes "一下吗……？";
+					set ch_poison,15;
+					changequest 11077,11078;
+					close;
+				}
+				mes "["+strcharinfo(0)+"]";
+				mes "...Nothing much.";
+				next;
+				mes "[纳加什·阿瑟斯]";
+				mes "嗯……？";
+				mes "我猜你还不知道发生了什么。我听到了一些关于他的坏传言，所以才问你。";
+				next;
+				mes "[纳加什·阿瑟斯]";
+				mes "我希望他平安无事。";
+				mes "毕竟，他本性";
+				mes "很善良。";
+				close;
+			}
+			mes "[纳加什·阿瑟斯]";
+			mes "嗯……？";
+			mes "我猜你还不知道发生了什么。我听到了一些关于他的坏传言，所以才问你。";
+			next;
+			mes "[纳加什·阿瑟斯]";
+			mes "我希望他平安无事。";
+			mes "毕竟，他本性";
+			mes "很善良。";
+			close;
+		case 3:
+			mes "[纳加什·阿瑟斯]";
+			mes "哦，你不知道吗？";
+			mes "嗯，这种事也会发生，";
+			mes "有时候，当你在";
+			mes "异乡待得";
+			mes "太久。希望你";
+			mes "早日好起来。";
+			close;
+		}
+	}
+	else if (ch_poison == 13) {
+		mes "[纳加什·阿瑟斯]";
+		mes "Recently...";
+		mes "我最近一直";
+		mes "有种不祥的预感……";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "我想把这归咎于";
+		mes "我的孤独，可是……";
+		close;
+	}
+	else if (ch_poison == 14) {
+		mes "^3355FF纳加什·阿瑟斯。他不再是有名的刺客，他曾经执掌的武学门派也早已解散。^000000";
+		next;
+		mes "^3355FF如今他只是一个可怜的老人，";
+		mes "为弟子的事痛苦不堪。无论你说什么，他都像活在梦里一样，继续说着毫不相干的事情。^000000";
+		close;
+	}
+	else if (ch_poison == 15 || ch_poison == 16) {
+		mes "[纳加什·阿瑟斯]";
+		mes "Youngster...";
+		mes "我求求你。";
+		mes "请不要让他";
+		mes "伤害领主。";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "如果你无法阻止他，";
+		mes "那就请你阻止他";
+		mes "实施他的计划。";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "我试过……";
+		mes "试着说服自己";
+		mes "我听到的那些话";
+		mes "只是恶毒的谣言。";
+		mes "但我错了……";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "我很确定他一直在向你和其他人求助。即使你不同意执行他的计划，我也相信他会找到别人去毒害白龙大人。";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "他要毒害领主，";
+		mes "只有一个办法。他喜欢喝酒，而且总随身带着一个心爱的酒瓶。你必须把他的酒弄走。";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "求求你，我求你了。";
+		mes "看在我的份上，也";
+		mes "看在我弟子的份上，";
+		mes "洛阳的领主不能死……";
+		set ch_poison,16;
+		changequest 11078,11079;
+		close;
+	}
+	else if (ch_poison == 17) {
+		mes "[纳加什·阿瑟斯]";
+		mes "So...";
+		mes "What...";
+		mes "发生什么了？";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "我成功了。";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "你成功了！？";
+		mes "哦～谢谢你，";
+		mes "太感谢你了！";
+		emotion ET_FRET;
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "谢天谢地，我";
+		mes "活到了这一天。";
+		mes "而且……你不在的时候，";
+		mes "我刚想起了一件事。";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "这本日记记录了我十五年来的愧疚之情，以及过去真正发生的事。我希望你能替我把它交给领主。";
+		next;
+		mes "^3355FF你获得了";
+		mes "^0000FF毒王";
+		mes "纳加什·阿瑟斯的日记^000000。";
+		set ch_poison,18;
+		changequest 11080,11081;
+		close;
+	}
+	else if (ch_poison == 18) {
+		mes "[纳加什·阿瑟斯]";
+		mes "祝您";
+		mes "能把这件东西";
+		mes "交给白龙大人……";
+		close;
+	}
+	else if (ch_poison == 19) {
+		mes "^3355FF你把";
+		mes "^0000FF白龙的信^000000交给了他。";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "这是什么……？";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "哎呀，他邀请我";
+		mes "担任";
+		mes "官员！";
+		mes "我真是感激不尽！";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "不过，请替我转告他，";
+		mes "我必须婉拒他的好意。我怕自己又会成为他的负担。";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "请告诉他，我想在这里安享晚年。而且，这里还有";
+		mes "需要我的人……";
+		next;
+		mes "[纳加什·阿瑟斯]";
+		mes "谢谢你，年轻人。";
+		mes "你阻止了我的弟子，";
+		mes "还帮我与一位老朋友";
+		mes "重归于好……";
+		next;
+		mes "^3355FF纳加什·阿瑟斯把手掌放在你背上，你能感觉到他的力量流入你的体内。^000000";
+		next;
+		mes "^3355FF你感到一阵眩晕，但同时也觉得自己变得更强，并获得了经验。^000000";
+		next;
+		set ch_poison,20;
+		changequest 11082,11083;
+		if (checkre(3)) {
+			if (BaseLevel < 56) getexp 1050,0;
+			else if (BaseLevel > 55 && BaseLevel < 61) getexp 1230,0;
+			else if (BaseLevel > 60 && BaseLevel < 66) getexp 1570,0;
+			else if (BaseLevel > 65 && BaseLevel < 71) getexp 2300,0;
+			else if (BaseLevel > 70 && BaseLevel < 76) getexp 3400,0;
+			else if (BaseLevel > 75 && BaseLevel < 81) getexp 4500,0;
+			else if (BaseLevel > 80 && BaseLevel < 86) getexp 9000,0;
+			else if (BaseLevel > 85 && BaseLevel < 91) getexp 18000,0;
+			else getexp 20000,0;
+		} else {
+			if (BaseLevel < 56) getexp 9000,0;
+			else if (BaseLevel > 55 && BaseLevel < 61) getexp 10500,0;
+			else if (BaseLevel > 60 && BaseLevel < 66) getexp 18684,0;
+			else if (BaseLevel > 65 && BaseLevel < 71) getexp 27411,0;
+			else if (BaseLevel > 70 && BaseLevel < 76) getexp 70757,0;
+			else if (BaseLevel > 75 && BaseLevel < 81) getexp 130246,0;
+			else if (BaseLevel > 80 && BaseLevel < 86) getexp 150340,0;
+			else if (BaseLevel > 85 && BaseLevel < 91) getexp 182052,0;
+			else getexp 406786,0;
+		}
+		mes "^3355FF接着……";
+		mes "一切都陷入了黑暗……^000000";
+		close2;
+		warp "louyang",270,136;
+		end;
+	}
+	else if (ch_poison > 20) {
+		mes "^3355FF他看起来有些疲惫，";
+		mes "不知为何，";
+		mes "仿佛正在思念";
+		mes "故乡梦罗克。^000000";
+		next;
+		mes "^3355FF你回想起他把残余的力量交给你时的情景，也想起他说过，他曾是最伟大的刺客之一……^000000";
+		next;
+		mes "^3355FF但经历了这一切之后，";
+		mes "他看起来只是一位喜欢为人治病的老者。看来他终于与自己和解了。^000000";
+		close;
+	}
+	else {
+		mes "[纳加什·阿瑟斯]";
+		mes "我的名字，纳加什·阿瑟斯，";
+		mes "也是阿克图鲁斯传说中毒王的名字。我完全有理由为自己的名字感到自豪！";
+		close;
+	}
+}
+
+lou_in02,253,45,0	script	职员#poison	822,{
+	if (checkweight(1201,1) == 0) {
+		mes "^3355FF * 等一下！ *";
+		mes "你现在携带的道具太多了。请把一些东西放进卡普拉仓库后再试。^000000";
+		close;
+	}
+	if (ch_par < 10 && ch_poison < 6) {
+		while(1) {
+			if (.@r_o_o_f > 5) {
+				break;
+			}
+			else {
+				if (rand(1,4) > 2) {
+					set .@r_o_o_f,.@r_o_o_f + 1;
+					mes "[宋志都]";
+					mes "让我看看，那种药，还有这边的药……";
+					next;
+				}
+				else {
+					mes "[宋志都]";
+					mes "...";
+					mes "......";
+					next;
+				}
+			}
+		}
+		mes "[宋志都]";
+		mes "我觉得你一直在看我。你有什么想要的东西吗？";
+		next;
+		switch(select("......:Ask him about his master.:Ask about Poison Organization.:Ask why he's working here.")) {
+		case 1:
+			mes "[宋志都]";
+			mes "看来你并没有什么需要我帮忙的。那么，恕我失陪了……";
+			close;
+		case 2:
+			mes "[宋志都]";
+			mes "哦，抱歉，我现在有点忙。你看，我们的药快用完了……";
+			next;
+			mes "[宋志都]";
+			mes "我的师父华佗，";
+			mes "也在为诊治所有病人而发愁。我必须给他弄到他需要的药……";
+			close;
+		case 3:
+			mes "[宋志都]";
+			mes "什么……？";
+			mes "你刚才";
+			mes "说什么……？";
+			next;
+			input .@input$;
+			mes "[宋志都]";
+			mes ""+.@input$+"...?";
+			next;
+			mes "[宋志都]";
+			mes "我这辈子从没听说过那个组织。抱歉，我帮不了你。那么，恕我失陪了……";
+			close;
+		case 4:
+			mes "[宋志都]";
+			mes "我当然是在这里学习医术。我很感激能有机会在这片地区最有名的医生手下工作。";
+			next;
+			mes "[宋志都]";
+			mes "华佗医生真是个了不起的人。我很乐意协助他用医术拯救他人的生命。";
+			next;
+			mes "[宋志都]";
+			mes "虽然我只负责管理药库，但我一直在努力，希望有一天能成为他的弟子。";
+			next;
+			mes "[宋志都]";
+			mes "而且和华佗医生一起工作真的很值得。不过，有时病人太多，供药确实很困难。";
+			next;
+			select("那你为什么不去采集药草呢？");
+			mes "[宋志都]";
+			mes "我的工作是看守这个药库。";
+			mes "我不该离开岗位。我需要整理药草，并确保它们保持良好状态。";
+			close;
+		}
+	}
+	else if (ch_par > 9 && ch_poison < 5) {
+		mes "[宋志都]";
+		mes "哎呀，真是辛苦你了。我没想到你会为我们采集来这么多药草……";
+		next;
+		mes "[宋志都]";
+		mes "看来我小看你了。对了，你了解毒吗？";
+		next;
+		if (select("是的，我有点感兴趣。:不，完全不了解。") == 1) {
+			mes "[宋志都]";
+			mes "哦，原来如此。那么，如果你有时间，为什么不去贫民窟看看我的老师父呢？";
+			next;
+			mes "[宋志都]";
+			mes "如果你们相处得来，我就告诉你一件重要的事。";
+			close;
+		}
+		mes "[宋志都]";
+		mes "嗯，原来如此。那么，再次感谢你费心。希望你在洛阳玩得愉快。";
+		close;
+	}
+	else if (ch_par > 9 && ch_poison == 5) {
+		mes "[宋志都]";
+		mes "...";
+		mes "那么，你和";
+		mes "我的老师父谈过了吗？";
+		mes "看来他真的很";
+		mes "喜欢你。";
+		next;
+		mes "[宋志都]";
+		mes "如你所知，我师父被安上了莫须有的罪名！他们还废掉了他的武功！";
+		next;
+		mes "[宋志都]";
+		mes "我无法原谅";
+		mes "他们对我师父所做的一切！";
+		mes "我要把他们的骨头";
+		mes "碾成粉末！而这还发生在";
+		mes "我杀他们之前！";
+		next;
+		mes "[宋志都]";
+		mes "他是无辜的，他做的";
+		mes "只是倾尽全力";
+		mes "研究毒物！就因为这样，";
+		mes "他们毁了他！";
+		next;
+		mes "[宋志都]";
+		mes "事情发生时，";
+		mes "我还很年轻……";
+		mes "太年轻了，";
+		mes "根本不懂什么武功。";
+		next;
+		mes "[宋志都]";
+		mes "我保护不了他。";
+		mes "我能做的只有躲起来，";
+		mes "看着别人被杀害。";
+		next;
+		mes "[宋志都]";
+		mes "我恨自己";
+		mes "不够强大！";
+		mes "可是，我的身体";
+		mes "不适合练武。";
+		next;
+		mes "[宋志都]";
+		mes "我能做的只有调养这具虚弱的身体，尽量让它保持健康。即便如此，要不是师父，我早就";
+		mes "死在街头了……";
+		next;
+		mes "[宋志都]";
+		mes "是师父把我从街头捡回来，治好了我。所以我决定成为一名医生，尽可能多救一些人。";
+		next;
+		mes "[宋志都]";
+		mes "但在那之前，";
+		mes "我要先做一件事，";
+		mes "我要^FF0000复仇^000000！";
+		next;
+		mes "[宋志都]";
+		mes "我说过了，我很虚弱。";
+		mes "太虚弱了……这一点我";
+		mes "打心底里明白。";
+		next;
+		mes "[宋志都]";
+		mes "But...";
+		next;
+		mes "[宋志都]";
+		mes "我精通医术，尤其是用毒。我可以告诉你，我是最厉害的人之一。";
+		next;
+		mes "[宋志都]";
+		mes "毒能杀人，也能用来救人。那些毁了我师父的人，";
+		mes "会付出代价。";
+		next;
+		mes "[宋志都]";
+		mes "你明白";
+		mes "我为什么这么愤怒吗！？";
+		next;
+		if (select("但复仇是不好的。:是的，我完全明白。") == 1) {
+			mes "[宋志都]";
+			mes "Hmm...";
+			mes "我明白了。";
+			next;
+			mes "[宋志都]";
+			mes "我想你无法";
+			mes "理解我的感受。";
+			mes "毕竟，你没有";
+			mes "经历过和我一样的";
+			mes "事情。";
+			next;
+			mes "[宋志都]";
+			mes "我想是我期望太高了，毕竟我师父喜欢你。你怎么可能明白我心中的愤怒和";
+			mes "悲伤呢！？";
+			next;
+			mes "[宋志都]";
+			mes "Fine.";
+			mes "去做你想做的事吧。";
+			mes "你原本打算做的事。";
+			mes "我只是很失望……";
+			set ch_poison,6;
+			changequest 11070,11071;
+			close;
+		}
+		mes "[宋剧毒]";
+		mes "对！对！";
+		mes "你果然明白！";
+		next;
+		mes "[宋剧毒]";
+		mes "我自愿担任这个药库的职位，就是为了能偷偷研究毒药！现在，行动的时候到了！";
+		next;
+		mes "[宋剧毒]";
+		mes "不过，我还需要一些材料来完成研究。然后，当我";
+		mes "成功制出毒丸后，我需要有人替我完成复仇。";
+		next;
+		mes "[宋剧毒]";
+		mes "我的身体如此虚弱，无法承受与毕生仇敌面对面时的紧张与愤怒。";
+		set ch_poison,8;
+		changequest 11070,11073;
+		close;
+	}
+	else if (ch_par > 9 && ch_poison == 6) {
+		mes "[宋剧毒]";
+		mes "我太失望了。";
+		mes "你甚至亲眼看到了";
+		mes "我师父那可怜的";
+		mes "模样！";
+		mes "你怎么能";
+		mes "不明白我呢？！";
+		next;
+		if (select("上次的事我很抱歉。:无论如何，复仇都不是好事。") == 1) {
+			mes "[宋剧毒]";
+			mes "如果你真的";
+			mes "觉得对不起我，";
+			mes "那你就必须帮我";
+			mes "完成复仇！";
+			next;
+			mes "[宋剧毒]";
+			mes "我还需要完成";
+			mes "我正在调配的毒药。希望你能带来我需要的东西，让我把它完成。去给我找来……";
+			next;
+			mes "[宋剧毒]";
+			mes "^0000FF4 蜂针，";
+			mes "10 毒牙，";
+			mes "10 空药水瓶，";
+			mes "30 绿色药水^000000。";
+			set ch_poison,7;
+			changequest 11071,11072;
+			next;
+			mes "[宋剧毒]";
+			mes "道歉可以，但你还得表现出你的歉意，并帮我执行我的计划。对此你有什么问题吗？";
+			close;
+		}
+		mes "[宋剧毒]";
+		mes "哦，算了吧。";
+		mes "我想我永远无法";
+		mes "让你明白我的感受。";
+		specialeffect EF_ENDURE;
+		close2;
+		set ch_poison,6;
+		changequest 11070,11071;
+		end;
+	}
+	else if (ch_par > 9 && ch_poison == 7) {
+		mes "[宋剧毒]";
+		mes "那么，你";
+		mes "把我要求的";
+		mes "东西都收集齐了吗？";
+		next;
+		if (select("是的。:你需要什么来着？") == 1) {
+			if (countitem(939) > 3 && countitem(937) > 9 && countitem(1093) > 9 && countitem(506) > 29) {
+				delitem 939,4; //Bee_Sting
+				delitem 937,10; //Posionous_Canine
+				delitem 1093,10; //Empty_Potion
+				delitem 506,30; //Green_Potion
+				set ch_poison,8;
+				changequest 11072,11073;
+				mes "[宋剧毒]";
+				mes "Ah...";
+				mes "有了这些，我就接受你的道歉。谢谢你费尽周折弄来这些东西。";
+				next;
+				mes "[宋剧毒]";
+				mes "既然你已经参与到这个地步，就得和我一起走到底！我一直在等这";
+				mes "一天，已经等了好多年……";
+				next;
+				mes "[宋剧毒]";
+				mes "剩下的就是制出这毒药，然后让";
+				mes "洛阳城主喝下去……";
+				close;
+			}
+			mes "[宋剧毒]";
+			mes "我让你带来的";
+			mes "东西呢？";
+			mes "你是在考验我的";
+			mes "耐心吗？";
+			next;
+			mes "[宋剧毒]";
+			mes "我还缺几样需要的东西。必须全部备齐，我才能制出这毒药！";
+			specialeffect EF_ENDURE;
+			close;
+		}
+		mes "[宋剧毒]";
+		mes "*唉……*";
+		mes "去给我找来……";
+		next;
+		mes "[宋剧毒]";
+		mes "^0000FF4 蜂针，";
+		mes "10 毒牙，";
+		mes "10 空药水瓶，";
+		mes "30 绿色药水^000000。";
+		specialeffect EF_ENDURE;
+		close;
+	}
+	else if (ch_par > 9 && ch_poison == 8) {
+		emotion ET_SURPRISE;
+		mes "[宋剧毒]";
+		mes "啊，你好。";
+		mes "请稍等一下，";
+		mes "我刚收到一封信。";
+		next;
+		mes "[宋剧毒]";
+		mes "啊！";
+		mes "上面写着";
+		mes "我的货";
+		mes "终于到了！";
+		next;
+		mes "[宋剧毒]";
+		mes "你能帮我把那个";
+		mes "箱子拿来吗？就在";
+		mes "洛阳入口处卖鞭炮的";
+		mes "姑娘那儿。先谢过";
+		mes "你了。";
+		close;
+	}
+	else if (ch_par > 9 && ch_poison == 9) {
+		if (countitem(7126) > 0) {
+			delitem 7126,countitem(7126); //Large_Jellopy
+			mes "[宋剧毒]";
+			mes "啊，谢谢你，";
+			mes "我正需要这个。那么，";
+			mes "我们开始吧？";
+			next;
+			mes "[宋剧毒]";
+			mes "首先，我要把从毒牙中提取的毒液";
+			mes "与一种叫卡勒波迪药水的外国液体混合。";
+			next;
+			mes "[宋剧毒]";
+			mes "然后，把绿色药草提取液、从蜂针中提取的毒液和一颗大杰勒比结晶加入液体中！最后，还要把它们全部加热！";
+			specialeffect EF_BEGINSPELL;
+			next;
+			mes "[宋剧毒]";
+			mes "最后，我必须小心加热混合物，再把它全部收集进一个药水瓶中。";
+			specialeffect EF_ENCHANTPOISON;
+			specialeffect EF_VENOMDUST;
+			next;
+			mes "[宋剧毒]";
+			mes "现在，我必须做得恰到好处。这是个非常精细的过程……";
+			next;
+			specialeffect EF_MAGNUMBREAK;
+			emotion ET_HUK;
+			mes "[宋剧毒]";
+			mes "不！！我又失败了！^666666*唉……*^000000 而且我花了很长时间才备齐那些材料……";
+			set ch_poison,10;
+			changequest 11074,11075;
+			close;
+		}
+		emotion ET_SURPRISE;
+		mes "[宋剧毒]";
+		mes "啊，你好。";
+		mes "请稍等一下，";
+		mes "我刚收到一封信。";
+		next;
+		mes "[宋剧毒]";
+		mes "啊！";
+		mes "上面写着";
+		mes "我的货";
+		mes "终于到了！";
+		next;
+		mes "[宋剧毒]";
+		mes "你能帮我把那个";
+		mes "箱子拿来吗？就在";
+		mes "洛阳入口处卖鞭炮的";
+		mes "姑娘那儿。先谢过";
+		mes "你了。";
+		close;
+	}
+	else if (ch_par > 9 && ch_poison == 10) {
+		if (countitem(939) > 3 && countitem(937) > 9 && countitem(1093) > 9 && countitem(506) > 29 && countitem(7126) > 0) {
+			mes "[宋剧毒]";
+			mes "哦！你把";
+			mes "我需要的东西全带来了！";
+			mes "真让我佩服！";
+			next;
+			mes "[宋剧毒]";
+			mes "你是唯一真正";
+			mes "明白我感受的";
+			mes "人。谢谢你收集来这些^FF0000材料^000000。";
+			next;
+			delitem 939,countitem(939); //Bee_Sting
+			delitem 937,countitem(937); //Posionous_Canine
+			delitem 1093,countitem(1093); //Empty_Potion
+			delitem 506,countitem(506); //Green_Potion
+			delitem 7126,countitem(7126); //Large_Jellopy
+			mes "[宋剧毒]";
+			mes "好，现在";
+			mes "就来制毒。";
+			mes "这会很艰难。";
+			mes "开始了……";
+			next;
+			if (rand(1,1000) > 700) {
+				mes "[宋剧毒]";
+				mes "首先，我要把从毒牙中提取的毒液";
+				mes "与一种叫卡勒波迪药水的外国液体混合。";
+				next;
+				mes "[宋剧毒]";
+				mes "然后，加入绿色药草提取液、";
+				mes "从蜂针中提取的毒液，还有一颗大杰勒比结晶！";
+				specialeffect EF_BEGINSPELL;
+				next;
+				mes "[宋剧毒]";
+				mes "最后，我必须小心加热混合物，再把它全部收集进一个药水瓶中。";
+				specialeffect EF_ENCHANTPOISON;
+				specialeffect EF_VENOMDUST;
+				next;
+				mes "[宋剧毒]";
+				mes "*呼……*";
+				mes "Did...";
+				mes "成功了吗？";
+				next;
+				specialeffect EF_PATTACK;
+				specialeffect EF_POISONHIT; 
+				emotion ET_HUK;
+				mes "[宋剧毒]";
+				mes "哈哈哈～！";
+				mes "成功了！";
+				mes "有效！";
+				mes "我终于制成了！";
+				mes "哇哈哈哈哈哈哈！";
+				next;
+				mes "[宋剧毒]";
+				mes "唔哈哈哈哈！";
+				next;
+				mes "[宋剧毒]";
+				mes "唔哈哈哈哈！";
+				mes "哈哈哈哈哈哈哈哈哈哈哈哈！";
+				next;
+				mes "[宋剧毒]";
+				mes "我成功了！";
+				mes "我成功了！";
+				mes "现在，复仇属于我了！";
+				next;
+				set ch_poison,11;
+				getitem 678,2; //Poison_Bottle
+				mes "[宋剧毒]";
+				mes "哈哈哈！现在，请";
+				mes "收下这个瓶子。但要小心。哪怕只闻到一点点，也会让你的身体腐烂，甚至丧命。";
+				close;
+			}
+			mes "[宋剧毒]";
+			mes "首先，我要把从毒牙中提取的毒液";
+			mes "与一种叫卡勒波迪药水的外国液体混合。";
+			next;
+			mes "[宋剧毒]";
+			mes "然后加入绿色药草提取液、从蜂针中提取的毒液和一颗大杰勒比结晶！";
+			specialeffect EF_BEGINSPELL;
+			next;
+			mes "[宋剧毒]";
+			mes "然后必须小心加热混合物，把它全部收进药水瓶里。";
+			specialeffect EF_ENCHANTPOISON;
+			specialeffect EF_VENOMDUST;
+			next;
+			mes "[宋剧毒]";
+			mes "*呼……*";
+			mes "Did...";
+			mes "成功了吗？";
+			next;
+			specialeffect EF_MAGNUMBREAK;
+			emotion ET_HUK;
+			mes "[宋剧毒]";
+			mes "不！我……我又失败了！而且我花了很长时间才把一切都准备好……";
+			close;
+		}
+		mes "[宋剧毒]";
+		mes "我不知道哪里出了问题。";
+		mes "嗯，你能再帮我一次吗？上次的材料我已经全用完了。";
+		next;
+		mes "[宋剧毒]";
+		mes "^0000FF4 蜂针^000000，";
+		mes "^0000FF10 毒牙^000000，";
+		mes "^0000FF10 空药水瓶^000000，";
+		mes "^0000FF30 绿色药水^000000，以及";
+		mes "^0000FF1 大杰勒比结晶^000000。";
+		next;
+		mes "[宋剧毒]";
+		mes "这就是我需要的全部了。";
+		mes "我本该道歉，但既然你已经表明愿意帮我完成复仇，我知道你会理解的。";
+		close;
+	}
+	else if (ch_par > 9 && ch_poison == 11) {
+		mes "[宋剧毒]";
+		mes "哈哈哈哈……！";
+		mes "现在，时候到了。";
+		mes "有了这毒药，洛阳的";
+		mes "城主将被送入地狱！";
+		next;
+		mes "[宋剧毒]";
+		mes "如果他们诬蔑了我师父，";
+		mes "那我就把他们的谎言变成事实。这样，我师父";
+		mes "就不会觉得冤枉了！";
+		next;
+		mes "[宋剧毒]";
+		mes "白龙大人！";
+		mes "你必须死！";
+		mes "哈 哈 哈 哈 哈！";
+		next;
+		mes "[宋剧毒]";
+		mes "唔哈哈哈哈！";
+		mes "哈哈……哈哈..哈哈哈..哈哈……哈哈哈哈哈哈……唔哈哈哈哈哈哈哈哈哈哈哈！！";
+		next;
+		mes "[宋剧毒]";
+		mes "唔哈哈哈哈哈哈！";
+		mes "...........";
+		next;
+		mes "[宋剧毒]";
+		mes "啊，请原谅我。";
+		mes "我太激动了。";
+		mes "对，我必须冷静下来……";
+		next;
+		mes "[宋剧毒]";
+		mes "现在，我还有最后一个请求。请潜入龙之城堡。";
+		next;
+		mes "[宋剧毒]";
+		mes "我要你把这毒药放到白龙大人可能会去的地方。但要小心，城堡的戒备很森严。";
+		next;
+		mes "[宋剧毒]";
+		mes "不过，你是来自米德加尔特的冒险者。你以前大概也遇到过这样的挑战，所以我相信你会有办法。";
+		next;
+		mes "[宋剧毒]";
+		mes "总之，相信我师父";
+		mes "知道这件事一定会很高兴：";
+		mes "我终于制出了^0000FF毒药";
+		mes "他想要的那种^000000！";
+		next;
+		mes "[宋剧毒]";
+		mes "哈哈哈……！";
+		mes "师父，我做到了！";
+		mes "您的弟子宋剧毒为您制出了世上最致命的毒药！";
+		set ch_poison,12;
+		changequest 11075,11076;
+		close;
+	}
+	else if (ch_par > 9 && ch_poison == 12) {
+		mes "[宋剧毒]";
+		mes "Remember...";
+		mes "龙之城堡";
+		mes "戒备十分森严。";
+		mes "看来白龙大人";
+		mes "也很不安呢。嘿嘿。";
+		next;
+		mes "[宋剧毒]";
+		mes "总之，希望你";
+		mes "千万小心。进去后，别忘了把这毒药用在该让白龙大人";
+		mes "喝到的地方。";
+		next;
+		mes "[宋剧毒]";
+		mes "总之，相信我师父";
+		mes "知道这件事一定会很高兴：";
+		mes "我终于制出了^0000FF毒药";
+		mes "他想要的那种^000000！";
+		next;
+		mes "[宋剧毒]";
+		mes "哈哈哈……！";
+		mes "师父，我做到了！";
+		mes "您的弟子宋剧毒为您制出了世上最致命的毒药！";
+		next;
+		mes "[宋剧毒]";
+		mes "走吧，";
+		mes "我的朋友！";
+		mes "为了我的复仇！";
+		mes "去杀了白龙大人！";
+		close;
+	}
+	else if (ch_par > 9 && ch_poison == 13) {
+		mes "[宋剧毒]";
+		mes "啊！";
+		mes "你回来了！";
+		next;
+		mes "[宋剧毒]";
+		mes "啊，是啊。";
+		mes "现在我要做的";
+		mes "就是等待听到";
+		mes "白龙大人的死讯。";
+		next;
+		mes "[宋剧毒]";
+		mes "太感谢你了，我的朋友。你让我多年的怨仇得以了结。";
+		next;
+		mes "[宋剧毒]";
+		mes "现在，我累了。";
+		mes "让我休息吧……保重，我的朋友，一路平安。";
+		next;
+		mes "[宋剧毒]";
+		mes "不过在走之前，让我给你一些毒药和一颗药丸。";
+		mes "这是我用药库里剩下的材料和药制成的。";
+		set ch_poison,14;
+		getitem 678,3; //Poison_Bottle
+		next;
+		mes "[宋剧毒]";
+		mes "请马上";
+		mes "把这颗药丸";
+		mes "服下。";
+		next;
+		mes "^3355FF你吞下了一颗奇怪的药丸";
+		mes "它泛着金色的光芒。";
+		mes "味道很苦……^000000";
+		next;
+		mes "^3355FF那股难闻的味道残留在口中，随后你感到一股暖流涌遍全身。最终，你失去了意识。^000000";
+		next;
+		if (checkre(3)) {
+			if (BaseLevel < 56) getexp 500,0;
+			else if (BaseLevel > 55 && BaseLevel < 61) getexp 700,0;
+			else if (BaseLevel > 60 && BaseLevel < 66) getexp 850,0;
+			else if (BaseLevel > 65 && BaseLevel < 71) getexp 1270,0;
+			else if (BaseLevel > 70 && BaseLevel < 76) getexp 1600,0;
+			else if (BaseLevel > 75 && BaseLevel < 81) getexp 2100,0;
+			else if (BaseLevel > 80 && BaseLevel < 86) getexp 4000,0;
+			else if (BaseLevel > 85 && BaseLevel < 91) getexp 7000,0;
+			else getexp 11000,0;
+		} else {
+			if (BaseLevel < 56) getexp 8909,0;
+			else if (BaseLevel > 55 && BaseLevel < 61) getexp 10213,0;
+			else if (BaseLevel > 60 && BaseLevel < 66) getexp 17684,0;
+			else if (BaseLevel > 65 && BaseLevel < 71) getexp 25411,0;
+			else if (BaseLevel > 70 && BaseLevel < 76) getexp 68757,0;
+			else if (BaseLevel > 75 && BaseLevel < 81) getexp 128246,0;
+			else if (BaseLevel > 80 && BaseLevel < 86) getexp 142340,0;
+			else if (BaseLevel > 85 && BaseLevel < 91) getexp 152052,0;
+			else getexp 366786,0;
+		}
+		warp "louyang",270,136;
+		end;
+	}
+	else if (ch_par > 9 && ch_poison == 14) {
+		mes "[宋剧毒]";
+		mes "......................";
+		next;
+		mes "^3355FF宋剧毒茫然地望着天花板。复仇之后，他似乎失去了生活的动力。帮他到底是不是正确的选择呢？^000000";
+		next;
+		mes "^3355FF听说那杯毒酒并没有奏效，因为一个异国盗贼把瓶子偷走了。^000000";
+		close;
+	}
+	else if (ch_par > 9 && ch_poison == 15 && ch_poison < 20) {
+		mes "[宋剧毒]";
+		mes "发生什么事了？";
+		mes "为什么";
+		mes "白龙大人还没死？！";
+		next;
+		mes "[宋剧毒]";
+		mes "Hmmm...";
+		mes "你该不会";
+		mes "还打着别的";
+		mes "算盘吧？";
+		close;
+	}
+	else if (ch_par > 9 && ch_poison == 20) {
+		mes "[宋剧毒]";
+		mes "Ah...";
+		mes "Welcome.";
+		mes "我师父把";
+		mes "一切都告诉我了。";
+		next;
+		mes "[宋剧毒]";
+		mes "不知为何，我既感到释然，又觉得抱歉。不过，现在我终于可以忘掉过去发生的一切了。";
+		next;
+		mes "[宋剧毒]";
+		mes "现在，我决定更专注于医术，好真正尽可能多救些人命。之前对你那么无礼，我很抱歉。";
+		next;
+		mes "[宋剧毒]";
+		mes "还有，希望你能";
+		mes "收下这些，我已经";
+		mes "不再需要它们了。";
+		set ch_poison,21;
+		completequest 11083;
+		getitem 678,5; //Poison_Bottle
+		next;
+		mes "[宋剧毒]";
+		mes "非常";
+		mes "再会了，朋友。";
+		mes "那么，恕我失陪，";
+		mes "我还有很多事要做……";
+		close;
+	}
+	else if (ch_poison > 20) {
+		mes "^3355FF宋剧毒正忙着整理药草。他脸上曾有的那抹淡淡忧伤，如今似乎已经消散。^000000";
+		next;
+		mes "^3355FF不过，从他的动作和工作节奏可以看出，他热爱自己正在做的事。看来宋剧毒终于找到了自己的人生道路。^000000";
+		close;
+	}
+	mes "[宋剧毒]";
+	mes "纳加西·阿尔塞斯也是阿克图鲁斯传说中毒王的名称。我师父有充分的理由为自己的名字感到自豪！";
+	close;
+}
+
+lou_fild01,224,348,0	script	贵妇#delivery	817,{
+	if (checkweight(1201,1) == 0) {
+		mes "^3355FF * 等一下！*";
+		mes "目前你携带的物品太多了。请把一些东西放进卡普拉仓库后再试。^000000";
+		close;
+	}
+	if (ch_poison < 8) {
+		if (rand(1,10) > 5) {
+			mes "[贵妇]";
+			mes "你现在位于";
+			mes "洛阳入口。";
+			mes "希望你在";
+			mes "你在这里过得愉快～";
+			emotion ET_CHUP;
+			close;
+		}
+		mes "[贵妇]";
+		mes "你现在位于洛阳入口。";
+		next;
+		mes "[贵妇]";
+		mes "洛阳以各式各样的";
+		mes "鞭炮而闻名。";
+		mes "你想看看吗？";
+		next;
+		if (select("好啊！:不用了～") == 1) {
+			mes "[贵妇]";
+			mes "好，放给你看！";
+			if (Zeny > 99) {
+				set Zeny, Zeny-100;
+			}
+			close2;
+			specialeffect EF_BLASTMINEBOMB,AREA," #fire";
+			end;
+		}
+		mes "[贵妇]";
+		mes "哼……！";
+		emotion ET_THINK;
+		close;
+	}
+	else if (ch_poison == 8) {
+		mes "[贵妇]";
+		mes "你";
+		mes "想看看";
+		mes "鞭炮吗？";
+		next;
+		if (select("好啊！:不用了～") == 1) {
+			mes "[贵妇]";
+			mes "好，";
+			mes "放给你看！";
+			if (Zeny > 99) {
+				set Zeny, Zeny-100;
+			}
+			close2;
+			donpcevent " #fire::OnClaymore";
+			end;
+		}
+		mes "[贵妇]";
+		mes "嗯，既然不是来看鞭炮，";
+		mes "那你一定是想要别的";
+		mes "东西。是有人让你来的吗？";
+		next;
+		if (select("是。:否。") == 1) {
+			mes "[贵妇]";
+			mes "是谁？";
+			mes "请告诉我";
+			mes "他的名字。";
+			next;
+			input .@input$;
+			if (.@input$ == "Song Zhi Du") {
+				mes "[贵妇]";
+				mes "哦，原来如此。";
+				mes "让我把";
+				mes "包裹交给你。";
+				next;
+				mes "[贵妇]";
+				mes "啊，等等！我忘了！";
+				mes "你得先付";
+				mes "1,000 Zeny 的运费。";
+				next;
+				if (Zeny > 999) {
+					set Zeny, Zeny-1000;
+					getitem 7126,1; //Large_Jellopy
+					mes "[贵妇]";
+					mes "谢谢～";
+					mes "既然运费付清了，";
+					mes "请把这个送去给";
+					mes "宋剧毒。";
+					mes "保重！";
+					set ch_poison,9;
+					changequest 11073,11074;
+					close;
+				}
+				mes "[贵妇]";
+				mes "Errr...";
+				mes "你的钱不够付运费。不付清运费，我不能把包裹交给你！";
+				emotion ET_FRET;
+				close;
+			}
+			mes "[贵妇]";
+			mes "嗯？";
+			mes "我不知道那是谁。";
+			mes "所以我这里绝对没有";
+			mes "你说的那个人";
+			mes "的包裹。";
+			close;
+		}
+		mes "[贵妇]";
+		mes "不是……？";
+		next;
+		mes "[贵妇]";
+		mes "你是在……";
+		mes "跟我搭讪吗？";
+		close;
+	}
+	else if (ch_poison > 8) {
+		if (rand(1,10) > 5) {
+			mes "[贵妇]";
+			mes "你现在位于";
+			mes "洛阳入口。";
+			mes "祝你玩得愉快～";
+			emotion ET_CHUP;
+			close;
+		}
+		mes "[贵妇]";
+		mes "你现在位于";
+		mes "入口处。";
+		mes "Luoyang.";
+		next;
+		mes "[贵妇]";
+		mes "洛阳以各式各样的";
+		mes "鞭炮而闻名。";
+		mes "你想看看吗？";
+		next;
+		if (select("好啊！:不用了～") == 1) {
+			mes "[贵妇]";
+			mes "好～";
+			mes "放给你看！";
+			if (Zeny > 99) {
+				set Zeny, Zeny-100;
+			}
+			close2;
+			donpcevent " #fire::OnClaymore";
+			end;
+		}
+		mes "[贵妇]";
+		mes "哼……！";
+		emotion ET_THINK;
+		close;
+	}
+}
+
+lou_fild01,225,350,0	script	 #fire	139,{
+	end;
+}
+
+lou_in01,101,125,0	script	陷阱#lou_in1	-1,20,1,{
+OnTouch_:
+	if (ch_poison == 12 || ch_poison == 16) {
+		mes "[士兵]";
+		mes "什么人！";
+		next;
+		mes "^3355FF你以最快的速度逃走了！^000000";
+		close2;
+		warp "louyang",218,246;
+		end;
+	}
+	end;
+}
+
+lou_in01,101,129,0	script	陷阱#lou_in2	-1,20,1,{
+OnTouch_:
+	if (ch_poison == 12 || ch_poison == 16) {
+		mes "[士兵]";
+		mes "咦……？";
+		mes "那是什么";
+		mes "声音？";
+		next;
+		mes "^3355FF你撒腿狂奔，以双脚所能承受的最快速度逃离了城堡。^000000";
+		close2;
+		warp "louyang",218,246;
+		end;
+	}
+	end;
+}
+
+lou_in01,101,134,0	script	陷阱#lou_in3	-1,20,1,{
+OnTouch_:
+	if (ch_poison == 12 || ch_poison == 16) {
+		mes "[士兵]";
+		mes "咦……？";
+		mes "有人在吗？";
+		next;
+		mes "^3355FF你躲开了士兵怀疑的目光。^000000";
+		close2;
+		warp "louyang",218,246;
+		end;
+	}
+	end;
+}
+
+lou_in01,114,163,0	script	陷阱#lou_in4	-1,6,1,{
+OnTouch_:
+	if (ch_poison == 12 || ch_poison == 16) {
+		mes "[士兵]";
+		mes "站住，米德加尔特人！";
+		next;
+		mes "^3355FF趁士兵还没抓住你，你拼命跑走了。^000000";
+		close2;
+		warp "louyang",218,246;
+		end;
+	}
+	end;
+}
+
+lou_in01,114,165,0	script	陷阱#lou_in5	-1,1,0,{
+OnTouch_:
+	if (ch_poison == 12 || ch_poison == 16) {
+		mes "[士兵]";
+		mes "咦……？";
+		mes "我听到声音了！";
+		next;
+		mes "^3355FF趁士兵还没发现你，你逃走了。^000000";
+		close2;
+		warp "louyang",218,246;
+		end;
+	}
+	end;
+}
+
+louyang,217,278,0	script	 #lou_path	111,{
+	if (ch_poison == 12 || ch_poison == 16) {
+		mes "["+strcharinfo(0)+"]";
+		mes "这是什么？";
+		mes "墙上的裂缝？";
+		next;
+		mes "^3355FF你跳到石墙边，朝裂缝里窥看。它看起来够大，能让人挤过去。^000000";
+		next;
+		mes "^3355FF你以最快的速度穿过裂缝。^000000";
+		close2;
+		warp "lou_in01",119,167;
+		end;
+	}
+	end;
+}
+
+lou_in01,107,163,0	script	 #lou_drink1	111,{
+	if (ch_poison == 12) {
+		mes "^3355FF你找到了一个酒瓶，可能是洛阳城主白龙的东西。^00000";
+		next;
+		mes "^3355FF你把致命的毒药倒进了瓶中。^000000";
+		delitem 678,1; //Poison_Bottle
+		set ch_poison,13;
+		changequest 11076,11077;
+		close;
+	}
+	else if (ch_poison == 13) {
+		mes "^3355FF最好尽快离开这里。^000000";
+		close;
+	}
+	else if (ch_poison == 16) {
+		if (countitem(938) > 0 && countitem(713) > 0) {
+			mes "^3355FF你拿走酒瓶，换上一个装满黏稠液体的瓶子。但愿白龙不会发现！^000000";
+			delitem 938,1; //Sticky_Mucus
+			delitem 713,1; //Empty_Bottle
+			set ch_poison,17;
+			changequest 11079,11080;
+			close;
+		}
+		mes "^3355FF看来你需要用别的东西换掉白龙的酒瓶。只把酒瓶拿走会引起怀疑。^000000";
+		next;
+		mes "^3355FF也许你可以找个空瓶子，往里面装点东西，比如黏稠液体……^000000";
+		close;
+	}
+	mes "^3355FF你找到了一个酒瓶。它如此精致，唯一可能的主人就是洛阳城主白龙。^000000";
+	close;
+}
+
+lou_in01,118,167,0	script	 #lou_drink2	111,{
+	if (ch_poison == 12) {
+		mes "^3355FF你以最快的速度挤过裂缝。^000000";
+		close2;
+		warp "louyang",217,278;
+		end;
+	}
+	else if (ch_poison == 13) {
+		mes "^3355FF你以最快的速度挤过裂缝。^000000";
+		close2;
+		warp "louyang",217,278;
+		end;
+	}
+	end;
+}
+
+lou_in01,99,158,4	script	领主#bailong	821,{
+	if (checkweight(1201,1) == 0) {
+		mes "^3355FF * 等一下！*";
+		mes "你现在携带的物品太多了。请把一些东西放进卡普拉仓库后再试。^000000";
+		close;
+	}
+	if (ch_poison == 12 || ch_poison == 16) {
+		mes "[白龙大人]";
+		mes "喂……！";
+		mes "你没在";
+		mes "做什么可疑的";
+		mes "事吧？";
+		next;
+		mes "^3355FF你逃离白龙，";
+		mes "以最快的速度";
+		mes "跑走了！^000000";
+		close2;
+		warp "louyang",218,246;
+		end;
+	}
+	else {
+		mes "[白龙大人]";
+		mes "哈哈哈哈！";
+		mes "欢迎来到洛阳！";
+		next;
+		mes "[白龙大人]";
+		mes "洛阳真是座了不起的城市。";
+		mes "四十年来，我们一直守护着这片土地，抵御邪恶生物的入侵！";
+		next;
+		mes "[白龙大人]";
+		mes "希望你在";
+		mes "愿你在此停留期间，";
+		mes "米德加尔特人！";
+		next;
+		if (ch_poison == 18) {
+			mes "^3355FF你把纳加西·阿尔塞斯的日记";
+			mes "交给白龙。他专注地读着，一页一页缓缓翻过。^000000";
+			next;
+			mes "^3355FF他整整沉默约十五分钟，把所有";
+			mes "注意力都集中在日记上。^000000";
+			next;
+			mes "^3355FF一滴眼泪";
+			mes "在他读着纳加西·阿尔塞的";
+			mes "文字时从眼角滑落……^000000";
+			next;
+			mes "[白龙大人]";
+			mes "谢谢你……";
+			mes "Adventurer...";
+			next;
+			mes "[白龙大人]";
+			mes "非常感谢。";
+			mes "你帮我";
+			mes "与旧友重逢了！";
+			next;
+			mes "[白龙领主]";
+			mes "我白龙将致力于";
+			mes "公平对待所有武林门派，不论其行事方式与理念如何！";
+			next;
+			mes "[白龙领主]";
+			mes "我也会宽恕宋志度，即使他曾试图毒害我。";
+			mes "他是无辜的……";
+			next;
+			mes "[白龙领主]";
+			mes "事实上，我收到报告说，纳加西在";
+			mes "那起事件后被驱逐回故乡。我完全不知道";
+			mes "他竟被关进了牢里！";
+			next;
+			mes "[白龙领主]";
+			mes "非常";
+			mes "感谢你的帮助！";
+			next;
+			next;
+			mes "[白龙领主]";
+			mes "请收下这个，聊表谢意。另外，请替我把这封信交给纳加西和宋志度。";
+			set ch_poison,19;
+			changequest 11081,11802;
+			getitem 603,1; //Old_Blue_Box
+			next;
+			mes "^3355FF你获得了 ^0000FF白龙的信^000000。";
+			next;
+			mes "[白龙领主]";
+			mes "先谢谢你了。";
+			close;
+		}
+		mes "[白龙领主]";
+		mes "我怎么会失去昔日荣光岁月里的朋友呢？嗯……？";
+		mes "哦，我没发现你还在那里……听我说话。";
+		next;
+		mes "[白龙领主]";
+		mes "抱歉，我只是在自言自语。希望你在洛阳逗留期间过得愉快。";
+		close;
+	}
+}
+
+lou_in01,111,151,4	script	士兵#bailong1	825,{
+	if (ch_poison == 12 || ch_poison == 16) {
+		mes "[士兵]";
+		mes "Hey...";
+		mes "你看起来";
+		mes "很可疑……！";
+		next;
+		mes "^3355FF你逃出了城堡，远远离开了那名可疑的守卫……^000000";
+		close2;
+		warp "louyang",218,246;
+		end;
+	}
+	mes "[士兵]";
+	mes "^666666*哈欠*^000000 如今这里真是无聊。不过我听说";
+	mes "很久以前，这里曾";
+	mes "大不相同。";
+	next;
+	mes "[士兵]";
+	mes "据说以前魔物经常侵入洛阳！嘿，不过那只是传闻。不过，最近流传着不少传闻，我挺好奇的……";
+	close;
+}
+
+lou_in01,91,151,4	script	士兵#bailong2	825,{
+	if (ch_poison == 12 || ch_poison == 16) {
+		mes "[士兵]";
+		mes "咦……？";
+		mes "有人在那里吗？";
+		next;
+		mes "^3355FF你逃走了";
+		mes "以最快的速度";
+		mes "跑开了。^000000";
+		close2;
+		warp "louyang",218,246;
+		end;
+	}
+	mes "[士兵]";
+	mes ".....z...Z....z...";
+	next;
+	select("喂，醒醒！");
+	mes "[士兵]";
+	mes "是……是的，长官！";
+	mes "我没有打瞌睡～真的……没……有……";
+	next;
+	mes "[士兵]";
+	mes "...";
+	next;
+	mes "[士兵]";
+	mes "...";
+	mes "......";
+	next;
+	mes "[士兵]";
+	mes ".....z...Z....z...";
+	close;
+}
+
+lou_in01,102,144,4	script	士兵#bailong3	825,{
+	if (ch_poison == 12 || ch_poison == 16) {
+		mes "[士兵]";
+		mes "咦……？";
+		mes "那是什么？";
+		next;
+		mes "^3355FF你避开了士兵的";
+		mes "可疑目光，尽可能快地";
+		mes "离开了。^000000";
+		close2;
+		warp "louyang",218,246;
+		end;
+	}
+	mes "[士兵]";
+	mes "人们一直在";
+	mes "说镇子入口处";
+	mes "有个骗子";
+	mes "出没……";
+	next;
+	select("...?");
+	mes "[士兵]";
+	mes "但我去了那里，却";
+	mes "没发现任何可疑的人。我发誓，一切看起来都完全正常！";
+	close;
+}
+
+lou_in01,99,144,4	script	士兵#bailong4	825,{
+	if (ch_poison == 12 || ch_poison == 16) {
+		mes "[士兵]";
+		mes "谁在那里？！";
+		next;
+		mes "^3355FF你逃走了";
+		mes "以最快的速度";
+		mes "跑开了。^000000";
+		close2;
+		warp "louyang",218,246;
+		end;
+	}
+	mes "[士兵]";
+	mes "啊，别费心";
+	mes "听我旁边";
+	mes "这家伙胡说。";
+	next;
+	mes "[士兵]";
+	mes "希望你在洛阳逗留期间过得愉快！";
+	close;
+}
+
+// Revolution Quest :: lou_zero
+//============================================================
+lou_in02,77,37,7	script	隐士	824,{
+	if (!QL_REVOL) {
+		mes "[孙茂]";
+		mes "有志者，";
+		mes "事竟成。只要我们";
+		mes "齐心协力，就";
+		mes "没有办不到的事。";
+		next;
+		mes "[孙茂]";
+		mes "你愿意助我们一臂之力，共建更美好的未来吗？你愿意加入我们推动洛阳社会改革的运动吗？";
+		next;
+		mes "[孙茂]";
+		mes "无论你是本地人还是外地人，都无所谓。只要我们怀着同一个目标——建设更好的洛阳，让人人平等——就够了。";
+		next;
+		mes "[孙茂]";
+		mes "我的名字……";
+		mes "叫孙茂。";
+		mes "这邀请也许有些突然，但我向来行动果断。我从你的脸上看出，你也憎恶不义。";
+		next;
+		switch(select("我该做什么？:我愿意加入！:唉，我只是个普通游客……")) {
+		case 1:
+			mes "[孙茂]";
+			mes "眼下，我们必须尽可能多地招募成员。等准备就绪，我们就会发起一场改变洛阳、乃至整个世界的运动！";
+			next;
+			mes "[孙茂]";
+			mes "然而，我们目前人手不足，无法执行已制定的计划。领主至今尚未发现我们，算是幸运。";
+			next;
+			mes "[孙茂]";
+			mes "我希望大家都能理解我们的意图，但这座城市的人并不团结。这已不是我第一次向外乡人求助了……";
+			next;
+			mes "[孙茂]";
+			mes "我想你明白我们事业的紧迫性，也明白我们需要召集更多认同我们目标价值的人！";
+			close;
+		case 2:
+			mes "[孙茂]";
+			mes "哦，上天今天一定站在我这边，把你送到了我面前。谢谢你做出这个重大决定……";
+			next;
+			mes "[孙茂]";
+			mes "那么，我就把你的名字";
+			mes "刻在这块血誓板上。但在那之前，我要再问一次。你真的愿意经历痛苦与流血，加入我们吗？";
+			next;
+			switch(select("不，等等！:我百分之百确定。")) {
+			case 1:
+				mes "[孙茂]";
+				mes "我理解你需要时间考虑。如果你决定加入我们，请回来。毕竟，时间站在我们这边。";
+				close;
+			case 2:
+				set QL_REVOL,1;
+				mes "[孙茂]";
+				mes strcharinfo(0)+ "...!";
+				mes "你的名字已经刻在这块血誓板上。我们将为洛阳的未来并肩战斗，至死方休！";
+				next;
+				getpartymember(getcharid(1));
+				set @partymember,$@partymembercount;
+				if (is_party_leader() == true || !@partymember) {
+					mes "[孙茂]";
+					mes "现在，我们事业最重要的事就是招募更多人，壮大队伍。请去寻找愿意加入我们战斗的人。";
+					next;
+					mes "[孙茂]";
+					mes "不过，为了不引起怀疑，每次只带一名新成员来。另外，我们建议不要带朋友组队同行。";
+					next;
+					mes "[孙茂]";
+					mes "现在，我会在这里等你。去吧，去找那些期盼洛阳拥有更美好未来的人！";
+					close;
+				}
+				mes "[孙茂]";
+				mes "请协助那些在你身后战斗的人。随着人数增多，我们的一位同志会向你传达进一步的指示。";
+				close;
+			}
+		case 3:
+			mes "[孙茂]";
+			mes "你是……？我明白了，你现在可以离开了。不要泄露你在此地的所见所闻。";
+			next;
+			mes "[孙茂]";
+			mes "如果你真是游客，就无论如何都不要卷入我们的事。";
+			close;
+		}
+	} else if (is_party_leader() == true) {
+		if (QL_REVOL == 9) {
+			mes "[孙茂]";
+			mes "再次";
+			mes "感谢您";
+			mes "给你添麻烦了。";
+			mes "一路平安。";
+			close;
+		}
+		getpartymember(getcharid(1));
+		set @partymember,$@partymembercount;
+		if (QL_REVOL < 8) {
+			if (@partymember == QL_REVOL +1) {
+				if (@partymember != 8) {
+					set QL_REVOL,QL_REVOL +1;
+					mes "[孙茂]";
+					mes "哦，你带来了一位新同志！欢迎。请先帮你的朋友理解我们的意图，再让他加入我们。";
+					next;
+					mes "[孙茂]";
+					switch(QL_REVOL) {
+					case 2:
+						mes "请再带一位你们二人都信任的朋友来。记住，每次只往队伍里加一个人。";
+						next;
+						mes "[孙茂]";
+						mes "否则，其他人可能会得知我们正在做的事，那会招来麻烦。";
+						close;
+					case 3:
+						mes "你们三人可以一起为我们的事业行动。请再找一名新成员作为第四人，邀请他加入队伍，并带他来此地。";
+						close;
+					case 4:
+						mes "啊，现在你们有四个人了。不过，我们必须谨慎地继续壮大队伍。请去找一名新成员，只找一名，加入你的队伍。";
+						close;
+					case 5:
+						mes "现在你们有五个人了。不必说，我们仍需要更多人手。请出去为我们的事业寻找另一名新成员。记住，只往队伍里再加一个人，然后回来见我。";
+						close;
+					case 6:
+						mes "现在你们有六个人了。到目前为止一切顺利。请再去找到仅仅一个人加入你的队伍，并带他来见我，以便我们招募他。";
+						close;
+					case 7:
+						mes "现在你们有七个人了，但我们仍缺少所需的人手。请再去寻找一名，仅仅一名，加入你的队伍，然后回来见我。";
+						close;
+					}
+				}
+				mes "[孙茂]";
+				mes "干得好，你又带来了一位新同志！欢迎！请向我们的新朋友说明我们的目标以及我们事业的正义性，让他能完全加入我们。";
+				next;
+				if (BaseLevel < 50) {
+					mes "[孙茂]";
+					mes "行动的时刻快到了……";
+					next;
+					mes "[孙茂]";
+					mes "我认可你为我们战斗的誓言，但我担心你还没准备好接受我手头交给你的任务。";
+					next;
+					mes "[孙茂]";
+					mes "不过，我们还有时间。出去和你召集的队伍成员一起训练，积累更多经验。";
+					next;
+					mes "[孙茂]";
+					mes "你们大家一起训练，会比独自修炼成长得更快。等你觉得自己准备好接受这项任务时再回来。";
+					close;
+				}
+				mes "[孙茂]";
+				mes "终于，你们有八个人了。现在，我相信你们之中已有人手可以执行这项任务。请仔细听。";
+				next;
+				mes "[孙茂]";
+				mes "你可能也知道，洛阳的各个武林门派已经分裂为两派：为正义而战者，以及为邪恶效力者。";
+				next;
+				mes "[孙茂]";
+				mes "最近，一些邪恶门派与腐败的官员勾结，意图扩张势力。";
+				next;
+				mes "[孙茂]";
+				mes "这些腐败的官员一直怀疑我们的火药研究，并以调查为借口逮捕了我们的同志、火药专家^3355FF郝辰柳^000000。";
+				next;
+				mes "[孙茂]";
+				mes "没有他，我们无法继续火药研究，也无法生产我们的运动所需的火药。我们必须联系他，让他为我们制造火药。";
+				next;
+				mes "[孙茂]";
+				mes "不幸的是，我们中许多人无法联系他，因为官员们知道我们的身份。不过，你们是新成员，又是米德加尔特人，他们不会知道你们的来历。";
+				next;
+				mes "[孙茂]";
+				mes "你们的任务是将这些化学品送给我们被政府关押的同志郝辰柳。";
+				next;
+				mes "[孙茂]";
+				mes "由于政府机关内禁止携带易燃化学品，你们必须把它们藏好。如果这些化学品由你们八人平分，我们也许就能成功！";
+				next;
+				set QL_REVOL,8;
+				getitem 7068,8; //Burn_Tree
+				getitem 7096,8; //Cold_Magma
+				getitem 7004,8; //Mud_Lump
+				mes "[孙茂]";
+				mes "拿去吧。现在，把这些材料在你们八人之间平分。你们八人必须通力合作，否则我们的计划就会失败。明白吗？";
+				close;
+			} else if (@partymember < QL_REVOL +1) {
+				mes "[孙茂]";
+				switch(QL_REVOL) {
+				case 1:
+					mes "你组建了队伍。现在，何不去招募更多追随者？眼下只再加一个人，以免引起敌人的怀疑。";
+					close;
+				case 2:
+					mes "Hmmm...";
+					mes "找不到第三个人加入队伍吗？找到一个值得信赖的人很重要。小心行事，别被抓到！";
+					close;
+				case 3:
+					mes "Hmmm...";
+					mes "找不到第四个人加入队伍吗？我明白，找到一个可以信任的人很重要。小心行事，别被抓到！";
+					close;
+				case 4:
+					mes "找不到第五个人加入队伍吗？我明白，找到一个可以信任的人很重要。小心行事，别被抓到！";
+					close;
+				case 5:
+					mes "找不到第六个人加入队伍吗？找到一个值得信赖的人很重要。小心行事，别被抓到！";
+					close;
+				case 6:
+					mes "找不到第七个人加入队伍吗？找到一个值得信赖的人很重要。小心行事，别被抓到！";
+					close;
+				case 7:
+					mes "Hmmm...";
+					mes "找不到第八个人加入队伍吗？找到一个值得信赖的人很重要。小心行事，别被抓到！";
+					close;
+				}
+			} else {
+				mes "[孙茂]";
+				mes "糟了！你带来的人不止一个！我们现在不能招募了，那会给我们的行动引来不必要的注意！";
+				next;
+				mes "[孙茂]";
+				switch(QL_REVOL) {
+				case 1:
+					mes "请确保你的队伍中共有两名成员，这样我们才能招募你的朋友。我相信那样看起来很自然。";
+					close;
+				case 2:
+					mes "在我们计划的这个阶段，我们不能让行动引来任何不必要的注意！请确保你的队伍中共有三名成员，这样我们才能招募你的朋友。";
+					close;
+				case 3:
+					mes "请确保你的队伍中共有四名成员，这样我们才能招募你的朋友。我相信那样看起来很自然。";
+					close;
+				case 4:
+					mes "请确保你的队伍中共有五名成员，这样我们才能招募你的朋友。我相信那样看起来很自然。";
+					close;
+				case 5:
+				case 6:
+					mes "到这时候，你应该知道每次只能再带一个人来。你知道，在行动之前不引来任何不必要的注意至关重要！";
+					close;
+				case 7:
+					mes "在我们计划的这个阶段，我们不能让行动引来任何不必要的注意！请确保你的队伍中共有八名成员，这样我们才能招募你的朋友。";
+					close;
+				}
+			}
+		} else if (QL_REVOL == 8) {
+			if (@partymember == 8) {
+				if (countitem(7204) > 7) {
+					mes "[孙茂]";
+					mes "欢迎回来！看来任务已顺利完成！干得好，各位！";
+					next;
+					mes "[孙茂]";
+					mes "终于，我们有了向敌人——腐败的官员与邪恶的武林门派——施以严惩的武器！感谢你们的帮助，同志们。";
+					next;
+					delitem 7204,countitem(7204);
+					set ch_make,0;
+					set QL_REVOL,9;
+					getitem 668,8;
+					mes "[孙茂]";
+					mes "请收下这些资金，与队伍成员分享。我希望你们所有人都能再次为我们的事业出力。";
+					next;
+					mes "[孙茂]";
+					mes "再次感谢你的帮助。现在，一路平安。";
+					close;
+				}
+				mes "[孙茂]";
+				mes "你的任务是带上我交给你的、以及你队伍成员手中的材料，把它们私运给郝辰柳。";
+				next;
+				mes "[孙茂]";
+				mes "郝辰柳目前被腐败的官员关押着。记住把材料在队伍成员之间平分，以免被官员发现。";
+				close;
+			}
+			mes "[孙茂]";
+			mes "咦，你的队员都去哪了？带上你招募的所有人再来见我。";
+			next;
+			mes "[孙茂]";
+			mes "记住，你要和同志们一起行动。你们当中没有叛徒吧？";
+			close;
+		}
+	} else {
+		if (ch_make == 1) {
+			set ch_make,0;
+			mes "[孙茂]";
+			mes "Ah...";
+			mes "你";
+			mes "回来了！";
+			mes "哈哈哈哈！";
+			next;
+			mes "[孙茂]";
+			mes "我要表扬你和你的同志们在上次任务中的出色表现。如果你想为我们的事业接受另一项任务，随时回来。";
+			close;
+		}
+		mes "[孙茂]";
+		mes "记住，队伍的权力中心是队长。队伍成员必须同心协力，才能达成目标。";
+		close;
+	}
+}
+
+lou_in01,43,147,3	script	火药专家	750,{
+	if (ch_make == 0) {
+		getpartymember(getcharid(1));
+		set @partymember,$@partymembercount;
+		if (!QL_REVOL) {
+			mes "[郝辰柳]";
+			mes "Who...";
+			mes "你们是……？";
+			next;
+			mes "[郝辰柳]";
+			mes "我只信任为洛阳事业奋斗的同志，别来烦我。宁死不受压迫！洛阳自由！";
+			close;
+		} else if (@partymember != 8) {
+			mes "[郝辰柳]";
+			mes "孙茂告诉我，会有八名";
+			mes "米德加尔特人来。";
+			mes "可发生了什么事？";
+			mes "我搞不懂……";
+			next;
+			mes "[郝辰柳]";
+			mes "孙茂的计划天衣无缝，";
+			mes "所以我照他拟定的剧本行事。你们要么是在无谓地即兴发挥，要么根本就不是我的同志……";
+			close;
+		 } else if (countitem(7068) && countitem(7096) && countitem(7004)) {
+			mes "[郝辰柳]";
+			mes "啊，我明白了，是孙茂";
+			mes "派你们来的。很抱歉";
+			mes "让你们为了把";
+			mes "化学品私运给我";
+			mes "而费了这么多周折，同志。";
+			next;
+			mes "[郝辰柳]";
+			mes "请给我";
+			mes "一分钟，好让";
+			mes "我能赶快制作";
+			mes "火药。";
+			next;
+			switch(select("制作火药。:取消。")) {
+			case 1:
+				delitem 7068,1; //Burn_Tree
+				delitem 7096,1; //Cold_Magma
+				delitem 7004,1; //Mud_Lump
+				mes "[郝辰柳]";
+				mes "我不想你们在士兵检查货物时被抓。你们中最好有一人推着推车，把火药藏在那里。";
+				set ch_make,1;
+				getitem 7204,1; //Gunpowder
+				close;
+			case 2:
+				mes "[郝辰柳]";
+				mes "Is...";
+				mes "出什么事了？！";
+				next;
+				mes "[郝辰柳]";
+				mes "看来我们必须";
+				mes "格外小心，";
+				mes "因为这里的";
+				mes "监视";
+				mes "很严密。";
+				close;
+			}
+		} else {
+			mes "[郝辰柳]";
+			mes "Hmmm...";
+			mes "看来";
+			mes "你是我们的人。";
+			next;
+			mes "[郝辰柳]";
+			mes "如果你是为";
+			mes "火药而来，就该";
+			mes "从你们队长那里";
+			mes "拿些化学品来。";
+			close;
+		}
+	} else if (countitem(7204)) {
+		mes "[郝辰柳]";
+		mes "小心！";
+		mes "火药";
+		mes "在检查过程中";
+		mes "很容易";
+		mes "被发现！";
+		mes "藏好……！";
+		close;
+	} else {
+		mes "[郝辰柳]";
+		mes "希望你能把火药平安送到孙茂手中。下次见到他时，请代我向他道谢。";
+		close;
+	}
+}
+
+lou_in01,45,138,3	script	士兵#1	825,{
+	if (countitem(7204)) {
+		mes "[士兵]";
+		mes "站住！";
+		next;
+		mes "[士兵]";
+		mes "不许把任何火药带出这里。现在去";
+		mes "把它放回去，米德加尔特人！快点！";
+		close;
+	}
+	mes "[士兵]";
+	mes "在这种地方看到外乡人真是奇怪。我们和你没什么事，";
+	mes "走吧。";
+	close2;
+	warp "lou_in01",82,141;
+	end;
+}
+
+lou_in01,82,139,7	script	士兵#2	825,{
+	if (countitem(7068) || countitem(7096) || countitem(7004)) {
+		mes "[士兵]";
+		mes "抱歉，你携带的部分商品";
+		mes "禁止带入。我不能让你进去。";
+		close;
+	}
+	mes "[士兵]";
+	mes "这里没什么特别的，不过如果你想看看这个房间，请随意。";
+	close2;
+	warp "lou_in01",47,141;
+	end;
+}

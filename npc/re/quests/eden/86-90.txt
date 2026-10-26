@@ -1,0 +1,201 @@
+//===== rAthena Script =======================================
+//= Eden Group Quests - Mission [86 - 90]
+//===== By: ==================================================
+//= Chilly
+//===== Current Version: =====================================
+//= 1.5
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Repetable Quests for Players between Baselevel 86 - 90.
+//===== Additional Comments: =================================
+//= 1.0 First Version. [Chilly]
+//= 1.1 Some little improvements here and there. [Masao]
+//= 1.2 Optimized. [Euphy]
+//= 1.3 Updated to match the official script. [Euphy]
+//= 1.4 Added support to Para_Team_Mark_ in Eden Group. [Ragno]
+//= 1.5 Added use of F_HasEdenGroupMark function. [Ragno]
+//============================================================
+
+moc_para01,48,175,3	script	86-90任务公告板	857,{
+	if (!callfunc("F_HasEdenGroupMark")) {
+		mes "等一下！";
+		mes "-你需要持有-";
+		mes "-^4d4dff'乐园团标志'^000000-";
+		mes "-才能接取这些任务。-";
+		next;
+		switch(select("直接离开:^0000FF乐园团^000000任务？:怎样才能成为^0000FF乐园团^000000的一员？")) {
+		case 1:
+			close;
+		case 2:
+			mes "::乐园团任务";
+			mes "::基本上是由";
+			mes "::王国各地的人们";
+			mes "::所委托的任务。";
+			mes "::我们只是将它们分类。";
+			next;
+			mes "::在乐园团里，";
+			mes "::我们将任务";
+			mes "::按难度等级整理。";
+			mes "::根据这个等级，";
+			mes "::你可以找到";
+			mes "::适合你的";
+			mes "::任务。";
+			next;
+			mes "::完成之后，";
+			mes "::你可以回到";
+			mes "::任务公告板。";
+			next;
+			mes "::然后你就会";
+			mes "::获得奖励！！";
+			mes "::很简单，对吧！！";
+			mes "::不需要手续费！！";
+			close;
+		case 3:
+			mes "::你可以加入";
+			mes "::乐园团，";
+			mes "::去找 ^0000FF莱姆·伊万诺^000000，";
+			mes "::她正在一楼等候。";
+			next;
+			mes "::如果你成为团员，";
+			mes "::你就会获得";
+			mes "::“^006400乐园团标志^000000”.";
+			mes "::然后你就能";
+			mes "::看到任务公告板了。";
+			close;
+		}
+	}
+	if (BaseLevel < 86  || BaseLevel > 90) {
+		// Quest IDs: 4167-4180
+		// Quest cooldown IDs: 4198-4211
+		setarray .@names$[0],
+			"Dragon Tail","Spring Rabbit","Pest",
+			"Bathory","Alarm",
+			"Baba Yaga","Yao Jun","Firelock Soldier","Zipper Bear",
+			"Ground Petite","Rafflesia","Venomous","Pitman","Yellow Novus";
+		setarray .@exp[0],
+			76000,82000,82000,
+			72000,76000,
+			72000,78000,82000,80000,
+			72000,72000,72000,86000,80000;
+		mes "必须处于86-90级才能接取这些任务。";
+		for(set .@quest,4167; .@quest<=4180; set .@quest,.@quest+1) {
+			set .@hunting, checkquest(.@quest,HUNTING);
+			if (.@hunting == 0 || .@hunting == 1) {
+				next;
+				mes ":: 你无法继续";
+				mes ":: ^0000FF"+.@names$[.@quest-4167]+"狩猎^000000。";
+				mes ":: 任务登记";
+				mes ":: 已取消。";
+				erasequest .@quest;
+				close;
+			} else if (.@hunting == 2) {
+				next;
+				mes ":: 你在任务公告板上";
+				mes ":: 添加了";
+				mes ":: ^0000FF"+.@names$[.@quest-4167]+"狩猎^000000";
+				mes ":: 的相关信息。";
+				mes ":: 你获得了";
+				mes ":: 有益的经验。";
+				erasequest .@quest;
+				getexp .@exp[.@quest-4167],0;
+				close;
+			}
+		}
+		close;
+	}
+	mes "[86-90任务公告板]";
+	mes "这块公告板上有几项委托。";
+	next;
+	switch(select("^8B4513乌龟岛^000000:^8B4513钟塔地下城^000000:^8B4513扩展城镇^000000:^8B4513其他地区^000000")) {
+	case 1:
+		mes "^8B4513乌龟岛^000000。";
+		mes "你要猎杀哪种魔物，或者已经完成猎杀了吗？";
+		next;
+		switch(select("^0000FF龙尾^000000:^0000FF弹簧兔^000000:^0000FF单眼虫^000000")) {
+			case 1: callsub L_Quest,4167,"Dragon Tail",76000,"靛贰帮抛老墨靛","There is a monster that only can be found on ^8B4513Turtle Island^000000.","s";
+			case 2: callsub L_Quest,4168,"Spring Rabbit",82000,"胶橇傅贰壶墨靛","There is a monster that only can be found on ^8B4513Turtle Island^000000.","s";
+			case 3: callsub L_Quest,4169,"Pest",82000,"其胶飘墨靛","There is a monster that only can be found on ^8B4513Turtle Island^000000.","s";
+		}
+	case 2:
+		mes "^8B4513钟塔地下城^000000。";
+		mes "你要猎杀哪种魔物，或者已经完成猎杀了吗？";
+		next;
+		switch(select("^0000FF巫婆^000000:^0000FF钟怪^000000")) {
+			case 1: callsub L_Quest,4170,"Bathory",72000,"官家府墨靛","The Clock Tower Dungeon is full of dangerous monsters.";
+			case 2: callsub L_Quest,4171,"Alarm",76000,"舅恩墨靛","The Clock Tower Dungeon is full of dangerous monsters.";
+		}
+	case 3:
+		mes "^8B4513扩展城市^000000";
+		mes "你要猎杀哪种魔物，或者已经完成猎杀了吗？";
+		next;
+		switch(select("^0000FF芭芭亚卡^000000:^0000FF妖君^000000:^0000FF武士火枪兵^000000:^0000FF拉链熊^000000")) {
+			case 1: callsub L_Quest,4172,"Baba Yaga",72000,"","The witch Baba Yaga can be found in the outskirts of Moscovia.";
+			case 2: callsub L_Quest,4173,"Yao Jun",117000,"驱焙墨靛","There are human-like monsters that roam around the dungeon in Luoyang.";
+			case 3: callsub L_Quest,4174,"Firelock Soldier",82000,"备侥炼醚捍墨靛","There are human-like monsters that roam around the dungeon in Amatsu.","s";
+			case 4: callsub L_Quest,4175,"Zipper Bear",120000,"瘤欺海绢墨靛","There are bear monsters swarming in the Kunlun dungeon.";
+		}
+	case 4:
+		mes "[86-90任务公告板]";
+		mes "这是一份在米德加尔特其他地区猎杀魔物的随机委托列表。";
+		mes "你要猎杀哪种魔物，或者已经完成猎杀了吗？";
+		next;
+		switch(select("^0000FF七彩地龙^000000:^0000FF草精^000000:^0000FF毒液魔^000000:^0000FF矿工魔^000000:^0000FF黄诺博斯^000000")) {
+			case 1: callsub L_Quest,4176,"Ground Petite",72000,"瘤惑悔鹅墨靛","There are dragon type monsters swarming the western region of Geffen.";
+			case 2: callsub L_Quest,4177,"Rafflesia",72000,"扼敲饭矫酒墨靛","There are plant type monsters infesting the fields of Lighthalzen.";
+			case 3: callsub L_Quest,4178,"Venomous",72000,"海畴赣胶","There are formless monsters floating around the fields of Einbroch.";
+			case 4: callsub L_Quest,4179,"Pitman",86000,"峭盖","There are undead monsters pushing a cart around the fields and dungeons of Einbroch.";
+			case 5: callsub L_Quest,4180,"Yellow Novus",80000,"炕肺快畴滚胶","There are yellow dragon type monsters terrorizing the fields of Hugel.";
+		}
+	}
+	end;
+
+//callsub L_Quest,<quest ID>,"<monster name>",<reward EXP>,"<cutin image>","<description>"{,"s"};
+L_Quest:
+	set .@quest1, getarg(0);
+	set .@quest2, .@quest1+31;
+	.@cutin$ = getarg(3);
+	set .@playtime, checkquest(.@quest2,PLAYTIME);
+	if (.@playtime == 0 || .@playtime == 1) {
+		mes "[86-90任务公告板]";
+		mes "你需要等待3小时才能再次接取这个任务。";
+		close;
+	}
+	set .@hunting, checkquest(.@quest1,HUNTING);
+	if (.@hunting == 0 || .@hunting == 1) {
+		mes "[86-90任务公告板]";
+		mes "你已经猎杀完30只"+getarg(1)+getarg(5,"")+"了吗？";
+		close;
+	} else if (.@hunting == 2) {
+		mes "[86-90任务公告板]";
+		mes "你已完成猎杀。";
+		mes "请收下这份奖励作为补偿。";
+		erasequest .@quest1;
+		if (.@playtime > -1) erasequest .@quest2;
+		setquest .@quest2;
+		getexp getarg(2),0;
+		close;
+	}/* else if (.@hunting == 3) {
+//		recall_completequest .@quest1
+		erasequest .@quest1;
+		mes "[86-90 Mission Board]";
+		mes "You have re-accepted the "+getarg(1)+" Hunting mission.";
+		close;
+	}*/ else {
+		mes "[86-90任务公告板]";
+		mes getarg(4);
+		next;
+		if (.@cutin$ != "") cutin .@cutin$,3;
+		mes "[86-90任务公告板]";
+		mes "猎杀30只"+getarg(1)+"魔物，并在此公告板上报告你的成果。";
+		next;
+		if (.@cutin$ != "") cutin .@cutin$,255;
+		if(select("我去猎杀:不了，谢谢") == 1) {
+			mes "[86-90任务公告板]";
+			mes "完成任务后，请在此公告板上登记并领取奖励。";
+			if (.@playtime > -1) erasequest .@quest2;
+			setquest .@quest1;
+		}
+		close;
+	}
+}

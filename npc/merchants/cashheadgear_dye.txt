@@ -1,0 +1,119 @@
+//===== rAthena Script ======================================= 
+//= Headgear Dyer (Cash)
+//===== By: ==================================================
+//= Xantara
+//= Maud_Dib
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Change headgear's color. Cost is a Mysterious Dyestuff
+//===== Additional Comments: =================================
+//= 1.0 First / Optimized Version
+//============================================================
+
+prt_in,253,168,4	script	阿洛拉	862,{
+
+// Mysterious Dyestuff
+	set .@dyeID, 6220;
+// Headgear Choices
+	setarray .@hgn$[1], "Mage Hat","Beanie","Drooping Cat","Deviruchi Hat","Wig","Ribbon","Magestic Goat";
+// Mage Hats - Normal, Yellow, Blue, Brown, Gray, Red
+	setarray .@hg_1[1], 5027, 5242, 5241, 5240, 5239, 5238;
+// Beanies - Normal, Pink, Blue, Brown
+	setarray .@hg_2[1], 5076, 5237, 5236, 5235;
+// Drooping Cats - Normal, Blue, Brown, Gray, Pink, Yellow
+	setarray .@hg_3[1], 5058, 5233, 5231, 5230, 5232, 5234;
+// Deviruchi Hats - Normal, Red, Gray, Brown
+	setarray .@hg_4[1], 5038, 5227, 5228, 5229;
+// Wigs - Happy, Shiny, Marvelous, Fantastic
+	setarray .@hg_5[1], 5273, 5274, 5275, 5276;
+// Ribbons - Normal, Black, Yellow, Green, Pink, Red, Orange, White
+	setarray .@hg_6[1], 2208, 5191, 5192, 5193, 5194, 5195, 5196, 5197;
+// Magestic Goats - Normal, Evolved
+	setarray .@hg_7[1], 2256, 5217;
+
+	mes "[阿洛拉]";
+	mes "你好，只要你带来神秘染料，我就能帮你改变头饰的颜色。";
+	next;
+	mes "[阿洛拉]";
+	mes "你有想要染色的头饰吗？";
+	next;
+	for(set .@i,1; .@i < getarraysize(.@hgn$); set .@i,.@i+1) {
+		if(.@i == 1)    set .@menu$, .@hgn$[.@i];
+		else            set .@menu$, .@menu$ +":"+ .@hgn$[.@i];
+	}
+	set .@menu$, .@menu$ +":Cancel";
+	set .@t, select(.@menu$);
+	if(.@t == getarraysize(.@hgn$)) {
+		mes "[阿洛拉]";
+		mes "冒险者，祝你旅途愉快！";
+		mes "如果你想让卡普拉头饰，或是冒险中获得的头饰换个新颜色，随时来找我！";
+		close;
+	}
+	mes "[阿洛拉]";
+	mes "好，你想把它改成什么颜色？";
+	next;
+	for(set .@i,1; .@i < getarraysize(getd(".@hg_"+.@t+"")); set .@i,.@i+1) {
+		if(.@i == 1 && .@t != 5)
+			set .@menu$, "普通";
+		else if(.@i == 1 && .@t == 5)
+			set .@menu$, getitemname(getd(".@hg_"+.@t+"["+.@i+"]"));
+		else {
+			sscanf(getitemname(getd(".@hg_"+.@t+"["+.@i+"]")),"%s "+ .@hgn$[.@t],.@colour$);
+			set .@menu$, .@menu$ +":"+ .@colour$;
+		}
+	}
+	set .@menu$, .@menu$ +":Cancel";
+	set .@c, select(.@menu$);
+	if(.@c == getarraysize(getd(".@hg_"+.@t+""))) {
+		mes "[阿洛拉]";
+		mes "哦，好的，没问题！";
+		close;
+	}
+	set .@dyHG, getd(".@hg_"+.@t+"["+.@c+"]");
+	mes "[阿洛拉]";
+	mes "我好兴奋，你呢？";
+	mes "再确认一下，你想要我使用的"+ .@hgn$[.@t] +"是哪一种颜色？";
+	next;
+	mes "[阿洛拉]";
+	mes "请注意，我将使用你背包里的 ^FF0000第1个"+ .@hgn$[.@t] +"，也就是该颜色的染料！^000000";
+	next;
+	mes "[阿洛拉]";
+	mes "神秘染料会溶解所有精炼与卡片，请确认你能接受 ^0000FF+0"+ getitemname(.@dyHG) +"这种没有任何卡片的装备。^000000";
+	next;
+	mes "["+ strcharinfo(0) +"]";
+	mes "好，谢谢你的提醒，那我就把我的";
+	next;
+	set .@menu$, "算了";
+	for(set .@i,1; .@i < getarraysize(getd(".@hg_"+.@t+"")); set .@i,.@i+1) {
+		if(.@i == 1)    set .@menu$, .@menu$ +":Normal "+ getitemname(getd(".@hg_"+.@t+"["+.@i+"]"));
+		else            set .@menu$, .@menu$ +":"+ getitemname(getd(".@hg_"+.@t+"["+.@i+"]"));
+	}
+	set .@mine, select(.@menu$) - 1;
+	if(!.@mine) {
+		mes "[阿洛拉]";
+		mes "还是确认清楚比较好，祝你一路平安。";
+		close;
+	}
+	set .@myHG, getd(".@hg_"+.@t+"["+.@mine+"]");
+	if(.@dyHG == .@myHG) {
+		mes "[阿洛拉]";
+		mes "哇，发生什么事了？";
+		close;
+	}
+	if(!countitem(.@dyeID) || !countitem(.@myHG)) {
+		mes "[阿洛拉]";
+		mes "哎呀，你好像缺了什么东西。";
+		close;
+	}
+	mes "[阿洛拉]";
+	mes "很好看吧？！";
+	mes "希望你以后再来染更多漂亮的头饰！";
+	delitem .@dyeID,1; // Dyestuff
+	delitem .@myHG,1;  // Your headgear
+	getitem .@dyHG,1;  // Dyed headgear
+	close;
+}

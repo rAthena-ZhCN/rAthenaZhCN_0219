@@ -1,0 +1,14 @@
+//===== rAthena Script =======================================
+//= Monsters from Varmundt's Mansion
+//===== Changelog: ===========================================
+//= 1.0 First version. [JohnnyPlayy]
+//============================================================
+
+//= Meditation Bath
+//============================================================
+ba_bath,0,0	monster	--ja--	20633,30,5000
+ba_bath,0,0	monster	--ja--	20634,30,5000
+ba_bath,0,0	monster	--ja--	20643,70,5000
+ba_bath,0,0	monster	--ja--	20644,50,5000
+ba_bath,0,0	monster	--ja--	20645,50,5000
+ba_bath,0,0	monster	--ja--	20646,70,5000

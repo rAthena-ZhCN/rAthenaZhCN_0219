@@ -1,0 +1,91 @@
+//===== rAthena Script =======================================
+//= Training Zone
+//===== Description: =========================================
+//= NPC warp related to the training zone.
+//===== Changelog: ===========================================
+//= 1.0 Initial Release [Capuche]
+//============================================================
+
+prontera,246,62,3	script	训练教官#sol1	8W_SOLDIER,{
+	mes "[训练教官]";
+	mes "如果你想在更广阔的区域训练，我就让你进去。";
+	next;
+	mes "[训练教官]";
+	mes "训练场主要分为两个区域。";
+	next;
+	mes "[训练教官]";
+	mes "上层区域，可确认根据怪物大小施加的力量。";
+	next;
+	mes "[训练教官]";
+	mes "下层区域，可确认根据怪物属性与形态施加的力量。";
+	next;
+	mes "[训练教官]";
+	mes "你想进入哪里？";
+	next;
+	switch( select( "上层区域", "下层区域", "不进入" ) ) {
+	case 1:
+		mes "[训练教官]";
+		mes "那么我来为你带路。";
+		close2;
+		warp "tra_fild",112,167;
+		end;
+	case 2:
+		mes "[训练教官]";
+		mes "那么我来为你带路。";
+		close2;
+		warp "tra_fild",111,74;
+		end;
+	case 3:
+		mes "[训练教官]";
+		mes "如果需要指引，就来找我。";
+		close;
+	}
+}
+
+tra_fild,111,79,3	script	训练教官#sol3	8W_SOLDIER,{
+	mes "[训练教官]";
+	mes "你确定要移动到上层区域吗？";
+	next;
+	switch( select( "移动", "不移动", "传送至普隆德拉。" ) ) {
+	case 1:
+		mes "[训练教官]";
+		mes "前往上层区域！！！";
+		close2;
+		warp "tra_fild",112,167;
+		end;
+	case 2:
+		mes "[训练教官]";
+		mes "需要移动时就来找我。";
+		close;
+	case 3:
+		mes "[训练教官]";
+		mes "我送你过去。";
+		close2;
+		warp "prontera",246,60;
+		end;
+	}
+}
+
+tra_fild,112,171,3	script	训练教官#sol2	8W_SOLDIER,{
+	mes "[训练教官]";
+	mes "你确定要移动到下层区域吗？";
+	next;
+	switch( select( "移动", "不移动", "传送至普隆德拉。" ) ) {
+	case 1:
+		mes "[训练教官]";
+		mes "前往下层区域！！！";
+		close2;
+		warp "tra_fild",111,74;
+		end;
+	case 2:
+		mes "[训练教官]";
+		mes "需要移动时就来找我。";
+		close;
+	case 3:
+		mes "[训练教官]";
+		mes "我送你过去。";
+		close2;
+		warp "prontera",246,60;
+		end;
+	}
+}

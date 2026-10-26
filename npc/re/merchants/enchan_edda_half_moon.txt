@@ -1,0 +1,283 @@
+//===== rAthena Script =======================================
+//= Half Moon in the Daylight Enchanter
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//= Half Moon in the Daylight related enchanter
+//===== Changelog: ===========================================
+//= 1.0 Initial release [Everade]
+//= 1.1 Clean-up [Capuche]
+//============================================================
+
+rachel,177,139,3	script	神殿道具管理员#0hmoon	4_M_TRAINEE,{
+	disable_items;
+	if (MaxWeight - Weight < 1000 || checkweight(5819,1) == 0) {
+		npctalk "请减轻一下负重。", "", bc_self;
+		end;
+	}
+	mes "[神殿道具管理员]";
+	mes "如果你有1个^0000cd" + getitemname(28387) + "^000000和1个^0000cd" + getitemname(25088) + "^000000，我就赐予你女神的力量。";
+	next;
+	mes "[神殿道具管理员]";
+	mes "我会好好干的。交给我吧。";
+	next;
+	switch( select( "女神的力量是什么？", "那么，拜托了。", "没什么。" ) ) {
+	case 1:
+		mes "[神殿道具管理员]";
+		mes "女神的力量是什么？你刚才是在问女神的力量吗？";
+		next;
+		if (select( "No.", "是的，我问了。" ) == 1) {
+			 mes "[神殿道具管理员]";
+			 mes "我想跟你聊聊，请听我说。";
+			 close;
+		}
+		mes "[神殿道具管理员]";
+		mes "女神的力量！！！我爱女神！女神，你太棒了！！！";
+		next;
+		mes "[神殿道具管理员]";
+		mes "有个故事得先讲给你听。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "我一直是^0000cd女神^000000的仰慕者。自从进入神殿、开始虔诚侍奉的生活，我的人生才开始绽放。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "有一天睡前，我向女神祈祷时做了一个^0000cd梦^000000。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "在满盈的光芒中，我听见了女神芙蕾雅的^0000cd声音^000000。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "但遗憾的是，我一醒来就把梦忘得一干二净。梦就是这样。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "我为此难过得哭了很久。可是，如果女神愿意透过梦境让我听见她的声音，那我们是不是也能透过做梦接近女神呢？";
+		next;
+		mes "[神殿道具管理员]";
+		mes "我开始倾尽全力研究梦境。我认为这是女神透过梦境向我传达的旨意。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "在我埋头研究时，我应身旁的大祭司尼乐研阿姨之托，造出了^0000cd梦境通道^000000。这是我倾注一生的成果。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "我还没能接近女神……不过在梦里遇见女神的人并不多……像我这样的人……";
+		next;
+		mes "[神殿道具管理员]";
+		mes "总之，当初听到大祭司尼乐研阿姨的请求时，我很惊讶。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "你敢进入教皇的梦境吗……？大祭司尼乐研说服我进入她的梦，可我却帮不上任何忙。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "而且那番劝说意外地有说服力。";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "那么，女神的力量究竟是什么？";
+		next;
+		mes "[神殿道具管理员]";
+		mes "我第一次进入教皇的梦境时，惊叹不已。";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "为什么？";
+		next;
+		mes "[神殿道具管理员]";
+		mes "为我的^0000cd天才^000000。";
+		emotion ET_SWEAT;
+		next;
+		mes "[神殿道具管理员]";
+		mes "这世上还有谁能造出进入他人梦境并身临其境的装置？呀——毕竟我是女神疼爱的羔羊。";
+		emotion ET_SWEAT;
+		next;
+		mes "[神殿道具管理员]";
+		mes "我在教皇的梦境中行走时，偶然发现了那位祭司的^0000cd祭司项链^000000，以及无面神殿中带着特殊能量的^0000cd碎片^000000。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "我在梦里四处奔走，尽可能查清一切，可当教皇发现我时，她因恐惧而激烈地排斥我。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "我不是教皇最亲近的知己，对她而言我大概只是个陌生人。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "于是我被赶出了教皇的梦境。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "话说回来，我从梦中醒来时，神殿的祭司项链和那枚奇怪的碎片还留在我手里。你怎么看？";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "Amazing.";
+		next;
+		mes "[神殿道具管理员]";
+		mes "哦，女神啊，请怜悯这位冒险家迟钝的感受力吧，他竟用“真厉害”这种词来形容如此惊人的成果——";
+		emotion ET_SWEAT;
+		next;
+		mes "[神殿道具管理员]";
+		mes "我能把从他人梦境中得到的东西带出来了。这可是大事！既然你似乎无法共情，我们就谈正事吧。";
+		emotion ET_SWEAT;
+		next;
+		mes "[神殿道具管理员]";
+		mes "我开始研究那条项链和神殿的奇怪碎片。那枚奇怪碎片被命名为^0000cd梦之碎片^000000，意思是在梦中获得的碎片。呀——命名品味！";
+		next;
+		mes "[神殿道具管理员]";
+		mes "它们分开时看似普通，可当我将它们叠在一起时，感觉到了一股微妙的力量。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "从那以后，我进入教皇的梦境，在不被教皇察觉的情况下，一枚一枚地收集它们进行研究。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "我发现，只要收集约^0000cd100个梦之碎片^000000，用力量压缩后装入^0000cd祭司项链^000000，就能赋予它^0000cd特殊力量^000000。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "经过不断研究再研究，我成功将那股力量分离成三个等级。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "这股力量能增强佩戴者的^0000cd物理^000000、^0000cd魔法^000000或^0000cd远程^000000攻击。而且没有任何副作用！";
+		next;
+		mes "[神殿道具管理员]";
+		mes "我分别将这些力量命名为^0000cd正义女神、慈悲女神、洞察女神^000000。是不是很合理？";
+		next;
+		mes "[神殿道具管理员]";
+		mes "但更惊人的是，如果放入更多^0000cd梦之碎片^000000，大约^0000cd1000个^000000左右，就能附上更^0000cd强大的力量^000000。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "超过这个数量，祭司项链就承受不住，我收集的所有材料都毁了。我还在继续研究，总有一天一定会成功。";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "那么，请你用三行总结一下。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "哎呀，这人真拿他没办法。不过我毕竟是女神善良的羔羊，就简单跟你说说吧。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "如果你带来在梦中获得的^0000cd1条祭司项链和100个梦之碎片^000000，你的^0000cd祭司项链就会附上女神的力量^000000。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "如果再带来已附上女神力量的^0000ff祭司项链^000000和^0000ff1000个梦之碎片^000000，就能获得更强大的力量。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "就是这样！";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "哦，谢谢。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "要再听一遍吗？";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "不用了，已经够了。就这样吧。";
+		next;
+		mes "[神殿道具管理员]";
+		mes "哦，真遗憾。这次我还打算讲得更详细些呢。";
+		close;
+	case 2:
+		mes "[神殿道具管理员]";
+		mes "真是明智的决定！你要附在^0000cd左^000000边？还是^0000cd右^000000边？两边我都有把握！……";
+		next;
+		switch( select( "左边", "右边", "取消" ) ) {
+		case 1:
+			.@part = EQI_ACC_L;
+			break;
+		case 2:
+			.@part = EQI_ACC_R;
+			break;
+		case 3:
+			mes "[神殿道具管理员]";
+			mes "哦，为什么！！！我可是在帮你！！！";
+			close;
+		}
+		.@itemid = getequipid(.@part);
+
+		if (.@itemid != 28387) {
+			mes "[神殿道具管理员]";
+			mes "呃，等等！那不是^0000cd" + mesitemlink(28387, false) + "^000000，对吧？能再确认一下吗？";
+			close;
+		}
+		.@card = getequipcardid(.@part,3);
+
+		if (getiteminfo(.@card, ITEMINFO_SUBTYPE) == CARD_ENCHANT) {
+			npctalk "你的这条项链已经附过魔了。";
+			end;
+		}
+		mes "[神殿道具管理员]";
+		mes "你想为项链附上什么特殊能力？";
+		next;
+		setarray .@enhance_n$[0], "Goddess of Justice", "Goddess of Mercy", "Goddess of Insight";
+		.@s = select( .@enhance_n$[0], .@enhance_n$[1], .@enhance_n$[2], "取消" ) -1;
+
+		switch( .@s ) {
+		default:
+			setarray .@enhance_a[0],29121,29123,29125;
+			setarray .@enhance_s[0],29122,29124,29126;
+
+			mes "[神殿道具管理员]";
+			mes "你选择了" + .@enhance_n$[.@s] + "附魔。";
+			mes "请选择等级";
+			mes "" + mesitemlink(.@enhance_a[.@s], false) + "";
+			mes "" + mesitemlink(.@enhance_s[.@s], false) + "";
+			next;
+			switch( select( "A级", "S级" ) ) {
+			case 1:
+				.@enchant = .@enhance_a[.@s];
+				.@cost = 100;
+				.@class = 1;
+				break;
+			case 2:
+				.@enchant = .@enhance_s[.@s];
+				.@cost = 1000;
+				.@class = 2;
+				break;
+			}
+			mes "[神殿道具管理员]";
+			mes "项链将附上" + mesitemlink(.@enchant, false) + "";
+			mes "你真的确定要进行这次附魔吗？";
+			next;
+			if (select( "不，我需要时间考虑。","好，请开始吧。" ) == 1)
+				break;
+			.@card = getequipcardid(.@part,3);	// re-defined
+
+			mes "[神殿道具管理员]";
+			if (!getequipisequiped(.@part) || isequipped(28387) < 1) {
+				mes "你没有佩戴" + mesitemlink(28387, false) + "...!";
+				close;
+			}
+			if (.@enchant == .@card) {
+				mes "你的" + mesitemlink(28387, false) + "已经附魔了。";
+				close;
+			}
+			if (countitem(25088) < .@cost) {
+				mes "你没有带够" + mesitemlink(25088, false) + "！";
+				close;
+			}
+			if (.@class == 2 && (.@enchant == 29122 && .@card != 29121 || .@enchant == 29124 && .@card != 29123 || .@enchant == 29126 && .@card != 29125)) {
+				mes "你需要先为项链附上" + mesitemlink(.@enhance_a[.@s], false) + "。";
+				close;
+			}
+			specialeffect2 182;
+			specialeffect2 205;
+			specialeffect2 102;
+			specialeffect2 104;
+			mes "项链已按你的要求完成附魔。";
+			delitem 25088,.@cost; //Fragment of Dream
+			delequip .@part;
+			getitem2 28387,1,1,0,0,0,0,0,.@enchant; //Priest's Necklace
+			close;
+		case 3:
+			break;
+		}
+		break;
+	case 3:
+		break;
+	}
+	mes "[神殿道具管理员]";
+	mes "没什么？你忘了要说什么吗？";
+	next;
+	mes "[神殿道具管理员]";
+	mes "如果你现在不忙，要不要和我一起吃饭？";
+	next;
+	mes "[神殿道具管理员]";
+	mes "何不抽空和我聊聊梦境、科学与女神呢？";
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "呃，我很忙……";
+	next;
+	mes "[神殿道具管理员]";
+	mes "就算你没什么要说的，也听我说！！！";
+	close;
+}

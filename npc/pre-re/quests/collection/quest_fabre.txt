@@ -1,0 +1,231 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Added Monster Killing quests.
+//= Repeatable EXP Quest (Fluffs)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+gef_fild07,321,193,4	script	兰格里#Fabre_Hunt	754,{
+	if (checkquest(60107) != -1) {
+		if (checkquest(60107,HUNTING) != 2 ) {
+			mes "[兰格里]";
+			mes "你已经猎杀完50只绿棉虫了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[兰格里]";
+				mes "嗯，我觉得你还没猎杀到50只……";
+				close;
+			case 2:
+				mes "[兰格里]";
+				mes "记住，我需要人帮忙猎杀绿棉虫，去猎杀50只吧。";
+				close;
+			case 3:
+				mes "[兰格里]";
+				mes "你确定要停止猎杀吗？";
+				mes "你已取得的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[兰格里]";
+					mes "那好吧，如果你改变主意就回来找我。";
+					erasequest 60107;
+					close;
+				case 2:
+					mes "[兰格里]";
+					mes "请猎杀50只绿棉虫。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[兰格里]";
+			mes "太厉害了，你完成得真快。";
+			getexp 385,30;
+			erasequest 60107;
+			close;
+		}
+	}
+	if (checkquest(60108) != -1) {
+		if (checkquest(60108,HUNTING) != 2 ) {
+			mes "[兰格里]";
+			mes "你已经猎杀完50只绿棉虫了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[兰格里]";
+				mes "嗯，我觉得你还没猎杀到100只……";
+				close;
+			case 2:
+				mes "[兰格里]";
+				mes "记住，我需要人帮忙猎杀绿棉虫，去猎杀100只吧。";
+				close;
+			case 3:
+				mes "[兰格里]";
+				mes "你确定要停止猎杀吗？";
+				mes "你已取得的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[兰格里]";
+					mes "那好吧，如果你改变主意就回来找我。";
+					erasequest 60108;
+					close;
+				case 2:
+					mes "[兰格里]";
+					mes "请猎杀100只绿棉虫。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[兰格里]";
+			mes "太厉害了，你完成得真快。";
+			getexp 385,30;
+			getexp 385,30;
+			erasequest 60108;
+			close;
+		}
+	}
+	if (checkquest(60109) != -1) {
+		if (checkquest(60109,HUNTING) != 2 ) {
+			mes "[兰格里]";
+			mes "你已经猎杀完150只绿棉虫了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[兰格里]";
+				mes "嗯，我觉得你还没猎杀到150只……";
+				close;
+			case 2:
+				mes "[兰格里]";
+				mes "记住，我需要人帮忙猎杀绿棉虫，去猎杀150只吧。";
+				close;
+			case 3:
+				mes "[兰格里]";
+				mes "你确定要停止猎杀吗？";
+				mes "你已取得的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[兰格里]";
+					mes "那好吧，如果你改变主意就回来找我。";
+					erasequest 60109;
+					close;
+				case 2:
+					mes "[兰格里]";
+					mes "请猎杀150只绿棉虫。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[兰格里]";
+			mes "太厉害了，你完成得真快。";
+			getexp 385,30;
+			getexp 385,30;
+			getexp 385,30;
+			erasequest 60109;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel > 1) {
+		//for maximum level
+		if (BaseLevel < 21) {
+			mes "[兰格里]";
+			mes "你觉得你能帮帮我吗？";
+			mes "拜托了？";
+			next;
+			switch(select("好的:不用")) {
+			case 1:
+				mes "[兰格里]";
+				mes "真的吗？！";
+				mes "那太好了！";
+				next;
+				switch(select("收集物品:猎杀绿棉虫:取消")) {
+				case 1:
+					// Item turn in
+					mes "[兰格里]";
+					mes "我需要收集^0000CE25柔毛^000000来";
+					mes "完成这项社区服务项目。";
+					mes "这样吧，你帮我，我甚至可以给你一点报酬。";
+					next;
+					switch(select("我有柔毛:你刚才说什么？")) {
+					case 1:
+						if (countitem(914) > 24) {
+							mes "[兰格里]";
+							mes "谢谢你的柔毛，这对我帮助很大。";
+							mes "对了，这个给你，应该能帮你更快变强！";
+							delitem 914,25; //Fluff
+							getexp 385,30;
+							close;
+						}
+						else {
+							mes "[兰格里]";
+							mes "我没看到什么柔毛，等等，我看到了，就是你嘴里说出的谎话。";
+							close;
+						}
+					case 2:
+						mes "[兰格里]";
+						mes "我需要^00CE0025柔毛^000000。";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[兰格里]";
+					mes "啊，好吧，我想你可以帮我猎杀一些绿棉虫。";
+					mes "你想猎杀多少只？";
+					next;
+					switch(select("50只绿棉虫:100只绿棉虫:150只绿棉虫")) {
+					case 1:
+						mes "[兰格里]";
+						mes "完成任务后回来找我，我会给你一点小奖励。";
+						setquest 60107;
+						close;
+					case 2:
+						mes "[兰格里]";
+						mes "完成任务后回来找我，我会给你一点小奖励。";
+						setquest 60108;
+						close;
+					case 3:
+						mes "[兰格里]";
+						mes "完成任务后回来找我，我会给你一点小奖励。";
+						setquest 60109;
+						close;
+					}
+				case 3:
+					mes "[兰格里]";
+					mes "如果你改变主意，请回来找我。";
+					close;
+				}
+			case 2:
+				mes "[兰格里]";
+				mes "如果你改变主意，请回来找我。";
+				close;
+			}
+		}
+		else {
+			mes "[兰格里]";
+			mes "你好，我叫兰格里。";
+			mes "我必须完成这项社区服务，可我实在是太懒了。";
+			close;
+		}
+	}
+	else {
+		mes "[兰格里]";
+		mes "你可能是我见过最不靠谱的人，去收拾几只绿棉虫再回来吧。";
+		close;
+	}
+}
+
+

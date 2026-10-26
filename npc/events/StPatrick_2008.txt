@@ -1,0 +1,717 @@
+//===== rAthena Script =======================================
+//= St. Patrick's Day (2008)
+//===== By: ==================================================
+//= Kisuka
+//===== Current Version: =====================================
+//= 1.5
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= iRO St. Patrick's Day. (2008)
+//= Find O'Riley's treasure for him, then hunt down coinds from
+//= the snakes to get Green Ale in return for them.
+//=
+//= Mobs 1841 through 1844 have been modified for this event
+//= you must use the mob edits provided for this quest.
+//= Enable in mob_db2.txt
+//=
+//= The item 12715 Black_Treasure_Chest contains a script 
+//= that relies explicitly on this script being loaded.
+//= Remove the "end" from the item script to enable.
+//= In addition to that, you must enable the item_avail
+//= entries if you are using a kRO client, as the items
+//= were removed from the client between testing and this
+//= updated.
+//===== Additional Comments: =================================
+//= 1.0 First version. [Kisuka]
+//= 1.1 Fixed checkitems for ale, fixed ale prize(gives the correct one now). [Kisuka]
+//= 1.2 Optimized. Uses only one variable now. [L0ne_W0lf]
+//=     Corrected EXP rewards, and some typos.
+//= 1.3 Corrected random in item function. [L0ne_W0lf]
+//= 1.4 Replaced effect numerics with constants. [Samuray22]
+//= 1.5 Revamped the script. [Kisuka]
+//============================================================
+
+prt_fild05,170,286,4	script	不安的小妖精#8pday	954,{
+	if (StPatrick2008 < 1) {
+		mes "[小妖精奥莱利]";
+		mes "Hmm...";
+		mes "今天天气真不错啊。";
+		mes "若你有空的话。";
+		mes "过来，过来这边，我告诉你一件事。";
+		next;
+		select("你说吧。");
+		mes "[小妖精奥莱利]";
+		mes "这些年来我到世间行走，每一次都被那些蛇偷走了我的财宝。";
+		next;
+		select("哦？");
+		mes "[小妖精奥莱利]";
+		mes "这片土地上的好心人一次又一次地帮我找回财宝，真是太感谢了。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "我吸取了教训，永远不会忘记那些可恶的蛇是怎样害我的。";
+		next;
+		select("你做了什么？");
+		mes "[小妖精奥莱利]";
+		mes "我造了一个安全的地方来藏我的财宝。";
+		mes "把它藏在隐秘之处，直到我明年重返世间，财宝都会安然无恙。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "今年，我又踏上了旅程，再度去看看外面的世界。";
+		mes "我走到藏金子的地方，发现它安然无恙，没人动过。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "我心里想，我把财宝藏得让那些蛇找不到，真是聪明。";
+		mes "唉，可我还是个傻瓜。";
+		next;
+		select("发生了什么事？");
+		mes "[小妖精奥莱利]";
+		mes "我的藏宝处太过巧妙了。";
+		mes "我又拉又拽又推，可那藏宝处纹丝不动。";
+		mes "于是今年，我又一次失去了财宝。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "因为这桩乱七八糟的事，我连著名的绿色麦酒都还没开始酿。";
+		mes "我要问你，你愿意帮我把财宝取回来吗？";
+		next;
+		if (select("当然，我可以帮你。:我太忙了。") == 2) {
+			mes "[小妖精奥莱利]";
+			mes "唉，我明白。";
+			mes "谢谢你听我讲这些。";
+			close;
+		}
+		mes "[小妖精奥莱利]";
+		mes "要想找到我的财宝，此乃实言。";
+		mes "为了我的财宝，我把秘密告诉你。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "所以，好好听着，一个字都别漏。";
+		mes "前往魔法师之城。";
+		mes "越过桥梁，渡过水面";
+		mes "爬上高山，直到北方再无可前行之路。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "穿过悬在半空的石阶。";
+		mes "我的财宝就藏在那山壁之中。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "你必须想办法把它砸开。";
+		mes "要取出那宝藏，你肯定需要一场猛烈的大爆炸。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "你可以试试鞭炮。";
+		mes "当然，你需要很多很多，至少需要 ^FF0000200 个鞭炮^000000";
+		set StPatrick2008,1;
+		close;
+	}
+	else if (StPatrick2008 == 1) {
+		mes "[小妖精奥莱利]";
+		mes "今天天气真不错啊。";
+		mes "你找到我的财宝了吗，找到了吗？";
+		mes "我藏东西的地方可没那么容易撬开。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "你可以试试鞭炮。";
+		mes "当然，你需要很多很多，至少需要 ^FF0000200 个鞭炮^000000";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "要是你实在拿不到，我也能理解。";
+		close;
+	}
+	else if (StPatrick2008 == 2) {
+		mes "[小妖精奥莱利]";
+		mes "哦，欢迎回来！";
+		mes "谢谢你替我找回财宝！";
+		mes "我的感激无以言表！";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "我太高兴了，";
+		mes "我马上就开酿我的酒";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "看来今年那些蛇又回来了，又想偷走我的财宝。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "那些蛇带着我族人的钱币，必须受到惩罚。";
+		mes "不过你一路奔波辛苦了，我非常感谢。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "等你歇歇腿，再来找我，我们再说说";
+		close2;
+		set StPatrick2008,3;
+    		getexp 200000,70000;
+		delitem 7721,1;
+		end;
+	}
+	else if (StPatrick2008 == 3) {
+		mes "[小妖精奥莱利]";
+		mes "啊，希望你已经休息好了？";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "谢谢你再次前来。";
+		mes "那些蛇带着我族人的钱币，必须受到惩罚。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "如果你把那些可恶的蛇所带的不义之财带给我，我会慷慨地分你一些我著名的酒";
+		next;
+		mes "还有，如果你找到我族人的宝物，请把那些钱币带给我，别让那些蛇拿到。";
+		set StPatrick2008,4;
+		close;
+	}
+	else if (StPatrick2008 == 4) {
+		mes "[小妖精奥莱利]";
+		mes "那些蛇带着太多我族人的钱币，我把我的酒按品脱送出，作为归还它们的奖赏。";
+		next;
+		mes "[小妖精奥莱利]";
+		mes "你交来 ^0000FF1 枚金币^000000、^0000FF5 枚银币^000000 或 ^0000FF10 枚铜币^000000，我就奖你一壶麦酒。";
+		mes "对这不义之财来说，算是公道的赏金。";
+		mes "那么，你带来了哪种钱币？";
+		next;
+		switch(select("铜币:银币:金币:退出。")) {
+		case 1:
+			mes "[小妖精奥莱利]";
+			mes "谢谢。这是你的麦酒~";
+			if (countitem(7915) >= 10) {
+				getitem 12135,1; 
+				delitem 7915,10;
+			}
+			close;
+		case 2:
+			mes "[小妖精奥莱利]";
+			mes "谢谢。这是你的麦酒~";
+			if (countitem(7916) >= 5) {
+				getitem 12135,1; 
+				delitem 7916,5;
+			}
+			close;
+		case 3:
+			mes "[小妖精奥莱利]";
+			mes "谢谢。这是你的麦酒~";
+			if (countitem(7720) >= 1) {
+				getitem 12135,1; 
+				delitem 7720,1;
+			}
+			close;
+		case 4:
+			mes "[小妖精奥莱利]";
+			mes "你交来 ^0000FF1 枚金币^000000、^0000FF5 枚银币^000000 或 ^0000FF10 枚铜币^000000，我就奖你一壶麦酒。";
+			close;
+		}
+	}
+}
+
+mjolnir_01,272,363,4	script	石头#08StPattysDay	-1,1,1,{
+	end;
+
+OnTouch:
+	if (StPatrick2008 < 1) {
+		mes "- 你发现了一堆覆着泥土的石头。-";
+		close;
+	}
+	if (StPatrick2008 == 1) {
+		mes "- 你发现了一堆覆着泥土的石头。-";
+		next;
+		if (countitem(12018) < 200) {
+			mes "石头纹丝不动。";
+			mes "也许奥莱利知道怎么挪动这些石头。";
+			close;
+		}
+		else {
+			if (select("使用鞭炮。:无视") == 2) {
+				close;
+			}
+			mes "你在石堆下面埋了 200 个鞭炮。";
+			mes "你点燃了引线。";
+			next;
+			mes "*轰！*";
+			specialeffect2 EF_LORD;
+			next;
+			mes "待尘土与烟雾散去后，";
+			mes "你在石缝与泥土之间发现了一个箱子。";
+			mes "这箱子里一定装着奥莱利的宝贝。";
+			mes "把箱子带去给奥莱利吧。";
+			close2;
+			set StPatrick2008,2;
+			delitem 12018,200;
+			getitem 7721,1;
+		}
+	}
+	end;
+}
+
+function	script	F_08stpattyseventbox	{
+	switch(rand(1,6)) {
+	case 1:
+		getitem 7915,1;
+		end;
+	case 2:
+		getitem 7915,1;
+		getitem 7916,1;
+		getitem 7720,1;
+		end;
+	case 3:
+		getitem 7720,1;
+		end;
+	case 4:
+		getitem 7915,1;
+		getitem 7916,1;
+		end;
+	case 5:
+		getitem 7916,2;
+		end;
+	case 6:
+		getitem 7915,2;
+		end;
+	}
+}
+
+
+// Snake Spawns.
+ein_fild03,0,0	monster	青蛇	1841,3,0,0,0
+ein_fild04,0,0	monster	青蛇	1841,3,0,0,0
+ein_fild06,0,0	monster	青蛇	1841,3,0,0,0
+ein_fild07,0,0	monster	青蛇	1841,3,0,0,0
+ein_fild08,0,0	monster	青蛇	1841,3,0,0,0
+ein_fild09,0,0	monster	青蛇	1841,3,0,0,0
+ein_fild10,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild00,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild01,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild02,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild03,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild04,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild05,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild07,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild08,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild09,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild10,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild11,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild12,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild13,0,0	monster	青蛇	1841,3,0,0,0
+gef_fild14,0,0	monster	青蛇	1841,3,0,0,0
+glast_01,0,0	monster	青蛇	1841,3,0,0,0
+lhz_fild01,0,0	monster	青蛇	1841,3,0,0,0
+lhz_fild02,0,0	monster	青蛇	1841,3,0,0,0
+lhz_fild03,0,0	monster	青蛇	1841,3,0,0,0
+mjolnir_01,0,0	monster	青蛇	1841,3,0,0,0
+mjolnir_02,0,0	monster	青蛇	1841,3,0,0,0
+mjolnir_03,0,0	monster	青蛇	1841,3,0,0,0
+mjolnir_04,0,0	monster	青蛇	1841,3,0,0,0
+mjolnir_05,0,0	monster	青蛇	1841,3,0,0,0
+mjolnir_06,0,0	monster	青蛇	1841,3,0,0,0
+mjolnir_07,0,0	monster	青蛇	1841,3,0,0,0
+mjolnir_08,0,0	monster	青蛇	1841,3,0,0,0
+mjolnir_09,0,0	monster	青蛇	1841,3,0,0,0
+mjolnir_10,0,0	monster	青蛇	1841,3,0,0,0
+mjolnir_11,0,0	monster	青蛇	1841,3,0,0,0
+mjolnir_12,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild01,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild02,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild03,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild04,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild05,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild06,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild07,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild08,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild09,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild10,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild11,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild12,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild13,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild14,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild03,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild16,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild17,0,0	monster	青蛇	1841,3,0,0,0
+moc_fild18,0,0	monster	青蛇	1841,3,0,0,0
+pay_fild01,0,0	monster	青蛇	1841,3,0,0,0
+pay_fild02,0,0	monster	青蛇	1841,3,0,0,0
+pay_fild03,0,0	monster	青蛇	1841,3,0,0,0
+pay_fild04,0,0	monster	青蛇	1841,3,0,0,0
+pay_fild05,0,0	monster	青蛇	1841,3,0,0,0
+pay_fild06,0,0	monster	青蛇	1841,3,0,0,0
+pay_fild07,0,0	monster	青蛇	1841,3,0,0,0
+pay_fild08,0,0	monster	青蛇	1841,3,0,0,0
+pay_fild09,0,0	monster	青蛇	1841,3,0,0,0
+pay_fild10,0,0	monster	青蛇	1841,3,0,0,0
+pay_fild11,0,0	monster	青蛇	1841,3,0,0,0
+prt_fild00,0,0	monster	青蛇	1841,3,0,0,0
+prt_fild01,0,0	monster	青蛇	1841,3,0,0,0
+prt_fild02,0,0	monster	青蛇	1841,3,0,0,0
+prt_fild03,0,0	monster	青蛇	1841,3,0,0,0
+prt_fild04,0,0	monster	青蛇	1841,3,0,0,0
+prt_fild05,0,0	monster	青蛇	1841,3,0,0,0
+prt_fild06,0,0	monster	青蛇	1841,3,0,0,0
+prt_fild07,0,0	monster	青蛇	1841,3,0,0,0
+prt_fild08,0,0	monster	青蛇	1841,3,0,0,0
+prt_fild09,0,0	monster	青蛇	1841,3,0,0,0
+prt_fild10,0,0	monster	青蛇	1841,3,0,0,0
+prt_fild11,0,0	monster	青蛇	1841,3,0,0,0
+xmas_fild01,0,0	monster	青蛇	1841,3,0,0,0
+cmd_fild01,0,0	monster	青蛇	1841,3,0,0,0
+cmd_fild02,0,0	monster	青蛇	1841,3,0,0,0
+cmd_fild03,0,0	monster	青蛇	1841,3,0,0,0
+cmd_fild04,0,0	monster	青蛇	1841,3,0,0,0
+cmd_fild05,0,0	monster	青蛇	1841,3,0,0,0
+cmd_fild06,0,0	monster	青蛇	1841,3,0,0,0
+cmd_fild07,0,0	monster	青蛇	1841,3,0,0,0
+cmd_fild08,0,0	monster	青蛇	1841,3,0,0,0
+cmd_fild09,0,0	monster	青蛇	1841,3,0,0,0
+yuno_fild01,0,0	monster	青蛇	1841,3,0,0,0
+yuno_fild02,0,0	monster	青蛇	1841,3,0,0,0
+yuno_fild03,0,0	monster	青蛇	1841,3,0,0,0
+yuno_fild04,0,0	monster	青蛇	1841,3,0,0,0
+yuno_fild05,0,0	monster	青蛇	1841,3,0,0,0
+yuno_fild06,0,0	monster	青蛇	1841,3,0,0,0
+yuno_fild07,0,0	monster	青蛇	1841,3,0,0,0
+yuno_fild08,0,0	monster	青蛇	1841,3,0,0,0
+yuno_fild09,0,0	monster	青蛇	1841,3,0,0,0
+yuno_fild11,0,0	monster	青蛇	1841,3,0,0,0
+yuno_fild12,0,0	monster	青蛇	1841,3,0,0,0
+ama_fild01,0,0	monster	青蛇	1841,3,0,0,0
+gon_fild01,0,0	monster	青蛇	1841,3,0,0,0
+um_fild01,0,0	monster	青蛇	1841,3,0,0,0
+um_fild02,0,0	monster	青蛇	1841,3,0,0,0
+um_fild03,0,0	monster	青蛇	1841,3,0,0,0
+um_fild04,0,0	monster	青蛇	1841,3,0,0,0
+nif_fild01,0,0	monster	青蛇	1841,3,0,0,0
+nif_fild02,0,0,0,0 	monster	青蛇	1841,3,0,0,0
+lou_fild01,0,0	monster	青蛇	1841,3,0,0,0
+hu_fild01,0,0	monster	青蛇	1841,3,0,0,0
+hu_fild04,0,0	monster	青蛇	1841,3,0,0,0
+hu_fild05,0,0	monster	青蛇	1841,3,0,0,0
+hu_fild07,0,0	monster	青蛇	1841,3,0,0,0
+ein_fild03,0,0	monster	毒蛇	1842,3,0,0,0
+ein_fild04,0,0	monster	毒蛇	1842,3,0,0,0
+ein_fild06,0,0	monster	毒蛇	1842,3,0,0,0
+ein_fild07,0,0	monster	毒蛇	1842,3,0,0,0
+ein_fild08,0,0	monster	毒蛇	1842,3,0,0,0
+ein_fild09,0,0	monster	毒蛇	1842,3,0,0,0
+ein_fild10,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild00,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild02,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild03,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild04,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild05,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild07,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild08,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild09,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild10,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild11,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild12,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild13,0,0	monster	毒蛇	1842,3,0,0,0
+gef_fild14,0,0	monster	毒蛇	1842,3,0,0,0
+glast_01,0,0	monster	毒蛇	1842,3,0,0,0
+lhz_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+lhz_fild02,0,0	monster	毒蛇	1842,3,0,0,0
+lhz_fild03,0,0	monster	毒蛇	1842,3,0,0,0
+mjolnir_01,0,0	monster	毒蛇	1842,3,0,0,0
+mjolnir_02,0,0	monster	毒蛇	1842,3,0,0,0
+mjolnir_03,0,0	monster	毒蛇	1842,3,0,0,0
+mjolnir_04,0,0	monster	毒蛇	1842,3,0,0,0
+mjolnir_05,0,0	monster	毒蛇	1842,3,0,0,0
+mjolnir_06,0,0	monster	毒蛇	1842,3,0,0,0
+mjolnir_07,0,0	monster	毒蛇	1842,3,0,0,0
+mjolnir_08,0,0	monster	毒蛇	1842,3,0,0,0
+mjolnir_09,0,0	monster	毒蛇	1842,3,0,0,0
+mjolnir_10,0,0	monster	毒蛇	1842,3,0,0,0
+mjolnir_11,0,0	monster	毒蛇	1842,3,0,0,0
+mjolnir_12,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild02,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild03,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild04,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild05,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild06,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild07,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild08,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild09,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild10,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild11,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild12,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild13,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild14,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild03,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild16,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild17,0,0	monster	毒蛇	1842,3,0,0,0
+moc_fild18,0,0	monster	毒蛇	1842,3,0,0,0
+pay_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+pay_fild02,0,0	monster	毒蛇	1842,3,0,0,0
+pay_fild03,0,0	monster	毒蛇	1842,3,0,0,0
+pay_fild04,0,0	monster	毒蛇	1842,3,0,0,0
+pay_fild05,0,0	monster	毒蛇	1842,3,0,0,0
+pay_fild06,0,0	monster	毒蛇	1842,3,0,0,0
+pay_fild07,0,0	monster	毒蛇	1842,3,0,0,0
+pay_fild08,0,0	monster	毒蛇	1842,3,0,0,0
+pay_fild09,0,0	monster	毒蛇	1842,3,0,0,0
+pay_fild10,0,0	monster	毒蛇	1842,3,0,0,0
+pay_fild11,0,0	monster	毒蛇	1842,3,0,0,0
+prt_fild00,0,0	monster	毒蛇	1842,3,0,0,0
+prt_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+prt_fild02,0,0	monster	毒蛇	1842,3,0,0,0
+prt_fild03,0,0	monster	毒蛇	1842,3,0,0,0
+prt_fild04,0,0	monster	毒蛇	1842,3,0,0,0
+prt_fild05,0,0	monster	毒蛇	1842,3,0,0,0
+prt_fild06,0,0	monster	毒蛇	1842,3,0,0,0
+prt_fild07,0,0	monster	毒蛇	1842,3,0,0,0
+prt_fild08,0,0	monster	毒蛇	1842,3,0,0,0
+prt_fild09,0,0	monster	毒蛇	1842,3,0,0,0
+prt_fild10,0,0	monster	毒蛇	1842,3,0,0,0
+prt_fild11,0,0	monster	毒蛇	1842,3,0,0,0
+xmas_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+cmd_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+cmd_fild02,0,0	monster	毒蛇	1842,3,0,0,0
+cmd_fild03,0,0	monster	毒蛇	1842,3,0,0,0
+cmd_fild04,0,0	monster	毒蛇	1842,3,0,0,0
+cmd_fild05,0,0	monster	毒蛇	1842,3,0,0,0
+cmd_fild06,0,0	monster	毒蛇	1842,3,0,0,0
+cmd_fild07,0,0	monster	毒蛇	1842,3,0,0,0
+cmd_fild08,0,0	monster	毒蛇	1842,3,0,0,0
+cmd_fild09,0,0	monster	毒蛇	1842,3,0,0,0
+yuno_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+yuno_fild02,0,0	monster	毒蛇	1842,3,0,0,0
+yuno_fild03,0,0	monster	毒蛇	1842,3,0,0,0
+yuno_fild04,0,0	monster	毒蛇	1842,3,0,0,0
+yuno_fild05,0,0	monster	毒蛇	1842,3,0,0,0
+yuno_fild06,0,0	monster	毒蛇	1842,3,0,0,0
+yuno_fild07,0,0	monster	毒蛇	1842,3,0,0,0
+yuno_fild08,0,0	monster	毒蛇	1842,3,0,0,0
+yuno_fild09,0,0	monster	毒蛇	1842,3,0,0,0
+yuno_fild11,0,0	monster	毒蛇	1842,3,0,0,0
+yuno_fild12,0,0	monster	毒蛇	1842,3,0,0,0
+ama_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+gon_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+um_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+um_fild02,0,0	monster	毒蛇	1842,3,0,0,0
+um_fild03,0,0	monster	毒蛇	1842,3,0,0,0
+um_fild04,0,0	monster	毒蛇	1842,3,0,0,0
+nif_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+nif_fild02,0,0,0,0 	monster	毒蛇	1842,3,0,0,0
+lou_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+hu_fild01,0,0	monster	毒蛇	1842,3,0,0,0
+hu_fild04,0,0	monster	毒蛇	1842,3,0,0,0
+hu_fild05,0,0	monster	毒蛇	1842,3,0,0,0
+hu_fild07,0,0	monster	毒蛇	1842,3,0,0,0
+ein_fild03,0,0	monster	黑蛇	1843,2,0,0,0
+ein_fild04,0,0	monster	黑蛇	1843,2,0,0,0
+ein_fild06,0,0	monster	黑蛇	1843,2,0,0,0
+ein_fild07,0,0	monster	黑蛇	1843,2,0,0,0
+ein_fild08,0,0	monster	黑蛇	1843,2,0,0,0
+ein_fild09,0,0	monster	黑蛇	1843,2,0,0,0
+ein_fild10,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild00,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild02,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild03,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild04,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild05,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild07,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild08,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild09,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild10,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild11,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild12,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild13,0,0	monster	黑蛇	1843,2,0,0,0
+gef_fild14,0,0	monster	黑蛇	1843,2,0,0,0
+glast_01,0,0	monster	黑蛇	1843,2,0,0,0
+lhz_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+lhz_fild02,0,0	monster	黑蛇	1843,2,0,0,0
+lhz_fild03,0,0	monster	黑蛇	1843,2,0,0,0
+mjolnir_01,0,0	monster	黑蛇	1843,2,0,0,0
+mjolnir_02,0,0	monster	黑蛇	1843,2,0,0,0
+mjolnir_03,0,0	monster	黑蛇	1843,2,0,0,0
+mjolnir_04,0,0	monster	黑蛇	1843,2,0,0,0
+mjolnir_05,0,0	monster	黑蛇	1843,2,0,0,0
+mjolnir_06,0,0	monster	黑蛇	1843,2,0,0,0
+mjolnir_07,0,0	monster	黑蛇	1843,2,0,0,0
+mjolnir_08,0,0	monster	黑蛇	1843,2,0,0,0
+mjolnir_09,0,0	monster	黑蛇	1843,2,0,0,0
+mjolnir_10,0,0	monster	黑蛇	1843,2,0,0,0
+mjolnir_11,0,0	monster	黑蛇	1843,2,0,0,0
+mjolnir_12,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild02,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild03,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild04,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild05,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild06,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild07,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild08,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild09,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild10,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild11,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild12,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild13,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild14,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild03,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild16,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild17,0,0	monster	黑蛇	1843,2,0,0,0
+moc_fild18,0,0	monster	黑蛇	1843,2,0,0,0
+pay_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+pay_fild02,0,0	monster	黑蛇	1843,2,0,0,0
+pay_fild03,0,0	monster	黑蛇	1843,2,0,0,0
+pay_fild04,0,0	monster	黑蛇	1843,2,0,0,0
+pay_fild05,0,0	monster	黑蛇	1843,2,0,0,0
+pay_fild06,0,0	monster	黑蛇	1843,2,0,0,0
+pay_fild07,0,0	monster	黑蛇	1843,2,0,0,0
+pay_fild08,0,0	monster	黑蛇	1843,2,0,0,0
+pay_fild09,0,0	monster	黑蛇	1843,2,0,0,0
+pay_fild10,0,0	monster	黑蛇	1843,2,0,0,0
+pay_fild11,0,0	monster	黑蛇	1843,2,0,0,0
+prt_fild00,0,0	monster	黑蛇	1843,2,0,0,0
+prt_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+prt_fild02,0,0	monster	黑蛇	1843,2,0,0,0
+prt_fild03,0,0	monster	黑蛇	1843,2,0,0,0
+prt_fild04,0,0	monster	黑蛇	1843,2,0,0,0
+prt_fild05,0,0	monster	黑蛇	1843,2,0,0,0
+prt_fild06,0,0	monster	黑蛇	1843,2,0,0,0
+prt_fild07,0,0	monster	黑蛇	1843,2,0,0,0
+prt_fild08,0,0	monster	黑蛇	1843,2,0,0,0
+prt_fild09,0,0	monster	黑蛇	1843,2,0,0,0
+prt_fild10,0,0	monster	黑蛇	1843,2,0,0,0
+prt_fild11,0,0	monster	黑蛇	1843,2,0,0,0
+xmas_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+cmd_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+cmd_fild02,0,0	monster	黑蛇	1843,2,0,0,0
+cmd_fild03,0,0	monster	黑蛇	1843,2,0,0,0
+cmd_fild04,0,0	monster	黑蛇	1843,2,0,0,0
+cmd_fild05,0,0	monster	黑蛇	1843,2,0,0,0
+cmd_fild06,0,0	monster	黑蛇	1843,2,0,0,0
+cmd_fild07,0,0	monster	黑蛇	1843,2,0,0,0
+cmd_fild08,0,0	monster	黑蛇	1843,2,0,0,0
+cmd_fild09,0,0	monster	黑蛇	1843,2,0,0,0
+yuno_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+yuno_fild02,0,0	monster	黑蛇	1843,2,0,0,0
+yuno_fild03,0,0	monster	黑蛇	1843,2,0,0,0
+yuno_fild04,0,0	monster	黑蛇	1843,2,0,0,0
+yuno_fild05,0,0	monster	黑蛇	1843,2,0,0,0
+yuno_fild06,0,0	monster	黑蛇	1843,2,0,0,0
+yuno_fild07,0,0	monster	黑蛇	1843,2,0,0,0
+yuno_fild08,0,0	monster	黑蛇	1843,2,0,0,0
+yuno_fild09,0,0	monster	黑蛇	1843,2,0,0,0
+yuno_fild11,0,0	monster	黑蛇	1843,2,0,0,0
+yuno_fild12,0,0	monster	黑蛇	1843,2,0,0,0
+ama_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+gon_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+um_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+um_fild02,0,0	monster	黑蛇	1843,2,0,0,0
+um_fild03,0,0	monster	黑蛇	1843,2,0,0,0
+um_fild04,0,0	monster	黑蛇	1843,2,0,0,0
+nif_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+nif_fild02,0,0,0,0 	monster	黑蛇	1843,2,0,0,0
+lou_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+hu_fild01,0,0	monster	黑蛇	1843,2,0,0,0
+hu_fild04,0,0	monster	黑蛇	1843,2,0,0,0
+hu_fild05,0,0	monster	黑蛇	1843,2,0,0,0
+hu_fild07,0,0	monster	黑蛇	1843,2,0,0,0
+ein_fild03,0,0	monster	蛇女伊丝	1844,1,0,0,0
+ein_fild04,0,0	monster	蛇女伊丝	1844,1,0,0,0
+ein_fild06,0,0	monster	蛇女伊丝	1844,1,0,0,0
+ein_fild07,0,0	monster	蛇女伊丝	1844,1,0,0,0
+ein_fild08,0,0	monster	蛇女伊丝	1844,1,0,0,0
+ein_fild09,0,0	monster	蛇女伊丝	1844,1,0,0,0
+ein_fild10,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild00,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild03,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild04,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild05,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild07,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild08,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild09,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild10,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild11,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild11,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild13,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gef_fild14,0,0	monster	蛇女伊丝	1844,1,0,0,0
+glast_01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+lhz_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+lhz_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+lhz_fild03,0,0	monster	蛇女伊丝	1844,1,0,0,0
+mjolnir_01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+mjolnir_01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+mjolnir_03,0,0	monster	蛇女伊丝	1844,1,0,0,0
+mjolnir_04,0,0	monster	蛇女伊丝	1844,1,0,0,0
+mjolnir_05,0,0	monster	蛇女伊丝	1844,1,0,0,0
+mjolnir_06,0,0	monster	蛇女伊丝	1844,1,0,0,0
+mjolnir_07,0,0	monster	蛇女伊丝	1844,1,0,0,0
+mjolnir_08,0,0	monster	蛇女伊丝	1844,1,0,0,0
+mjolnir_09,0,0	monster	蛇女伊丝	1844,1,0,0,0
+mjolnir_10,0,0	monster	蛇女伊丝	1844,1,0,0,0
+mjolnir_11,0,0	monster	蛇女伊丝	1844,1,0,0,0
+mjolnir_11,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild03,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild04,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild05,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild06,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild07,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild08,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild09,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild10,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild11,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild11,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild13,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild14,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild03,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild16,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild17,0,0	monster	蛇女伊丝	1844,1,0,0,0
+moc_fild18,0,0	monster	蛇女伊丝	1844,1,0,0,0
+pay_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+pay_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+pay_fild03,0,0	monster	蛇女伊丝	1844,1,0,0,0
+pay_fild04,0,0	monster	蛇女伊丝	1844,1,0,0,0
+pay_fild05,0,0	monster	蛇女伊丝	1844,1,0,0,0
+pay_fild06,0,0	monster	蛇女伊丝	1844,1,0,0,0
+pay_fild07,0,0	monster	蛇女伊丝	1844,1,0,0,0
+pay_fild08,0,0	monster	蛇女伊丝	1844,1,0,0,0
+pay_fild09,0,0	monster	蛇女伊丝	1844,1,0,0,0
+pay_fild10,0,0	monster	蛇女伊丝	1844,1,0,0,0
+pay_fild11,0,0	monster	蛇女伊丝	1844,1,0,0,0
+prt_fild00,0,0	monster	蛇女伊丝	1844,1,0,0,0
+prt_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+prt_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+prt_fild03,0,0	monster	蛇女伊丝	1844,1,0,0,0
+prt_fild04,0,0	monster	蛇女伊丝	1844,1,0,0,0
+prt_fild05,0,0	monster	蛇女伊丝	1844,1,0,0,0
+prt_fild06,0,0	monster	蛇女伊丝	1844,1,0,0,0
+prt_fild07,0,0	monster	蛇女伊丝	1844,1,0,0,0
+prt_fild08,0,0	monster	蛇女伊丝	1844,1,0,0,0
+prt_fild09,0,0	monster	蛇女伊丝	1844,1,0,0,0
+prt_fild10,0,0	monster	蛇女伊丝	1844,1,0,0,0
+prt_fild11,0,0	monster	蛇女伊丝	1844,1,0,0,0
+xmas_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+cmd_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+cmd_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+cmd_fild03,0,0	monster	蛇女伊丝	1844,1,0,0,0
+cmd_fild04,0,0	monster	蛇女伊丝	1844,1,0,0,0
+cmd_fild05,0,0	monster	蛇女伊丝	1844,1,0,0,0
+cmd_fild06,0,0	monster	蛇女伊丝	1844,1,0,0,0
+cmd_fild07,0,0	monster	蛇女伊丝	1844,1,0,0,0
+cmd_fild08,0,0	monster	蛇女伊丝	1844,1,0,0,0
+cmd_fild09,0,0	monster	蛇女伊丝	1844,1,0,0,0
+yuno_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+yuno_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+yuno_fild03,0,0	monster	蛇女伊丝	1844,1,0,0,0
+yuno_fild04,0,0	monster	蛇女伊丝	1844,1,0,0,0
+yuno_fild05,0,0	monster	蛇女伊丝	1844,1,0,0,0
+yuno_fild06,0,0	monster	蛇女伊丝	1844,1,0,0,0
+yuno_fild07,0,0	monster	蛇女伊丝	1844,1,0,0,0
+yuno_fild08,0,0	monster	蛇女伊丝	1844,1,0,0,0
+yuno_fild09,0,0	monster	蛇女伊丝	1844,1,0,0,0
+yuno_fild11,0,0	monster	蛇女伊丝	1844,1,0,0,0
+yuno_fild11,0,0	monster	蛇女伊丝	1844,1,0,0,0
+ama_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+gon_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+um_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+um_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+um_fild03,0,0	monster	蛇女伊丝	1844,1,0,0,0
+um_fild04,0,0	monster	蛇女伊丝	1844,1,0,0,0
+nif_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+nif_fild01,0,0,0,0 	monster	蛇女伊丝	1844,1,0,0,0
+lou_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+hu_fild01,0,0	monster	蛇女伊丝	1844,1,0,0,0
+hu_fild04,0,0	monster	蛇女伊丝	1844,1,0,0,0
+hu_fild05,0,0	monster	蛇女伊丝	1844,1,0,0,0
+hu_fild07,0,0	monster	蛇女伊丝	1844,1,0,0,0

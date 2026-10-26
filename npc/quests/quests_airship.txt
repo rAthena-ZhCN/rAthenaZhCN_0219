@@ -1,0 +1,3354 @@
+//===== rAthena Script =======================================
+//= Airship Related Quests
+//===== By: ==================================================
+//= Samuray22
+//===== Current Version: =====================================
+//= 3.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Quest from the airplane to einbroch and einbech.
+//= Reward: -Free Ticket for Flyship.
+//=		-Free System to Repair.
+//= Quest about how work the airship
+//= Reward: -Base Experience 200,000
+//=		-Job Experience 10,000
+//===== Additional Comments: =================================
+//= 1.0 First Beta.
+//= 1.1 Added Heart Fragment quest. [SinSloth]
+//= 1.2 Change the laboratory code text to make it easier to
+//=	 understand. [SinSloth]
+//= 1.3 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 1.3a Corrected a Typo error ";;". [Samuray22]
+//= 1.4 Fixed incorrect variable type used. [L0ne_W0lf]
+//= 1.5 Replaced effect numerics with constants. [Samuray22]
+//= 1.6 Changed some variables to scope instead of permanent char. [brianluau]
+//= 1.7 some minor cleanup updates to the airship invasion. [L0ne_W0lf]
+//= 1.8 Added quest log entries for:
+//=	 - Airship Ticket Quest
+//=	 - How the Airship Works
+//= 1.9 Fixed missing checks for How the Airship Works quest. [Joseph]
+//= 2.0 Updated RE/Pre-RE EXP. [Euphy]
+//= 2.1 Updated Airship Ticket Quest with some missing parts. [Euphy]
+//= 3.0 Updated to match official version & clean-up. [Capuche]
+//============================================================
+
+// Airship Ticket Quest :: ein_tre
+//============================================================
+
+//----------------------------------------------------------------------------
+// Kain Himere
+//----------------------------------------------------------------------------
+airplane,47,61,7	script	船员	4_M_ZONDAOYAJI,{
+	mes "[凯恩·希梅尔]";
+	if (kain_ticket == 4) {
+		mes "Ah...";
+		mes "就是这个！";
+		next;
+		mes "[凯恩·希梅尔]";
+		mes "几天前，有位客人";
+		mes "从艾音布罗克来，把这东西落在";
+		mes "飞空艇上了。他打电话告诉我们";
+		mes "说他没法回来";
+		mes "取走它，不过他正住在";
+		mes "艾音布罗克的旅馆里。";
+		next;
+		mes "[凯恩·希梅尔]";
+		mes "我知道这个请求";
+		mes "有点奇怪，不过你能";
+		mes "把这个送去给艾音布罗克旅馆的";
+		mes "德弗鲁·阿克吗？";
+		mes "当然，等你回来";
+		mes "我会好好答谢你。";
+		next;
+		setquest 2079;
+		kain_ticket = 5;
+		mes "^3355FF凯恩·希梅尔给了你一个小箱子。^000000";
+		close;
+	}
+	mes "欢迎搭乘飞空艇~";
+	mes "如果有任何疑问";
+	mes "或需要帮助，请";
+	mes "随时来找我，或者";
+	mes "找其他任何一位船员。";
+	next;
+	if (kain_ticket == 0 || kain_ticket == 1) {
+		switch(select("关于飞空艇……", "留下意见" )) {
+		case 1:
+			mes "[凯恩·希梅尔]";
+			kain_ticket++;
+			if (kain_ticket == 1) {
+				mes "这是你第一次搭乘吗？";
+				mes "你紧张我明白。我来这里工作之前，也有同样的感觉。不过，这";
+				mes "飞空艇真是了不起。科学能做到这种地步，实在令人惊叹……";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "我听开发飞空艇";
+				mes "技术的学者们说，";
+				mes "只要一小块";
+				mes "依美乐之心";
+				mes "就能产生动力，";
+				mes "让这艘船飞起来。真不可思议……";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "你知道吗，科学研究";
+				mes "让黑森林共和国的生活";
+				mes "变得更轻松、更";
+				mes "舒适，就像魔法研究";
+				mes "改变了卢恩-米德加尔特王国的生活一样。";
+			}
+			else {
+				mes "你还想多听一些";
+				mes "飞空艇的事？嗯……";
+				mes "我知道的其实";
+				mes "也不多，让我想想……";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "嗯，有传闻说这艘";
+				mes "飞空艇是由一家很大的";
+				mes "公司运营的。据说";
+				mes "他们把手伸进了";
+				mes "各种各样的生意里。";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "既然飞空艇是我们的";
+				mes "国家交通工具，";
+				mes "上头的人一定赚了";
+				mes "一大笔钱。真是离谱。";
+			}
+			close;
+		case 2:
+			mes "[凯恩·希梅尔]";
+			mes "你想留下";
+			mes "对我们服务的";
+			mes "意见吗？告诉我";
+			mes "内容，我会转达";
+			mes "给上级。";
+			mes "若要取消，请按“0”。";
+			next;
+			input .@comment$;
+			if (.@comment$ == "kafra") {
+				mes "[凯恩·希梅尔]";
+				mes "卡、卡普拉……？";
+				mes "嗯，也许我还是";
+				mes "别把这个报上去了……";
+				emotion ET_FRET;
+			} else if (.@comment$ == "0") {
+				mes "[凯恩·希梅尔]";
+				mes "啊，不过，如果你有";
+				mes "对我们服务有益的";
+				mes "批评，随时可以来";
+				mes "找我提意见。";
+			} else {
+				mes "["+strcharinfo(0)+"]";
+				mes .@comment$+".";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "Hmmmm...";
+				mes "我明白了。那么，我会";
+				mes "尽快把您的意见";
+				mes "转达给";
+				mes "上级。";
+				mes "非常感谢。";
+			}
+			close;
+		}
+	} else if (kain_ticket == 2 || kain_ticket == 3) {
+		if (kain_ticket == 3) {
+			mes "[凯恩·希梅尔]";
+			mes "哦，你好吗？";
+			mes "不介意的话，";
+			mes "请问你这次";
+			mes "是要去哪里？";
+		} else {
+			select("关于飞空艇……");
+			next;
+			mes "[凯恩·希梅尔]";
+			mes "你真的很想知道飞空艇的一切，对吧？抱歉，我知道的也不比刚才告诉你的多多少。";
+			next;
+			mes "[凯恩·希梅尔]";
+			mes "如果你想知道更多，大概得去朱诺学习成为贤者，自己研究飞空艇了……";
+			next;
+			mes "[凯恩·希梅尔]";
+			mes "^666666*呜呜……*^000000";
+			mes "打、打扰一下……";
+			mes "^666666*抽泣*^000000";
+			next;
+			switch(select("搞什么……？:怎么了？")) {
+			case 1:
+				mes "[凯恩·希梅尔]";
+				mes "对、对不起……";
+				mes "刚才真是";
+				mes "unprofessional.";
+				mes "祝、祝您一路平安，";
+				mes "还有，谢、谢谢您";
+				mes "搭乘飞空艇！^333333*呜……*^000000";
+				close;
+			case 2:
+				mes "[凯恩·希梅尔]";
+				mes "抱歉，这事说来";
+				mes "话长。而且，";
+				mes "你也不会明白的……";
+				next;
+				select("我有时间听长话。");
+				mes "[凯恩·希梅尔]";
+				mes "好吧，我也正好";
+				mes "把心里的话说出来。我想";
+				mes "一切都始于我年轻时";
+				mes "住在艾音贝赫的时候。";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "那时候，我性子很";
+				mes "急躁，脾气也坏，";
+				mes "但做矿工的日子";
+				mes "总能让我心里平静。和朋友们一起拿着矿镐拼命。是啊……";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "那也许很危险，";
+				mes "但那是踏实、辛苦又诚实的工作。你知道吗，那些通往艾音贝赫矿脉的矿坑";
+				mes "曾经是我们小镇的一切。可是后来，事情变了……";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "工厂一家接一家";
+				mes "冒出来，所有矿石都被";
+				mes "运到了烟囱日夜";
+				mes "不停冒烟的地方。更多矿工";
+				mes "开始去工厂干活，矿坑也变得越来越冷清……";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "可我太喜欢";
+				mes "采矿了，于是一直干着，";
+				mes "直到那场事故。";
+				mes "现在我的右臂已经";
+				mes "没法像从前那样使了，只好";
+				mes "辞掉矿工的工作……";
+				next;
+				select("听到这个我很难过。");
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "Yeah...";
+				mes "事发之后我";
+				mes "彻底垮了。那大概是";
+				mes "我一生中最";
+				mes "黑暗的几年。";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "我无法想象";
+				mes "没有采矿的生活，";
+				mes "对人生也";
+				mes "完全失去了热情。我开始酗酒，也把家人拒之门外。我真是太蠢了……";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "我至今仍不敢相信";
+				mes "那些日子里妻子";
+				mes "有多么支持我。即使我";
+				mes "跌到谷底，她也努力安慰我，甚至出去工作";
+				mes "养活我和我们的女儿。";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "^666666*呜呜……*^000000 直到她";
+				mes "去世，我才明白";
+				mes "她受了多少苦。更糟的是，";
+				mes "我不得不把女儿托付给邻居，";
+				mes "自己出去找工作……";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "我花了几年时间";
+				mes "在各个城镇间流浪，过着";
+				mes "相当放荡的生活，直到重新振作起来。最后，我成了飞空艇的船员。";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "我失去家人";
+				mes "已经二十年了。";
+				mes "我女儿就在";
+				mes "某个地方，可我甚至";
+				mes "记不起她的名字……";
+				next;
+				select("你试过去找她吗？");
+				mes "[凯恩·希梅尔]";
+				mes "我去过邻居";
+				mes "以前住的房子，";
+				mes "但他们多年前就搬走了。";
+				mes "我完全不知道她";
+				mes "会在哪里。但我没资格见她。我是个糟糕的父亲！";
+				next;
+				mes "[凯恩·希梅尔]";
+				mes "^666666*呜……*^000000 抱歉让你";
+				mes "听了这些，";
+				mes "不过真的很感谢";
+				mes "你愿意听我说。那么，";
+				mes "告诉我，你要去哪里？";
+				break;
+			}
+		}
+		next;
+		switch(select("艾音布罗克:朱诺")) {
+		case 1:
+			kain_ticket = 4;
+			mes "["+strcharinfo(0)+"]";
+			mes "我要去";
+			mes "艾音布罗克。";
+			next;
+			mes "[凯恩·希梅尔]";
+			mes "太好了……！";
+			mes "如果不介意，";
+			mes "能帮我";
+			mes "一个忙吗？先让我";
+			mes "找找那个包裹……";
+			close;
+		case 2:
+			kain_ticket = 3;
+			mes "["+strcharinfo(0)+"]";
+			mes "我要去";
+			mes "朱诺。";
+			next;
+			mes "[凯恩·希梅尔]";
+			mes "啊，原来如此……";
+			mes "本来有件东西";
+			mes "要送去艾音布罗克。";
+			mes "总之，祝你旅途愉快。";
+			mes "对了，谢谢你听我说。";
+			close;
+		}
+	} else if (kain_ticket > 4 && kain_ticket < 10) {
+		mes "[凯恩·希梅尔]";
+		mes "哦，你好！";
+		mes "现在有点";
+		mes "忙乱，不过";
+		mes "你送到——哦！";
+		mes "等等，不好意思！先生——！";
+		next;
+		mes "^3355FF凯恩似乎太";
+		mes "忙了，现在";
+		mes "没空跟你说话……^000000";
+	} else if (kain_ticket == 10) {
+		mes "[凯恩·希梅尔]";
+		mes "欢迎回到飞空艇。那个小箱子你顺利送到了吗？";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "不，很遗憾。我到的时候他不在。这个箱子还给你吧。";
+		next;
+		mes "[凯恩·希梅尔]";
+		mes "Oh...";
+		mes "现在该怎么办呢？算了，抱歉让你这么费心。";
+		next;
+		switch(select("随口提起《矿工之歌》", "从容地提起塔尔莎")) {
+		case 1:
+			mes "["+ strcharinfo(0) +"]";
+			mes "说到箱子和";
+			mes "送货的事，";
+			mes "你听说过";
+			mes "那首《矿工之歌》吗？";
+			next;
+			mes "[凯恩·希梅尔]";
+			mes "《矿工之歌》……";
+			mes "我怀念在矿坑";
+			mes "干活时唱那首歌。";
+			mes "其实我年轻时";
+			mes "经常唱。";
+			next;
+			mes "[凯恩·希梅尔]";
+			mes "我想我唱得";
+			mes "太多了，连我的小";
+			mes "女儿都跟着我一起唱~";
+			mes "（可她叫什么名字来着？！）";
+			break;
+		case 2:
+			mes "["+ strcharinfo(0) +"]";
+			mes "^333333*咳咳*";
+			mes "*咳——塔尔莎——咳*^000000";
+			next;
+			mes "[凯恩·希梅尔]";
+			mes "什么……？";
+			mes "等等。塔、塔尔莎……";
+			mes "为什么这个名字";
+			mes "让我觉得有印象？";
+			break;
+		}
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "你知道吗……";
+		mes "我在艾音布罗克遇到一个小女孩";
+		mes "她正在唱《矿工";
+		mes "之歌》。她的母亲";
+		mes "塔尔莎教过她这首歌。";
+		next;
+		mes "[凯恩·希梅尔]";
+		mes "有意思。不过一般来说，";
+		mes "只有矿工才会";
+		mes "知道那首歌。这和我";
+		mes "有什么关系吗？";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "这个小女孩的母亲塔尔莎，是从";
+		mes "她父亲那里学来的，他可能";
+		mes "也是矿工。但他多年前";
+		mes "神秘地失踪了……";
+		next;
+		mes "[凯恩·希梅尔]";
+		mes "可怜的孩子……！";
+		mes "她父亲就";
+		mes "这样丢下她？！怎么，";
+		mes "她简直就像……";
+		next;
+		mes "[凯恩·希梅尔]";
+		mes "Wait...";
+		mes "老天啊……";
+		mes "教塔尔莎";
+		mes "那首歌的矿工，";
+		mes "也许就是……^0000FF我^000000。";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "不过眼下还不能";
+		mes "太确定。你有没有";
+		mes "什么东西能证明";
+		mes "你是塔尔莎的父亲？";
+		next;
+		mes "[凯恩·希梅尔]";
+		mes "Ehhmmm...";
+		mes "我离开镇子之前，把";
+		mes "一些东西埋在";
+		mes "艾音贝赫的一棵树下。我记不清具体位置了，但我妻子的";
+		mes "日记应该在那里。";
+		next;
+		mes "[凯恩·希梅尔]";
+		mes "我妻子把一切都";
+		mes "记在日记里，";
+		mes "她应该写了足够多";
+		mes "关于我们女儿的事，足够让我们判断这个塔尔莎是不是我失散多年的女儿。";
+		next;
+		mes "[凯恩·希梅尔]";
+		mes "我现在实在离不开";
+		mes "飞空艇，所以你能帮我";
+		mes "找到那本日记，";
+		mes "看看塔尔莎到底是不是和我有关系吗？我会很感激";
+		mes "你能帮我这个忙……";
+		changequest 2081,2082;
+		kain_ticket = 11;
+	} else if (kain_ticket == 11 || kain_ticket == 12) {
+		mes "[凯恩·希梅尔]";
+		mes "你能找到我妻子的";
+		mes "日记，看看塔尔莎";
+		mes "是不是我的女儿吗？那";
+		mes "本日记应该埋在";
+		mes "艾音贝赫的一棵树下。";
+	} else if (kain_ticket == 13) {
+		mes "^3355FF你最好完成凯恩的";
+		mes "请求，找到他妻子的";
+		mes "日记，并在再次和他";
+		mes "说话之前去确认塔尔莎的事。^000000";
+	} else if (kain_ticket == 14) {
+		if (countitem(7276) == 1) {// Picture_Letter
+			mes "^3355FF你把他妻子的";
+			mes "日记交给凯恩，并告诉";
+			mes "他，你得知塔尔莎";
+			mes "确实是他的女儿，而且";
+			mes "她婚姻幸福，是";
+			mes "艾音布罗克的一位发明家。^000000";
+			next;
+			mes "^3355FF凯恩眼中";
+			mes "涌出泪水，整个";
+			mes "身体都因无法抑制的";
+			mes "喜悦而颤抖。";
+			next;
+			mes "[凯恩·希梅尔]";
+			mes "她一定";
+			mes "吃了很多苦……";
+			mes "但她一点也";
+			mes "不恨我。";
+			next;
+			mes "[凯恩·希梅尔]";
+			mes "拉谢尔？";
+			mes "你能看见我吗？";
+			mes "我真的可以这么";
+			mes "幸福吗？对不起，";
+			mes "我的爱人……^666666*呜……*^000000";
+			next;
+			mes "[凯恩·希梅尔]";
+			mes "谢谢你所有的";
+			mes "帮助，年轻人。";
+			mes "请收下这个，";
+			mes "作为我的谢礼。";
+			next;
+			mes "[凯恩·希梅尔]";
+			mes "我知道这不算";
+			mes "什么，但请你";
+			mes "明白，这已经是";
+			mes "我能给你的全部了。";
+			mes "愿神保佑你，";
+			mes "感谢你为我做的一切~";
+			completequest 2085;
+			kain_ticket = 15;
+			delitem 7276,1;// Picture_Letter
+			getitem 7311,4;// Free_Flying_Ship_Ticket
+		} else {
+			mes "^3355FF嗯……";
+			mes "你最好";
+			mes "带着收到的";
+			mes "涂鸦信";
+			mes "去找凯恩。^000000";
+		}
+	} else {
+		mes "[凯恩·希梅尔]";
+		mes "哦，你最近";
+		mes "怎么样，我的朋友？";
+		mes "我过得很好，";
+		mes "尤其是你帮我";
+		mes "找到了女儿之后。";
+		mes "旅途愉快~";
+	}
+	close;
+}
+
+//----------------------------------------------------------------------------
+// Empty Room 201
+//----------------------------------------------------------------------------
+ein_in01,227,279,3	script	#door_ein	-1,5,5,{
+OnTouch_:
+	if (kain_ticket == 5) {
+		kain_ticket = 6;
+		mes "["+strcharinfo(0)+"]";
+		mes "不好意思……？";
+		next;
+		mes "^3355FF这里没人！^000000";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "应该就是这个房间……";
+		mes "可他到底在哪儿？";
+		mes "如果他不回来，";
+		mes "我也不能就这么把东西放这儿。";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "算了……";
+		mes "看来我只好";
+		mes "把这东西";
+		mes "带回飞空艇";
+		mes "还给凯恩。";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "既然到了艾音布罗克，";
+		mes "我就顺便在附近";
+		mes "看看，说不定能";
+		mes "找到什么有趣的线索。不过，我还是忍不住想起凯恩";
+		mes "希梅尔失散多年的女儿……";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Maybe...";
+		mes "说不定……";
+		mes "我能找到一些";
+		mes "关于她下落的";
+		mes "线索。她也许";
+		mes "就住在艾音布罗克。";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "就这么办吧。";
+		mes "也许现在";
+		mes "就去。把它当成";
+		mes "一个任务之类的。";
+		mes "嗯，这办法不错。";
+		close;
+	}
+}
+
+//----------------------------------------------------------------------------
+// Elle Cherno
+//----------------------------------------------------------------------------
+ein_in01,261,241,3	script	艾尔·切尔诺	4_F_KID2,3,3,{
+OnTouch_:
+	mes "[艾儿·齐尔诺]";
+	mes "开工吧，";
+	mes "无所畏惧的同伴们~！";
+	mes "全力以赴！什么都";
+	mes "挡不住我们，伙计们~！";
+	if (kain_ticket == 6) {
+		next;
+		switch(select("你好！:你在唱什么？")) {
+		case 1:
+			mes "[艾儿·齐尔诺]";
+			mes "开工吧，";
+			mes "无所畏惧的同伴们~！";
+			mes "全力以赴！什么都";
+			mes "挡不住我们，伙计们~！";
+			next;
+			mes "[艾儿·齐尔诺]";
+			mes "我超喜欢这首歌！";
+			mes "尤其是我大声喊";
+			mes "“同伴们！”同伴们！";
+			close;
+		case 2:
+			changequest 2079,2080;
+			kain_ticket = 7;
+			mes "[艾儿·齐尔诺]";
+			mes "这个……？";
+			mes "是《矿工之歌》！";
+			mes "是我妈妈教我的，";
+			mes "她经常唱。不过爸爸";
+			mes "说太吵了。";
+			next;
+			mes "[艾儿·齐尔诺]";
+			mes "嗯，我妈妈唱";
+			mes "这首歌的时候，有时看起来";
+			mes "有点难过。今天她唱了几句，好像快哭了。^666666*啊！*^000000 等等，你";
+			mes "觉得我妈妈是不是生病了？";
+			next;
+			mes "[艾儿·齐尔诺]";
+			mes "糟了，糟了……";
+			mes "喂，你能帮我去看看";
+			mes "我妈妈好不好吗？";
+			mes "求你了？我家就在";
+			mes "旅馆后面，如果她不舒服，";
+			mes "一定要告诉我，好吗？";
+			close;
+		}
+	} else if (kain_ticket == 7) {
+		next;
+		mes "[艾儿·齐尔诺]";
+		mes "我家就在";
+		mes "旅馆后面。";
+		mes "你能去那里";
+		mes "帮我看看妈妈吗？";
+		mes "求你了？我很担心……";
+	} else if (kain_ticket == 13) {
+		next;
+		if (checkweight(7276,1) == 0) {
+			mes "[艾儿·齐尔诺]";
+			mes "喂！我有东西";
+			mes "要给你，可你东西";
+			mes "太多啦！喂，";
+			mes "你晚点再来，";
+			mes "我再给你，好吗？";
+			close;
+		}
+		mes "[艾儿·齐尔诺]";
+		mes "你见到我爷爷了？";
+		mes "你是他的朋友，对吧？";
+		mes "你、你待会儿";
+		mes "还会去见他吗？因为……因为……";
+		next;
+		mes "[艾儿·齐尔诺]";
+		mes "这是我给他做的。";
+		mes "我不会写字，";
+		mes "但我给爷爷做了封信，";
+		mes "已经尽力了。你能";
+		mes "答应帮我交给";
+		mes "他吗？求求你啦？";
+		next;
+		mes "^3355FF艾儿把一封";
+		mes "画满涂鸦的信";
+		mes "放进了你手里。^000000";
+		changequest 2084,2085;
+		kain_ticket = 14;
+		getitem 7276, 1; //Picture_Letter
+	}
+	close;
+}
+
+//----------------------------------------------------------------------------
+// Theo Cherno
+//----------------------------------------------------------------------------
+ein_in01,123,94,1	script	西奥·切尔诺	4_M_REPAIR,{
+	if (kain_ticket == 7) {
+		callfunc "F_Cherno";
+		kain_ticket = 8;
+	} else if (kain_ticket > 7 && kain_ticket < 10) {
+		mes "[提奥·齐尔诺]";
+		mes "你真是好心，";
+		mes "冒险者。世上";
+		mes "应该多一些";
+		mes "像你这样的人。";
+	} else if (kain_ticket > 9 && kain_ticket < 13) {
+		mes "[提奥·齐尔诺]";
+		mes "你确定";
+		mes "能找到";
+		mes "塔尔莎的父亲吗？哦，";
+		mes "你一定是神派来的！";
+	} else if (kain_ticket > 12) {
+		emotion ET_SMILE;
+		mes "[提奥·齐尔诺]";
+		mes "我为妻子";
+		mes "感到高兴。我……";
+		mes "我不知道怎么";
+		mes "才能报答你……";
+	} else {
+		mes "[西奥·切尔诺]";
+		mes "Hmm...";
+		mes "能晚点再谈吗？";
+		mes "我现在正忙着";
+		mes "修这个东西，";
+		mes "就在此刻。";
+	}
+	close;
+}
+
+//----------------------------------------------------------------------------
+// Tarsha Cherno
+//----------------------------------------------------------------------------
+ein_in01,125,99,3	script	塔莎·切尔诺	4_F_EINWOMAN,{
+	if (kain_ticket == 7) {
+		callfunc "F_Cherno";
+		kain_ticket = 8;
+	} else if (kain_ticket == 8) {
+		mes "[塔尔莎·切尔诺]";
+		mes "虽然这些装置";
+		mes "大多不值得一提，";
+		mes "但我们花了很多";
+		mes "心血来发明这些";
+		mes "机器。所以，当然，";
+		mes "它们让我们很自豪~";
+		next;
+		mes "[塔尔莎·切尔诺]";
+		mes "也许这些小小的";
+		mes "项目并不算";
+		mes "多么了不起，但我喜欢";
+		mes "把它们当作通往";
+		mes "未来成就的垫脚石。";
+	} else if (kain_ticket == 9) {
+		mes "["+strcharinfo(0)+"]";
+		mes "打扰一下，夫人，";
+		mes "您的肩上";
+		mes "有一道疤。是";
+		mes "意外留下的吗？";
+		next;
+		mes "[塔尔莎·切尔诺]";
+		mes "哦，那是多年";
+		mes "以前留下的";
+		mes "旧伤。我想";
+		mes "我那时给";
+		mes "养育我的人";
+		mes "添了不少麻烦……";
+		next;
+		mes "[塔尔莎·切尔诺]";
+		mes "你看，我很小的时候";
+		mes "就失去了父母。";
+		mes "直到后来我才明白";
+		mes "我是被养父母养大的。";
+		mes "我得知我的生母";
+		mes "很久以前就去世了……";
+		next;
+		mes "[塔尔莎·切尔诺]";
+		mes "至于我的父亲，";
+		mes "没人知道他";
+		mes "是死是活。我尽力";
+		mes "想让养父母开心，";
+		mes "但结果我却太过叛逆，让他们伤心。";
+		next;
+		mes "[塔尔莎·切尔诺]";
+		mes "我最终离开了家，";
+		mes "学习机械。我在";
+		mes "学校里遇见了丈夫，";
+		mes "那是我一生中";
+		mes "最美好的事~";
+		emotion ET_THROB, getnpcid(0, "西奥·切尔诺");
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "对了，我听说";
+		mes "你女儿在唱";
+		mes "某种叫矿工之歌的歌。";
+		mes "是你教她的吗？";
+		emotion ET_HUK;
+		emotion ET_HUK, getnpcid(0, "西奥·切尔诺");
+		next;
+		mes "[西奥·切尔诺]";
+		mes "我不明白";
+		mes "小艾尔为什么喜欢";
+		mes "这么粗犷的汉子歌。";
+		mes "这全是你的错，塔尔莎！";
+		emotion ET_ANGER, getnpcid(0, "西奥·切尔诺");
+		next;
+		emotion ET_SMILE;
+		mes "[塔尔莎·切尔诺]";
+		mes "哦~呵呵呵呵~";
+		mes "我那时太小，";
+		mes "记不太清了，";
+		mes "但我确信我的";
+		mes "生父很喜欢那首歌。";
+		next;
+		mes "[塔尔莎·切尔诺]";
+		mes "我几乎不记得";
+		mes "他以前会一边";
+		mes "打扫我们的旧房子一边唱它。";
+		mes "是的，我不记得";
+		mes "他长什么样了，但他";
+		mes "曾经一定当过矿工。";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "矿工……？";
+		mes "（等等，那个船员，";
+		mes "凯恩·希梅雷！他是";
+		mes "一个矿工，失去了";
+		mes "女儿！也许……）";
+		next;
+		emotion ET_SURPRISE;
+		mes "["+ strcharinfo(0) +"]";
+		mes "...!";
+		mes "Tarsha...";
+		mes "你的父亲";
+		mes "也许还活着！";
+		next;
+		mes "[塔尔莎·切尔诺]";
+		mes "...What?";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "我得去查证";
+		mes "一件事，但";
+		mes "希望我能很快";
+		mes "带着好消息回来！";
+		changequest 2080,2081;
+		kain_ticket = 10;
+	} else if (kain_ticket == 10 || kain_ticket == 11) {
+		mes "["+strcharinfo(0)+"]";
+		mes "塔尔莎，我认识一个人，";
+		mes "他可能是你的父亲！";
+		mes "等等我，希望";
+		mes "我很快就能带回好消息！";
+	} else if (kain_ticket == 12) {
+		mes "[塔尔莎·切尔诺]";
+		mes "哦，欢迎回来~";
+		mes "那么你";
+		mes "带回好消息了吗？";
+		emotion ET_SMILE;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "哦，是的。";
+		mes "说起来，";
+		mes "请允许我……检查";
+		mes "一件事……";
+		next;
+		switch(select("查看她的脖子。:查看她的手。:查看她的腿。:查看她的额头。")) {
+		case 1:
+			mes "^3355FF糟了……";
+			mes "那里什么都没有！^000000";
+			next;
+			mes "[西奥·切尔诺]";
+			mes "太、太无礼了！";
+			mes "竟然摸别人";
+			mes "家的妻子……？！";
+			next;
+			specialeffect2 EF_PIERCE;
+			percentheal -10,0;
+			close;
+		case 2:
+			mes "^3355FF你发现";
+			mes "她手上有一块";
+			mes "烫伤的痕迹。^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "就是这个！";
+			mes "塔尔莎，你";
+			mes "父亲的名字是";
+			mes "凯恩·希梅雷，他";
+			mes "正在飞空艇上";
+			mes "做一名船员。";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "他很想念你，";
+			mes "非常想，希望";
+			mes "你能原谅";
+			mes "他……总有一天。";
+			next;
+			mes "[塔尔莎·切尔诺]";
+			mes "Are...";
+			mes "你说真的？";
+			mes "我父亲还活着！";
+			mes "哦，感谢神！太";
+			mes "感谢你了，冒险者！";
+			next;
+			mes "[塔尔莎·切尔诺]";
+			mes "...........";
+			mes "那么就是说，我的";
+			mes "真名应该是";
+			mes "^3131FF塔尔莎·希梅雷·切尔诺^000000。";
+			next;
+			mes "[塔尔莎·切尔诺]";
+			mes "哦，你真是上天派来的！";
+			mes "我永远不会忘记";
+			mes "你为我做的事！我一定要";
+			mes "想办法报答你！可我会的";
+			mes "只有机械工程……";
+			next;
+			mes "[塔尔莎·切尔诺]";
+			mes "哦，我知道~";
+			mes "如果你有";
+			mes "^3131FF损坏的装备^000000，";
+			mes "我可以用这个";
+			mes "专家修理师修好它。它";
+			mes "是我们最好的发明之一！";
+			next;
+			mes "[塔尔莎·切尔诺]";
+			mes "我得马上去见";
+			mes "我的生父！";
+			mes "我想念他很多年了！";
+			mes "再次感谢你";
+			mes "为我们家所做的一切~";
+			next;
+			mes "[塔尔莎·切尔诺]";
+			mes "哦，还有，在你";
+			mes "走之前，能再去";
+			mes "看看艾尔吗？她有事";
+			mes "想跟你说。";
+			changequest 2083,2084;
+			kain_ticket = 13;
+			close;
+		case 3:
+			mes "^3355FF糟了……";
+			mes "那里什么都没有！^000000";
+			next;
+			mes "[西奥·切尔诺]";
+			mes "太、太无礼了！";
+			mes "竟然摸别人";
+			mes "家的妻子……？！";
+			next;
+			specialeffect2 EF_PIERCE;
+			percentheal -20,0;
+			close;
+		case 4:
+			mes "^3355FF糟了……";
+			mes "那里什么都没有！^000000";
+			next;
+			mes "[西奥·切尔诺]";
+			mes "太、太无礼了！";
+			mes "竟然摸别人";
+			mes "家的妻子……？！";
+			next;
+			specialeffect2 EF_PIERCE;
+			percentheal -10,0;
+			close;
+		}
+	} else if (kain_ticket > 12) {
+		mes "[塔尔莎·切尔诺]";
+		mes "在你们为我做了";
+		mes "这么多之后，我";
+		mes "感觉很好。我想再次";
+		mes "感谢你，善良的冒险者。";
+	} else {
+		mes "[塔尔莎·切尔诺]";
+		mes "很抱歉，";
+		mes "我们很忙。";
+		mes "请见谅~";
+	}
+	close;
+}
+
+ein_in01,127,94,3	script	#exp_ein	HIDDEN_NPC,{ end; }
+
+function	script	F_Cherno	{
+	specialeffect EF_COMBOATTACK1,AREA,"#exp_ein";
+	mes "^33355F*砰*^000000";
+	next;
+	specialeffect EF_COMBOATTACK2,AREA,"#exp_ein";
+	mes "^33355F*砰*^000000";
+	next;
+	specialeffect EF_COMBOATTACK3,AREA,"#exp_ein";
+	mes "^33355F*砰*^000000";
+	next;
+	specialeffect EF_POISONATTACK,AREA,"#exp_ein";
+	mes "^33355F*哗啦！*^000000";
+	mes ".....";
+	emotion ET_SWEAT, getnpcid(0, "西奥·切尔诺");
+	emotion ET_SWEAT, getnpcid(0, "塔莎·切尔诺");
+	next;
+	mes "[西奥·切尔诺]";
+	mes "Honey...";
+	mes "我想这个接合处";
+	mes "有严重的";
+	mes "结构问题。";
+	next;
+	mes "[塔尔莎·切尔诺]";
+	mes "一定是";
+	mes "没接对。";
+	mes "也许我们……嗯。";
+	next;
+	mes "[西奥·切尔诺]";
+	mes "好吧，今天就";
+	mes "到此为止，明天";
+	mes "再完成这个，好吗？";
+	next;
+	emotion ET_QUESTION, getnpcid(0, "塔莎·切尔诺");
+	mes "[塔尔莎·切尔诺]";
+	mes "哦~";
+	mes "我不知道我们";
+	mes "有客人。你好，";
+	mes "你还好吗？";
+	mes "你对我们的";
+	mes "发明有兴趣吗？";
+	next;
+	switch(select("没什么。:你的女儿让我来拜访你。")) {
+	case 1:
+		mes "[西奥·切尔诺]";
+		mes "哦，是的，我妻子和";
+		mes "我一直忙着";
+		mes "做研究。";
+		mes "我们想发明新的";
+		mes "东西，让生活更美好。";
+		mes "这就是我们做的事……";
+		close;
+	case 2:
+		emotion ET_SWEAT, getnpcid(0, "塔莎·切尔诺");
+		emotion ET_SWEAT, getnpcid(0, "西奥·切尔诺");
+		mes "[塔尔莎·切尔诺]";
+		mes "哈哈哈，艾尔？";
+		mes "我们的女儿";
+		mes "为什么会";
+		mes "派你来看我们？";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "这个，呃……";
+		mes "她想让我";
+		mes "来看看她妈妈";
+		mes "是不是病了或难过";
+		mes "...Or something?";
+		next;
+		emotion ET_HUK, getnpcid(0, "塔莎·切尔诺");
+		mes "[塔尔莎·切尔诺]";
+		mes "我的天……！";
+		mes "她在想什么？";
+		mes "很抱歉因为这种";
+		mes "愚蠢的误会";
+		mes "麻烦你，冒险者！";
+		next;
+		mes "[西奥·切尔诺]";
+		mes "可是等等，亲爱的。";
+		mes "我同意，有时候";
+		mes "你看起来像是世上";
+		mes "最孤独的人，望着";
+		mes "窗外，眼神";
+		mes "说不出的惆怅。";
+		next;
+		mes "[塔尔莎·切尔诺]";
+		mes "哦，我一定";
+		mes "让家人";
+		mes "很担心了。但";
+		mes "你别担心，亲爱的。";
+		mes "我对你和艾尔";
+		mes "很满足。";
+		next;
+		mes "[塔尔莎·切尔诺]";
+		mes "And...";
+		mes "善良的冒险者，";
+		mes "能请教你的名字吗？";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "我叫，";
+		mes ""+ strcharinfo(0) +".";
+		emotion ET_SMILE;
+		next;
+		mes "[塔尔莎·切尔诺]";
+		mes ""+ strcharinfo(0) +"，";
+		mes "感谢你";
+		mes "对我们的关心。你";
+		mes "愿意留下来喝杯茶吗？";
+		next;
+		mes "[塔尔莎·切尔诺]";
+		mes "那么，请见谅";
+		mes "这里很乱。我丈夫和我";
+		mes "是机械工程师，专注";
+		mes "于制造能";
+		mes "降低采矿风险的机器。";
+		next;
+		mes "[塔尔莎·切尔诺]";
+		mes "因为我们在家工作，";
+		mes "难免会有些机器";
+		mes "零件散落在";
+		mes "各处。无论如何，我们";
+		mes "希望造出能让矿工生活更安全的机器……";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Ah...";
+		mes "所以这就是";
+		mes "你家里有";
+		mes "这么多有趣";
+		mes "东西的原因……";
+		next;
+		mes "^3355FF你开始";
+		mes "环顾";
+		mes "切尔诺家。^000000";
+		return;
+	}
+}
+
+//----------------------------------------------------------------------------
+// Unidentified Machine
+//----------------------------------------------------------------------------
+ein_in01,122,103,5	script	不明装置#ein	HIDDEN_NPC,{
+	mes "^3355FF这是……";
+	mes "这是一台";
+	mes "样子很奇怪的";
+	mes "机器。它";
+	mes "真的能做什么吗？^000000";
+	close;
+}
+
+//----------------------------------------------------------------------------
+// Mirror
+//----------------------------------------------------------------------------
+ein_in01,121,99,3	script	镜子#ein	HIDDEN_NPC,{
+	if (kain_ticket == 8) {
+		mes "^3355FF这是一面镜子。";
+		mes "所以当然，";
+		mes "你第一眼";
+		mes "看到的就是自己。";
+		next;
+		.@r = rand(1,5);
+		if (.@r == 5) {
+			mes "["+strcharinfo(0)+"]";
+			mes "哇哦……";
+			mes "我看起来还挺不错。";
+			mes "不，等等。真的，真的";
+			mes "很不错。所以这就是";
+			mes "我在餐厅能受到";
+			mes "这么好待遇的原因……";
+		} else if (Sex == SEX_MALE) {
+			switch(.@r) {
+			case 1:
+				mes "["+strcharinfo(0)+"]";
+				mes "Man...";
+				mes "我都不知道";
+				mes "我长得这么";
+				mes "好看！哦耶~";
+				break;
+			case 2:
+				mes "["+strcharinfo(0)+"]";
+				mes "Whoa...";
+				mes "所以这就是";
+				mes "女士们总看着";
+				mes "我。我就是行走的";
+				mes "免费肌肉秀！";
+				break;
+			case 3:
+				mes "["+strcharinfo(0)+"]";
+				mes "可惜我不能转职";
+				mes "成男模。";
+				mes "显然，我会是，职业";
+				mes "等级 87 什么的。";
+				mes "天啊，我真美……";
+				break;
+			case 4:
+				mes "["+strcharinfo(0)+"]";
+				mes "这是我的倒影？！";
+				mes "没人能长得这么";
+				mes "好看，除非有特别的";
+				mes "效果！我是说，这对";
+				mes "其他人太不公平了……";
+				break;
+			}
+		} else {
+			switch(.@r) {
+			case 1:
+				mes "["+strcharinfo(0)+"]";
+				mes "哦。哇。";
+				mes "我从没发现……";
+				mes "一切都是";
+				mes "完美的比例！";
+				mes "难怪大家";
+				mes "都想和我组队~";
+				break;
+			case 2:
+				mes "["+strcharinfo(0)+"]";
+				mes "哦，天哪~";
+				mes "我怎么能";
+				mes "不化妆就这么好看？";
+				mes "这、这对其他";
+				mes "女孩太不公平了……哇，这真的是我吗？";
+				break;
+			case 3:
+				mes "["+strcharinfo(0)+"]";
+				mes "我疯了吗？";
+				mes "镜子里那个";
+				mes "女孩真的是我……？";
+				mes "我怎么一直没发现";
+				mes "我这么美？";
+				break;
+			case 4:
+				mes "["+strcharinfo(0)+"]";
+				mes "So...";
+				mes "你对这面镜子";
+				mes "做了什么？因为我";
+				mes "看着自己的倒影，";
+				mes "却好像找不到";
+				mes "身材有任何缺点……";
+				next;
+				emotion ET_PROFUSELY_SWEAT, getnpcid(0, "塔莎·切尔诺");
+				mes "[塔尔莎·切尔诺]";
+				mes "Actually...";
+				mes "那不是我们的";
+				mes "发明。";
+				mes "只是一面普通的镜子……";
+				next;
+				mes "["+strcharinfo(0)+"]";
+				mes "哎呀……！";
+				mes "你确定？";
+				mes "因为我的脸看起来";
+				mes "完美得离谱！而且";
+				mes "简直可以说，我太性感了！";
+				break;
+			}
+		}
+		next;
+		mes "^3355FF享受完那";
+		mes "小小的顿悟后，你";
+		mes "放回镜子时，看到了";
+		mes "塔尔莎脖颈上";
+		mes "的倒影。^000000";
+		next;
+		mes "^3355FF你凑近";
+		mes "细看，发现";
+		mes "她的脖子周围";
+		mes "有一道奇怪的印记。那会是什么意思呢？^000000";
+		kain_ticket = 9;
+		close;
+	}
+}
+
+//----------------------------------------------------------------------------
+// Tree from Einbech
+//----------------------------------------------------------------------------
+einbech,45,113,5	script	树#t1-1::Tree	HIDDEN_NPC,{
+	if (kain_ticket == 11) {
+		mes "^3355FF你在树下";
+		mes "蹲下身，";
+		mes "开始挖";
+		mes "开地面。^000000";
+		next;
+		mes "...";
+		mes "......";
+		next;
+		mes "...";
+		mes "......";
+		mes ".........";
+		next;
+		.@find_diary = rand(1,100);
+		if (.@find_diary > 10) {
+			mes "^3355ff可惜，";
+			mes "你没能";
+			mes "找到任何东西。^000000";
+		} else {
+			mes "^3355FF你找到了一本日记，";
+			mes "它和一些其他物品";
+			mes "一起被凯恩埋在地下。";
+			mes "你打开日记，开始";
+			mes "阅读里面写的内容。^000000";
+			callsub L_Diary;
+			next;
+			mes "...";
+			mes "......";
+			next;
+			mes "^3355FF那是日记的最后一页。你把它收了起来，好带去给 ^3131FF塔尔莎。^000000";
+			changequest 2082,2083;
+			kain_ticket = 12;
+		}
+	} else if (kain_ticket == 12) {
+		mes "^3355FF你打开";
+		mes "日记，";
+		mes "开始阅读……^000000";
+		callsub L_Diary;
+	}
+	else
+		end;
+	close;
+
+L_Diary:
+	next;
+	mes "...";
+	mes "......";
+	next;
+	mes "<日期：OX OX>";
+	mes "^856363我好开心";
+	mes "能和凯恩在一起。";
+	mes "他是个那么诚实、";
+	mes "真诚的人，虽然";
+	mes "他有时很沉默。";
+	next;
+	mes "^856363虽然他对我";
+	mes "是个很好的丈夫，";
+	mes "但我不太擅长";
+	mes "做个主妇。不过我会";
+	mes "为我们俩尽全力。";
+	next;
+	mes "<日期：OX OX>";
+	mes "^856363我做晚饭时";
+	mes "睡着了，把食物";
+	mes "全烧焦了。我怎么";
+	mes "这么粗心？可凯恩";
+	mes "每一口都吃了，即使他";
+	mes "得假装自己喜欢。^000000";
+	next;
+	mes "<日期：OX OX>";
+	mes "^856363我和凯恩很快";
+	mes "就要有孩子了！我好开心，";
+	mes "但有时也有点";
+	mes "担心。不过凯恩总是笑着，";
+	mes "让我安心。^000000";
+	next;
+	mes "<日期：OX OX>";
+	mes "^856363越来越多人";
+	mes "离开矿山，去新";
+	mes "工厂工作，其中很多";
+	mes "是凯恩的朋友。我想";
+	mes "凯恩的自尊很受打击。";
+	mes "我该怎么帮他呢？^000000";
+	next;
+	mes "<日期：OX OX>";
+	mes "^856363我和凯恩现在是";
+	mes "一个漂亮女婴的";
+	mes "骄傲父母。我们给她取名^000000塔尔莎^856363";
+	mes "她有着父亲的眼睛。";
+	mes "我要尽我所能";
+	mes "做她最好的母亲。";
+	next;
+	mes "<日期：OX OX>";
+	mes "^856363塔尔莎第一次";
+	mes "叫我“妈妈”";
+	mes "了！真是奇迹！";
+	mes "这世上我只希望";
+	mes "她能";
+	mes "幸福健康。^000000";
+	next;
+	mes "<日期：OX OX>";
+	mes "^856363凯恩在矿上";
+	mes "出了事故。他们挖矿时，";
+	mes "有毒气体不知怎么";
+	mes "泄漏了。虽然没有";
+	mes "致命，但凯恩的手臂";
+	mes "部分瘫痪了……^000000";
+	next;
+	mes "^856363当医生说";
+	mes "以后甚至可能影响他的记忆时，";
+	mes "他变得非常消沉。";
+	mes "我试着做他最喜欢的";
+	mes "汤，让他好受些。";
+	mes "他笑了，但我看得出来……^000000";
+	next;
+	mes "^856363我看得出他";
+	mes "并不好受。";
+	mes "我希望他很快";
+	mes "好起来。他的绝望";
+	mes "至少和他对工作的";
+	mes "热情一样深。^000000";
+	next;
+	mes "...";
+	mes "......";
+	next;
+	mes "<日期：OX OX>";
+	mes "^856363凯恩的酒";
+	mes "越喝越多。他";
+	mes "回家时常大吵";
+	mes "大闹。他心中";
+	mes "积了太多怒气，他";
+	mes "已经不再是从前的他了……";
+	next;
+	mes "...";
+	mes "......";
+	next;
+	mes "<日期：OX OX>";
+	mes "^856363塔尔莎在厨房";
+	mes "玩耍时被";
+	mes "开水";
+	mes "烫伤了手。虽然她";
+	mes "接受了治疗，但";
+	mes "那块^000000烫伤疤痕^856363会永远留下。^000000";
+	next;
+	mes "^856363我们从";
+	mes "诊所回家后，塔尔莎笑着";
+	mes "玩她的娃娃，就好像";
+	mes "什么都没发生过。可是";
+	mes "不知为什么，我";
+	mes "忍不住一直哭……^000000";
+	next;
+	mes "...";
+	mes "......";
+	next;
+	mes "<日期：OX OX>";
+	mes "^856363凯恩现在";
+	mes "很少回家了。我只好";
+	mes "开始去店里工作，";
+	mes "因为我们的";
+	mes "积蓄都花光了。一边工作";
+	mes "一边照顾家庭，很辛苦。";
+	next;
+	mes "^856363不过，只要看到";
+	mes "塔尔莎的笑容，一切都值得。";
+	mes "但我永远无法停止";
+	mes "担心我可怜的凯恩……";
+	next;
+	mes "...";
+	mes "......";
+	next;
+	mes "<日期：OX OX>";
+	mes "^856363每一天，我都觉得";
+	mes "越来越虚弱，仿佛";
+	mes "每天都在死去一点。";
+	mes "我想告诉凯恩";
+	mes "医生说的那些话，可他";
+	mes "还没准备好接受这个消息……^000000";
+	next;
+	mes "^856363最近塔尔莎总是";
+	mes "哭个不停。我可怜的孩子很";
+	mes "爱她父亲，可他却总是";
+	mes "那么疏远。但有时，";
+	mes "我能看到他对着塔尔莎";
+	mes "悲伤地微笑，哪怕只有一瞬。^000000";
+	return;
+}
+einbech,36,100,5	duplicate(Tree)	树#t1-2	HIDDEN_NPC
+einbech,44,90,5	duplicate(Tree)	树#t1-3	HIDDEN_NPC
+einbech,53,94,5	duplicate(Tree)	树#t1-4	HIDDEN_NPC
+
+//----------------------------------------------------------------------------
+// Expert Repairman
+//----------------------------------------------------------------------------
+ein_in01,117,80,5	script	不明装置#as	HIDDEN_NPC,{
+	if (kain_ticket > 12) {
+		mes "["+strcharinfo(0)+"]";
+		mes "这就是";
+		mes "^FF0000专家修理员^000000？！";
+		mes "看起来它自己";
+		mes "就需要修理……";
+		next;
+		if (select("修理物品", "Cancel.") == 1) {
+			if (getbrokenid(1) == 0) {
+				mes "*哔——*";
+				mes "你身上";
+				mes "没有需要修理的东西。";
+				close;
+			}
+			getinventorylist;
+			for (.@i = 0; .@i < @inventorylist_count; .@i++)
+				.@total = .@total + @inventorylist_attribute[.@i];
+			mes "*哔——*";
+			mes "你一共有";
+			mes "多达" + .@total + "件损坏物品。";
+			mes "要我把它们修好吗？";
+			next;
+			if (select("是", "否") == 1) {
+				getinventorylist;
+				for (.@i = 0; .@i < @inventorylist_count; .@i++)
+					.@total2 = .@total2 + @inventorylist_attribute[.@i];
+				if (.@total == .@total2) {
+					repairall;
+					mes "*哔——*";
+					mes "修理完成。";
+				} else {
+					mes "*哔——*";
+					mes "请再检查";
+					mes "一下你的物品。";
+				}
+				close;
+			}
+		}
+		mes "你选择了停止。";
+	} else {
+		mes "^3355FF这是某种";
+		mes "奇怪的机器。";
+		mes "它的功能与用途";
+		mes "完全无法辨认。^000000";
+	}
+	close;
+}
+
+// "How Does The Airship Work" Quest :: lght_air & lght_ymir
+//============================================================
+
+//----------------------------------------------------------------------------
+// Monsters Attack :: lght_air
+//----------------------------------------------------------------------------
+airplane_01,1,1,0	script	飞艇#airplane02	-1,{
+	end;
+OnEnable:
+	initnpctimer;
+	end;
+OnTimer25000:
+	mapannounce "airplane_01","我们正前往伊斯鲁得。",bc_map,0x00FF00;
+	end;
+OnTimer30000:
+	mapannounce "airplane_01","船长：各位乘客请注意。",bc_map,0x00FF00;
+	end;
+OnTimer34000:
+	mapannounce "airplane_01","船长：一群不明生物正在接近我们。",bc_map,0x00ff00;
+	end;
+OnTimer38000:
+	mapannounce "airplane_01", "船长：甲板上的所有乘客，请到船舱内避难！",bc_map,0x00ff00;
+	hideonnpc "飞空艇职员#airplane01";
+	end;
+OnTimer48000:
+	monster "airplane_01",245,57,"Gremlin",1632,1,"飞艇#airplane02::OnMyMobDead";
+	monster "airplane_01",247,59,"Gremlin",1632,1,"飞艇#airplane02::OnMyMobDead";
+	monster "airplane_01",249,52,"Gremlin",1632,1,"飞艇#airplane02::OnMyMobDead";
+	monster "airplane_01",243,62,"Gremlin",1632,1,"飞艇#airplane02::OnMyMobDead";
+	monster "airplane_01",239,52,"Beholder",1633,1,"飞艇#airplane02::OnMyMobDead";
+	monster "airplane_01",234,56,"Beholder",1633,1,"飞艇#airplane02::OnMyMobDead";
+	monster "airplane_01",227,49,"Beholder",1633,1,"飞艇#airplane02::OnMyMobDead";
+	monster "airplane_01",233,41,"Beholder",1633,1,"飞艇#airplane02::OnMyMobDead";
+	setarray .@x[0], 251,245,234,233;
+	setarray .@y[0],  47, 53, 46, 58;
+	for (.@i = 0; .@i < 4; .@i++) {
+		switch(rand(1,5)) {
+			case 1: monster "airplane_01",.@x[.@i],.@y[.@i],"Drainliar",1111,1,"飞艇#airplane02::OnMyMobDead"; break;
+			case 2: monster "airplane_01",.@x[.@i],.@y[.@i],"Rotar Zairo",1392,1,"飞艇#airplane02::OnMyMobDead"; break;
+			case 3: monster "airplane_01",.@x[.@i],.@y[.@i],"Farmiliar",1005,1,"飞艇#airplane02::OnMyMobDead"; break;
+			case 4: monster "airplane_01",.@x[.@i],.@y[.@i],"Picky",1049,1,"飞艇#airplane02::OnMyMobDead"; break;
+			case 5: monster "airplane_01",.@x[.@i],.@y[.@i],"Steel Chonchon",1042,1,"飞艇#airplane02::OnMyMobDead"; break;
+		}
+	}
+	// it's possible this is an error, but in aegis it stops resetting the random var.
+	setarray .@mob_list[0], 1111, 1392, 1005, 1049, 1042;
+	.@mob_id = .@mob_list[ rand(5) ];
+	monster "airplane_01",243,60,"--ja--",.@mob_id,1,"飞艇#airplane02::OnMyMobDead";
+	monster "airplane_01",228,54,"--ja--",.@mob_id,1,"飞艇#airplane02::OnMyMobDead";
+	monster "airplane_01",232,41,"--ja--",.@mob_id,1,"飞艇#airplane02::OnMyMobDead";
+	end;
+OnTimer48010:
+	monster "airplane_01",238,56,"Gremlin",1632,1,"飞艇#airplane02::OnCaptainMobDead";
+	monster "airplane_01",239,56,"Gremlin",1632,1,"飞艇#airplane02::OnCaptainMobDead";
+	monster "airplane_01",240,50,"Gremlin",1632,1,"飞艇#airplane02::OnCaptainMobDead";
+	monster "airplane_01",241,56,"Gremlin",1632,1,"飞艇#airplane02::OnCaptainMobDead";
+	monster "airplane_01",247,51,"Gremlin",1632,1,"飞艇#airplane02::OnCaptainMobDead";
+	monster "airplane_01",237,44,"Beholder",1633,1,"飞艇#airplane02::OnCaptainMobDead";
+	monster "airplane_01",233,54,"Beholder",1633,1,"飞艇#airplane02::OnCaptainMobDead";
+	monster "airplane_01",237,62,"Beholder",1633,1,"飞艇#airplane02::OnCaptainMobDead";
+	end;
+OnTimer53000:
+	mapannounce "airplane_01", "乘务员：裴陆船长，我们遇到麻烦了！那些怪物正朝螺旋桨去了！",bc_map,0x00FF00;
+	end;
+OnTimer58000:
+	mapannounce "airplane_01", "裴陆船长：什么？！我得去阻止它们！",bc_map,0x70DBDB;
+	end;
+OnTimer63000:
+	hideonnpc "飞艇船长#01";
+	hideoffnpc "飞艇船长#02";
+	end;
+OnTimer68000:
+	emotion ET_ANGER, getnpcid(0, "飞艇船长#02");
+	mapannounce "airplane_01", "裴陆船长：你们这些丑陋的、该死的家伙……滚下我的船！",bc_map,0x70DBDB;
+	end;
+OnTimer73000:
+	mapannounce "airplane_01", "*咔滋……嘎啦……轰！哐当！*",bc_map,0x00FF00;
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom6#airplane";
+	end;
+OnTimer73500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom7#airplane";
+	end;
+OnTimer74000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom8#airplane";
+	end;
+OnTimer74500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom9#airplane";
+	end;
+OnTimer75000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom10#airplane";
+	end;
+OnTimer75500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom6#airplane";
+	end;
+OnTimer76000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom7#airplane";
+	end;
+OnTimer76500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom8#airplane";
+	end;
+OnTimer77000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom9#airplane";
+	end;
+OnTimer77500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom10#airplane";
+	end;
+OnTimer78000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom6#airplane";
+	mapannounce "airplane_01", "工程师：糟了！一号后置引擎出问题了！",bc_map,0x00FF00;
+	end;
+OnTimer79000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom7#airplane";
+	end;
+OnTimer80000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom8#airplane";
+	end;
+OnTimer81000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom9#airplane";
+	end;
+OnTimer82000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom10#airplane";
+	end;
+OnTimer83000:
+	mapannounce "airplane_01", "飞行员：快！先把妇女、老人和孩子转移到安全的地方！快！",bc_map,0x00FF00;
+	end;
+OnTimer84000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom6#airplane";
+	end;
+OnTimer85000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom7#airplane";
+	end;
+OnTimer86000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom8#airplane";
+	end;
+OnTimer87000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom7#airplane";
+	end;
+OnTimer88000:
+	emotion ET_ANGER, getnpcid(0, "飞艇船长#02");
+	mapannounce "airplane_01", "裴陆船长：你们这些肮脏的怪物，竟敢惹这艘船的船长……",bc_map,0x70DBDB;
+	end;
+OnTimer93000:
+	emotion ET_ANGER, getnpcid(0, "飞艇船长#02");
+	mapannounce "airplane_01", "裴陆船长：我会用生命保护这艘船和我的船员！",bc_map,0x70DBDB;
+	end;
+OnTimer98000:
+	emotion ET_HNG, getnpcid(0, "飞艇船长#02");
+	mapannounce "airplane_01", "裴陆船长：看招！特制·出埃及·小丑十三·末日步枪！",bc_map,0x70DBDB;
+	end;
+OnTimer103000:
+	mapannounce "airplane_01", "*砰！砰砰！砰砰！砰砰砰！*",bc_map,0x00FF00;
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer103500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom1#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer104000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom2#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer104500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom3#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer105000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom4#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer105500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom5#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer106000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom0#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer106500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom1#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer107000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom2#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer107500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom4#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer108000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom5#airplane";
+	killmonster "airplane_01","飞艇#airplane02::OnCaptainMobDead";
+	end;
+OnTimer113000:
+	emotion ET_HNG, getnpcid(0, "飞艇船长#02");
+	mapannounce "airplane_01","裴陆船长：肮脏的畜生！别弄坏我的船！",bc_map,0x70DBDB;
+	end;
+OnTimer118000:
+	mapannounce "airplane_01", "*砰！砰砰！砰砰！砰砰砰！*",bc_map,0x00FF00;
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer118500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom6#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer119000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom7#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer119500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom8#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer120000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom9#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer120500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom10#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer121000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom6#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer121500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom7#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer122000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom8#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer122500:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom9#airplane";
+	specialeffect EF_HIT5,AREA,"飞艇船长#02";
+	end;
+OnTimer123000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom8#airplane";
+	mapannounce "airplane_01", "*轰！轰轰！轰轰！轰！*",bc_map,0x00FF00;
+	end;
+OnTimer124000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom9#airplane";
+	end;
+OnTimer125000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom10#airplane";
+	end;
+OnTimer126000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom6#airplane";
+	end;
+OnTimer127000:
+	specialeffect EF_SUI_EXPLOSION,AREA,"boom7#airplane";
+	end;
+OnTimer128000:
+	emotion ET_FRET, getnpcid(0, "飞艇船长#02");
+	mapannounce "airplane_01", "裴陆船长：数量……太多了，应付不过来！",bc_map,0x70DBDB;
+	end;
+OnTimer133000:
+	mapannounce "airplane_01", "飞行员：船长，情况越来越危急了！",bc_map,0x00FF00;
+	end;
+OnTimer138000:
+	emotion ET_SWEAT, getnpcid(0, "飞艇船长#02");
+	mapannounce "airplane_01", "裴陆船长：我们需要一切能得到的帮助！",bc_map,0x70DBDB;
+	end;
+OnTimer143000:
+	emotion ET_SORRY, getnpcid(0, "飞艇船长#02");
+	mapannounce "airplane_01", "裴陆船长：全体船员，还有能战斗的乘客！我们必须把这些怪物赶走！",bc_map,0x70DBDB;
+	end;
+OnTimer148000:
+	hideonnpc "飞艇船长#02";
+	hideoffnpc "飞艇船长#01";
+	end;
+OnTimer400000:
+	killmonster "airplane_01","飞艇#airplane02::OnMyMobDead";
+	end;
+OnTimer405000:
+	mapannounce "airplane_01","怪物威胁已解除。飞空艇正在恢复正常运行。",bc_map,0x00FF00;
+	hideoffnpc "飞空艇职员#airplane01";
+	end;
+OnTimer410000:
+	mapannounce "airplane_01","我们即将抵达伊斯鲁得。",bc_map,"0x00ff00";
+	end;
+OnTimer420000:
+	$@airplanelocation2 = 1;
+	donpcevent "#AirshipWarp-3::OnUnhide";
+	donpcevent "#AirshipWarp-4::OnUnhide";
+	mapannounce "airplane_01","欢迎来到伊斯鲁得。祝您旅途愉快。",bc_map,"0x00ff00";
+	end;
+OnTimer430000:
+	mapannounce "airplane_01","目前已抵达伊斯鲁得，飞空艇即将起飞。",bc_map,"0x00ff00";
+	end;
+OnTimer440000:
+	donpcevent "#AirshipWarp-3::OnHide";
+	donpcevent "#AirshipWarp-4::OnHide";
+	mapannounce "airplane_01","飞空艇即将起飞。下一站是朱诺。",bc_map,"0x70dbdb";
+	end;
+OnTimer465000:
+	mapannounce "airplane_01","我们正前往朱诺。",bc_map,"0x70dbdb";
+	end;
+OnTimer490000:
+	mapannounce "airplane_01","即将抵达朱诺。",bc_map,"0x70dbdb";
+	end;
+OnTimer500000:
+	$@airplanelocation2 = 2;
+	donpcevent "#AirshipWarp-3::OnUnhide";
+	donpcevent "#AirshipWarp-4::OnUnhide";
+	mapannounce "airplane_01","欢迎来到朱诺。祝您旅途愉快。",bc_map,"0x70dbdb";
+	end;
+OnTimer510000:
+	mapannounce "airplane_01","目前已抵达朱诺，飞空艇即将启程。",bc_map,"0x70dbdb";
+	end;
+OnTimer520000:
+	donpcevent "#AirshipWarp-3::OnHide";
+	donpcevent "#AirshipWarp-4::OnHide";
+	mapannounce "airplane_01","飞空艇即将起飞。下一站是拉赫。",bc_map,"0xFF8200";
+	end;
+OnTimer545000:
+	mapannounce "airplane_01","我们正前往拉赫。",bc_map,"0xFF8200";
+	end;
+OnTimer570000:
+	mapannounce "airplane_01","我们即将抵达拉赫。",bc_map,"0xFF8200";
+	end;
+OnTimer580000:
+	$@airplanelocation2 = 0;
+	donpcevent "#AirshipWarp-3::OnUnhide";
+	donpcevent "#AirshipWarp-4::OnUnhide";
+	mapannounce "airplane_01","欢迎来到拉赫。祝您旅途愉快。",bc_map,"0xFF8200";
+	end;
+OnTimer590000:
+	mapannounce "airplane_01","目前已抵达拉赫，飞空艇即将起飞。",bc_map,"0xFF8200";
+	end;
+OnTimer600000:
+	donpcevent "#AirshipWarp-3::OnHide";
+	donpcevent "#AirshipWarp-4::OnHide";
+	mapannounce "airplane_01","飞空艇正在起飞。下一站是伊斯鲁得。",bc_map,"0x00ff00";
+	stopnpctimer;
+	set getvariableofnpc(.moninv, "International_Airship"),2;
+	donpcevent "International_Airship::OnEnable";
+	end;
+
+OnMyMobDead:
+OnCaptainMobDead:
+	end;
+}
+
+airplane_01,246,54,3	script	飞艇船长#02	4_M_REINDEER,{
+	cutin "fly_felrock",2;
+	mes "[裴陆]";
+	mes "我是裴陆，";
+	mes "这艘飞空艇的";
+	mes "船长。去和";
+	mes "那些";
+	mes "小妖精战斗吧！";
+	close2;
+	cutin "",255;
+	end;
+	
+OnInit:
+	hideonnpc "飞艇船长#02";
+	end;
+}
+
+airplane_01,249,50,0	script	boom0#airplane	HIDDEN_WARP_NPC,{ end; }
+airplane_01,239,62,0	script	boom1#airplane	HIDDEN_WARP_NPC,{ end; }
+airplane_01,244,55,0	script	boom2#airplane	HIDDEN_WARP_NPC,{ end; }
+airplane_01,239,50,0	script	boom3#airplane	HIDDEN_WARP_NPC,{ end; }
+airplane_01,245,59,0	script	boom4#airplane	HIDDEN_WARP_NPC,{ end; }
+airplane_01,245,48,0	script	boom5#airplane	HIDDEN_WARP_NPC,{ end; }
+airplane_01,235,39,0	script	boom6#airplane	HIDDEN_WARP_NPC,{ end; }
+airplane_01,252,41,0	script	boom7#airplane	HIDDEN_WARP_NPC,{ end; }
+airplane_01,252,63,0	script	boom8#airplane	HIDDEN_WARP_NPC,{ end; }
+airplane_01,234,65,0	script	boom9#airplane	HIDDEN_WARP_NPC,{ end; }
+airplane_01,227,67,0	script	boom10#airplane	HIDDEN_WARP_NPC,{ end; }
+
+//----------------------------------------------------------------------------
+// Captain Tarlock :: lght_air
+//----------------------------------------------------------------------------
+airplane_01,238,154,3	script	飞艇船长#01	4_M_REINDEER,{
+	cutin "fly_felrock",2;
+	mes "[裴陆]";
+	mes "我是裴陆，";
+	mes "这艘飞空艇的";
+	mes "船长。你";
+	mes "有什么问题吗？";
+	next;
+	if (lght_air >= 0 && lght_air <= 3 || lght_air == 7) {
+		.@question$ = "How does this Airship fly?";
+	} else if (lght_air == 4) {
+		.@question$ = "I handed the letter to Captain Ferlock.";
+	} else if (lght_air == 5) {
+		.@question$ = "You finished reading the letter?";
+	} else if (lght_air == 6) {
+		.@question$ = "Already finished reading?";
+	}
+	switch (select("你、你是驯鹿？！", .@question$, "不，没什么。")) {
+	case 1:
+		mes "[裴陆]";
+		mes "嗯？哦，那个";
+		mes "我们驯鹿是骄傲的";
+		mes "种族，喜欢周游";
+		mes "世界。不过，只要想想";
+		mes "为克劳斯工作的";
+		mes "驯鹿，就该明白了。";
+		next;
+		mes "[裴陆]";
+		mes "好吧，不管是不是";
+		mes "驯鹿，我都是凭本事";
+		mes "当上这艘船的船长，";
+		mes "也赢得了船员的忠诚。";
+		mes "我们会尽一切努力";
+		mes "确保你的旅途安全。";
+		break;
+	case 2:
+		mes "[裴陆]";
+		if (lght_air == 1) {
+			if (BaseLevel <= 59) {
+				mes "嗯……？";
+				mes "你是不是问过";
+				mes "我这个问题？总之，";
+				mes "很抱歉，我还是";
+				mes "不能把那个秘密告诉你。";
+				break;
+			} else {
+				mes "嗯……？";
+				mes "你是不是问过";
+				mes "我这个问题？你只是好奇，";
+				mes "还是真的想知道？";
+				next;
+				switch (select("不，不是真的……:是的，我真的很想知道！")) {
+				case 1:
+					mes "[裴陆]";
+					mes "哈哈哈哈~";
+					mes "也许有一天，你会";
+					mes "弄明白这艘飞空艇";
+					mes "是如何停留在空中、";
+					mes "翱翔于天际的。";
+					break;
+				case 2:
+					mes "[裴陆]";
+					mes "说实话，";
+					mes "这艘飞空艇飞行的";
+					mes "秘密，是只有";
+					mes "船长才有权";
+					mes "知道的。所以我本不该";
+					mes "告诉你关于它的任何事。";
+					next;
+					mes "[裴陆]";
+					mes "但我一直无法";
+					mes "信任上层，";
+					mes "所以我对他们";
+					mes "没什么忠诚。只要你";
+					mes "先帮我个小忙，我";
+					mes "不介意把机密告诉你。";
+					next;
+					switch (select("让我考虑一下。:当然。")) {
+					case 1:
+						mes "[裴陆]";
+						mes "好吧。不过别";
+						mes "担心，我不会";
+						mes "让你去做任何";
+						mes "你应付不了的事。等";
+						mes "你决定后再回来，好吗？";
+						break;
+					case 2:
+						setquest 8032;
+						lght_air = 2;
+						mes "[裴陆]";
+						mes "哈哈！我";
+						mes "已经喜欢上你了！好，说说";
+						mes "条件吧。我有个弟弟，";
+						mes "我很少见到他，因为";
+						mes "他也是飞空艇船长，";
+						mes "总是在外航行。";
+						next;
+						mes "[裴陆]";
+						mes "你能把这封";
+						mes "信带给我弟弟";
+						mes "杜陆吗？还有，请";
+						mes "务必带着他的";
+						mes "回信回来，好吗？";
+						mes "谢谢你，冒险者。";
+						next;
+						mes "[裴陆]";
+						mes "哦，等你见到";
+						mes "我弟弟，请帮";
+						mes "帮他一把。等你见到他，";
+						mes "他会向你解释的。";
+						next;
+						mes "^3131FF你收到了";
+						mes "裴陆船长的信，";
+						mes "要送交他的弟弟";
+						mes "杜陆船长。";
+						break;
+					}
+					break;
+				}
+			}
+		} else if (lght_air == 4) {
+			lght_air = 5;
+			changequest 8034,8035;
+			mes "哦！";
+			mes "他回你信了？真的吗？！";
+			mes "其实，我也没";
+			mes "抱太大期望……";
+			mes "请稍等，";
+			mes "我读一下他的信。";
+		} else if (lght_air == 5) {
+			lght_air = 6;
+			mes "嗯……哈哈哈~！";
+			mes "这家伙，真是个痴情种！";
+			mes "可他真实的内心";
+			mes "受制于他的职责。";
+			mes "你觉得呢？";
+			mes "呵呵呵。";
+			next;
+			mes "^3131ff他继续读着";
+			mes "那封信。^000000";
+		} else if (lght_air == 6) {
+			mes "好，我看完了。";
+			mes "虽然我理解他，";
+			mes "但我的看法";
+			mes "完全不同。不过我们";
+			mes "俩都无所畏惧。";
+			next;
+			mes "[裴陆]";
+			mes "哦，我差点忘了，";
+			mes "我会告诉你";
+			mes "你想知道的事。";
+			next;
+			mes "[裴陆]";
+			mes "飞空艇浮空的秘密是……";
+			mes "点燃巨大的锅炉，";
+			mes "由此推动活塞、齿轮";
+			mes "与涡轮，靠的是";
+			mes "水在锅炉中流过时";
+			mes "产生的蒸汽。";
+			next;
+			mes "[裴陆]";
+			mes "从而带动螺旋桨。";
+			mes "就这些。你明白了吗？";
+			next;
+			select("嗯？就这些？没有别的了？");
+			mes "[裴陆]";
+			mes "哈哈哈！";
+			mes "我讲得粗略，是";
+			mes "为了让你更容易";
+			mes "听懂。怎么，你";
+			mes "还不满意？我已经用";
+			mes "谁都听得懂的浅显英文。";
+			mes "understand.";
+			next;
+			mes "[裴陆]";
+			mes "显然，光靠蒸汽";
+			mes "是不可能让它飞起来的。";
+			mes "因此，它使用了一种";
+			mes "名为^ff0000卢恩机关^000000的增幅装置。";
+			next;
+			select("咦？卢恩机关是什么？");
+			mes "[裴陆]";
+			mes "那是一种以";
+			mes "魔法石为动力源的装置。";
+			mes "不过，我不知道";
+			mes "它是怎么运作的……";
+			mes "我大概忘了细节，";
+			mes "因为当时没怎么用心。";
+			next;
+			mes "[裴陆]";
+			mes "我只记得";
+			mes "能量在通过";
+			mes "连接于蒸汽机的";
+			mes "卢恩时，会";
+			mes "被增幅。";
+			next;
+			mes "[裴陆]";
+			mes "事实上，这整艘飞空艇";
+			mes "能浮空，全靠";
+			mes "那块石头提供的能量。";
+			mes "exaggeration.";
+			mes "它的力量真的很强。";
+			next;
+			specialeffect2 EF_MAPPILLAR;
+			mes "[裴陆]";
+			mes "你明白了吗？";
+			mes "我要休息一下。";
+			mes "我读信和写那些";
+			mes "长长的东西，累了。";
+			mes "letters.";
+			completequest 8035;
+			lght_air = 7;
+			if (checkre(3))
+				getexp 20000,1000;
+			else
+				getexp 200000,10000;
+		} else if (lght_air == 7) {
+			mes "我之前不是教过你吗？";
+			mes "我不会再把那么长的";
+			mes "故事讲一遍了！";
+		} else if (lght_air == 2 || lght_air == 3) {
+			mes "哈哈哈！别担心，我";
+			mes "会告诉你这艘飞空艇";
+			mes "是如何飞行的，等你把";
+			mes "信送给我弟弟杜陆，";
+			mes "并带回他的回信之后。";
+		} else {
+			mes "哈哈哈！这艘";
+			mes "飞空艇怎么飞的？没错，";
+			mes "很奇妙，不是吗？";
+			mes "虽说那是个秘密，";
+			mes "但我可以向你保证，它";
+			mes "既不诡异也不危险。";
+			lght_air = 1;
+		}
+		break;
+	case 3:
+		mes "[杜陆]";
+		mes "好的，那么。";
+		mes "感谢您乘坐";
+		mes "我们的飞空艇，希望";
+		mes "您旅途愉快。";
+		break;
+	}
+	close2;
+	cutin "",255;
+	end;
+}
+
+//----------------------------------------------------------------------------
+// Captain Ferlock :: lght_ymir
+//----------------------------------------------------------------------------
+airplane,236,163,5	script	飞艇船长#03	4_M_REINDEER,{
+	cutin "fly_trock.bmp",2;
+	mes "[杜陆]";
+	if (hg_ma1 == 3 || hg_ma1 == 4) {
+		mes "欢迎乘坐飞空艇。我是船长杜陆。";
+		mes "今天有什么我能帮你的吗？";
+		next;
+		select("我在找一个叫提俄立的人。");
+		mes "[杜陆]";
+		mes "提俄立？嗯，我想我不认识那个人。";
+		mes "至少我可以保证，他没有为我工作。";
+		next;
+		select("能让我查一下过去的乘客名单吗？");
+		mes "[杜陆]";
+		mes "抱歉，我不能向未经授权的人透露这类个人信息。";
+		if (hg_ma1 == 3) close;
+		next;
+		mes "- 杜陆船长仔细听着你解释寻找提俄立的理由。 -";
+		next;
+		mes "[杜陆]";
+		mes "嗯……我明白了，我完全理解你的处境。但我的处境是，我不能把乘客名单透露给未经授权的人……";
+		next;
+		mes "[杜陆]";
+		mes "*唉*……看来规则迟早都是要被打破的……好吧，我让你查我们的乘客名单。请稍等。";
+		next;
+		mes "- 杜陆船长从某处取出一本厚重的书，在第一个空白页上写下了“提俄立”这个名字。 -";
+		mes "- 随着字迹缓缓消失，书页开始自行翻动。 -";
+		next;
+		mes "- 书页在写着“提俄立”这个名字的一页停了下来。 -";
+		next;
+		mes "[杜陆]";
+		mes "哈哈，你一定很惊讶吧？如你所见，这是一本魔法书，不需要翻页就能找到特定的一页。";
+		mes "这就是我们黑森林共和派在生活中运用魔法的方式。";
+		next;
+		mes "[杜陆]";
+		mes "这是我的老朋友送给我的……算了，现在这并不重要。";
+		next;
+		mes "[杜陆]";
+		mes "我看看，提俄立，提俄立……有了，大约一个月前他在飞空艇上。他当时前往休格尔，是最早乘坐休格尔航线的乘客之一。";
+		next;
+		mes "[杜陆]";
+		mes "....Oh, did you say that he was good at researching stuffs? Now I remember him, he was the guy!";
+		next;
+		mes "[杜陆]";
+		mes "那是我们开通休格尔航线的第一天。就在我们飞往休格尔的途中，一群龙袭击了我们的飞空艇。";
+		mes "我们对这样的袭击毫无准备，基本上陷入了极其危险的境地。";
+		next;
+		mes "[杜陆]";
+		mes "这全是我的错，因为我知道龙正是人们不敢前往休格尔的原因之一。";
+		mes "我真是太愚蠢了！直到那时，我都没有认真考虑过让船员为那些凶残的龙的袭击做好准备。";
+		next;
+		mes "[杜陆]";
+		mes "龙严重损坏了我们的飞空艇，我们眼看就要坠向地面。这时那个年轻人站了出来，修好了飞空艇，仿佛他早就知道会发生这一切。";
+		mes "我很确定，提俄立就是救了我们的那个人。";
+		next;
+		mes "[杜陆]";
+		mes "当时我还在想，是什么让他看起来如此悲伤沮丧。现在我知道原因了。";
+		mes "我很高兴自己决定帮你找到这个了不起的人。现在你可以去告诉他的未婚妻他在哪里了。";
+		next;
+		mes "[杜陆]";
+		mes "如果你见到他，请代我向他问好。";
+		changequest 8045,8046;
+		hg_ma1 = 5;
+	} else if (hg_ma1 == 5)
+		mes "请告诉他的未婚妻他在哪里。";
+	else if (lght_air == 7 && lhz_heart == 11) {
+		mes "啊，谢谢你过来。";
+		mes "那么，我想问你";
+		mes "为什么要调查";
+		mes "依美乐心脏堆积物。你只是";
+		mes "出于好奇，还是";
+		mes "有什么特别的原因？";
+		next;
+		switch(select("只是好奇……:嗯，有个人需要我帮助……")) {
+		case 1:
+			mes "[杜陆]";
+			mes "只是好奇……？";
+			mes "我不知道满足";
+			mes "你的好奇心，是否值得";
+			mes "你至今已经承担的";
+			mes "风险。以后你该更";
+			mes "小心一些……";
+			break;
+		case 2:
+			mes "[杜陆]";
+			mes "唉，我本不该";
+			mes "这么信任你，";
+			mes "但既然你帮过";
+			mes "我和我弟弟，我觉得";
+			mes "你一定是个乐于助人的冒险者。好吧。";
+			next;
+			mes "[杜陆]";
+			mes "如果你保证";
+			mes "绝不把我告诉你的事";
+			mes "说出去，那我想我可以";
+			mes "告诉你关于卢恩石";
+			mes "和依美乐心脏堆积物的事。";
+			next;
+			select("我保证……");
+			mes "[杜陆]";
+			mes "那就好。我希望你";
+			mes "遵守诺言。现在，你";
+			mes "已经知道飞空艇是靠";
+			mes "卢恩石驱动的，那是依美乐心脏堆积物的仿制品。";
+			next;
+			mes "[杜陆]";
+			mes "虽然卢恩石";
+			mes "比不上真正的依美乐";
+			mes "心脏堆积物，但我们能";
+			mes "想造多少就造多少。至于真正的";
+			mes "依美乐心脏堆积物，则很难找到或有效复制。";
+			next;
+			mes "[杜陆]";
+			mes "你也许已经";
+			mes "想到了，所有";
+			mes "卢恩石都是在";
+			mes "艾音布罗克实验室";
+			mes "为飞空艇生产的。那么，";
+			mes "你看出是怎么回事了吗？";
+			next;
+			select("等等，瓦尔蒙特计划是什么？");
+			mes "[杜陆]";
+			mes "瓦尔蒙特计划是";
+			mes "伟大的贤者瓦尔蒙特";
+			mes "所开创的其中一项";
+			mes "研究的延续。他从小";
+			mes "就被誉为";
+			mes "了不起的天才、神童。";
+			next;
+			mes "[杜陆]";
+			mes "然而，无论他";
+			mes "在学术上多么成功——";
+			mes "他甚至成为了朱诺";
+			mes "大学的终身教授——";
+			mes "瓦尔蒙特始终无法为自己的研究筹集资金。";
+			next;
+			mes "[杜陆]";
+			mes "最终，他接受了";
+			mes "雷肯贝尔公司的邀约，";
+			mes "以开发一种能源";
+			mes "换取研究资金。他为";
+			mes "他们工作的成果，就是发明了卢恩石。";
+			next;
+			mes "[杜陆]";
+			mes "然而，公众并不";
+			mes "知道卢恩石是";
+			mes "瓦尔蒙特发明的。后来，";
+			mes "瓦尔蒙特在完善";
+			mes "卢恩石制造工艺之前";
+			mes "就失踪了。";
+			next;
+			mes "[杜陆]";
+			mes "因此，我们现在的";
+			mes "卢恩石并不稳定，";
+			mes "过一段时间就会失效。";
+			mes "瓦尔蒙特计划旨在";
+			mes "修正这些缺陷，完善";
+			mes "依美乐心脏的复制……";
+			next;
+			mes "[杜陆]";
+			mes "呃，总之，这就是";
+			mes "我今天会在艾音布罗克";
+			mes "实验室的原因。我的卢恩";
+			mes "石快耗尽了，";
+			mes "所以我去那里领取";
+			mes "一块充满能量的。";
+			next;
+			mes "[杜陆]";
+			mes "^333333*呼……*^000000";
+			mes "能给我";
+			mes "一点时间";
+			mes "让我喘口气，";
+			mes "再接着说吗？是的，";
+			mes "还有一点点……";
+			lhz_heart = 12;
+			break;
+		}
+	} else if (lght_air == 7 && lhz_heart == 12) {
+		mes "那么，"+strcharinfo(0)+"，";
+		mes "你一定在想，";
+		mes "我为什么要把这些";
+		mes "都告诉你。我认为有某个";
+		mes "势力想从飞空艇上";
+		mes "偷走卢恩石。";
+		next;
+		mes "[杜陆]";
+		mes "你注意到";
+		mes "攻击我弟弟那艘船的";
+		mes "小妖精和恶魔之眼";
+		mes "了吗？信不信由你，";
+		mes "小妖精通常只是";
+		mes "无害又爱恶作剧。";
+		next;
+		mes "[杜陆]";
+		mes "小妖精的翅膀";
+		mes "天生并不足以";
+		mes "让它们飞行。然而，";
+		mes "如果有人把黑暗意志";
+		mes "植入它们体内，它们的";
+		mes "力量就会指数级增长。";
+		next;
+		mes "[杜陆]";
+		mes "虽然小妖精";
+		mes "除非被激怒，否则";
+		mes "通常不会攻击人类，";
+		mes "而且往往避人而居，但它们";
+		mes "正被操控着去偷取";
+		mes "我们飞空艇上的卢恩石。";
+		next;
+		mes "[杜陆]";
+		mes "操控小妖精的人";
+		mes "还派来那些恶魔之眼";
+		mes "怪物，以便";
+		mes "监视它们的进展，";
+		mes "并观察我们的抵抗。";
+		next;
+		mes "[杜陆]";
+		mes "我和我弟弟一直在";
+		mes "调查此事，但";
+		mes "到目前为止，我们还没查到";
+		mes "多少东西。现在，我的飞空艇只";
+		mes "提供国内航班，";
+		mes "所以还没遭到袭击。";
+		next;
+		mes "[杜陆]";
+		mes "而我弟弟的飞空艇";
+		mes "专营国际航班，";
+		mes "深受小妖精";
+		mes "入侵之苦，所以我们";
+		mes "猜测袭击者来自黑森林共和国之外。";
+		next;
+		mes "[杜陆]";
+		mes "总之，这就是全部";
+		mes "我确实知道。请你";
+		mes "把这件事保守秘密";
+		mes "如果查出什么新情况，请告诉我。";
+		next;
+		mes "[费洛克]";
+		mes "如果我能查明";
+		mes "那些家伙的";
+		mes "任何事，他们使用";
+		mes "黑暗意志来控制";
+		mes "小恶魔并偷走我们的卢恩";
+		mes "石，我会告诉你的。";
+		next;
+		mes "[费洛克]";
+		mes "是谁派这些";
+		mes "怪物来入侵我们的";
+		mes "飞空艇，目的又";
+		mes "是什么，他们要卢恩";
+		mes "石做什么？嗯。那么，这次";
+		mes "就先告别了，冒险者。";
+		close2;
+		specialeffect2 EF_ABSORBSPIRITS;
+		completequest 8043;
+		lhz_heart = 13;
+		if (checkre(3))
+			getexp 70000,40000;
+		else
+			getexp 700000,400000;
+		cutin "",255;
+		end;
+	} else if (lght_air == 7 && lhz_heart == 13) {
+		mes "我会忙于我的";
+		mes "船长事务，还有";
+		mes "对卢恩石抢劫未遂案的";
+		mes "私下调查。";
+		mes "希望以后还能再见。保重。";
+	} else {
+		mes "你好，欢迎";
+		mes "搭乘飞空艇。我是";
+		mes "费洛克，本次航班的";
+		mes "船长。有什么";
+		mes "我能为你效劳的吗？";
+		next;
+		if (lght_air == 2)
+			.@question2$ = "Give him Tarlock's Letter.";
+		else if (lght_air == 3)
+			.@question2$ = "Here are the items I've found.";
+		switch(select("这艘飞空艇是怎么飞的？", .@question2$, "Cancel.")) {
+		case 1:
+			mes "[费洛克]";
+			mes "抱歉，我不能";
+			mes "把那种";
+			mes "机密情报告诉你。";
+			mes "这关系到这艘飞空艇的";
+			mes "安全与保障，";
+			mes "太过重要了。";
+			break;
+		case 2:
+			if (lght_air == 2) {
+				changequest 8032,8033;
+				lght_air = 3;
+				mes "^3131FF你把弟弟塔洛克";
+				mes "写给费洛克船长的信";
+				mes "转交给了他。^000000";
+				next;
+				mes "[费洛克]";
+				mes "哦，这是我";
+				mes "弟弟寄来的？嘿，太";
+				mes "感谢你把它";
+				mes "带给我。啊，给我";
+				mes "一点时间读完";
+				mes "这个，可以吗？";
+				next;
+				mes "[费洛克]";
+				mes "...";
+				mes "原来他一直在";
+				mes "忙这些。呵。哈哈哈！哦，真是";
+				mes "有意思。啊，能收到";
+				mes "塔洛克的消息总是好的。那么，";
+				mes "抱歉让你久等了。";
+				next;
+				mes "[费洛克]";
+				mes "总之，我弟弟信里";
+				mes "写的都是寻常事，不过";
+				mes "他提到他";
+				mes "希望能终于归还几件";
+				mes "他向我借的东西。";
+				mes "可是，他把那些弄丢了……";
+				next;
+				mes "[费洛克]";
+				mes "结果那些讨厌的";
+				mes "偶尔袭击他飞船的";
+				mes "小恶魔偷走了我的";
+				mes "东西，所以他其实是";
+				mes "希望你能";
+				mes "帮我拿回来。";
+				next;
+				mes "[费洛克]";
+				mes "对，对。他特地";
+				mes "提到，在你去";
+				mes "猎杀那些怪物、";
+				mes "把我的东西拿回来之前，";
+				mes "我不该给你回信。抱歉，";
+				mes "看来你欠我大哥一个人情吧？";
+				next;
+				mes "[费洛克]";
+				mes "那么，如果你愿意";
+				mes "帮我，能帮我取回";
+				mes "^ff00002黑暗意志^000000和";
+				mes "^ff00002尖刺果实^000000吗？";
+				next;
+				mes "[费洛克]";
+				mes "袭击塔洛克";
+				mes "飞空艇的怪物";
+				mes "应该持有它们。如果你能";
+				mes "在这件事上帮我，";
+				mes "我会很感激，冒险者。先";
+				mes "谢谢了，祝你好运～";
+			} else if (lght_air == 3) {
+				if (countitem(7340) >= 2 && countitem(576) >= 2) {// Will_Of_Darkness, Prickly_Fruit
+					delitem 7340, 2;
+					delitem 576, 2;
+					changequest 8033,8034;
+					lght_air = 4;
+					mes "[费洛克]";
+					mes "哦，太棒了！终于，";
+					mes "我的东西回来了！不过，";
+					mes "我完全不明白塔洛克";
+					mes "一开始为什么";
+					mes "想要这些东西。算了。你能帮我把这封回信带给塔洛克吗？";
+					next;
+					mes "[费洛克]";
+					mes "再次感谢";
+					mes "你的所有帮助！";
+					mes "我想我再也";
+					mes "见不到这些东西了，";
+					mes "要不是有你～";
+					next;
+					mes "^3355FF你收到了";
+					mes "费洛克船长写给";
+					mes "要送交他哥哥";
+					mes "塔洛克船长的信。^000000";
+				} else {
+					mes "[费洛克]";
+					mes "哦，抱歉，看起来";
+					mes "你少了点东西。";
+					mes "能请你去找到";
+					mes "^ff00002黑暗意志^000000和";
+					mes "^ff00002尖刺果实^000000吗？谢谢，";
+					mes "勇敢的冒险者～";
+				}
+			}
+			break;
+		case 3:
+			mes "[费洛克]";
+			mes "那么，希望";
+			mes "你在这艘飞空艇上";
+			mes "过得愉快，";
+			mes "也祝你";
+			mes "旅途愉快。";
+			break;
+		}
+	}
+	close2;
+	cutin "",255;
+	end;
+}
+
+// Heart Fragment Quest :: lght_ymir
+//============================================================
+airplane,236,63,4	script	哈伦	4_M_KID1,{
+	mes "[哈伦]";
+	if (hg_ma1 == 3 || BaseLevel < 60) {
+		mes "如果你需要我";
+		mes "做什么，就";
+		mes "喊我一声。";
+		mes "嘿嘿……喊我一下～";
+		if (hg_ma1 == 3) {
+			next;
+			select("嘿，你认识一个叫蒂埃里的人吗？");
+			mes "[哈伦]";
+			mes "蒂埃里？嗯……我不认识。你去问卡西吧？她也许知道。";
+		}
+	} else if (!lhz_heart) {
+		mes "你好啊，你好啊～";
+		mes "欢迎搭乘飞空艇。";
+		next;
+		switch(select("我不是乘客。:喂，孩子，你在做什么？")) {
+		case 1:
+			emotion ET_QUESTION;
+			mes "[哈伦]";
+			mes "那你是说你是";
+			mes "船员之一吗？";
+			mes "我想我们以前没见过，";
+			mes "而且到现在我该认识";
+			mes "在这里工作的每个人了……";
+			next;
+			emotion ET_SURPRISE;
+			mes "[哈伦]";
+			mes "喂……！";
+			mes "如果你在值班，";
+			mes "不是应该穿着";
+			mes "制服吗？看来你";
+			mes "根本不在这里工作！";
+			mes "嘿，我自己看出来的～";
+			next;
+			mes "[哈伦]";
+			mes "呃，我得先把";
+			mes "这层甲板扫完。然后，";
+			mes "休息时我可以和卡西";
+			mes "玩一会儿赢苹果的";
+			mes "小游戏。我就是这么过的。";
+			break;
+		case 2:
+			mes "[哈伦]";
+			mes "嗯……这不是很明显吗？";
+			mes "我在扫甲板。我是";
+			mes "最年轻的船员，所以";
+			mes "最没劲的差事";
+			mes "都归我。不过干完后，就是";
+			mes "和卡西玩骰子的时间了。哦耶～";
+			break;
+		}
+		next;
+		select("卡西？");
+		mes "[哈伦]";
+		mes "卡西……你知道，就是";
+		mes "骰子游戏的庄家？";
+		mes "你该试试：只要";
+		mes "掷掷骰子就有机会";
+		mes "赢些苹果。嘿，";
+		mes "你可能会走大运！";
+		next;
+		mes "[哈伦]";
+		mes "嘿，有个人从卡西那儿";
+		mes "赢了太多苹果，";
+		mes "结果都能当上";
+		mes "苹果商人了。你";
+		mes "信吗？是啊……卡西";
+		mes "不太喜欢他……";
+		close2;
+		lhz_heart = 1;
+		end;
+	} else if (lhz_heart == 1) {
+		mes "哦嘿，是你啊～";
+		mes "我们之前聊过，";
+		mes "对吧？是啊……";
+		mes "我还在这里扫";
+		mes "这层地板。还得";
+		mes "好一阵子。";
+		next;
+		emotion ET_SURPRISE;
+		mes "[哈伦]";
+		mes "看起来我";
+		mes "一时半会儿";
+		mes "还扫不完。嘿，你";
+		mes "能不能";
+		mes "帮我个忙，因为我";
+		mes "实在离不开这里？";
+		next;
+		switch(select("抱歉，我很忙……:什么事？")) {
+		case 1:
+			mes "[哈伦]";
+			mes "呃，好吧。我想";
+			mes "我能理解。不过";
+			mes "我还是能让你";
+			mes "不虚此行的，如果你";
+			mes "懂我意思～";
+			close;
+		case 2:
+			mes "[哈伦]";
+			mes "别担心，不是什么";
+			mes "难事。我本该把";
+			mes "朱诺机场的信件送给";
+			mes "其他船员，可我";
+			mes "没时间。对了，我这有";
+			mes "一封给卡西的信……";
+			next;
+			mes "[哈伦]";
+			mes "你能去";
+			mes "帮我把这封信";
+			mes "送给她吗？是";
+			mes "一个叫";
+			mes "马旺先生的人寄的，说是她的师父";
+			mes "之类的。";
+			next;
+			mes "^3355FF哈伦把";
+			mes "马旺写给";
+			mes "卡西的信交给了你。^000000";
+			setquest 8036;
+			lhz_heart = 2;
+			next;
+			mes "[哈伦]";
+			mes "嘿，多谢了，朋友～";
+			mes "你能在飞空艇上找到";
+			mes "主持骰子游戏的卡西。";
+			close;
+		}
+	} else if (lhz_heart == 2) {
+		mes "^333333*叹气……*^000000";
+		mes "我真是受够";
+		mes "一直扫地了。";
+		mes "感觉我就像个";
+		mes "没用的客舱服务生。";
+		mes "可是……我大概就是吧！";
+		next;
+		mes "[哈伦]";
+		mes "哦嘿，你";
+		mes "把那封信";
+		mes "交给卡西了吗？";
+		mes "我觉得那封信";
+		mes "挺重要的，所以尽量";
+		mes "别拖太久，好吗？";
+	} else if (lhz_heart == 3) {
+		mes "^333333*叹气……*^000000";
+		mes "我真是受够";
+		mes "一直扫地了。";
+		mes "感觉我就像个";
+		mes "没用的客舱服务生。";
+		mes "可是……我大概就是吧！";
+	} else if (lhz_heart == 4) {
+		mes "嘿，谢谢你帮我";
+		mes "把那封信送给卡西。";
+		mes "她听说我让乘客";
+		mes "去送信，";
+		mes "有点不高兴，不过她理解";
+		mes "我实在忙得不可开交。";
+		next;
+		mes "[哈伦]";
+		mes "你不觉得";
+		mes "人们在危难时";
+		mes "应该互相";
+		mes "帮助吗？";
+		next;
+		switch(select("一点也不。人人为己！:是的，我同意。")) {
+		case 1:
+			mes "[哈伦]";
+			mes "什、什么……？";
+			mes "我无法相信";
+			mes "你真的";
+			mes "这么想……";
+			lhz_heart = 5;
+			changequest 8038,8039;
+			close;
+		case 2:
+			mes "[哈伦]";
+			mes "啊，真的吗？";
+			mes "我就知道你会";
+			mes "有同样的想法";
+			mes "我也这么想。你和我，我们";
+			mes "真是心有灵犀～";
+			next;
+			if (checkweight(501,1) != 1) {
+				mes "[哈伦]";
+				mes "哦……嘿，我本";
+				mes "打算给你";
+				mes "一点小东西，";
+				mes "可你现在";
+				mes "带的东西太多了……";
+				close;
+			}
+			lhz_heart = 5;
+			getitem 501,1;// Red_Potion
+			mes "[哈伦]";
+			mes "我知道这不算";
+			mes "什么，但我想";
+			mes "把它送给你。再说，你";
+			mes "永远不知道什么在";
+			mes "紧急时能派上用场。";
+			mes "那就这样，回头见～";
+			close;
+		}
+	} else if (lhz_heart == 5) {
+		mes "嘿，嘿～最近怎么样？";
+		mes "我知道，我知道，我该";
+		mes "扫地的，而且我还没";
+		mes "扫完，可有时候，";
+		mes "你知道，人总得";
+		mes "休息一下，对吧？";
+		next;
+		mes "[哈伦]";
+		mes "啊，这样忙碌的日子";
+		mes "让我想起以前在";
+		mes "朱诺老家和邻居";
+		mes "盖弗一起干活。他是个天才发明家，";
+		mes "你知道，对我来说";
+		mes "有点像英雄或榜样。";
+		next;
+		mes "[哈伦]";
+		mes "盖弗太聪明了，";
+		mes "他几乎能做出";
+		mes "任何他想要的东西。总有一天，";
+		mes "我想达到他的水平，";
+		mes "创造出能帮助";
+		mes "人们、让他们快乐的东西。";
+		next;
+		mes "[哈伦]";
+		mes "这差不多就是我的";
+		mes "人生志向——你知道，";
+		mes "就是那种我想";
+		mes "为世界贡献的事。当";
+		mes "然，我怀疑自己比得上";
+		mes "伟大的贤者瓦蒙特。";
+		next;
+		select("贤者瓦蒙特？");
+		mes "[哈伦]";
+		mes "对，瓦蒙特……他算是";
+		mes "历史上最伟大的";
+		mes "贤者之一。不过，没人";
+		mes "太了解他，但三百年前，";
+		mes "他创下了许多开创性的成就。";
+		next;
+		mes "[哈伦]";
+		mes "据说他凭一己之力";
+		mes "革新了科学。如今";
+		mes "许多便利生活的机器都是他的发明。";
+		mes "遗憾的是，他从历史中消失了，没人知道他怎么消失的。";
+		next;
+		mes "[哈伦]";
+		mes "伟大的贤者瓦蒙特……";
+		mes "这在施瓦茨瓦尔德";
+		mes "共和国是相当";
+		mes "有名的传说。总之，为了我的";
+		mes "研究，我想多了解";
+		mes "这些飞空艇。";
+		next;
+		mes "[哈伦]";
+		mes "这些飞空艇又大";
+		mes "又重，我简直";
+		mes "不敢相信它们能飞。这";
+		mes "怎么可能？那么，如果";
+		mes "你能帮我查清楚，";
+		mes "那真是帮了大忙。";
+		if (isbegin_quest(8039) == 0)
+			changequest 8038,8039;
+		lhz_heart = 6;
+	} else if (lhz_heart == 6) {
+		mes "嘿，你查出";
+		mes "是什么让这么巨大、";
+		mes "沉重的飞空艇";
+		mes "能在空中飞这么久了吗？";
+		next;
+		if (lght_air == 7) {
+			select("嗯，算是吧。");
+			mes "[哈伦]";
+			mes "真的……？";
+			mes "你是认真的吗？";
+			mes "那秘密是什么？";
+			mes "告诉我，我太想知道了！";
+			next;
+			mes "^3355FF你把从";
+			mes "塔洛克船长那里";
+			mes "学到的都告诉了哈伦，但你";
+			mes "很小心，绝口不";
+			mes "提伊米尔的心脏碎片。^000000";
+			next;
+			mes "[哈伦]";
+			mes "所以……螺旋桨是";
+			mes "靠蒸汽驱动的？";
+			mes "这说不通。";
+			mes "不可能，不会这么简单。再说，蒸汽也有极限。";
+			mes "你确定就这些吗？";
+			next;
+			select("其实，还有另一种动力源。");
+			mes "^3355FF你揭示了";
+			mes "你了解到的卢恩石，";
+			mes "那是对伊米尔心脏";
+			mes "碎片的仿制品：哈伦是个善意的";
+			mes "孩子，大概不会把这些";
+			mes "知识用于邪恶目的。";
+			next;
+			mes "[哈伦]";
+			mes "太、太棒了！所以真有";
+			mes "某种特殊的魔力";
+			mes "来源，帮助这艘飞空艇";
+			mes "飞行！我就知道！那么，它";
+			mes "叫什么来着？啊，";
+			mes "卢恩石，对吧？";
+			next;
+			mes "[哈伦]";
+			mes "伊米尔心脏";
+			mes "碎片的仿制品。我之前";
+			mes "在哪儿听说过";
+			mes "这个？嗯，让我想想……";
+			changequest 8039,8040;
+			lhz_heart = 7;
+		} else {
+			select("Actually...");
+			mes "[哈伦]";
+			mes "你还没打听到";
+			mes "飞空艇的什么消息吧？";
+			mes "也许费洛克船长";
+			mes "知道些什么，或者";
+			mes "其他飞空艇船长中的某一位。";
+			mes "希望有人会告诉你……";
+			next;
+			mes "[哈伦]";
+			mes "我知道飞空艇飞行的";
+			mes "秘密被视为";
+			mes "机密，但如果";
+			mes "有人能撬出那些秘密，";
+			mes "那一定是你们冒险者中的一个。所以请帮帮我……";
+		}
+	} else if (lhz_heart == 7) {
+		mes "所以卢恩石";
+		mes "只是伊米尔心脏";
+		mes "碎片的仿制品。";
+		mes "可我之前在哪儿";
+		mes "听说过这个……？";
+		next;
+		emotion ET_SURPRISE;
+		mes "[哈伦]";
+		mes "哦，对了！";
+		mes "卡西跟我说过一个";
+		mes "醉汉，他玩";
+		mes "掷骰子赢苹果时";
+		mes "总提到伊米尔的";
+		mes "心脏！";
+		next;
+		if (Shinokas_Quest > 9) {
+			mes "["+strcharinfo(0)+"]";
+			mes "（^333333等等，我帮希诺卡斯的时候";
+			mes "见过那个人。他是";
+			mes "艾因布洛克研究所的";
+			mes "所长之一，那间研究所";
+			mes "藏有一块伊米尔的心脏。";
+			mes "值得去查一查……^000000）";
+			next;
+		}
+		mes "[哈伦]";
+		mes "总之，这不算什么，";
+		mes "不过让我给你一点";
+		mes "小东西，答谢你";
+		mes "费心替我打听";
+		mes "那些秘密情报……";
+		next;
+		if (checkweight(501,1) != 1) {
+			mes "[哈伦]";
+			mes "唉，糟糕……";
+			mes "你没有";
+			mes "足够的空间";
+			mes "收下我的小礼物。";
+			mes "请先在你的背包里";
+			mes "腾出些空间，好吗？";
+			close;
+		}
+		if (Shinokas_Quest > 9) {
+			lhz_heart = 9;
+			changequest 8040,8042;
+		} else {
+			lhz_heart = 8;
+			changequest 8040,8041;
+		}
+		getitem 501,1;
+		mes "[哈伦]";
+		mes "给你～";
+		mes "我知道和你们冒险者";
+		mes "通常得到的奖励相比，";
+		mes "这实在微不足道，";
+		mes "不过嘿……心意";
+		mes "最重要，对吧？回头见～";
+	} else if (lhz_heart == 8) {
+		mes "嘿，你不如";
+		mes "去问问卡西那个";
+		mes "总在玩她的";
+		mes "骰子游戏的醉汉？";
+		mes "你也许能多了解些";
+		mes "伊米尔的心脏碎片，懂吗？";
+	} else {
+		mes "谢谢你上次";
+		mes "帮了我。我想";
+		mes "了解卢恩石";
+		mes "多少激励了我，将来";
+		mes "要造一艘自己的飞空艇……";
+	}
+	close;
+}
+
+airplane,33,69,4	script	卡西	1_F_MERCHANT_01,{
+	mes "[卡西]";
+	if (hg_ma1 == 3) {
+		mes "你一定非常";
+		mes "无聊吧，冒险者～";
+		mes "要不要来";
+		mes "来玩一局骰子吗？";
+		next;
+		select("你认识一个叫蒂埃里的人吗？");
+		mes "[卡西]";
+		mes "蒂埃里？嗯……听起来有点耳熟……";
+		next;
+		mes "[卡西]";
+		mes "....................";
+		mes ".............";
+		mes ".......";
+		mes "...";
+		next;
+		mes "[卡西]";
+		mes "哦，对了！蒂埃里，蒂埃里，蒂埃里！对吧？";
+		next;
+		mes "[卡西]";
+		mes "- 她突然把那名字喊了好几遍，  -";
+		mes "- 你被吓了一跳，手里的半个苹果掉了下来。 -";
+		next;
+		mes "[卡西]";
+		mes "哎呀，抱歉吓到你了。我一时想不起那名字，因为上次听到已经很久了。";
+		next;
+		mes "[卡西]";
+		mes "我跟马旺先生学游戏和戏法的时候，蒂埃里是住在隔壁的人。";
+		mes "我记得他是个非常聪明的人，做过很多研究工作。";
+		next;
+		mes "[卡西]";
+		mes "对了，他还爱上了尤克兰的妹妹。";
+		mes "当时我和尤克兰一起在马旺先生门下学习游戏。";
+		mes "嗯……不知道他们现在怎么样了。";
+		next;
+		mes "- 你告诉她，尤斯兰和蒂埃里已经订婚，但蒂埃里为了给她找药不得不离开她。 -";
+		next;
+		mes "[卡西]";
+		mes "哦……天哪……真不敢相信尤斯兰竟然病了……哦……";
+		next;
+		mes "- 卡西似乎被这个噩耗惊呆了。 -";
+		mes "- 她喃喃自语了一阵，然后才回过神来。 -";
+		next;
+		mes "[卡西]";
+		mes "我真为她难过……我很想帮帮她……可是我已经很久没见过他们了。所以我不知道他在哪里。";
+		next;
+		mes "[卡西]";
+		mes "不过，让我想想……";
+		next;
+		mes "[卡西]";
+		mes "哦，对了！飞艇船长也许能帮你，因为乘客名单由他管理。";
+		next;
+		mes "[卡西]";
+		mes "虽然乘客名单属于机密，严禁对外公开……";
+		next;
+		mes "[卡西]";
+		mes "不过，如果你把事情告诉他，他也许会帮你。方便的话就去问问他吧。";
+		next;
+		mes "[卡西]";
+		mes "如果你再见到尤斯兰，请代我向她问好，并送上我的祝福。";
+		next;
+		mes "- 你答应她，会代她向尤斯兰问好并送上祝福。 -";
+		changequest 8044,8045;
+		hg_ma1 = 4;
+	} else if (hg_ma1 == 4)
+		mes "飞艇船长也许能帮你找到蒂埃里的下落。";
+	else if (lhz_heart == 2) {
+		mes "你一定很";
+		mes "无聊吧，冒险者～";
+		mes "要不要来";
+		mes "要来玩一局骰子吗？";
+		next;
+		select("把哈伦的信交给她。");
+		mes "[卡西]";
+		mes "哦，一定是哈伦";
+		mes "托你送来的。";
+		mes "这种事他应该";
+		mes "自己来做，而不是";
+		mes "麻烦客人帮忙！";
+		mes "不过话说回来，他真的很忙……";
+		next;
+		changequest 8036,8037;
+		lhz_heart = 3;
+		mes "[卡西]";
+		mes "谢谢你把这个";
+		mes "送来给我。以后";
+		mes "如果需要我帮";
+		mes "点小忙，尽管开口，";
+		mes "好吗？回头见～";
+	} else if (lhz_heart == 3) {
+		mes "哦，你好。谢谢你";
+		mes "把马旺先生的";
+		mes "那封信送给我，尤其是";
+		mes "在哈伦太忙";
+		mes "没法亲自送来的时候。读到那封";
+		mes "信真让我开心了一整天～";
+		next;
+		while (.@a == 0 || .@b == 0 || .@c == 0) {
+			if (.@a || .@b || .@c) {
+				mes "[卡西]";
+				mes "如果需要";
+				mes "帮忙，只要";
+				mes "是一点小忙，";
+				mes "或者只是对我";
+				mes "感到好奇，尽管问我～";
+				next;
+			}
+			switch(select("打听哈伦:打听马旺:打听飞艇")) {
+			case 1:
+				.@a = 1;
+				mes "[卡西]";
+				mes "哈伦？嗯，他和我";
+				mes "关系很好。你知道";
+				mes "我们是表亲吗？其实，";
+				mes "他父亲，也就是我叔叔，";
+				mes "在我父亲";
+				mes "二十年前去世后收养了我。";
+				next;
+				mes "[卡西]";
+				mes "艾因贝克发生了";
+				mes "一场矿井爆炸事故。";
+				mes "我记不清了。";
+				mes "总之，我和哈伦";
+				mes "情同姐弟，";
+				mes "总是形影不离。";
+				next;
+				mes "[卡西]";
+				mes "当费洛克船长看到我";
+				mes "偶然主持了一场骰子游戏";
+				mes "并雇我在他的飞艇上工作后，哈伦坚持要";
+				mes "跟着一起来。他就是这么固执，";
+				mes "但他也很贴心。";
+				break;
+			case 2:
+				.@b = 1;
+				mes "[卡西]";
+				mes "马旺先生？哦，别";
+				mes "误会了！他是我的";
+				mes "导师，就是教会我";
+				mes "玩这些";
+				mes "精彩游戏的人。他在";
+				mes "朱诺一带很有名呢。";
+				next;
+				mes "[卡西]";
+				mes "父亲去世后，";
+				mes "我曾一度十分消沉，";
+				mes "对世事毫不关心。";
+				mes "后来，我遇见了马旺先生，";
+				mes "他教会我如何";
+				mes "重新找到生活的乐趣。";
+				next;
+				mes "[卡西]";
+				mes "因为他，我决定";
+				mes "学习他的游戏，并";
+				mes "帮助人们忘却";
+				mes "烦恼，好好";
+				mes "享受片刻，哪怕";
+				mes "只有短短一会儿。";
+				break;
+			case 3:
+				.@c = 1;
+				mes "[卡西]";
+				mes "飞艇？它那么";
+				mes "巨大又美丽，";
+				mes "我总是惊叹它";
+				mes "能如此优雅地";
+				mes "在空中飞行。我一直想住在靠近天空的地方……";
+				next;
+				mes "[卡西]";
+				mes "一个能看见";
+				mes "云朵、沐浴";
+				mes "阳光的地方。所以，当费洛克船长";
+				mes "邀请我来这里工作时，那简直";
+				mes "就像美梦成真～";
+				break;
+			}
+			next;
+		}
+		mes "[卡西]";
+		mes "对了，如果哈伦";
+		mes "下次又拿别的";
+		mes "请求来烦你，";
+		mes "请拒绝他，好吗？";
+		mes "我可不准他";
+		mes "被宠坏！呵呵呵呵～";
+		next;
+		mes "[卡西]";
+		mes "好了，我该";
+		mes "回去工作了。";
+		mes "祝你今天愉快，";
+		mes "回头见～";
+		changequest 8037,8038;
+		lhz_heart = 4;
+	} else if (lhz_heart == 8) {
+		mes "你好，"+strcharinfo(0)+".";
+		mes "很高兴再见到你。";
+		mes "那么今天有什么";
+		mes "我能帮你的吗？";
+		next;
+		select("那边那个醉汉是谁？");
+		mes "[卡西]";
+		mes "哦，他？他是我的";
+		mes "常客，据说是个";
+		mes "艾因布罗克";
+		mes "实验室主任。他玩骰子时";
+		mes "总是输掉苹果：";
+		mes "我觉得他是个赌徒～";
+		next;
+		mes "[卡西]";
+		mes "其实，他输掉的正好";
+		mes "弥补了我当年输给";
+		mes "那位苹果商人的所有苹果。如今这已成了我们";
+		mes "都津津乐道的传说，";
+		mes "但当时那几乎让我崩溃。";
+		next;
+		mes "[卡西]";
+		mes "总之，撇开";
+		mes "艾因布罗克实验室主任";
+		mes "喝醉时有点爱抱怨、";
+		mes "又是个蹩脚赌徒这点不谈，";
+		mes "我对他了解不多。";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "(^333333艾因布罗克实验室……";
+		mes "太可疑了。那个";
+		mes "主任竟然知道伊米尔";
+		mes "心脏碎片的事，所以他们一定";
+		mes "在那里藏着";
+		mes "非常重要的东西。^000000)";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "(^333333我最好";
+		mes "尽快去调查";
+		mes "艾因布罗克的那间实验室，";
+		mes "即使那里是戒备森严的区域。^000000)";
+		changequest 8041,8042;
+		lhz_heart = 9;
+	} else {
+		mes "你一定很";
+		mes "无聊吧，冒险者～";
+		mes "要不要来";
+		mes "要来玩一局骰子吗？";
+		next;
+		callfunc "applegamble","Kaci";
+	}
+	close;
+}
+
+ein_in01,279,25,0	script	#lab01_heart	HIDDEN_WARP_NPC,1,1,{
+	end;
+OnTouch_:
+	if (lhz_heart == 9) {
+		mes "["+strcharinfo(0)+"]";
+		mes "(^333333我……我必须";
+		mes "去调查";
+		mes "那间实验室，";
+		mes "看看里面有没有";
+		mes "什么古怪的事。^000000)";
+		close;
+	}
+}
+
+ein_in01,264,17,0	script	#lab02_heart	HIDDEN_WARP_NPC,1,1,{
+	end;
+OnTouch_:
+	if (lhz_heart == 9) {
+		mes "["+strcharinfo(0)+"]";
+		mes "这是……";
+		mes "这是个某种";
+		mes "奇怪的装置。上面的";
+		mes "标签上写着“密码";
+		mes "检验器”？嗯，这东西";
+		mes "也许以后用得上。";
+		next;
+		mes "^3355FF你决定把";
+		mes "密码检验器";
+		mes "装置随身带进";
+		mes "实验室。^000000";
+		lhz_heart = 10;
+		close;
+	}
+}
+
+ein_in01,263,35,3	script	费洛克#lab	4_M_REINDEER,{
+	end;
+
+OnEnter:
+	enablenpc "费洛克#lab";
+	initnpctimer;
+	end;
+
+OnTimer120000:
+OnInit:
+	disablenpc "费洛克#lab";
+	stopnpctimer;
+	end;
+}
+
+ein_in01,261,35,0	script	lab03#heart	HIDDEN_WARP_NPC,1,1,{
+	end;
+OnTouch_:
+	if (lhz_heart == 9) {
+		mes "[保安系统]";
+		mes "^FF0000检测到";
+		mes "未经许可者。未检测到";
+		mes "密码检验器。";
+		mes "拒绝进入。^000000";
+		close;
+	} else if (lhz_heart == 10) {
+		mes "[保安系统]";
+		mes "^FF0000请输入 3 位数密码。";
+		mes "您有 3 分钟时间";
+		mes "输入正确的密码，";
+		mes "共可尝试 5 次，否则";
+		mes "密码将会重置。^000000";
+		next;
+		mes "[密码检验器]";
+		mes "^333333提示：";
+		mes "不要使用";
+		mes "数字 0，也不要";
+		mes "重复输入同";
+		mes "一个数字。请确认";
+		mes "密码为 3 位数。";
+		while (.@yagu100 == .@yagu10 || .@yagu100 == .@yagu1 || .@yagu10 == .@yagu1) {
+			.@yagu100 = rand(1,9);
+			.@yagu10 = rand(1,9);
+			.@yagu1 = rand(1,9);
+		}
+		while (1) {
+			while (1) {
+				next;
+				input .@input;
+				if (.@input < 100 || .@input > 999) {
+					mes "[保安系统]";
+					mes "^FF0000错误。";
+					mes "输入的密码";
+					mes "超出了位数";
+					mes "限制。您只能输入";
+					mes "3 位数密码。^000000";
+					close;
+				}
+				.@input100 = .@input / 100;
+				.@input10 = (.@input % 100) / 10;
+				.@input1 = .@input % 10;
+				if ((.@input100 + .@input10 + .@input1 == 0) || .@input100 == .@input10 || .@input100 == .@input1 || .@input10 == .@input1) {
+					mes "[保安系统]";
+					mes "^FF0000错误。";
+					mes "不能输入";
+					mes "数字 0，也不能将";
+					mes "其他数字重复";
+					mes "使用。请重试。^000000";
+					continue;
+				}
+				break;
+			}
+			.@retry++;
+			mes "[保安系统]";
+			mes "^FF0000"+ strcharinfo(0) +"^000000";
+			mes "输入了以下内容：";
+			mes "^0000ff"+ .@input100 +"^000000 - ^0000ff"+ .@input10 +"^000000 - ^0000ff"+ .@input1 +"^000000。";
+			mes "请等待授权完成。";
+			next;
+			.@strike = (.@yagu100 == .@input100) + (.@yagu10 == .@input10) + (.@yagu1 == .@input1);
+			.@ball = (.@yagu100 == .@input10 || .@yagu100 == .@input1) + (.@yagu10 == .@input100 || .@yagu10 == .@input1) + (.@yagu1 == .@input100 || .@yagu1 == .@input10);
+			if (.@strike == 3) {
+				mes "[保安系统]";
+				mes "授权完成。";
+				mes "档案访问权限已开放。";
+				next;
+				mes "^3355FF档案室的门打开了，";
+				mes "露出一排排";
+				mes "归档的文件。在";
+				mes "所有文件中，有一份";
+				mes "引起了你的注意。^000000";
+				next;
+				mes "瓦尔蒙特计划 第 3 号";
+				mes "安全等级：1-C 级";
+				mes " ";
+				mes "注意：仅伊米尔心脏合成计划";
+				mes "的项目成员才有权查看";
+				mes "本机密文件。";
+				next;
+				mes "瓦尔蒙特计划 第 3 号";
+				mes "安全等级：1-C 级";
+				mes " ";
+				mes "其他人员若被发现";
+				mes "阅读本文件，将受到";
+				mes "处罚或免职。";
+				next;
+				mes "^3355FF你听到";
+				mes "脚步声，连忙";
+				mes "把文件放回";
+				mes "原处。然而，";
+				mes "来到档案室的人";
+				mes "已经看到";
+				mes "你手里拿着文件。^000000";
+				next;
+				donpcevent "费洛克#lab::OnEnter";
+				mes "[费洛克]";
+				mes "打扰一下，请问";
+				mes "你是这里的员工吗？";
+				mes "我来取一颗";
+				mes "飞艇用的新";
+				mes "符文石。等等，等等……";
+				mes "你看起来很面熟……";
+				next;
+				emotion ET_HUK, getnpcid(0, "费洛克#lab");
+				mes "[费洛克]";
+				mes "没错，你不就是";
+				mes "给我送来我";
+				mes "弟弟信的人吗？对，你";
+				mes "之前还问过我";
+				mes "飞艇的飞行原理。";
+				mes "所以你不是员工……";
+				next;
+				mes "[费洛克]";
+				mes "小子，你竟然跑到";
+				mes "禁区里查那种资料，";
+				mes "好奇心未免";
+				mes "太强了。不过别担心，你";
+				mes "一定有你的理由，";
+				mes "所以我不会叫守卫。";
+				next;
+				mes "[费洛克]";
+				mes "不过，你最好";
+				mes "离开这里。守卫会定期";
+				mes "巡逻此地，你几乎";
+				mes "肯定会被抓住。嗯，";
+				mes "晚点来飞艇上";
+				mes "找我，好吗？快走吧！";
+				close2;
+				donpcevent "费洛克#lab::OnInit";
+				changequest 8042,8043;
+				lhz_heart = 11;
+				end;
+			}
+			mes "[密码检验器]";
+			mes " ";
+			mes "^333333位置与数字均正确的";
+			mes "数量：^ff0000"+.@strike+"^333333";
+			mes "数字正确但位置错误的总数：^ff0000"+.@ball+"^333333。";
+			mes "请根据这些结果";
+			mes "做出更准确的推测。^000000";
+			next;
+			if (.@retry > 4) {
+				mes "[保安系统]";
+				mes "^FF0000本次会话的正确";
+				mes "密码为";
+				mes "^000000"+.@yagu100+"^FF0000 - ^000000"+.@yagu10+"^000000 - ^000000"+.@yagu1+"^FF0000。";
+				mes "密码现在将重置。^000000";
+				close;
+			}
+			mes "[保安系统]";
+			mes "哔——！";
+			mes "密码错误。";
+			mes " ";
+			switch (.@retry) {
+				case 1: mes "正在初始化第 2 次尝试……^000000"; break;
+				case 2: mes "正在初始化第 3 次尝试……^000000"; break;
+				case 3: mes "正在初始化第 4 次尝试……^000000"; break;
+				case 4: mes "正在初始化最后一次尝试……^000000"; break;
+			}
+		}
+	}
+	end;
+}

@@ -1,0 +1,85 @@
+//===== rAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= 1.1 Made all into functions, additional checks, etc. [Lupus]
+//= 1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,39,3	script	圣殿十字军#Valkyrie	752,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[圣殿十字军]";
+			mes "Congratulations.";
+			mes "荣耀归于战士们！";
+			close;
+		}
+		mes "[圣殿十字军]";
+		mes "别忘了，";
+		mes "圣战";
+		mes "正迅速逼近！";
+		mes "我们必须做好准备！";
+		mes "愿正义之光";
+		mes "永远照亮我们的道路！";
+		close;
+	}
+	else if (ADVJOB == Job_Paladin && Class == Job_Swordman_High && JobLevel > 39) {
+		mes "[圣殿十字军]";
+		mes "圣战将在我们";
+		mes "察觉之前";
+		mes "降临。我们比以往";
+		mes "更需要坚强的男女";
+		mes "为善良与正义";
+		mes "而战。";
+		next;
+		mes "[圣殿十字军]";
+		mes "你愿意";
+		mes "站在正义一方";
+		mes "成为圣殿十字军而战吗？";
+		next;
+		if (select("否:是") == 1) {
+			mes "[圣殿十字军]";
+			mes "等你准备好，";
+			mes "随时回来。";
+			mes "荣耀归于战士们！";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[圣殿十字军]";
+			mes "你仍可以学习更多技能。请用完";
+			mes "所有剩余的技能点，再来找我。";
+			close;
+		}
+		jobchange Job_Paladin;
+		set ADVJOB,0;
+		mes "[圣殿十字军]";
+		mes "Congratulations.";
+		mes "作为圣殿十字军，我希望";
+		mes "你能保护";
+		mes "弱者，并为我们";
+		mes "在即将到来的";
+		mes "善恶之战中带来胜利。";
+		close;
+	}
+	mes "[圣殿十字军]";
+	mes "欢迎";
+	mes "前往巴哈拉宫，";
+	mes "荣誉殿堂。";
+	next;
+	mes "[圣殿十字军]";
+	mes "请在这里";
+	mes "放松一下";
+	mes "不必拘束。";
+	mes "荣耀归于战士们！";
+	close;
+}

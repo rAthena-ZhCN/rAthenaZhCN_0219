@@ -1,0 +1,482 @@
+//===== rAthena Script ======================================= 
+//= Super Novice Job Quest
+//===== By: ================================================== 
+//= Darkchild
+//===== Current Version: ===================================== 
+//= 2.4
+//===== Compatible With: ===================================== 
+//= rAthena Project; SVN r15340+
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Super Novice Job Change Npc
+//= Super Novice Cart Rental Npc
+//= Some Other Useless Super Novice Npc
+//===== Additional Comments: ================================= 
+//= 1.9 Rescripted to the Aegis 10.3 Standars. [Samuray22]
+//= 2.0 Rescripted again, this time using an iRO base. [L0ne_W0lf]
+//= 2.1 Swapped use of baseclass for basejob. [L0ne_W0lf]
+//= 2.2 Added Quest Log commands. [Kisuka]
+//= 2.3 NPC "Esseray" calls Ex. Super Novice script when enabled. [Euphy]
+//= 2.4 Added an Ex. Super Novice dialog check. [Euphy]
+//============================================================ 
+
+aldeba_in,223,167,3	script	泽雷罗#sn	709,{
+	if (BaseJob == Job_Super_Novice) {
+		mes "[泽雷罗]";
+		mes "我想你应该很享受";
+		mes "作为超级初心者的生活吧？啊，";
+		mes "很好很好……正如我所料。";
+		mes "诚然，平庸之光正在你体内闪耀……";
+		next;
+		mes "[泽雷罗]";
+		mes "我鼓励你去过";
+		mes "基姆-肖恩先生那样的生活……";
+		mes "成为万事通吧……";
+		mes "...and a master of none.";
+		close;
+	}
+	if (countitem(938) > 29 && countitem(907) > 29 && SUPNOV_Q == 1) {
+		delitem 938,30; //Sticky_Mucus
+		delitem 907,30; //Resin
+		mes "[泽雷罗]";
+		mes "啊，你带来了";
+		mes "我要的道具！";
+		mes "你已经证明自己";
+		mes "有资格加入我们的";
+		mes "超级初心者协会。";
+		next;
+		mes "[泽雷罗]";
+		mes "那么，按照约定，我这就";
+		mes "把你的职业转为";
+		mes "^3355FF超级初心——^000000嗯？";
+		mes "你背后那是什么？";
+		next;
+		select("嗯？:那是什么？");
+		mes "^3355FF你回头看去，可是……";
+		mes "那里什么都没有。";
+		mes "这里肯定有鬼！^000000";
+		next;
+		completequest 6010;
+		callfunc "F_ClearJobVar";
+		getitem 2339,1; //G_Strings
+		if (Upper==0) jobchange Job_Super_Novice;
+		if (Upper==2) jobchange Job_Super_Baby;
+		mes "[泽雷罗]";
+		mes "哇哈哈！我骗到你了！";
+		mes "那么……你觉得我的玩笑怎么样？";
+		mes "算了，别提那事了……";
+		next;
+		mes "[泽雷罗]";
+		mes "顺便也澄清一下";
+		mes "像我这样的成年男子";
+		mes "为什么会随身带着";
+		mes "一条内裤。";
+		next;
+		mes "[泽雷罗]";
+		mes "重要的是……";
+		mes "你已经加入了伟大的";
+		mes "超级初心者的光荣行列。";
+		next;
+		mes "[泽雷罗]";
+		mes "就把这条内裤当作礼物吧……";
+		mes "据说这件衣物";
+		mes "曾由基姆-肖恩先生穿着，";
+		mes "他是我们传说中的俱乐部创始人，";
+		mes "在他早年追求";
+		mes "模范般的平庸之时。";
+		next;
+		mes "[泽雷罗]";
+		mes "去吧，享受你的新生活";
+		mes "作为超级初心者！向前";
+		mes "迈进，帮助平民";
+		mes "同时自己也是";
+		mes "其中一员！";
+		close;
+	}
+	if (SUPNOV_Q == 1) {
+		mes "[泽雷罗]";
+		mes "嗯？你忘了我";
+		mes "要你做什么吗？好吧，";
+		mes "我再跟你说";
+		mes "一次。这次请";
+		mes "记牢了……";
+		next;
+		mes "[泽雷罗]";
+		mes "我要你带来";
+		mes "^FF000030 份黏稠液体^000000 和";
+		mes "^FF000030 份树脂^000000。";
+		close;
+	}
+	if (BaseJob == Job_Novice && Upper != 1) {
+		mes "[泽雷罗]";
+		mes "...Hmm?";
+		mes "Stop.";
+		mes "让我看看你。";
+		next;
+		mes "[泽雷罗]";
+		mes ".....";
+		mes ".......";
+		mes ".........";
+		emotion ET_THINK;
+		next;
+		mes "[泽雷罗]";
+		mes "我看到那";
+		mes "平庸之光";
+		mes "在你体内闪耀……";
+		next;
+		mes "[泽雷罗]";
+		mes "你何不加入我们，";
+		mes "年轻的初心者？加入";
+		mes "我们，体会那份";
+		mes "身为平凡者的伟大……";
+		mes "mediocre...";
+		next;
+		mes "[泽雷罗]";
+		mes "接受我的提议吧……";
+		mes "脱下你那身";
+		mes "棕色、沾满灰尘的衣服";
+		mes "蜕变成……";
+		next;
+		mes "[泽雷罗]";
+		mes "...a ^CE6300Super Novice^000000.";
+		next;
+		switch(select("接受他的提议。:拒绝他的提议。:再仔细听听。")) {
+		case 1:
+			if (!callfunc("F_CanChangeJob")) {
+				mes "[泽雷罗]";
+				mes "嗯……但你真的";
+				mes "懂得";
+				mes "在软弱中";
+				mes "寻得力量的价值吗？你必须";
+				mes "向我证明你";
+				mes "是个真正的不成器之人。";
+				next;
+				mes "[泽雷罗]";
+				mes "以初心者的身份生活吧……";
+				mes "等你";
+				mes "掌握了";
+				mes "基本技能之后再回来……";
+				mes "在平庸中成长，";
+				mes "成为等级 10 的初心者……";
+				close;
+			}
+			if (BaseLevel < 45) {
+				mes "[泽雷罗]";
+				mes "嗯……但你真的";
+				mes "珍视那种悠闲的";
+				mes "平庸冒险者的生活方式吗？";
+				mes "向我证明你并不";
+				mes "渴望力量……";
+				next;
+				mes "[泽雷罗]";
+				mes "平平淡淡地生活吧……";
+				mes "成为等级 45 的初心者……";
+				mes "到那时你才能加入我们……";
+				close;
+			}
+			mes "[泽雷罗]";
+			mes "我能从你眼中看到";
+			mes "那份决心，";
+			mes "要简朴地生活……";
+			next;
+			mes "[泽雷罗]";
+			mes "唯有真正的智者才能";
+			mes "看出平凡";
+			mes "与平庸，才是";
+			mes "最好的生活方式。";
+			next;
+			mes "[泽雷罗]";
+			mes "不过，我们并不欢迎";
+			mes "随便什么人加入我们的协会。";
+			mes "你必须先通过我们的";
+			mes "资格测试。";
+			next;
+			mes "[泽雷罗]";
+			mes "这项测试需要你";
+			mes "带给我一些";
+			mes "由普通、";
+			mes "毫无特别的魔物掉落的道具。";
+			next;
+			mes "[泽雷罗]";
+			mes "Hmmmm...";
+			mes "^FF000030 份黏稠液体^000000";
+			mes "以及 ^FF000030 份树脂";
+			mes "^000000就足以测试你";
+			mes "与弱小敌人战斗的能力。";
+			next;
+			mes "[泽雷罗]";
+			mes "另外，数字 30";
+			mes "很重要。它并不";
+			mes "特别……只是";
+			mes "一个普通的数字。";
+			mes "哈哈哈哈哈哈~";
+			next;
+			set SUPNOV_Q,1;
+			setquest 6010;
+			mes "[泽雷罗]";
+			mes "祝你好运，我的朋友。";
+			close;
+		case 2:
+			mes "[泽雷罗]";
+			mes "好吧好吧……我想";
+			mes "简朴生活的价值";
+			mes "对你来说很难";
+			mes "理解。这……没关系……";
+			mes "你的人生属于你自己。";
+			next;
+			mes "[泽雷罗]";
+			mes "但是，如果你哪天看到";
+			mes "那平庸之光，";
+			mes "欢迎来找我";
+			mes "anytime...";
+			next;
+			mes "[泽雷罗]";
+			mes "随着我们初心者俱乐部";
+			mes "越来越受欢迎、";
+			mes "追随者越来越多，";
+			mes "我们也许会考虑";
+			mes "采用更困难的测试……";
+			close;
+		case 3:
+			mes "[泽雷罗]";
+			mes "我们的初心者协会是由";
+			mes "传说中的";
+			mes "基姆-肖恩先生创立的……他或许是";
+			mes "我们这一代最伟大的人。";
+			next;
+			mes "[泽雷罗]";
+			mes "他意识到世上";
+			mes "有太多苦难，尤其是在";
+			mes "这片土地上";
+			mes "的平民百姓之间";
+			mes "Midgard...";
+			next;
+			mes "[泽雷罗]";
+			mes "他从遇见的";
+			mes "形形色色的人身上";
+			mes "学会了许多技能……但由于他";
+			mes "从不久留一地，";
+			mes "他成了万事通，";
+			mes "却也样样不精。";
+			next;
+			mes "[泽雷罗]";
+			mes "在分担平民的";
+			mes "痛苦之中，他";
+			mes "自己也成了其中一员……";
+			mes "史上最伟大的";
+			mes "平凡之人。";
+			next;
+			mes "[泽雷罗]";
+			mes "我们协会的成员";
+			mes "都努力按照";
+			mes "基姆-肖恩先生的方式生活，";
+			mes "遵循他留给我们的原则……";
+			close;
+		}
+	}
+	else {
+		if (BaseJob == Job_Super_Novice) {
+			mes "[泽雷罗]";
+			mes "你觉得过着";
+			mes "简朴的超级";
+			mes "初心者生活如何？我相信";
+			mes "你一定很享受~";
+			next;
+			mes "[泽雷罗]";
+			mes "请作为超级";
+			mes "初心者成长，帮助";
+			mes "平民，同时自己也";
+			mes "是他们中的一员……";
+			next;
+			mes "[泽雷罗]";
+			mes "我鼓励你";
+			mes "在超级";
+			mes "初心者之路上成长，并成为";
+			mes "生活中的榜样，";
+			mes "过着格外";
+			mes "平凡的生活。";
+			close;
+		}
+		mes "[泽雷罗]";
+		mes "你好，我是泽雷罗，";
+		mes "伟大的初心者协会的";
+		mes "非正式执行";
+		mes "理事。";
+		next;
+		mes "[泽雷罗]";
+		mes "嗯……你似乎远远";
+		mes "高于普通人。";
+		mes "是啊，你绝对更";
+		mes "像“非凡”，而不是";
+		mes "“平凡”……";
+		next;
+		mes "[泽雷罗]";
+		mes "*叹气* 我想你";
+		mes "永远无法理解";
+		mes "我们的生活方式，";
+		mes "也理解不了";
+		mes "平凡之中那份微妙的伟大。不过";
+		mes "那也没关系。";
+		next;
+		mes "[泽雷罗]";
+		mes "这个……这世上有成千上万";
+		mes "各不相同的人，";
+		mes "所以我只是试着接受";
+		mes "我们彼此的所有差异。";
+		mes "希望你也如此。";
+		close;
+	}
+}
+
+aldeba_in,216,169,5	script	艾瑟雷#sn	86,{
+	if (Class == Job_Super_Novice_E || Class == Job_Super_Baby_E) {
+		mes "[艾瑟雷]";
+		mes "你！比以前更强了。";
+		mes "我就知道你能通过测试~";
+		close;
+	}
+	if (BaseJob == Job_Super_Novice) {
+		if (checkre(0))
+			callfunc "Esseray_Ex";
+		mes "[艾瑟雷]";
+		mes "嗯？嘿，你是";
+		mes "伟大初心者协会的成员，";
+		mes "对吧？这不是";
+		mes "最棒的俱乐部吗？！";
+		next;
+		mes "[艾瑟雷]";
+		mes "平平淡淡地生活，";
+		mes "按照";
+		mes "基姆-肖恩先生的原则……";
+		mes "平凡真好！";
+		next;
+		mes "[艾瑟雷]";
+		mes "让我们尽量";
+		mes "过普通人的生活！";
+		mes "顺便告诉你，我是";
+		mes "头号会员，";
+		mes "当然是在泽雷罗先生";
+		mes "之下！";
+		close;
+	}
+	if (BaseJob == Job_Novice && Upper != 1) {
+		mes "[艾瑟雷]";
+		mes "哈~ 你还完全不懂";
+		mes "什么是普通人呢！";
+		mes "你何不加入我们的初心者";
+		mes "协会？这个俱乐部是全世界最棒的~";
+		next;
+		mes "[艾瑟雷]";
+		mes "对，超级初心者";
+		mes "是最棒的角色！";
+		mes "哈哈哈哈哈哈哈哈哈！";
+		close;
+	}
+	else {
+		mes "[艾瑟雷]";
+		mes "呸~！你比一般人";
+		mes "强……搞不好你";
+		mes "甚至算“特别”呢。";
+		mes "真可惜！不过……";
+		mes "我希望你仍然";
+		mes "积极地过你的人生。";
+		close;
+	}
+}
+
+aldebaran,54,238,5	script	卡普拉职员#sn	117,{
+	if (BaseJob == Job_Super_Novice) {
+		mes "[卡普拉职员]";
+		if (Sex == SEX_MALE)
+			mes "你好，超级初心者先生~";
+		else
+			mes "你好，超级初心者女士。";
+		mes "你一定很";
+		mes "失望，因为别的";
+		mes "卡普拉职员不让你";
+		mes "向她们租推车。";
+		mes "不过现在别担心……";
+		next;
+		mes "[卡普拉职员]";
+		mes "我是来支援你们的，";
+		mes "为你们提供推车……";
+		next;
+		mes "[卡普拉职员]";
+		mes "^3355FF*低语*^000000";
+		mes "^555555我本不该这么做，";
+		mes "因为这违反我们的";
+		mes "公司规定。但我觉得";
+		mes "超级初心者实在太可怜了";
+		mes "...so here I am.^000000";
+		next;
+		mes "[卡普拉职员]";
+		mes "总之，你要租推车吗？服务费是 1,900 Zeny。";
+		next;
+		if (select("租推车。:取消。") == 1) {
+			mes "[卡普拉职员]";
+			mes "哦，是这样……";
+			mes "你学过“手推车使用”";
+			mes "技能吗？我可以直接租给你一辆";
+			mes "推车，但如果你";
+			mes "没学会推车，那只会";
+			mes "白白浪费你的 Zeny。";
+			next;
+			mes "[卡普拉职员]";
+			mes "所以请确认你";
+			mes "已经学会了“手推车使用”技能。";
+			next;
+			if (select("租推车。:取消。") == 1) {
+				if (checkcart()) {
+					mes "[卡普拉职员]";
+					mes "哦，你已经装备了推车。";
+					close;
+				}
+				if (Zeny >= 1899) {
+					set RESRVPTS, RESRVPTS + 190;
+					set Zeny, Zeny-1900;
+					if (getskilllv("MC_PUSHCART") > 0) setcart;
+					mes "[卡普拉职员]";
+					mes "感谢使用我的服务。";
+					mes "虽然我做的事在别的";
+					mes "卡普拉职员看来";
+					mes "可能不合规矩，但我坚信";
+					mes "我做的是对顾客正确的事。";
+					close;
+				}
+				else {
+					mes "[卡普拉职员]";
+					mes "抱歉，你身上的 Zeny 不够。服务费是 1,900 Zeny。";
+					close;
+				}
+			}
+			mes "[卡普拉职员]";
+			mes "欢迎再次光临。";
+			mes "感谢使用我的服务。";
+			close;
+		}
+		mes "[卡普拉职员]";
+		mes "欢迎再次光临。";
+		mes "感谢使用我的服务。";
+		close;
+	}
+	mes "[卡普拉职员]";
+	mes "你好——啊呀……！";
+	mes "我想我无法为你提供";
+	mes "你想要的服务……";
+	mes "请去找别的";
+	mes "卡普拉职员吧。非常抱歉";
+	mes "给你带来这样的不便……";
+	close;
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= Dialogs From Some Other Scripts (Most Of It)
+//= 1.3-1.5 Added Baby class support (and to the Kafta SN Cart
+//=     renter, too) [Lupus]
+//= 1.6 Added a fix which prevent High Novices passing
+//=     this Job Quests again. [Lupus]
+//= 1.7 Fixed Baby Class Support. [Lupus]
+//= 1.8 Now a Baby can become a Super Baby [Lupus]
+//============================================================ 

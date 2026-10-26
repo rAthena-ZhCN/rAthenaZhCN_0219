@@ -1,0 +1,96 @@
+//===== rAthena Script ======================================= 
+//= Mysterious Cookie Shop
+//===== Changelogs: ==========================================
+//= 1.0 Initial version from replays. [Capuche]
+//============================================================
+
+malangdo,124,152,3	script	神秘饼干商店#stone	4_COOKIEHOUSE,{
+	mes "[神秘饼干商店]";
+	mes "" + mesitemlink(7000) + "可以兑换你渴望的任何东西。";
+	next;
+	switch( select( "^4d4dff头部上段^000000时装石", "^1C8008头部中段^000000时装石", "^ff0000头部下段^000000时装石", "^9905d8披风^000000时装石", "^8B4513双重与效果^000000时装石", "^9905d8时装^000000挂在晾衣绳上" ) ) {
+	case 1:
+		mes "[神秘饼干商店]";
+		mes "来看看用你的里程能变成什么样的石头吧！";
+		close2;
+		callshop( "barter_stone_top" );
+		end;
+	case 2:
+		mes "[神秘饼干商店]";
+		mes "来看看用你的里程能变成什么样的石头吧！";
+		close2;
+		callshop( "barter_stone_mid" );
+		end;
+	case 3:
+		mes "[神秘饼干商店]";
+		mes "来看看用你的里程能变成什么样的石头吧！";
+		close2;
+		callshop( "barter_stone_low" );
+		end;
+	case 4:
+		mes "[神秘饼干商店]";
+		mes "来看看用你的里程能变成什么样的石头吧！";
+		close2;
+		callshop( "barter_stone_garment" );
+		end;
+	case 5:
+		mes "[神秘饼干商店]";
+		mes "来看看用你的里程能变成什么样的石头吧！";
+		close2;
+		callshop( "barter_stone_dual" );
+		end;
+	case 6:
+		mes "[神秘饼干商店]";
+		mes "用你的里程去扯下挂满各式服装的晾衣绳吧！";
+		next;
+		switch( select( "第一条晾衣绳", "第二条晾衣绳" ) ) {
+		case 1:
+			callshop( "barter_costume_1" );
+			end;
+		case 2:
+			callshop( "barter_costume_2" );
+			end;
+		}
+	}
+}
+
+malangdo,116,152,3	script	时装石模特#Models1	HIDDEN_NPC,{
+	end;
+OnInit:
+	.@npc_id = getnpcid(0);
+	setunitdata .@npc_id, UNPC_CLASS, JOB_MINSTREL;
+	setunitdata .@npc_id, UNPC_SEX, 1;
+	setunitdata .@npc_id, UNPC_HAIRSTYLE, 30;
+	end;
+}
+
+malangdo,118,152,3	script	时装石模特#Models2	HIDDEN_NPC,{
+	end;
+OnInit:
+	.@npc_id = getnpcid(0);
+	setunitdata .@npc_id, UNPC_CLASS, JOB_CARDINAL;
+	setunitdata .@npc_id, UNPC_CLOTHCOLOR, 3;
+	setunitdata .@npc_id, UNPC_HAIRSTYLE, 27;
+	setunitdata .@npc_id, UNPC_HEADTOP, 1550;
+	end;
+}
+
+malangdo,120,152,3	script	时装石模特#Models3	HIDDEN_NPC,{
+	end;
+OnInit:
+	.@npc_id = getnpcid(0);
+	setunitdata .@npc_id, UNPC_CLASS, JOB_BIOLO;
+	setunitdata .@npc_id, UNPC_SEX, 1;
+	setunitdata .@npc_id, UNPC_HAIRSTYLE, 27;
+	end;
+}
+
+malangdo,122,152,7	script	时装石模特#Models4	HIDDEN_NPC,{
+	end;
+OnInit:
+	.@npc_id = getnpcid(0);
+	setunitdata .@npc_id, UNPC_CLASS, JOB_MECHANIC;
+	setunitdata .@npc_id, UNPC_SEX, 1;
+	setunitdata .@npc_id, UNPC_HAIRSTYLE, 27;
+	end;
+}

@@ -1,0 +1,1047 @@
+//===== rAthena Script =======================================
+//= Umbala Town script
+//===== By: ==================================================
+//= jAthena (1.0) Fusion Dev Team (1.1) Muad Dib (1.2) Darkchild (1.3)
+//===== Current Version: =====================================
+//= 2.1
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//- [Official Conversion]
+//= Umbala Town Npcs
+//===== Additional Comments: =================================
+//= 1.0 Done By jAthena (dunno Who)
+//= 1.1 Translated by Fusion Dev Team
+//= 1.2 Fixed Something by Muad Dib
+//= 1.3 Fixed up For eA by Darkchild
+//= 1.4 Fixed some wrong item names [Lupus]
+//= 1.5 Spell Checked [massdriller]
+//= 1.6 Fixed item names, added a chance to get to Niflheim via Jumping Bungy Area [Lupus]
+//= 1.7 Fixed bugs and exploits [Lupus]
+//= 1.8 Warps you to Niff with 1HP [Lance]
+//= 1.9 Moved Umbala Event, Create Essence/Dismantle Stone, and Skeletal Gate to npc/quests/quests_umbala.txt [Evera]
+//= 2.0 Removed duplicates, max NPC name length is 23, so Utan Tribe Young Adult#1, the 1 is skipped [Toms]
+//= 2.1 Updated to Aegis 10.3 standards. [L0ne_W0lf]
+//============================================================
+
+comodo,170,137,7	script	拉艾德#um	84,{
+	end;
+}
+
+comodo,171,137,1	script	海斯#um	92,{
+	mes "[拉艾德]";
+	mes "那地方一定藏着宝物！";
+	next;
+	mes "[海斯]";
+	mes "要是找到了，大家就不会再当我们是废物了～！！";
+	next;
+	mes "[拉艾德]";
+	mes "终于！";
+	next;
+	mes "[海斯]";
+	mes "我们去找那件宝物吧！";
+	next;
+	mes "[拉艾德]";
+	mes "上吧～！！";
+	emotion ET_KIK;
+	next;
+	mes "[海斯]";
+	mes "................";
+	next;
+	mes "[拉艾德]";
+	mes "话说回来……你觉得他";
+	mes "会这么轻易地告诉我们";
+	mes "这种宝物的下落吗？";
+	emotion ET_SCRATCH;
+	emotion ET_SCRATCH, getnpcid(0, "拉艾德#um");
+	next;
+	select("嗯？什么宝物？");
+	mes "[拉艾德]";
+	mes "什——？！你什么时候开始偷听的？！";
+	next;
+	mes "[海斯]";
+	mes "哼……看来你想知道";
+	mes "更多关于宝物的事。那么，";
+	mes "这情报可不便宜……";
+	emotion ET_KIK;
+	next;
+	mes "[拉艾德]";
+	mes "而且，我们还得留点";
+	mes "留点东西，以防";
+	mes "*咳！* ^555555我们什么";
+	mes "都没找到。^000000";
+	next;
+	mes "[拉艾德、海斯]";
+	mes "只要你付我们 1,000 Zeny，我们就告诉你！";
+	emotion ET_KIK;
+	emotion ET_KIK, getnpcid(0, "拉艾德#um");
+	next;
+	if (select("支付 1,000 Zeny:拒绝支付") == 1) {
+		if (Zeny > 999) {
+			set Zeny, Zeny-1000;
+			mes "[海斯]";
+			mes "哈哈哈哈！你真是好样的！";
+			next;
+			mes "[拉艾德]";
+			mes "好，不久前，一位有名的";
+			mes "冒险者尼尔斯旅行回来了。";
+			next;
+			mes "[海斯]";
+			mes "*低声说*";
+			mes "^555555他带回来一个大箱子。^000000";
+			next;
+			mes "[拉艾德]";
+			mes "而且，他是在半夜";
+			mes "回来的，谁也没";
+			mes "告诉。所以，他肯定";
+			mes "藏着什么秘密，你不觉得吗？";
+			next;
+			mes "[海斯]";
+			mes "那箱子里到底装着什么～？";
+			mes "一定是宝物！！";
+			next;
+			mes "[拉艾德]";
+			mes "所以！我们决定踏上旅程，去找属于我们自己的宝物——！！";
+			next;
+			mes "[海斯]";
+			mes "问题是，我们不确定";
+			mes "尼尔斯会不会告诉我们";
+			mes "他是在哪里";
+			mes "找到宝物的……";
+			emotion ET_SCRATCH;
+			next;
+			mes "[拉艾德]";
+			mes "因为尼尔斯总把我们当成";
+			mes "傻子！！呸～！！";
+			next;
+			select("这个尼尔斯在哪里？");
+			mes "[拉艾德]";
+			mes "他就住在村子的";
+			mes "北边。";
+			next;
+			mes "[海斯]";
+			mes "既然我们给了你这么多情报，";
+			mes "你可得好好报答我们！";
+			next;
+			mes "[拉艾德、海斯]";
+			mes "祝你好运！";
+			close;
+		}
+		mes "[拉艾德]";
+		mes "算了～！如果你没有钱，那我们也不能把情报告诉你～";
+		close;
+	}
+	mes "[海斯]";
+	mes "呸！随便你～";
+	emotion ET_SCRATCH;
+	emotion ET_SCRATCH, getnpcid(0, "拉艾德#um");
+	close;
+}
+
+cmd_in01,175,120,3	script	伊莉雅#um	69,{
+	mes "[伊莉雅]";
+	mes "尼尔斯先生就坐在角落";
+	mes "的那张桌子旁。他有很多";
+	mes "关于这个世界的趣闻。";
+	next;
+	mes "[伊莉雅]";
+	mes "我也不清楚他这次";
+	mes "去了哪里。他只是笑着";
+	mes "说'我想我并不适合";
+	mes "这份教书的工作。'";
+	next;
+	mes "[伊莉雅]";
+	mes "与此同时，还是不断有人";
+	mes "来找尼尔斯先生……我不禁";
+	mes "会想……";
+	mes "他究竟去了哪里？";
+	close;
+}
+
+cmd_in01,164,115,1	script	尼尔斯#um	731,{
+	mes "[尼尔斯]";
+	mes "嗯？你这是什么表情？";
+	mes "啊～你一定是听说了那些";
+	mes "我找到了某种宝物的";
+	mes "传闻吧。嗯，也难怪……";
+	next;
+	mes "[尼尔斯]";
+	mes "不过，那些说我偶然撞见";
+	mes "了不起的宝物的传闻，";
+	mes "不过是想象力";
+	mes "过度活跃的结果。我找到的";
+	mes "不过是能给我的收藏";
+	mes "添上一件的小东西罢了。";
+	next;
+	mes "[尼尔斯]";
+	mes "但是……既然我亲眼所见，";
+	mes "证明'它'确实";
+	mes "存在，";
+	mes "那么对我来说，我得到的";
+	mes "就是珍贵的宝物。";
+	next;
+	mes "[尼尔斯]";
+	mes "克魔岛这座村庄！";
+	mes "你不觉得这里的洞窟";
+	mes "小得有些过分、窄得有些奇怪吗？";
+	next;
+	mes "[尼尔斯]";
+	mes "所以我就一直在想……";
+	mes "最后我得出结论：";
+	mes "这洞窟里一定藏着";
+	mes "什么东西……";
+	next;
+	mes "[尼尔斯]";
+	mes "然后！";
+	mes "我终于找到了。";
+	mes "通往'那个地方'的";
+	mes "道路，谁也没找到过的！";
+	next;
+	mes "[尼尔斯]";
+	mes "................";
+	next;
+	mes "[尼尔斯]";
+	mes ".......Hm?";
+	next;
+	mes "[尼尔斯]";
+	mes "我本以为我这一宣布";
+	mes "会伴随着壮观而";
+	mes "戏剧性的音效！";
+	mes "唉，算了……";
+	emotion ET_SCRATCH;
+	next;
+	mes "[尼尔斯]";
+	mes "好吧，为了探险的精神，";
+	mes "你可千万别想着问我";
+	mes "'那个地方'怎么走，";
+	mes "也别问'那个地方'里有什么。";
+	mes "我可不想破坏";
+	mes "surprise.";
+	next;
+	mes "[尼尔斯]";
+	mes "如果你是真正的冒险者，";
+	mes "我希望你能用尽";
+	mes "全力大喊……";
+	next;
+	mes "[尼尔斯]";
+	mes "'啊啊啊！我一定要知道它";
+	mes "是什么！！'踢开门，拼命";
+	mes "跑去，靠自己的力量";
+	mes "找到那个地方！！";
+	next;
+	mes "[尼尔斯]";
+	mes "好了！快去找出那个地方";
+	mes "吧！那会是全新的世界，";
+	mes "还是通往地狱的";
+	mes "陷阱？！前进吧，去迎接";
+	mes "你的命运，冒险者！";
+	close;
+}
+
+umbala,70,106,3	script	乌坦小孩#um	781,{
+	if (event_umbala >= 3) {
+		mes "[???]";
+		mes "嗯？";
+		mes "你不是我们族里的人吧？";
+		next;
+		mes "[???]";
+		mes "嘿！你好！";
+		mes "我叫哈坦。";
+		emotion ET_SMILE;
+		next;
+		mes "[哈坦]";
+		mes "...*Sigh*";
+		mes "对不起，我现在不能";
+		mes "和你玩。我父母的房子";
+		mes "昨天被雷打中了，";
+		mes "把我们的屋顶烧掉了……";
+		emotion ET_CRY;
+		next;
+		mes "[哈坦]";
+		mes "……！";
+		next;
+		mes "[哈坦]";
+		mes "对了！你可以帮帮我吗？";
+		mes "你看起来挺有钱的……";
+		mes "能捐点钱帮我";
+		mes "重建父母的房子吗？";
+		mes "你们卢恩-米德加尔特人";
+		mes "都比伍坦族有钱！求求你了！";
+		emotion ET_SMILE;
+		next;
+		if (select("(点头):(摇头)") == 1) {
+			mes "[哈坦]";
+			mes "哇啊啊！！";
+			mes "你真是好人～！";
+			mes "太谢谢你了，耶～！";
+			if (Zeny > 1000) {
+				set Zeny, Zeny-1000;
+				if (checkweight(517,1)) {
+					getitem 517,1;// Meat
+				}
+				emotion ET_PROFUSELY_SWEAT;
+			}
+			else {
+				next;
+				mes "[哈坦]";
+				mes "Uh...";
+				mes "看来……";
+				mes "你好像没有多少";
+				mes "yourself...";
+				emotion ET_HNG;
+				close;
+			}
+			next;
+			mes "[哈坦]";
+			mes "太感谢你了！";
+			emotion ET_SMILE;
+			close;
+		}
+		mes "[哈坦]";
+		mes ".............*Sob*...";
+		emotion ET_CRY;
+		close;
+	}
+	else {
+		mes "[???]";
+		mes "翁巴？";
+		mes "汶巴拉 翁巴巴 翁巴？";
+		next;
+		mes "[???]";
+		mes "翁巴！翁巴翁巴！";
+		mes "翁巴翁巴 哈坦 巴巴。";
+		emotion ET_CRY;
+		next;
+		mes "[哈坦]";
+		mes "........umbah,";
+		mes "翁巴 翁巴 翁巴翁布姆巴 翁巴 翁巴";
+		mes "巴巴翁 巴巴洪 温巴 翁巴 翁巴巴";
+		mes "翁巴 翁巴";
+		mes "..Umbah umbabah umbah...";
+		emotion ET_SMILE;
+		next;
+		mes "[哈坦]";
+		mes "……！";
+		next;
+		mes "[哈坦]";
+		mes "翁巴！";
+		mes "翁巴 翁巴？翁巴 翁巴巴";
+		mes "阿巴翁 巴巴洪 温巴！";
+		mes "翁巴翁巴 翁巴巴翁巴洪巴洪巴！翁巴！";
+		emotion ET_SMILE;
+		next;
+		if (select("(点头):(摇头)") == 1) {
+			mes "[哈坦]";
+			mes "翁巴翁巴！！";
+			mes "翁～巴洪巴～翁～巴翁巴～";
+			mes "翁～巴翁巴～翁～巴翁巴～";
+			if (Zeny > 1000) {
+				set Zeny, Zeny-1000;
+				if (checkweight(517,1)) {
+					getitem 517,1;// Meat
+				}
+				emotion ET_PROFUSELY_SWEAT;
+			}
+			else {
+				next;
+				mes "[哈坦]";
+				mes "...umbah? Umbahumbah!! Umbaum!";
+				emotion ET_HNG;
+				close;
+			}
+			next;
+			mes "[哈坦]";
+			mes "翁巴 翁巴 翁巴翁。";
+			emotion ET_CRY;
+			close;
+		}
+		mes "[哈坦]";
+		mes "........umbah..";
+		emotion ET_SMILE;
+		close;
+	}
+	close;
+}
+
+umbala,59,243,5	script	乌坦小孩#1	787,{
+	if (event_umbala >= 3) {
+		mes "[科坦]";
+		mes "............";
+		mes ".........poop!";
+		mes ".....me like Meat.";
+		mes "....gimme a Meat.";
+		emotion ET_ROCK;
+		next;
+		if (select("给他肉.:拒绝。") == 1) {
+			if (countitem(517) > 0) {
+				mes "[科坦]";
+				mes "哇，你真的要给我";
+				mes "肉吗？谢谢！我会用这些";
+				mes "来报答你。";
+				delitem 517,1;// Meat
+				if ( checkre(0) ) {
+					//Clover 50%, Fluff 25%, Jellopy 25%
+					switch (rand(1,4)) {
+						case 1: getitem 909,3; break; // Jellopy
+						case 2: getitem 914,3; break; // Fluff
+						case 3: getitem 705,3; break; // Clover
+						case 4: getitem 705,3; break; // Clover
+					}
+				} else {
+					getitem 909,2; // Jellopy
+					getitem 914,2; // Fluff
+					getitem 705,2; // Clover
+				}
+				emotion ET_SCISSOR;
+				close;
+			}
+			mes "[科坦]";
+			mes "哈！你根本没有肉，";
+			mes "却装作有吗？！";
+			mes "我最讨厌";
+			mes "对我说谎的人！！";
+			percentheal -20,0;
+			emotion ET_FRET;
+			close;
+		}
+		mes "[科坦]";
+		mes ".........";
+		mes ".....hungwee.";
+		mes ".....I want Meat.";
+		percentheal -1,0;
+		emotion ET_CRY;
+		close;
+	}
+	else {
+		mes "[???]";
+		mes "............";
+		mes "........umbah.";
+		mes ".......umbabah.";
+		mes "......humbah.";
+		emotion ET_ROCK;
+		next;
+		if (select("翁巴:翁巴布") == 1) {
+			if (countitem(517) > 0) {
+				mes "[???]";
+				mes "Umbaumbaumbabababah.";
+				mes "Umbababahum.";
+				delitem 517,1;// Meat
+				if ( checkre(0) ) {
+					switch (rand(1,4)) {
+						//Clover 50%, Fluff 25%, Jellopy 25%
+						case 1: getitem 909,3; break; // Jellopy
+						case 2: getitem 914,3; break; // Fluff
+						case 3: getitem 705,3; break; // Clover
+						case 4: getitem 705,3; break; // Clover
+					}
+				} else {
+					getitem 909,2; // Jellopy
+					getitem 914,2; // Fluff
+					getitem 705,2; // Clover
+				}
+				emotion ET_SCISSOR;
+				close;
+			}
+			mes "[???]";
+			mes "翁巴呼呼洪布巴巴巴巴巴！！";
+			mes "翁巴翁巴巴巴 翁巴翁布！";
+			percentheal -20,0;
+			emotion ET_FRET;
+			close;
+		}
+		mes "[???]";
+		mes "...........";
+		mes "......woong bah.";
+		mes "....umbabababah.";
+		emotion ET_CRY;
+		percentheal -1,0;
+		close;
+	}
+}
+
+umbala,177,153,3	script	帕斯托#um	97,{
+	mes "[帕斯托]";
+	emotion ET_SURPRISE;
+	mes "天哪～！终于，";
+	mes "又一个卢恩-米德加尔特人！";
+	mes "我在这个地方";
+	mes "从没见过故乡的人！";
+	mes "很高兴见到你，我叫帕斯托！";
+	next;
+	mes "[帕斯托]";
+	mes "这个地方叫汶巴拉。";
+	mes "这个村子的当地人";
+	mes "形成了一种与我去过的";
+	mes "其他地方完全不同的";
+	mes "文化。";
+	next;
+	mes "[帕斯托]";
+	mes "我猜是因为这里";
+	mes "因为地理环境的关系，";
+	mes "一直与其他地区";
+	mes "隔绝开来。";
+	next;
+	mes "[帕斯托]";
+	mes "他们长得和我们不同，";
+	mes "说的语言到现在";
+	mes "仍让我很困惑。他们的";
+	mes "表情用法也和我们不同，";
+	mes "让我摸不着头脑。";
+	next;
+	mes "[帕斯托]";
+	mes "当然，也有一些";
+	mes "相似之处。不过，某些";
+	mes "地方你最好还是";
+	mes "issues.";
+	next;
+	mes "[帕斯托]";
+	mes "有时候，你说的话或做的事";
+	mes "可能会被误解成";
+	mes "完全相反的意思。";
+	next;
+	mes "[帕斯托]";
+	mes "真希望我能说他们的";
+	mes "语言……*叹气*";
+	mes "...Or I wish I could meet more";
+	mes "这里会说我的语言的";
+	mes "人……我……我……";
+	mes "太孤独了……*呜呜*";
+	emotion ET_CRY;
+	close;
+}
+
+umbala,80,146,4	script	尤沃奇#um	753,{
+	mes "[尤沃奇]";
+	mes "翁巴 翁巴 乌加乌……";
+	mes "啊，抱歉！我已经太习惯";
+	mes "说伍坦语了。";
+	mes "很高兴见到你。";
+	next;
+	mes "[尤沃奇]";
+	mes "我从没想过会在这个";
+	mes "村子里遇到另一个";
+	mes "来自故乡的人。";
+	mes "哈哈哈哈哈～！";
+	next;
+	mes "[尤沃奇]";
+	mes "我来这里是为了寻找强者，";
+	mes "帮我磨练我的";
+	mes "战斗技巧。但很快我就";
+	mes "感到沮丧，因为学这门";
+	mes "语言花了很长时间……";
+	next;
+	mes "[尤沃奇]";
+	mes "不过，现在我多少习惯";
+	mes "了自己的处境。虽然";
+	mes "我花了一阵子才习惯";
+	mes "伍坦文化。哈哈哈哈～！";
+	next;
+	mes "[尤沃奇]";
+	mes "但你知道我发现伍坦文化";
+	mes "里最奇怪的事情";
+	mes "是什么吗？一开始，伍坦族的";
+	mes "男人似乎有种，怎么说，";
+	mes "强烈的物种延续本能。";
+	next;
+	mes "[尤沃奇]";
+	mes "这个村子里有很多";
+	mes "伍坦族的花花公子。有人也许";
+	mes "会觉得伍坦族在这方面";
+	mes "很原始，但是……";
+	next;
+	mes "[尤沃奇]";
+	mes "随着我对他们了解加深，";
+	mes "我最终发现，他们的";
+	mes "求爱仪式其实比";
+	mes "卢恩-米德加尔特文化";
+	mes "里任何东西都要先进。";
+	next;
+	mes "[尤沃奇]";
+	mes "真是相当有趣。";
+	mes "其实我现在还在向";
+	mes "伍坦族的花花公子们";
+	mes "和他们厉害的手法学了很多。";
+	close;
+}
+
+umbala,140,157,6	script	乌坦男子#1	785,{
+	if (event_umbala >= 3) {
+		mes "[杰坦]";
+		mes "蹦极很危险，";
+		mes "稍有不慎就可能";
+		mes "丢了性命。我们伍坦族";
+		mes "一直把蹦极视为成人";
+		mes "仪式中非常重要的";
+		mes "一环。";
+		close;
+	}
+	else {
+		mes "[???]";
+		mes "翁巴翁巴 洪巴。";
+		mes "乌 翁巴翁巴翁巴巴 乌 洪巴";
+		mes "翁巴巴巴 翁巴 翁巴。";
+		close;
+	}
+}
+
+umbala,146,157,4	script	乌坦男子#2	786,{
+	if (event_umbala >= 3) {
+		mes "[阿罗坦]";
+		mes "完成蹦极";
+		mes "是非常困难的事。";
+		mes "今天我们聚在这里，庆祝";
+		mes "那些成功完成的人，";
+		mes "他们展现了勇气。";
+		close;
+	}
+	else {
+		mes "[???]";
+		mes "乌 翁巴翁巴翁巴巴 乌 洪巴";
+		mes "翁巴巴巴 翁巴 翁巴。";
+		close;
+	}
+}
+
+umbala,149,165,4	script	乌坦小孩#3	781,{
+	if (event_umbala >= 3) {
+		mes "[克鲁马坦]";
+		mes "从那么高的地方";
+		mes "掉下来，真的很可怕……";
+		mes "但我想你必须这么做，";
+		mes "否则谁都不会";
+		mes "把你当大人。";
+		next;
+		mes "[克鲁马坦]";
+		mes "我想我还不想";
+		mes "这么快变成大人。";
+		mes "但有些和我一样大的孩子";
+		mes "太急着";
+		mes "不想再当孩子了。";
+		close;
+	}
+	else {
+		mes "[???]";
+		mes "翁巴洪巴 乌蒙巴。";
+		mes "翁巴翁巴 翁巴巴。";
+		mes "Umbahumhumbabahum.";
+		close;
+	}
+}
+
+umbala,92,159,4	script	贝尔坦#um	785,{
+	if (event_umbala >= 3) {
+		mes "[贝尔坦]";
+		mes "哟，废物！";
+		next;
+		mes "[贝尔坦]";
+		mes "怎么了，";
+		mes "你这卢恩-米德加尔特人？！？！";
+		mes "我刚才叫你'废物'！";
+		mes "看来你笨得";
+		mes "听不懂！！";
+		mes "哈哈哈哈哈啊哈哈哈哈～！";
+		next;
+		mes "[贝尔坦]";
+		mes "...";
+		mes "呃……哦！";
+		next;
+		mes "[贝尔坦]";
+		mes "看来你听得懂";
+		mes "我的话——！不错，不错！";
+		mes "好吧，为了赔罪，";
+		mes "你想听个笑话吗？";
+		next;
+		mes "[贝尔坦]";
+		mes "好吧，好吧。";
+		mes "来喽。";
+		mes "Ummmm...";
+		mes "好，我想到了一个。";
+		next;
+		switch(rand(1,6)) {
+		case 1:
+			mes "[贝尔坦]";
+			mes "卢恩-米德加尔特人";
+			mes "对野猪说了什么？";
+			mes "...";
+			next;
+			mes "[贝尔坦]";
+			mes "我不知道……";
+			mes "但他们彼此";
+			mes "完全不用费力";
+			mes "就能听懂对方！！！哈哈哈哈～！";
+			mes "懂了吗？因为，那个，";
+			mes "他们都是猪～！";
+			next;
+			mes "[贝尔坦]";
+			mes "不好笑，对吧？";
+			mes "算了。看来我的";
+			mes "幽默感实在";
+			mes "太高深了。";
+			close;
+		case 2:
+			mes "[贝尔坦]";
+			mes "好……驯服兽人女战士";
+			mes "最好的办法是什么？";
+			mes "放弃……？";
+			next;
+			mes "[贝尔坦]";
+			mes "用结婚戒指！";
+			mes "哈哈哈哈哈哈哈！";
+			mes "天啊～我太搞笑了！！";
+			next;
+			mes "[贝尔坦]";
+			mes "...";
+			mes "...Wait.";
+			mes "等一下……";
+			next;
+			mes "[贝尔坦]";
+			mes "这一点都不好笑……";
+			mes "只是非常……";
+			mes "Scary...";
+			mes "毛骨悚然——！";
+			mes "她太丑了！！";
+			close;
+		case 3:
+			mes "[贝尔坦]";
+			mes "其实……算了。";
+			next;
+			mes "[贝尔坦]";
+			mes "我本来想讲一个";
+			mes "关于蛇女伊丝的";
+			mes "敲门笑话，但后来";
+			mes "觉得那种幽默";
+			mes "太低级了。";
+			mes "...Zing!";
+			close;
+		case 4:
+			mes "[贝尔坦]";
+			mes "为什么卢恩-米德加尔特人";
+			mes "SOOoOOoo...";
+			mes "嗯，唔……";
+			mes "也许那个笑话";
+			mes "不太适合现在";
+			mes "这个场合，对吧？";
+			close;
+		case 5:
+			mes "[贝尔坦]";
+			mes "好，为什么";
+			mes "GM 们不喜欢";
+			mes "露面……？放弃了吗？";
+			next;
+			mes "[贝尔坦]";
+			mes "因为那些家伙穿";
+			mes "裙子～！哈哈哈！";
+			mes "天啊，我讲了个笑话！";
+			next;
+			mes "[贝尔坦]";
+			mes "*呼* 好家伙～";
+			mes "天啊。";
+			mes "真是经典。";
+			close;
+		case 6:
+			mes "[贝尔坦]";
+			mes "一个十字军、一个炼金术师和一个初心者走进一家酒馆。";
+			next;
+			mes "[贝尔坦]";
+			mes "他们看见里面有一块牌子，";
+			mes "上面写着'^CC0000魔物援助所：";
+			mes "仅限女士。^000000'";
+			next;
+			mes "[贝尔坦]";
+			mes "'^000099哦！^000000'十字军说。";
+			mes "'^000099幸好我们几个";
+			mes "都是女士。^000000'她走上前";
+			mes "说'^000099载我一程。^000000'";
+			mes "对十字军来说有点没礼貌，";
+			mes "不过算了。";
+			next;
+			mes "[贝尔坦]";
+			mes "不知从哪儿冒出来一只";
+			mes "七彩大嘴鸟，";
+			mes "开口道'^CC0000我载你一程，";
+			mes "宝贝。小心，这条路";
+			mes "可会颠得很厉害。^000000'";
+			mes "然后他们就出发了。";
+			next;
+			mes "[贝尔坦]";
+			mes "接着轮到炼金术师，";
+			mes "她说'^330099我需要";
+			mes "帮忙杀僵尸^000000'，";
+			mes "然后这只气泡虫";
+			mes "不知从哪儿";
+			mes "冒了出来，说道……";
+			next;
+			mes "[贝尔坦]";
+			mes "'^CC0000我来给你火。小心，";
+			mes "宝贝，要是碰错";
+			mes "地方，我可能就会";
+			mes "爆～炸。^000000'于是";
+			mes "他们也开开心心地";
+			mes "上路了。";
+			next;
+			mes "[贝尔坦]";
+			mes "最后，那个初心者";
+			mes "走上前来说道";
+			mes "'^006633我需要找人";
+			mes "组队。^000000'";
+			next;
+			mes "[贝尔坦]";
+			mes "不知从哪里，这个";
+			mes "霍德突然冒出来说……";
+			next;
+			mes "[贝尔坦]";
+			mes "'^CC0000我认识一些人";
+			mes "不过让我查查我的";
+			mes "通讯录。霍德登场！^000000'";
+			mes "....";
+			next;
+			mes "[贝尔坦]";
+			mes ".....";
+			mes "..........";
+			mes "不行吗？";
+			next;
+			mes "[贝尔坦]";
+			mes "好了，来吧！";
+			mes "我可不能一直";
+			mes "都那么搞笑，懂吗？";
+			close;
+		}
+	}
+	else {
+		mes "[????]";
+		mes "温巴温巴 温巴温巴";
+		next;
+		mes "[????]";
+		mes "布瓦布瓦 哈布拉！";
+		mes "温巴温巴 温巴温巴";
+		mes "温巴温巴 温巴温巴";
+		next;
+		mes "[????]";
+		mes "温巴温巴 温巴温巴 呜～";
+		emotion ET_DELIGHT;
+		close;
+	}
+	close;
+}
+
+umbala,194,104,4	script	乌坦小孩#2	787,{
+	if (event_umbala >= 3) {
+		mes "[布尔卡坦]";
+		mes "咦？你是从卢恩米德加尔特来的，";
+		mes "对吧？你玩过蹦极吗？";
+		next;
+		if (select("是:否") == 1) {
+			mes "[布尔卡坦]";
+			mes "哇，真让人吃惊！我从没";
+			mes "想到会有外面的人";
+			mes "懂得怎么玩。";
+			mes "好吧，我就相信你的话，";
+			mes "欢迎你来到我们村子。";
+			close;
+		}
+		mes "[布尔卡坦]";
+		mes "呃，原来如此……";
+		mes "作为成年礼的一部分，";
+		mes "所有乌坦人都必须";
+		mes "完成一次蹦极。等我长大了，";
+		mes "我也要去跳，向大家证明";
+		mes "我是个男子汉！";
+		close;
+	}
+	else {
+		mes "[???]";
+		mes "温巴温巴巴巴 温洪巴。";
+		mes "温巴鲍温巴 温巴温巴？";
+		next;
+		if (select("是:否") == 1) {
+			mes "[???]";
+			mes "温巴，温温巴 温巴巴。";
+			mes "温巴温巴 温温巴巴。";
+			close;
+		}
+		mes "[???]";
+		mes "呃，温巴洪巴 温温巴。";
+		mes "温巴洪巴 温巴巴。";
+		mes "Umbahumhumbabahum.";
+		close;
+	}
+}
+
+umbala,193,208,6	script	乌坦男子#3	789,{
+	if (event_umbala >= 3) {
+		mes "[维坦]";
+		mes "我年轻时也跳过蹦极，";
+		mes "那时的事我记得很清楚……";
+		mes "那是我第一次跳，";
+		mes "大地迎面朝我扑来……";
+		mes "有那么一瞬间，我以为自己";
+		mes "要把命送掉了……";
+		next;
+		mes "[维坦]";
+		mes "但成功之后，我真是";
+		mes "为自己感到骄傲～";
+		mes "有些乌坦人可能不同意，但";
+		mes "我认为蹦极是";
+		mes "成年礼中很重要的";
+		mes "一部分。";
+		close;
+	}
+	else {
+		mes "[???]";
+		mes "温巴洪巴 温温巴。";
+		mes "温巴洪巴 温巴巴。";
+		mes "Umbahumhumbabahum.";
+		close;
+	}
+}
+
+umbala,139,205,4	script	乌坦男子#5	785,{
+	if (event_umbala >= 3) {
+		mes "[朱尔坦]";
+		mes "我好久没见过";
+		mes "卢恩米德加尔特人了～！";
+		mes "欢迎你，异乡人。";
+		next;
+		mes "[朱尔坦]";
+		mes "我们乌坦人把这里用来";
+		mes "蹦极。许多乌坦";
+		mes "年轻人在这里展现";
+		mes "勇气、赢得自尊，";
+		mes "并在这个地方";
+		mes "成为了成年人。";
+		next;
+		mes "[朱尔坦]";
+		mes "哦……对。有几个倒霉的人";
+		mes "在蹦极失误后";
+		mes "摔死了。还有";
+		mes "几个人在看着别人跳下时";
+		mes "心脏病发作了……";
+		next;
+		mes "[朱尔坦]";
+		mes "So...";
+		mes "四处走动时要小心，";
+		mes "可别掉下去。";
+		mes "如果你想试试蹦极，";
+		mes "最好先做好准备。";
+		next;
+		mes "[朱尔坦]";
+		mes "哦……对。据说，";
+		mes "水里有只";
+		mes "不明生物……";
+		mes "所以你要是掉进水里，";
+		mes "就赶紧离开那儿～！";
+		close;
+	}
+	else {
+		mes "[???]";
+		mes "温巴 温巴！";
+		mes "温巴温巴 巴巴巴 温巴。";
+		mes "巴巴姆 乌坦 温巴 温巴巴";
+		mes "温巴巴 哼。";
+		mes "温温洪巴 温巴温巴 温巴巴。";
+		next;
+		mes "[???]";
+		mes "温鲍姆 马巴巴布 温巴，";
+		mes "温巴巴坦 温巴温巴。";
+		mes "巴，温巴温鲍姆姆巴鲍姆。";
+		mes "温巴巴 温鲍姆姆姆。";
+		mes "Umbaumbaubahum.";
+		close;
+	}
+}
+
+um_in,158,71,3	script	乌坦村民#um	787,{
+	if (event_umbala >= 3) {
+		mes "[穆塔库坦]";
+		mes "汶巴拉有好多好多的树！";
+		mes "我穆塔库坦，最喜欢树了。";
+		mes "嘿嘿~";
+		next;
+		mes "[穆塔库坦]";
+		mes "有一棵特别的树，我最";
+		mes "喜欢它了！那是汶巴拉";
+		mes "最古老、最大的树！";
+		mes "不对，我想它是世界上";
+		mes "最古老、最大的树……";
+		mes "我敢肯定！";
+		next;
+		mes "[穆塔库坦]";
+		mes "它真的又大又老！";
+		mes "它太高了，连我都还没";
+		mes "见过树顶。我以前";
+		mes "试过爬上去，可总是";
+		mes "到不了顶……尽管";
+		mes "我很擅长爬树。";
+		next;
+		mes "[穆塔库坦]";
+		mes "哦，还有那棵树上的果子";
+		mes "非常好吃！我敢说那是";
+		mes "世界上最好吃的果子～";
+		mes "又甜又酸……吃下去就";
+		mes "让人神清气爽、";
+		mes "精神百倍～！";
+		next;
+		mes "[穆塔库坦]";
+		mes "关于这种果子有个";
+		mes "神奇的故事。我们村";
+		mes "有位老人得了";
+		mes "致命的病……什么都";
+		mes "似乎都无济于事……";
+		next;
+		mes "[穆塔库坦]";
+		mes "但他服用了用这棵树的";
+		mes "落叶磨成的药之后，";
+		mes "又变得健康强壮了！我想是神";
+		mes "把这棵树赐给我们，";
+		mes "让它保佑我们。";
+		next;
+		mes "[穆塔库坦]";
+		mes "它就在我们村子北边，";
+		mes "你何不去亲眼看看";
+		mes "这棵树的雄伟呢？";
+	}
+	else {
+		mes "[??????]";
+		mes "温巴温巴 温巴巴 翁哈！";
+		mes "温巴 温巴 温巴巴 温巴";
+		mes "温巴 温巴 温巴";
+		mes "温巴巴 温巴 温巴巴";
+		next;
+		mes "[??????]";
+		mes "....";
+		mes "......";
+		mes "温巴 巴鲁加？";
+		mes "温巴 巴鲁乌乌乌加？";
+		next;
+		mes "[??????]";
+		mes "...";
+		mes "穆加哈鲁 舒鲁鲁。";
+	}
+	close;
+}
+
+umbala,140,197,1	script	蹦极	-1,0,0,{
+OnTouch_:
+	switch(rand(1,3)) {
+	case 1:
+		percentheal -100,0;
+		mapannounce "umbala","蹦极："+strcharinfo(0)+"：呀啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊～～～～～～～",bc_map;
+		end;
+	case 2:
+		percentheal -50,0;
+		mapannounce "umbala","蹦极："+strcharinfo(0)+"：呜啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊～～～～～～！",bc_map;
+		end;
+	case 3:
+		if (rand(1,2) == 2) {
+			percentheal -99,0;
+			warp "nif_in",69,15;
+		}
+		end;
+	}
+}
+
+umbala,136,195,0	script	 #jump	-1,1,1,{
+OnTouch_:
+	warp "umbala",145,166;
+	end;
+}

@@ -1,0 +1,203 @@
+//===== rAthena Script ======================================= 
+//= Cool Event Corp. Staff
+//===== By: ================================================== 
+//= Gepard
+//===== Current Version: ===================================== 
+//= 1.6
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Cool Event Corp. Staff (Save, Storage & Pushcart Service)
+//= in Arunafeltz Region.
+//===== Additional Comments: ================================= 
+//= 1.0 First version, iRO Sakray X.4 [Gepard]
+//= 1.1 Optimized, fixed a conditional bug [Lupus]
+//= 1.1a Redo back. It wasn't a bug [Lupus]
+//= 1.2 Added Rachel Cool Event Corp. Staff [Playtester]
+//= 1.3 Added cutins, closed 卡普拉 Password exploit
+//=     until we got a client/packet based password support [Lupus]
+//= 1.4 Added Veins Cool Event Corp. Staff. [L0ne_W0lf]
+//= 1.5 Cool Event Corp staff is now more iRO like. [L0ne_W0lf]
+//= 1.6 Wrote a basic function and added VIP features. [Euphy]
+//============================================================ 
+
+//callfunc "F_CoolEventCorp","<menu>","<location>","<save map>",<x>,<y>,"<warp map>";
+function	script	F_CoolEventCorp	{
+	cutin "zonda_01",2;
+	mes "[酷炫活动公司职员]";
+	mes "欢迎来到酷炫活动公司。";
+	mes "我们的职员始终努力";
+	mes "超越您的期待";
+	mes "提供优质服务。那么";
+	mes "今天有什么可以为您效劳的？";
+	next;
+	switch(select(getarg(0))) {
+	case 1:
+		mes "[酷炫活动公司职员]";
+		mes "您的重生点";
+		mes "已保存在此处";
+		mes getarg(1)+".";
+		mes "感谢您使用";
+		mes "酷炫活动公司的服务~";
+		savepoint getarg(2),getarg(3),getarg(4),1,1;
+		close2;
+		break;
+	case 2:
+		mes "[酷炫活动公司职员]";
+		if(!callfunc("F_CanOpenStorage")){
+			mes "很抱歉，你";
+			mes "需要初心者的";
+			mes "基本技能等级 6 才能";
+			mes "使用仓库服务。";
+			close2;
+			break;
+		}
+		if(Zeny < 40){
+			mes "抱歉，您的钱";
+			mes "拥有足够的 Zeny 来使用";
+			mes "仓库服务。我们的";
+			mes "仓库使用费是 40 Zeny。";
+			close2;
+			break;
+		}
+		set Zeny, Zeny - 40;
+		mes "我这就为您打开您的";
+		mes "个人仓库。";
+		mes "感谢您支持酷炫";
+		mes "活动公司，使用我们的";
+		mes "服务。祝您愉快~";
+		callfunc("F_CheckKafCode");	//check your storage password, if set
+		close2;
+		openstorage;
+		break;
+	case 3:
+		mes "请选择";
+		mes "您的目的地。";
+		next;
+		if (VIP_SCRIPT && !vip_status(VIP_STATUS_ACTIVE))
+			set .@cost,4400;
+		else
+			set .@cost,2200;
+		.@destination$ = getarg(5);
+		if (select(.@destination$ +"->"+ .@cost +"Zeny:取消") == 1) {
+			if ((countitem(7060) != 0) || (Zeny >= .@cost)) {
+				if (countitem(7060) != 0) {
+					delitem 7060,1; //Warp_Free_Ticket
+				}
+				else {
+					set Zeny,Zeny-.@cost;
+				}
+				if (.@destination$ == "Veins") warp "veins",205,101;
+				else if (.@destination$ == "Rachel") warp "rachel",115,125;
+				cutin "",255;
+				end;
+			}
+			else {
+				mes "[酷炫活动公司职员]";
+				mes "抱歉，您没有";
+				mes "足够的 Zeny 支付传送";
+				mes "服务。传送";
+				mes "至"+ .@destination$ +"费用为"+.@cost+"Zeny。";
+			}
+		}
+		close2;
+		break;
+	case 4:
+		mes "[酷炫活动公司职员]";
+		if(BaseClass != Job_Merchant){
+			mes "抱歉，";
+			mes "手推车租赁服务";
+			if (checkre(0))
+				mes "仅向商人系职业提供。";
+			else {
+				mes "仅向商人、";
+				mes "铁匠、神工匠、";
+				mes "炼金术师与创造者提供。";
+			}
+			close2;
+			break;
+		}
+		if(getskilllv("MC_PUSHCART") == 0){
+			mes "只有在学会";
+			mes "推车技能后才能租用推车。";
+			close2;
+			break;
+		}
+		if(checkcart() == 1){
+			mes "您已经";
+			mes "装备了推车。";
+			mes "很遗憾，我们无法";
+			mes "向每位顾客同时";
+			mes "出租超过一辆。";
+			close2;
+			break;
+		}
+		if(countitem(7061)){
+			delitem 7061,1; //Cart_Free_Ticket
+			setcart;
+			close2;
+			break;
+		}
+		mes "手推车租赁";
+		mes "费用是 800 Zeny。您";
+		mes "要租一辆手推车吗？";
+		next;
+		if(select("租手推车:取消") == 1){
+			if(Zeny < 800){
+				mes "[酷炫活动公司职员]";
+				mes "很抱歉，你";
+				mes "没有足够的";
+				mes "Zeny 支付手推车的";
+				mes "800 Zeny 租赁费。";
+			} else {
+				set Zeny, Zeny - 800;
+				setcart;
+			}
+		}
+		close2;
+		break;
+	case 5:
+		callfunc("F_SetKafCode","[Cool Event Corp. Staff]","Cool Event Corp.");
+		//the function closes msg and removes cutins
+	case 6:
+	default:
+		mes "[酷炫活动公司职员]";
+		mes "酷炫活动公司始终";
+		mes "努力为客户";
+		mes "提供最好的服务。";
+		mes "帮助我们成为最好的：";
+		mes "请提供您的意见";
+		mes "与坦诚的反馈。谢谢。";
+		close2;
+	}
+	cutin "", 255;
+	end;
+}
+
+lighthalzen,94,248,3	script	酷炫活动公司职员::CoolEventCorpStaffLighthalzen	4_M_ZONDAMAN,{
+	callfunc "F_CoolEventCorp",
+		"Save:Use Storage::Rent a Pushcart:Storage Password Service:Cancel",
+		"in the town of Lighthalzen","lighthalzen",95,240;
+	end;
+}
+
+hugel,88,168,4	script	酷炫活动公司职员::CoolEventCorpStaffHugel	4_M_ZONDAMAN,{
+	callfunc "F_CoolEventCorp",
+		"Save:Use Storage::Rent a Pushcart:Storage Password Service:Cancel",
+		"in the village of Hugel","hugel",96,155;
+	end;
+}
+
+rachel,109,138,5	script	酷炫活动公司职员::CoolEventCorpStaffRachel	4_M_ZONDAMAN,{
+	callfunc "F_CoolEventCorp",
+		"Save:Use Storage:Teleport Service:Rent a Pushcart:Storage Password Service:Cancel",
+		"in the town of Rachel","rachel",113,137,"Veins";
+	end;
+}
+
+veins,208,128,5	script	酷炫活动公司职员::CoolEventCorpStaffVeins	4_M_ZONDAMAN,{
+	callfunc "F_CoolEventCorp",
+		"Save:Use Storage:Teleport Service:Rent a Pushcart:Storage Password Service:Cancel",
+		"in the town of Veins","veins",204,103,"Rachel";
+	end;
+}

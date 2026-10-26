@@ -1,0 +1,341 @@
+//===== rAthena Script ======================================= 
+//= 卡普拉 Teleportation Services
+//===== Changelogs: ==========================================
+//= 1.0 First Version. [JohnnyPlayy]
+//===== Description: ========================================= 
+// Texts from this script were translated according to KRO
+//============================================================
+
+function	script	F_KafTeleDoram	{
+	.@menu_choice = getarg(0);
+
+	cutin "kafra_do01", 2;
+	mes "[卡普拉职员]";
+	mes "Welcome.";
+	mes "卡普拉服务永远陪伴在您身边。";
+	mes "请选择目的地。";
+	next;
+	switch(.@menu_choice) {
+	case 1: // Alberta
+		switch( select( "裴扬东南旷野", "艾尔贝沉船", "Cancel.") ) {
+		case 1:
+			callsub( S_Zone, "Southeast Field of Payon", 250,13 );
+			warp "pay_fild06",199,152;
+			end;
+		case 2:
+			callsub( S_Zone, "Sunken Ship", 50,3 );
+			warp "alb2trea",55,63;
+			end;
+		case 3:
+			callfunc( "F_KafEnd",0,0 );
+		}
+	case 2: // Aldebaran
+		switch( select( "艾尔帕兰边界", "Cancel.") ) {
+		case 1:
+			callsub( S_Zone, "Aldebaran Border", 50,3 );
+			warp "yuno_fild01",194,150;
+			end;
+		case 2:
+			callfunc( "F_KafEnd",0,0 );
+		}
+	case 3: // Einbroch
+		switch( select( "深渊峡谷西边旷野", "里希塔乐镇北边旷野", "Cancel.") ) {
+		case 1:
+			callsub( S_Zone, "West Field of the Abyss Valley", 600,30 );
+			warp "ein_fild06",199,152;
+			end;
+		case 2:
+			callsub( S_Zone, "North Field of Lighthalzen", 1400,70 );
+			warp "lhz_fild01",244,130;
+			end;
+		case 3:
+			callfunc( "F_KafEnd",0,0 );
+		}
+	case 4: // Geffen
+		switch( select( "吉芬塔地下入口", "妙勒尼山脉北边旷野", "兽人村落", "克雷斯特汉姆古城入口", "Cancel.") ) {
+		case 1:
+			callsub( S_Zone, "Geffen Tower Underground Entrance", 300,15 );
+			warp "gef_tower",153,46;
+			end;
+		case 2:
+			callsub( S_Zone, "North Field of Mount Mjolnir", 150,8 );
+			warp "mjolnir_02",172,195;
+			end;
+		case 3:
+			callsub( S_Zone, "Orc Village", 100,5 );
+			warp "gef_fild10",150,301;
+			end;
+		case 4:
+			callsub( S_Zone, "Glast Heim Entrance", 6666,444 );
+			warp "gef_fild06",34,270;
+			end;
+		case 5:
+			callfunc( "F_KafEnd",0,0 );
+		}
+	case 5: // Lighthalzen
+		switch( select( "里希塔乐镇北边旷野", "Cancel.") ) {
+		case 1:
+			callsub( S_Zone, "North Field of Lighthalzen", 200,10 );
+			warp "lhz_fild01",244,130;
+			end;
+		case 2:
+			callfunc( "F_KafEnd",0,0 );
+		}
+	case 6: // Morocc
+		switch( select( "梦罗克废墟金字塔", "苏克拉特沙漠史芬克斯", "梦罗克东南旷野", "克魔岛海边", "亡者国度", "Cancel.") ) {
+		case 1:
+			callsub( S_Zone, "Morocc Ruins Pyramid", 50,3 );
+			warp "moc_ruins",100,140;
+			end;
+		case 2:
+			callsub( S_Zone, "Sograt Desert Sphinx", 50,3 );
+			warp "moc_fild19",132,100;
+			end;
+		case 3:
+			callsub( S_Zone, "Southeast Morocc Field", 100,5 );
+			warp "moc_fild11",267,100;
+			end;
+		case 4:
+			callsub( S_Zone, "Comodo Beaches", 250,13 );
+			warp "cmd_fild02",89,83;
+			end;
+		case 5:
+			callsub( S_Zone, "Kingdom of the Dead", 12121,666 );
+			warp "niflheim",220,141;
+			end;
+		case 6:
+			callfunc( "F_KafEnd",0,0 );
+		}
+	case 7: // Payon
+		switch( select( "弓箭手村", "裴扬东南旷野", "普隆德拉南边旷野", "Cancel.") ) {
+		case 1:
+			callsub( S_Zone, "Archer's Village", 50,3 );
+			warp "pay_arche",69,130;
+			end;
+		case 2:
+			callsub( S_Zone, "Southeast Payon Field", 100,5 );
+			warp "pay_fild10",203,331;
+			end;
+		case 3:
+			callsub( S_Zone, "Prontera South Field", 150,8 );
+			warp "moc_fild02",109,144;
+			end;
+		case 4:
+			callfunc( "F_KafEnd",0,0 );
+		}
+	case 8: // Prontera
+		switch( select( "普隆德拉西南旷野", "普隆德拉北边旷野", "柏伊亚岚岛", "普隆德拉南边旷野", "Cancel.") ) {
+		case 1:
+			callsub( S_Zone, "Southwestern Prontera Field", 100,5 );
+			warp "prt_fild07",250,257;
+			end;
+		case 2:
+			callsub( S_Zone, "Prontera North Field", 150,8 );
+			warp "prt_fild01",194,123;
+			end;
+		case 3:
+			callsub( S_Zone, "Byalan Island", 150,8 );
+			warp "izlu2dun",63,129;
+			end;
+		case 4:
+			callsub( S_Zone, "Prontera South Field", 150,8 );
+			warp "moc_fild02",109,144;
+			end;
+		case 5:
+			callfunc( "F_KafEnd",0,0 );
+		}
+	case 9: // Rachel
+		switch( select( "拉赫冰洞穴南边旷野", "托尔火山东边旷野", "Cancel.") ) {
+		case 1:
+			callsub( S_Zone, "Southern Ice Cave Field", 600,30 );
+			warp "ra_fild04",214,220;
+			end;
+		case 2:
+			callsub( S_Zone, "Thor Volcano East Field", 600,30 );
+			warp "ve_fild04",198,174;
+			end;
+		case 3:
+			callfunc( "F_KafEnd",0,0 );
+		}
+	case 10: // Veins
+		switch( select( "托尔火山东边旷野", "伯仁斯南边旷野", "Cancel.") ) {
+		case 1:
+			callsub( S_Zone, "Thor Volcano East Field", 400,20 );
+			warp "ra_fild04",198,174;
+			end;
+		case 2:
+			callsub( S_Zone, "South Veins Field", 200,10 );
+			warp "ve_fild07",85,255;
+			end;
+		case 3:
+			callfunc( "F_KafEnd",0,0 );
+		}
+	case 11: // Yuno
+		switch( select( "深渊峡谷西边旷野", "深渊峡谷幻影挖掘地", "朱诺高原岩浆洞穴", "深渊湖水西边旷野", "Cancel.") ) {
+		case 1:
+			callsub( S_Zone, "West Field of the Abyss Valley", 400,20 );
+			warp "ein_fild06",199,152;
+			end;
+		case 2:
+			callsub( S_Zone, "Phantasmagorika Excavation of the Abyss Valley", 400,20 );
+			warp "yuno_fild07",225,145;
+			end;
+		case 3:
+			callsub( S_Zone, "Magma Dungeon Juno Plateau", 400,20 );
+			warp "yuno_fild03",201,152;
+			end;
+		case 4:
+			callsub( S_Zone, "West Field of Abyss Lake", 800,40 );
+			warp "hu_fild04",186,78;
+			end;
+		case 5:
+			callfunc( "F_KafEnd",0,0 );
+		}
+	}
+
+S_Zone:
+	.@zeny_req = getarg(1);
+	.@item_req = getarg(2);
+
+	mes "[卡普拉职员]";
+	mes getarg(0) + "的费用为^ff0000" + .@zeny_req + " Zenys^000000 or ^ff0000" + .@item_req + " Malang Sp Can^000000.";
+	next;
+	switch( select( .@zeny_req + "Zeny", .@item_req + "绵绵岛特制罐头", "取消" ) ) {
+	case 1:
+		if (Zeny < .@zeny_req)
+			break;
+		Zeny -= .@zeny_req;
+		return;
+	case 2:
+		if (countitem(12636) < .@item_req)
+			break;
+		delitem 12636,.@item_req; // Malang_Sp_Can
+		return;
+	case 3:
+		mes "[卡普拉职员]";
+		mes "能告诉我其他服务区域吗？";
+		close3;
+	}
+	mes "[卡普拉职员]";
+	mes "先生！您拥有的价值不足以支付我们的要求。";
+	mes "请稍后再来确认。";
+	close3;
+}
+
+moc_para01,35,23,3	script	卡普拉传送#eden	4_F_DRKAFRA01,{
+	cutin "kafra_do01", 2;
+	mes "[卡普拉职员]";
+	mes "Welcome.";
+	mes "卡普拉服务永远陪伴在您身边。";
+	next;
+	mes "[卡普拉职员]";
+	mes "为回馈冒险者的支持，卡普拉公司联合乐园团，为^ff000039级以下的初心冒险者^000000提供免费服务。";
+	next;
+	if (BaseLevel > 40) {
+		mes "[卡普拉职员]";
+		mes "我们不向^ff000040级以上^000000的冒险者提供免费传送服务。";
+		mes "请在城市中寻找卡普拉传送服务。";
+		close3;
+	}
+	mes "[卡普拉职员]";
+	mes "请选择目的地。";
+	next;
+	switch( select( "普隆德拉西边旷野", "普隆德拉西南旷野", "普隆德拉湖泊旷野", "裴扬地下城入口", "伊斯鲁得西南旷野", "Cancel.") ) {
+	case 1:
+		mes "[卡普拉职员]";
+		mes "普隆德拉旷野：";
+		mes "普隆德拉西边旷野是一片山地旷野，可以从那里进入^ff0000普隆德拉下水道^000000。";
+		mes "那里栖息着^ff0000蜂兵^000000，初心冒险者要多加小心！";
+		next;
+		callsub( S_Zone );
+		warp "prt_fild05",276,241;
+		end;
+	case 2:
+		mes "[卡普拉职员]";
+		mes "普隆德拉旷野：";
+		mes "普隆德拉西南旷野是^ff0000摇滚蝗虫^000000栖息的地方。";
+		next;
+		callsub( S_Zone );
+		warp "prt_fild07",250,257;
+		end;
+	case 3:
+		mes "[卡普拉职员]";
+		mes "普隆德拉旷野：";
+		mes "普隆德拉湖泊旷野是^ff0000蜗牛^000000栖息的地方。";
+		next;
+		callsub( S_Zone );
+		warp "prt_fild04",204,109;
+		end;
+	case 4:
+		mes "[卡普拉职员]";
+		mes "弓箭手村：";
+		mes "裴扬洞穴是个可怕的地方，那里有大量的^ff0000腐尸^000000和^ff0000邪骸战士^000000。";
+		next;
+		callsub( S_Zone );
+		warp "pay_arche",69,130;
+		end;
+	case 5:
+		mes "[卡普拉职员]";
+		mes "苏克拉特沙漠：";
+		mes "这里位于普隆德拉西南方、伊斯鲁得西南方，到处都是^ff0000摩卡^000000和^ff0000大嘴鸟^000000。";
+		next;
+		callsub( S_Zone );
+		warp "moc_fild01",232,250;
+		end;
+	case 6:
+		callfunc( "F_KafEnd",0,0 );
+	}
+S_Zone:
+	switch( select( "我想去。", "我想留下。" ) ) {
+	case 1:
+		return;
+	case 2:
+		mes "[卡普拉职员]";
+		mes "要看看我们的其他服务吗？";
+		close3;
+	}	
+}
+
+alberta,33,239,5	script	卡普拉传送#alberta	4_F_DRKAFRA01,{
+	callfunc "F_KafTeleDoram",1;
+}
+
+aldebaran,136,122,5	script	卡普拉传送#aldebaran	4_F_DRKAFRA01,{
+	callfunc "F_KafTeleDoram",2;
+}
+
+einbroch,246,205,5	script	卡普拉传送#einbroch	4_F_DRKAFRA01,{
+	callfunc "F_KafTeleDoram",3;
+}
+
+geffen,115,66,5	script	卡普拉传送#geffen	4_F_DRKAFRA01,{
+	callfunc "F_KafTeleDoram",4;
+}
+
+lighthalzen,167,103,5	script	卡普拉传送#lighthalzen	4_F_DRKAFRA01,{
+	callfunc "F_KafTeleDoram",5;
+}
+
+morocc,155,257,6	script	卡普拉传送#morocc	4_F_DRKAFRA01,{
+	callfunc "F_KafTeleDoram",6;
+}
+
+payon,176,104,5	script	卡普拉传送#payon	4_F_DRKAFRA01,{
+	callfunc "F_KafTeleDoram",7;
+}
+
+prontera,143,87,5	script	卡普拉传送#prontera	4_F_DRKAFRA01,{
+	callfunc "F_KafTeleDoram",8;
+}
+
+rachel,116,139,5	script	卡普拉传送#rachel	4_F_DRKAFRA01,{
+	callfunc "F_KafTeleDoram",9;
+}
+
+veins,196,133,5	script	卡普拉传送#veins	4_F_DRKAFRA01,{
+	callfunc "F_KafTeleDoram",10;
+}
+
+yuno,143,184,5	script	卡普拉传送#yuno	4_F_DRKAFRA01,{
+	callfunc "F_KafTeleDoram",11;
+}

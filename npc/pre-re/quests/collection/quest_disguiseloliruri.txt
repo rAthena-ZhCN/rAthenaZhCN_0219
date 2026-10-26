@@ -1,0 +1,150 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= Masao
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Custom Version.
+//= Repeatable EXP Quest : Kill 50 Disguise or Loli Ruri.
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+nif_fild01,332,327,4	script	亡者	795,{
+
+	if (checkquest(60173) != -1) {
+		if (checkquest(60173,HUNTING) != 2 ) {
+			mes "[亡者]";
+			mes "你猎杀完50只假面鬼了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[亡者]";
+				mes "唔，我觉得你还没猎杀到50只。";
+				close;
+			case 2:
+				mes "[亡者]";
+				mes "记住，我需要人帮忙猎杀假面鬼，去猎杀50只吧。";
+				close;
+			case 3:
+				mes "[亡者]";
+				mes "你确定要停止猎杀吗？";
+				mes "你目前的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[亡者]";
+					mes "那好吧，如果你改变主意，就回到这里来。";
+					erasequest 60173;
+					close;
+				case 2:
+					mes "[亡者]";
+					mes "请猎杀50只假面鬼，让这里成为大家可以来获取经验的地方。";
+					close;
+				}
+			}
+		}
+		mes "[亡者]";
+		mes "了不起，你做得真快。";
+		getexp 140600,95800;
+		erasequest 60173;
+		close;
+	}
+	if (checkquest(60176) != -1) {
+		if (checkquest(60176,HUNTING) != 2 ) {
+			mes "[亡者]";
+			mes "你猎杀完50只银月魔女了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[亡者]";
+				mes "唔，我觉得你还没猎杀到50只。";
+				close;
+			case 2:
+				mes "[亡者]";
+				mes "记住，我需要人帮忙猎杀银月魔女，去猎杀50只吧。";
+				close;
+			case 3:
+				mes "[亡者]";
+				mes "你确定要停止猎杀吗？";
+				mes "你目前的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[亡者]";
+					mes "那好吧，如果你改变主意，就回到这里来。";
+					erasequest 60176;
+					close;
+				case 2:
+					mes "[亡者]";
+					mes "请猎杀50只银月魔女，让这里成为大家可以来获取经验的地方。";
+					close;
+				}
+			}
+		}
+		mes "[亡者]";
+		mes "了不起，你做得真快。";
+		getexp 332000,239500;
+		erasequest 60176;
+		close;
+	}
+	if ((BaseLevel > 59) && (BaseLevel < 99)) {
+		mes "[亡者]";
+		mes "哦，太好了！";
+		mes "你是来帮我的，对吧？";
+		mes "如果不是，我真不知道该怎么对付这里的怪物！";
+		next;
+		switch(select("当然:不")) {
+		case 1:
+			mes "[亡者]";
+			mes "太好了！我一看到你就知道可以依靠你！";
+			mes "我需要你减少这张地图上正在肆虐的怪物数量！";
+			mes "这附近有太多假面鬼和银月魔女，低等级的玩家根本无法在这里获得好的经验。";
+			next;
+			mes "[亡者]";
+			mes "那么，你想替我猎杀哪种怪物？";
+			next;
+			switch(select("假面鬼:银月魔女:取消")) {
+			case 1:
+				if (BaseLevel > 90) {
+					mes "[亡者]";
+					mes "非常感谢你帮忙对付假面鬼！";
+					mes "目前情况已经稳定，我不再需要你帮忙猎杀它们了。";
+					close;
+				}
+				mes "[亡者]";
+				mes "猎杀50只假面鬼，完成后告诉我。我会为你的努力给予报酬。";
+				setquest 60173;
+				close;
+			case 2:
+				if (BaseLevel > 98) {
+					mes "[亡者]";
+					mes "非常感谢你帮忙对付银月魔女！";
+					mes "目前情况已经稳定，我不再需要你帮忙猎杀它们了。";
+					close;
+				}
+				mes "[亡者]";
+				mes "猎杀50只银月魔女，完成后告诉我。我会为你的努力给予报酬。";
+				setquest 60176;
+				close;
+			case 3:
+				mes "[亡者]";
+				mes "如果你改变主意，请回来。";
+				close;
+			}
+		case 2:
+			mes "[亡者]";
+			mes "如果你改变主意，请回来。";
+			close;
+		}
+	}
+	mes "[亡者]";
+	mes "哎呀，哎呀！";
+	next;
+	mes "[亡者]";
+	mes "抱歉，我现在没法说话，我正痛苦不堪，这些该死的假面鬼和银月魔女要杀了我。";
+	close;
+}

@@ -1,0 +1,227 @@
+//===== rAthena Script =======================================
+//= Lighthalzen Guides
+//===== By: ==================================================
+//= MasterOfMuppets; L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Guides for the City of Lighthalzen
+//===== Additional Comments: =================================
+//= 1.0 First Version [MasterOfMuppets]
+//= 1.1 Removed Duplicates [Silent]
+//= 1.2 Rescripted to official 10.3 standards. [L0ne_W0lf]
+//============================================================
+
+lighthalzen,207,310,5	script	向导#lhz::LhzGuide	852,{
+	cutin "ein_soldier",2;
+	mes "[里希塔乐镇向导]";
+	mes "欢迎来到里希塔乐镇，";
+	mes "这座企业城邦。";
+	mes "如果你需要任何指引";
+	mes "在城里，尽管";
+	mes "来问我，我会";
+	mes "尽力帮助你。";
+	set .@loop1,1;
+	while (.@loop1) {
+		next;
+		switch(select("城市向导:移除迷你地图标记:说明:取消")) {
+		case 1:
+			mes "[里希塔乐镇向导]";
+			mes "请注意，我负责";
+			mes "提供有关里希塔乐镇";
+			mes "西区的信息。";
+			mes "西区的信息。现在，请";
+			mes "选择你想";
+			mes "进一步了解的地点。";
+			if (.@compass_check == 0) {
+				next;
+				mes "[里希塔乐镇向导]";
+				mes "不过在此之前，";
+				mes "需要我为你";
+				mes "在迷你地图上";
+				mes "标记地点吗？";
+				next;
+				if (select("是。:否。") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				switch(select("^FF0000雷肯贝尔公司^000000:火车站:警察局:银行:旅馆:机场:商人公会:珠宝店:武器店:百货商店:取消")) {
+				case 1:
+					mes "[里希塔乐镇向导]";
+					mes "雷肯贝尔公司";
+					mes "是黑森林共和国";
+					mes "最大的企业，";
+					mes "总部位于里希塔乐镇";
+					mes "西北部。你不会";
+					mes "错过那栋总部大楼的。";
+					if (.@compass_check)
+						viewpoint 1,102,247,2,0xFF0000;
+					break;
+				case 2:
+					mes "[里希塔乐镇向导]";
+					mes "火车站位于";
+					mes "城市中心，";
+					mes "那里有";
+					mes "直达艾音布罗克的铁路。";
+					if (.@compass_check)
+						viewpoint 1,233,164,3,0xFF00FF;
+					break;
+				case 3:
+					mes "[里希塔乐镇向导]";
+					mes "我们的警察局就在";
+					mes "城市中心以北。";
+					mes "如果发现任何可疑人物或";
+					mes "可疑人物或";
+					mes "活动，或遇到任何";
+					mes "问题，请务必";
+					if (.@compass_check)
+						viewpoint 1,236,276,4,0x99FFFF;
+					break;
+				case 4:
+					mes "[里希塔乐镇向导]";
+					mes "银行就位于";
+					mes "里希塔乐镇警察局";
+					mes "的正对面，";
+					mes "仔细想想，";
+					mes "这样安排其实挺不错的。^FFFFFFspacer^000000";
+					if (.@compass_check)
+						viewpoint 1,198,257,5,0x0000FF;
+					break;
+				case 5:
+					mes "[里希塔乐镇向导]";
+					mes "我们的旅馆位于";
+					mes "南广场的正中央。";
+					mes "凭借优质的服务和";
+					mes "豪华的住宿条件，";
+					mes "这家旅馆非常受欢迎。";
+					if (.@compass_check)
+						viewpoint 1,159,133,6,0x00FF00;
+					break;
+				case 6:
+					mes "[里希塔乐镇向导]";
+					mes "机场位于中央大道";
+					mes "的最西端。";
+					mes "乘坐飞空艇，";
+					mes "你可以前往";
+					mes "黑森林共和国的任何地方。";
+					if (.@compass_check)
+						viewpoint 1,267,75,7,0x00FF00;
+					break;
+				case 7:
+					mes "[里希塔乐镇向导]";
+					mes "商人公会位于";
+					mes "里希塔乐镇的";
+					mes "西南部。";
+					if (.@compass_check)
+						viewpoint 1,74,53,8,0xFF99FF;
+					break;
+				case 8:
+					mes "[里希塔乐镇向导]";
+					mes "珠宝店位于";
+					mes "南广场的";
+					mes "正西侧。";
+					if (.@compass_check)
+						viewpoint 1,93,110,9,0xFF9900;
+					break;
+				case 9:
+					mes "[里希塔乐镇向导]";
+					mes "武器店位于";
+					mes "中央大道的";
+					mes "尽头。";
+					mes "如果你打算";
+					mes "在这一带认真";
+					mes "冒险，至少值得一看。";
+					if (.@compass_check)
+						viewpoint 1,196,46,10,0x330033;
+					break;
+				case 10:
+					mes "[里希塔乐镇向导]";
+					mes "百货商店位于";
+					mes "里希塔乐镇的中央，";
+					mes "是这里最大、";
+					mes "最方便的";
+					mes "一站式购物场所。";
+					if (.@compass_check)
+						viewpoint 1,199,163,11,0xFFFF00;
+					break;
+				case 11:
+					mes "[里希塔乐镇向导]";
+					mes "如果你不再希望";
+					mes "迷你地图上显示";
+					mes "地点标记，请让我";
+					mes "地点标记，请让我";
+					mes "地图标记''。";
+					set .@loop2,0;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,102,247,2,0xFF0000;
+			viewpoint 2,233,164,3,0xFF00FF;
+			viewpoint 2,236,276,4,0x99FFFF;
+			viewpoint 2,198,257,5,0x0000FF;
+			viewpoint 2,159,133,6,0x00FF00;
+			viewpoint 2,267,75,7,0x00FF00;
+			viewpoint 2,74,53,8,0xFF99FF;
+			viewpoint 2,93,110,9,0xFF9900;
+			viewpoint 2,196,46,10,0x330033;
+			viewpoint 2,199,163,11,0xFFFF00;
+			set .@compass_check,0;
+			break;
+		case 3:
+			mes "[里希塔乐镇向导]";
+			mes "魔法与科技的";
+			mes "进步让我们得以";
+			mes "更新信息系统，";
+			mes "现在可以在迷你地图上";
+			mes "标记地点，";
+			mes "让导航更加方便。";
+			next;
+			mes "[里希塔乐镇向导]";
+			mes "你的迷你地图位于";
+			mes "屏幕的右上角。";
+			mes "如果看不到，";
+			mes "请按 Ctrl + Tab";
+			mes "键，或点击基本状态窗口中的''地图''按钮。";
+			next;
+			mes "[里希塔乐镇向导]";
+			mes "在迷你地图上，";
+			mes "点击''+''和''-''";
+			mes "符号即可放大和";
+			mes "缩小迷你地图。我们";
+			mes "祝愿你旅途愉快，";
+			mes "在里希塔乐镇。";
+			break;
+		case 4:
+			mes "[里希塔乐镇向导]";
+			mes "里希塔乐镇以一条";
+			mes "贯穿市中心的铁路";
+			mes "分为东区";
+			mes "和西区。";
+			mes "这里始终有卫兵";
+			mes "巡逻，守护着和平。";
+			next;
+			mes "[里希塔乐镇向导]";
+			mes "如果发现任何";
+			mes "可疑活动或人物，";
+			mes "请务必向我们报告。";
+			mes "希望你在这座";
+			mes "美丽的城市过得愉快，冒险者。";
+			close2;
+			set .@loop1,0;
+		}
+	}
+	cutin "ein_soldier",255;
+	end;
+}
+
+lighthalzen,220,311,3	duplicate(LhzGuide)	向导#2lhz	852
+
+lighthalzen,154,100,5	duplicate(LhzGuide)	向导#3lhz	852
+
+lighthalzen,307,224,3	duplicate(LhzGuide)	向导#4lhz	852

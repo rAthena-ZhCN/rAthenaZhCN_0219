@@ -1,0 +1,473 @@
+//===== rAthena Script ======================================= 
+//= Eclage Instance Script
+//===== By: ================================================== 
+//= Dastgir
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Eclage Interior Instance
+//===== Additional Comments: ================================= 
+//= 1.0 Converted from the official Aegis script. [Dastgir]
+//= 1.1 Converted from Hercules script to rAthena script & Small bug fix. [Skorm]
+//============================================================ 
+
+ecl_hub01,132,12,3	script	首席参谋#tl02	435,{
+	.@party_id = getcharid(1);
+	.@md_name$ = "Eclage Interior";
+
+	if (.@party_id == 0 || is_party_leader() == false){
+		mes "-! 警告 !-";
+		mes "本次任务将在回忆副本中进行。";
+		mes "仅队长可以进入。请先创建队伍。";
+		close;
+	}
+	if (ep14_2_mylord == 29) {
+		mes "[赛尼梅]";
+		mes "这里是为宝珠设置照明的地方。";
+		mes "如果你偏向市长那边，在这里最好小心一点。";
+		next;
+		switch (select("进入。:算了。")) {
+		case 1:
+			if (instance_create(.@md_name$) < 0) {
+				mes "[赛尼梅]";
+				mes "不久前市长派来了一些士兵。";
+				mes "但愿你不是他们正在找的闹事者，对吧？";
+				close;
+			}
+			ecl_interior_time = gettimetick(2) + 20 * 60;
+			mes "[赛尼梅]";
+			mes "内部戒备森严，你最好有所准备。";
+			mes "在这里稍等片刻。";
+			close;
+		case 2:
+			mes "[赛尼梅]";
+			mes "这可不是件容易的事。";
+			close;
+		}
+	}
+	mes "[高级守护精灵]";
+	mes "嗯？这个房间？";
+	mes "没什么。别放在心上。";
+	close;
+}
+
+ecl_hub01,130,15,0	script	紧闭的门	844,{
+	if (ep14_2_mylord == 29) {
+		mes "这扇门通向广场的天花板。";
+		mes "这里也是设置灯光、让宝珠显得更加美丽的地方。";
+		next;
+		if (select("进入。:算了。") == 1) {
+			.@party_id = getcharid(1);
+			.@md_name$ = "Eclage Interior";
+			if (.@party_id == 0 || is_party_leader() == false) {
+				mes "-! 警告 !-";
+				mes "本次任务将在回忆副本中进行。";
+				mes "仅队长可以进入。请先创建队伍。";
+				close;
+			}
+			if (gettimetick(2) >= ecl_interior_time){
+				mes "[赛尼梅]";
+				mes "里面的士兵似乎非常紧张。";
+				mes "要带你这样的外人进去，可相当困难。";
+				close;
+			}
+			switch (instance_enter(.@md_name$)) {
+			case IE_OTHER:
+				mes "发生了未知错误。";
+				close;
+			case IE_NOINSTANCE:
+				mes "门紧紧关着。";
+				close;
+			case IE_OK:
+				mapannounce "ecl_hub01",getpartyname(.@party_id) + "队长" + strcharinfo(0) + "正在进入" + .@md_name$,bc_map,"0x00ff99";
+				end;
+			default:
+			}
+		} else
+			close;
+	}
+	mes "这扇门通向广场的天花板。";
+	mes "这里也是设置灯光、让宝珠显得更加美丽的地方。";
+	mes "门紧紧关着。";
+	close;
+}
+
+1@ecl,58,69,3	script	赛尼梅#ecl01	435,{
+	mes "[赛尼梅]";
+	mes "哦？这里发生了什么事？";
+	mes "他们连市长追加派来的部队也消灭了？";
+	next;
+	select("什么……？:我把怪物打退了！");
+	mes "[赛尼梅]";
+	mes "无所谓。";
+	mes "你的任务到此为止了。";
+	mes "现在你成了背叛者。";
+	mes "那么，永别了！";
+	specialeffect EF_BEGINSPELL3;
+	next;
+	mes "[" + strcharinfo(0) + "]";
+	mes "不……不可能！！！";
+	specialeffect2 EF_LORD;
+	percentheal -99,0;
+	soundeffect "wander_man_move.wav",1;
+	sc_start SC_BLIND,60000,0;
+	close2;
+	warp instance_mapname("1@ecl"),146,95;
+	end;
+
+OnInstanceInit:
+	hideonnpc instance_npcname(strnpcinfo(0));
+	end;
+
+OnEnable:
+	hideoffnpc instance_npcname(strnpcinfo(0));
+	end;
+}
+
+1@ecl,51,64,1	script	可疑生物#1	2375,{
+	end;
+}
+1@ecl,43,67,3	duplicate(可疑生物#1)	可疑生物#2	2375,0,0
+1@ecl,55,80,3	duplicate(可疑生物#1)	可疑生物#3	2375,0,0
+1@ecl,60,75,3	duplicate(可疑生物#1)	可疑生物#4	2375,0,0
+
+1@ecl,42,80,5	script	可疑生物#5	2376,{
+	end;
+OnInstanceInit:
+	hideonnpc instance_npcname(strnpcinfo(0));
+	end;
+}
+1@ecl,48,86,3	duplicate(可疑生物#5)	可疑生物#6	2376,0,0
+1@ecl,58,82,3	duplicate(可疑生物#5)	可疑生物#7	2376,0,0
+1@ecl,56,88,3	duplicate(可疑生物#5)	可疑生物#8	2376,0,0
+
+1@ecl,53,83,0	script	#sndmaster	HIDDEN_WARP_NPC,10,10,{
+	end;
+
+OnInstanceInit:
+	'mob_summoned = 0;
+	disablenpc();
+	end;
+
+OnEnable:
+	sleep 1000;
+    mapannounce instance_mapname("1@ecl"),"警告：照明室发生异常。照明室发生异常。",bc_map,"0xffff00"; //FW_NORMAL 12 0 0
+	sleep 2000;
+    mapannounce instance_mapname("1@ecl"),"可疑生物：喀啊啊啊……咕哇啊啊！！",bc_map,"0xffff00"; //FW_NORMAL 12 0 0
+	hideoffnpc instance_npcname("Suspicious Creature#5");
+	hideoffnpc instance_npcname("Suspicious Creature#6");
+	hideoffnpc instance_npcname("Suspicious Creature#7");
+	hideoffnpc instance_npcname("Suspicious Creature#8");
+	sleep 3000;
+	hideonnpc instance_npcname("#sndmaster");
+	end;
+
+OnMyMobDead:
+	if (mobcount(instance_mapname("1@ecl"),instance_npcname("#sndmaster")+"::OnMyMobDead") == 0) {
+		donpcevent instance_npcname("Shenime#ecl01")+"::OnEnable";
+		mapannounce instance_mapname("1@ecl"),"赛尼梅：很好，我刚好赶上了。",bc_map,"0xffff00"; //FW_NORMAL 12 0 0
+	}
+	end;
+
+OnTouch:
+	if ('mob_summoned > 1) end;
+    mes "在消灭宝珠附近的入侵者后，又出现了另一群模样怪异的生物。";
+    next;
+    mes "我们也无法与它们沟通，其中一只环顾四周、发现同伴已被打倒后，显得十分愤怒。";
+    next;
+    mes "[" + strcharinfo(0) + "]";
+    mes "它们看起来就像是梦罗克的化身。";
+    mes "是魔王盯上了宝珠吗？";
+    mes "还是说这只是巧合？";
+    next;
+    mes "[魔王的手下]";
+    mes "喀呀啊啊……喀啦啊啊啊！！！";
+    mes "咕哇啊啊！";
+    next;
+    mes "这一战无法避免！";
+    mes "它们会杀了我的！";
+	close2;
+	hideonnpc instance_npcname("Suspicious Creature#5");
+	hideonnpc instance_npcname("Suspicious Creature#6");
+	hideonnpc instance_npcname("Suspicious Creature#7");
+	hideonnpc instance_npcname("Suspicious Creature#8");
+	disablenpc instance_npcname("Suspicious Creature#5");
+	disablenpc instance_npcname("Suspicious Creature#6");
+	disablenpc instance_npcname("Suspicious Creature#7");
+	disablenpc instance_npcname("Suspicious Creature#8");
+	.@eclmap$ = instance_mapname("1@ecl");
+	.@sndmaster$ = instance_npcname("#sndmaster");
+	monster .@eclmap$,42,80,"Subordinate of the King of Demons",2376,1,.@sndmaster$+"::OnMyMobDead";
+	monster .@eclmap$,48,86,"Subordinate of the King of Demons",2376,1,.@sndmaster$+"::OnMyMobDead";
+	monster .@eclmap$,59,82,"Subordinate of the King of Demons",2376,1,.@sndmaster$+"::OnMyMobDead";
+	monster .@eclmap$,56,88,"Subordinate of the King of Demons",2376,1,.@sndmaster$+"::OnMyMobDead";
+	monster .@eclmap$,39,72,"Subordinate of the King of Demons",2376,1,.@sndmaster$+"::OnMyMobDead";
+	monster .@eclmap$,42,69,"Subordinate of the King of Demons",2376,1,.@sndmaster$+"::OnMyMobDead";
+	monster .@eclmap$,47,64,"Subordinate of the King of Demons",2376,1,.@sndmaster$+"::OnMyMobDead";
+	monster .@eclmap$,50,60,"Subordinate of the King of Demons",2376,1,.@sndmaster$+"::OnMyMobDead";
+	'mob_summoned = 2;
+    end;
+}
+
+1@ecl,57,65,0	script	#event	139,5,5,{
+	end;
+OnTouch:
+	if ('mob_summoned > 0) end;
+	.@eclmap$ = instance_mapname("1@ecl");
+	.@eventname$ = instance_npcname("#event");
+	mes "空无一物的房间。";
+	mes "房间中央的圆形装置正散发出光芒。";
+	next;
+	mes "[可疑生物]";
+	mes "Keheehehehe......";
+	next;
+	mes "一群来历不明的生物正气势汹汹地逼近。";
+	mes "它们似乎很惊讶；虽然彩虹桥的意志仍然存在，却难以沟通。";
+	next;
+	mes "[可疑生物]";
+	mes "喀呀啊啊……喀……喀呀呀呀！！";
+	next;
+	mes "它们似乎随时都会发起攻击。";
+	mes "我们只能与它们一战了！";
+	close2;
+	hideonnpc instance_npcname("Suspicious Creature#1");
+	hideonnpc instance_npcname("Suspicious Creature#2");
+	hideonnpc instance_npcname("Suspicious Creature#3");
+	hideonnpc instance_npcname("Suspicious Creature#4");
+	disablenpc instance_npcname("Suspicious Creature#1");
+	disablenpc instance_npcname("Suspicious Creature#2");
+	disablenpc instance_npcname("Suspicious Creature#3");
+	disablenpc instance_npcname("Suspicious Creature#4");
+	monster .@eclmap$,51,64,"Suspicious Creature",2375,1,.@eventname$+"::OnMyMobDead";
+	monster .@eclmap$,43,67,"Suspicious Creature",2375,1,.@eventname$+"::OnMyMobDead";
+	monster .@eclmap$,55,80,"Suspicious Creature",2375,1,.@eventname$+"::OnMyMobDead";
+	monster .@eclmap$,60,75,"Suspicious Creature",2375,1,.@eventname$+"::OnMyMobDead";
+	'mob_summoned = 1;
+	end;
+
+OnMyMobDead:
+	if (mobcount(instance_mapname("1@ecl"),instance_npcname("#event")+"::OnMyMobDead") == 0) {
+		enablenpc instance_npcname("#sndmaster");
+		donpcevent instance_npcname("#sndmaster")+"::OnEnable";
+	}
+	end;
+}
+
+1@ecl,148,97,3	script	阿凡特#	618,{
+	mes "[阿凡特]";
+	mes "嘿，看看是谁来了！";
+	mes "你是我儿子的朋友，对吧？";
+	mes "真是奇妙的缘分，竟让我们在这里相遇！";
+	cutin "avant01",1;
+	next;
+	mes "[阿凡特]";
+	mes "你遇到什么事了吗？";
+	mes "那声音中带着一丝微妙的魔力回响。";
+	mes "紧接着，你就被抛到了这里。";
+	next;
+	if (select("都是因为你！:赛尼梅说过……") == 1) {
+		mes "[阿凡特]";
+		mes "你说的我一个字都听不懂。";
+		mes "你不能把事情说清楚吗？不知道“五个W和一个H”的原则吗？";
+		next;
+	}
+	mes "[阿凡特]";
+	mes "哦……原来是这样。";
+	mes "你是说赛尼梅的目标是宝珠？";
+	next;
+	mes "[阿凡特]";
+	mes "呵呵呵……哈哈哈哈哈 啊哈哈哈哈";
+	mes "哎呀呀……连我也中招了吗？";
+	mes "偏偏是我阿凡特？！哈哈哈哈哈！";
+	cutin "avant02",1;
+	next;
+	select("你是什么意思？");
+	mes "[阿凡特]";
+	mes "我一直在独自研究宝珠的力量。";
+	mes "但赛尼梅却一再地怂恿我。";
+	cutin "avant01",1;
+	next;
+	mes "[阿凡特]";
+	mes "我从思索宝珠的美丽开始，接着好奇宝珠之中究竟积蓄着怎样的力量……";
+	mes "既然我们都受益于宝珠的力量，我便开始质疑其力量的原理。";
+	next;
+	mes "[阿凡特]";
+	mes "所有守护精灵都将宝珠视为空气与水一般理所当然的存在，而他却是第一个让我换一种眼光看待它、并去探究其起源的人。";
+	mes "对……赛尼梅。他是故意挑起我的好奇心的。";
+	next;
+	mes "[阿凡特]";
+	mes "去刺激一个未曾意识到空气与水的人，让他察觉，并继续探究下去！";
+	mes "哎呀呀……这不是很有意思吗！";
+	cutin "avant02",1;
+	next;
+	mes "[阿凡特]";
+	mes "Ha...hahaha...";
+	mes "...I'm so angry about the fact that I just realized how he used me, but what's even worse is that I've done something horrible to our people.";
+	mes "我想我现在相当恼火。";
+	next;
+	select("你还有良心？");
+	mes "[阿凡特]";
+	mes "你到底把我当成什么人了！";
+	mes "是因为我儿子们吗？";
+	mes "既然如此，我也不能太责怪你。";
+	cutin "avant01",1;
+	next;
+	mes "[阿凡特]";
+	mes "...Bah.";
+	mes "真没意思。";
+	mes "已经不好玩了。我对你已经没有兴趣了。";
+	next;
+	mes "[阿凡特]";
+	mes "......";
+	mes "好像有客人来了。";
+	next;
+	cutin "minuel01",4;
+	mes "[米努埃尔]";
+	mes "" + strcharinfo(0) + "先生，";
+	mes "虽然您因涉嫌对照明室近日发生的事件负责而被拘留，";
+	mes "但已有证人可以证明您的清白。";
+	next;
+	mes "[米努埃尔]";
+	mes "我不清楚详情，";
+	mes "但我也相信您是无辜的。";
+	mes "看这伤势似乎很严重，我送您去治疗室吧。";
+	next;
+	mes "[米努埃尔]";
+	mes "我想这不算什么大事。";
+	mes "...hopefully.";
+	mes "走吧，我来带路。";
+	close2;
+	cutin "",255;
+	warp "1@ecl",146,29;
+	end;
+}
+	
+1@ecl,148,29,3	script	洛奇#ecl01	512,{
+	mes "[洛奇]";
+	mes "我旁边这位好像比我有更多话要说。";
+	mes "不如你先向他解释吧？";
+	close;
+}	
+	
+1@ecl,147,30,3	script	尼德霍格#ecl01	510,{
+	mes "[守护者尼德霍格]";
+	mes "我想你应该先和希西艾谈谈。";
+	close;
+}
+	
+1@ecl,144,27,5	script	希西艾#ecl01	623,{
+	cutin "hisie01",0;
+	mes "[希西艾]";
+	mes "能告诉我究竟发生了什么吗？";
+	next;
+	select("我和怪物战斗过。");
+	cutin "hisie03",0;
+	mes "[希西艾]";
+	mes "怪物？梦罗克的手下？";
+	mes "你原本要杀的，是我们的士兵，守护精灵！！";
+	mes "那里究竟发生了什么？";
+	npcskill "AL_HEAL",9,99,80;
+	next;
+	cutin "",255;
+	mes "[洛奇]";
+	mes "是因为这个。";
+	mes "" + strcharinfo(0) + "它就在……的体内——";
+	mes "赛尼梅的力量就是如此强大。";
+	next;
+	mes "洛奇的掌心里，静静躺着一小截又细又干的尖刺。";
+	next;
+	cutin "hisie03",0;
+	mes "[希西艾]";
+	mes "首席参谋赛尼梅？";
+	mes "他怎么会和这件事扯上关系？";
+	npcskill "AL_HEAL",9,99,80;
+	next;
+	cutin "",255;
+	mes "[洛奇]";
+	mes "赛尼梅是梦罗克的手下之一。";
+	mes "他的力量使他能够直接操控他人，或通过自己身体的一部分间接影响对方的心智。";
+	next;
+	select("这么说来……");
+	mes "[" + strcharinfo(0) + "]";
+	mes "就在来这里之前，赛尼梅向我伸出手，我握住他的手时感到一阵刺痛。";
+	mes "我以为只是错觉，便没有理会……也许就是那时他……";
+	next;
+	mes "[尼德霍格]";
+	mes "你大概说得对。";
+	mes "他们会使些邪恶的伎俩。";
+	mes "这里的这根尖刺，大概蒙蔽了你的判断。";
+	next;
+	cutin "hisie03",0;
+	mes "[希西艾]";
+	mes "你是说，他欺骗了我们所有人？";
+	mes "首席参谋是和我们共处了很长时间的守护精灵！他不可能……";
+	npcskill "AL_HEAL",9,99,80;
+	next;
+	cutin "",255;
+	mes "[洛奇]";
+	mes "他可能已经被操控很长一段时间了。";
+	mes "总之，这家伙是无辜的。";
+	mes "我可以证明。";
+	next;
+	mes "[尼德霍格]";
+	mes "我也以世界树守护者之名起誓。";
+	mes "" + strcharinfo(0) + "——绝不会做出这种事。";
+	next;
+	cutin "hisie02",0;
+	mes "[希西艾]";
+	mes "Hah...";
+	mes "但事情失控了。";
+	mes "我没料到会这样。";
+	next;
+	select("宝珠怎么了？");
+	mes "[希西艾]";
+	mes "核心被偷走了。";
+	mes "没有人知道宝珠的核心已经不见，";
+	mes "所以卡尔才没能赶到这里。";
+	npcskill "AL_HEAL",9,99,80;
+	next;
+	mes "[希西艾]";
+	mes "而且，还有几名士兵因你而受伤。";
+	mes "幸好无人死亡，但大多数人伤势严重。";
+	mes "现在的情况不太好。";
+	next;
+	cutin "",255;
+	mes "[洛奇]";
+	mes "那么，总得有人为此承担责任。";
+	mes "十有八九，" + strcharinfo(0) + "那个人就是你。";
+	next;
+	cutin "hisie02",0;
+	mes "[希西艾]";
+	mes "......these two gentlemen here cleared up all charges related to the Orb,";
+	mes "但你和卡尔都无法逃避责任。";
+	mes "你们必须抓住赛尼梅。";
+	npcskill "AL_HEAL",9,99,80;
+	next;
+	cutin "hisie01",0;
+	mes "[希西艾]";
+	mes "看来你已经休息够了。我们出发吧。";
+	mes "卡尔在等你。";
+	mes "你们两个打算怎么办？";
+	next;
+	cutin "",255;
+	mes "[洛奇]";
+	mes "不用担心我们。";
+	mes "我们的目标是魔王梦罗克。";
+	mes "能在这里找到证据，已经足够了。";
+	next;
+	cutin "hisie01",0;
+	mes "[希西艾]";
+	mes "感谢你的帮助。";
+	mes "我们这就出发了。";
+	mes "走吧，" + strcharinfo(0) + ".";
+	ep14_2_mylord = 30;
+	changequest 7450,7451;
+	close2;
+	cutin "",255;
+	warp "ecl_in03",57,76;
+	instance_destroy;
+	end;
+}

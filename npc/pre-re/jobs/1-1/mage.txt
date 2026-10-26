@@ -1,0 +1,699 @@
+//===== rAthena Script ======================================= 
+//= Mage Job Quest
+//===== By: ================================================== 
+//= kobra_k88; L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 2.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Job quest for Mage classes
+//===== Additional Comments: ================================= 
+//= 1.0 Fully working.
+//= 1.1 Fixed input ingridients bug [Lupus]
+//= 1.2 Added instant job change for High Novice [Lupus]
+//= 1.3 Added Baby Class support [Lupus]
+//= 1.4 Optimised and moved first checker to Jfunc1-1 [massdriller]
+//= 1.5 Now saves/restores all quest skills [Lupus]
+//= 1.6 Merged back JFunc, CHANGED NUMBERS TO CONSTANTS [Lupus]
+//= 1.7 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//=     No longer uses function "F_ToHigh"
+//= 1.7a Fixed a "If" in the quest. (bugreport:489) [Samuray22]
+//= 1.8 Added Quest Log commands. [L0ne_W0lf]
+//= 1.9 Fixed an issue with completequest by adding checkquest. [Kisuka]
+//= 2.0 Moved "Dollshoi" and "Ponka-Hontas" NPCs. [Euphy]
+//============================================================ 
+
+geffen_in,164,124,4	script	魔法师公会成员	123,{
+	if (Upper == 1) {
+		if (ADVJOB == Job_High_Wizard || ADVJOB == Job_Professor) {
+			if (Class == Job_Novice_High) {
+				mes "[魔法师公会成员]";
+				mes "哇，好久不见了！可你不是应该已经死了吗？";
+				next;
+				mes "[魔法师公会成员]";
+				mes "啊，你一定是转生了。嗯，很高兴你回来了。";
+				next;
+				if (!callfunc("F_CanChangeJob")) {
+					mes "[魔法师公会成员]";
+					mes "抱歉，我认为你还没准备好学习魔法。不如先去把基本技能学完吧？";
+					next;
+					mes "[魔法师公会成员]";
+					mes "不用着急。你学得越多，就越能准备好再次学习魔法。";
+					close;
+				}
+				mes "[魔法师公会成员]";
+				mes "既然你已经通过过一次魔法师考试，我就不再质疑你的资格了。你想立刻取回魔法技能，对吧？";
+				next;
+				skill "NV_TRICKDEAD",0,SKILL_PERM;
+				jobchange Job_Mage_High;
+				skill "MG_ENERGYCOAT",1,SKILL_PERM;
+				mes "[魔法师公会成员]";
+				mes "哇，不知为何，你看起来比以前好多了。总之，我相信你当魔法师也会做得更好。";
+				close;
+			}
+			else {
+				mes "[魔法师公会成员]";
+				mes "还有什么需要我帮忙的吗？如果没有，不如去试试你的身手吧？世界在等着你~！";
+				close;
+			}
+		}
+		else {
+			mes "[魔法师公会成员]";
+			mes "怎么，你对魔法师公会有兴趣？我本不想告诉你，但你不属于这里。";
+			next;
+			mes "[魔法师公会成员]";
+			mes "我不知道你为什么还站在我面前，但我看得出你注定成不了魔法师。";
+			close;
+		}
+	}
+	mes "[魔法师公会成员]";
+	mes "哟。有什么事吗？";
+	next;
+	switch(select("我想成为魔法师。:告诉我条件。:没什么事。")) {
+	case 1:
+		mes "[魔法师公会成员]";
+		if (BaseJob == Job_Mage) {
+			mes "喂，你还没意识到吗？你已经是魔法师了，小傻瓜！";
+			next;
+			mes "[魔法师公会成员]";
+			mes "总有一天，当你用意志生出火焰时，就会明白自己体内蕴藏的力量！";
+			close;
+		}
+		if (BaseJob != Job_Novice) {
+			mes "喂~ 别这样。别闹了。你已经有别的职业了，不能成为魔法师。";
+			close;
+		}
+		if (job_magician_q == 0) {
+			mes "想成为魔法师，是吗……？";
+			if (Sex == SEX_MALE)
+				mes "喂，看看你！还挺可爱的~！不过不是我喜欢的类型……";
+			else {
+				mes "哦哦，你真是个火辣的美人~！";
+				mes "我喜欢你这样的女孩~";
+			}
+			next;
+			mes "[魔法师公会成员]";
+			mes "对了，你说想成为魔法师？那就请在魔法师入会申请书上签字吧。";
+			next;
+			if (select("报名。:退出。") == 1) {
+				mes "[魔法师公会成员]";
+				mes "好的。就签在这里。哦，你的字写得真好。那么，你的名字是……" + strcharinfo(0) + ".";
+				next;
+				mes "[魔法师公会成员]";
+				mes "现在，该";
+				mes "由我来给你出考题了。";
+				switch(rand(0,3)) {
+				case 1:
+					mes "给我制作一份^3355FF混合溶液1号^000000";
+					mes "然后拿回来给我。";
+					set job_magician_q,1;
+					break;
+				case 2:
+					mes "给我制作一份^3355FF混合溶液2号^000000";
+					mes "然后拿回来给我。";
+					set job_magician_q,2;
+					break;
+				case 3:
+					mes "给我制作一份^3355FF混合溶液3号^000000";
+					mes "然后拿回来给我。";
+					set job_magician_q,3;
+					break;
+				default:
+					mes "给我制作一份^3355FF混合溶液4号^000000";
+					mes "然后拿回来给我。";
+					set job_magician_q,4;
+				}
+				next;
+				getitem 1092,1; //Empty_Cylinder
+				mes "[魔法师公会成员]";
+				mes "所需的材料可以在本公会的指南书里找到。所以出发前最好先查清楚你需要什么。";
+				next;
+				mes "[魔法师公会成员]";
+				mes "收集齐所有材料后，就用房间中央的机器来混合溶液。祝你好运！";
+				close;
+			}
+			mes "[魔法师公会成员]";
+			mes "什——么~？！刚说想当魔法师，马上就改主意了？！做事果断一点！";
+			close;
+		}
+		mes "是吗？准备好了吗……？";
+		if (!callfunc("F_CanChangeJob")) {
+			mes "哦，真遗憾。你还没达到条件。";
+			next;
+			mes "[魔法师公会成员]";
+			mes "先回去把初心者职业等级提升到9级。别忘了在回来之前还要学会所有基本技能。";
+			close;
+		}
+		mes "" + strcharinfo(0) + "的测试结果是……";
+		if (job_magician_q == 1)
+			mes "制作混合溶液1号。";
+		else if (job_magician_q == 2)
+			mes "制作混合溶液2号。";
+		else if (job_magician_q == 3)
+			mes "制作混合溶液3号。";
+		else
+			mes "制作混合溶液4号。";
+		next;
+		mes "[魔法师公会成员]";
+		mes "好，让我";
+		mes "来确认一下你调制的";
+		mes "溶液是否正确……";
+		next;
+		mes "[魔法师公会成员]";
+		if (countitem(1071) == 0 && countitem(1085) == 0 && countitem(1086) == 0 && countitem(1087) == 0 && countitem(1090) == 0) {
+			mes "喂，我要的溶液";
+			mes "在哪儿……？你不给我看，我怎么确认呢？";
+			close;
+		}
+		else {
+			if ((job_magician_q == 1 && countitem(1071) == 0) || (job_magician_q == 2 && countitem(1085) == 0) || (job_magician_q == 3 && countitem(1086) == 0) || (job_magician_q == 4 && countitem(1087) == 0)) {
+				mes "Wait.";
+				mes "这不是我要的";
+				mes "溶液！";
+				next;
+				mes "[魔法师公会成员]";
+				if (job_magician_q == 1)
+					mes "你需要制作混合溶液1号并拿回来给我。现在再去试一次吧。";
+				else if (job_magician_q == 2)
+					mes "你需要制作混合溶液2号并拿回来给我。现在再去试一次吧。";
+				else if (job_magician_q == 3)
+					mes "你需要制作混合溶液3号并拿回来给我。现在再去试一次吧。";
+				else
+					mes "你需要制作混合溶液4号并拿回来给我。现在再去试一次吧。";
+
+				if (countitem(1071) != 0) delitem 1071,1; //Mage_Test_1
+				else if (countitem(1085) != 0) delitem 1085,1; //Mage_Test_2
+				else if (countitem(1086) != 0) delitem 1086,1; //Mage_Test_3
+				else if (countitem(1087) != 0) delitem 1087,1; //Mage_Test_4
+				else delitem 1090,1; //Mage_Test_Etc
+				close;
+			}
+		}
+		if (countitem(1071) != 0) delitem 1071,1; //Mage_Test_1
+		else if (countitem(1085) != 0) delitem 1085,1; //Mage_Test_2
+		else if (countitem(1086) != 0) delitem 1086,1; //Mage_Test_3
+		else if (countitem(1087) != 0) delitem 1087,1; //Mage_Test_4
+		else delitem 1090,1; //Mage_Test_Etc
+		mes "嗯。看得出你很努力。作为新手的第一次尝试，这已经很不错了。";
+		mes "做得很好！";
+		next;
+		mes "[魔法师公会成员]";
+		mes "好！很高兴地通知你，你已经通过魔法师考试了。我马上就为你转职！";
+		next;
+		mes "[魔法师公会成员]";
+		mes "*咳咳*";
+		mes "恭喜！";
+		mes "你现在是魔法师了！";
+		next;
+		for ( .@quest_id = 1005; .@quest_id <= 1008; .@quest_id++ ) {
+			if (isbegin_quest(.@quest_id) == 1)
+				completequest .@quest_id;
+		}
+		callfunc "Job_Change",Job_Mage;
+		callfunc "F_ClearJobVar";
+		set Zeny,Zeny+50;
+		mes "[魔法师公会成员]";
+		mes "'欢迎来到我的世界~'";
+		mes "呵呵，我只是想说这句话。你知道吗，这是某部著名电影的台词~";
+		next;
+		mes "[魔法师公会成员]";
+		mes "既然你现在和我们一样是魔法师了，我们做朋友吧，好吗？";
+		close;
+	case 2:
+		mes "[魔法师公会成员]";
+		mes "想成为魔法师，是吗？";
+		if (Sex == SEX_MALE)
+			mes "像你这样的小可爱，我很乐意为你说明条件！";
+		else
+			mes "像你这样漂亮的女孩，我很乐意为你说明条件！";
+		next;
+		mes "[魔法师公会成员]";
+		mes "首先，你必须达到初心者职业等级10并学会所有基本技能。然后，还要通过魔法师考试。";
+		next;
+		if (job_magician_q != 0) {
+			mes "[魔法师公会成员]";
+			mes "你的考题是";
+			switch(job_magician_q) {
+			case 1:
+				mes "为我制作";
+				mes "^3355FF混合溶液1号^000000";
+				mes "然后拿回来给我。";
+				if (isbegin_quest(1005) == 0)
+					setquest 1005;
+				break;
+			case 2:
+				mes "为我制作";
+				mes "^3355FF混合溶液2号^000000";
+				mes "然后拿回来给我。";
+				if (isbegin_quest(1006) == 0)
+					setquest 1006;
+				break;
+			case 3:
+				mes "为我制作";
+				mes "^3355FF混合溶液3号^000000";
+				mes "然后拿回来给我。";
+				if (isbegin_quest(1007) == 0)
+					setquest 1007;
+				break;
+			default:
+				mes "为我制作";
+				mes "^3355FF混合溶液4号^000000";
+				mes "然后拿回来给我。";
+				if (isbegin_quest(1008) == 0)
+					setquest 1008;
+				break;
+			}
+			next;
+			mes "[魔法师公会成员]";
+			mes "制作溶液所需材料的说明，可以在本公会的指南书里查到。";
+		}
+		else {
+			mes "[魔法师公会成员]";
+			mes "在申请书上签字后，就会告知你需要制作哪一种混合溶液。";
+		}
+		next;
+		mes "[魔法师公会成员]";
+		mes "准备好成为魔法师的时候告诉我，好吗？";
+		close;
+	case 3:
+		mes "[魔法师公会成员]";
+		mes "没什么事……？";
+		close;
+	}
+}
+
+geffen_in,164,112,4	script	混合机	111,{
+	mes "[混合机]";
+	mes "本机为吉芬魔法师公会所有，仅用于混合魔法用途的溶液。";
+	next;
+	if (select("使用机器。:取消。") == 1) {
+		mes "[混合机]";
+		mes "请选择";
+		mes "调制溶液";
+		mes "所用的溶剂。";
+		next;
+		switch(select("裴扬溶液。:梦罗克溶液。:不使用溶剂。")) {
+		case 1:
+			if (countitem(1089) == 0) {
+				mes "[混合机]";
+				mes "Error.";
+				mes "找不到该物品。";
+				mes "请再确认一次。";
+				mes "停止处理。";
+				close;
+			}
+			set .@mixitem2,1;
+			break;
+		case 2:
+			if (countitem(1088) == 0) {
+				mes "[混合机]";
+				mes "Error.";
+				mes "找不到该物品。";
+				mes "请再确认一次。";
+				mes "停止处理。";
+				close;
+			}
+			set .@mixitem2,2;
+			break;
+		case 3:
+			set .@mixitem2,0;
+			break;
+		}
+		while (1) {
+			if (.@progress == 2) {
+				mes "[混合机]";
+				if (.@mixitem1_1 != 0) mes "杰勒比结晶：" + .@mixitem1_1 + "个。";
+				if (.@mixitem1_2 != 0) mes "柔毛：" + .@mixitem1_2 + "个。";
+				if (.@mixitem1_3 != 0) mes "牛奶：" + .@mixitem1_3 + "个。";
+				if (.@mixitem2 == 0) mes "溶剂：无。";
+				if (.@mixitem2 == 1) mes "溶剂：裴扬溶液。";
+				if (.@mixitem2 == 2) mes "溶剂：梦罗克溶液。";
+				next;
+				mes "[混合机]";
+				mes "请选择开始混合，或重新输入要混合的物品数量。";
+				next;
+				switch(select("开始混合。:重新输入物品数量。:重置。")) {
+				case 1:
+					mes "[混合机]";
+					mes "请将物品放入混合槽。请确认物品数量无误。";
+					next;
+					mes "[混合机]";
+					mes "物品一旦放入混合槽，就无法调整或取回。";
+					next;
+					mes "[混合机]";
+					mes "如果一切无误，准备好后请按下'混合'按钮。否则请按下'取消'按钮。";
+					next;
+					if (select("按下'混合'按钮。:按下'取消'按钮。") == 1) {
+						mes "[混合机]";
+						mes "现在请将物品放入混合槽。请稍候。";
+						next;
+						mes "[混合机]";
+						if (countitem(909) < .@mixitem1_1) {
+							mes "杰勒比结晶不足。";
+							mes "请再确认一次。";
+							mes "处理已停止。";
+							close;
+						}
+						else if (countitem(914) < .@mixitem1_2) {
+							mes "柔毛不足。";
+							mes "请再确认一次。";
+							mes "处理已停止。";
+							close;
+						}
+						else if (countitem(519) < .@mixitem1_3) {
+							mes "牛奶不足。";
+							mes "请再确认一次。";
+							mes "处理已停止。";
+							close;
+						}
+						else if (.@mixitem2 == 1 || .@mixitem2 == 2) {
+							if (countitem(1089) == 0 && countitem(1088) == 0) {
+								mes "未找到溶液。";
+								mes "请再确认一次。";
+								mes "处理已停止。";
+								close;
+							}
+						}
+						if (.@mixitem1_1 != 0) delitem 909,.@mixitem1_1; //Jellopy
+						if (.@mixitem1_2 != 0) delitem 914,.@mixitem1_2; //Fluff
+						if (.@mixitem1_3 != 0) delitem 519,.@mixitem1_3; //Milk
+						if (.@mixitem2 == 1) delitem 1089,1; //Payon_Potion
+						if (.@mixitem2 == 2) delitem 1088,1; //Morocc_Potion
+						mes "物品已就绪。";
+						mes "请盖上盖子。";
+						set .@progress,3;
+						next;
+					}
+					break;
+				case 2:
+					set .@continue,0;
+					next;
+					break;
+				case 3:
+					set .@mixitem1_1,0;
+					set .@mixitem1_2,0;
+					set .@mixitem1_3,0;
+					set .@progress,0;
+					set .@continue,0;
+					mes "[混合机]";
+					mes "重置完成。";
+					mes "要再次启动吗？";
+					next;
+					if (select("是。:否。") == 1)
+						break;
+					mes "[混合机]";
+					mes "处理已停止。";
+					mes "谢谢。";
+					close;
+				}
+				if (.@progress == 3) break;
+			}
+			else if (.@progress == 1) {
+				mes "[混合机]";
+				mes "什么也没找到。";
+				next;
+			}
+			mes "[混合机]";
+			mes "请选择要混合的物品。";
+			while(1) {
+				switch(select("杰勒比结晶。:柔毛。:牛奶。:准备混合。")) {
+				case 1:
+					while(1) {
+						input .@input;
+						if (.@input > 10000) {
+							next;
+							mes "[混合机]";
+							mes "错误：物品数量超出上限。请输入小于10,000的数值后重试。";
+							next;
+						}
+						else {
+							if (countitem(909) > 0) set .@mixitem1_1,.@mixitem1_1 + .@input;
+							set .@progress,2;
+							break;
+						}
+					}
+					break;
+				case 2:
+					while(1) {
+						input .@input;
+						if (.@input > 10000) {
+							next;
+							mes "[混合机]";
+							mes "错误：物品数量超出上限。请输入小于10,000的数值后重试。";
+							next;
+						}
+						else {
+							if (countitem(914) > 0) set .@mixitem1_2,.@mixitem1_2 + .@input;
+							set .@progress,2;
+							break;
+						}
+					}
+					break;
+				case 3:
+					while(1) {
+						input .@input;
+						if (.@input > 10000) {
+							next;
+							mes "[混合机]";
+							mes "错误：物品数量超出上限。请输入小于10,000的数值后重试。";
+							next;
+						}
+						else {
+						if (countitem(519) > 0) set .@mixitem1_3,.@mixitem1_3 + .@input;
+							set .@progress,2;
+							break;
+						}
+					}
+					break;
+
+				case 4:
+					if (.@progress != 2)
+						set .@progress,1;
+					set .@continue,1;
+					next;
+				}
+				if (.@continue) break;
+			}
+		}
+		mes "[混合机]";
+		mes "请输入";
+		mes "魔力粉末的";
+		mes "序列号。";
+		next;
+		while(1) {
+			input .@input;
+			if (.@input < 1000 || .@input > 9999) {
+				mes "[混合机]";
+				if (.@input == 0) {
+					mes "要跳过此菜单吗？";
+					next;
+					if (select("是。:否。") == 1) {
+						break;
+					}
+				}
+				else {
+					mes "序列号无效。";
+					mes "请重试。";
+					next;
+				}
+			}
+			else {
+				mes "[混合机]";
+				mes "序列号为 #" + .@input + ", correct?";
+				next;
+				if (select("确认。:取消。") == 1) {
+					if (.@input == 8472)
+						set .@magic_powder,1;
+					else if (.@input == 3735)
+						set .@magic_powder,2;
+					else if (.@input == 2750)
+						set .@magic_powder,3;
+					else if (.@input == 5429)
+						set .@magic_powder,4;
+					else
+						set .@magic_powder,5;
+				}
+				break;
+			}
+		}
+		mes "[混合机]";
+		mes "请选择";
+		mes "催化剂石。";
+		next;
+		switch(select("黄色魔力矿石。:红色魔力矿石。:蓝色魔力矿石。:1克拉钻石。:跳过。")) {
+		case 1: set .@mixitem3,1; break;
+		case 2: set .@mixitem3,2; break;
+		case 3: set .@mixitem3,3; break;
+		case 4: set .@mixitem3,4; break;
+		case 5: break;
+		}
+		mes "[混合机]";
+		mes "准备完毕。";
+		mes "正在启动";
+		mes "混合流程。";
+		mes "请稍候。";
+		next;
+		mes "[混合机]";
+		mes "- 今日谚语 -";
+		switch(rand(1,5)) {
+		case 1:
+			mes "以眼还眼：从他人那里取得，就必须以某种方式补偿或回报。";
+			break;
+		case 2:
+			mes "信用是人的货币：真正的信任具有无法衡量的价值。";
+			break;
+		case 3:
+			mes "因果循环：最终，你会以你对待他人的方式被对待。";
+			mes "意思是'你伤害他人时，必将在无法回避的处境中遭到他的伤害'。";
+			break;
+		case 4:
+			mes "远亲不如近邻：需要帮助时，你可以依靠身边的人。";
+			break;
+		default:
+			mes "物以类聚：看一个人的朋友，就能看出他的品性。";
+		}
+		next;
+		if (.@mixitem1_1 == 2 && .@mixitem1_2 == 3 && .@mixitem1_3 == 1 && .@mixitem2 == 1 && .@mixitem3 == 1 && .@magic_powder == 1) {
+			mes "[混合机]";
+			mes "魔法师考试溶液1号。";
+			getitem 1071,1; //Mage_Test_1
+			next;
+		}
+		else if (.@mixitem1_1 == 3 && .@mixitem1_2 == 1 && .@mixitem1_3 == 1 && .@mixitem2 == 0 && .@mixitem3 == 2 && .@magic_powder == 2) {
+			mes "[混合机]";
+			mes "魔法师考试溶液2号。";
+			getitem 1085,1; //Mage_Test_2
+			next;
+		}
+		else if (.@mixitem1_1 == 6 && .@mixitem1_2 == 1 && .@mixitem1_3 == 0 && .@mixitem2 == 1 && .@mixitem3 == 3 && .@magic_powder == 3) {
+			mes "[混合机]";
+			mes "魔法师考试溶液3号。";
+			getitem 1086,1; //Mage_Test_3
+			next;
+		}
+		else if (.@mixitem1_1 == 2 && .@mixitem1_2 == 3 && .@mixitem1_3 == 0 && .@mixitem2 == 2 && .@mixitem3 == 4 && .@magic_powder == 4) {
+			mes "[混合机]";
+			mes "魔法师考试溶液4号。";
+			getitem 1087,1; //Mage_Test_4
+			next;
+		}
+		else {
+			mes "[混合机]";
+			mes "发生了意外";
+			mes "发生了错误。";
+			getitem 1090,1; //Mage_Test_Etc
+			next;
+		}
+		mes "[混合机]";
+		mes "混合完成。";
+		mes "谢谢。";
+		close;
+	}
+	close;
+}
+
+// The Morocc Solution and Payon Solution traders
+// are also used in the Sage skill quests, and have
+// been moved to npc/quests/mage_solution.txt.
+//
+// pay_arche,122,100,0	script	Dollshoi	88,{}
+// moc_ruins,91,150,0	script	Ponka-Hontas	93,{}
+
+geffen_in,177,112,4	script	书架	111,{
+	mes "[指南书]";
+	mes "本指南书为吉芬魔法师协会所有。请小心取用。";
+	next;
+	switch(select("溶液1号。:溶液2号。:溶液3号。:溶液4号。:关闭。")) {
+	case 1:
+		mes "[魔法师考试溶液1号]";
+		mes "* 材料清单 *";
+		mes "杰勒比结晶 2个";
+		mes "柔毛 3个";
+		mes "牛奶 1个";
+		next;
+		mes "[魔法师考试溶液1号]";
+		mes "* 溶剂 *";
+		mes "裴扬溶液";
+		mes "获取地点：";
+		mes "弓箭手之村裴扬的一处小泉水。";
+		next;
+		mes "[魔法师考试溶液1号]";
+		mes "* 魔力序列码 *";
+		mes "8472";
+		next;
+		mes "[魔法师考试溶液1号]";
+		mes "* 催化剂 *";
+		mes "黄色魔力矿石";
+		mes "（由";
+		mes "混合机提供）";
+		close;
+	case 2:
+		mes "[魔法师考试溶液2号]";
+		mes "* 材料清单 *";
+		mes "杰勒比结晶 3个";
+		mes "柔毛 1个";
+		mes "牛奶 1个";
+		next;
+		mes "[魔法师考试溶液2号]";
+		mes "* 溶剂 *";
+		mes "无";
+		next;
+		mes "[魔法师考试溶液2号]";
+		mes "* 魔力序列码 *";
+		mes "3735";
+		next;
+		mes "[魔法师考试溶液2号]";
+		mes "* 催化剂 *";
+		mes "红色魔力矿石";
+		mes "（由";
+		mes "混合机提供）";
+		close;
+	case 3:
+		mes "[魔法师考试溶液3号]";
+		mes "* 材料清单 *";
+		mes "杰勒比结晶 6个";
+		mes "柔毛 1个";
+		next;
+		mes "[魔法师考试溶液3号]";
+		mes "* 溶剂 *";
+		mes "裴扬溶液";
+		mes "获取地点：";
+		mes "弓箭手之村裴扬的一处小泉水。";
+		next;
+		mes "[魔法师考试溶液3号]";
+		mes "* 魔力序列码 *";
+		mes "2750";
+		next;
+		mes "[魔法师考试溶液3号]";
+		mes "* 催化剂 *";
+		mes "蓝色魔力矿石";
+		mes "（由";
+		mes "混合机提供）";
+		close;
+	case 4:
+		mes "[魔法师考试溶液4号]";
+		mes "* 材料清单 *";
+		mes "杰勒比结晶 2个";
+		mes "柔毛 3个";
+		next;
+		mes "[魔法师考试溶液4号]";
+		mes "* 溶剂 *";
+		mes "梦罗克溶液";
+		mes "获取地点：";
+		mes "梦罗克金字塔入口附近的一处小泉水。";
+		next;
+		mes "[魔法师考试溶液4号]";
+		mes "* 魔力序列码 *";
+		mes "5429";
+		next;
+		mes "[魔法师考试溶液4号]";
+		mes "* 催化剂 *";
+		mes "1克拉钻石";
+		mes "（由";
+		mes "混合机提供）";
+		close;
+	}
+	close;
+}

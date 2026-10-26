@@ -1,0 +1,208 @@
+//===== rAthena Script ======================================= 
+//= Custom Umbalian Language Quest
+//===== By: ================================================== 
+//= sabernet09
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= 1.1 Removed it from offical Umbala Quests [Lupus]
+//============================================================ 
+
+prontera,145,290,5	script	梅森	742,{
+	mes "[梅森]";
+	if(umb_lang==0) goto L_NOT_GOT_QUEST;
+	if(umb_lang==2 || umb_mason==1) goto L_AGAIN;
+
+	mes "你好，我来普隆德拉是为了找一位能把卡片从插槽中取出的老婆婆。你知道在哪儿能找到她吗？";
+	menu "是",-, "否",M_NO;
+
+	mes "哦哦，能请你告诉我她在哪儿吗？我会非常感激的。";
+	menu "剑士协会",-, "圣堂",M_Boo1,"普隆德拉骑士团",M_Boo2,"贸易站",M_Boo3,"杂货店",M_Boo4,"旅店",M_Boo5,"兵器店",M_DONE,"图书馆",M_Boo6,"职业介绍所",M_Boo7,"普隆德拉城堡",M_Boo8,"市政厅",M_Boo9;
+
+	next;
+	mes "[梅森]";
+	mes "嗯……我不知道她为什么会在那儿……我去看看吧。";
+	close;
+M_Boo1:
+	next;
+	mes "[梅森]";
+	mes "哇，我从来不知道她这么虔诚……我会去看看，谢谢。";
+	close;
+M_Boo2:
+	next;
+	mes "[梅森]";
+	mes "嗯……你确定吗？";
+	close;
+M_Boo3:
+	next;
+	mes "[梅森]";
+	mes "她为什么要去那里？我想你大概弄错了。";
+	close;
+M_Boo4:
+	next;
+	mes "[梅森]";
+	mes "她在杂货店唯一需要的东西就是治风湿的药。这会儿她大概早就离开了。";
+	close;
+M_Boo5:
+	next;
+	mes "[梅森]";
+	mes "我觉得她没必要去那儿，她就住在普隆德拉。";
+	close;
+M_Boo6:
+	next;
+	mes "[梅森]";
+	mes "啊，我明白了，如果她在学习，那我就不打扰她了。还是谢谢你。";
+	close;
+M_Boo7:
+	next;
+	mes "[梅森]";
+	mes "职业介绍所？我看不会。请别带着我在普隆德拉到处乱转！她本来就是这里的老师。";
+	close;
+M_Boo8:
+	next;
+	mes "[梅森]";
+	mes "城堡啊，我可不想进去……感觉不适合我的风格。我不喜欢那种贵族自以为重要的感觉。";
+	close;
+M_Boo9:
+	next;
+	mes "[梅森]";
+	mes "哦哇，她成了普隆德拉的重要人物吗？那她大概忙得没空让我拜访了。我改天再来。";
+	close;
+M_DONE:
+	next;
+	mes "[梅森]";
+	mes "啊，我听说她的教室就在那附近……太感谢了！这点小意思，谢谢你的帮忙。";
+	getitem 7117,1;//Items: Torn Spell Book,
+	set umb_mason,1;
+	close;
+
+L_AGAIN:
+	emotion ET_THANKS;
+	mes "太好了，我找到她了！非常感谢你的帮助！";
+	close;
+
+L_NOT_GOT_QUEST:
+	mes "嗨！我来普隆德拉是为了找一位老婆婆……可是……";
+	close;
+M_NO:
+	mes "哦……好……还是谢谢你。";
+	close;
+}
+
+aldebaran,153,212,1	script	莫乔	740,{
+	mes "[莫乔]";
+	if(umb_lang!=1) goto L_NOT_GOT_QUEST;
+	mes "糟了！我把老师的^FF0000旧魔法书^000000弄丢了！";
+	mes "我该怎么办……那些可恶的巴索利……";
+	if(umb_lang==1) set umb_mojo,1;
+	close;
+L_NOT_GOT_QUEST:
+	emotion ET_QUESTION;
+	mes "我把老师的书弄丢了！我该怎么办……";
+	close;
+}
+
+amatsu,267,189,4	script	玛丽	744,{
+	mes "[玛丽]";
+	if(umb_lang==0) goto L_NOT_GOT_QUEST;
+	if(umb_lang==2 || umb_marie==1) goto L_AGAIN;
+	if(countitem(9001)>0 && countitem(643)>0) goto L_DONE;//Items: Poring Egg, Pet Incubator,
+	mes "你好，有什么需要吗？";
+	next;
+	menu "不，没什么。",M_NO,"你的老师让我来的。",-;
+
+	mes "[玛丽]";
+	mes "他找我有什么事？";
+	emotion ET_QUESTION;
+	next;
+	mes "[玛丽]";
+	mes "哦等等，我明白了……他想要回他的资料卷轴，对吧？嗯，我其实还在用啦，不过……如果你能给我一颗波利蛋和一个宠物孵蛋器，我就还给他。那些东西超可爱的！";
+	close;
+
+L_NOT_GOT_QUEST:
+	emotion ET_QUESTION;
+	mes "嗨！你找我有什么事？";
+	close;
+
+M_NO:
+	mes "[玛丽]";
+	mes "嗯……好吧？那再见……";
+	close;
+
+L_DONE:
+	mes "嗨呀，你有波利蛋，还配着宠物孵蛋器！那是给我的吗？";
+	menu "没错！",-, "抱歉，不是。",M_DOH;
+
+	mes "[玛丽]";
+	if(countitem(9001)==0 && countitem(643)==0) goto M_DOH;//Items: Poring Egg, Pet Incubator,
+	mes "太好了！这点小东西作为回礼。";
+	delitem 9001,1;//Items: Poring Egg,
+	delitem 643,1;//Items: Pet Incubator,
+	getitem 7118,1;//Items: Torn Scroll,
+	set umb_marie,1; //got Torn Scroll
+	close;
+
+M_DOH:
+	mes "哦……噗……唉……";
+	close;
+
+L_AGAIN:
+	emotion ET_THANKS;
+	mes "太好了！我最喜欢波利了！";
+	close;
+}
+
+yuno,157,366,2	script	智者法比乌斯	743,{
+	mes "[法比乌斯]";
+	if(event_umbala >= 3) set umb_lang,2; //You already learned Umbalian language from Umbalian Chief. So this Quest is disabled
+	if(umb_lang<2) goto L_QUEST;
+	mes "你能流利地说乌姆巴语了！这样你就永远不会忘记乌姆巴人的语言！";
+	close;
+L_QUEST:
+	if((countitem(1006) < 1) || (countitem(7118) < 1) || (countitem(7117) < 1)) goto L_DONE;//Items: Old Magic Book, Torn Scroll, Torn Spell Book,
+	delitem 1006,1;	//Items: Old Magic Book,
+	delitem 7118,1;	//Items: Torn Scroll,
+	delitem 7117,1;//Items: Torn Spell Book,
+	emotion ET_THANKS;
+	mes "啊，你很好地取回了我的资料。这些遗物记载着世界各地遗迹的信息，从熔岩洞穴那燃烧的炼狱，到伊格德拉西尔那神秘诡异的隐藏森林。";
+	next;
+	mes "[法比乌斯]";
+	mes "不过话说够了，你只是急着想拿报酬，对吧？嗯，听起来也许不算什么，但我要给你的报酬是知识……";
+	next;
+	mes "[法比乌斯]";
+	mes "其实是关于乌姆巴人的知识。他们以某种特殊方式与米德加尔特这个世界相连，只是我们还无法确认。有一种说法认为，他们或许像精灵一样，守护着古老的伊格德拉西尔之树。";
+	next;
+	mes "[法比乌斯]";
+	mes "而我，朱诺的伟大智者，将教会你他们的语言！";
+	next;
+	mes "^0000FF 学会了乌姆巴人的语言！ ^000000";
+	set umb_lang,2;
+	//clear subquests
+	set umb_marie,0;
+	set umb_mason,0;
+	set umb_mojo,0;
+	//make you understand Umbalian people
+	//it's an alternative way to learn Umbalian Language
+	if(event_umbala < 3) set event_umbala,3;
+	close;
+L_DONE:
+	set umb_lang,1; //got Quest
+	mes "气死我了！我的三个学生带着我的资料跑了！喂，你！能帮我把它们要回来吗？我会好好答谢你的。";
+	next;
+	mes "[法比乌斯]";
+	mes "据我所知，他们各自在不同的城镇闯荡，想做出点名堂。";
+	if(umb_marie==0 && umb_mason==0 && umb_mojo==0) goto L_NOT_MET;
+	if(umb_marie==1) mes "哦……你在天津町找到玛丽了。";
+	if(umb_mojo==1) mes "你在阿尔德巴兰见到莫乔了？";
+	if(umb_mason==1) mes "那么……梅森现在在普隆德拉……好吧……";
+	if(umb_marie==0) mes "不知道我们那位海边姑娘玛丽在哪儿？";
+	if(umb_mojo==0) mes "莫乔应该在水边某处……";
+	if(umb_mason==0) mes "那梅森去哪儿了……";
+	mes "对了，告诉他们是我让你去的";
+	close;
+L_NOT_MET:
+	mes "对了，告诉他们是我让你去的，他们叫玛丽、梅森和莫乔。";
+	close;
+}

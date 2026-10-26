@@ -1,0 +1,93 @@
+//===== rAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= 1.1 Made all into functions, additional checks, etc. [Lupus]
+//= 1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,58,3	script	神行太保#Valkyrie	747,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[神行太保]";
+			mes "Congratulations.";
+			mes "荣耀归于战士们！";
+			close;
+		}
+		mes "[神行太保]";
+		mes "Heh...";
+		mes "当英雄";
+		mes "并不容易，";
+		mes "还得阴险狡诈，";
+		mes "不被人信任，";
+		mes "sneaky...";
+		next;
+		mes "[神行太保]";
+		mes "但当";
+		mes "局势艰难时，";
+		mes "伙伴们知道";
+		mes "可以信赖我。";
+		mes "我需要他们，";
+		mes "他们也需要我。";
+		close;
+	}
+	else if (ADVJOB == Job_Stalker && Class == Job_Thief_High && JobLevel > 39) {
+		mes "[神行太保]";
+		mes "这个世界需要";
+		mes "更多愿意";
+		mes "行走在秩序与";
+		mes "无序之间的英雄。";
+		next;
+		mes "[神行太保]";
+		mes "你准备好";
+		mes "加入这群";
+		mes "最狡猾的";
+		mes "战士之中了吗？你准备好";
+		mes "成为神行太保了吗？";
+		next;
+		if (select("否:是") == 1) {
+			mes "[神行太保]";
+			mes "等你准备好，";
+			mes "随时回来。";
+			mes "荣耀归于战士们！";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[神行太保]";
+			mes "你仍可以学习更多技能。请用完";
+			mes "所有剩余的技能点，再来找我。";
+			close;
+		}
+		jobchange Job_Stalker;
+		set ADVJOB,0;
+		mes "[神行太保]";
+		mes "恭喜！";
+		mes "作为神行太保，我希望";
+		mes "你能把刀捅向";
+		mes "对的人背后。用恶人";
+		mes "自己的卑劣手段";
+		mes "驱逐邪恶！";
+		close;
+	}
+	mes "[神行太保]";
+	mes "欢迎";
+	mes "前往巴哈拉宫，";
+	mes "荣誉殿堂。";
+	next;
+	mes "[神行太保]";
+	mes "请在这里";
+	mes "放松一下";
+	mes "不必拘束。";
+	mes "荣耀归于战士们！";
+	close;
+}

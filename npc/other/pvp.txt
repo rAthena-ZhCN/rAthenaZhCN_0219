@@ -1,0 +1,448 @@
+//===== rAthena Script ======================================= 
+//= PvP NPCs
+//===== By: ==================================================
+//= kobra_k88; L0ne_W0lf, Elias (og2)
+//===== Current Version: =====================================
+//= 2.5
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= PvP NPCs that are found in the Inns in major cities.
+//= Includes Yoyo Mode, Nightmare Mode, and Event Mode.
+//===== Additional Comments: ================================= 
+//= 2.0 Narrators/GateKeepers,etc. Translated from the Official 2011 [Elias]
+//= 2.1 Changed PVP Narrator and GateKeeper to Floating NPC [Elias]
+//= 2.2 Some cleaning. [Euphy]
+//= 2.3 Fixed grammatical errors. [Joseph]
+//= 2.4 Fixed incorrect use of 'close' and some cleaning. [Joseph]
+//= 2.5 Renewal/Pre-Renewal split. [Euphy]
+//============================================================
+
+// Information
+//============================================================ 
+-	script	PVP Narrator::pvpe	-1,{
+	mes "[PVP解说员]";
+	mes "你好，欢迎光临！";
+	mes "我负责";
+	mes "讲解PVP模式。";
+	mes "我是PVP解说员！";
+	next;
+	switch(select("什么是PVP？:PVP有哪些模式？:PVP的规则是什么？:保存位置。:结束对话。")) {
+	case 1:
+		mes "[PVP解说员]";
+		mes "简而言之，PVP就是";
+		mes "' 玩家对战玩家模式 '";
+		mes "这是一个供人们";
+		mes "相互决斗的特殊场所。";
+		next;
+		mes "[PVP解说员]";
+		mes "只要告诉";
+		mes "^3355FF守门人^000000";
+		mes "你想尝试哪个模式，他就会";
+		mes "让你进入PVP广场。";
+		next;
+		mes "[PVP解说员]";
+		mes "不过，你必须达到";
+		mes "至少31级。而且你";
+		mes "必须支付500 Zeny的入场费，才能";
+		mes "进入PVP战斗广场。";
+		break;
+	case 2:
+		mes "[PVP解说员]";
+		mes "当你符合条件后，";
+		mes "可以选择两种模式之一。";
+		mes "Yoyo模式或噩梦模式。";
+		next;
+		mes "[PVP解说员]";
+		mes "Yoyo模式没有风险。";
+		mes "你可以在";
+		mes "不受任何限制或";
+		mes "惩罚的情况下体验PVP。建议";
+		mes "你先在这里练习";
+		mes "技巧，然后再继续前进。";
+		next;
+		mes "[PVP解说员]";
+		mes "噩梦模式非常";
+		mes "危险！请务必小心，";
+		mes "被击败时，你会损失";
+		mes "一部分经验值。而且";
+		mes "还有很小的几率";
+		mes "掉落一些装备。";
+		next;
+		mes "[PVP解说员]";
+		mes "不过，如果你获胜，";
+		mes "奖励会非常丰厚！";
+		mes "为了避免误会，";
+		mes "你最好三思";
+		mes "再前往那里……";
+		mes "祝你好运！";
+		break;
+	case 3:
+		mes "[PVP解说员]";
+		mes "每个战斗广场";
+		mes "都有一排解说员，";
+		mes "根据你的等级来选择";
+		mes "qualifications.";
+		next;
+		mes "[PVP解说员]";
+		mes "每位解说员都会询问";
+		mes "你想去五个PVP地图中的";
+		mes "哪一个。";
+		mes "选择后进入吧！";
+		next;
+		mes "[PVP解说员]";
+		mes "每张地图都有";
+		mes "可参加人数的限制。";
+		mes "所以你会看到";
+		mes "角落里显示着";
+		mes "'参加人数/总人数'。";
+		next;
+		mes "[PVP解说员]";
+		mes "此外，PVP模式中还有";
+		mes "隐藏的经验值。这个经验值";
+		mes "分数只在PVP区域内";
+		mes "生效，所以不必担心";
+		mes "worry.";
+		next;
+		mes "[PVP解说员]";
+		mes "每位玩家在开始时";
+		mes "的经验值通常是5点。";
+		mes "如果获胜，它会";
+		mes "增加1点";
+		next;
+		mes "[PVP解说员]";
+		mes "同样，当你";
+		mes "失败时……你的经验值会";
+		mes "下降5点。";
+		mes "所以要小心！";
+		next;
+		mes "[PVP解说员]";
+		mes "当你被击败，";
+		mes "并且你的经验值等于";
+		mes "或小于0时，";
+		mes "你将被移出PVP";
+		mes "决斗也就结束了！";
+		next;
+		mes "[PVP解说员]";
+		mes "不过，如果你的经验值";
+		mes "大于0。你仍然可以通过";
+		mes "其他玩家的治疗获得帮助……";
+		mes "明白了吗？";
+		next;
+		mes "[PVP解说员]";
+		mes "PVP中的战斗";
+		mes "操作与平常相同。";
+		mes "所有基本操作都一样";
+		mes "same.";
+		next;
+		mes "[PVP解说员]";
+		mes "不过，有一件事……";
+		mes "在PVP战斗广场";
+		mes "和PVP战斗区域内，";
+		mes "无法保存位置。";
+		mes "请牢记……这些规则";
+		mes "能帮助你确保胜利。";
+		break;
+	case 4:
+		mes "[PVP解说员]";
+		mes "位置保存成功……";
+		mes "非常感谢！";
+		mes "我们很快再见。";
+		if(strnpcinfo(4) == "morocc_in") { savepoint "morocc_in",141,139,1,1; }
+		if(strnpcinfo(4) == "alberta_in") { savepoint "alberta_in",22,148,1,1; }
+		if(strnpcinfo(4) == "prt_in") { savepoint "prt_in",54,137,1,1; }
+		if(strnpcinfo(4) == "geffen_in") { savepoint "geffen_in",70,59,1,1; }
+		if(strnpcinfo(4) == "payon_in01") { savepoint "payon_in01",142,46,1,1; }
+		break;
+	case 5:
+		mes "[PVP解说员]";
+		mes "在怪物与人类战火纷飞之际，";
+		mes "人与人之间的这场竞争——";
+		mes "PVP——";
+		mes "激励着我们所有人变得";
+		mes "更强。欢迎再来，";
+		mes "我们欢迎你的挑战！";
+		break;
+	}
+	close;
+}
+morocc_in,144,138,4	duplicate(pvpe)	PVP Narrator#pe1	84
+alberta_in,22,146,4	duplicate(pvpe)	PVP Narrator#pe2	84
+prt_in,56,140,4	duplicate(pvpe)	PVP Narrator#pe3	84
+geffen_in,67,63,4	duplicate(pvpe)	PVP Narrator#pe4	84
+payon_in01,142,50,4	duplicate(pvpe)	PVP Narrator#pe5	84
+geffen_in,67,63,4	duplicate(pvpe)	PVP Narrator#pe6	84
+
+// Mode Select
+//============================================================ 
+-	script	Gate Keeper::gkut	-1,{
+	mes "[守门人]";
+	mes "很高兴为您服务。";
+	mes "我会为你打开PVP战斗";
+	mes "广场！如果你对PVP";
+	mes "模式或规则";
+	mes "有任何疑问，请询问";
+	mes "解说员……";
+	next;
+	switch(select("^FF5533' PvP 噩梦模式'^000000:^3355FF' PvP Yoyo模式'^000000:^3355FF' PvP 活动模式'^000000:退出")) {
+		case 1:
+			mes "[守门人]";
+			mes "很抱歉，噩梦模式服务目前无法使用。";
+			mes "请改用Yoyo模式。给您带来不便，敬请谅解。";
+			break;
+		case 2:
+			mes "[守门人]";
+			mes "入场费是500 Zeny。";
+			mes "你想前往";
+			mes "Yoyo模式";
+			mes "战斗广场吗？";
+			next;
+			switch(select("前往:取消")) {
+			case 1:
+				if ((Zeny > 499) && (BaseLevel > 30)) {
+					set Zeny, Zeny - 500;
+					callsub L_Warp,"pvp_y_room";
+				}
+				else {
+					mes "[守门人]";
+					mes "打扰一下，";
+					mes "你没有做好准备吗？";
+					mes "请确认你带有";
+					mes "500 Zeny的入场费，并且";
+					mes "等级至少达到31级！";
+				}
+				close;
+			case 2:
+				mes "[守门人]";
+				mes "在怪物与人类战火纷飞之际，";
+				mes "人与人之间的这场竞争——";
+				mes "PVP——";
+				mes "激励着我们所有人变得";
+				mes "更强。欢迎再来，";
+				mes "我们欢迎你的挑战！";
+				close;
+			}
+		case 3:
+			mes "[守门人]";
+			mes "欢迎！";
+			mes "请再次确认";
+			mes "你持有入场券或观战券。";
+			next;
+			if ((countitem(7028) == 0) && (countitem(7029) == 0)) {
+				mes "[守门人]";
+				mes "咦？你没有吗？那么我";
+				mes "很抱歉，这个战斗广场";
+				mes "只允许持有";
+				mes "入场券或观战券的人进入。";
+				mes "没有券不能进入。";
+				close;
+			}
+			mes "[守门人]";
+			mes "好的，感谢参与。祝你玩得开心！";
+			if (Zeny >= 500) set Zeny, Zeny - 500;
+			callsub L_Warp,"pvp_room";
+			break;
+		case 4:
+			mes "[守门人]";
+			mes "在怪物与人类战火纷飞之际，";
+			mes "人与人之间的这场竞争——";
+			mes "PVP——";
+			mes "激励着我们所有人变得";
+			mes "更强。欢迎再来，";
+			mes "我们欢迎你的挑战！";
+			break;
+	}
+	close;
+
+L_Warp:
+	set .@map$,getarg(0);
+	if (checkre(0)) {
+		switch(rand(1,10)) {
+			case 1: warp .@map$,34,38; break;
+			case 2: warp .@map$,46,38; break;
+			case 3: warp .@map$,58,38; break;
+			case 4: warp .@map$,70,38; break;
+			case 5: warp .@map$,82,38; break;
+			case 6: warp .@map$,82,58; break;
+			case 7: warp .@map$,65,58; break;
+			case 8: warp .@map$,49,58; break;
+			case 9: warp .@map$,33,58; break;
+			case 10: warp .@map$,52,24; break;
+		}
+	} else
+		warp .@map$,51,23;
+	return;
+}
+morocc_in,144,142,4	duplicate(gkut)	Gate Keeper#gke1	83
+alberta_in,26,146,4	duplicate(gkut)	Gate Keeper#gke2	83
+prt_in,52,140,4	duplicate(gkut)	Gate Keeper#gke3	83
+geffen_in,63,63,4	duplicate(gkut)	Gate Keeper#gke4	83
+payon_in01,140,53,4	duplicate(gkut)	Gate Keeper#gke5	83
+
+// PVP Warper Function
+//============================================================ 
+// Note: The warper NPCs are in the pre-re/re paths.
+
+//callfunc "F_PVP_FSRS"{,<min_lvl>,<max_lvl>};
+function	script	F_PVP_FSRS	{
+	if (getargcount()) {
+		setarray .@lvl[0], getarg(0), getarg(1);
+		if (BaseLevel < .@lvl[0] || BaseLevel > .@lvl[1]) {
+			mes "[PVP战斗场接待员]";
+			mes "抱歉，你的基础等级必须在LV"+ .@lvl[0] +"到LV"+ .@lvl[1] +".";
+			close;
+		}
+	}
+	if (strnpcinfo(4) == "pvp_y_room") {
+		set .@base$, "pvp_y_"+strnpcinfo(2);
+		setarray .@Maps$[0],	.@base$+"-1",	.@base$+"-2",	.@base$+"-3",	.@base$+"-4",	.@base$+"-5";
+		setarray .@Name$[0],	"Prontera",		"Izlude",		"Payon",		"Alberta",		"Morocc";
+		setarray .@Limit[0],	128,			128,			128,			128,			128;
+	} else {
+		setarray .@Maps$[0],	"pvp_n_8-1",	"pvp_n_8-2",	"pvp_n_8-3",	"pvp_n_8-4",	"pvp_n_8-5";
+		setarray .@Name$[0],	"Sandwich",		"Lock on",		"Four Room",	"Under cross",	"Compass Room";
+		setarray .@Limit[0],	64,				32,				32,				32,				32;
+	}
+	for(set .@i,0; .@i<5; set .@i,.@i+1)
+		set .@menu$, .@menu$+.@Name$[.@i]+"["+getmapusers(.@Maps$[.@i])+"/"+.@Limit[.@i]+"]:";
+	set .@menu$, .@menu$+"Cancel.";
+	set .@i, select(.@menu$)-1;
+	if (.@i == 5) close;
+	if (getmapusers(.@Maps$[.@i]) >= .@Limit[.@i]) {
+		mes "[PVP战斗场接待员]";
+		mes "这张地图目前人数已满。";
+		close;
+	}
+	warp .@Maps$[.@i],0,0;
+	end;
+}
+
+
+
+// Event Contestant Entrance
+//============================================================ 
+pvp_room,54,85,4	script	登记员#1	105,{
+	if (countitem(7028) == 0) {
+		mes "[PVP战斗广场登记员]";
+		mes "咦？你是怎么进来的？";
+		mes "这里只供玩家进入。";
+		mes "有关观战者的详情，请咨询右侧的登记员。";
+		close;
+	}
+	set .@size, getarraysize(.warp_x);
+	if (.@size == 0) {
+		setarray .warp_x,40,59,20,40;
+		setarray .warp_y,59,40,40,20;
+	}
+	if (select("战斗广场一号:取消") == 1) {
+		mes "[PVP战斗广场登记员]";
+		mes "'"+ strcharinfo(0) +"'";
+		mes "你准备好了吗？！";
+		next;
+		if (select("是！:否！") == 1) {
+			mes "[PVP战斗广场登记员]";
+			mes "好！我这就送你进去";
+			mes "祝你好运！";
+			close2;
+			delitem 7028,1; //Invite_For_Duel
+			set .@rand, rand(.@size);
+			warp "pvp_2vs2", .warp_x[.@rand], .warp_y[.@rand];
+			deletearray .warp_x[.@rand],1;
+			deletearray .warp_y[.@rand],1;
+			end;
+		}
+		mes "[PVP战斗广场登记员]";
+		mes "准备好后随时再来。";
+		close;
+	}
+	close;
+
+OnInit:
+	waitingroom "Combat Square players entrance only",0;
+	end;
+}
+
+// Spectator Entrance
+//============================================================ 
+-	script	Spectator's Entrance#dum::PVPSpectator	-1,{
+	if (countitem(7029) == 0) {
+		mes "[PVP竞技广场登记员]";
+		mes "这里是观战者的入口。";
+		mes "有关玩家入口的详情，请咨询左侧的登记员。";
+		close;
+	}
+	if (select("竞技广场一号:取消") == 1) {
+		mes "[PVP战斗广场登记员]";
+		mes "没问题，感谢参与。祝你玩得开心！";
+		close2;
+		delitem 7029,1; //Admission_For_Duel
+		switch(rand(1,4)) {
+			case 1: warp "pvp_2vs2",39,7; end;
+			case 2: warp "pvp_2vs2",39,73; end;
+			case 3: warp "pvp_2vs2",7,39; end;
+			case 4: warp "pvp_2vs2",73,39; end;
+		}
+	}
+	close;
+
+OnInit:
+	waitingroom "Compete Square viewer's entrance",0;
+	end;
+}
+pvp_room,62,85,4	duplicate(PVPSpectator)	Spectator's Entrance#1	105
+pvp_room,70,85,4	duplicate(PVPSpectator)	Spectator's Entrance#2	105
+pvp_room,78,85,4	duplicate(PVPSpectator)	Spectator's Entrance#3	105
+pvp_room,86,85,4	duplicate(PVPSpectator)	Spectator's Entrance#4	105
+
+// Spectator Warps
+//============================================================ 
+-	script	Combat Square Staff#dum::PVPSpecWarp	-1,{
+OnTouch_:
+	mes "[战斗广场职员]";
+	mes "有什么可以帮您？";
+	if (select("前往中央观战席。:离开战斗广场。") == 1) {
+		warp "pvp_2vs2",38,38;
+		end;
+	}
+	warp "pvp_room",84,39;
+	end;
+}
+pvp_2vs2,5,4,0	duplicate(PVPSpecWarp)	战斗广场职员#1	45,1,1
+pvp_2vs2,5,74,0	duplicate(PVPSpecWarp)	战斗广场职员#2	45,1,1
+pvp_2vs2,74,74,0	duplicate(PVPSpecWarp)	战斗广场职员#3	45,1,1
+pvp_2vs2,74,5,0	duplicate(PVPSpecWarp)	战斗广场职员#4	45,1,1
+
+pvp_2vs2,40,40,0	script	战斗广场职员#5	45,1,1,{
+	mes "[战斗广场职员]";
+	mes "有什么可以帮您？";
+	switch(select("前往侧面观战席。:离开战斗广场。")) {
+	case 1:
+		switch(rand(1,4)) {
+			case 1: warp "pvp_2vs2",39,7; end;
+			case 2: warp "pvp_2vs2",39,73; end;
+			case 3: warp "pvp_2vs2",7,39; end;
+			case 4: warp "pvp_2vs2",73,39; end;
+		}
+	case 2:
+		warp "pvp_c_room",84,39;
+		end;
+	}
+}
+
+// PVP Area Exit warp
+//============================================================ 
+pvp_room,51,19,0	script	出口#eventpvp	45,4,2,{
+OnTouch_:
+	mes "[战斗广场职员]";
+	mes "在战斗广场玩得开心吗？";
+	mes "请问你想去哪里？";
+	next;
+	switch(select("普隆德拉。:梦罗克。:吉芬。:裴扬。:阿尔贝塔。:取消。")) {
+		case 1: warp "prontera",107,60; end;
+		case 2: warp "morocc",157,96; end;
+		case 3: warp "geffen",120,36; end;
+		case 4: warp "payon",96,100; end;
+		case 5: warp "alberta",41,243; end;
+		case 6: close;
+	}
+}

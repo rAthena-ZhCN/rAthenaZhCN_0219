@@ -1,0 +1,392 @@
+//===== rAthena Script =======================================
+//= Novice Goods Exchanger
+//===== By: ==================================================
+//= ???, rAthena Team
+//===== Current Version: =====================================
+//= 1.4
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Exchanges your Basic Monster drops for Red Potions.
+//===== Additional Comments: =================================
+//= 1.2 Rescripted to Aegis 10.standards. [L0ne_W0lf[
+//=     Made it easier to add new items to exhange list
+//=     meaning only the exchange is done in a function now.
+//= 1.3 Fixed dialog mix-up in function. [L0ne_W0lf]
+//= 1.4 Added checkweight, and input min/max values. [L0ne_W0lf]
+//============================================================
+
+prontera,123,102,5	script	商人#pron	85,{
+	if (MaxWeight - Weight < 6301 || checkweight(1201,1) == 0) {
+		mes "[商人]";
+		mes "哈哈！";
+		mes "你难道是超人吗？";
+		mes "你带的东西也太多了吧！";
+		mes "你最好把其中一些";
+		mes "放进卡普拉仓库吧~";
+		close;
+	}
+	mes "[商人]";
+	mes "你好啊！";
+	mes "你有没有收集到";
+	mes "坚硬外壳或柔毛之类的物品？";
+	mes "杰勒比结晶呢？对了，";
+	mes "那些我正好需要。";
+	next;
+	mes "[商人]";
+	mes "当然，我不会让你";
+	mes "白给我那些东西。我用1瓶红色药水换5个坚硬外壳、10个柔毛，";
+	mes "或者10个杰勒比结晶？";
+	next;
+	switch(select("好啊！:我觉得太坑人了！:不用了，谢谢。")) {
+	case 1:
+		mes "[商人]";
+		mes "那你打算";
+		mes "拿哪种东西来？";
+		mes "坚硬外壳、柔毛，还是杰勒比结晶？";
+		next;
+		switch(select("坚硬外壳:杰勒比结晶:柔毛:取消")) {
+		case 1: callfunc "F_PotExchange",935,5;
+		case 2: callfunc "F_PotExchange",909,10;
+		case 3: callfunc "F_PotExchange",914,10;
+		case 4:
+			mes "[商人]";
+			mes "好的~";
+			mes "没问题。";
+			close;
+		}
+	case 2:
+		mes "[商人]";
+		mes "坑人……？";
+		mes "你去查查这些";
+		mes "交易物品的市价，其实被坑的";
+		mes "是我才对吧。";
+		close;
+	case 3:
+		mes "[商人]";
+		mes "好吧，";
+		mes "没问题。";
+		mes "不过要是你改变主意，";
+		mes "记得回来找我。";
+		close;
+	}
+}
+
+morocc,180,259,3	script	商人#Morocc	85,{
+	if (MaxWeight - Weight < 6301 || checkweight(1201,1) == 0) {
+		mes "[商人]";
+		mes "哈哈！";
+		mes "你难道是超人吗？";
+		mes "你带的东西也太多了吧！";
+		mes "你最好把其中一些";
+		mes "放进卡普拉仓库吧~";
+		close;
+	}
+	mes "[商人]";
+	mes "你好啊！";
+	mes "你有没有收集到";
+	mes "坚硬外壳或羽毛？";
+	mes "杰勒比结晶呢？对了，";
+	mes "那些我正好需要。";
+	next;
+	mes "[商人]";
+	mes "当然，我不会让你";
+	mes "白给我那些东西。我用1瓶红色药水换5个坚硬外壳、7根羽毛、";
+	mes "或者10个杰勒比结晶？";
+	next;
+	switch(select("好啊！:我觉得太坑人了！:不用了，谢谢。")) {
+	case 1:
+		mes "[商人]";
+		mes "那你打算";
+		mes "拿哪种东西来？";
+		mes "坚硬外壳、羽毛，";
+		mes "或者杰勒比结晶？";
+		next;
+		switch(select("坚硬外壳:羽毛:杰勒比结晶:取消")) {
+		case 1: callfunc "F_PotExchange",935,5;
+		case 2: callfunc "F_PotExchange",916,7;
+		case 3: callfunc "F_PotExchange",909,10;
+		case 4:
+			mes "[商人]";
+			mes "好的~";
+			mes "没问题。";
+			close;
+		}
+	case 2:
+		mes "[商人]";
+		mes "坑人……？";
+		mes "你去查查这些";
+		mes "交易物品的市价，其实被坑的";
+		mes "是我才对吧。";
+		close;
+	case 3:
+		mes "[商人]";
+		mes "好吧，";
+		mes "没问题。";
+		mes "不过要是你改变主意，";
+		mes "记得回来找我。";
+		close;
+	}
+}
+
+payon,200,134,5	script	商人#pay	85,{
+	if (MaxWeight - Weight < 6301 || checkweight(1201,1) == 0) {
+		mes "[商人]";
+		mes "哈哈！";
+		mes "你难道是超人吗？";
+		mes "你带的东西也太多了吧！";
+		mes "你最好把其中一些";
+		mes "放进卡普拉仓库吧~";
+		close;
+	}
+	mes "[商人]";
+	mes "你好啊！";
+	mes "你有没有收集到";
+	mes "树根之类的物品？";
+	mes "杰勒比结晶呢？对了，";
+	mes "那些我正好需要。";
+	next;
+	mes "[商人]";
+	mes "当然，我不会让你";
+	mes "白给我那些东西。我用1瓶红色药水换6个树根或10个杰勒比结晶，怎么样？";
+	next;
+	switch(select("好啊！:我觉得太坑人了！:不用了，谢谢。")) {
+	case 1:
+		mes "[商人]";
+		mes "那你打算";
+		mes "拿哪种东西来？";
+		mes "树根，还是杰勒比结晶？";
+		next;
+		switch(select("树根:杰勒比结晶:取消")) {
+		case 1: callfunc "F_PotExchange",902,6;
+		case 2: callfunc "F_PotExchange",909,10;
+		case 3:
+			mes "[商人]";
+			mes "好的~";
+			mes "没问题。";
+			close;
+		}
+	case 2:
+		mes "[商人]";
+		mes "坑人……？";
+		mes "你去查查这些";
+		mes "交易物品的市价，其实被坑的";
+		mes "是我才对吧。";
+		close;
+	case 3:
+		mes "[商人]";
+		mes "好吧，";
+		mes "没问题。";
+		mes "不过要是你改变主意，";
+		mes "记得回来找我。";
+		close;
+	}
+}
+
+aldebaran,152,63,5	script	商人#alde	85,{
+	if (MaxWeight - Weight < 6301 || checkweight(1201,1) == 0) {
+		mes "[商人]";
+		mes "哈哈！";
+		mes "你难道是超人吗？";
+		mes "你带的东西也太多了吧！";
+		mes "你最好把其中一些";
+		mes "放进卡普拉仓库吧~";
+		close;
+	}
+	mes "[商人]";
+	mes "你好啊！";
+	mes "你有没有收集到";
+	mes "昆虫外壳或羽毛？";
+	mes "杰勒比结晶怎么样？对了，";
+	mes "那些我正好需要。";
+	next;
+	mes "[商人]";
+	mes "当然，我不会让你";
+	mes "白给我那些东西。我用1瓶红色药水换1个昆虫外壳、7根羽毛，或10个杰勒比结晶，怎么样？";
+	next;
+	switch(select("好啊！:我觉得太坑人了！:不用了，谢谢。")) {
+	case 1:
+		mes "[商人]";
+		mes "那你打算";
+		mes "拿哪种东西来？";
+		mes "羽毛？";
+		mes "昆虫外壳？";
+		mes "或者杰勒比结晶？";
+		next;
+		switch(select("昆虫外壳:羽毛:杰勒比结晶:取消")) {
+		case 1: callfunc "F_PotExchange",955,1;
+		case 2: callfunc "F_PotExchange",916,7;
+		case 3: callfunc "F_PotExchange",909,10;
+		case 4:
+			mes "[商人]";
+			mes "好的~";
+			mes "没问题。";
+			close;
+		}
+	case 2:
+		mes "[商人]";
+		mes "坑人……？";
+		mes "你去查查这些";
+		mes "交易物品的市价，其实被坑的";
+		mes "是我才对吧。";
+		close;
+	case 3:
+		mes "[商人]";
+		mes "好吧，";
+		mes "没问题。";
+		mes "不过要是你改变主意，";
+		mes "记得回来找我。";
+		close;
+	}
+}
+
+geffen,173,88,5	script	商人#geff	85,{
+	if (MaxWeight - Weight < 6301 || checkweight(1201,1) == 0) {
+		mes "[商人]";
+		mes "哈哈！";
+		mes "你难道是超人吗？";
+		mes "你带的东西也太多了吧！";
+		mes "你最好把其中一些";
+		mes "放进卡普拉仓库吧~";
+		close;
+	}
+	mes "[商人]";
+	mes "你好啊！";
+	mes "你有没有收集到";
+	mes "坚硬外壳或蛹壳之类的物品？";
+	mes "杰勒比结晶呢？对了，";
+	mes "那些我正好需要。";
+	next;
+	mes "[商人]";
+	mes "当然，我不会让你";
+	mes "白给我那些东西。我用1瓶红色药水换5个坚硬外壳或6个蛹壳，或10个杰勒比结晶，怎么样？";
+	next;
+	switch(select("好啊！:我觉得太坑人了！:不用了，谢谢。")) {
+	case 1:
+		mes "[商人]";
+		mes "那你打算";
+		mes "拿哪种东西来？";
+		mes "坚硬外壳、蛹壳，还是杰勒比结晶？";
+		next;
+		switch(select("坚硬外壳:蛹壳:杰勒比结晶:取消")) {
+		case 1: callfunc "F_PotExchange",935,5;
+		case 2: callfunc "F_PotExchange",915,6;
+		case 3: callfunc "F_PotExchange",909,10;
+		case 4:
+			mes "[商人]";
+			mes "好的~";
+			mes "没问题。";
+			close;
+		}
+	case 2:
+		mes "[商人]";
+		mes "坑人……？";
+		mes "你去查查这些";
+		mes "交易物品的市价，其实被坑的";
+		mes "是我才对吧。";
+		close;
+	case 3:
+		mes "[商人]";
+		mes "好吧，";
+		mes "没问题。";
+		mes "不过要是你改变主意，";
+		mes "记得回来找我。";
+		close;
+	}
+}
+
+function	script	F_PotExchange	{
+	.@item_req = getarg(0);
+	.@req_amount = getarg(1);
+
+	if (countitem(.@item_req) < .@req_amount) {
+		mes "[商人]";
+		mes "喂，你答应给我的";
+		mes "那些"+ getitemname(.@item_req) +"";
+		mes "到哪儿去了？";
+		mes "给我"+ getitemname(.@item_req) +"！";
+		close;
+	}
+	else {
+		mes "[商人]";
+		mes "好，让我数数看";
+		mes "你有多少"+ getitemname(.@item_req) +"，";
+		mes "都带在身上。嗯……";
+		next;
+		mes "[商人]";
+		mes "你身上";
+		mes "一共有"+ countitem(.@item_req) +" "+ getitemname(.@item_req) +".";
+		mes "这些我可以给你";
+		mes "总共"+ (countitem(.@item_req)/.@req_amount) +"瓶红色药水作为交换。";
+		next;
+		mes "[商人]";
+		mes "你觉得怎么样？";
+		mes "要成交吗？";
+		next;
+		if (select("成交。:不成交。") == 1) {
+			mes "[商人]";
+			mes "你知道想换";
+			mes "多少瓶红色药水";
+			mes "来交换你手上的";
+			mes "那些"+ getitemname(.@item_req) +"，对吧？";
+			next;
+			mes "[商人]";
+			mes "现在，我可以跟你交换";
+			mes "最少 1 瓶红色药水";
+			mes "最多 100 瓶红色药水，";
+			mes "一次为限。如果你改变";
+			mes "主意，输入 '0' 就能取消。";
+			next;
+			while(1) {
+				input .@input,0,101;
+				if (.@input == 0) {
+					mes "[商人]";
+					mes "什么……？";
+					mes "你到底为什么要";
+					mes "特地跑来跟我说话？";
+					mes "真是优柔寡断啊。";
+					close;
+				}
+				else if (.@input > 100) {
+					mes "[商人]";
+					mes "我不能一次给你超过";
+					mes "100 瓶红色药水。";
+					mes "一次。我们再";
+					mes "试一次吧。";
+					next;
+				}
+				else {
+					break;
+				}
+			}
+			.@put_out_item = .@input * .@req_amount;
+			if (countitem(.@item_req) < .@put_out_item) {
+				mes "[商人]";
+				mes "哎呀，你输入的数字好像不对。你最好重新确认一下能换到的红色药水数量。";
+				close;
+			}
+			mes "[商人]";
+			mes "给你！";
+			mes "看看我给了你多少瓶";
+			mes "红色药水，应该没错。谢啦，这交易很划算~";
+			delitem .@item_req,.@put_out_item; //Shell
+			getitem 501,.@input; //Red_Potion
+			close;
+		}
+		mes "[商人]";
+		mes "咦~";
+		mes "Alright.";
+		mes "不过对像你这样的";
+		mes "冒险者来说，红色药水";
+		mes "不是更有用吗？";
+		close;
+	}
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.1 Made it as a function. U can add your own Merchs [Lupus]
+//= 1.1a Fixed item select [KarLaeda]
+//============================================================ 

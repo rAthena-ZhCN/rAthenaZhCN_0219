@@ -1,0 +1,83 @@
+//===== rAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= 1.1 Made all into functions, additional checks, etc. [Lupus]
+//= 1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,56,3	script	冷艳舞姬#Valkyrie	101,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[冷艳舞姬]";
+			mes "Congratulations.";
+			mes "荣耀归于战士们！";
+			close;
+		}
+		mes "[冷艳舞姬]";
+		mes "向左移，";
+		mes "向右移～！";
+		mes "再踏一步……！";
+		mes "跳舞不只是";
+		mes "一种爱好。";
+		mes "对我来说，这是一种生活方式～";
+		close;
+	}
+	else if (ADVJOB == Job_Gypsy && Class == Job_Archer_High && JobLevel > 39) {
+		mes "[冷艳舞姬]";
+		mes "米德加尔特";
+		mes "正需要才华横溢的女性";
+		mes "在善与恶之战中";
+		mes "悄然扭转";
+		mes "双方的均势。";
+		next;
+		mes "[冷艳舞姬]";
+		mes "你准备好";
+		mes "担起这份职责，";
+		mes "成为冷艳舞姬了吗？";
+		next;
+		if (select("否:是") == 1) {
+			mes "[冷艳舞姬]";
+			mes "等你准备好，";
+			mes "随时回来。";
+			mes "荣耀归于战士们！";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[冷艳舞姬]";
+			mes "你仍可以学习更多技能。请用完";
+			mes "所有剩余的技能点，再来找我。";
+			close;
+		}
+		jobchange Job_Gypsy;
+		set ADVJOB,0;
+		mes "[冷艳舞姬]";
+		mes "恭喜！";
+		mes "作为冷艳舞姬，我深知";
+		mes "你的演出将";
+		mes "撼动所有";
+		mes "观者的心……";
+		close;
+	}
+	mes "[冷艳舞姬]";
+	mes "欢迎";
+	mes "前往巴哈拉宫，";
+	mes "荣誉殿堂。";
+	next;
+	mes "[冷艳舞姬]";
+	mes "请在这里";
+	mes "放松一下";
+	mes "不必拘束。";
+	mes "荣耀归于战士们！";
+	close;
+}

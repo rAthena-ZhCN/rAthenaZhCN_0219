@@ -1,0 +1,2978 @@
+//===== rAthena Script =======================================
+//= Hugel Monster Races
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 2.0
+//===== Compatible With: =====================================
+//= rAthena Project; SVN r12752+
+//===== Description: =========================================
+//= [Official Conversion]
+//= - Hugel Monster Races (Single and Double)
+//= - Prize Medal Exchanging, and Monster Track NPCs.
+//= - Contains both euRO and iRO dialog.
+//===== Additional Comments: =================================
+//= 1.0 First version. Please report bugs. [L0ne_W0lf]
+//= 1.1 Corrected a minor typo. [L0ne_W0lf]
+//= 1.2 Replaced effect numerics with constants. [L0ne_W0lf]
+//= 1.3 Ei'felle now gives Exercise. (Bugreport:4092) [L0ne_W0lf]
+//= 1.4 Fixed call to a non-existant event. [L0ne_W0lf]
+//= 1.5 Updated Dialog. [L0ne_W0lf]
+//= 1.6 Updated experience rewards. [L0ne_W0lf]
+//= 1.7 Optimization, -4000 lines (more can still be done). [Euphy]
+//= 1.8 Optimized.
+//=     Fixed Medal Distributor (Dual Race) disappears accordingly. [Joseph] 
+//= 1.9 Updated RE/Pre-RE EXP. [Euphy]
+//= 2.0 Added GM management NPC. [Euphy]
+//= 2.1 Fixed prize in dual race and optimization. [Capuche]
+//============================================================
+
+// Monster Race - Single Monster Race
+//============================================================
+hugel,51,61,0	script	#race_timer1-1	-1,{
+OnEnable:
+	enablenpc "#race_timer1-1";
+OnInit:
+	$@mon_time_1_1 = 2;
+	initnpctimer;
+	end;
+
+OnTimer10000:
+	mapannounce "hugel","单怪赛跑即将开始，希望各位踊跃参加！",bc_map,"0x87ceeb";
+	end;
+OnTimer30000:
+	mapannounce "hugel","单怪赛跑竞技场刚刚开放。",bc_map,"0x87ceeb";
+	$@mon_time_1_1 = 1;
+	donpcevent "赛程计时器::OnEnable";
+	end;
+OnTimer90000:
+	mapannounce "hugel","单怪赛跑竞技场现已开放，参赛者请尽快入场。",bc_map,"0x87ceeb";
+	end;
+OnTimer210000:
+	mapannounce "hugel","单怪赛跑竞技场入口即将关闭，参赛者请立即入场。",bc_map,"0x87ceeb";
+	end;
+OnTimer270000:
+	mapannounce "hugel","单怪赛跑竞技场的入口即将关闭。",bc_map,"0x87ceeb";
+	end;
+OnTimer272000:
+	mapannounce "hugel","参赛者请在入口关闭前入场。",bc_map,"0x87ceeb";
+	end;
+OnTimer330000:
+	mapannounce "hugel","比赛即将开始。错过本次报名的玩家，请下次再来~！",bc_map,"0x87ceeb";
+	$@mon_time_1_1 = 0;
+	disablenpc "#race_timer1-1";
+	stopnpctimer;
+	end;
+}
+
+p_track01,58,0,0	script	赛程计时器	-1,{
+OnEnable:
+	initnpctimer;
+	enablenpc "赛程计时器";
+	for ( .@c = 1; .@c < 7; .@c++ ) {
+		.@line = rand(1,70);
+		enablenpc "starting#"+.@c;
+		enablenpc "Tire"+.@c+"#1";
+		if ( .@line <= 10 ) {
+			.@tired = rand(50,60);
+			enablenpc "Luk"+.@c+"#5";
+			enablenpc "Luk"+.@c+"#6";
+		} else if ( .@line <= 30 ) {
+			.@tired = rand(40,60);
+			enablenpc "Luk"+.@c+"#5";
+			if (.@tired >= 50) enablenpc "Tire"+.@c+"#2";
+		} else if ( .@line <= 40 ) {
+			.@tired = rand(30,50);
+			enablenpc "Luk"+.@c+"#1";
+			enablenpc "Tire"+.@c+"#2";
+			if ( .@tired < 40 ) enablenpc "Tire"+.@c+"#3";
+		} else if (.@line <= 50) {
+			.@tired = rand(20,40);
+			enablenpc "Luk"+.@c+"#1";
+			enablenpc "Luk"+.@c+"#2";
+			enablenpc "Tire"+.@c+"#2";
+			enablenpc "Tire"+.@c+"#3";
+			if (.@tired < 30) enablenpc "Tire"+.@c+"#4";
+		} else if (.@line <= 60) {
+			.@tired = rand(10,30);
+			for ( .@i = 1; .@i <= 3; .@i++ )
+				enablenpc "Luk"+.@c+"#"+.@i;
+			for ( .@i = 2; .@i <= 4; .@i++ )
+				enablenpc "Tire"+.@c+"#"+.@i;
+			if ( .@tired < 20) enablenpc "Tire"+.@c+"#5";
+		} else if (.@line <= 70) {
+			.@tired = rand(0,20);
+			for ( .@i = 1; .@i <= 4; .@i++ )
+				enablenpc "Luk"+.@c+"#"+.@i;
+			for ( .@i = 2; .@i <= 5; .@i++ )
+				enablenpc "Tire"+.@c+"#"+.@i;
+			if (.@tired < 10) enablenpc "Tire"+.@c+"#6";
+		}
+		setd "$@mr_1_luk"+.@c, .@line;
+		setd "$@mr_1_tire"+.@c, .@tired;
+	}
+	end;
+OnTimer1000:
+	enablenpc "售票助手#single";
+	end;
+OnTimer7000:
+	mapannounce "p_track01","欢迎来到魔物赛跑竞技场。",bc_map,"0xffb6c1";
+	end;
+OnTimer10000:
+	mapannounce "p_track01","如有疑问，欢迎随时向服务台咨询。",bc_map,"0xffb6c1";
+	end;
+OnTimer120000:
+	mapannounce "p_track01","单怪赛跑将在3分钟后开始。",bc_map,"0xffb6c1";
+	end;
+OnTimer123000:
+	mapannounce "p_track01","如需下注，请向票务员咨询。",bc_map,"0xffb6c1";
+	end;
+OnTimer240000:
+	mapannounce "p_track01","单怪赛跑即将开始。",bc_map,"0xffb6c1";
+	end;
+OnTimer243000:
+	mapannounce "p_track01","如需下注，请向票务员咨询。",bc_map,"0xffb6c1";
+	end;
+OnTimer300000:
+	mapannounce "p_track01","魔物赛跑已经开始，祝各位参赛者好运。",bc_map,"0xffb6c1";
+	$@monster_race = 0;
+	disablenpc "售票助手#single";
+	for ( .@i = 1; .@i <= 6; .@i++ )
+		donpcevent "Runner No. "+.@i+"#"+.@i+"::OnEnable";
+	stopnpctimer;
+	end;
+
+OnDisable:
+OnInit:
+	disablenpc "赛程计时器";
+	end;
+}
+
+p_track01,73,22,1	script	售票助手#single	899,{
+	mes "[票务员]";
+	mes "欢迎来到";
+	mes "魔物赛跑竞技场。";
+	mes "若您想参加";
+	mes "^3131FF单怪赛跑^000000，";
+	mes "请从以下6只魔物中";
+	mes "选出1只。";
+	next;
+	if (!checkweight("Spawn",200)) {
+		mes "[票务员]";
+		mes "等等……";
+		mes "我现在不能";
+		mes "给您任何东西。";
+		mes "您身上带的";
+		mes "东西太多了……";
+		close;
+	}
+	.@m = select ("魔物状态", "魔物1", "魔物2", "魔物3", "魔物4", "魔物5", "魔物6") - 1;
+	if (.@m == 0) {
+		for ( .@i = 1; .@i <= 6; .@i++ )
+			mes "魔物"+.@i+"[^CC6600幸运^000000:" + getd("$@mr_1_luk"+.@i) + "] [^EE0000HP^000000:" + getd("$@mr_1_tire"+.@i) + "]";
+		close;
+	} else {
+		if ($@mon_time_1_1 == 1) {
+			if (monster_race_1) {
+				mes "[票务员]";
+				mes "您已选择";
+				mes "魔物 ^FF0000"+ monster_race_1 +"^000000 参加";
+				mes "单怪赛跑。";
+				mes "比赛开始的时间";
+				mes "即将公布，";
+				mes "请稍候，谢谢。";
+				close;
+			}
+			mes "[票务员]";
+			mes "您选择了魔物"+.@m+"？";
+			mes "好的，请等待";
+			mes "比赛开始的消息";
+			mes "公布。如果您选中的";
+			mes "魔物获胜，请用这张票兑换奖励。";
+			getitem 7514,1; //Monster_Ticket
+			monster_race_1 = .@m;
+			close;
+		}
+		mes "[票务员]";
+		mes "抱歉，魔物";
+		mes "赛跑正在进行中。";
+		mes "若您想参加，请等待下一场比赛。";
+		close;
+	}
+
+OnInit:
+	disablenpc "售票助手#single";
+	end;
+}
+
+-	script	Runner_main	-1,{
+OnEnable:
+	emotion ET_SURPRISE;
+	enablenpc();
+	getmapxy(.@m$,.@x,.@y,BL_NPC);
+	setarray .@mob[1], 1725,1726,1727,1728,1730,1729;
+	.@n = atoi( strnpcinfo(2) );
+	monster "p_track01",58,.@y,"The "+ callfunc("F_GetNumSuffix",.@n) +" Racer",.@mob[.@n],1,strnpcinfo(0)+"::OnMyMobDead";
+	end;
+
+OnDisable:
+	disablenpc();
+	killmonster "p_track01",strnpcinfo(0)+"::OnMyMobDead";
+	end;
+
+OnTouchNPC:
+	.@n = atoi( strnpcinfo(2) );
+	$@monster_race = .@n;
+	for ( .@i = 1; .@i <= 6; .@i++ ) {
+		if (.@n == .@i) continue;
+		donpcevent "Runner No. "+.@i+"#"+.@i+"::OnDisable";
+	}
+	sleep 1000;
+	mapannounce "p_track01","冠军诞生了……！",bc_map,"0x33FF66";
+	sleep 1000;
+	mapannounce "p_track01","魔物"+.@n+"是本场比赛的冠军！",bc_map,"0x33FF66";
+	sleep 4000;
+	mapannounce "p_track01","如果您下注了魔物"+.@n+"并押中，请找奖牌发放员领取奖励！",bc_map,"0x33FF66";
+	sleep 2000;
+	mapannounce "p_track01","请注意，每场比赛结束后，奖牌仅发放5分钟。",bc_map,"0x33FF66";
+	sleep 1000;
+	donpcevent "奖牌发放员#single::OnEnable";
+	donpcevent strnpcinfo(0)+"::OnDisable";
+	killmonster "p_track01",strnpcinfo(0)+"::OnMyMobDead";
+	end;
+	
+OnInit:
+	if (strnpcinfo(2) != "" )
+		disablenpc();
+	end;
+}
+p_track01,30,38,0	duplicate(Runner_main)	Runner No. 1#1	-1,1,0
+p_track01,30,36,0	duplicate(Runner_main)	Runner No. 2#2	-1,1,0
+p_track01,30,34,0	duplicate(Runner_main)	Runner No. 3#3	-1,1,0
+p_track01,30,32,0	duplicate(Runner_main)	Runner No. 4#4	-1,1,0
+p_track01,30,30,0	duplicate(Runner_main)	Runner No. 5#5	-1,1,0
+p_track01,30,28,0	duplicate(Runner_main)	Runner No. 6#6	-1,1,0
+
+p_track01,67,45,5	script	奖牌发放员#single	845,{
+	if (!checkweight("Spawn",200)) {
+		mes "[奖牌发放员]";
+		mes "抱歉，我无法";
+		mes "发放奖牌给您，";
+		mes "除非您的物品栏";
+		mes "腾出更多空间。";
+		close;
+	}
+	if (countitem("Monster_Ticket")) {// 7514
+		mes "[奖牌发放员]";
+		mes "您好~";
+		mes "如果您在最近的";
+		mes "比赛中下注了获胜的";
+		mes "魔物，就可以在这里";
+		mes "用您的赛跑票兑换";
+		mes "一些奖牌。";
+		next;
+		mes "[奖牌发放员]";
+		mes "请注意，您只能在";
+		mes "比赛刚结束的一小段";
+		mes "时间内用获胜的赛跑票";
+		mes "兑换奖牌。奖牌";
+		mes "可以交给Hugel的韦恩，";
+		mes "用来交换物品。";
+		next; 
+		if ($@monster_race) {
+			if (monster_race_1 == $@monster_race) {
+				mes "[奖牌发放员]";
+				mes "哦，恭喜您，";
+				mes "您有一张";
+				mes "单怪赛跑的获胜票！那么";
+				mes "您愿意用赛跑票";
+				mes "兑换奖牌吗？";
+				next;
+				if (select("是的，麻烦了。:不用了，谢谢。") == 2) {
+					mes "[奖牌发放员]";
+					mes "嗯，您确定吗？您";
+					mes "只能在比赛结束后";
+					mes "的短时间内把获胜赛跑票";
+					mes "兑换成奖牌。如果您弄错了，";
+					mes "请尽快再来找我。";
+					close;
+				}
+				mes "[奖牌发放员]";
+				mes "让我看看您的票……";
+				mes "哦！恭喜您，";
+				mes "您中奖了！请问您的名字？";
+				next;
+				input .@input$;
+				if (.@input$ == strcharinfo(0)) {
+					.@insa = rand(1,1000);
+					mes "[奖牌发放员]";
+					mes "啊，"+strcharinfo(0)+".";
+					mes "您现在可以输入";
+					mes "兑换号码，把这张票";
+					mes "换成奖牌。您的";
+					mes "兑换号码是";
+					mes "^FF0000" + .@insa + "^000000。";
+					next;
+					input .@input;
+					if (!.@input) {
+						mes "[奖牌发放员]";
+						mes "哦？您不想";
+						mes "把获胜票";
+						mes "兑换掉吗？";
+						close;
+					} else if (.@input == .@insa) {
+						mes "[奖牌发放员]";
+						mes "谢谢！您输入的";
+						mes "号码正确……";
+						mes "一切似乎都";
+						mes "没有问题。好的！";
+						next;
+						mes "[奖牌发放员]";
+						mes "现在请收下您的";
+						mes "奖牌！您可以";
+						mes "用这些奖牌";
+						mes "在Hugel的韦恩那里";
+						mes "兑换有趣的物品。谢谢~";
+						delitem 7514,1; //Monster_Ticket
+						monster_race_1 = 0;
+						getitem 7515,4; //Marvelous_Medal
+						close;
+					}
+					mes "[奖牌发放员]";
+					mes "抱歉，看来";
+					mes "您输入的";
+					mes "兑换号码不正确。";
+					mes "您介意稍后";
+					mes "再来一次吗？";
+					close;
+				}
+				mes "[奖牌发放员]";
+				mes "这是怎么回事……？";
+				mes "看来出问题了……";
+				mes "您输入名字时";
+				mes "出错了吗？请检查";
+				mes "名字后再试一次。";
+				close;
+			}
+			mes "[奖牌发放员]";
+			mes "您或许并未在";
+			mes "上一场比赛中下注";
+			mes "获胜的魔物，但我希望";
+			mes "您下次能有好运~";
+			close;
+		}
+	}
+	mes "[奖牌发放员]";
+	mes "您好~";
+	mes "如果您在最近的";
+	mes "比赛中下注了获胜的";
+	mes "魔物，就可以在这里";
+	mes "用您的赛跑票兑换";
+	mes "一些奖牌。";
+	next;
+	mes "[奖牌发放员]";
+	mes "请注意，您只能在";
+	mes "比赛刚结束的一小段";
+	mes "时间内用获胜的赛跑票";
+	mes "兑换奖牌。奖牌";
+	mes "可以交给Hugel的韦恩，";
+	mes "用来交换物品。";
+	close;
+
+OnEnable:
+	enablenpc "奖牌发放员#single";
+	emotion ET_SURPRISE;
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	mapannounce "p_track01","魔物赛跑结束了！恭喜所有获胜者！",bc_map,"0xFFFF00";
+	end;
+OnTimer4000:
+	mapannounce "p_track01","若您押中获胜魔物，请将赛跑票交给奖牌发放员。",bc_map,"0xFFFF00";
+	end;
+OnTimer7000:
+	mapannounce "p_track01","您有5分钟时间向奖牌发放员用获胜票兑换奖牌。",bc_map,"0xFFFF00";
+	end;
+OnTimer10000:
+	mapannounce "p_track01","5分钟后所有票券都将失效，请获胜者立即领取奖励。",bc_map,"0xFFFF00";
+	end;
+OnTimer13000:
+	mapannounce "p_track01","请在这5分钟结束前离开竞技场，谢谢。",bc_map,"0xFFFF00";
+	end;
+OnTimer240000:
+	mapannounce "p_track01","请注意。我们即将开始准备下一场比赛……",bc_map,"0xFFFF00";
+	end;
+OnTimer243000:
+	mapannounce "p_track01","为准备下一场比赛，竞技场将在1分钟后关闭。",bc_map,"0xFFFF00";
+	end;
+OnTimer246000:
+	mapannounce "p_track01","上一场比赛的参赛者请尽快离开竞技场。",bc_map,"0xFFFF00";
+	end;
+OnTimer249000:
+	mapannounce "p_track01","感谢您的配合。",bc_map,"0xFFFF00";
+	end;
+OnTimer252000:
+	mapannounce "p_track01","希望您在魔物赛跑竞技场玩得开心，欢迎再来~",bc_map,"0xFFFF00";
+	$@mr_1_luk1 = $@mr_1_tire1 = 0;
+	for ( .@i = 1; .@i <= 6; .@i++ ) {
+		for ( .@j = 1; .@j <= 6; .@j++ ) {
+			disablenpc "Tire"+.@i+"#"+.@j;
+			disablenpc "Luk"+.@i+"#"+.@j;
+		}
+		enablenpc "Luk1#"+.@i;
+		enablenpc "Tire1#"+.@i;
+		setd "$@mr_1_luk"+.@i,0;
+		setd "$@mr_1_tire"+.@i,0;
+	}
+	end;
+OnTimer300000:
+	donpcevent "#race_timer1-1::OnEnable";
+	$@monster_race = 0;
+	mapwarp "p_track01","hugel",63,73;
+	end;
+
+OnTimer342000:
+	stopnpctimer;
+OnInit:
+	disablenpc "奖牌发放员#single";
+	end;
+}
+
+p_track01,76,36,1	script	出口向导#single	798,{
+	mes "[出口向导]";
+	mes "如果您持有获胜的";
+	mes "赛跑票，请务必";
+	mes "现在就兑换成奖牌。";
+	mes "下一场比赛开始后，";
+	mes "所有赛跑票都会失效。";
+	next;
+	mes "[出口向导]";
+	mes "如果您想离开";
+	mes "竞技场，我可以为您";
+	mes "带路。您想现在";
+	mes "离开竞技场吗？";
+	next;
+	if (select("是:否") == 2) {
+		mes "[出口向导]";
+		mes "好的，那么。";
+		mes "准备好离开时";
+		mes "随时告诉我";
+		mes "一声就好。";
+		close;
+	}
+	if (!countitem(7514)) {
+		mes "[出口向导]";
+		mes "感谢您";
+		mes "感谢您的光临，";
+		mes "希望您";
+		mes "很快再次光临~";
+	} else {
+		mes "[出口向导]";
+		mes "按照我们的";
+		mes "规定，在您离开前";
+		mes "我必须收回赛跑票。";
+		mes "感谢您的光临，";
+		mes "希望您在魔物赛跑";
+		mes "竞技场度过愉快时光。";
+		delitem 7514,1; //Monster_Ticket
+	}
+	monster_race_1 = 0;
+	close2;
+	warp "hugel",63,73;
+	end;
+}
+
+hugel,58,72,6	script	艾卡·艾勒伯德#single	798,{
+	mes "[埃卡·埃勒伯德]";
+	mes "欢迎来到Hugel最大的";
+	mes "娱乐场所——";
+	mes "魔物赛跑竞技场。";
+	mes "今天有什么可以帮您？";
+	next;
+	if (select("魔物赛跑介绍:进入魔物赛跑") == 1) {
+		mes "[埃卡·埃勒伯德]";
+		mes "魔物赛跑起源于";
+		mes "孩子们的小游戏，";
+		mes "让可爱宠物互相赛跑。后来它发展成";
+		mes "大受欢迎的消遣，我们便在Hugel建了竞速场。";
+		next;
+		mes "[埃卡·埃勒伯德]";
+		mes "我们的魔物赛跑竞技场";
+		mes "有两种赛事。首先是单怪赛跑，";
+		mes "下注第一名魔物的人可以获得奖励。";
+		next;
+		mes "[埃卡·埃勒伯德]";
+		mes "其次是双怪";
+		mes "赛跑，其赔率与奖励都高于单怪";
+		mes "赛跑：您必须下注2只魔物，且它们必须";
+		mes "分别获得第一、第二名才算获胜。";
+		next;
+		mes "[埃卡·埃勒伯德]";
+		mes "虽然需要支付少量";
+		mes "入场费，但我们只把";
+		mes "这些钱用于奖励";
+		mes "参赛者以及维护";
+		mes "这座竞技场。因此我们";
+		mes "并未从中获利。";
+		next;
+		mes "[埃卡·埃勒伯德]";
+		mes "此外，我们禁止";
+		mes "私下就比赛结果";
+		mes "以物品或zeny";
+		mes "进行个人赌博";
+		mes "和下注。那种";
+		mes "赌博在这里是违法的……";
+		next;
+		mes "[埃卡·埃勒伯德]";
+		mes "进入竞速场后，您会得到一张赛跑票。";
+		mes "请记住，获胜的赛跑票只能在比赛结束后";
+		mes "的5分钟内兑换成奖牌。";
+		next;
+	}
+	mes "[埃卡·埃勒伯德]";
+	mes "魔物赛跑竞技场所有";
+	mes "比赛的入场费";
+	mes "都是2,000 zeny。如果您想下注双怪赛跑，";
+	mes "请去找我的兄弟埃雷内斯，";
+	mes "他会帮助您。";
+	next;
+	mes "[埃卡·埃勒伯德]";
+	mes "否则，我可以帮您";
+	mes "开始，如果您有兴趣";
+	mes "参加单怪赛跑。";
+	mes "您想下注";
+	mes "单怪赛跑吗？";
+	next;
+	if (select("是的，麻烦了。:不用了，谢谢。") == 2) {
+		mes "[埃卡·埃勒伯德]";
+		mes "好的。希望您在";
+		mes "魔物赛跑竞技场";
+		mes "玩得愉快~";
+		close;
+	}
+	if (!checkweight("Spawn",700)) {
+		mes "[埃卡·埃勒伯德]";
+		mes "哎呀，您带的";
+		mes "东西可真多……嗯，";
+		mes "最好把一部分放进";
+		mes "卡普拉仓库之类的地方。";
+		close;
+	}
+	if (Zeny < 2000) {
+		mes "[埃卡·埃勒伯德]";
+		mes "很抱歉，你";
+		mes "没有足够的";
+		mes "支付入场费所需的";
+		mes "2,000 zeny。";
+		close;
+	}
+	if (countitem("Monster_Ticket")) {
+		mes "[埃卡·埃勒伯德]";
+		mes "嗯？您拿着一张";
+		mes "过期的赛跑票做什么？";
+		mes "我还是帮您处理掉吧，免得它和";
+		mes "您的新赛跑票弄混。";
+		delitem 7514,1; //Monster_Ticket
+		next;
+		if ($@mon_time_1_1 == 1) {
+			if (Zeny < 2000) {
+				mes "[埃卡·埃勒伯德]";
+				mes "很抱歉，你";
+				mes "没有足够的";
+				mes "支付入场费所需的";
+				mes "2,000 zeny。";
+				close;
+			}
+			mes "[埃卡·埃勒伯德]";
+			mes "好了，我想您";
+			mes "已经准备好了。希望";
+			mes "您享受这场比赛~";
+			mes "我现在带您进入";
+			mes "魔物赛跑竞技场。";
+			Zeny -= 2000;
+			monster_race_1 = 0;
+			close2;
+			warp "p_track01",75,41;
+			end;
+		}
+	} else if ($@mon_time_1_1 == 1) {
+		mes "[埃卡·埃勒伯德]";
+		mes "谢谢，希望";
+		mes "您享受这场比赛。";
+		mes "我现在带您前往";
+		mes "魔物赛跑竞技场。";
+		Zeny -= 2000;
+		monster_race_1 = 0;
+		close2;
+		warp "p_track01",75,41;
+		end;
+	}
+	if ($@mon_time_1_1 == 2) {
+		mes "[埃卡·埃勒伯德]";
+		mes "我们还在完成";
+		mes "下一场单怪赛跑的";
+		mes "准备工作，所以";
+		mes "请您再";
+		mes "稍等一会儿……";
+		close;
+	}
+	if ($@monster_race == 0) {
+		mes "[埃卡·埃勒伯德]";
+		mes "现在魔物赛跑";
+		mes "正在进行。下注已经来不及了，但如果您想";
+		mes "观赛，观众票价为500 zeny，";
+		mes "您要进入魔物赛跑竞技场吗？";
+		next;
+		if (select("进入:取消") == 2) {
+			mes "[埃卡·埃勒伯德]";
+			mes "好的。如果您想";
+			mes "下注魔物赛跑，";
+			mes "请等待当前";
+			mes "比赛结束。希望您";
+			mes "在魔物赛跑竞技场";
+			mes "玩得愉快~";
+			close;
+		}
+		if (Zeny > 499) {
+			mes "[埃卡·埃勒伯德]";
+			mes "谢谢~";
+			mes "希望你在";
+			mes "观看本场比赛！";
+			Zeny -= 500;
+			monster_race_1 = 0;
+			close2;
+			warp "p_track01",75,41;
+			end;
+		}
+		mes "[埃卡·埃勒伯德]";
+		mes "抱歉，您的钱";
+		mes "有足够的钱支付";
+		mes "500 zeny的观众费用。";
+		close;
+	}
+	mes "[埃卡·埃勒伯德]";
+	mes "抱歉，魔物";
+	mes "赛跑刚刚结束，我们正在";
+	mes "进行5分钟的";
+	mes "领奖时段，";
+	mes "获胜者可领取奖牌。入口";
+	mes "即将开放，请稍候。";
+	close;
+OnEnable:
+	enablenpc "艾卡·艾勒伯德#single";
+	end;
+OnDisable:
+	disablenpc "艾卡·艾勒伯德#single";
+	end;
+}
+
+p_track01,39,49,3	script	游戏向导#single	845,{
+	mes "[游戏向导]";
+	mes "欢迎来到";
+	mes "魔物赛跑竞技场。";
+	mes "有什么可以帮您？";
+	next;
+	switch(select("魔物赛跑介绍:下注说明:票券兑换说明")) {
+	case 1:
+		mes "[游戏向导]";
+		mes "魔物赛跑起源于";
+		mes "孩子们的小游戏，";
+		mes "让可爱宠物互相赛跑。后来它发展成";
+		mes "大受欢迎的消遣，我们便在Hugel建了竞速场。";
+		next;
+		mes "[游戏向导]";
+		mes "我们的魔物赛跑竞技场";
+		mes "有两种赛事。首先是单怪赛跑，";
+		mes "下注第一名魔物的人可以获得奖励。";
+		next;
+		mes "[游戏向导]";
+		mes "其次是双怪";
+		mes "赛跑，其赔率与奖励都高于单怪";
+		mes "赛跑：您必须下注2只魔物，且它们必须";
+		mes "分别获得第一、第二名才算获胜。";
+		next;
+		mes "[游戏向导]";
+		mes "虽然需要支付少量";
+		mes "入场费，但我们只把";
+		mes "这些钱用于奖励";
+		mes "参赛者以及维护";
+		mes "这座竞技场。因此我们";
+		mes "并未从中获利。";
+		next;
+		mes "[游戏向导]";
+		mes "此外，我们禁止";
+		mes "私下就比赛结果";
+		mes "以物品或zeny";
+		mes "进行个人赌博";
+		mes "和下注。那种";
+		mes "赌博在这里是违法的……";
+		next;
+		mes "[游戏向导]";
+		mes "进入竞速场后，您会得到一张赛跑票。";
+		mes "请记住，获胜的赛跑票只能在比赛结束后";
+		mes "的5分钟内兑换成奖牌。";
+		next;
+		break;
+	case 2:
+		mes "[游戏向导]";
+		mes "下注之前，您必须";
+		mes "先从票务员那里";
+		mes "领取免费的赛跑票。";
+		mes "我已经在小地图上";
+		mes "标记了票务员的位置，";
+		mes "您很容易就能找到他。";
+		viewpoint 1,73,22,1,0xFF3355;
+		next;
+		break;
+	case 3:
+		mes "[游戏向导]";
+		mes "如果您下注了";
+		mes "单怪赛跑的冠军，或";
+		mes "双怪赛跑中获得第一、";
+		mes "第二名的魔物，那么";
+		mes "您可以用赛跑票";
+		mes "兑换奖牌。";
+		next;
+		mes "[游戏向导]";
+		mes "不过，您必须在赛跑";
+		mes "结束后5分钟内";
+		mes "向奖牌发放员";
+		mes "兑换您的赛跑票。";
+		mes "比赛一结束，^FF0000您的票券^FFFFFF ^FF0000就只在5分钟内有效，之后失效。^000000";
+		next;
+		mes "[游戏向导]";
+		mes "当这5分钟的";
+		mes "时限一到，您就会被传送出去，我们会立刻";
+		mes "开始准备下一场比赛。下注时请务必";
+		mes "记住这一点。";
+		next;
+		mes "[游戏向导]";
+		mes "如果您还没有";
+		mes "领取免费的赛跑票，";
+		mes "请去找";
+		mes "票务员。我已经";
+		mes "把位置标在小地图上了。";
+		viewpoint 1,67,45,2,0xCE6300;
+		next;
+		break;
+	}
+	mes "[游戏向导]";
+	mes "谢谢，祝您";
+	mes "希望你在";
+	mes "在魔物赛跑";
+	mes "竞技场玩得开心。";
+	close;
+}
+
+-	script	starting_1	-1,{
+OnTouchNPC:
+	// .@speed = 10 * ( 6 + rand(100)/10 );// speed 60-150
+	.@start = rand(1,100);
+	if (.@start < 11) .@speed = 60;
+	else if (.@start < 21) .@speed = 70;
+	else if (.@start < 31) .@speed = 80;
+	else if (.@start < 41) .@speed = 90;
+	else if (.@start < 51) .@speed = 100;
+	else if (.@start < 61) .@speed = 110;
+	else if (.@start < 71) .@speed = 120;
+	else if (.@start < 81) .@speed = 130;
+	else if (.@start < 91) .@speed = 140;
+	else .@speed = 150;
+	sc_start SC_WALKSPEED,5000,.@speed;
+	end;
+	
+OnInit:
+	disablenpc();
+	end;
+}
+
+-	script	Luk_1	-1,{
+OnTouchNPC:
+	.@start = rand(1,100);
+	if (.@start < 61) .@speed = 110;
+	else if (.@start < 71) .@speed = 120;
+	else if (.@start < 81) .@speed = 130;
+	else if (.@start < 91) .@speed = 140;
+	else .@speed = 150;
+	sc_start SC_WALKSPEED,10000,.@speed;
+	end;
+	
+OnInit:
+	disablenpc();
+	end;
+}
+
+-	script	Luk_2	-1,{
+OnTouchNPC:
+	.@start = rand(1,100);
+	if (.@start < 61) .@time = 1000;
+	else if (.@start < 71) .@time = 2000;
+	else if (.@start < 81) .@time = 3000;
+	else if (.@start < 91) .@time = 4000;
+	if (.@time) sc_start SC_STUN,.@time,0;
+	end;
+	
+OnInit:
+	disablenpc();
+	end;
+}
+
+-	script	Tire_1	-1,{
+OnTouchNPC:
+	.@start = rand(1,100);
+	if (.@start < 61) .@time = 1000;
+	else if (.@start < 71) .@time = 2000;
+	else if (.@start < 81) .@time = 3000;
+	else if (.@start < 91) .@time = 4000;
+	if (.@time) sc_start SC_SLEEP,.@time,0;
+	end;
+	
+OnInit:
+	disablenpc();
+	end;
+}
+
+p_track01,56,38,0	duplicate(starting_1)	starting#1	-1,0,0
+p_track01,56,36,0	duplicate(starting_1)	starting#2	-1,0,0
+p_track01,56,34,0	duplicate(starting_1)	starting#3	-1,0,0
+p_track01,56,32,0	duplicate(starting_1)	starting#4	-1,0,0
+p_track01,56,30,0	duplicate(starting_1)	starting#5	-1,0,0
+p_track01,56,28,0	duplicate(starting_1)	starting#6	-1,0,0
+
+p_track01,33,38,0	duplicate(Luk_1)	Luk1#1	-1,0,0
+p_track01,37,38,0	duplicate(Luk_1)	Luk1#2	-1,0,0
+p_track01,53,38,0	duplicate(Luk_1)	Luk1#3	-1,0,0
+p_track01,45,38,0	duplicate(Luk_1)	Luk1#4	-1,0,0
+p_track01,33,36,0	duplicate(Luk_1)	Luk2#1	-1,0,0
+p_track01,37,36,0	duplicate(Luk_1)	Luk2#2	-1,0,0
+p_track01,53,36,0	duplicate(Luk_1)	Luk2#3	-1,0,0
+p_track01,45,36,0	duplicate(Luk_1)	Luk2#4	-1,0,0
+p_track01,33,34,0	duplicate(Luk_1)	Luk3#1	-1,0,0
+p_track01,37,34,0	duplicate(Luk_1)	Luk3#2	-1,0,0
+p_track01,53,34,0	duplicate(Luk_1)	Luk3#3	-1,0,0
+p_track01,45,34,0	duplicate(Luk_1)	Luk3#4	-1,0,0
+p_track01,33,32,0	duplicate(Luk_1)	Luk4#1	-1,0,0
+p_track01,37,32,0	duplicate(Luk_1)	Luk4#2	-1,0,0
+p_track01,53,32,0	duplicate(Luk_1)	Luk4#3	-1,0,0
+p_track01,45,32,0	duplicate(Luk_1)	Luk4#4	-1,0,0
+p_track01,33,30,0	duplicate(Luk_1)	Luk5#1	-1,0,0
+p_track01,37,30,0	duplicate(Luk_1)	Luk5#2	-1,0,0
+p_track01,53,30,0	duplicate(Luk_1)	Luk5#3	-1,0,0
+p_track01,45,30,0	duplicate(Luk_1)	Luk5#4	-1,0,0
+p_track01,33,28,0	duplicate(Luk_1)	Luk6#1	-1,0,0
+p_track01,37,28,0	duplicate(Luk_1)	Luk6#2	-1,0,0
+p_track01,53,28,0	duplicate(Luk_1)	Luk6#3	-1,0,0
+p_track01,45,28,0	duplicate(Luk_1)	Luk6#4	-1,0,0
+
+p_track01,49,38,0	duplicate(Luk_2)	Luk1#5	-1,0,0
+p_track01,41,38,0	duplicate(Luk_2)	Luk1#6	-1,0,0
+p_track01,49,36,0	duplicate(Luk_2)	Luk2#5	-1,0,0
+p_track01,41,36,0	duplicate(Luk_2)	Luk2#6	-1,0,0
+p_track01,49,34,0	duplicate(Luk_2)	Luk3#5	-1,0,0
+p_track01,41,34,0	duplicate(Luk_2)	Luk3#6	-1,0,0
+p_track01,49,32,0	duplicate(Luk_2)	Luk4#5	-1,0,0
+p_track01,41,32,0	duplicate(Luk_2)	Luk4#6	-1,0,0
+p_track01,49,30,0	duplicate(Luk_2)	Luk5#5	-1,0,0
+p_track01,41,30,0	duplicate(Luk_2)	Luk5#6	-1,0,0
+p_track01,49,28,0	duplicate(Luk_2)	Luk6#5	-1,0,0
+p_track01,41,28,0	duplicate(Luk_2)	Luk6#6	-1,0,0
+
+p_track01,43,38,0	duplicate(Tire_1)	Tire1#1	-1,0,0
+p_track01,39,38,0	duplicate(Tire_1)	Tire1#2	-1,0,0
+p_track01,35,38,0	duplicate(Tire_1)	Tire1#3	-1,0,0
+p_track01,55,38,0	duplicate(Tire_1)	Tire1#4	-1,0,0
+p_track01,51,38,0	duplicate(Tire_1)	Tire1#5	-1,0,0
+p_track01,47,38,0	duplicate(Tire_1)	Tire1#6	-1,0,0
+p_track01,43,36,0	duplicate(Tire_1)	Tire2#1	-1,0,0
+p_track01,39,36,0	duplicate(Tire_1)	Tire2#2	-1,0,0
+p_track01,35,36,0	duplicate(Tire_1)	Tire2#3	-1,0,0
+p_track01,55,36,0	duplicate(Tire_1)	Tire2#4	-1,0,0
+p_track01,51,36,0	duplicate(Tire_1)	Tire2#5	-1,0,0
+p_track01,47,36,0	duplicate(Tire_1)	Tire2#6	-1,0,0
+p_track01,43,34,0	duplicate(Tire_1)	Tire3#1	-1,0,0
+p_track01,39,34,0	duplicate(Tire_1)	Tire3#2	-1,0,0
+p_track01,35,34,0	duplicate(Tire_1)	Tire3#3	-1,0,0
+p_track01,55,34,0	duplicate(Tire_1)	Tire3#4	-1,0,0
+p_track01,51,34,0	duplicate(Tire_1)	Tire3#5	-1,0,0
+p_track01,47,34,0	duplicate(Tire_1)	Tire3#6	-1,0,0
+p_track01,43,32,0	duplicate(Tire_1)	Tire4#1	-1,0,0
+p_track01,39,32,0	duplicate(Tire_1)	Tire4#2	-1,0,0
+p_track01,35,32,0	duplicate(Tire_1)	Tire4#3	-1,0,0
+p_track01,55,32,0	duplicate(Tire_1)	Tire4#4	-1,0,0
+p_track01,51,32,0	duplicate(Tire_1)	Tire4#5	-1,0,0
+p_track01,47,32,0	duplicate(Tire_1)	Tire4#6	-1,0,0
+p_track01,43,30,0	duplicate(Tire_1)	Tire5#1	-1,0,0
+p_track01,39,30,0	duplicate(Tire_1)	Tire5#2	-1,0,0
+p_track01,35,30,0	duplicate(Tire_1)	Tire5#3	-1,0,0
+p_track01,55,30,0	duplicate(Tire_1)	Tire5#4	-1,0,0
+p_track01,51,30,0	duplicate(Tire_1)	Tire5#5	-1,0,0
+p_track01,47,30,0	duplicate(Tire_1)	Tire5#6	-1,0,0
+p_track01,43,28,0	duplicate(Tire_1)	Tire6#1	-1,0,0
+p_track01,39,28,0	duplicate(Tire_1)	Tire6#2	-1,0,0
+p_track01,35,28,0	duplicate(Tire_1)	Tire6#3	-1,0,0
+p_track01,55,28,0	duplicate(Tire_1)	Tire6#4	-1,0,0
+p_track01,51,28,0	duplicate(Tire_1)	Tire6#5	-1,0,0
+p_track01,47,28,0	duplicate(Tire_1)	Tire6#6	-1,0,0
+
+// Monster Race - Dual Monster Race
+//============================================================
+hugel,47,56,0	script	#race_timer2-1	-1,{
+OnEnable:
+	enablenpc "#race_timer2-1";
+OnInit:
+	$@mon_time_2_1 = 2;
+	initnpctimer;
+	end;
+
+OnTimer10000:
+	mapannounce "hugel","双怪赛跑即将开始，希望各位踊跃参加！",bc_map,"0xffb6c1";
+	end;
+
+OnTimer30000:
+	mapannounce "hugel","双怪赛跑竞技场刚刚开放。",bc_map,"0xffb6c1";
+	$@mon_time_2_1 = 1;
+	donpcevent "#race_timer2-2::OnEnable";
+	donpcevent "TrapGlobal#race02::OnEnable";
+	enablenpc "售票助手#2";
+	end;
+
+OnTimer90000:
+	mapannounce "hugel","双怪赛跑竞技场现已开放，参赛者请尽快入场。",bc_map,"0xffb6c1";
+	end;
+
+OnTimer210000:
+	mapannounce "hugel","双怪赛跑竞技场入口即将关闭，参赛者请立即入场。",bc_map,"0xffb6c1";
+	end;
+
+OnTimer270000:
+	mapannounce "hugel","双怪赛跑竞技场的入口即将关闭。",bc_map,"0xffb6c1";
+	end;
+
+OnTimer272000:
+	mapannounce "hugel","参赛者请在入口关闭前入场。",bc_map,"0xffb6c1";
+	end;
+
+OnTimer330000:
+	mapannounce "hugel","比赛即将开始。错过本次报名的玩家，请下次再来~！",bc_map,"0xffb6c1";
+	$@mon_time_2_1 = 0;
+	disablenpc "#race_timer2-1";
+	stopnpctimer;
+	end;
+}
+
+p_track02,42,23,0	script	#race_timer2-2	-1,{
+OnEnable:
+	enablenpc "#race_timer2-2";
+	$@mon_time_2_2 = 0;
+	initnpctimer;
+	end;
+
+OnTimer5000:
+	mapannounce "p_track02","欢迎来到魔物赛跑竞技场。",bc_map,"0x87ceeb";
+	end;
+
+OnTimer7000:
+	mapannounce "p_track02","如有疑问，欢迎随时向服务台咨询。",bc_map,"0x87ceeb";
+	end;
+
+OnTimer120000:
+	mapannounce "p_track02","双怪赛跑将在3分钟后开始。",bc_map,"0x87ceeb";
+	end;
+
+OnTimer122000:
+	mapannounce "p_track02","如需下注，请向票务员咨询。",bc_map,"0x87ceeb";
+	end;
+
+OnTimer240000:
+	mapannounce "p_track02","双怪赛跑即将开始。",bc_map,"0x87ceeb";
+	end;
+
+OnTimer242000:
+	mapannounce "p_track02","如需下注，请向票务员咨询。",bc_map,"0x87ceeb";
+	end;
+
+OnTimer300000:
+	mapannounce "p_track02","魔物赛跑现在开始，祝大家好运！",bc_map,"0x87ceeb";
+	$@mon_time_2_2 = 1;
+	disablenpc "售票助手#2";
+	donpcevent "#poring1::OnEnable";
+	donpcevent "#lunatic1::OnEnable";
+	donpcevent "#savagebebe1::OnEnable";
+	donpcevent "#desertwolf1::OnEnable";
+	donpcevent "#deviruchi1::OnEnable";
+	donpcevent "#baphomet1::OnEnable";
+	stopnpctimer;
+	disablenpc "#race_timer2-2";
+	end;
+
+OnInit:
+	disablenpc "#race_timer2-2";
+	$@mon_time_2_2 = 0;
+	end;
+}
+
+p_track02,80,43,0	script	#race_timer2-3	-1,{
+OnEnable:
+	enablenpc "#race_timer2-3";
+	initnpctimer;
+	end;
+
+OnTimer3000:
+	mapannounce "p_track02","魔物赛跑结束了！恭喜所有获胜者！",bc_map,"0xFFFF00";
+	end;
+
+OnTimer6000:
+	mapannounce "p_track02","若您押中获胜魔物，请将赛跑票交给奖牌发放员。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer9000:
+	mapannounce "p_track02","您有5分钟时间向奖牌发放员用获胜票兑换奖牌。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer12000:
+	mapannounce "p_track02","5分钟后所有票券都将失效，请获胜者立即领取奖励。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer15000:
+	mapannounce "p_track02","请在这5分钟结束前离开竞技场，谢谢。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer240000:
+	mapannounce "p_track02","请注意。我们即将开始准备下一场比赛……",bc_map,"0xFFFF00";
+	end;
+
+OnTimer243000:
+	mapannounce "p_track02","为准备下一场比赛，竞技场将在1分钟后关闭。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer246000:
+	mapannounce "p_track02","上一场比赛的参赛者请尽快离开竞技场。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer249000:
+	mapannounce "p_track02","感谢您的配合。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer252000:
+	mapannounce "p_track02","希望您在魔物赛跑竞技场玩得开心，欢迎再来~",bc_map,"0xFFFF00";
+	end;
+
+OnTimer300000:
+	mapwarp "p_track02","hugel",63,73;
+	disablenpc "奖牌发放员#medal";
+	donpcevent "#race_timer2-1::OnEnable";
+	stopnpctimer;
+OnInit:
+	$@mon_race_2_1 = $@mon_race_2_2 = 0;
+	disablenpc "#race_timer2-3";
+	end;
+}
+
+hugel,62,69,1	script	艾卡·埃雷内斯#double	798,{
+	mes "[埃卡·埃雷内斯]";
+	mes "欢迎来到";
+	mes "魔物赛跑竞技场，";
+	mes "Hugel村引以为傲的";
+	mes "欢乐之地！";
+	mes "有什么可以为您效劳的？";
+	next;
+	if (select("魔物赛跑介绍:进入魔物赛跑") == 1) {
+		mes "[埃卡·埃雷内斯]";
+		mes "魔物赛跑起源于";
+		mes "孩子们的小游戏，";
+		mes "可爱宠物们会互相赛跑。这份乐趣逐渐演变成一项";
+		mes "如此受欢迎的消遣，于是我们在休格尔建起了赛跑竞赛场。";
+		next;
+		mes "[艾卡·艾雷尼斯]";
+		mes "我们的魔物赛跑竞赛场举办";
+		mes "两种魔物赛跑。首先是单人魔物赛跑，";
+		mes "押中第一名魔物的人可获得奖励。";
+		next;
+		mes "[艾卡·艾雷尼斯]";
+		mes "接着是双人魔物";
+		mes "赛跑，庄家的赔率和奖励都比单人";
+		mes "魔物赛跑更高：你必须押注2只魔物，而且它们必须";
+		mes "分别跑出第1和第2名，你才能赢。";
+		next;
+		mes "[艾卡·艾雷尼斯]";
+		mes "虽然需要收取少量的入场";
+		mes "费，但我们只把这笔钱";
+		mes "用来发放奖励给";
+		mes "参赛者，并维护这座";
+		mes "竞赛场。因此，我们并不";
+		mes "靠这门生意获利。";
+		next;
+		mes "[艾卡·艾雷尼斯]";
+		mes "此外，我们也禁止他人";
+		mes "私下对赌";
+		mes "和投注，用道具与";
+		mes "Zeny，依据这些";
+		mes "比赛的结果。那种";
+		mes "赌博在这里是违法的……";
+		next;
+		mes "[艾卡·艾雷尼斯]";
+		mes "一旦进入赛跑竞赛场，你就会收到一张赛跑票券。";
+		mes "请记住，中奖的赛跑票券只能在";
+		mes "比赛结束后5分钟窗口内兑换成奖牌。";
+		next;
+	}
+	mes "[艾卡·艾雷尼斯]";
+	mes "魔物赛跑竞赛场所有比赛的";
+	mes "入场费都是";
+	mes "2,000 Zeny。如果你想对单人魔物赛跑下注，";
+	mes "那就请找我弟弟";
+	mes "艾尔伯德帮忙吧。";
+	next;
+	mes "[艾卡·艾雷尼斯]";
+	mes "否则，如果你有兴趣";
+	mes "开始的话，我也可以帮你";
+	mes "参加双人魔物赛跑。";
+	mes "你想对双人";
+	mes "魔物赛跑下注吗？";
+	next;
+	if (select("好的，麻烦你。:不用了，谢谢。") == 2) {
+		mes "[艾卡·艾雷尼斯]";
+		mes "好的。希望你在";
+		mes "魔物赛跑竞赛场";
+		mes "玩得开心~";
+		close;
+	}
+	if (!checkweight("Jellopy",700)) {
+		mes "[艾卡·艾雷尼斯]";
+		mes "嗯……你现在随身带的";
+		mes "东西太多了。";
+		mes "你最好先把";
+		mes "一些东西放进";
+		mes "卡普拉仓库，然后才能";
+		mes "对任何魔物赛跑下注……";
+		close;
+	}
+	if (Zeny < 2000) {
+		mes "[艾卡·艾雷尼斯]";
+		mes "很抱歉，你";
+		mes "没有足够的";
+		mes "钱来支付";
+		mes "2,000 Zeny的入场费。";
+		close;
+	}
+	if (countitem(7514)) {
+		mes "[艾卡·艾雷尼斯]";
+		mes "嗯？你拿着";
+		mes "一张过期的赛跑票券做什么？";
+		mes "我还是帮你把它处理掉吧，免得它和";
+		mes "你的新赛跑票券弄混。";
+		delitem 7514,1; //Monster_Ticket
+		next;
+		if ($@mon_time_2_1 == 1) {
+			mes "[艾卡·艾雷尼斯]";
+			mes "好了，我想你都";
+			mes "准备好了。希望你";
+			mes "享受这场比赛~";
+			mes "我现在带你进入";
+			mes "魔物赛跑竞赛场。";
+			Zeny -= 2000;
+			monster_race_2_1 = monster_race_2_2 = 0;
+			close2;
+			warp "p_track02",75,41;
+			end;
+		}
+		else if ($@mon_time_2_1 == 2) {
+			mes "[艾卡·艾雷尼斯]";
+			mes "我们还在为下一场";
+			mes "双人魔物赛跑做";
+			mes "最后的准备，所以";
+			mes "请你再耐心";
+			mes "等待一会儿……";
+			close;
+		}
+	} else {
+		if ($@mon_time_2_1 == 1) {
+			mes "[艾卡·艾雷尼斯]";
+			mes "谢谢，希望你";
+			mes "享受这场比赛。";
+			mes "我现在就带你";
+			mes "前往魔物赛跑竞赛场。";
+			Zeny -= 2000;
+			monster_race_2_1 = monster_race_2_2 = 0;
+			close2;
+			warp "p_track02",75,41;
+			end;
+		} else if ($@mon_time_2_1 == 2) {
+			mes "[艾卡·艾雷尼斯]";
+			mes "我们还在为下一场";
+			mes "双人魔物赛跑做";
+			mes "最后的准备，所以";
+			mes "请你再耐心";
+			mes "等待一会儿……";
+			close;
+		}
+	}
+	if ($@mon_time_2_2 == 1) {
+		mes "[艾卡·艾雷尼斯]";
+		mes "现在正有一场魔物赛跑";
+		mes "进行中。现在已经来不及下注了，不过如果你想";
+		mes "观赛，观众费用为500 Zeny。";
+		mes "你想进入魔物赛跑竞赛场吗？";
+		next;
+		if (select("进入:取消") == 2) {
+			mes "[艾卡·艾雷尼斯]";
+			mes "那么好吧。如果你想";
+			mes "对魔物赛跑";
+			mes "下注，请等待当前";
+			mes "当前比赛结束。希望你";
+			mes "在魔物赛跑竞赛场";
+			mes "玩得开心~";
+			close;
+		}
+		if (Zeny > 499) {
+			mes "[艾卡·艾雷尼斯]";
+			mes "谢谢你~";
+			mes "希望你在";
+			mes "观看这场比赛！";
+			Zeny -= 500;
+			monster_race_2_1 = monster_race_2_2 = 0;
+			close2;
+			warp "p_track02",75,41;
+			end;
+		}
+		mes "[艾卡·艾雷尼斯]";
+		mes "抱歉，您的钱";
+		mes "有足够的钱支付";
+		mes "500 Zeny的观赛费用。";
+		close;
+	}
+	mes "[艾卡·艾雷尼斯]";
+	mes "抱歉，一场魔物";
+	mes "赛跑刚刚结束，我们正";
+	mes "在进行5分钟的";
+	mes "领奖时间，中奖者可以";
+	mes "领取他们的奖牌。大门";
+	mes "很快就会打开，请稍等。";
+	close;
+OnEnable:
+	enablenpc "艾卡·埃雷内斯#double";
+	end;
+OnDisable:
+	disablenpc "艾卡·埃雷内斯#double";
+	end;
+}
+
+p_track02,73,22,1	script	售票助手#2	899,{
+	if (!checkweight("Spawn",200)) {
+		mes "[票券助手]";
+		mes "欢迎来到";
+		mes "魔物赛跑竞赛场。";
+		mes "如果你想参加";
+		mes "^3131FF双人魔物赛跑^000000，";
+		mes "请从名单中";
+		mes "选出6只魔物中的1只。";
+		next;
+		mes "[票券助手]";
+		mes "等等，等等……";
+		mes "我现在";
+		mes "什么都不能给你。";
+		mes "你带的东西";
+		mes "实在太多了……";
+		close;
+	}
+	if (!monster_race_2_1 && !monster_race_2_2) {
+		mes "[票券助手]";
+		mes "你好！";
+		mes "有兴趣对";
+		mes "双人魔物赛跑下注吗？";
+		mes "如果你有";
+		mes "任何疑问，或者想";
+		mes "下注，我都可以帮你。";
+		next;
+		switch(select("查看魔物状态:下注:魔物赛跑？:取消")) {
+		case 1:
+			for ( .@i = 1; .@i <= 6; .@i++ )
+				mes "魔物"+.@i+"[^CC6600幸运^000000：" + getd("$@mon_r02_Luk"+.@i) + "] [^EE0000HP^000000:" + getd("$@mon_r02_tire"+.@i) + "]";
+			close;
+		case 2:
+			mes "[票券助手]";
+			mes "好的，请选出你认为";
+			mes "会赢得第1名和第2名的";
+			mes "两只魔物。";
+			mes "如果你的两只魔物";
+			mes "以任意顺序跑出第1和第2名，";
+			mes "你就能赢下这次投注。";
+			next;
+			mes "[票券助手]";
+			mes "现在，请告诉我";
+			mes "你第一个看好的";
+			mes "会赢得这场比赛";
+			mes "的魔物。";
+			next;
+			for ( .@i = 1; .@i <= 6; .@i++ )
+				.@menu$ = .@menu$ + "魔物"+ .@i +":";
+			while (1) {
+				if ( .@m1 > 0 )
+					.@menu$ = replacestr( .@menu$, "魔物"+ .@m1, "" );
+				.@m = select (.@menu$);
+				switch (.@m) {
+					case 1: setarray .@string$, "a friendly","Poring type monster"; break;
+					case 2: setarray .@string$, "an adorable","Lunatic type monster"; break;
+					case 3: setarray .@string$, "a darling","Savage Babe monster"; break;
+					case 4: setarray .@string$, "a gentle baby","Desert Wolf monster"; break;
+					case 5: setarray .@string$, "a small, yet","demonic, Deviruchi"; break;
+					case 6: setarray .@string$, "a naughty","Baphomet Jr. monster"; break;
+				}
+				mes "[票券助手]";
+				mes "你选择了";
+				mes "^0000FF魔物"+.@m+"^000000，"+.@string$[0];
+				mes .@string$[1]+".";
+				mes "你确定要";
+				mes "选择这只魔物吗？";
+				next;
+				if (select("是:否") == 2) {
+					mes "[票券助手]";
+					mes "你取消了";
+					mes "投注。好的，";
+					mes "我明白。也许";
+					mes "你会想先";
+					mes "查看一下魔物？";
+					close;			
+				}
+				if (.@m1 == 0) {
+					mes "[票券助手]";
+					mes "现在，请做出";
+					mes "你的第二个选择，";
+					mes "选出你认为";
+					mes "会在这场比赛中跑出";
+					mes "第1或第2名的魔物。";
+					next;
+					.@m1 = .@m;
+				} else {
+					if (!$@mon_time_2_2) {
+						mes "[票券助手]";
+						mes "你已投注";
+						mes "^0000FF魔物"+.@m1+"^000000 与 ^0000FF魔物"+.@m+"^000000";
+						mes "会赢得这场比赛。祝你好运！";
+						mes "我真心希望赔率";
+						mes "能对你有利~";
+						emotion ET_CHUP;
+						monster_race_2_1 = .@m1;
+						monster_race_2_2 = .@m;
+						getitem 7514,1; //Monster_Ticket
+					} else {
+						mes "[票券助手]";
+						mes "非常抱歉，一场";
+						mes "魔物赛跑正在进行中。";
+						mes "请稍等一下，再为下一场比赛";
+						mes "下注。";
+					}
+					close;
+				}
+			}
+		case 3:
+			mes "[票券助手]";
+			mes "魔物赛跑源自";
+			mes "孩子们简单的游戏，";
+			mes "可爱宠物们会互相赛跑。这份乐趣逐渐演变成一项";
+			mes "如此受欢迎的消遣，于是我们在休格尔建起了赛跑竞赛场。";
+			next;
+			mes "[票券助手]";
+			mes "我们的魔物赛跑竞赛场举办";
+			mes "两种魔物赛跑。首先是单人魔物赛跑，";
+			mes "押中第一名魔物的人可获得奖励。";
+			next;
+			mes "[艾克拉·艾尔伯德]";
+			mes "接着是双人魔物";
+			mes "赛跑，押中第1名和第2名魔物的人";
+			mes "可获得同等奖励。庄家的";
+			mes "赔率和投注奖励在双人赛中比单人赛更高。";
+			next;
+			mes "[票券助手]";
+			mes "虽然需要收取少量的入场";
+			mes "费，但我们只把这笔钱";
+			mes "用来发放奖励给";
+			mes "参赛者，并维护这座";
+			mes "竞赛场。因此，我们并不";
+			mes "靠这门生意获利。";
+			next;
+			mes "[票券助手]";
+			mes "此外，我们也禁止他人";
+			mes "私下对赌";
+			mes "和投注，用道具与";
+			mes "Zeny，依据这些";
+			mes "比赛的结果。那种";
+			mes "赌博在这里是违法的……";
+			next;
+			mes "[票券助手]";
+			mes "一旦进入赛跑竞赛场，你就会收到一张赛跑票券。";
+			mes "请记住，中奖的赛跑票券只能在";
+			mes "比赛结束后5分钟窗口内兑换成奖牌。";
+			next;
+			mes "[票券助手]";
+			mes "你已经在";
+			mes "魔物赛跑";
+			mes "竞赛场里了，不妨";
+			mes "试着下注吧。这";
+			mes "比你想象的更有趣~";
+			close;
+		case 4:
+			mes "[票券助手]";
+			mes "你取消了";
+			mes "投注。好的，";
+			mes "我明白。也许";
+			mes "你会想先";
+			mes "查看一下魔物？";
+			close;
+		}
+	} else {
+		if (countitem(7514)) {
+			mes "[票券助手]";
+			mes "你已投注";
+			mes "^0000FF魔物" + monster_race_2_1 + "^000000 与 ^0000FF魔物" + monster_race_2_2 + "^000000";
+			mes "会在这场双人魔物赛跑中获胜。";
+			next;
+		} 
+		mes "[票券助手]";
+		mes "比赛开始时会";
+		mes "通过广播通知。";
+		mes "你可以查看小地图";
+		mes "来追踪魔物比赛的";
+		mes "位置。谢谢你，";
+		mes "祝你玩得愉快！";
+		viewpoint 1,43,35,0,0xFF0000;
+		close;	
+	}
+
+OnInit:
+	disablenpc "售票助手#2";
+	end;
+}
+
+p_track02,39,49,3	script	游戏向导#double	845,{
+	mes "[游戏向导]";
+	mes "欢迎来到";
+	mes "魔物赛跑竞赛场。";
+	mes "有什么可以帮你的吗？";
+	next;
+	switch(select("魔物赛跑资讯:下注资讯:票券兑换资讯")) {
+	case 1:
+		mes "[游戏向导]";
+		mes "魔物赛跑源自";
+		mes "孩子们简单的游戏，";
+		mes "可爱宠物们会互相赛跑。这份乐趣逐渐演变成一项";
+		mes "如此受欢迎的消遣，于是我们在休格尔建起了赛跑竞赛场。";
+		next;
+		mes "[游戏向导]";
+		mes "我们的魔物赛跑竞赛场举办";
+		mes "两种魔物赛跑。首先是单人魔物赛跑，";
+		mes "押中第一名魔物的人可获得奖励。";
+		next;
+		mes "[游戏向导]";
+		mes "接着是双人魔物";
+		mes "赛跑，庄家的赔率和奖励都比单人";
+		mes "魔物赛跑更高：你必须押注2只魔物，而且它们必须";
+		mes "分别跑出第1和第2名，你才能赢。";
+		next;
+		mes "[游戏向导]";
+		mes "虽然需要收取少量的入场";
+		mes "费，但我们只把这笔钱";
+		mes "用来发放奖励给";
+		mes "参赛者，并维护这座";
+		mes "竞赛场。因此，我们并不";
+		mes "靠这门生意获利。";
+		next;
+		mes "[游戏向导]";
+		mes "此外，我们也禁止他人";
+		mes "私下对赌";
+		mes "和投注，用道具与";
+		mes "Zeny，依据这些";
+		mes "比赛的结果。那种";
+		mes "赌博在这里是违法的……";
+		next;
+		mes "[游戏向导]";
+		mes "一旦进入赛跑竞赛场，你就会收到一张赛跑票券。";
+		mes "请记住，中奖的赛跑票券只能在";
+		mes "比赛结束后5分钟窗口内兑换成奖牌。";
+		next;
+		break;
+	case 2:
+		mes "[游戏向导]";
+		mes "在下注之前，你";
+		mes "必须先向票券助手";
+		mes "领取一张免费的赛跑票券。";
+		mes "我已经在小地图上";
+		mes "标出了票券助手的位置，";
+		mes "你很容易就能找到他。";
+		viewpoint 1,73,22,1,0xFF3355;
+		next;
+		break;
+	case 3:
+		mes "[游戏向导]";
+		mes "如果你押中了单人魔物赛跑";
+		mes "冠军，或者押中了";
+		mes "双人魔物赛跑中";
+		mes "第1或第2名的魔物，那么";
+		mes "你就可以用你的赛跑";
+		mes "票券兑换奖牌。";
+		next;
+		mes "[游戏向导]";
+		mes "不过，你必须";
+		mes "拿着赛跑票券，到奖牌发放员";
+		mes "那里兑换，时间限";
+		mes "比赛结束后的5分钟";
+		mes "内。^FF0000你的票券会在^FFFFFF ^FF0000这5分钟过后失效。^000000";
+		next;
+		mes "[游戏向导]";
+		mes "当这5分钟";
+		mes "结束后，你会被传送到外面，我们会立刻";
+		mes "开始准备下一场比赛。下注时请务必";
+		mes "记住这一点。";
+		next;
+		mes "[游戏向导]";
+		mes "如果你还没有领取";
+		mes "免费的赛跑票券，";
+		mes "请去找票券";
+		mes "助手。我已经在小地图上";
+		mes "标出了他的位置。";
+		viewpoint 1,67,45,2,0xCE6300;
+		next;
+		break;
+	}
+	mes "[游戏向导]";
+	mes "谢谢你，";
+	mes "希望你在";
+	mes "希望你在";
+	mes "魔物赛跑竞赛场过得愉快。";
+	close;
+}
+
+p_track02,67,45,5	script	奖牌发放员#medal	845,{
+	if (!checkweight("Jellopy",20)) {
+		mes "[奖牌发放员]";
+		mes "抱歉，我暂时不能";
+		mes "给你任何奖牌，";
+		mes "除非你在背包里";
+		mes "腾出更多空间。";
+		close;
+	}
+	mes "[奖牌发放员]";
+	mes "你好~";
+	mes "如果你在最近一场";
+	mes "比赛中押中";
+	mes "获胜的魔物，就可以";
+	mes "在这里用你的游戏票券";
+	mes "兑换一些奖牌。";
+	next;
+	if (!countitem(7514)) {
+		mes "[奖牌发放员]";
+		mes "请记住，中奖的游戏票券";
+		mes "只能在比赛结束后";
+		mes "立刻兑换成奖牌。";
+		mes "奖牌可以交给";
+		mes "休格尔的韦恩，";
+		mes "用来换取道具。";
+		close;
+	}
+	mes "[奖牌发放员]";
+	mes "请记住，中奖的游戏票券";
+	mes "只能在比赛结束后";
+	mes "立刻兑换成奖牌。";
+	mes "奖牌可以交给";
+	mes "休格尔的韦恩，";
+	mes "用来换取道具。";
+	next;
+	if ((monster_race_2_1 == $@mon_race_2_1 && monster_race_2_2 == $@mon_race_2_2) || (monster_race_2_1 == $@mon_race_2_2 && monster_race_2_2 == $@mon_race_2_1)) {
+		mes "[奖牌发放员]";
+		mes "恭喜！要猜中";
+		mes "双人魔物赛跑的赢家";
+		mes "真的很难，所以你";
+		mes "运气一定很好！你";
+		mes "想用中奖的赛跑";
+		mes "票券兑换奖牌吗？";
+		next;
+		if (select("好的，麻烦你。:不用了，谢谢。") == 1) {
+			mes "[奖牌发放员]";
+			mes "好的，一切都没问题，";
+			mes "这是你的奖牌~";
+			mes "如果你想用这些";
+			mes "奖牌兑换道具，请";
+			mes "去休格尔找韦恩。希望";
+			mes "享受了这场魔物赛跑~";
+			monster_race_2_1 = monster_race_2_2 = 7;
+			delitem 7514,1; //Monster_Ticket
+			getitem 7515,15; //Marvelous_Medal
+			close;
+		}
+		mes "[奖牌发放员]";
+		mes "嗯，你确定吗？你";
+		mes "只能在比赛结束后";
+		mes "的短时间内用中奖的赛跑票券兑换奖牌。";
+		mes "如果你弄错了，";
+		mes "请尽快再问我一次。";
+		close;
+	} else if (!monster_race_2_1 && !monster_race_2_2) {
+		mes "[奖牌发放员]";
+		mes "唉，下次祝你好运……";
+		mes "虽然不可能总是";
+		mes "走运，但给魔物赛跑";
+		mes "下注总是很有趣！";
+		close;
+	} else if (monster_race_2_1 == 7 && monster_race_2_2 == 7) {
+		mes "[奖牌发放员]";
+		mes "感谢光临";
+		mes "魔物赛跑竞赛场，";
+		mes "希望你在这里";
+		mes "玩得愉快。下次再见~";
+		close;
+	} else if (monster_race_2_1 != $@mon_race_2_1 || monster_race_2_2 != $@mon_race_2_2) {
+		mes "[奖牌发放员]";
+		mes "你也许没能在上一场";
+		mes "比赛中押中";
+		mes "获胜的魔物，但我希望";
+		mes "你下次能走运~";
+		close;
+	}
+
+OnInit:
+	disablenpc "奖牌发放员#medal";
+	end;
+}
+
+p_track02,76,38,1	script	出口向导#double	798,{
+	mes "[出口向导]";
+	mes "如果你有中奖的赛跑";
+	mes "票券，请务必现在";
+	mes "就把它兑换成奖牌。";
+	mes "所有赛跑票券都会在";
+	mes "下一场比赛开始时失效。";
+	next;
+	mes "[出口向导]";
+	mes "如果你想离开";
+	mes "竞赛场，我可以带你";
+	mes "到外面去。你现在";
+	mes "就想离开竞赛场吗？";
+	next;
+	if (select("是:否") == 2) {
+		mes "[出口向导]";
+		mes "好的，那么。";
+		mes "只要告诉我";
+		mes "你什么时候";
+		mes "准备好离开就行。";
+		close;
+	}
+	if (!countitem(7514)) {
+		mes "[出口向导]";
+		mes "感谢您";
+		mes "感谢你的光顾，";
+		mes "希望你能";
+		mes "很快再来~";
+	} else {
+		mes "[出口向导]";
+		mes "按照我们的";
+		mes "规定，你离开前我必须";
+		mes "收回你的赛跑票券。";
+		mes "感谢你的光顾，";
+		mes "希望你在魔物赛跑竞赛场";
+		mes "过得愉快。";
+		delitem 7514,1; //Monster_Ticket
+	}
+	monster_race_2_1 = monster_race_2_2 = 0;
+	close2;
+	warp "hugel",63,73;
+	end;
+}
+
+-	script	mob1#main	-1,{
+function	MN	{
+	setarray .@n$[1], "poring","lunatic","savagebebe","desertwolf","deviruchi","baphomet";
+	for ( .@i = 1; .@i <= 6; .@i++ ) {
+		if (compare(strnpcinfo(0),.@n$[.@i])) 
+			break;
+	}
+	return .@i;	
+}
+
+OnEnable:
+	enablenpc();
+	setarray .@n[1], 1725,1726,1727,1728,1730,1729;
+	getmapxy(.@m$,.@x,.@y,BL_NPC);
+	.@i = MN;
+	monster "p_track02",58,.@y,"Monster "+.@i,.@n[.@i],1,strnpcinfo(0)+"::OnMyMobDead";
+	end;
+
+OnTouchNPC:
+	.@i = MN;
+	if (!$@mon_race_2_1) {
+		emotion ET_THROB;
+		specialeffect EF_MVP;
+		mapannounce "p_track02","魔物"+.@i+"已抵达终点线！",bc_map,"0x66FFCC";
+		$@mon_race_2_1 = .@i;
+		donpcevent strnpcinfo(0)+"::OnDisable";
+	} else {
+		emotion ET_THROB;
+		specialeffect EF_MVP;
+		mapannounce "p_track02","比赛结束了！魔物"+.@i+"已抵达终点线！",bc_map,"0x66FFCC";
+		$@mon_race_2_2 = .@i;
+		donpcevent "#poring1::OnDisable";
+		donpcevent "#lunatic1::OnDisable";
+		donpcevent "#savagebebe1::OnDisable";
+		donpcevent "#desertwolf1::OnDisable";
+		donpcevent "#deviruchi1::OnDisable";
+		donpcevent "#baphomet1::OnDisable";
+		donpcevent "TrapGlobal#race02::OnDisable";
+		enablenpc "奖牌发放员#medal";
+		donpcevent "#race_timer2-3::OnEnable";
+	}
+OnMyMobDead:
+	end;
+
+OnDisable:
+	killmonster "p_track02",strnpcinfo(0)+"::OnMyMobDead";
+
+OnInit:
+	if ( strnpcinfo(2) != "main" )
+		disablenpc();
+	end;
+}
+p_track02,30,38,0	duplicate(mob1#main)	#poring1	139,0,0
+p_track02,30,36,0	duplicate(mob1#main)	#lunatic1	139,0,0
+p_track02,30,34,0	duplicate(mob1#main)	#savagebebe1	139,0,0
+p_track02,30,32,0	duplicate(mob1#main)	#desertwolf1	139,0,0
+p_track02,30,30,0	duplicate(mob1#main)	#deviruchi1	139,0,0
+p_track02,30,28,0	duplicate(mob1#main)	#baphomet1	139,0,0
+
+p_track02,19,48,0	script	TrapGlobal#race02	-1,{
+OnEnable:
+	enablenpc "TrapGlobal#race02";	
+	for ( .@c = 1; .@c <= 6; .@c++ ) {
+		.@line = rand(1,70);
+		enablenpc "starting#race02_"+.@c;
+		enablenpc "Tire#race02_"+.@c+"_1";
+		if (.@line <= 10) {
+			.@tired = rand(50,60);
+			enablenpc "Luk#race02_"+.@c+"_5";
+			enablenpc "Luk#race02_"+.@c+"_6";
+		} else if (.@line <= 30) {
+			.@tired = rand(40,60);
+			enablenpc "Luk#race02_"+.@c+"_5";
+			if ( .@tired < 50 ) enablenpc "Tire#race02_"+.@c+"_2";
+		} else if (.@line <= 40) {
+			.@tired = rand(30,50);
+			enablenpc "Luk#race02_"+.@c+"_1";
+			enablenpc "Tire#race02_"+.@c+"_2";
+			if ( .@tired < 40 ) enablenpc "Tire#race02_"+.@c+"_3";
+		} else if (.@line <= 50) {
+			.@tired = rand(20,40);
+			enablenpc "Luk#race02_"+.@c+"_1";
+			enablenpc "Luk#race02_"+.@c+"_2";
+			enablenpc "Tire#race02_"+.@c+"_2";
+			enablenpc "Tire#race02_"+.@c+"_3";
+			if ( .@tired < 30 ) enablenpc "Tire#race02_"+.@c+"_4";
+		} else if (.@line <= 60) {
+			.@tired = rand(10,30);
+			for ( .@i = 1; .@i <= 3; .@i++ )
+				enablenpc "Luk#race02_"+.@c+"_"+.@i;
+			for ( .@i = 2; .@i <= 4; .@i++ )
+				enablenpc "Tire#race02_"+.@c+"_"+.@i;
+			if ( .@tired < 20 ) enablenpc "Tire#race02_"+.@c+"_5";
+		}	else if (.@line <= 70) {
+			.@tired = rand(0,20);
+			for ( .@i = 1; .@i <= 4; .@i++ )
+				enablenpc "Luk#race02_"+.@c+"_"+.@i;
+			for ( .@i = 2; .@i <= 5; .@i++ )
+				enablenpc "Tire#race02_"+.@c+"_"+.@i;
+			if ( .@tired < 10 ) enablenpc "Tire#race02_"+.@c+"_6";
+		}
+		setd "$@mon_r02_luk"+.@c, .@line;
+		setd "$@mon_r02_tire"+.@c, .@tired;
+	}
+	end;
+
+OnDisable:
+	disablenpc "TrapGlobal#race02";
+	for ( .@i = 1; .@i <= 6; .@i++ )
+		donpcevent "starting#race02_"+.@i+"::OnDisable";
+	end;
+	
+OnInit:
+	for ( .@i = 1; .@i <= 6; .@i++ ) {
+		setd "$@mon_r02_luk"+.@i,0;
+		setd "$@mon_r02_tire"+.@i,0;
+	}
+	end;
+}
+
+-	script	starting_2	-1,{
+OnTouchNPC:
+	.@start = rand(1,100);
+	if (.@start < 11) .@speed = 60;
+	else if (.@start < 21) .@speed = 70;
+	else if (.@start < 31) .@speed = 80;
+	else if (.@start < 41) .@speed = 90;
+	else if (.@start < 51) .@speed = 100;
+	else if (.@start < 61) .@speed = 110;
+	else if (.@start < 71) .@speed = 120;
+	else if (.@start < 81) .@speed = 130;
+	else if (.@start < 91) .@speed = 140;
+	else .@speed = 150;
+	sc_start SC_WALKSPEED,5000,.@speed;
+	end;
+
+OnDisable:
+	for( .@i = 1; .@i < 7; .@i++ ) {
+		disablenpc "Luk#"+strnpcinfo(2)+"_"+.@i;
+		disablenpc "Tire#"+strnpcinfo(2)+"_"+.@i;
+	}
+	
+OnInit:
+	disablenpc();
+	end;
+}
+
+p_track02,56,38,0	duplicate(starting_2)	starting#race02_1	-1,0,0
+p_track02,56,36,0	duplicate(starting_2)	starting#race02_2	-1,0,0
+p_track02,56,34,0	duplicate(starting_2)	starting#race02_3	-1,0,0
+p_track02,56,32,0	duplicate(starting_2)	starting#race02_4	-1,0,0
+p_track02,56,30,0	duplicate(starting_2)	starting#race02_5	-1,0,0
+p_track02,56,28,0	duplicate(starting_2)	starting#race02_6	-1,0,0
+
+p_track02,33,38,0	duplicate(Luk_1)	Luk#race02_1_1	-1,0,0
+p_track02,37,38,0	duplicate(Luk_1)	Luk#race02_1_2	-1,0,0
+p_track02,53,38,0	duplicate(Luk_1)	Luk#race02_1_3	-1,0,0
+p_track02,45,38,0	duplicate(Luk_1)	Luk#race02_1_4	-1,0,0
+p_track02,33,36,0	duplicate(Luk_1)	Luk#race02_2_1	-1,0,0
+p_track02,37,36,0	duplicate(Luk_1)	Luk#race02_2_2	-1,0,0
+p_track02,53,36,0	duplicate(Luk_1)	Luk#race02_2_3	-1,0,0
+p_track02,45,36,0	duplicate(Luk_1)	Luk#race02_2_4	-1,0,0
+p_track02,33,34,0	duplicate(Luk_1)	Luk#race02_3_1	-1,0,0
+p_track02,37,34,0	duplicate(Luk_1)	Luk#race02_3_2	-1,0,0
+p_track02,53,34,0	duplicate(Luk_1)	Luk#race02_3_3	-1,0,0
+p_track02,45,34,0	duplicate(Luk_1)	Luk#race02_3_4	-1,0,0
+p_track02,33,32,0	duplicate(Luk_1)	Luk#race02_4_1	-1,0,0
+p_track02,37,32,0	duplicate(Luk_1)	Luk#race02_4_2	-1,0,0
+p_track02,53,32,0	duplicate(Luk_1)	Luk#race02_4_3	-1,0,0
+p_track02,45,32,0	duplicate(Luk_1)	Luk#race02_4_4	-1,0,0
+p_track02,33,30,0	duplicate(Luk_1)	Luk#race02_5_1	-1,0,0
+p_track02,37,30,0	duplicate(Luk_1)	Luk#race02_5_2	-1,0,0
+p_track02,53,30,0	duplicate(Luk_1)	Luk#race02_5_3	-1,0,0
+p_track02,45,30,0	duplicate(Luk_1)	Luk#race02_5_4	-1,0,0
+p_track02,33,28,0	duplicate(Luk_1)	Luk#race02_6_1	-1,0,0
+p_track02,37,28,0	duplicate(Luk_1)	Luk#race02_6_2	-1,0,0
+p_track02,53,28,0	duplicate(Luk_1)	Luk#race02_6_3	-1,0,0
+p_track02,45,28,0	duplicate(Luk_1)	Luk#race02_6_4	-1,0,0
+
+p_track02,49,38,0	duplicate(Luk_2)	Luk#race02_1_5	-1,0,0
+p_track02,41,38,0	duplicate(Luk_2)	Luk#race02_1_6	-1,0,0
+p_track02,49,36,0	duplicate(Luk_2)	Luk#race02_2_5	-1,0,0
+p_track02,41,36,0	duplicate(Luk_2)	Luk#race02_2_6	-1,0,0
+p_track02,49,34,0	duplicate(Luk_2)	Luk#race02_3_5	-1,0,0
+p_track02,41,34,0	duplicate(Luk_2)	Luk#race02_3_6	-1,0,0
+p_track02,49,32,0	duplicate(Luk_2)	Luk#race02_4_5	-1,0,0
+p_track02,41,32,0	duplicate(Luk_2)	Luk#race02_4_6	-1,0,0
+p_track02,49,30,0	duplicate(Luk_2)	Luk#race02_5_5	-1,0,0
+p_track02,41,30,0	duplicate(Luk_2)	Luk#race02_5_6	-1,0,0
+p_track02,49,28,0	duplicate(Luk_2)	Luk#race02_6_5	-1,0,0
+p_track02,41,28,0	duplicate(Luk_2)	Luk#race02_6_6	-1,0,0
+
+p_track02,43,38,0	duplicate(Tire_1)	Tire#race02_1_1	-1,0,0
+p_track02,39,38,0	duplicate(Tire_1)	Tire#race02_1_2	-1,0,0
+p_track02,35,38,0	duplicate(Tire_1)	Tire#race02_1_3	-1,0,0
+p_track02,55,38,0	duplicate(Tire_1)	Tire#race02_1_4	-1,0,0
+p_track02,51,38,0	duplicate(Tire_1)	Tire#race02_1_5	-1,0,0
+p_track02,47,38,0	duplicate(Tire_1)	Tire#race02_1_6	-1,0,0
+p_track02,43,36,0	duplicate(Tire_1)	Tire#race02_2_1	-1,0,0
+p_track02,39,36,0	duplicate(Tire_1)	Tire#race02_2_2	-1,0,0
+p_track02,35,36,0	duplicate(Tire_1)	Tire#race02_2_3	-1,0,0
+p_track02,55,36,0	duplicate(Tire_1)	Tire#race02_2_4	-1,0,0
+p_track02,51,36,0	duplicate(Tire_1)	Tire#race02_2_5	-1,0,0
+p_track02,47,36,0	duplicate(Tire_1)	Tire#race02_2_6	-1,0,0
+p_track02,43,34,0	duplicate(Tire_1)	Tire#race02_3_1	-1,0,0
+p_track02,39,34,0	duplicate(Tire_1)	Tire#race02_3_2	-1,0,0
+p_track02,35,34,0	duplicate(Tire_1)	Tire#race02_3_3	-1,0,0
+p_track02,55,34,0	duplicate(Tire_1)	Tire#race02_3_4	-1,0,0
+p_track02,51,34,0	duplicate(Tire_1)	Tire#race02_3_5	-1,0,0
+p_track02,47,34,0	duplicate(Tire_1)	Tire#race02_3_6	-1,0,0
+p_track02,43,32,0	duplicate(Tire_1)	Tire#race02_4_1	-1,0,0
+p_track02,39,32,0	duplicate(Tire_1)	Tire#race02_4_2	-1,0,0
+p_track02,35,32,0	duplicate(Tire_1)	Tire#race02_4_3	-1,0,0
+p_track02,55,32,0	duplicate(Tire_1)	Tire#race02_4_4	-1,0,0
+p_track02,51,32,0	duplicate(Tire_1)	Tire#race02_4_5	-1,0,0
+p_track02,47,32,0	duplicate(Tire_1)	Tire#race02_4_6	-1,0,0
+p_track02,43,30,0	duplicate(Tire_1)	Tire#race02_5_1	-1,0,0
+p_track02,39,30,0	duplicate(Tire_1)	Tire#race02_5_2	-1,0,0
+p_track02,35,30,0	duplicate(Tire_1)	Tire#race02_5_3	-1,0,0
+p_track02,55,30,0	duplicate(Tire_1)	Tire#race02_5_4	-1,0,0
+p_track02,51,30,0	duplicate(Tire_1)	Tire#race02_5_5	-1,0,0
+p_track02,47,30,0	duplicate(Tire_1)	Tire#race02_5_6	-1,0,0
+p_track02,43,28,0	duplicate(Tire_1)	Tire#race02_6_1	-1,0,0
+p_track02,39,28,0	duplicate(Tire_1)	Tire#race02_6_2	-1,0,0
+p_track02,35,28,0	duplicate(Tire_1)	Tire#race02_6_3	-1,0,0
+p_track02,55,28,0	duplicate(Tire_1)	Tire#race02_6_4	-1,0,0
+p_track02,51,28,0	duplicate(Tire_1)	Tire#race02_6_5	-1,0,0
+p_track02,47,28,0	duplicate(Tire_1)	Tire#race02_6_6	-1,0,0
+
+// NPCs for Redeeming Prize Medals (Einbroch and Hugel)
+//============================================================
+ein_in01,85,208,5	script	艾菲勒#repay01	854,{
+	if (!ein_medal01) {
+		mes "[艾菲勒]";
+		mes "可恶！我们得把";
+		mes "客人订的东西交出去，";
+		mes "可我们一直在做";
+		mes "粗制滥造的产品！要是";
+		mes "有那种金属，我们就能";
+		mes "提升产品的质量！";
+		next;
+		select("你说的金属是什么？");
+		mes "[艾菲勒]";
+		mes "有一个小村庄，";
+		mes "位于黑森林共和国的";
+		mes "郊外，那里会发放";
+		mes "一种特别的奖牌，";
+		mes "是用这种金属制成的，";
+		mes "而我们急需这种金属……";
+		next;
+		mes "[艾菲勒]";
+		mes "我们已经派出最好的";
+		mes "公会成员之一，去为我们";
+		mes "弄一些那种奖牌回来，";
+		mes "但他还没有回报消息。";
+		mes "我越来越着急了……";
+		next;
+		mes "[艾菲勒]";
+		mes "我是说，我们需要";
+		mes "大量的那种金属，才能完成";
+		mes "我们的订单，并完成我们的";
+		mes "制造研究，";
+		mes "但至今我们还没人";
+		mes "能拿到任何奖牌……";
+		next;
+		if (countitem("Marvelous_Medal")) {//7515
+			mes "["+ strcharinfo(0) +"]";
+			mes "哦！你是在说";
+			mes "那些在";
+			mes "魔物赛跑竞赛场";
+			mes "作为奖励发放的奖牌吗？";
+			mes "我有一些。";
+			next;
+			mes "[艾菲莉]";
+			mes "咦？让我看看……";
+			mes "对！那正是";
+			mes "我们需要的！能请你";
+			mes "捐出奖牌，好让我们";
+			mes "终于能制造一些优质";
+			mes "产品给顾客吗？";
+			next;
+			callsub S_Reward;
+			end;
+		}
+		mes "[艾菲莉]";
+		mes "如果你碰巧得到";
+		mes "休格尔魔物赛跑";
+		mes "竞赛场的奖牌，";
+		mes "请带一些";
+		mes "给我。我一定会";
+		mes "报答你的好意……";
+		close;
+	} else if (ein_medal01 < 500) {
+		mes "[艾菲莉]";
+		mes "哦，你最近好吗？";
+		mes "非常感谢你";
+		mes "捐了这么多奖牌，";
+		mes "它们对我的";
+		mes "研究很有帮助。不过，我还需要";
+		mes "越来越多的奖牌……";
+		next;
+		if (countitem("Marvelous_Medal")) {
+			mes "[艾菲莉]";
+			mes "铁匠公会的其他";
+			mes "工匠们正竭尽全力";
+			mes "在休格尔收集奖牌，";
+			mes "但他们总是失败";
+			mes "拿不到！如果你有";
+			mes "奖牌，能分我一些吗？";
+			next;
+			callsub S_Reward;
+			end;
+		}
+		mes "[艾菲莉]";
+		mes "如果你碰巧得到";
+		mes "休格尔魔物赛跑";
+		mes "竞赛场的奖牌，";
+		mes "请带一些";
+		mes "给我。我一定会";
+		mes "报答你的好意……";
+		close;
+	}
+	if (!checkweight("Knife",1)) {//1201
+		mes "[艾菲莉]";
+		mes "天哪，你带了";
+		mes "这么多东西！";
+		mes "最好把一些";
+		mes "物品放进卡普拉仓库，";
+		mes "免得被";
+		mes "成堆的物品压垮！";
+		close;
+	}
+	if (ein_medal01 > 499 && ein_medal01 < 1500) {
+		if (ein_medal01 < 1000) {
+			mes "[艾菲莉]";
+			mes "啊，欢迎回来！我终于";
+			mes "在我的金属研究上";
+			mes "取得了突破！看，我";
+			mes "做出了这件闪亮";
+			mes "夹克！它既轻便";
+			mes "又耐用，你看？";
+			next;
+			mes "[艾菲莉]";
+			mes "如果没有你的帮助，";
+			mes "我无法完成";
+			mes "这个。现在，你愿意";
+			mes "收下这件闪亮夹克，";
+			mes "作为我的报答吗？";
+			next;
+			if (select("接受:等待后续开发") == 1) {
+				callsub S_BonusReward,500,2319;//Glittering_Clothes
+				end;
+			}
+			mes "[艾菲莉]";
+			mes "啊，我明白了。你宁愿等";
+			mes "我们开发出";
+			mes "更合你心意的东西。既然";
+			mes "如此，能请你再捐";
+			mes "一些奖牌给我的研究吗？";
+			mes "我们总是很缺奖牌……";
+			next;
+		} else if (ein_medal01 < 1500) {
+			mes "[艾菲莉]";
+			mes "哦，你回来了！";
+			mes "多亏了你捐的";
+			mes "所有奖牌，我现在";
+			mes "能制造一套";
+			mes "带有插槽、附加";
+			mes "你自选属性的防具了。";
+			next;
+			mes "[艾菲莉]";
+			mes "如果你愿意，我现在就可以";
+			mes "为你制作一套带插槽的属性防具，或者我们";
+			mes "可以等你再捐";
+			mes "一些奖牌，直到我开发出";
+			mes "别的东西给你。";
+			next;
+			switch(select("接受防具:可以给我别的吗？:等待后续开发")) {
+				case 1:
+					mes "[艾菲莉]";
+					mes "我可以制造一套";
+					mes "带有插槽、附加";
+					mes "火、地、风或水";
+					mes "属性的防具。你希望";
+					mes "你的防具拥有哪种属性？";
+					next;
+					switch(select("火属性:地属性:风属性:水属性")) {
+						case 1: callsub S_BonusReward,1000,2345; end;// Flame_Sprits_Armor_
+						case 2: callsub S_BonusReward,1000,2351; end;// Earth_Sprits_Armor_
+						case 3: callsub S_BonusReward,1000,2349; end;// Wind_Sprits_Armor_
+						case 4: callsub S_BonusReward,1000,2347; end;// Water_Sprits_Armor_
+					}
+				case 2:
+					mes "[艾菲莉]";
+					mes "别的东西……？";
+					mes "哦，你一定是说";
+					mes "我之前开发的";
+					mes "那件闪亮夹克。毕竟，";
+					mes "我现在也没有";
+					mes "别的物品可以给你……";
+					next;
+					callsub S_BonusReward,500,2319;
+					end;
+				case 3:
+					mes "[艾菲莉]";
+					mes "啊，我明白了。你宁愿等";
+					mes "我们开发出";
+					mes "更合你心意的东西。既然";
+					mes "如此，能请你再捐";
+					mes "一些奖牌给我的研究吗？";
+					mes "我们总是很缺奖牌……";
+					next;
+					break;
+			}
+		}
+		if (countitem("Marvelous_Medal")) {
+			mes "[艾菲莉]";
+			mes "铁匠公会的其他";
+			mes "工匠们正竭尽全力";
+			mes "在休格尔收集奖牌，";
+			mes "但他们总是失败";
+			mes "拿不到！如果你有";
+			mes "奖牌，能分我一些吗？";
+			next;
+			callsub S_Reward;
+			end;
+		}
+		mes "[艾菲莉]";
+		mes "如果你碰巧得到";
+		mes "休格尔魔物赛跑";
+		mes "竞赛场的奖牌，";
+		mes "请带一些";
+		mes "给我。我一定会";
+		mes "报答你的好意……";
+		close;
+	} else if (ein_medal01 > 1499) {
+		mes "[艾菲莉]";
+		mes "啊，你回来了！我";
+		mes "已经把你给我的";
+		mes "奖牌里的金属";
+		mes "全部提炼出来了，我想";
+		mes "足够制作一把四级";
+		mes "武器。是不是很厉害？";
+		next;
+		mes "[艾菲莉]";
+		mes "如果你愿意，我可以";
+		mes "为你制作其中一把武器，";
+		mes "作为对你帮助的";
+		mes "报答。你觉得如何？";
+		next;
+		if (select("是的，我想要四级武器。:可以给我别的吗？") == 2) {
+			mes "[艾菲莉]";
+			mes "别的东西？";
+			mes "哦，那好吧，你";
+			mes "想要一件闪亮";
+			mes "夹克，还是一套带插槽的";
+			mes "属性防具？请";
+			mes "直接选择吧~";
+			next;
+			switch (select("闪亮夹克:火属性防具:地属性防具:风属性防具:水属性防具:取消")) {
+				case 1: callsub S_BonusReward,500,2319; end;
+				case 2: callsub S_BonusReward,1000,2345; end;
+				case 3: callsub S_BonusReward,1000,2351; end;
+				case 4: callsub S_BonusReward,1000,2349; end;
+				case 5: callsub S_BonusReward,1000,2347; end;
+				case 6: end;
+			}
+		}
+		setarray .@type$, "Dagger","One Handed Sword","Two Handed Sword","Axe","Mace","Bow","Staff","Book","Spear","Katar","Knuckle","Whip","Musical Instrument";
+		.@m = select( implode(.@type$,":") ) - 1;
+		mes "[艾菲莉]";
+		mes "那么，你想要一把";
+		mes .@type$[.@m]+"？请选择";
+		mes "你想让我制作的";
+		mes "是哪把四级武器。";
+		next;
+		switch(.@m) {
+			case 0:
+				.@weapon$ = "Ginnungagap:Grimtooth:Dragon Killer:Mail Breaker:Bazerald:Sword Breaker:Ice Pick:Sucsamad:Kitchen Knife:Azoth:Exorciser:Assassin Dagger:Moonlight Dagger:Weeder Knife:Cursed Dagger:Dagger of Counter:Combat Knife:Fortune Sword";
+				setarray .@weapon_id, 13002,1237,13001,1225,1231,1224,1230,1236,1229,1235,1233,1232,1234,1227,1241,1242,1228,1223;
+				break;
+			case 1:
+				.@weapon$ = "Nagan:Immaterial Sword:Mysteltainn:Byeollungum:Star Dust Blade:Caesar's Sword:Ice Falchion:Excalibur:Edge:Cutlus:Solar Sword:Tirfing:Fireblend";
+				setarray .@weapon_id, 1130,1141,1138,1140,1148,1134,1131,1137,1132,1135,1136,1139,1133;
+				break;
+			case 2:	
+				.@weapon$ = "Dragon Slayer:Masamune:Muramasa:Schweizersabel:Executioner:Zweihander:Katzbalger";
+				setarray .@weapon_id, 1166,1165,1164,1167,1169,1168,1170;
+				break;
+			case 3:
+				.@weapon$ = "Great Axe:Guillotine:Light Epsilon:Bloody Axe:Sabbath:Slaughter:Cleaver:Tomahawk";
+				setarray .@weapon_id, 1364,1369,1366,1363,1365,1367,1305,1368;
+				break;
+			case 4:
+				.@weapon$ = "Golden Mace:Grand Cross:Long Mace:Spike:Slash:Quadrille";
+				setarray .@weapon_id, 1524,1528,1525,1523,1526,1527;
+				break;
+			case 5:
+				.@weapon$ = "Roguemaster's Bow:Dragon Wing:Rudra's Bow:Ballista";
+				setarray .@weapon_id, 1719,1724,1720,1722;
+				break;
+			case 6:
+				.@weapon$ = "Wing Staff:Wizardry Staff";
+				setarray .@weapon_id, 1616,1473;
+			case 7:
+				.@weapon$ = "Legacy of Dragon:Book of the Apocalypse:Girl's Diary:Hardcover Book";
+				setarray .@weapon_id, 1559,1557,1558,1561;
+				break;
+			case 8:
+				.@weapon$ = "Gae Bolg:Gelerdria:Gungnir:Skewer:Longinus's Spear:Brionac:Bill Guisarme:Zephyrus:Crescent Scythe:Tjungkuletti:Hellfire";
+				setarray .@weapon_id, 1474,1414,1413,1415,1469,1470,1467,1468,1466,1416,1471;
+				break;
+			case 9:
+				.@weapon$ = "Infiltrator:Bloody Roar:Unholy Touch";
+				setarray .@weapon_id, 1261,1265,1263;
+				break;
+			case 10:
+				.@weapon$ = "Hatii Claw:Berserk:Kaiser Knuckle";
+				setarray .@weapon_id, 1815,1814,1813;
+				break;
+			case 11:
+				.@weapon$ = "Lariat:Rapture Rose:Blade Whip:Chemeti:Queen's Whip";
+				setarray .@weapon_id, 1962,1963,1969,1964,1970;
+				break;
+			case 12:
+				.@weapon$ = "Oriental Lute:Electric Guitar";
+				setarray .@weapon_id, 1918,1913;
+				break;		
+		}
+		.@j = select (.@weapon$+":取消") - 1;
+		explode(.@weapon$,.@weapon$,":");
+		if (.@j == getarraysize(.@weapon$)) close;
+		callsub S_BonusReward,1500,.@weapon_id[.@j];
+		end;
+	}
+	
+S_Reward:
+	if (select("确定:否") == 2) {
+		mes "[艾菲莉]";
+		mes "哦，好吧……";
+		mes "不过，我真的很需要";
+		mes "那些奖牌，如果你";
+		mes "改变主意，请";
+		mes "尽快回来。";
+		emotion ET_CRY;
+		close;
+	}
+	mes "[艾菲莉]";
+	mes "哦，太感谢你了！";
+	mes "我可以用那些奖牌里的";
+	mes "金属来生产一些高";
+	mes "品质产品。那么，我该";
+	mes "怎么报答你给了我";
+	mes "一些奖牌呢？";
+	next;
+	switch(select("基础经验值:职业经验值:不，我只是想帮忙。:你的研究进展如何？")) {
+		case 1:
+			mes "[艾菲莉]";
+			mes "你只是想提升";
+			mes "自己，是吧？嗯，我不知道";
+			mes "你是想变得更强、";
+			mes "更聪明，还是更快，但我可以";
+			mes "教你做些想象训练。现在，和我一起放松~";
+			mes "身体发育。";
+			next;
+			mes "[艾菲莉]";
+			mes "集中精神……然后相信。";
+			mes "相信你正在";
+			mes "成为你想要";
+			mes "成为的样子！相、相信……用";
+			mes "你的全部真心！";
+			emotion ET_HUK, playerattached();
+			emotion ET_HUK;
+			next;
+			mes "[艾菲莉]";
+			mes "*呼* 怎么样？";
+			mes "现在你看到";
+			mes "希望的力量了吗？";
+			delitem 7515,1; //Marvelous_Medal
+			if (checkre(3)) {
+				if (BaseLevel < 21) getexp 110,0;
+				else if ((BaseLevel > 20) && (BaseLevel < 31)) getexp 280,0;
+				else if ((BaseLevel > 30) && (BaseLevel < 41)) getexp 1000,0;
+				else if ((BaseLevel > 40) && (BaseLevel < 51)) getexp 1200,0;
+				else if ((BaseLevel > 50) && (BaseLevel < 61)) getexp 1500,0;
+				else if ((BaseLevel > 60) && (BaseLevel < 71)) getexp 2800,0;
+				else if ((BaseLevel > 70) && (BaseLevel < 81)) getexp 4500,0;
+				else getexp 8500,0;
+
+			/* iRO EXP Table:
+				if (BaseLevel < 21) getexp 200,0;
+				else if ((BaseLevel > 20) && (BaseLevel < 31)) getexp 300,0;
+				else if ((BaseLevel > 30) && (BaseLevel < 41)) getexp 1000,0;
+				else if ((BaseLevel > 40) && (BaseLevel < 51)) getexp 1800,0;
+				else if ((BaseLevel > 50) && (BaseLevel < 61)) getexp 2500,0;
+				else if ((BaseLevel > 60) && (BaseLevel < 71)) getexp 4700,0;
+				else if ((BaseLevel > 70) && (BaseLevel < 81)) getexp 5500,0;
+				else if ((BaseLevel > 80) && (BaseLevel < 96)) getexp 7000,0;
+				else if ((BaseLevel > 95) && (BaseLevel < 111)) getexp 8800,0;
+				else if ((BaseLevel > 110) && (BaseLevel < 126)) getexp 10900,0;
+				else if ((BaseLevel > 125) && (BaseLevel < 141)) getexp 13300,0;
+				else getexp 16000,0;
+			*/
+
+			} else {
+				if (BaseLevel < 21) getexp 150,0;
+				else if ((BaseLevel > 20) && (BaseLevel < 31)) getexp 300,0;
+				else if ((BaseLevel > 30) && (BaseLevel < 41)) getexp 2000,0;
+				else if ((BaseLevel > 40) && (BaseLevel < 51)) getexp 8000,0;
+				else if ((BaseLevel > 50) && (BaseLevel < 61)) getexp 25000,0;
+				else if ((BaseLevel > 60) && (BaseLevel < 71)) getexp 47000,0;
+				else if ((BaseLevel > 70) && (BaseLevel < 81)) getexp 55000,0;
+				else getexp 65000,0;
+			}
+			close;
+		case 2:
+			mes "[艾菲莉]";
+			mes "你想在工作中";
+			mes "变得更得力？嗯……";
+			mes "好吧，我们可以做到。只要";
+			mes "和我一起冥想，然后我们";
+			mes "一起做些意象训练。";
+			mes "你知道，我很擅长这个。";
+			next;
+			mes "[艾菲莉]";
+			mes "只、只要……想象";
+			mes "你自己……变得……";
+			mes "超、超级……厉害！";
+			mes "你必须看到它，";
+			mes "必须在你的";
+			mes "真心和脑海里感受它！";
+			emotion ET_HUK, playerattached();
+			emotion ET_HUK;
+			next;
+			mes "[艾菲莉]";
+			mes "嗯，不管";
+			mes "是真实还是想象……";
+			mes "你的大脑会处理";
+			mes "你灌输给它的一切。";
+			mes "安慰剂和身心症状——它们全都联系在一起。";
+			delitem 7515,1; //Marvelous_Medal
+			if (checkre(3)) {
+				if (Class == Job_Novice) {
+					getexp 0,15;
+				} else if (Class == Job_Novice_High) {
+					getexp 0,25;
+				} else if ((Class >= Job_Swordman && Class <= Job_Thief) || Class == Job_Taekwon) {
+					if (JobLevel < 11) getexp 0,25;
+					else if ((JobLevel > 10) && (JobLevel < 21)) getexp 0,200;
+					else if ((JobLevel > 20) && (JobLevel < 31)) getexp 0,300;
+					else if ((JobLevel > 30) && (JobLevel < 41)) getexp 0,950;
+					else getexp 0,1800;
+				} else if ((Class >= Job_Knight && Class <= Job_Crusader2) || (Class >= Job_Swordman_High && Class <= Job_Thief_High)) {
+					if (JobLevel < 11) getexp 0,40;
+					else if ((JobLevel > 10) && (JobLevel < 21)) getexp 0,300;
+					else if ((JobLevel > 20) && (JobLevel < 31)) getexp 0,550;
+					else if ((JobLevel > 30) && (JobLevel < 41)) getexp 0,1080;
+					else getexp 0,2150;
+				} else {
+					if (JobLevel < 11) getexp 0,55;
+					else if ((JobLevel > 10) && (JobLevel < 21)) getexp 0,330;
+					else if ((JobLevel > 20) && (JobLevel < 31)) getexp 0,600;
+					else if ((JobLevel > 30) && (JobLevel < 41)) getexp 0,1200;
+					else if ((JobLevel > 40) && (JobLevel < 51)) getexp 0,1750;
+					else getexp 0,2950;
+				}
+
+			/* iRO JEXP Table:
+				if (BaseLevel < 21) getexp 0,150;
+				else if ((BaseLevel > 20) && (BaseLevel < 31)) getexp 0,200;
+				else if ((BaseLevel > 30) && (BaseLevel < 41)) getexp 0,750;
+				else if ((BaseLevel > 40) && (BaseLevel < 51)) getexp 0,1800;
+				else if ((BaseLevel > 50) && (BaseLevel < 61)) getexp 0,2500;
+				else if ((BaseLevel > 60) && (BaseLevel < 71)) getexp 0,3525;
+				else if ((BaseLevel > 70) && (BaseLevel < 81)) getexp 0,4125;
+				else if ((BaseLevel > 80) && (BaseLevel < 96)) getexp 0,5250;
+				else if ((BaseLevel > 95) && (BaseLevel < 111)) getexp 0,6600;
+				else if ((BaseLevel > 110) && (BaseLevel < 126)) getexp 0,8175;
+				else if ((BaseLevel > 125) && (BaseLevel < 141)) getexp 0,9975;
+				else getexp 0,12000;
+			*/
+
+			} else {
+				if (Class == Job_Novice) {
+					getexp 0,30;
+				} else if ((Class >= Job_Swordman && Class <= Job_Thief) || Class == Job_Taekwon) {
+					if (JobLevel < 11) getexp 0,50;
+					else if ((JobLevel > 10) && (JobLevel < 21)) getexp 0,250;
+					else if ((JobLevel > 20) && (JobLevel < 31)) getexp 0,1500;
+					else if ((JobLevel > 30) && (JobLevel < 41)) getexp 0,7000;
+					else getexp 0,20000;
+				} else if (Class >= Job_Knight && Class <= Job_Crusader2) {
+					if (JobLevel < 11) getexp 0,80;
+					else if ((JobLevel > 10) && (JobLevel < 21)) getexp 0,2000;
+					else if ((JobLevel > 20) && (JobLevel < 31)) getexp 0,10000;
+					else if ((JobLevel > 30) && (JobLevel < 41)) getexp 0,25000;
+					else getexp 0,38000;
+				} else if (Class == Job_Novice_High) {
+					getexp 0,40;
+				} else if (Class >= Job_Swordman_High && Class <= Job_Thief_High) {
+					if (JobLevel < 11) getexp 0,65;
+					else if ((JobLevel > 10) && (JobLevel < 21)) getexp 0,300;
+					else if ((JobLevel > 20) && (JobLevel < 31)) getexp 0,2500;
+					else if ((JobLevel > 30) && (JobLevel < 41)) getexp 0,10000;
+					else getexp 0,25000;
+				} else if (Class >= Job_Lord_Knight && Class <= Job_Paladin_2) {
+					if (JobLevel < 11) getexp 0,150;
+					else if ((JobLevel > 10) && (JobLevel < 21)) getexp 0,2200;
+					else if ((JobLevel > 20) && (JobLevel < 31)) getexp 0,13000;
+					else if ((JobLevel > 30) && (JobLevel < 41)) getexp 0,27000;
+					else if ((JobLevel > 40) && (JobLevel < 51)) getexp 0,38000;
+					else getexp 0,40000;
+				} else {
+					if (JobLevel < 11) getexp 0,50;
+					else if ((JobLevel > 10) && (JobLevel < 21)) getexp 0,250;
+					else if ((JobLevel > 20) && (JobLevel < 31)) getexp 0,1500;
+					else if ((JobLevel > 30) && (JobLevel < 41)) getexp 0,7000;
+					else if ((JobLevel > 40) && (JobLevel < 51)) getexp 0,20000;
+					else if ((JobLevel > 50) && (JobLevel < 61)) getexp 0,30000;
+					else getexp 0,38000;
+				}
+			}
+			close;
+		case 3:
+			mes "[艾菲莉]";
+			mes "什么——？！你确定";
+			mes "你什么都不要吗？";
+			mes "嗯，好吧，我觉得如果";
+			mes "我不给你点什么回报，";
+			mes "会有点损运气，所以……";
+			mes "想点什么。快点。";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "呃，就把这些奖牌";
+			mes "用来推进你的制造";
+			mes "研究，然后等你";
+			mes "开发出新东西再";
+			mes "还我。这，呃，就像";
+			mes "对你工作的投资！";
+			next;
+			mes "[艾菲莉]";
+			mes "对……对。";
+			mes "好，我明白";
+			mes "你的意思了。";
+			mes "这挺聪明的。";
+			mes "好，等我们开发出";
+			mes "新东西，我就还你！";
+			next;
+			mes "[艾菲莉]";
+			mes "总之，我需要尽可能多";
+			mes "的奖牌，而且";
+			mes "越快越好。你觉得";
+			mes "现在能给我";
+			mes "多少奖牌？";
+			next;
+			switch(select("全给你。:这么多怎么样？:不，我改变主意了。")) {
+			case 1:
+				mes "[艾菲莉]";
+				mes "谢、谢谢你！";
+				mes "太感谢你了！";
+				mes "你的帮助会大大";
+				mes "推进我的研究，";
+				mes "我保证会尽快";
+				mes "报答你！";
+				.@medals = countitem("Marvelous_Medal");
+				delitem 7515, .@medals; //Marvelous_Medal
+				ein_medal01 += .@medals;
+				close;
+			case 2:
+				mes "[艾菲莉]";
+				mes "好的，请输入";
+				mes "你愿意给我的";
+				mes "奖牌数量。";
+				mes "请不要输入";
+				mes "大于100的数字。";
+				next;
+				while(1) {
+					input .@input;
+					if (!.@input) {
+						mes "[艾菲莉]";
+						mes "唉，所以你决定";
+						mes "取消了？好吧，这是你的";
+						mes "选择，但我还是很";
+						mes "失望。如果你改变主意，";
+						mes "请回来……";
+						close;
+					} else if (.@input < 1 || .@input > 100) {
+						mes "[艾菲莉]";
+						mes "记住，你只能";
+						mes "输入1到100之间的数字。";
+						mes "如果你想给我更多";
+						mes "奖牌，那也许";
+						mes "干脆全给我吧~";
+						next;
+					} else break;
+				}
+				if (countitem("Marvelous_Medal") < .@input) {
+					mes "[艾菲莉]";
+					mes "抱歉，但我";
+					mes "觉得你身上没有";
+					mes "那么多奖牌。请确保";
+					mes "你给我的奖牌数量";
+					mes "是你实际拥有的。";
+					emotion ET_SMILE;
+					close;
+				} else {
+					mes "[艾菲莉]";
+					mes "谢、谢谢你！";
+					mes "太感谢你了！";
+					mes "你的帮助会大大";
+					mes "推进我的研究，";
+					mes "我保证会尽快";
+					mes "报答你！";
+					delitem 7515, .@input; //Marvelous_Medal
+					ein_medal01 += .@input;
+					close;
+				}
+			case 3:
+				mes "[艾菲莉]";
+				mes "哦，好吧……";
+				mes "不过，我真的很需要";
+				mes "那些奖牌，如果你";
+				mes "改变主意，请";
+				mes "尽快回来。";
+				close;
+			}
+		case 4:
+			mes "[艾菲莉]";
+			mes "嗯，我已经能";
+			mes "用你带给我的奖牌";
+			mes "制作出一件";
+			mes "闪亮夹克了。但我知道";
+			mes "如果你再带些奖牌来，";
+			mes "我一定能做出更好的！";
+			next;
+			mes "[艾菲莉]";
+			mes "到目前为止，我拥有的金属来自";
+			mes "^FF0000"+ ein_medal01 +"^000000 枚你捐给我的奖牌。";
+			mes "你带来的越多，";
+			mes "就越接近新的突破！";
+			close;
+	}
+
+S_BonusReward:
+	mes "[艾菲莉]";
+	.@arg1 = getarg(1);
+	if (.@arg1 == 2319) {
+		mes "你真的想要";
+		mes "这件"+getitemname(.@arg1)+"？";
+		mes "你也许可以放弃这份";
+		mes "奖励，以便以后";
+		mes "得到更好的东西……";
+	} else if (.@arg1 == 2345 || .@arg1 == 2347 || .@arg1 == 2349 || .@arg1 == 2351) {
+		mes "你确定要接受";
+		mes "这套带插槽的";
+		if (.@arg1 == 2345) mes "火属性防具吗？如果接受，";
+		else if (.@arg1 == 2351) mes "地属性防具吗？如果接受，";
+		else if (.@arg1 == 2349) mes "风属性防具吗？如果接受，";
+		else if (.@arg1 == 2347) mes "水属性防具吗？如果接受，";
+		mes "我就需要你提供更多奖牌，";
+		mes "才能在我的制造研究中";
+		mes "取得进一步进展。";
+	} else {
+		mes "那么，你希望要";
+		mes getitemname(.@arg1)+"？如果你选择";
+		mes "要这把四级武器，";
+		mes "我就需要熔化许多";
+		mes "你捐给我的";
+		mes "奖牌。我们继续吗？";
+	}
+	next;
+	if (select("拒绝:接受") == 1) {
+		mes "["+ strcharinfo(0) +"]";
+		mes "等、等等，我改变";
+		mes "主意了。可以";
+		mes "请你以后";
+		mes "再给我奖励吗？";
+		next;
+		mes "[艾菲莉]";
+		if (getiteminfo( .@arg1, ITEMINFO_TYPE ) == IT_ARMOR) {
+			mes "当然，当然。";
+			mes "记住，如果你再捐";
+			mes "更多奖牌给我，";
+			mes "我就能为你制作";
+			mes "品质更高的物品~";
+		} else {
+			mes "我觉得我无法开发出";
+			mes "比这些四级武器更好的东西了，但既然做了";
+			mes "这么大的投入，你应该仔细决定想要什么。";
+		}
+		close;
+	}
+	mes "[艾菲莉]";
+	if (.@arg1 == 2319) {
+		mes "给你，我相信";
+		mes "这件"+getitemname(.@arg1)+"会";
+		mes "好好为你效力。谢谢你";
+		mes "的帮助，希望你能";
+		mes "继续为我的金属研究";
+		mes "捐赠奖牌~";
+	} else if (.@arg1 == 2345 || .@arg1 == 2347 || .@arg1 == 2349 || .@arg1 == 2351) {
+		mes "好选择！我相信";
+		if (.@arg1 == 2345) mes "这套带插槽的火";
+		else if (.@arg1 == 2351) mes "这套带插槽的地";
+		else if (.@arg1 == 2349) mes "这套带插槽的风";
+		else if (.@arg1 == 2347) mes "这套带插槽的水";
+		mes "属性防具会";
+		mes "好好为你效力。谢谢你的帮助，";
+		mes "如果你得到更多奖牌，";
+		mes "请捐给我~";
+	} else {
+		mes "我想再次";
+		mes "感谢你提供";
+		mes "这么多奖牌给我。";
+		mes "我想那一定";
+		mes "很不容易。无论如何，我";
+		mes "感谢你一直以来的帮助~";
+	}
+	ein_medal01 -= getarg(0);
+	getitem .@arg1,1;
+	close;
+}
+
+hugel,71,83,4	script	韦恩	900,{
+	if (!checkweight("Knife",1)) {
+		mes "[韦恩]";
+		mes "等一下……";
+		mes "如果你想用";
+		mes "奖牌兑换物品，";
+		mes "最好先在背包里";
+		mes "腾出更多空间。为什么不用卡普拉仓库呢？";
+		close;
+	}
+	mes "[韦恩]";
+	mes "你好！有没有想过";
+	mes "你能用赢来的";
+	mes "所有魔物赛跑竞赛场";
+	mes "奖牌做什么？你";
+	mes "可以把它们捐给";
+	mes "艾音布罗克的铁匠公会……";
+	next;
+	mes "[韦恩]";
+	mes "...Or you can exchange them";
+	mes "兑换物品，就在此时";
+	mes "此刻，找我。和往常一样，";
+	mes "选择权在你。";
+	next;
+	if (select("奖牌兑换:取消") == 2) {
+		mes "[韦恩]";
+		mes "好吧，只要记住";
+		mes "你随时可以来找我";
+		mes "把奖牌换成";
+		mes "消耗品。";
+		mes "艾音布罗克那家伙？我不确定";
+		mes "他会拿什么跟你换……";
+		next;
+		mes "[韦恩]";
+		mes "我只知道他";
+		mes "需要大量奖牌";
+		mes "来做他正在做的工作。";
+		mes "不过，我听说他也许";
+		mes "会让你的捐赠值得";
+		mes "你付出的一切努力，你知道吗？";
+		close;
+	}
+	if (!checkweight("Jellopy",550)) {
+		mes "[韦恩]";
+		mes "等一下……";
+		mes "如果你想用";
+		mes "奖牌兑换物品，";
+		mes "最好先在背包里";
+		mes "腾出更多空间。为什么不用卡普拉仓库呢？";
+		close;
+	} else {
+		mes "[韦恩]";
+		mes "那么，你想用多少奖牌";
+		mes "您要兑换吗？";
+		mes "不用天才也能";
+		mes "明白，一次兑换";
+		mes "更多奖牌，就能得到";
+		mes "更有价值的物品。";
+		next;
+		setarray .@pm, 1,3,7,8,16,25,42,59;
+		.@total_pm = getarraysize(.@pm);
+		for ( .@i = 0; .@i < .@total_pm; .@i++ )
+			.@menu$ = .@menu$ + .@pm[.@i] + "奖牌:";
+		.@m = select(.@menu$) - 1;
+		switch (.@m) {
+			case 0: 
+				.@items$ = "2 Hinale Leaflets:2 Aloe Leaflets:1 Mastela Fruit:5 Witch Starsands:4 Condensed Red Potions";
+				setarray .@item_array, 520,2,521,2,522,1,1061,5,545,4;
+				break;
+			case 1:
+				.@items$ = "1 Royal Jelly:6 Holy Waters";
+				setarray .@item_array, 526,1,523,6;
+				break;
+			case 2:
+				.@items$ = "1 Cookie Bag:1 First Aid Kit";
+				setarray .@item_array, 12130,1,12110,1;
+				break;
+			case 3:
+				.@items$ = "1 Gift Box";
+				setarray .@item_array, 644,1;
+				break;
+			case 4:
+				.@items$ = "1 Old Blue Box";
+				setarray .@item_array, 603,1;
+				break;
+			case 5:
+				.@items$ = "1 Taming Gift Set";
+				setarray .@item_array, 12105,1;
+				break;
+			case 6:
+				.@items$ = "1 Old Purple Box";
+				setarray .@item_array, 617,1;
+				break;
+			case 7:
+				.@items$ = "1 Poring Box";
+				setarray .@item_array, 12109,1;
+				break;
+		}
+		mes "[韦恩]";
+		mes "现在，请选择";
+		mes "你想用";
+		mes "兑换以下哪一组";
+		mes "物品，以换取"+.@pm[.@m]+" Prize Medal."+((getarraysize(.@item_array)<3)?" Well, we have only 1 set, but...":"");
+		next;
+		.@m2 = ( select(.@items$) -1 ) *2;
+		if (countitem("Marvelous_Medal") < .@pm[.@m]) {
+			mes "[韦恩]";
+			mes "嘿，你身上";
+			mes "没有足够的";
+			mes "奖牌。再去多弄一些，";
+			mes "如果你想和我";
+			mes "兑换任何东西。";
+			close;
+		}
+		mes "[韦恩]";
+		mes "好了~";
+		mes "感谢使用我的";
+		mes "服务，希望你能";
+		mes "很快再来";
+		mes "找我。祝你享受魔物";
+		mes "赛跑，公平的冒险者~";
+		delitem 7515,.@pm[.@m];// Marvelous_Medal
+		getitem .@item_array[.@m2], .@item_array[(.@m2+1)];
+		close;		
+	}
+}
+
+// Monster Race Affiliated NPCs
+//============================================================
+airplane,246,47,1	script	艾欧卡特#decoy01	878,{
+	mes "[艾欧卡特]";
+	mes "在黑森林共和国";
+	mes "的郊外，有一座";
+	mes "古老而简朴的村庄。";
+	mes "在他们开办";
+	mes "魔物赛跑竞赛场之前，";
+	mes "它只是地图上的一个小点！";
+	next;
+	mes "[艾欧卡特]";
+	mes "如果你在魔物";
+	mes "赛跑游戏中赢下赌注，";
+	mes "就会获得这些由";
+	mes "某种稀有金属制成的";
+	mes "奖牌。听说这种金属在艾音布罗克很抢手……";
+	next;
+	mes "[艾欧卡特]";
+	mes "对，对……";
+	mes "我想起来了，";
+	mes "那座城镇叫休格尔。";
+	mes "我相信那里还有别的";
+	mes "好玩的事，但竞赛场一定不能错过！";
+	close;
+}
+
+hugel,85,93,5	script	穆迪#dummy01	866,{
+	mes "[穆迪]";
+	mes "魔物赛跑";
+	mes "大概是休格尔";
+	mes "最吸引人的地方了。";
+	mes "恐怕我们这里";
+	mes "没别的什么活动。";
+	next;
+	mes "[穆迪]";
+	mes "如果你想去参观";
+	mes "魔物赛跑竞赛场，";
+	mes "就朝着";
+	mes "七点钟方向，";
+	mes "看着小地图前进，然后找";
+	mes "那座被栅栏围住的小山。";
+	next;
+	mes "[穆迪]";
+	mes "你应该能在那一带";
+	mes "找到竞技场。";
+	mes "总之，如果你想下注";
+	mes "或者只是想看看比赛，";
+	mes "就去问艾卡兄弟中的一位吧。希望你喜欢我们的小镇~";
+	close;
+}
+
+p_track02,32,45,5	script	古怪学者#double	755,{
+	mes "[古怪学者]";
+	mes "让我算算……";
+	mes "一号怪物的平均速度";
+	mes "以及受";
+	mes "风阻、疲劳……影响的运气值";
+	mes "那么，获胜的";
+	mes "概率大概是多少……？";
+	next;
+	mes "[古怪学者]";
+	mes "把它代入我的";
+	mes "算法里……再进位二……";
+	mes "等等，我该用几位";
+	mes "有效数字来着？";
+	mes "啊，对了，是七位，用来计入 x，";
+	mes "一个代表——";
+	next;
+	mes "["+ strcharinfo(0) +"]";
+	mes "打扰一下，";
+	mes "你在做什么？";
+	next;
+	mes "[古怪学者]";
+	mes "安、安静！";
+	mes "我必须完成";
+	mes "我的计算！";
+	mes "那么，我算到哪了……？";
+	specialeffect EF_CLAYMORE;
+	emotion ET_FRET;
+	close;
+}
+
+p_track02,69,31,1	script	铁匠公会成员#dou	726,{
+	if (!$@mon_time_2_2) {
+		mes "[铁匠公会成员]";
+		mes "这些比赛我到底要";
+		mes "押多少次才行？！";
+		mes "我一次都没赢过！";
+		mes "唉，我一定是有史以来";
+		mes "赌运最差的人！";
+		emotion ET_CRY;
+		next;
+		mes "[铁匠公会成员]";
+		mes "公会派我";
+		mes "带一些奖牌";
+		mes "回艾音布罗克……";
+		mes "听说它们是用";
+		mes "某种稀有金属做的，可是……";
+		mes "我实在赢不了啊~！";
+		emotion ET_PROFUSELY_SWEAT;
+		close;
+	} 
+	mes "[铁匠公会成员]";
+	mes "跑啊！冲、冲、冲！";
+	mes "我得赢点";
+	mes "奖牌！不然我";
+	mes "实在没脸回";
+	mes "艾音布罗克的家！快、再快点！";
+	emotion ET_FLAG;
+	close;
+}
+
+p_track02,53,45,3	script	英勇骑士#double	733,{
+	mes "[英勇骑士]";
+	mes "嘿，你最近";
+	mes "在赌比赛吗？";
+	mes "如果你有什么内幕消息，";
+	mes "能跟我分享一下吗？";
+	mes "我也赢过几注……不过";
+	mes "我真的很想多赢一些！";
+	next;
+	mes "[英勇骑士]";
+	mes "哈哈！我常跟";
+	mes "那些铁匠说！要是他们";
+	mes "不想一直输，";
+	mes "那就该一直押同一只怪物。我吗？我总是";
+	mes "押那只黑色的小恶魔~";
+	next;
+	mes "[英勇骑士]";
+	mes "你也一样……！";
+	mes "永远都要";
+	mes "押小恶魔！";
+	emotion ET_BEST;
+	close;
+}
+
+p_track01,27,47,5	script	醉汉#single	853,{
+	mes "[眼熟的醉汉]";
+	mes "呃呃……！^333333*打嗝*^000000";
+	mes "下一场我非赢";
+	mes "不可！我必须做到！";
+	mes "嘿，说你呢！你的";
+	mes "幸运数字是几？嗯？";
+	next;
+	mes "["+ strcharinfo(0) +"]";
+	mes "我，呃……";
+	next;
+	mes "[眼熟的醉汉]";
+	mes "快点，我需要你的";
+	mes "幸运数字，因为我的";
+	mes "已经用光了！告诉我！";
+	mes "告诉我！^333333*打嗝~*^000000";
+	close;
+}
+
+p_track01,69,31,1	script	铁匠公会成员#sin	107,{
+	mes "[铁匠公会成员]";
+	mes "这事怎么这么难？";
+	mes "为什么我连一场";
+	mes "比赛都赢不了？呃啊！";
+	mes "在拿到至少一枚";
+	mes "奖牌之前我不能回去！";
+	next;
+	mes "[铁匠公会成员]";
+	mes "是啊，我被";
+	mes "艾音布罗克工厂派来";
+	mes "弄些奖牌，因为";
+	mes "它们是用这种稀有金属做的。不过看来他们选";
+	mes "错人来做这差事了……";
+	next;
+	mes "[铁匠公会成员]";
+	mes "我是说，我在这儿";
+	mes "待了这么久，还什么都";
+	mes "没赢到！嘿，帮我个";
+	mes "忙，如果你有多的";
+	mes "奖牌，就把它";
+	mes "交给艾音布罗克工厂，好吗？";
+	close;
+}
+
+p_track01,45,42,3	script	心不在焉的男人#single	881,{
+	mes "[心不在焉的男人]";
+	mes "我说，你是来赌";
+	mes "怪物赛跑的吗？我";
+	mes "大老远跑来这里，就是";
+	mes "因为有个奇怪的男人";
+	mes "让我赢些奖牌。这";
+	mes "就是我待在休格尔的唯一原因……";
+	next;
+	mes "[心不在焉的男人]";
+	mes "可是我已经下了";
+	mes "一百多注，却一注";
+	mes "都没赢过！我是说，如果我";
+	mes "连续押同一只怪物六次，";
+	mes "至少该赢一次吧，";
+	mes "对吧？这到底怎么回事？！";
+	close;
+}
+
+hugel,5,5,3	script	怪物赛跑管理员	868,{
+	callfunc "F_GM_NPC";
+	mes "[怪物赛跑管理员]";
+	mes "我可以开启和";
+	mes "关闭竞技场里";
+	mes "单人及双人怪物赛跑的";
+	mes "报名 NPC。";
+	next;
+	.@select = select("单人赛报名 - 开:双人赛报名 - 开:单人赛报名 - 关:双人赛报名 - 关");
+	mes "[怪物赛跑管理员]";
+	mes "请输入";
+	mes "密码。";
+	next;
+	.@i = callfunc("F_GM_NPC",1854,0,0,2000);
+	if (.@i == -2) {
+		mes "[怪物赛跑管理员]";
+		mes "Error.";
+	} else if (.@i == -1) {
+		mes "[怪物赛跑管理员]";
+		mes "密码错误。";
+	} else if (.@i == 1) {
+		mes "[怪物赛跑管理员]";
+		switch(.@select) {
+		case 1:
+			mes "单人怪物赛跑的";
+			mes "报名 NPC 已开启。";
+			donpcevent "艾卡·艾勒伯德#single::OnEnable";
+			close;
+		case 2:
+			mes "双人怪物赛跑的";
+			mes "报名 NPC 已开启。";
+			donpcevent "艾卡·埃雷内斯#double::OnEnable";
+			close;
+		case 3:
+			mes "单人怪物赛跑的";
+			mes "报名 NPC 已关闭。";
+			donpcevent "艾卡·艾勒伯德#single::OnDisable";
+			close;
+		case 4:
+			mes "双人怪物赛跑的";
+			mes "报名 NPC 已关闭。";
+			donpcevent "艾卡·埃雷内斯#double::OnDisable";
+			close;
+		}
+	}
+	close;
+}

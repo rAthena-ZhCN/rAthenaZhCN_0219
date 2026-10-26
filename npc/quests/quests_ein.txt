@@ -1,0 +1,7362 @@
+//===== rAthena Script ======================================= 
+//= Quest NPCs related to Einbroch and Einbech
+//===== By: ================================================== 
+//= Evera and The rAthena Dev Team
+//===== Current Version: ===================================== 
+//= 2.7
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Oridecon/Mineral Quest
+//= - Variable in use: ein_gear1 (max 2)
+//= - Variable in use: $ein_amano (max 60)
+//= Uwe Kliene Quest
+//= - Variable in use: ein_cook (max ???)
+//= Factory Quest
+//= - Variable in use: EinFactory (max 16)
+//= - Variable in use: $EinPolution (max 10)
+//= Murder Quest
+//= - Variable in use: Shinokas_Quest (max 11)
+//= Lovers Quest
+//= - Variable in use: EIN_LOVERQ (max 17)
+//===== Additional Comments: ================================= 
+//= 1.0 Initial Release [Evera]
+//= 1.1 Added more quests [Evera]
+//= 1.2 Added quest bits from Einbech and renamed file to
+//=     quests_ein.txt [Evera]
+//= 1.3 Implemented the polution quest. [MasterOfMuppets]
+//= 1.4.1 Massive bugfix. Fixed Pollution exploit [Lupus]
+//= 1.4.2 Fixed Khowropher bug [Lupus]
+//= 1.5 Fixed double levelup bug [Lupus]
+//= 1.5.1 Fixed exploit [KarLaeda]
+//= 1.5.2 Updated Shino Quest to leave no grabage vars [Lupus]
+//= 1.5.3 Fixed some typos regarding Schwarzwald Trilogy [SinSloth]
+//= 1.6 Updated Laboratory Entrance regarding Heart Fragment quest. [SinSloth]
+//= 1.7 Changed the laboratory entrance checking to prevent players
+//= from being stuck in the quest. [SinSloth]
+//= 1.8 Fixed experience gains to match upcoming rate adjustments. [SinSloth]
+//= 1.9 Fixed a bug with Einbroch Pollution quest. [SinSloth]
+//= 2.0 Fixed bad NPC header data to comply with rev. 11603. [L0ne_W0lf]
+//= 2.1 Fixed typo in disable/enable npc's (bugreport:2027) [Yommy]
+//= 2.2 Overall update to the structure of the scripts. [L0ne_W0lf]
+//=     Swapped the use of enable/disablenpc with hideon/offnpc.
+//=     Added missing quest, "Oridecon/Mineral Quest"
+//=     Full overhual of the Uwe Kleine quest.
+//= 2.2a Fixed typos in var names from EIN_LOVERQRQ to EIN_LOVERQ. (bugreport:2464) [Paradox924X]
+//= 2.3 Removed occurrence of PcName. [L0ne_W0lf]
+//= 2.4 Added missing remove cutin. [Kisuka]
+//= 2.5 Added quest log entries for:
+//=     - Factory Quest
+//=     - Murder Quest
+//= 2.6 Updated RE/Pre-RE EXP. [Euphy]
+//= 2.7 Added GM management function. [Euphy]
+//============================================================ 
+
+// Oridecon Stone OR Mineral Stone Quest :: ein_amano
+//============================================================ 
+einbech,97,167,5	script	卡维塔	847,{
+	if (ein_gear1 == 2) {
+		mes "[卡维塔]";
+		mes "好久不见，";
+		mes "朋友。多亏";
+		mes "你的帮助，我妻子";
+		mes "已经好多了。";
+		next;
+		mes "[卡维塔]";
+		mes "再次感谢";
+		mes "你为我";
+		mes "所做的一切。要是";
+		mes "你再来我们镇上，";
+		mes "请随时来坐坐。";
+		close;
+	}
+	else if (ein_gear1 == 1) {
+		mes "[卡维塔]";
+		mes "哦，欢迎。";
+		mes "我拜托你的";
+		mes "东西，都";
+		mes "带来了吗？";
+		next;
+		switch(select("是的。:还没有。")) {
+		case 1:
+			if ((countitem(1011) > 9) && (countitem(1003) > 2) && (countitem(912) > 9) && (countitem(7126) > 39)) {
+				mes "[卡维塔]";
+				mes "让我先看看";
+				mes "你带来的东西，";
+				mes "然后给你神之金属。";
+				next;
+				if ((MaxWeight - Weight) > 2399) {
+					mes "[卡维塔]";
+					mes "很好，你带齐了";
+					mes "所有东西！现在";
+					mes "把这神之金属给你。";
+					mes "很抱歉我没法给你";
+					mes "比这更多的东西。";
+					next;
+					mes "[卡维塔]";
+					mes "那么，";
+					mes "冒险者，祝你";
+					mes "旅途平安。";
+					delitem 1003,3;  //Coal
+					delitem 7126,40;  //Large_Jellopy
+					delitem 1011,10;  //Emveretarcon
+					delitem 912,10;  //Zargon
+					set ein_gear1,0;
+					getitem 615,1; // Oridecon
+					close;
+				}
+				else {
+					mes "[卡维塔]";
+					mes "嗯……你好像";
+					mes "带的东西太多了。";
+					mes "是不是该先把一些";
+					mes "物品存进";
+					mes "卡普拉仓库？";
+					close;
+				}
+			}
+			else {
+				mes "[卡维塔]";
+				mes "嗯……？";
+				mes "你好像缺了";
+				mes "些东西。我再说一遍";
+				mes "你需要带什么，";
+				mes "这样我才能";
+				mes "给你 1 个神之金属。";
+				next;
+				mes "[卡维塔]";
+				mes "40 个大杰勒比结晶，";
+				mes "10 个强化武器金属-级数二，";
+				mes "3 个煤矿和";
+				mes "10 个刹勒空结晶。";
+				mes "请别";
+				mes "忘了。";
+				close;
+			}
+		case 2:
+			mes "[卡维塔]";
+			mes "哦，好吧。";
+			mes "我提醒你一下，";
+			mes "换 1 个神之金属";
+			mes "需要准备";
+			mes "哪些东西，";
+			mes "免得你忘了。";
+			next;
+			mes "[卡维塔]";
+			mes "40 个大杰勒比结晶，";
+			mes "10 个强化武器金属-级数二，";
+			mes "3 个煤矿和";
+			mes "10 个刹勒空结晶。";
+			mes "准备好了";
+			mes "就回来吧。";
+			close;
+		}
+	}
+	else {
+		if (BaseLevel < 40){
+			mes "[卡维塔]";
+			mes "最近矿井里发生了";
+			mes "隧道塌方，有矿工";
+			mes "因此伤亡。现在人手";
+			mes "更少，我们在矿里";
+			mes "干活也更";
+			mes "困难了。";
+			next;
+			mes "[卡维塔]";
+			mes "真正可疑的是，";
+			mes "好像有什么东西";
+			mes "在故意让";
+			mes "隧道塌方。有些人";
+			mes "认为是我们";
+			mes "惹怒了洞窟之主。";
+			next;
+			mes "[卡维塔]";
+			mes "那次隧道事故";
+			mes "我到现在还记忆犹新。";
+			mes "自从隧道开始";
+			mes "莫名塌方，^FF0000洞窟之主^000000";
+			mes "的目击报告";
+			mes "就越来越多了。";
+			next;
+			mes "[卡维塔]";
+			mes "事故发生时";
+			mes "我正好不当班。";
+			mes "不过我听说唯一的幸存者";
+			mes "发了疯，不知";
+			mes "跑到哪里去了。可怜的家伙……";
+			close;
+		}
+		else {
+			if (Zeny < 1000){
+				mes "[卡维塔]";
+				mes "你……";
+				mes "你过得也";
+				mes "和我一样惨啊！";
+				mes "我实在替你难过，";
+				mes "要是我手头宽裕，";
+				mes "真想分你一些 Zeny……";
+				close;
+			}
+			else {
+				mes "[卡维塔]";
+				mes "嗯……？";
+				mes "很抱歉，";
+				mes "我现在可没有";
+				mes "闲工夫";
+				mes "跟你聊天。";
+				next;
+				mes "[卡维塔]";
+				mes "我妻子在矿里";
+				mes "和我一起干活时";
+				mes "遇上塌方，";
+				mes "受了重伤。";
+				mes "不知道她能不能好起来，";
+				mes "这种煎熬真让人难受。";
+				next;
+				mes "[卡维塔]";
+				mes "幸好没有人";
+				mes "丧命，可我";
+				mes "妻子她……^333333*抽、抽泣*^000000";
+				mes "对不起，我现在";
+				mes "想一个人静一静……";
+				next;
+				switch(select("我可以帮你。:好吧……:事故？")) {
+				case 1:
+					mes "[卡维塔]";
+					mes "你说真的？！";
+					mes "谢谢，太谢谢你了！";
+					mes "如、如你所见，我手头";
+					mes "并不宽裕。但我得把妻子送到医院去。";
+					next;
+					mes "[卡维塔]";
+					mes "而且我得";
+					mes "亲自照顾她，";
+					mes "一直没法去干活。";
+					mes "我不知道该怎么办才好。";
+					next;
+					select("那我能帮上什么忙？");
+					mes "[卡维塔]";
+					mes "说实话，";
+					mes "我现在急需 Zeny。";
+					mes "她一天的医药费";
+					mes "和饭钱，";
+					mes "就要 1,000 Zeny。";
+					next;
+					switch(select("帮助他。:放弃。")) {
+					case 1:
+						if (checkweight(908,10) == 0) {
+							mes "[卡维塔]";
+							mes "嗯……你好像";
+							mes "带的东西太多了。";
+							mes "是不是该先把一些";
+							mes "物品存进";
+							mes "卡普拉仓库？";
+							close;
+						}
+						else {
+							mes "[卡维塔]";
+							mes "哦……！";
+							mes "谢谢你，你";
+							mes "想象不到我";
+							mes "有多感激！我从没";
+							mes "想过会遇到";
+							mes "像你这么善良的人。";
+							next;
+							if ($ein_amano == 60) {
+								if (rand(1,3) == 1) {
+									mes "[卡维塔]";
+									mes "其他冒险者也";
+									mes "一直在帮我，";
+									mes "在大家的帮助下，";
+									mes "我妻子渐渐好转了。";
+									next;
+									mes "[卡维塔]";
+									mes "我想送你";
+									mes "一份小礼物，";
+									mes "聊表谢意。";
+									mes "如果你愿意，请收下这个。";
+									set Zeny,Zeny-1000;
+									set ein_gear1,2;
+									switch(rand(1,7)) {
+									case 1:
+										getitem 7290,1; // Phlogopite
+										break;
+									case 2:
+										getitem 7291,1; // Agate
+										break;
+									case 3:
+										getitem 7293,1; // Rose_Quartz
+										break;
+									case 4:
+										getitem 7294,1; // Turquoise
+										break;
+									case 5:
+										getitem 7295,1; // Citrine
+										break;
+									case 6:
+										getitem 7296,1; // Pyroxene
+										break;
+									case 7:
+										getitem 7289,1; // Olivine
+									}
+									next;
+									mes "[卡维塔]";
+									mes "我一直留着这些";
+									mes "金属，因为我觉得";
+									mes "它们在别人手里";
+									mes "比在我这儿更有用。";
+									mes "希望这块矿石";
+									mes "能对你有用处。";
+									close;
+								}
+								else {
+									mes "[卡维塔]";
+									mes "如果我还";
+									mes "在干活，一定会";
+									mes "尽力报答你。";
+									mes "但我现在的处境";
+									mes "实在不允许……";
+									next;
+									mes "[卡维塔]";
+									mes "不过，我愿意";
+									mes "用 1 个神之金属";
+									mes "和你换些";
+									mes "东西。你觉得怎么样？";
+									next;
+									mes "[卡维塔]";
+									mes "能帮我带来";
+									mes "40 个大杰勒比结晶，";
+									mes "10 个强化武器金属-级数二，";
+									mes "3 个煤矿和";
+									mes "10 个刹勒空结晶吗？";
+									next;
+									switch(select("当然～！:不用了，谢谢。")) {
+									case 1:
+										set Zeny,Zeny-1000;
+										set ein_gear1,1;
+										mes "[卡维塔]";
+										mes "太好了……！";
+										mes "现在我该去";
+										mes "照顾我妻子了。";
+										mes "等你把我要的";
+										mes "东西都";
+										mes "收集齐了再来吧。";
+										close;
+									case 2:
+										mes "[卡维塔]";
+										mes "我明白了。";
+										mes "我明白，";
+										mes "冒险者不会";
+										mes "在一个地方";
+										mes "待太久。再次";
+										mes "感谢你的帮助。";
+										next;
+										mes "[卡维塔]";
+										mes "不过请收下";
+										mes "这份小礼物，";
+										mes "聊表";
+										mes "我的谢意。";
+										set Zeny,Zeny-1000;
+										getitem 1010,1; // Phracon
+										close;
+									}
+								}
+							}
+							else {
+								mes "[卡维塔]";
+								mes "如果我还";
+								mes "在干活，一定会";
+								mes "尽力报答你。";
+								mes "但我现在的处境";
+								mes "实在不允许……";
+								next;
+								mes "[卡维塔]";
+								mes "不过，我愿意";
+								mes "用 1 个神之金属";
+								mes "和你换些";
+								mes "东西。你觉得怎么样？";
+								next;
+								mes "[卡维塔]";
+								mes "能帮我带来";
+								mes "40 个大杰勒比结晶，";
+								mes "10 个强化武器金属-级数二，";
+								mes "3 个煤矿和";
+								mes "10 个刹勒空结晶吗？";
+								next;
+								switch(select("当然～！:不用了，谢谢。")) {
+						 		case 1:
+									set Zeny,Zeny-1000;
+									set $ein_amano,$ein_amano + 1;
+									set ein_gear1,1;
+									mes "[卡维塔]";
+									mes "太好了……！";
+									mes "现在我该去";
+									mes "照顾我妻子了。";
+									mes "等你把我要的";
+									mes "东西都";
+									mes "收集齐了再来吧。";
+									close;
+						 		case 2:
+									mes "[卡维塔]";
+									mes "我明白了。";
+									mes "我明白，";
+									mes "冒险者不会";
+									mes "在一个地方";
+									mes "待太久。再次";
+									mes "感谢你的帮助。";
+									next;
+									mes "[卡维塔]";
+									mes "不过请收下";
+									mes "这份小礼物，";
+									mes "聊表";
+									mes "我的谢意。";
+									set Zeny,Zeny-1000;
+									getitem 1010,1; // Phracon
+									close;
+								}
+							}
+					 	}
+					case 2:
+						mes "[卡维塔]";
+						mes "我明白了。";
+						mes "抱歉，我";
+						mes "向你要求了这么多。";
+						mes "但请你也体谅";
+						mes "我实在是走投无路了……";
+						close;
+					}
+		 		case 2:
+					mes "[卡维塔]";
+					mes "你……";
+					mes "你这人真没良心！";
+					mes "^666666*抽泣……*^000000";
+					mes "你就看不出";
+					mes "我很穷、需要帮助吗？！";
+					close;
+				case 3:
+					mes "[卡维塔]";
+					mes "最近矿井里发生了";
+					mes "隧道塌方，有矿工";
+					mes "因此伤亡。现在人手";
+					mes "更少，我们在矿里";
+					mes "干活也更";
+					mes "困难了。";
+					next;
+					mes "[卡维塔]";
+					mes "真正可疑的是，";
+					mes "好像有什么东西";
+					mes "在故意让";
+					mes "隧道塌方。有些人";
+					mes "认为是我们";
+					mes "惹怒了洞窟之主。";
+					next;
+					mes "[卡维塔]";
+					mes "那次隧道事故";
+					mes "我到现在还记忆犹新。";
+					mes "自从隧道开始";
+					mes "莫名塌方，^FF0000洞窟之主^000000";
+					mes "的目击报告";
+					mes "就越来越多了。";
+					next;
+					mes "[卡维塔]";
+					mes "事故发生时";
+					mes "我正好不当班。";
+					mes "不过我听说唯一的幸存者";
+					mes "发了疯，不知";
+					mes "跑到哪里去了。可怜的家伙……";
+					close;
+				}
+			}
+		}
+	}
+}
+
+// Uwe Kleine :: ein_anoz
+//============================================================
+einbroch,215,180,6	script	乌韦·克莱内#ein	85,{
+	if (BaseClass == Job_Blacksmith) {
+		if (ein_cook > 999) {
+			set .@ccc,ein_cook-1000;
+			if (.@ccc > 199) {
+				mes "[乌韦]";
+				mes "哦，你好呀你好呀～";
+				mes "好久不见，";
+				mes "跟你聊天了，";
+				mes "可爱的冒险者～";
+				next;
+				switch(select("这么说……你是厨师。:是的，我尽力了。")) {
+				case 1:
+					mes "["+ strcharinfo(0) +"]";
+					mes "So...";
+					mes "你是厨师。";
+					next;
+					mes "[乌韦]";
+					mes "没错，这就是";
+					mes "我的营生。";
+					mes "说到我的";
+					mes "^EEA9B8爱好^000000，你可别";
+					mes "客气，尽管问，甜心～";
+					next;
+					break;
+				case 2:
+					mes "[乌韦]";
+					mes "只有不断努力才能成功。看来你已经吸取教训了，甜心～";
+					next;
+					break;
+				}
+				if (checkweight(908,200) == 0) {
+					mes "[乌韦]";
+					mes "哦，我本来想";
+					mes "给你点小东西，";
+					mes "可你带的";
+					mes "东西太多了。不如";
+					mes "先把一些东西";
+					mes "存进卡普拉仓库？";
+					close;
+				}
+				set ein_cook,219;
+				getitem 612,10; //Portable_Furnace
+				mes "[乌韦]";
+				mes "这些东西";
+				mes "一直闲放着，";
+				mes "你拿去吧，";
+				mes "甜心？它们不算";
+				mes "贵，但打铁时";
+				mes "还挺有用。";
+				next;
+				mes "[乌韦]";
+				mes "那就这样～";
+				mes "希望你喜欢";
+				mes "你的携带用熔矿炉";
+				switch(rand(1,3)) {
+				case 1: mes "...Ho ho~"; close;
+				case 2: mes "...*Tee Hee~*"; close;
+				case 3: mes "...Behbie~"; close;
+				}
+			}
+			else if (.@ccc > 99) {
+				mes "[乌韦]";
+				mes "哦，你好呀你好呀～";
+				mes "好久不见，";
+				mes "跟你聊天了，";
+				mes "可爱的冒险者～";
+				next;
+				mes "[乌韦]";
+				mes "那么，甜心，";
+				mes "上次我拜托你的";
+				mes "那件小事";
+				mes "办得怎么样了？";
+				mes "你该不会已经忘了";
+				mes "那 6 个大杰勒比结晶吧？";
+				next;
+				switch(select("给你。:我想放弃。:可以晚点再说吗？")) {
+				case 1:
+					if (countitem(7126) > 5) {
+						if (checkweight(908,199) == 0) {
+							mes "[乌韦]";
+							mes "哦，我本来想";
+							mes "给你点小东西，";
+							mes "可你带的";
+							mes "东西太多了。不如";
+							mes "先把一些东西";
+							mes "存进卡普拉仓库？";
+							close;
+						}
+						mes "[乌韦]";
+						mes "真是^EEA9B8太^000000感谢你了！";
+						mes "这是答应给你的煤矿～";
+						mes "哦，还有这些携带用熔矿炉，你也拿去吧。它们一直闲放着，我就想，不如给你好了？*嘻嘻嘻～*";
+						delitem 7126,6; //Large_Jellopy
+						set ein_cook,219;
+						getitem 1003,1; //Coal
+						getitem 612,10; //Portable_Furnace
+						next;
+						mes "[乌韦]";
+						mes "希望您喜欢！";
+						mes "我个人觉得，";
+						mes "打铁最棒的地方";
+						mes "就是站在熊熊炉火前，";
+						mes "弄得浑身^EEA9B8又热";
+						mes "又出汗^000000。哦，多让人兴奋～！";
+						close;
+					}
+					else if (countitem(7126) > 0) {
+						mes "[乌韦]";
+						mes "哦，你好像少了";
+						mes "一些。你当然还是";
+						mes "可以给我，不过";
+						mes "报酬会少一些";
+						if (Sex == SEX_MALE) {
+							mes "...you ^EEA9B8naughty boy^000000.";
+						}
+						else {
+							mes "...you ^EEA9B8naughty girl^000000.";
+						}
+						switch(select("全部给他。:取消。")) {
+						case 1:
+							if (checkweight(1201,1) == 0) {
+								mes "[乌韦]";
+								mes "哦，我本来想";
+								mes "给你点小东西，";
+								mes "可你带的";
+								mes "东西太多了。不如";
+								mes "先把一些东西";
+								mes "存进卡普拉仓库？";
+								close;
+							}
+							mes "[乌韦]";
+							mes "开玩笑的～";
+							mes "别这么紧张，那些东西我其实已经不需要了。不过看在你这么努力的份上，我再多给你一点东西……";
+							next;
+							if (checkweight(908,220) == 0) {
+								mes "[乌韦]";
+								mes "哦，我本来想";
+								mes "给你点小东西，";
+								mes "可你带的";
+								mes "东西太多了。不如";
+								mes "先把一些东西";
+								mes "存进卡普拉仓库？";
+								close;
+							}
+							mes "[乌韦]";
+							if (Class == Job_Whitesmith) {
+								mes "平时我都会给可爱的铁匠大师们 10 个携带用熔矿炉，不过这次就给你 ^EEA9B811^000000 个吧。这就是我说的额外小礼物。";
+							}
+							else {
+								mes "平时我都会给可爱的铁匠们 10 个携带用熔矿炉，不过这次就给你 ^EEA9B811^000000 个吧。这就是我说的额外小礼物。";
+							}
+							set ein_cook,219;
+							getitem 612,11; //Portable_Furnace
+							next;
+							mes "[乌韦]";
+							mes "我知道这不算什么厚礼，但你下次打铁时一定用得上。好好利用它们，好吗？";
+							close;
+						case 2:
+							if (checkweight(1201,1) == 0) {
+								mes "[乌韦]";
+								mes "哦，我本来想";
+								mes "给你点小东西，";
+								mes "可你带的";
+								mes "东西太多了。不如";
+								mes "先把一些东西";
+								mes "存进卡普拉仓库？";
+								close;
+							}
+							mes "[乌韦]";
+							mes "嗯……那么……总之，";
+							mes "恭喜你成为";
+							if (Class == Job_Whitesmith) {
+								mes "大师铁匠！！";
+							}
+							else {
+								mes "铁匠！！";
+							}
+							mes "这是我给你的贺礼。";
+							if (Sex == SEX_MALE) {
+								mes "...you ^EEA9B8naughty boy^000000.";
+							}
+							else {
+								mes "...you ^EEA9B8naughty girl^000000.";
+							}
+							break;
+						}
+						if (checkweight(908,100) == 0) {
+							next;
+							mes "哦，我本来想";
+							mes "给你点小东西，";
+							mes "可你带的";
+							mes "东西太多了。不如";
+							mes "先把一些东西";
+							mes "存进卡普拉仓库？";
+							close;
+						}
+						set ein_cook,219;
+						getitem 612,5; //Portable_Furnace
+						next;
+						mes "[乌韦]";
+						mes "我知道这不算什么厚礼，但你下次打铁时一定用得上。好好利用它们，好吗？";
+						close;
+					}
+					else {
+						mes "[乌韦]";
+						mes "^666666你没带";
+						mes "大杰勒比结晶来……？^000000。";
+						set ein_cook,219;
+						next;
+						mes "[乌韦]";
+						mes "没关系！我才没有觉得^EEA9B8被背叛^000000呢，不过那些东西我已经不需要了！既然我们都是打铁的，我只希望你能记住，答应别人的事就要做到，好吗？拜拜～";
+						close;
+					}
+				case 2:
+					if (checkweight(908,200) == 0) {
+						mes "[乌韦]";
+						mes "哦，我本来想";
+						mes "给你点小东西，";
+						mes "可你带的";
+						mes "东西太多了。不如";
+						mes "先把一些东西";
+						mes "存进卡普拉仓库？";
+						close;
+					}
+					mes "[乌韦]";
+					mes "放弃……？";
+					mes "好吧，至少你很诚实。不过既然我们都是铁匠同行，就让我给你点小东西吧。";
+					next;
+					mes "[乌韦]";
+					mes "Still...";
+					mes "但这改变不了";
+					mes "你刚才的表现";
+					mes "非常、非常糟糕这件事。";
+					if (Sex == SEX_MALE) {
+						mes "...You ^EEA9B8naughty boy^000000.";
+					}
+					else {
+						mes "...You ^EEA9B8naughty girl^000000.";
+					}
+					set ein_cook,219;
+					getitem 612,10; //Portable_Furnace
+					next;
+					mes "[乌韦]";
+					mes "我知道这不算什么厚礼，但你下次打铁时一定用得上。好好利用它们，好吗？";
+					close;
+				case 3:
+					mes "[乌韦]";
+					mes "哦～你比我想的回来得晚，那些东西我已经不太需要了。不过话说回来，一直留在手里也不太好……";
+					next;
+					switch(select("给你～:我想放弃。")) {
+					case 1:
+						if (checkweight(908,199) == 0) {
+							mes "[乌韦]";
+							mes "哦，我本来想";
+							mes "给你点小东西，";
+							mes "可你带的";
+							mes "东西太多了。不如";
+							mes "先把一些东西";
+							mes "存进卡普拉仓库？";
+							close;
+						}
+						if (countitem(7126) > 5) {
+							mes "[乌韦]";
+							mes "真是^EEA9B8太^000000感谢你了！";
+							mes "这是答应给你的煤矿～";
+							mes "哦，还有这些携带用熔矿炉，你也拿去吧。它们一直闲放着，我就想，不如给你好了？*嘻嘻嘻～*";
+							delitem 7126,6; //Large_Jellopy
+							set ein_cook,219;
+							getitem 1003,1; //Coal
+							getitem 612,10; //Portable_Furnace
+							close;
+						}
+						else if (countitem(7126) > 0) {
+							mes "[乌韦]";
+							mes "哦，你好像少了";
+							mes "一些。你当然还是";
+							mes "可以给我，不过";
+							mes "报酬会少一些";
+							if (Sex == SEX_MALE) {
+								mes "...You ^EEA9B8naughty boy^000000.";
+							}
+							else {
+								mes "...You ^EEA9B8naughty girl^000000.";
+							}
+							switch(select("全部给你。:取消。")) {
+							case 1:
+								if (checkweight(908,220) == 0) {
+									mes "[乌韦]";
+									mes "哦，我本来想";
+									mes "给你点小东西，";
+									mes "可你带的";
+									mes "东西太多了。不如";
+									mes "先把一些东西";
+									mes "存进卡普拉仓库？";
+									close;
+								}
+								mes "[乌韦]";
+								mes "开玩笑的～";
+								mes "别这么紧张，那些东西我其实已经不需要了。不过看在你这么努力的份上，我再多给你一点东西……";
+								next;
+								mes "[乌韦]";
+								if (Class == Job_Whitesmith) {
+									mes "我通常会给可爱的铁匠大师们10个携带用熔矿炉，不过你可以拿走^EEA9B811^000000。这就是我说的额外小礼物。";
+								}
+								else {
+									mes "我通常会给可爱的铁匠们10个携带用熔矿炉，不过你可以拿走^EEA9B811^000000。这就是我说的额外小礼物。";
+								}
+								set ein_cook,219;
+								getitem 612,11; //Portable_Furnace
+								next;
+								mes "[乌韦]";
+								mes "我知道这不算什么厚礼，不过下次你锻造时应该用得上。好好利用它们吧，好吗？";
+								close;
+							case 2:
+								if (checkweight(908,200) == 0) {
+									mes "[乌韦]";
+									mes "啊，我本来想给";
+									mes "你一点小东西，";
+									mes "可是你带的东西";
+									mes "太多了。不如";
+									mes "把一些先收进";
+									mes "卡普拉仓库里？";
+									close;
+								}
+								mes "[乌韦]";
+								mes "Okay.";
+								mes "总之～！";
+								mes "等你凑齐所有";
+								mes "那些大杰勒比结晶，";
+								mes "就回来找我吧。";
+								if (Sex == SEX_MALE) {
+									mes "...you ^EEA9B8naughty boy^000000.";
+								}
+								else {
+									mes "...you ^EEA9B8naughty girl^000000.";
+								}
+								set ein_cook,219;
+								getitem 612,10; //Portable_Furnace
+								next;
+								mes "[乌韦]";
+								mes "这个携带用熔矿炉虽然不贵";
+								mes "但对铁匠来说是非常重要的物品，对吧？";
+								mes "好好用它！";
+								mes "以后有空再来看看我。呵呵……";
+								close;
+							}
+						}
+						else {
+							mes "[乌韦]";
+							mes "^666666你没有带来";
+							mes "任何大杰勒比结晶……？^000000。";
+							set ein_cook,219;
+							next;
+							mes "[乌韦]";
+							mes "没关系！我才没有觉得^EEA9B8被背叛^000000什么的，不过我已经不需要那些了！既然我们都是做锻造这一行的，我只希望你记得把答应别人的事办完，好吗？拜拜～";
+							close;
+						}
+					case 2:
+						if (checkweight(908,200) == 0) {
+							mes "[乌韦]";
+							mes "啊，我本来想给";
+							mes "你一点小东西，";
+							mes "可是你带的东西";
+							mes "太多了。不如";
+							mes "把一些先收进";
+							mes "卡普拉仓库里？";
+							close;
+						}
+						mes "[乌韦]";
+						mes "嗯……那么……总之，";
+						mes "恭喜你成为了";
+						if (Class == Job_Whitesmith) {
+							mes "铁匠大师！！";
+							mes "这是我的祝贺礼物。呵呵。";
+						}
+						else {
+							mes "铁匠！！";
+							mes "这是我的祝贺礼物。呵呵。";
+							if (Sex == SEX_MALE) {
+								mes "...You ^EEA9B8naughty boy^000000.";
+							}
+							else {
+								mes "...You ^EEA9B8naughty girl^000000.";
+							}
+						}
+						set ein_cook,219;
+						getitem 612,10; //Portable_Furnace
+						next;
+						mes "[乌韦]";
+						mes "我知道这不算什么厚礼，不过下次你锻造时应该用得上。好好利用它们吧，好吗？";
+						close;
+					}
+				}
+			}
+		}
+		if (ein_cook == 0) {
+			mes "[乌韦]";
+			mes "烹饪真是件乐事～！";
+			mes "那香气、那味道，以及纯粹的^EEA9B8饱足^000000感……";
+			next;
+			switch(select("呃，这里不是铁匠铺吗？:别理他。")) {
+			case 1:
+				mes "[乌韦]";
+				mes "这里是铁匠铺吗？";
+				mes "哦，我的天，";
+				mes "你以前没来过";
+				mes "这里吧？";
+				next;
+				mes "[乌韦]";
+				mes "我叫乌韦·克莱内";
+				mes "这是我的铁匠铺～！我是";
+				mes "这里最优雅的铁匠";
+				mes "也是这里最棒的厨师，就在";
+				mes "秀发兹发德共和国～";
+				next;
+				mes "[乌韦]";
+				mes "烹饪大概是";
+				mes "工匠所能享受的";
+				mes "最大乐趣之一。哦，";
+				mes "你觉得烹饪中";
+				mes "最重要的因素是什么，";
+				if (Sex == SEX_MALE) {
+					mes "你这个^EEA9B8调皮的小子^000000？";
+				}
+				else {
+					mes "你这个^EEA9B8调皮又调皮的小姑娘^000000？";
+				}
+				next;
+				switch(select("心意.:食材.:技巧.:工具.")) {
+				case 1:
+					mes "[乌韦]";
+					mes "...";
+					mes "......";
+					mes "......Heart?";
+					next;
+					mes "[乌韦]";
+					mes "不～不～不～不～行～";
+					mes "如果只要有";
+					mes "心意就能烹饪或锻造，";
+					mes "那谁都能制作和";
+					mes "强化一把巨剑了，对吧？";
+					next;
+					mes "[乌韦]";
+					mes "你真正需要的";
+					mes "在烹饪和锻造时";
+					mes "是^EEA9B8渴望^000000。那份燃烧的渴望";
+					mes "与热情，去做出";
+					mes "了不起的东西！如果你是这个意思，那你完全正确！";
+					next;
+					mes "[乌韦]";
+					mes "但那个答案若有";
+					mes "任何别的含义，那";
+					mes "就绝对大错特错了。";
+					next;
+					mes "[乌韦]";
+					mes "哦～我今天刚收到";
+					mes "一些艾姆维塔康，";
+					mes "请拿一个吧，好吗？";
+					mes "欢迎来到艾音布罗克，小可爱～";
+					set ein_cook,1;
+					getitem 1011,1; //Emveretarcon
+					break;
+				case 2:
+					mes "[乌韦]";
+					mes "...";
+					mes "......";
+					mes "......Ingredients?";
+					next;
+					mes "[乌韦]";
+					mes "不～不～不～不～行～";
+					mes "事情搞砸时，人们";
+					mes "总是怪食材";
+					mes "出了问题！就是那些人";
+					mes "只会让自己丢脸～";
+					next;
+					mes "[乌韦]";
+					mes "当然，如果你有那份坚持，只用你能找到的最好的食材，那也没问题。但你做出来的东西品质如何，不能只取决于食材。";
+					next;
+					mes "[乌韦]";
+					mes "说到食材，";
+					mes "刚才有人给了我一些";
+					mes "钢铁。不如你拿2个";
+					mes "去，算是我对你说的“欢迎来到艾音布罗克，小可爱～！”";
+					set ein_cook,3;
+					getitem 998,2; //Iron
+					break;
+				case 3:
+					mes "[乌韦]";
+					mes "...";
+					mes "......";
+					mes "......Skills?";
+					next;
+					mes "[乌韦]";
+					mes "嗯，光有技巧";
+					mes "并不足以做出";
+					mes "了不起的东西。你还得投入";
+					mes "心力。你不能在偷懒时";
+					mes "抱怨自己的技巧";
+					mes "不够，对吧？";
+					next;
+					mes "[乌韦]";
+					mes "你永远需要投入";
+					mes "时间和心力，才能让你的";
+					mes "手艺脱颖而出。那么，如果你";
+					mes "遇到一个技巧";
+					mes "让你相形见绌、促使你提升自己的人……";
+					next;
+					mes "[乌韦]";
+					mes "那就尽管";
+					mes "追随";
+					mes "你的动力，提升";
+					mes "你的技巧！只是别";
+					mes "把自己的技巧不足";
+					mes "当作任何借口。";
+					next;
+					mes "[乌韦]";
+					mes "哦～我今天刚收到";
+					mes "一些艾姆维塔康，";
+					mes "请拿一个吧，好吗？";
+					mes "欢迎来到艾音布罗克，小可爱～";
+					set ein_cook,5;
+					getitem 1011,1; //Emveretarcon
+					break;
+				case 4:
+					mes "[乌韦]";
+					mes "...";
+					mes "......";
+					mes "......Tools?";
+					next;
+					mes "[乌韦]";
+					mes "嗯，不是谁都能";
+					mes "烤出美味的蛋糕，就算";
+					mes "他们有全";
+					mes "秀发兹发德共和国最好的烤箱。";
+					mes "而一个孩子就算有全部工具";
+					mes "也拼不出一把剑。";
+					next;
+					mes "[乌韦]";
+					mes "工具是有帮助，但";
+					mes "大师级工匠从不";
+					mes "把自己的失误怪到工具上。";
+					next;
+					mes "[乌韦]";
+					mes "哦，说到";
+					mes "工具，我今天刚收到";
+					mes "几把新锤子。";
+					mes "不如你拿一把，";
+					mes "算是我对你说的“欢迎";
+					mes "来到艾音布罗克，亲爱的～”";
+					set ein_cook,7;
+					getitem 613,1; //Iron_Hammer
+					break;
+				}
+				next;
+				mes "[乌韦]";
+				mes "Oh...";
+				mes "也随时";
+				mes "过来看看我";
+				mes "随时都行，好吗？";
+				mes "所以别害羞";
+				switch(rand(1,3)) {
+				case 1: mes "...Ho ho~"; close;
+				case 2: mes "...*Tee Hee~*"; close;
+				case 3: mes "...Behbie~"; close;
+				}
+			case 2:
+				mes "[乌韦]";
+				mes "嗯……？";
+				mes "不如留下来聊聊？";
+				mes "哦，你们冒险者总是";
+				mes "忙着要做的事";
+				mes "和要见的人。唉，好吧～";
+				close;
+			}
+		}
+		else if (ein_cook < 10) {
+			mes "[乌韦]";
+			mes "哦！又见面了，";
+			mes "可爱的小冒险者。";
+			mes "那么告诉我，是什么";
+			mes "风把你吹来的，"+strcharinfo(0)+"？";
+			next;
+			switch(select("询问烹饪.:询问艾音布罗克.:取消.")) {
+			case 1:
+				if (ein_cook == 1) {
+					mes "[乌韦]";
+					mes "哦～烹饪！";
+					mes "那么你想";
+					mes "问我什么呢……？";
+					next;
+					switch(select("食材:技巧:工具:取消")) {
+					case 1:
+						mes "[乌韦]";
+						mes "对初学者来说，";
+						mes "学会挑选";
+						mes "和使用食材";
+						mes "是最";
+						mes "重要的基本功之一。";
+						next;
+						mes "[乌韦]";
+						mes "烹饪和锻造很像";
+						mes "因为特定的食材";
+						mes "是制作特色";
+						mes "物品或料理所必需的。你不能";
+						mes "在真正需要时";
+						mes "跳过它们，对吧？对！";
+						next;
+						mes "[乌韦]";
+						mes "一旦你下定决心";
+						mes "去做一件事，";
+						mes "就要专心完成它，好吗？";
+						mes "绝不要偷工减料，";
+						mes "要全心投入，做出";
+						mes "最好的成品～";
+						next;
+						mes "[乌韦]";
+						mes "嗯，这真是";
+						mes "一次愉快的交谈。以后";
+						mes "再来看看我，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面～";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 2:
+						mes "[乌韦]";
+						mes "刚开始学习";
+						mes "技巧时，不要让自己灰心！熟能生巧，";
+						mes "你知道吧？但绝不要";
+						mes "把自己的技巧不足";
+						mes "当作失败时的借口……";
+						next;
+						mes "[乌韦]";
+						mes "努力也是锻造和烹饪中";
+						mes "不可或缺的！那么，";
+						mes "另一方面，如果你投入了";
+						mes "全部努力却没学到任何技巧，那还是很快就走不下去，对吧？对！";
+						next;
+						mes "[乌韦]";
+						mes "关键在于始终";
+						mes "付出100%的努力，并";
+						mes "致力于提升自己的技巧。";
+						mes "不知不觉间，你就会";
+						mes "成为受人尊敬的大师！";
+						next;
+						mes "[乌韦]";
+						mes "嗯，这真是";
+						mes "一次愉快的交谈。以后";
+						mes "再来看看我，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面～";
+						switch(rand(1,3)) {
+						case 1: mes "Hohohohoho."; close;
+						case 2: mes "嗯呵呵呵呵。*"; close;
+						case 3: mes "Umho."; close;
+						}
+					case 3:
+						mes "[乌韦]";
+						mes "如果你有更好的";
+						mes "工具可用，";
+						mes "烹饪会稍微";
+						mes "轻松些，但也仅此而已。工具";
+						mes "本身并不能";
+						mes "让任何人都成为大师。";
+						next;
+						mes "[乌韦]";
+						mes "说到底，最好的";
+						mes "工具，就是那些你";
+						mes "用起来最顺手的。";
+						mes "事实上，我现在还在用我当初只是";
+						mes "个新手小厨师时用的那把旧刀～";
+						next;
+						mes "[乌韦]";
+						mes "哦，既然说到";
+						mes "工具的事，";
+						mes "我今天刚收到";
+						mes "一些新锤子。";
+						mes "你要不要拿几把？";
+						next;
+						if (checkweight(908,50) == 0) {
+							mes "[乌韦]";
+							mes "嗯……？";
+							mes "你带的东西";
+							mes "太多了。你如果没有";
+							mes "空间，我就没法";
+							mes "给你锤子。快把多余的";
+							mes "东西放进卡普拉仓库～";
+							close;
+						}
+						set ein_cook,11;
+						getitem 614,1; //Golden_Hammer
+						getitem 613,1; //Iron_Hammer
+						mes "[乌韦]";
+						mes "那么，希望";
+						mes "你喜欢它们～";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 4:
+						mes "[乌韦]";
+						mes "哦……？";
+						mes "那么，随时";
+						mes "欢迎来";
+						mes "看我，";
+						mes "只要你想，好吗？";
+						close;
+					}
+				}
+				else if (ein_cook == 3) {
+					mes "[乌韦]";
+					mes "哦～烹饪！";
+					mes "那么你想";
+					mes "问我什么呢……？";
+					next;
+					switch(select("心意:技巧:工具:取消.")) {
+					case 1:
+						mes "[乌韦]";
+						mes "啊，心意。就和锻造一样，";
+						mes "你需要热情与渴望";
+						mes "才能创造出特别的东西。";
+						mes "每个铁匠和厨师都知道，";
+						mes "只要你有";
+						mes "意志和承诺，就能做到任何事。";
+						next;
+						mes "[乌韦]";
+						mes "嗯，这大概就是";
+						mes "我真正想说的";
+						mes "全部了。不过";
+						mes "随时回来";
+						mes "聊聊天吧。";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 2:
+						mes "[乌韦]";
+						mes "刚开始学习";
+						mes "技巧时，不要让自己灰心！熟能生巧，";
+						mes "你知道吧？但绝不要";
+						mes "把自己的技巧不足";
+						mes "当作失败时的借口……";
+						next;
+						mes "[乌韦]";
+						mes "努力也是锻造和烹饪中";
+						mes "不可或缺的！那么，";
+						mes "另一方面，如果你投入了";
+						mes "全部努力却没学到任何技巧，那还是很快就走不下去，对吧？对！";
+						next;
+						mes "[乌韦]";
+						mes "关键在于始终";
+						mes "付出100%的努力，并";
+						mes "致力于提升自己的技巧。";
+						mes "不知不觉间，你就会";
+						mes "成为受人尊敬的大师！";
+						next;
+						mes "[乌韦]";
+						mes "嗯，这真是";
+						mes "一次愉快的交谈。以后";
+						mes "再来看看我，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面～";
+						switch(rand(1,3)) {
+						case 1: mes "Hohohohoho."; close;
+						case 2: mes "嗯呵呵呵呵。*"; close;
+						case 3: mes "Umho."; close;
+						}
+					case 3:
+						mes "[乌韦]";
+						mes "如果你有更好的";
+						mes "工具可用，";
+						mes "烹饪会稍微";
+						mes "轻松些，但也仅此而已。工具";
+						mes "本身并不能";
+						mes "让任何人都成为大师。";
+						next;
+						mes "[乌韦]";
+						mes "说到底，最好的";
+						mes "工具，就是那些你";
+						mes "用起来最顺手的。";
+						mes "事实上，我现在还在用我当初只是";
+						mes "个新手小厨师时用的那把旧刀～";
+						next;
+						mes "[乌韦]";
+						mes "哦，既然说到";
+						mes "工具的事，";
+						mes "我今天刚收到";
+						mes "一些新锤子。";
+						mes "你要不要拿几把？";
+						next;
+						if (checkweight(908,50) == 0) {
+							mes "[乌韦]";
+							mes "嗯……？";
+							mes "你带的东西";
+							mes "太多了。你如果没有";
+							mes "空间，我就没法";
+							mes "给你锤子。快把多余的";
+							mes "东西放进卡普拉仓库～";
+							close;
+						}
+						set ein_cook,13;
+						getitem 614,1; //Golden_Hammer
+						getitem 613,1; //Iron_Hammer
+						mes "[乌韦]";
+						mes "那么，希望";
+						mes "你喜欢它们～";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 4:
+						mes "[乌韦]";
+						mes "哦……？";
+						mes "那么，随时";
+						mes "欢迎来";
+						mes "看我，";
+						mes "只要你想，好吗？";
+						close;
+					}
+				}
+				else if (ein_cook == 5) {
+					mes "[乌韦]";
+					mes "哦～烹饪！";
+					mes "那么你想";
+					mes "问我什么呢……？";
+					next;
+					switch(select("心意:食材:工具:取消")) {
+					case 1:
+						mes "[乌韦]";
+						mes "啊，心意。就和锻造一样，";
+						mes "你需要热情与渴望";
+						mes "才能创造出特别的东西。";
+						mes "每个铁匠和厨师都知道，";
+						mes "只要你有";
+						mes "意志和承诺，就能做到任何事。";
+						next;
+						mes "[乌韦]";
+						mes "嗯，这大概就是";
+						mes "我真正想说的";
+						mes "全部了。不过";
+						mes "随时回来";
+						mes "聊聊天吧。";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 2:
+						mes "[乌韦]";
+						mes "对初学者来说，";
+						mes "学会挑选";
+						mes "和使用食材";
+						mes "是最";
+						mes "重要的基本功之一。";
+						next;
+						mes "[乌韦]";
+						mes "烹饪和锻造很像";
+						mes "因为特定的食材";
+						mes "是制作特色";
+						mes "物品或料理所必需的。你不能";
+						mes "在真正需要时";
+						mes "跳过它们，对吧？对！";
+						next;
+						mes "[乌韦]";
+						mes "一旦你下定决心";
+						mes "去做一件事，";
+						mes "就要专心完成它，好吗？";
+						mes "绝不要偷工减料，";
+						mes "要全心投入，做出";
+						mes "最好的成品～";
+						next;
+						mes "[乌韦]";
+						mes "嗯，这真是";
+						mes "一次愉快的交谈。以后";
+						mes "再来看看我，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面～";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 3:
+						mes "[乌韦]";
+						mes "如果你有更好的";
+						mes "工具可用，";
+						mes "烹饪会稍微";
+						mes "轻松些，但也仅此而已。工具";
+						mes "本身并不能";
+						mes "让任何人都成为大师。";
+						next;
+						mes "[乌韦]";
+						mes "说到底，最好的";
+						mes "工具，就是那些你";
+						mes "用起来最顺手的。";
+						mes "事实上，我现在还在用我当初只是";
+						mes "个新手小厨师时用的那把旧刀～";
+						next;
+						mes "[乌韦]";
+						mes "哦，既然说到";
+						mes "工具的事，";
+						mes "我今天刚收到";
+						mes "一些新锤子。";
+						mes "你要不要拿几把？";
+						next;
+						if (checkweight(908,50) == 0) {
+							mes "[乌韦]";
+							mes "嗯……？";
+							mes "你带的东西";
+							mes "太多了。你如果没有";
+							mes "空间，我就没法";
+							mes "给你锤子。快把多余的";
+							mes "东西放进卡普拉仓库～";
+							close;
+						}
+						set ein_cook,15;
+						getitem 614,1; //Golden_Hammer
+						getitem 613,1; //Iron_Hammer
+						next;
+						mes "[乌韦]";
+						mes "那么，希望";
+						mes "你喜欢它们～";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 4:
+						mes "[乌韦]";
+						mes "哦……？";
+						mes "那么，随时";
+						mes "欢迎来";
+						mes "看我，";
+						mes "只要你想，好吗？";
+						close;
+					}
+				}
+				else if (ein_cook == 7) {
+					mes "[乌韦]";
+					mes "哦～烹饪！";
+					mes "那么你想";
+					mes "问我什么呢……？";
+					next;
+					switch(select("心意:食材:技巧:取消.")) {
+					case 1:
+						mes "[乌韦]";
+						mes "啊，心意。就和锻造一样，";
+						mes "你需要热情与渴望";
+						mes "才能创造出特别的东西。";
+						mes "每个铁匠和厨师都知道，";
+						mes "只要你有";
+						mes "意志和承诺，就能做到任何事。";
+						next;
+						mes "[乌韦]";
+						mes "嗯，这大概就是";
+						mes "我真正想说的";
+						mes "全部了。不过";
+						mes "随时回来";
+						mes "聊聊天吧。";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 2:
+						mes "[乌韦]";
+						mes "对初学者来说，";
+						mes "学会挑选";
+						mes "和使用食材";
+						mes "是最";
+						mes "重要的基本功之一。";
+						next;
+						mes "[乌韦]";
+						mes "烹饪和锻造很像";
+						mes "因为特定的食材";
+						mes "是制作特色";
+						mes "物品或料理。你可不能";
+						mes "在真正需要的时候跳过";
+						mes "它们，对吧？对吧！";
+						next;
+						mes "[乌韦]";
+						mes "一旦你下定决心";
+						mes "去做某件事，";
+						mes "就要专心完成它，好吗？";
+						mes "绝不偷工减料，永远";
+						mes "全力以赴做出";
+						mes "最完美的成品～";
+						set ein_cook,17;
+						next;
+						mes "[乌韦]";
+						mes "好了，这真是";
+						mes "一次愉快的谈话。记得";
+						mes "再来看我，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面～";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 3:
+						mes "[乌韦]";
+						mes "“我做不到，因为";
+						mes "我不擅长这个。”";
+						mes "这是世上最愚蠢的话。";
+						mes "烹饪只有一条路。";
+						mes "练习，练习，再尝试！";
+						next;
+						mes "[乌韦]";
+						mes "我知道这是最轻松的";
+						mes "借口，那些从不";
+						mes "认真对待任何事的人。";
+						next;
+						mes "[乌韦]";
+						mes "锻造工作也是如此。";
+						mes "如果你不试着";
+						mes "提升自己的技艺，";
+						mes "你的作品就会很糟";
+						mes "forever..";
+						next;
+						mes "[乌韦]";
+						mes "但还有另一种方式";
+						mes "可以归咎于你的技艺。";
+						mes "当你面对更高的墙，";
+						mes "你会感到自己还不够好。";
+						mes "然后你可以责备自己和自己的技艺。";
+						mes "这很自然。";
+						next;
+						mes "[乌韦]";
+						mes "经历那样的考验后，如果你更加努力";
+						mes "把目标定得更高，";
+						mes "你身边的每个人都会";
+						mes "敬仰你。";
+						next;
+						mes "[乌韦]";
+						mes "好了，我希望";
+						mes "你会喜欢它们～";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 4:
+						mes "[乌韦]";
+						mes "哦……？";
+						mes "那么，随时";
+						mes "欢迎来找";
+						mes "我，只要";
+						mes "你想来，好吗？";
+						close;
+					}
+				}
+				else if (ein_cook == 9) {
+					mes "[乌韦]";
+					mes "哦，烹饪！";
+					mes "那么你想";
+					mes "问我什么……？";
+					next;
+					switch(select("心意:食材:技巧:工具:取消。")) {
+					case 1:
+						mes "[乌韦]";
+						mes "啊，心意。就像锻造一样，";
+						mes "你需要热情和渴望";
+						mes "才能创造出特别的东西。";
+						mes "每个铁匠和厨师都知道";
+						mes "只要有意志和决心";
+						mes "你就能做到任何事。";
+						next;
+						mes "[乌韦]";
+						mes "好了，这就是";
+						mes "我真正想说的";
+						mes "全部了。不过";
+						mes "随时回来";
+						mes "和我聊聊。";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 2:
+						mes "[乌韦]";
+						mes "对初学者来说，";
+						mes "学会挑选";
+						mes "和使用食材";
+						mes "是最重要的";
+						mes "基本功之一。";
+						next;
+						mes "[乌韦]";
+						mes "烹饪就像锻造";
+						mes "因为需要特定的食材";
+						mes "才能做出特别的";
+						mes "物品或料理。你可不能";
+						mes "在真正需要的时候跳过";
+						mes "它们，对吧？对吧！";
+						next;
+						mes "[乌韦]";
+						mes "一旦你下定决心";
+						mes "去做某件事，";
+						mes "就要专心完成它，好吗？";
+						mes "绝不偷工减料，永远";
+						mes "全力以赴做出";
+						mes "最完美的成品～";
+						next;
+						mes "[乌韦]";
+						mes "好了，这真是";
+						mes "一次愉快的谈话。记得";
+						mes "再来看我，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面～";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 3:
+						mes "[乌韦]";
+						mes "刚开始学习技艺时，";
+						mes "你不能让自己灰心！熟能生巧";
+						mes "你知道的，对吧？但千万别";
+						mes "把技艺不足当作";
+						mes "失败的借口……";
+						next;
+						mes "[乌韦]";
+						mes "努力也是锻造和烹饪中";
+						mes "不可或缺的！那么，";
+						mes "另一方面，如果你付出了";
+						mes "全部努力却没学到任何技艺，你依然会一事无成，对吧？对吧！";
+						next;
+						mes "[乌韦]";
+						mes "关键是要始终";
+						mes "付出百分之百的努力，并";
+						mes "不断提升自己的技艺。";
+						mes "不知不觉间，你就会";
+						mes "成为受人尊敬的大师！";
+						next;
+						mes "[乌韦]";
+						mes "好了，这真是";
+						mes "一次愉快的谈话。记得";
+						mes "再来看我，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面～";
+						switch(rand(1,3)) {
+						case 1: mes "Hohohohoho."; close;
+						case 2: mes "嗯呵呵呵呵。*"; close;
+						case 3: mes "Umho."; close;
+						}
+					case 4:
+						mes "[乌韦]";
+						mes "如果有更好的工具，";
+						mes "烹饪会稍微";
+						mes "轻松一些，";
+						mes "但也仅此而已。工具本身";
+						mes "并不能让";
+						mes "随便什么人都成为大师。";
+						next;
+						mes "[乌韦]";
+						mes "说到底，最好的";
+						mes "工具，是你用起来";
+						mes "最顺手的那些。";
+						mes "其实，我还在用当年我还是个";
+						mes "小小学徒厨师时用的旧刀～";
+						next;
+						mes "[乌韦]";
+						mes "哦，说到";
+						mes "工具，";
+						mes "我今天刚收到";
+						mes "几把新锤子。";
+						mes "你想要几把吗？";
+						next;
+						if (checkweight(908,50) == 0) {
+							mes "[乌韦]";
+							mes "嗯……？";
+							mes "你带的东西太多了。";
+							mes "如果你没有空位，";
+							mes "我就没法给你";
+							mes "锤子。快把多余的";
+							mes "东西放进卡普拉仓库～";
+							close;
+						}
+						set ein_cook,19;
+						getitem 614,1; //Golden_Hammer
+						getitem 613,1; //Iron_Hammer
+						next;
+						mes "[乌韦]";
+						mes "好了，我希望";
+						mes "你会喜欢它们～";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 5:
+						mes "[乌韦]";
+						mes "哦……？";
+						mes "那么，随时";
+						mes "欢迎来找";
+						mes "我，只要";
+						mes "你想来，好吗？";
+						close;
+					}
+				}
+			case 2:
+				mes "[乌韦]";
+				mes "艾音布罗克原本是";
+				mes "为支援艾音贝赫的";
+				mes "采矿事业而建的。因为那里";
+				mes "狭小又人满为患，";
+				mes "没有空间在那里建矿石精炼厂。";
+				next;
+				mes "[乌韦]";
+				mes "既然艾音布罗克曾经是";
+				mes "一片空地，就非常适合";
+				mes "建工厂。这是";
+				mes "我祖父很久以前";
+				mes "告诉我的。总之，艾音布罗克很快发展成了一座大都市。";
+				next;
+				mes "[乌韦]";
+				mes "现在人们认为这座";
+				mes "城市从来就不是被规划成";
+				mes "艾音贝赫的附属地。";
+				mes "看到那边的城墙了吗？";
+				mes "它根本没和艾音贝赫连起来！他们一点保护都没有……";
+				next;
+				mes "[乌韦]";
+				mes "就像是政府";
+				mes "对艾音贝赫彻底失去了兴趣。";
+				mes "连那里的矿工都";
+				mes "搬到这里来，在";
+				mes "工厂里工作。但人多了，这座城市并没有更热闹。";
+				next;
+				mes "[乌韦]";
+				mes "艾音布罗克现在也许看起来";
+				mes "现代又热闹，但很快";
+				mes "你就会发现这里没有一丝";
+				mes "温暖或生气。所以……老了可别住在这里。";
+				next;
+				switch(select("那你为什么在这里？:可我喜欢城市生活～")) {
+				case 1:
+					mes "[乌韦]";
+					mes "哎呀，小甜心，";
+					mes "我一直在等";
+					mes "一个人。可是……看起来";
+					mes "那个人不会";
+					mes "再回来了。";
+					next;
+					mes "[乌韦]";
+					mes "哦，不过我们别谈";
+					mes "这个了。下次你";
+					mes "过来，我们聊点";
+					mes "更有趣的，好吗？";
+					close;
+				case 2:
+					mes "[乌韦]";
+					mes "大城市是不错，";
+					mes "但你永远无法享受";
+					mes "赤脚踩过";
+					mes "草地的感觉，";
+					mes "也看不到夜空中";
+					mes "璀璨星辰的壮丽景象。";
+					next;
+					mes "[乌韦]";
+					mes "而且住在城市里的";
+					mes "人有时真是";
+					mes "太拘谨了！我认识";
+					mes "不少看不起";
+					mes "小城镇来的人的家伙。";
+					next;
+					mes "[乌韦]";
+					mes "看到有些人总是";
+					mes "那么无知，真让人难过。";
+					mes "我……我就是";
+					mes "无法相信那些人";
+					mes "竟然这么狭隘！";
+					next;
+					mes "[乌韦]";
+					mes "哦……！";
+					mes "抱歉，我想我";
+					mes "说得有点过头了。";
+					mes "^666666*轻笑*^000000 下次你";
+					mes "过来，我们聊点";
+					mes "更有趣的，好吗？拜拜～";
+					close;
+				}
+			case 3:
+				mes "[乌韦]";
+				mes "哦……？";
+				mes "那么，随时";
+				mes "欢迎来找";
+				mes "我，只要";
+				mes "你想来，好吗？";
+				close;
+			}
+		}
+		else if ((ein_cook < 20) || (ein_cook == 219)) {
+			mes "[乌韦]";
+			mes "哦，欢迎回来。";
+			mes "那么武器锻造";
+			mes "进展得怎么样了？";
+			next;
+			switch(select("聊聊烹饪:聊聊艾音布罗克:聊聊烹饪工具:取消")) {
+			case 1:
+				mes "[乌韦]";
+				mes "哦，烹饪！";
+				mes "那么你想";
+				mes "问我什么……？";
+				next;
+				switch(select("心意:食材:技巧:工具:取消。")) {
+				case 1:
+					mes "[乌韦]";
+					mes "啊，心意。就像锻造一样，";
+					mes "你需要热情和渴望";
+					mes "才能创造出特别的东西。";
+					mes "每个铁匠和厨师都知道";
+					mes "只要有意志和决心";
+					mes "你就能做到任何事。";
+					next;
+					mes "[乌韦]";
+					mes "好了，这就是";
+					mes "我真正想说的";
+					mes "全部了。不过";
+					mes "随时回来";
+					mes "和我聊聊。";
+					switch(rand(1,3)) {
+					case 1: mes "...Ho ho~"; close;
+					case 2: mes "...*Tee Hee~*"; close;
+					case 3: mes "...Behbie~"; close;
+					}
+				case 2:
+					mes "[乌韦]";
+					mes "对初学者来说，";
+					mes "学会挑选";
+					mes "和使用食材";
+					mes "是最重要的";
+					mes "基本功之一。";
+					next;
+					mes "[乌韦]";
+					mes "烹饪就像锻造";
+					mes "因为需要特定的食材";
+					mes "才能做出特别的";
+					mes "物品或料理。你可不能";
+					mes "在真正需要的时候跳过";
+					mes "它们，对吧？对吧！";
+					next;
+					mes "[乌韦]";
+					mes "一旦你下定决心";
+					mes "去做某件事，";
+					mes "就要专心完成它，好吗？";
+					mes "绝不偷工减料，永远";
+					mes "全力以赴做出";
+					mes "最完美的成品～";
+					next;
+					mes "[乌韦]";
+					mes "好了，这真是";
+					mes "一次愉快的谈话。记得";
+					mes "再来看我，好吗？";
+					mes "我会想你的，直到";
+					mes "下次见面～";
+					switch(rand(1,3)) {
+					case 1: mes "...Ho ho~"; close;
+					case 2: mes "...*Tee Hee~*"; close;
+					case 3: mes "...Behbie~"; close;
+					}
+				case 3:
+					mes "[乌韦]";
+					mes "刚开始学习技艺时，";
+					mes "你不能让自己灰心！熟能生巧";
+					mes "你知道的，对吧？但千万别";
+					mes "把技艺不足当作";
+					mes "失败的借口……";
+					next;
+					mes "[乌韦]";
+					mes "努力也是锻造和烹饪中";
+					mes "不可或缺的！那么，";
+					mes "另一方面，如果你付出了";
+					mes "全部努力却没学到任何技艺，你依然会一事无成，对吧？对吧！";
+					next;
+					mes "[乌韦]";
+					mes "关键是要始终";
+					mes "付出百分之百的努力，并";
+					mes "不断提升自己的技艺。";
+					mes "不知不觉间，你就会";
+					mes "成为受人尊敬的大师！";
+					next;
+					mes "[乌韦]";
+					mes "好了，这真是";
+					mes "一次愉快的谈话。记得";
+					mes "再来看我，好吗？";
+					mes "我会想你的，直到";
+					mes "下次见面～";
+					switch(rand(1,3)) {
+					case 1: mes "...Ho ho~"; close;
+					case 2: mes "...*Tee Hee~*"; close;
+					case 3: mes "...Behbie~"; close;
+					}
+				case 4:
+					mes "[乌韦]";
+					mes "如果有更好的工具，";
+					mes "烹饪会稍微";
+					mes "轻松一些，";
+					mes "但也仅此而已。工具本身";
+					mes "并不能让";
+					mes "随便什么人都成为大师。";
+					next;
+					mes "[乌韦]";
+					mes "说到底，最好的";
+					mes "工具，是你用起来";
+					mes "最顺手的那些。";
+					mes "其实，我还在用当年我还是个";
+					mes "小小学徒厨师时用的旧刀～";
+					next;
+					mes "[乌韦]";
+					mes "好了，这真是";
+					mes "一次愉快的谈话。记得";
+					mes "再来看我，好吗？";
+					mes "我会想你的，直到";
+					mes "下次见面～";
+					switch(rand(1,3)) {
+					case 1: mes "...Ho ho~"; close;
+					case 2: mes "...*Tee Hee~*"; close;
+					case 3: mes "...Behbie~"; close;
+					}
+				case 5:
+					mes "[乌韦]";
+					mes "哦……？";
+					mes "那么，随时";
+					mes "欢迎来找";
+					mes "我，只要";
+					mes "你想来，好吗？";
+					close;
+				}
+			case 2:
+				mes "[乌韦]";
+				mes "艾音布罗克原本是";
+				mes "为支援艾音贝赫的";
+				mes "采矿事业而建的。因为那里";
+				mes "狭小又人满为患，";
+				mes "没有空间在那里建矿石精炼厂。";
+				next;
+				mes "[乌韦]";
+				mes "既然艾音布罗克曾经是";
+				mes "一片空地，就非常适合";
+				mes "建工厂。这是";
+				mes "我祖父很久以前";
+				mes "告诉我的。总之，艾音布罗克很快发展成了一座大都市。";
+				next;
+				mes "[乌韦]";
+				mes "现在人们认为这座";
+				mes "城市从来就不是被规划成";
+				mes "艾音贝赫的附属地。";
+				mes "看到那边的城墙了吗？";
+				mes "它根本没和艾音贝赫连起来！他们一点保护都没有……";
+				next;
+				mes "[乌韦]";
+				mes "就像是政府";
+				mes "对艾音贝赫彻底失去了兴趣。";
+				mes "连那里的矿工都";
+				mes "搬到这里来，在";
+				mes "工厂里工作。但人多了，这座城市并没有更热闹。";
+				next;
+				mes "[乌韦]";
+				mes "艾音布罗克现在也许看起来";
+				mes "现代又热闹，但很快";
+				mes "你就会发现这里没有一丝";
+				mes "温暖或生气。所以……老了可别住在这里。";
+				next;
+				switch(select("那你为什么在这里？:可我喜欢城市生活～")) {
+				case 1:
+					mes "[乌韦]";
+					mes "哎呀，小甜心，";
+					mes "我一直在等一个人。可是……看起来那个人不会再回来了。";
+					next;
+					mes "[乌韦]";
+					mes "哦，不过我们别谈这个了。下次你过来，我们聊点更有趣的，好吗？拜拜～";
+					close;
+				case 2:
+					mes "[乌韦]";
+					mes "大城市是不错，但你永远无法享受赤脚踩过草地的感觉，也看不到夜里清澈的星空。";
+					next;
+					mes "[乌韦]";
+					mes "而且住在城市里的人有时真是太拘谨了！我认识不少看不起小城镇来的人的家伙。";
+					next;
+					mes "[乌韦]";
+					mes "看到有些人总是那么无知，真让人难过。我……我就是无法相信人们竟然这么狭隘！";
+					next;
+					mes "[乌韦]";
+					mes "哦……！";
+					mes "抱歉，我想我说得有点过头了。^666666*轻笑*^000000 下次你过来，我们聊点更有趣的，好吗？拜拜～";
+					close;
+				}
+			case 3:
+				mes "[乌韦]";
+				mes "烹饪工具？";
+				mes "嗯，它们通常";
+				mes "是用^0000FF朱玮乐^000000做的，";
+				mes "那是一种由矿物类魔物";
+				mes "掉落的结晶。";
+				next;
+				mes "[乌韦]";
+				mes "朱玮乐太软了，";
+				mes "做不了武器，但";
+				mes "它导热性非常好";
+				mes "所以非常适合制作";
+				mes "烹饪工具！*嘻嘻～*";
+				next;
+				mes "[乌韦]";
+				mes "这倒提醒了我……";
+				mes "我很快需要做一些新的烹饪工具。你能帮我个忙，分我一些材料吗？求求你啦～";
+				next;
+				mes "[乌韦]";
+				mes "如果你不介意，";
+				mes "能给我";
+				mes "30个^0000FF朱玮乐^000000和4个^0000FF大杰勒比结晶^000000吗？";
+				mes "那么，我用1个煤矿和你换这些。怎么样？";
+				next;
+				switch(select("好的。:不用了，谢谢。")) {
+				case 1:
+					if ((countitem(7312) > 29) && (countitem(7126) > 3)) {
+						delitem 7312,30; //Jubilee
+						delitem 7126,4; //Large_Jellopy
+						getitem 1003,1; //Coal
+						mes "[乌韦]";
+						mes "万岁！";
+						mes "非常";
+						mes "^EEA9B8太^000000感谢你了！";
+						close;
+					}
+					else {
+						mes "[乌韦]";
+						mes "嗯……？";
+						mes "你的数量";
+						mes "不够吗？";
+						next;
+						mes "[乌韦]";
+						mes "好吧，别";
+						mes "担心。你可以慢慢来，";
+						mes "什么时候方便";
+						mes "再把那些东西";
+						mes "带来就好，好吗？";
+						close;
+					}
+				case 2:
+					mes "[乌韦]";
+					mes "我明白了。";
+					mes "你现在可能还没有";
+					mes "我要的那些朱玮乐";
+					mes "和大杰勒比结晶，";
+					mes "总之。不过如果你拿到了，会再来找我吗，小可爱？";
+					close;
+				}
+			case 4:
+				mes "[乌韦]";
+				mes "哦……？";
+				mes "那么，随时";
+				mes "欢迎来找";
+				mes "我，只要";
+				mes "你想来，好吗？";
+				close;
+			}
+		}
+		else if (ein_cook > 299) {
+			if (Class == Job_Whitesmith) {
+				mes "[乌韦]";
+				mes "哦……！";
+				mes "恭喜！";
+				mes "你终于成为";
+				mes "可爱的神工匠了！";
+				next;
+				mes "[乌韦]";
+				mes "Mmmm...";
+				mes "我知道！";
+				mes "我们来庆祝吧！";
+				mes "来，小甜心，";
+				mes "尝尝这些";
+				mes "我刚烤的饼干～";
+				next;
+				set ein_cook,9;
+				getitem 538,5; //Well_Baked_Cookie
+				mes "[乌韦]";
+				mes "好，好好享用！";
+				mes "希望你";
+				mes "锻造得开心！";
+				close;
+			}
+			else {
+				mes "[乌韦]";
+				mes "嗯？";
+				mes "哦，是你呀～";
+				mes "抱歉，我刚才";
+				mes "在想一些";
+				mes "事情，可现在";
+				mes "我把思路给忘了。";
+				set ein_cook,219;
+				next;
+				mes "[乌韦]";
+				mes "我刚才想";
+				mes "说什么来着？嗯，我";
+				mes "记不太清了。算了，";
+				mes "回头见啦，小可爱~";
+				close;
+			}
+		}
+	}
+	else {
+		set .@aaa,ein_cook % 2;
+		if (.@aaa == 1) {
+			set .@bbb,ein_cook;
+			if (.@bbb > 99) {
+				set .@bbb,.@bbb-100;
+				if (.@bbb > 99) {
+					set .@bbb,.@bbb-100;
+					if (.@bbb > 99) {
+						set .@ccc,3;
+					}
+					else {
+						set .@ccc,2;
+					}
+				}
+				else {
+					set .@ccc,1;
+				}
+			}
+			else {
+				set .@ccc,0;
+			}
+			if (.@ccc < 3) {
+				mes "[乌韦]";
+				mes "嗯……？";
+				mes "我从来不会忘记见过的脸，";
+				mes "但总觉得";
+				mes "我们以前在哪儿见过……";
+				next;
+				if (.@ccc == 0) {
+					set ein_cook,ein_cook+300;
+				}
+				else if (.@ccc == 2) {
+					set ein_cook,ein_cook+100;
+				}
+				mes "[乌韦]";
+				mes "啊……！";
+				mes "我想起来了！";
+				mes "" + strcharinfo(0) + "！";
+				mes "对，我现在记起你了。";
+				mes "决定转生了啊？";
+				next;
+				mes "[乌韦]";
+				mes "是什么风把";
+				if (Sex == SEX_MALE) {
+					mes "你这^EEA9B8淘气小子^000000吹来了？";
+				}
+				else {
+					mes "你这^EEA9B8淘气丫头^000000吹来了？";
+				}
+				next;
+			}
+			else if (.@ccc == 3) {
+				mes "[乌韦]";
+				mes "啊，又见面了，";
+				mes "可爱的小冒险家。";
+				mes "有什么我能帮你的吗？";
+				next;
+			}
+			switch(select("询问艾音布罗克。:询问烹饪。:取消。")) {
+			case 1:
+				mes "[乌韦]";
+				mes "艾音布罗克原本是";
+				mes "为支持艾音贝赫的";
+				mes "采矿事业而建。因为那里";
+				mes "地方小、人口又拥挤，";
+				mes "根本没有空地建矿石精炼工厂。";
+				next;
+				mes "[乌韦]";
+				mes "艾音布罗克以前是";
+				mes "一片空地，用来建工厂";
+				mes "再合适不过了。这是";
+				mes "我祖父很久以前告诉我";
+				mes "的。总之，艾音布罗克很快发展成了大城市。";
+				next;
+				mes "[乌韦]";
+				mes "现在人们认为这座";
+				mes "城市从一开始就";
+				mes "不只是艾音贝赫的延伸。";
+				mes "看到那边的城墙了吗？";
+				mes "它根本没和艾音贝赫连起来！他们得不到任何保护……";
+				next;
+				mes "[乌韦]";
+				mes "就好像政府";
+				mes "对艾音贝赫完全失去了兴趣。";
+				mes "连那里的矿工都";
+				mes "搬到这里来，在";
+				mes "工厂里工作了。可是人多了，这座城市却并没有更有生气。";
+				next;
+				mes "[乌韦]";
+				mes "艾音布罗克现在也许看起来";
+				mes "很现代、很热闹，但很快";
+				mes "你就会发现这里看不到";
+				mes "一丝温暖或生气。所以……老了可别住在这儿。";
+				next;
+				switch(select("那你为什么在这里？:我不会的。谢谢你的忠告。")) {
+				case 1:
+					mes "[乌韦]";
+					mes "这个嘛，我有些";
+					mes "珍贵的回忆，";
+					mes "关于这个地方。曾经，这里住着";
+					mes "一个住在这里的人，他";
+					mes "对我来说就像父亲一样。";
+					next;
+					mes "[乌韦]";
+					mes "哦，不过我猜";
+					mes "你不想听";
+					mes "这些吧。下次你";
+					mes "来的时候，我们聊点";
+					mes "更有趣的，好吗？";
+					mes "那么再见了，小可爱~";
+					close;
+				case 2:
+					mes "[乌韦]";
+					mes "哦，那真是";
+					mes "个好决定，";
+					mes "小甜心！哦，你们";
+					mes "这些可爱的小冒险家";
+					mes "真是又珍贵又惹人爱。";
+					mes "^333333*嘻嘻嘻~*^000000";
+					next;
+					mes "[乌韦]";
+					mes "好啦，这真是";
+					mes "一次愉快的交谈。下次";
+					mes "再来玩，好吗？";
+					mes "我会想你的，直到";
+					mes "下次见面~";
+					close;
+				}
+			case 2:
+				mes "[乌韦]";
+				mes "哦，烹饪！";
+				mes "那么你想问我";
+				mes "什么呢……？";
+				next;
+				switch(select("心意:材料:技巧:工具:取消。")) {
+				case 1:
+					mes "[乌韦]";
+					mes "啊，心意。就像锻造一样，";
+					mes "需要热情和渴望";
+					mes "才能做出特别的东西。";
+					mes "每个铁匠和厨师都知道，";
+					mes "只要有";
+					mes "意志和投入，你什么都能做到。";
+					next;
+					mes "[乌韦]";
+					mes "好啦，这就是";
+					mes "我能说的";
+					mes "全部了。不过";
+					mes "随时回来";
+					mes "跟我聊聊吧。";
+					break;
+				case 2:
+					mes "[乌韦]";
+					mes "对初学者来说，";
+					mes "学会挑选";
+					mes "和使用材料";
+					mes "是最重要的";
+					mes "基本功之一。";
+					next;
+					mes "[乌韦]";
+					mes "烹饪就像锻造，";
+					mes "因为特定的材料";
+					mes "是制作特色";
+					mes "物品或菜肴所必需的。你不能";
+					mes "在真正需要时跳过它们，";
+					mes "对吧？对！";
+					next;
+					mes "[乌韦]";
+					mes "一旦你下定决心";
+					mes "要做一件事，";
+					mes "就要专心把它做完，好吗？";
+					mes "绝不能偷工减料，要始终";
+					mes "全力以赴，做出";
+					mes "最出色的成品~";
+					next;
+					mes "[乌韦]";
+					mes "好啦，这真是";
+					mes "一次愉快的交谈。下次";
+					mes "再来玩，好吗？";
+					mes "我会想你的，直到";
+					mes "下次见面~";
+					break;
+				case 3:
+					mes "[乌韦]";
+					mes "刚开始学习";
+					mes "技能时，可不能灰心！熟能生巧";
+					mes "嘛，你知道吗？但千万别";
+					mes "把技术不足当作";
+					mes "失败的借口……";
+					next;
+					mes "[乌韦]";
+					mes "努力也是锻造和烹饪中";
+					mes "不可或缺的！那么，";
+					mes "反过来说，如果你付出了";
+					mes "全部努力，却没学会任何技巧，还是很难有进展，对吧？对！";
+					next;
+					mes "[乌韦]";
+					mes "关键是要始终";
+					mes "付出百分之百的努力，并";
+					mes "致力于提升自己的技巧。";
+					mes "不知不觉间，你就会";
+					mes "成为受人尊敬的大师！";
+					next;
+					mes "[乌韦]";
+					mes "好啦，这真是";
+					mes "一次愉快的交谈。下次";
+					mes "再来玩，好吗？";
+					mes "我会想你的，直到";
+					mes "下次见面~";
+					break;
+				case 4:
+					mes "[乌韦]";
+					mes "烹饪会稍微";
+					mes "容易些，如果你有";
+					mes "更好的工具可用，";
+					mes "但也仅此而已。工具本身";
+					mes "并不能把随便什么人";
+					mes "变成大师。";
+					next;
+					mes "[乌韦]";
+					mes "说到底，最好的";
+					mes "工具，就是你用起来";
+					mes "最顺手的那件。";
+					mes "其实，我现在还在用当年";
+					mes "还是个小厨子时用的旧刀~";
+					next;
+					mes "[乌韦]";
+					mes "好啦，这真是";
+					mes "一次愉快的交谈。下次";
+					mes "再来玩，好吗？";
+					mes "我会想你的，直到";
+					mes "下次见面~";
+					break;
+				case 5:
+					mes "[乌韦]";
+					mes "哦……？";
+					mes "这个嘛，";
+					mes "你随时";
+					mes "都可以来";
+					mes "找我，好吗？";
+					close;
+				}
+				switch(rand(1,3)) {
+				case 1: mes "...Ho ho~"; break;
+				case 2: mes "...*Tee Hee~*"; break;
+				case 3: mes "...Behbie~";
+				}
+				close;
+
+			case 3:
+				mes "[乌韦]";
+				mes "哦……？";
+				mes "这个嘛，";
+				mes "你随时";
+				mes "都可以来";
+				mes "找我，好吗？";
+				close;
+			}
+		}
+		if (ein_cook > 999) {
+			set .@eee,ein_cook-1000;
+			if (.@eee > 199) {
+				mes "[乌韦]";
+				mes "啊，又见面了，";
+				mes "可爱的小冒险家。";
+				mes "有什么我能帮你的吗？";
+				next;
+				switch(select("谈谈艾音布罗克。:请他锻造武器。:谈谈烹饪。:取消。")) {
+				case 1:
+					mes "[乌韦]";
+					mes "艾音布罗克原本是";
+					mes "为支持艾音贝赫的";
+					mes "采矿事业而建。因为那里";
+					mes "地方小、人口又拥挤，";
+					mes "根本没有空地建矿石精炼工厂。";
+					next;
+					mes "[乌韦]";
+					mes "艾音布罗克以前是";
+					mes "一片空地，用来建工厂";
+					mes "再合适不过了。这是";
+					mes "我祖父很久以前告诉我";
+					mes "的。总之，艾音布罗克很快发展成了大城市。";
+					next;
+					mes "[乌韦]";
+					mes "现在人们认为这座";
+					mes "城市从一开始就";
+					mes "不只是艾音贝赫的延伸。";
+					mes "看到那边的城墙了吗？";
+					mes "它根本没和艾音贝赫连起来！他们得不到任何保护……";
+					next;
+					mes "[乌韦]";
+					mes "就好像政府";
+					mes "对艾音贝赫完全失去了兴趣。";
+					mes "连那里的矿工都";
+					mes "搬到这里来，在";
+					mes "工厂里工作了。可是人多了，这座城市却并没有更有生气。";
+					next;
+					mes "[乌韦]";
+					mes "艾音布罗克现在也许看起来";
+					mes "很现代、很热闹，但很快";
+					mes "你就会发现这里看不到";
+					mes "一丝温暖或生气。所以……老了可别住在这儿。";
+					next;
+					switch(select("那你为什么在这里？:我不会的。谢谢你的忠告。")) {
+					case 1:
+						mes "[乌韦]";
+						mes "这个嘛，我有些";
+						mes "珍贵的回忆，";
+						mes "关于这个地方。曾经，这里住着";
+						mes "一个住在这里的人，他";
+						mes "对我来说就像父亲一样。";
+						next;
+						mes "[乌韦]";
+						mes "哦，不过我猜";
+						mes "你不想听";
+						mes "这些吧。下次你";
+						mes "来的时候，我们聊点";
+						mes "更有趣的，好吗？";
+						mes "那么再见了，小可爱~";
+						close;
+					case 2:
+						mes "[乌韦]";
+						mes "哦，那真是";
+						mes "个好决定，";
+						mes "小甜心！哦，你们";
+						mes "这些可爱的小冒险家";
+						mes "真是又珍贵又惹人爱。";
+						mes "^333333*嘻嘻嘻~*^000000";
+						next;
+						mes "[乌韦]";
+						mes "好啦，这真是";
+						mes "一次愉快的交谈。下次";
+						mes "再来玩，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面~";
+						close;
+					}
+				case 2:
+					mes "[乌韦]";
+					mes "Well...";
+					mes "其实我只是";
+					mes "做些锻造活儿，";
+					mes "用来打造自己的";
+					mes "烹饪工具。";
+					next;
+					mes "[乌韦]";
+					mes "哦，我明白";
+					mes "总得有人";
+					mes "去和怪物战斗，";
+					mes "但我可不是";
+					mes "适合委托锻造武器的人。";
+					mes "我……是坚定的和平主义者~";
+					next;
+					mes "[乌韦]";
+					mes "你只要四处";
+					mes "稍微找一找，";
+					mes "我相信你一定能";
+					mes "找到一位愿意";
+					mes "为你锻造";
+					mes "好武器的铁匠~";
+					close;
+				case 3:
+					mes "[乌韦]";
+					mes "哦，烹饪！";
+					mes "那么你想问我";
+					mes "什么呢……？";
+					next;
+					switch(select("心意:材料:技巧:工具:取消。")) {
+					case 1:
+						mes "[乌韦]";
+						mes "啊，心意。就像锻造一样，";
+						mes "需要热情和渴望";
+						mes "才能做出特别的东西。";
+						mes "每个铁匠和厨师都知道，";
+						mes "只要有";
+						mes "意志和投入，你什么都能做到。";
+						next;
+						mes "[乌韦]";
+						mes "好啦，这就是";
+						mes "我能说的";
+						mes "全部了。不过";
+						mes "随时回来";
+						mes "跟我聊聊吧。";
+						break;
+					case 2:
+						mes "[乌韦]";
+						mes "对初学者来说，";
+						mes "学会挑选";
+						mes "和使用材料";
+						mes "是最重要的";
+						mes "基本功之一。";
+						next;
+						mes "[乌韦]";
+						mes "烹饪就像锻造，";
+						mes "因为特定的材料";
+						mes "是制作特色";
+						mes "物品或菜肴所必需的。你不能";
+						mes "在真正需要时跳过它们，";
+						mes "对吧？对！";
+						next;
+						mes "[乌韦]";
+						mes "一旦你下定决心";
+						mes "要做一件事，";
+						mes "就要专心把它做完，好吗？";
+						mes "绝不能偷工减料，要始终";
+						mes "全力以赴，做出";
+						mes "最出色的成品~";
+						next;
+						mes "[乌韦]";
+						mes "好啦，这真是";
+						mes "一次愉快的交谈。下次";
+						mes "再来玩，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面~";
+						break;
+					case 3:
+						mes "[乌韦]";
+						mes "刚开始学习";
+						mes "技能时，可不能灰心！熟能生巧";
+						mes "嘛，你知道吗？但千万别";
+						mes "把技术不足当作";
+						mes "失败的借口……";
+						next;
+						mes "[乌韦]";
+						mes "努力也是锻造和烹饪中";
+						mes "不可或缺的！那么，";
+						mes "反过来说，如果你付出了";
+						mes "全部努力，却没学会任何技巧，还是很难有进展，对吧？对！";
+						next;
+						mes "[乌韦]";
+						mes "关键是要始终";
+						mes "付出百分之百的努力，并";
+						mes "致力于提升自己的技巧。";
+						mes "不知不觉间，你就会";
+						mes "成为受人尊敬的大师！";
+						next;
+						mes "[乌韦]";
+						mes "好啦，这真是";
+						mes "一次愉快的交谈。下次";
+						mes "再来玩，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面~";
+						break;
+					case 4:
+						mes "[乌韦]";
+						mes "烹饪会稍微";
+						mes "容易些，如果你有";
+						mes "更好的工具可用，";
+						mes "但也仅此而已。工具本身";
+						mes "并不能把随便什么人";
+						mes "变成大师。";
+						next;
+						mes "[乌韦]";
+						mes "说到底，最好的";
+						mes "工具，就是你用起来";
+						mes "最顺手的那件。";
+						mes "其实，我现在还在用当年";
+						mes "还是个小厨子时用的旧刀~";
+						next;
+						mes "[乌韦]";
+						mes "好啦，这真是";
+						mes "一次愉快的交谈。下次";
+						mes "再来玩，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面~";
+						break;
+					case 5:
+						mes "[乌韦]";
+						mes "哦……？";
+						mes "这个嘛，";
+						mes "你随时";
+						mes "都可以来";
+						mes "找我，好吗？";
+						close;
+					}
+					switch(rand(1,3)) {
+					case 1: mes "...Ho ho~"; close;
+					case 2: mes "...*Tee Hee~*"; close;
+					case 3: mes "...Behbie~"; close;
+					}
+
+				case 4:
+					mes "[乌韦]";
+					mes "那就这样吧，";
+					mes "小甜心。";
+					mes "保重哦~";
+					mes "呵呵呵呵呵~";
+					close;
+				}
+			}
+			else if (.@eee > 99) {
+				mes "[乌韦]";
+				mes "哦，你好你好~";
+				mes "我们好久";
+				mes "没聊过了，";
+				mes "可爱的小冒险家~";
+				next;
+				mes "[乌韦]";
+				mes "那么，小甜心，";
+				mes "上次我拜托你的";
+				mes "那件小事，";
+				mes "办得怎么样了？";
+				mes "你是不是已经忘了";
+				mes "那6个大型杰勒比结晶？";
+				next;
+				switch(select("谈谈艾音布罗克。:请他锻造武器。:把材料交给他。:取消。")) {
+				case 1:
+					mes "[乌韦]";
+					mes "艾音布罗克原本是";
+					mes "为支持艾音贝赫的";
+					mes "采矿事业而建。因为那里";
+					mes "地方小、人口又拥挤，";
+					mes "根本没有空地建矿石精炼工厂。";
+					next;
+					mes "[乌韦]";
+					mes "艾音布罗克以前是";
+					mes "一片空地，用来建工厂";
+					mes "再合适不过了。这是";
+					mes "我祖父很久以前告诉我";
+					mes "的。总之，艾音布罗克很快发展成了大城市。";
+					next;
+					mes "[乌韦]";
+					mes "现在人们认为这座";
+					mes "城市从一开始就";
+					mes "不只是艾音贝赫的延伸。";
+					mes "看到那边的城墙了吗？";
+					mes "它根本没和艾音贝赫连起来！他们得不到任何保护……";
+					next;
+					mes "[乌韦]";
+					mes "就好像政府";
+					mes "对艾音贝赫完全失去了兴趣。";
+					mes "连那里的矿工都";
+					mes "搬到这里来，在";
+					mes "工厂里工作了。可是人多了，这座城市却并没有更有生气。";
+					next;
+					mes "[乌韦]";
+					mes "艾音布罗克现在也许看起来";
+					mes "很现代、很热闹，但很快";
+					mes "你就会发现这里看不到";
+					mes "一丝温暖或生气。所以……老了可别住在这儿。";
+					next;
+					switch(select("那你为什么在这里？:我不会的。谢谢你的忠告。")) {
+					case 1:
+						mes "[乌韦]";
+						mes "这个嘛，我有些";
+						mes "珍贵的回忆，";
+						mes "关于这个地方。曾经，这里住着";
+						mes "一个住在这里的人，他";
+						mes "对我来说就像父亲一样。";
+						next;
+						mes "[乌韦]";
+						mes "哦，不过我猜";
+						mes "你不想听";
+						mes "这些吧。下次你";
+						mes "来的时候，我们聊点";
+						mes "更有趣的，好吗？";
+						mes "那么再见了，小可爱~";
+						close;
+					case 2:
+						mes "[乌韦]";
+						mes "哦，那真是";
+						mes "个好决定，";
+						mes "小甜心！哦，你们";
+						mes "这些可爱的小冒险家";
+						mes "真是又珍贵又惹人爱。";
+						mes "^333333*嘻嘻嘻~*^000000";
+						next;
+						mes "[乌韦]";
+						mes "好啦，这真是";
+						mes "一次愉快的交谈。下次";
+						mes "再来玩，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面~";
+						close;
+					}
+				case 2:
+					mes "[乌韦]";
+					mes "Well...";
+					mes "其实我只是";
+					mes "做些锻造活儿，";
+					mes "用来打造自己的";
+					mes "烹饪工具。";
+					next;
+					mes "[乌韦]";
+					mes "哦，我明白";
+					mes "总得有人";
+					mes "去和怪物战斗，";
+					mes "但我可不是";
+					mes "适合委托锻造武器的人。";
+					mes "我……是坚定的和平主义者~";
+					next;
+					mes "[乌韦]";
+					mes "你只要四处";
+					mes "稍微找一找，";
+					mes "我相信你一定能";
+					mes "找到一位愿意";
+					mes "为你锻造";
+					mes "好武器的铁匠~";
+					close;
+				case 3:
+					if (countitem(7126) > 5) {
+						mes "[乌韦]";
+						mes "^EEA9B8非常感谢^000000你！";
+						mes "这是我答应给你的煤炭~";
+						delitem 7126,6; //Large_Jellopy
+						set ein_cook,ein_cook+100;
+						getitem 1003,1; //Coal
+						next;
+					}
+					else {
+						mes "[乌维]";
+						mes "咦……？";
+						if (countitem(7126) == 0) {
+							mes "你带来了";
+							mes "一个都没有……？";
+						}
+						else {
+							mes "这还不够";
+							mes "大杰勒比结晶……！";
+						}
+						mes "下次一定要";
+						mes "带来 6 个大杰勒比结晶，";
+						mes "好吗？别忘了哦，小可爱~";
+						close;
+					}
+					mes "[乌维]";
+					mes "我不能把烹饪的一切都教给你，但我会给初学者一些好建议。";
+					mes "希望你能认真听，甜心";
+					mes "宝贝。那么你想";
+					mes "多听哪方面的？嗯……？";
+					next;
+					switch(select("心:材料:技巧:工具:取消。")) {
+					case 1:
+						mes "[乌维]";
+						mes "啊，心。就像锻造一样，";
+						mes "需要热情与渴望";
+						mes "才能创造出特别的东西。";
+						mes "每个铁匠和厨师都知道";
+						mes "只要有意志和投入，你就能";
+						mes "做到任何事。";
+						next;
+						mes "[乌维]";
+						mes "好了，我要说的";
+						mes "就这些了。";
+						mes "不过你随时";
+						mes "都可以回来";
+						mes "和我聊聊。";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 2:
+						mes "[乌维]";
+						mes "对初学者来说，";
+						mes "学会挑选";
+						mes "和使用食材";
+						mes "是最";
+						mes "重要的基本功之一。";
+						next;
+						mes "[乌维]";
+						mes "烹饪就像锻造";
+						mes "因为制作特殊的";
+						mes "物品或菜肴需要";
+						mes "特定食材。你不能";
+						mes "真需要时就跳过";
+						mes "它们，对吧？对吧！";
+						next;
+						mes "[乌维]";
+						mes "一旦你下定";
+						mes "决心要做一件事，";
+						mes "就专注把它做完，好吗？";
+						mes "绝不偷工减料，永远";
+						mes "全力以赴做出";
+						mes "最好的成品~";
+						next;
+						mes "[乌维]";
+						mes "好了，这真是";
+						mes "一次愉快的交谈。记得";
+						mes "再来玩，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面~";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 3:
+						mes "[乌维]";
+						mes "刚开始学";
+						mes "技艺时，可不能灰心！熟能生";
+						mes "巧，你知道吗？但千万别";
+						mes "拿自己技术不足当";
+						mes "借口，万一失败了的话……";
+						next;
+						mes "[乌维]";
+						mes "努力也是锻造和烹饪中";
+						mes "不可或缺的一环！那么，";
+						mes "另一方面，如果你";
+						mes "尽全力却没学到任何技术，那还是很难有成就，对吧？对吧！";
+						next;
+						mes "[乌维]";
+						mes "关键是要永远";
+						mes "付出百分之百的努力，";
+						mes "不断提升自己的技术。";
+						mes "不知不觉间，你就会";
+						mes "成为受人尊敬的大师！";
+						next;
+						mes "[乌维]";
+						mes "好了，这真是";
+						mes "一次愉快的交谈。记得";
+						mes "再来玩，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面~";
+						switch(rand(1,3)) {
+						case 1: mes "Hohohohoho."; close;
+						case 2: mes "嗯呵呵呵呵。*"; close;
+						case 3: mes "Umho."; close;
+						}
+					case 4:
+						mes "[乌维]";
+						mes "烹饪会稍微";
+						mes "轻松些，如果";
+						mes "有更好的工具用，";
+						mes "但也就仅此而已。工具";
+						mes "本身并不能让";
+						mes "谁都能成为大师。";
+						next;
+						mes "[乌维]";
+						mes "说到底，最好的";
+						mes "工具就是你用起来";
+						mes "最顺手的那把。";
+						mes "其实，我现在还在用当年我当";
+						mes "小小见习厨师时用的旧刀~";
+						next;
+						mes "[乌维]";
+						mes "好了，这真是";
+						mes "一次愉快的交谈。记得";
+						mes "再来玩，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面~";
+						switch(rand(1,3)) {
+						case 1: mes "...Ho ho~"; close;
+						case 2: mes "...*Tee Hee~*"; close;
+						case 3: mes "...Behbie~"; close;
+						}
+					case 5:
+						mes "[乌维]";
+						mes "那么好吧，";
+						mes "甜心宝贝。";
+						mes "保重~";
+						mes "呵呵呵呵呵~";
+						close;
+					}
+					break;
+				case 4:
+					mes "[乌维]";
+					mes "那么好吧，";
+					mes "甜心宝贝。";
+					mes "保重~";
+					mes "呵呵呵呵呵~";
+					close;
+				}
+			}
+			else {
+				mes "[乌维]";
+				mes "你好呀，小可爱~";
+				mes "有什么我能帮你的吗？";
+				next;
+				switch(select("聊聊艾音布罗克。:请他锻造武器。:师父，我想学烹饪。:取消。")) {
+				case 1:
+					mes "[乌维]";
+					mes "艾音布罗克原本是";
+					mes "为了支援艾音贝赫的";
+					mes "采矿事业而建的。因为那里";
+					mes "地方小又挤满了人，";
+					mes "那边没有空地可以建矿石精炼工厂。";
+					next;
+					mes "[乌维]";
+					mes "因为艾音布罗克过去是";
+					mes "一片空地，非常适合";
+					mes "修建工厂。那是";
+					mes "我祖父很久以前";
+					mes "很久以前的事了。总之，艾音布罗克很快就发展成了一座大都市。";
+					next;
+					mes "[乌维]";
+					mes "现在人们认为这座";
+					mes "城市从来就不是";
+					mes "只是艾音贝赫的延伸。";
+					mes "看到那边的城墙了吗？";
+					mes "它和艾音贝赫根本没有连起来！他们一点保护都没有……";
+					next;
+					mes "[乌维]";
+					mes "就好像政府";
+					mes "对艾音贝赫彻底失去了兴趣。";
+					mes "就连那里的矿工也";
+					mes "搬到这里，在";
+					mes "工厂里工作。但人变多了，这座城市却没有变得更有生气。";
+					next;
+					mes "[乌维]";
+					mes "艾音布罗克如今也许看起来现代";
+					mes "又令人兴奋，但很快";
+					mes "你就会发现这里没有一丝";
+					mes "温暖或生机。所以……老了可别住在这里。";
+					next;
+					switch(select("那你为什么在这里？:我不会的。谢谢你的忠告。")) {
+					case 1:
+						mes "[乌维]";
+						mes "嗯，我对这";
+						mes "个地方有些";
+						mes "珍贵的回忆。从前，这里";
+						mes "曾有个住在这里的人，";
+						mes "对我就像父亲一样。";
+						next;
+						mes "[乌维]";
+						mes "哦，不过我想";
+						mes "你不想听";
+						mes "这些。下次你";
+						mes "再来坐坐，我们聊聊";
+						mes "更有趣的事，好吗？";
+						mes "先再见啦，小可爱~";
+						close;
+					case 2:
+						mes "[乌维]";
+						mes "哦，那真是";
+						mes "一个明智的决定，";
+						mes "甜心宝贝！哦，你们";
+						mes "可爱的冒险者们";
+						mes "真是又珍贵又可爱。";
+						mes "^333333*嘿嘿嘿~*^000000";
+						next;
+						mes "[乌维]";
+						mes "好了，这真是";
+						mes "一次愉快的交谈。记得";
+						mes "再来玩，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面~";
+						close;
+					}
+				case 2:
+					mes "[乌维]";
+					mes "Well...";
+					mes "其实我只是";
+					mes "做些锻冶的工作";
+					mes "来打造我自己的";
+					mes "烹饪工具。";
+					next;
+					mes "[乌维]";
+					mes "哦，我明白";
+					mes "有人需要";
+					mes "去对抗怪物，";
+					mes "但我可不是适合";
+					mes "去锻造武器。";
+					mes "我……是个彻底的和平主义者~";
+					next;
+					mes "[乌维]";
+					mes "就四处";
+					mes "转转，用不了";
+					mes "多久，我相信你会";
+					mes "找到一位铁匠";
+					mes "愿意为你锻造";
+					mes "一把好武器~";
+					close;
+				case 3:
+					mes "[乌维]";
+					mes "嗯……？";
+					mes "你刚刚";
+					mes "说你想";
+					mes "想学";
+					mes "烹饪的艺术？";
+					next;
+					mes "[乌维]";
+					mes "抱歉，我没办法";
+					mes "真正开设烹饪";
+					mes "课程。不过我会";
+					mes "给有心的初学者";
+					mes "一些好建议。";
+					next;
+					mes "[乌维]";
+					mes "Now...";
+					mes "至于你的学费";
+					mes "我需要——天哪，";
+					mes "要说的实在太多了。";
+					mes "东西。拿些纸，";
+					mes "再拿支笔来记这份清单……";
+					next;
+					set ein_cook,ein_cook+100;
+					mes "[乌维]";
+					mes "开玩笑的！";
+					mes "^333333*偷笑~*^000000 我不需要";
+					mes "不需要太多材料就能做";
+					mes "烹饪器具。带";
+					mes "6 个 ^0000FF大杰勒比结晶^000000。就这样！";
+					next;
+					mes "[乌维]";
+					mes "作为回报，我会给你";
+					mes "1 个煤炭，还有一些";
+					mes "给新手的烹饪建议。";
+					mes "这些建议我都是免费给";
+					mes "我那些锻冶同行的，不过……";
+					next;
+					mes "[乌维]";
+					mes "你 ^EEA9B8为什么不^000000";
+					mes "当个铁匠呢？";
+					mes "我对那方面";
+					mes "可自信多了。^333333*嘿嘿~*^000000";
+					next;
+					mes "[乌维]";
+					mes "那我就";
+					mes "一直在这里";
+					mes "等你";
+					mes "回来。";
+					switch(rand(1,3)) {
+					case 1: mes "...Ho ho~"; close;
+					case 2: mes "...*Tee Hee~*"; close;
+					case 3: mes "...Behbie~"; close;
+					}
+				case 4:
+					mes "[乌维]";
+					mes "保重，";
+					mes "可爱的小冒险者！";
+					mes "呵呵呵！";
+					close;
+				}
+			}
+		}
+		else if (ein_cook == 0) {
+			mes "[乌维]";
+			mes "烹饪真是件乐事~！";
+			mes "那香气、那滋味，还有那种纯粹的 ^EEA9B8饱足^000000 感……";
+			next;
+			switch(select("呃，这里不是锻炉吗？:别理他。")) {
+			case 1:
+				mes "[乌维]";
+				set ein_cook,1000;
+				mes "这里是锻炉吗？";
+				mes "哦，甜心宝贝，";
+				mes "你以前没来过";
+				mes "这里吧？";
+				next;
+				mes "[乌维]";
+				mes "我叫乌维·克莱恩";
+				mes "这就是我的锻炉~！我是";
+				mes "最优雅的铁匠";
+				mes "也是秀发兹发德共和国";
+				mes "最棒的厨师~";
+				next;
+				mes "[乌维]";
+				mes "那么，我该怎么";
+				mes "帮你呢，你这位";
+				mes "可爱到不行的";
+				if (Sex == SEX_MALE) {
+					mes "壮汉？";
+				}
+				else {
+					mes "淑女？";
+				}
+				next;
+				switch(select("聊聊艾音布罗克。:请他锻造武器。:师父，我想学烹饪。:取消。")) {
+				case 1:
+					mes "[乌维]";
+					mes "艾音布罗克原本是";
+					mes "为了支援艾音贝赫的";
+					mes "采矿事业而建的。因为那里";
+					mes "地方小又挤满了人，";
+					mes "那边没有空地可以建矿石精炼工厂。";
+					next;
+					mes "[乌维]";
+					mes "因为艾音布罗克过去是";
+					mes "一片空地，非常适合";
+					mes "修建工厂。那是";
+					mes "我祖父很久以前";
+					mes "很久以前的事了。总之，艾音布罗克很快就发展成了一座大都市。";
+					next;
+					mes "[乌维]";
+					mes "现在人们认为这座";
+					mes "城市从来就不是";
+					mes "只是艾音贝赫的延伸。";
+					mes "看到那边的城墙了吗？";
+					mes "它和艾音贝赫根本没有连起来！他们一点保护都没有……";
+					next;
+					mes "[乌维]";
+					mes "就好像政府";
+					mes "对艾音贝赫彻底失去了兴趣。";
+					mes "就连那里的矿工也";
+					mes "搬到这里，在";
+					mes "工厂里工作。但人变多了，这座城市却没有变得更有生气。";
+					next;
+					mes "[乌维]";
+					mes "艾音布罗克如今也许看起来现代";
+					mes "又令人兴奋，但很快";
+					mes "你就会发现这里没有一丝";
+					mes "温暖或生机。所以……老了可别住在这里。";
+					next;
+					switch(select("那你为什么在这里？:我不会的。谢谢你的忠告。")) {
+					case 1:
+						mes "[乌维]";
+						mes "嗯，我对这";
+						mes "个地方有些";
+						mes "珍贵的回忆。从前，这里";
+						mes "曾有个住在这里的人，";
+						mes "对我就像父亲一样。";
+						next;
+						mes "[乌维]";
+						mes "哦，不过我想";
+						mes "你不想听";
+						mes "这些。下次你";
+						mes "再来坐坐，我们聊聊";
+						mes "更有趣的事，好吗？";
+						mes "先再见啦，小可爱~";
+						close;
+					case 2:
+						mes "[乌维]";
+						mes "哦，那真是";
+						mes "一个明智的决定，";
+						mes "甜心宝贝！哦，你们";
+						mes "可爱的冒险者们";
+						mes "真是又珍贵又可爱。";
+						mes "^333333*嘿嘿嘿~*^000000";
+						next;
+						mes "[乌维]";
+						mes "好了，这真是";
+						mes "一次愉快的交谈。记得";
+						mes "再来玩，好吗？";
+						mes "我会想你的，直到";
+						mes "下次见面~";
+						close;
+					}
+				case 2:
+					mes "[乌维]";
+					mes "Well...";
+					mes "其实我只是";
+					mes "做些锻冶的工作";
+					mes "来打造我自己的";
+					mes "烹饪工具。";
+					next;
+					mes "[乌维]";
+					mes "哦，我明白";
+					mes "有人需要";
+					mes "去对抗怪物，";
+					mes "但我可不是适合";
+					mes "去锻造武器。";
+					mes "我……是个彻底的和平主义者~";
+					next;
+					mes "[乌维]";
+					mes "就四处";
+					mes "转转，用不了";
+					mes "多久，我相信你会";
+					mes "找到一位铁匠";
+					mes "愿意为你锻造";
+					mes "一把好武器~";
+					close;
+				case 3:
+					mes "[乌维]";
+					mes "嗯……？";
+					mes "你刚刚";
+					mes "说你想";
+					mes "想学";
+					mes "烹饪的艺术？";
+					next;
+					mes "[乌维]";
+					mes "抱歉，我没办法";
+					mes "真正开设烹饪";
+					mes "课程。不过我会";
+					mes "给有心的初学者";
+					mes "一些好建议。";
+					next;
+					mes "[乌维]";
+					mes "Now...";
+					mes "至于你的学费";
+					mes "我需要——天哪，";
+					mes "要说的实在太多了。";
+					mes "东西。拿些纸，";
+					mes "再拿支笔来记这份清单……";
+					next;
+					set ein_cook,ein_cook+100;
+					mes "[乌维]";
+					mes "开玩笑的！";
+					mes "^333333*偷笑~*^000000 我不需要";
+					mes "不需要太多材料就能做";
+					mes "烹饪器具。带";
+					mes "6 个 ^0000FF大杰勒比结晶^000000。就这样！";
+					next;
+					mes "[乌维]";
+					mes "作为回报，我会给你";
+					mes "1 个煤炭，还有一些";
+					mes "给新手的烹饪建议。";
+					mes "这些建议我都是免费给";
+					mes "我那些锻冶同行的，不过……";
+					next;
+					mes "[乌维]";
+					mes "你 ^EEA9B8为什么不^000000";
+					mes "当个铁匠呢？";
+					mes "我对那方面";
+					mes "可自信多了。^333333*嘿嘿~*^000000";
+					next;
+					mes "[乌维]";
+					mes "那我就";
+					mes "一直在这里";
+					mes "等你";
+					mes "回来。";
+					switch(rand(1,3)) {
+					case 1: mes "...Ho ho~"; close;
+					case 2: mes "...*Tee Hee~*"; close;
+					case 3: mes "...Behbie~"; close;
+					}
+				case 4:
+					mes "[乌维]";
+					mes "保重，";
+					mes "甜心宝贝~";
+					mes "呵呵呵！";
+					close;
+				}
+			case 2:
+				mes "[乌维]";
+				mes "烹饪始于";
+				mes "火，也终于火。";
+				mes "要做出";
+				mes "精致美味、令味蕾欢喜的";
+				mes "美食，其中自有一番学问~";
+				close;
+			}
+		}
+	}
+}
+
+// Factory Quest :: ein_factory
+//============================================================
+einbroch,1,1,0	script	艾因布罗克烟雾警报	-1,{
+	end;
+
+OnEnable:
+	set $@AlrdEinPoll,1;
+	mapannounce "einbroch","紧急状态！有害烟雾的浓度正达到高度饱和。艾音布罗克的居民必须立即寻找避难所。",bc_map;
+	enablenpc "艾因布罗克烟雾警报";
+	hideonnpc "森兹#ein";
+	hideonnpc "科沃弗#ein";
+	hideonnpc "凯汀#ein";
+	hideonnpc "斯莱克#ein";
+	hideonnpc "托拉夫#ein";
+	hideonnpc "凯内肖茨#ein";
+	hideonnpc "卡舒兰兹#ein";
+	hideonnpc "凯桑博斯#ein";
+	hideonnpc "Train Station Staff#ein1";
+	hideonnpc "车站职员#ein2";
+	hideonnpc "莱斯莉#ein_1";
+	hideonnpc "谭#ein";
+	hideonnpc "小托比#ein-1";
+	hideonnpc "飞空艇工程师#ein-1";
+	hideonnpc "卡普拉职员#ein1";
+	hideonnpc "卡普拉职员#ein2";
+	hideonnpc "卡普拉职员#ein3";
+	hideonnpc "莫雷#ein";
+	hideonnpc "马克#ein";
+	hideonnpc "Khemko#ein";
+	hideonnpc "Oberu#ein";
+	hideonnpc "乌韦·克莱内#ein";
+	hideonnpc "口罩商人#ein";
+	hideonnpc "船夫#ein";
+	hideonnpc "实验室士兵#ein-1";
+	hideonnpc "实验室士兵#ein-2";
+	initnpctimer;
+	monster "einbroch",82,332,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",99,328,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",122,317,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",138,319,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",147,312,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",159,316,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",173,315,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",161,311,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",147,296,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",168,282,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",175,271,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",146,274,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",160,272,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",155,256,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",179,262,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",192,248,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",212,255,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",230,250,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",246,251,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",262,254,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",253,240,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",202,245,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",181,251,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",172,238,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",146,242,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",186,226,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",173,239,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",124,248,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",120,234,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",98,234,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",101,219,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",89,208,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",96,191,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",76,194,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",60,196,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",45,194,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",34,201,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",40,184,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",64,173,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",96,173,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",41,155,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",46,131,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",46,108,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",38,93,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",55,86,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",81,81,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",107,82,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",107,104,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",123,73,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",132,87,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",125,63,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",142,64,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",150,52,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",157,37,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",179,39,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",197,46,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",217,67,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",246,54,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",228,110,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",250,118,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",273,127,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",288,138,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",281,160,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",281,192,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",291,201,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",283,218,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",268,216,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",273,196,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",262,164,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",241,180,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",216,205,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",209,198,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",224,177,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",227,163,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",208,166,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",132,87,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",149,119,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",119,36,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",84,155,"Toxic Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	monster "einbroch",82,107,"Red Fog",1621,1,"艾因布罗克烟雾警报::OnMyMobDead";
+	end;
+
+OnMyMobDead:
+	if (mobcount("einbroch","Einbroch Smog Alert::OnMyMobDead")) {
+		end;
+	}
+
+OnTimer600000:
+	killmonsterall "einbroch";
+	mapannounce "einbroch","紧急状态现已解除。空气污染水平已回到安全范围内。",bc_map;
+	disablenpc "艾因布罗克烟雾警报";
+	hideoffnpc "利奥茨堡#ein";
+	hideoffnpc "森兹#ein";
+	hideoffnpc "科沃弗#ein";
+	hideoffnpc "凯汀#ein";
+	hideoffnpc "斯莱克#ein";
+	hideoffnpc "托拉夫#ein";
+	hideoffnpc "凯内肖茨#ein";
+	hideoffnpc "卡舒兰兹#ein";
+	hideoffnpc "凯桑博斯#ein";
+	hideoffnpc "Train Station Staff#ein1";
+	hideoffnpc "车站职员#ein2";
+	hideoffnpc "莱斯莉#ein_1";
+	hideoffnpc "谭#ein";
+	hideoffnpc "小托比#ein-1";
+	hideoffnpc "飞空艇工程师#ein-1";
+	hideoffnpc "卡普拉职员#ein1";
+	hideoffnpc "卡普拉职员#ein2";
+	hideoffnpc "卡普拉职员#ein3";
+	hideoffnpc "莫雷#ein";
+	hideoffnpc "马克#ein";
+	hideoffnpc "Khemko#ein";
+	hideoffnpc "Oberu#ein";
+	hideoffnpc "乌韦·克莱内#ein";
+	hideoffnpc "口罩商人#ein";
+	hideoffnpc "船夫#ein";
+	hideoffnpc "实验室士兵#ein-1";
+	hideoffnpc "实验室士兵#ein-2";
+	set $@AlrdEinPoll,0;
+	set $EinPolution,0;
+	stopnpctimer;
+	end;
+}
+
+einbroch,132,84,3	script	利奥茨堡#ein	853,2,2,{
+	if (EinFactory == 13 || EinFactory == 14) {
+		if (isbegin_quest(8029) == 1)
+			changequest 8029,8030;
+		set EinFactory,14;
+		mes "[利奥兹伯格]";
+		mes "什么……？";
+		mes "工厂维修";
+		mes "预算？不可能！";
+		next;
+		mes "[利奥兹伯格]";
+		mes "为什么要浪费钱？";
+		mes "我们到现在";
+		mes "都没出过任何问题！你看，";
+		mes "一切都好好的！你";
+		mes "为什么要夸大";
+		mes "这种小细节？";
+		next;
+		mes "[利奥兹伯格]";
+		mes "现场监督";
+		mes "泽尔梅托刚过来";
+		mes "申请增加预算。";
+		mes "哼，我觉得他在说谎！";
+		mes "一切都好得很！";
+		close;
+	}
+	mes "[利奥兹伯格]";
+	mes "我是这家工厂的";
+	mes "厂长。";
+	mes "我的大部分员工";
+	mes "都是勤勉的工人。我不能说人人如此，但总体上我们做得非常出色。哈哈哈~！";
+	next;
+	mes "[利奥兹伯格]";
+	mes "只要这座工厂";
+	mes "维护得当，我们";
+	mes "就不必担心这座城市";
+	mes "的安全了。现场监督";
+	mes "泽尔梅托也非常可靠。";
+	next;
+	mes "[利奥兹伯格]";
+	mes "我可以信任泽尔梅托";
+	mes "照看一切，";
+	mes "所以没必要";
+	mes "我亲自进工厂。";
+	mes "把工作交出去真是太棒了！";
+	next;
+	mes "[利奥兹伯格]";
+	mes "我们的工厂会";
+	mes "继续发展";
+	mes "大家都会";
+	mes "为我们取得的进步";
+	mes "感到自豪。是的，我可以";
+	mes "向你保证！";
+	close;
+
+OnTouch_:
+	if ($EinPolution > 9 && !$@AlrdEinPoll) {
+		mes "[利奥兹伯格]";
+		mes "怎么回事？！";
+		mes "这是谁的责任？！";
+		mes "天哪，我真不敢相信";
+		mes "居然会发生这种事！";
+		mes "^333333*咳咳！*^000000";
+		next;
+		mes "[利奥兹伯格]";
+		mes "我得离开这里！";
+		mes "你！快、快想办法";
+		mes "修好它！我得躲起来，找个";
+		mes "安全的地方！";
+		close2;
+ 		if ($EinPolution > 9 && !$@AlrdEinPoll) {
+			donpcevent "艾因布罗克烟雾警报::OnEnable";
+			hideonnpc "利奥茨堡#ein";
+		}
+		end;
+	}
+	else {
+		end;
+	}
+}
+
+ein_in01,67,242,3	script	泽尔梅托	851,{
+	if ($EinPolution > 9) {
+		mes "[泽尔梅托]";
+		mes "我们这里";
+		mes "遇到大麻烦了！我很感谢你";
+		mes "一直在收集材料，";
+		mes "但这些机器已经";
+		mes "坏得太久了！";
+		next;
+		mes "[泽尔梅托]";
+		mes "就在我想";
+		mes "修好它时，发生了";
+		mes "严重的短路。我们镇上";
+		mes "大概已经充满";
+		mes "现在有毒雾！";
+		next;
+		mes "[泽尔梅托]";
+		mes "我会尽力修好";
+		mes "这个，但我们真该";
+		mes "早点拨出资金";
+		mes "来修这台机器！";
+		next;
+		mes "[泽尔梅托]";
+		mes "最重要的是";
+		mes "你赶紧离开这里";
+		mes "找到避难所！";
+		mes "立刻！";
+		close2;
+		warp "einbroch",131,83;
+		end;
+	}
+	if (EinFactory == 16) {
+		mes "[泽尔梅托]";
+		mes "我们会好好";
+		mes "利用你给我的";
+		mes "材料。有你的帮助，";
+		mes "我们的工厂就能";
+		mes "安全运转。至少，";
+		mes "还能再维持一阵子。";
+		close;
+	}
+	if ((EinFactory == 15) && (countitem(7325) > 19) && (countitem(7317) > 9) && (countitem(7319) > 9)) {
+		mes "[泽尔梅托]";
+		mes "啊，又是你。";
+		mes "让别人知道";
+		mes "我们这凄惨的";
+		mes "处境……真是丢脸……";
+		next;
+		mes "[泽尔梅托]";
+		mes "这里没什么";
+		mes "值得看的，";
+		mes "所以你实在没有";
+		mes "必要再来";
+		mes "这个地方了。";
+		next;
+		switch(select("给他材料。:Huh.")) {
+		case 1:
+			mes "[泽尔梅托]";
+			mes "...Hm?";
+			mes "这些不就是";
+			mes "我们修理工厂";
+			mes "需要的材料吗？";
+			mes "你是怎么";
+			mes "找到这些的？";
+			next;
+			mes "[泽尔梅托]";
+			mes "我真不知道";
+			mes "该怎么报答你";
+			mes "这份大恩情。";
+			mes "我很感激你";
+			mes "挺身而出帮助我们。";
+			next;
+			mes "[泽尔梅托]";
+			mes "哦……！";
+			mes "我管理多年，";
+			mes "学会了终极的";
+			mes "激励技巧。让";
+			mes "我来激发你的干劲，";
+			mes "以表达我的谢意。";
+			next;
+			mes "[泽尔梅托]";
+			mes "Now...";
+			mes "放开心扉，";
+			mes "听听我这些";
+			mes "鼓励与激励";
+			mes "的话语……";
+			next;
+			mes "[泽尔梅托]";
+			mes "^236B8E境况越是";
+			mes "艰难，你就越要";
+			mes "变得坚强！";
+			mes "你得爬上那座";
+			mes "山，因为没人会";
+			mes "替你爬！^000000";
+			next;
+			mes "[泽尔梅托]";
+			mes "^236B8E别放弃！";
+			mes "拼尽全力！";
+			mes "失败者都是半途而废的人，";
+			mes "半途而废的人都是失败者！";
+			delitem 7325,20; //Tube
+			delitem 7317,10; //Screw
+			delitem 7319,10; //Old_Steel_Plate
+			set $EinPolution,$EinPolution+1;
+			completequest 8031;
+			set EinFactory,16;
+			if (checkre(3)) {
+				if (BaseLevel < 41) getexp 61,0;
+				else if (BaseLevel < 51) getexp 307,0;
+				else if (BaseLevel < 61) getexp 660,0;
+				else if (BaseLevel < 71) getexp 1850,0;
+				else if (BaseLevel < 81) getexp 3206,0;
+				else if (BaseLevel < 91) getexp 7602,0;
+				else getexp 29067,0;
+			} else {
+				if (BaseLevel < 41) getexp 615,0;
+				else if (BaseLevel < 51) getexp 3075,0;
+				else if (BaseLevel < 61) getexp 6604,0;
+				else if (BaseLevel < 71) getexp 18508,0;
+				else if (BaseLevel < 81) getexp 32066,0;
+				else if (BaseLevel < 91) getexp 76026,0;
+				else getexp 290675,0;
+			}
+			next;
+			mes "[泽尔梅托]";
+			mes "^333333*呼*^000000";
+			mes "我好久没这么";
+			mes "鼓舞过人了，不过";
+			mes "你的帮助很值得。";
+			mes "我要开始修理了，不过还想再次感谢你。";
+			close;
+		case 2:
+			mes "[泽尔梅托]";
+			mes "^333333*唉……*^000000";
+			mes "我真的很担心";
+			mes "这座工厂的";
+			mes "未来。我们的";
+			mes "主管到底在想什么……？";
+			close;
+		}
+	}
+	if (EinFactory == 15) {
+		mes "[泽尔梅托]";
+		mes "我们需要";
+		mes "至少";
+		mes "20 个 ^FF0000软管^000000、";
+		mes "10 个 ^FF0000生锈的螺丝^000000 和";
+		mes "10 个 ^FF0000用过的铁板^000000";
+		mes "来修理这座工厂。";
+		next;
+		mes "[泽尔梅托]";
+		mes "^333333*唉……*^000000";
+		mes "但我们没法";
+		mes "弄到所有那些";
+		mes "东西。我们的预算";
+		mes "不够支付……";
+		close;
+	}
+	if (EinFactory == 14) {
+		mes "[泽尔梅托]";
+		mes "...";
+		mes "......";
+		next;
+		mes "[泽尔梅托]";
+		mes "^333333*唉*^000000";
+		mes "我的提案被";
+		mes "主管驳回了。可是";
+		mes "保养和维修";
+		mes "对维持最佳运转效率";
+		mes "和工人安全至关重要！";
+		next;
+		mes "[泽尔梅托]";
+		mes "我又沮丧又担心。";
+		mes "也许眼下不会";
+		mes "出事，但我们必须";
+		mes "通过定期保养";
+		mes "所有这些机器";
+		mes "来保障我们的未来。";
+		next;
+		mes "[泽尔梅托]";
+		mes "哪怕是可能威胁";
+		mes "工人安全的问题";
+		mes "也不能忽视。难道";
+		mes "我就无能为力吗？ ^333333*唉*^000000";
+		next;
+		mes "[泽尔梅托]";
+		mes "只要我们能";
+		mes "弄到";
+		mes "20 个 ^FF0000软管^000000、";
+		mes "10 个 ^FF0000生锈的螺丝^000000 和";
+		mes "10 个 ^FF0000用过的铁板^000000，";
+		mes "就能进行那些修理。";
+		next;
+		changequest 8030,8031;
+		set EinFactory,15;
+		mes "[泽尔梅托]";
+		mes "但没有资金，我们";
+		mes "根本买不起";
+		mes "那些东西。万一出了";
+		mes "什么事，谁来";
+		mes "负责？";
+		close;
+	}
+	if (EinFactory == 13) {
+		mes "[泽尔梅托]";
+		mes "我得尽快";
+		mes "把这件事报告给";
+		mes "主管。";
+		next;
+		mes "[泽尔梅托]";
+		mes "运气好的话，他会批准";
+		mes "增加预算，这样我们";
+		mes "就能买齐修理";
+		mes "所需的全部材料。";
+		close;
+	}
+	if (EinFactory == 12) {
+		mes "[泽尔梅托]";
+		mes "我想两条";
+		mes "传送带大概都有";
+		mes "类似的问题。我们";
+		mes "可以同时";
+		mes "修好它们，不过";
+		mes "会很麻烦。";
+		next;
+		mes "[泽尔梅托]";
+		mes "非常感谢你的";
+		mes "帮助。没有你，";
+		mes "我很确定我们直到";
+		mes "为时已晚才会";
+		mes "知道这些问题。";
+		next;
+		mes "[泽尔梅托]";
+		mes "现在，我得确保";
+		mes "我们有足够的材料";
+		mes "进行修理，好让";
+		mes "这些机器能安全地";
+		mes "重新运转。";
+		next;
+		changequest 8028,8029;
+		set EinFactory,13;
+		mes "[泽尔梅托]";
+		mes "首先，我最好";
+		mes "赶紧向主管";
+		mes "申请增加";
+		mes "工厂维修";
+		mes "预算。";
+		close;
+	}
+	if (EinFactory == 11) {
+		mes "[泽尔梅托]";
+		mes "你现在";
+		mes "要检查的";
+		mes "那台机器";
+		mes "是一台大型传送带。";
+		next;
+		mes "[泽尔梅托]";
+		mes "记住我们";
+		mes "还有一台小型";
+		mes "传送带，所以一定要";
+		mes "检查那台";
+		mes "较大的，好吗？";
+		close;
+	}
+	if (EinFactory == 10) {
+		mes "[泽尔梅托]";
+		mes "这比";
+		mes "我想象的";
+		mes "还要糟……";
+		next;
+		mes "[泽尔梅托]";
+		mes "我们得尽快";
+		mes "开始修理！希望";
+		mes "我们能在发生";
+		mes "严重问题之前";
+		mes "解决这件事……";
+		next;
+		mes "[泽尔梅托]";
+		mes "好了，你最后";
+		mes "需要检查的";
+		mes "是一台 ^FF0000大型传送带^000000。";
+		mes "它和你之前";
+		mes "检查过的那台类似，但";
+		mes "更大，动力也更强。";
+		next;
+		mes "[泽尔梅托]";
+		mes "这种机器我们";
+		mes "只有一台，而且因为";
+		mes "厂里很多人都在用，";
+		mes "它经常被搬来搬去。";
+		mes "我真不知道";
+		mes "它现在会在哪里。";
+		next;
+		changequest 8026,8027;
+		set EinFactory,11;
+		mes "[泽尔梅托]";
+		mes "不过，我确定";
+		mes "它就在这栋建筑里，";
+		mes "所以你应该能";
+		mes "找到它。希望你能";
+		mes "尽快替我检查那条传送带。";
+		close;
+	}
+	if (EinFactory == 9) {
+		mes "[泽尔梅托]";
+		mes "这次，你需要";
+		mes "检查一根位于";
+		mes "工厂很远处";
+		mes "的室外管道。";
+		next;
+		mes "[泽尔梅托]";
+		mes "既然那附近";
+		mes "没有其他机器，";
+		mes "那根管道应该";
+		mes "不会太难找。";
+		close;
+	}
+	if (EinFactory == 8) {
+		mes "[泽尔梅托]";
+		mes "嗯？";
+		mes "听你这么说";
+		mes "我很吃惊。^333333*唉*^000000 需要修的";
+		mes "东西实在太多了。";
+		mes "太糟糕了……";
+		next;
+		mes "[泽尔梅托]";
+		mes "好了，这件事";
+		mes "先让我来操心。请你";
+		mes "继续专心检查";
+		mes "其他一些机器。";
+		next;
+		mes "[泽尔梅托]";
+		mes "现在，这厂里";
+		mes "有一根管道想请你";
+		mes "看看。我们很多管道";
+		mes "状况都不太好，";
+		mes "但这一根可能";
+		mes "已经严重损坏了。";
+		next;
+		mes "[泽尔梅托]";
+		mes "现在，我想让你";
+		mes "检查的那根管道";
+		mes "就在那些装熔融金属的";
+		mes "大熔炉附近。你";
+		mes "应该很容易就能找到。";
+		next;
+		changequest 8024,8025;
+		set EinFactory,9;
+		mes "[泽尔梅托]";
+		mes "再次感谢";
+		mes "你的帮助，";
+		mes "adventurer.";
+		close;
+	}
+	if (EinFactory == 7) {
+		mes "[泽尔梅托]";
+		mes "这次我";
+		mes "想让你检查的";
+		mes "是一台小型";
+		mes "传送带。";
+		next;
+		mes "[泽尔梅托]";
+		mes "一定要";
+		mes "检查那台小的，";
+		mes "因为我们厂里";
+		mes "还有一台大型";
+		mes "传送带。";
+		close;
+	}
+	if (EinFactory == 6) {
+		mes "[泽尔梅托]";
+		mes "原来如此……";
+		mes "很可能是";
+		mes "发生了短路，";
+		mes "大部分内部";
+		mes "装置都";
+		mes "烧毁了……";
+		next;
+		mes "[泽尔梅托]";
+		mes "谢谢你替";
+		mes "我检查那个。现在，";
+		mes "我要你检查的";
+		mes "下一台机器，和你";
+		mes "之前检查过的";
+		mes "都不一样。";
+		next;
+		mes "[泽尔梅托]";
+		mes "那是一只搬运";
+		mes "小物件的机械";
+		mes "手。我们没";
+		mes "正式给它起名字，但";
+		mes "你应该能找到它。";
+		next;
+		mes "[泽尔梅托]";
+		mes "最近那台机器";
+		mes "运转时似乎";
+		mes "一直有问题。";
+		mes "如果有什么坏了，";
+		mes "我们得知道，";
+		mes "并马上修好。";
+		next;
+		changequest 8022,8023;
+		set EinFactory,7;
+		mes "[泽尔梅托]";
+		mes "再次提前";
+		mes "谢谢你。";
+		close;
+	}
+	if (EinFactory == 5) {
+		mes "[泽尔梅托]";
+		mes "我想请你检查";
+		mes "控制面板。它";
+		mes "相当大，就在";
+		mes "工厂中央。你";
+		mes "找到它应该";
+		mes "不会太费事。";
+		close;
+	}
+	if (EinFactory == 4) {
+		mes "[泽尔梅托]";
+		mes "什么……？";
+		mes "这比我预料的";
+		mes "还要糟。不过";
+		mes "我们能尽快";
+		mes "知道这些问题，";
+		mes "也是好事。";
+		next;
+		mes "[泽尔梅托]";
+		mes "别担心，";
+		mes "我们会处理";
+		mes "这件事。同时，";
+		mes "我想请你";
+		mes "替我检查下一台机器。";
+		next;
+		mes "[泽尔梅托]";
+		mes "我想请你检查";
+		mes "一块 ^FF0000控制面板^000000。它和";
+		mes "你刚检查过的那块";
+		mes "是同一种，但";
+		mes "尺寸更大。";
+		next;
+		mes "[泽尔梅托]";
+		mes "它位于";
+		mes "工厂中央，";
+		mes "所以你应该能";
+		mes "找到它。它可能";
+		mes "状况不佳，尽管";
+		mes "目前运转正常……";
+		next;
+		changequest 8020,8021;
+		set EinFactory,5;
+		mes "[泽尔梅托]";
+		mes "我们必须确保";
+		mes "它稳定、可靠，";
+		mes "不会对我们的工人";
+		mes "构成威胁。再次";
+		mes "感谢你，冒险者。";
+		close;
+	}
+	if (EinFactory == 3) {
+		mes "[泽尔梅托]";
+		mes "你需要检查";
+		mes "一台自动压力";
+		mes "调节器。它看起来正常，";
+		mes "但有时会发出";
+		mes "奇怪的声音。";
+		next;
+		mes "[泽尔梅托]";
+		mes "这次最好";
+		mes "把那台机器";
+		mes "更仔细地";
+		mes "检查一遍，";
+		mes "以防万一。";
+		next;
+		mes "[泽尔梅托]";
+		mes "非常";
+		mes "感谢你帮助我们，";
+		mes "adventurer.";
+		close;
+	}
+	if (EinFactory == 2) {
+		mes "[泽尔梅托]";
+		mes "嗯，我明白了。";
+		mes "我们必须尽快";
+		mes "处理这件事。现在，让我";
+		mes "告诉你接下来";
+		mes "要检查什么。";
+		next;
+		mes "[泽尔梅托]";
+		mes "有 3 台自动";
+		mes "压力调节器，";
+		mes "从上方锤压弯曲的铁板";
+		mes "把它们压平。";
+		mes "其中似乎有一台";
+		mes "出了某种问题。";
+		next;
+		mes "[泽尔梅托]";
+		mes "请检查 ^FF0000自动压力调节器^000000。即使";
+		mes "问题看起来很小，也请";
+		mes "向我报告。我知道现在可能看着没事，但我希望能防患于未然。";
+		next;
+		changequest 8018,8019;
+		set EinFactory,3;
+		mes "[泽尔梅托]";
+		mes "非常";
+		mes "提前谢谢你，";
+		mes "adventurer.";
+		close;
+	}
+	if (EinFactory == 1) {
+		mes "[泽尔梅托]";
+		mes "如果可以，";
+		mes "请检查一下";
+		mes "第 2 块控制面板，";
+		mes "它似乎已经";
+		mes "坏了有一阵子了……";
+		close;
+	}
+	mes "[泽尔梅托]";
+	mes "啊，你一定是访客。";
+	mes "我是泽尔梅托·阿贝洛夫，";
+	mes "现场主管。你以前";
+	mes "来过这个设施吗？";
+	next;
+	mes "[泽尔梅托]";
+	mes "这座工厂在我们城市";
+	mes "扮演重要角色，";
+	mes "带来了可观的收入。";
+	mes "然而，我们的员工";
+	mes "饱受恶劣工作环境之苦。";
+	next;
+	mes "[泽尔梅托]";
+	mes "我们的主管赚了";
+	mes "很多钱，似乎对";
+	mes "现状很满意。然而，其余员工并不能享受他所得的全部好处……";
+	next;
+	mes "[泽尔梅托]";
+	mes "很多人已经";
+	mes "辞职，只有少数";
+	mes "人还继续在这里";
+	mes "工作。所以我们现在人手不足，";
+	mes "我也很为难……";
+	next;
+	mes "[泽尔梅托]";
+	mes "有几项紧急";
+	mes "任务需要完成，但";
+	mes "我根本没法";
+	mes "招到新工人。";
+	mes "啊，抱歉，我说得";
+	mes "太随意了，尽说自己的问题……";
+	next;
+	switch(select("你们人手不足吗？:No, it's okay.")) {
+	case 1:
+		mes "[泽尔梅托]";
+		mes "是的，人手不足！";
+		mes "我没有足够的";
+		mes "人手来检查";
+		mes "工厂的机器，";
+		mes "判断我们有哪些";
+		mes "问题。";
+		next;
+		mes "[泽尔梅托]";
+		mes "这项任务很费时，";
+		mes "我本想自己";
+		mes "做。可是既要忙这个，";
+		mes "又要管理员工，";
+		mes "我实在没时间……";
+		next;
+		switch(select("我可以帮你。:Keep up the good job.")) {
+		case 1:
+			mes "[泽尔梅托]";
+			mes "你可以帮我？";
+			mes "我知道这样";
+			mes "的请求太过分，";
+			mes "但任何人愿意帮我，";
+			mes "我都会接受。我";
+			mes "已经走投无路了。";
+			next;
+			mes "[泽尔梅托]";
+			mes "好，那就请你";
+			mes "把工厂里的机器";
+			mes "一台一台检查。";
+			mes "我们必须弄清楚";
+			mes "哪些需要修理，";
+			mes "哪些运转正常。";
+			next;
+			mes "[泽尔梅托]";
+			mes "首先，找到 ^FF0000第 2 块控制";
+			mes "面板^000000，确定它的";
+			mes "状态。我很确定";
+			mes "它很久以前就坏了，但";
+			mes "确认一下也无妨。";
+			mes "你应该很容易找到。";
+			next;
+			setquest 8017;
+			set EinFactory,1;
+			mes "[泽尔梅托]";
+			mes "检查完";
+			mes "之后，回来";
+			mes "向我报告，这样我就能";
+			mes "告诉你下一台";
+			mes "检查哪台机器。再次感谢";
+			mes "你愿意帮忙。";
+			close;
+		case 2:
+			mes "[泽尔梅托]";
+			mes "唉，总得谋生。";
+			mes "^333333*唉*^000000 这些我还能";
+			mes "忍受，但我希望上级";
+			mes "能考虑改善";
+			mes "这里的工作环境……";
+			close;
+		}
+	case 2:
+		mes "[泽尔梅托]";
+		mes "感谢您";
+		mes "谢谢你的好意。";
+		mes "还有，请别";
+		mes "让任何人知道";
+		mes "我刚跟你说的事。";
+		close;
+	}
+}
+
+ein_in01,49,232,3	script	第二控制面板#ins	111,{
+	if (EinFactory == 1 || EinFactory == 2) {
+		if (isbegin_quest(8017) == 1)
+			changequest 8017,8018;
+		set EinFactory,2;
+		mes "^3355FF这就是泽尔梅托";
+		mes "让你检查的第 2 块控制面板。";
+		mes "它看起来完全坏了：螺丝";
+		mes "不见了，铁盖";
+		mes "被撬开弯曲，露出";
+		mes "里面一团乱糟糟的电线。^000000";
+		close;
+	}
+	end;
+}
+
+ein_in01,108,217,3	script	第三压力调节器#1	111,{
+	if (EinFactory == 3 || EinFactory == 4) {
+		if (isbegin_quest(8019) == 1)
+			changequest 8019,8020;
+		set EinFactory,4;
+		mes "^3355FF乍一看，这台";
+		mes "压力调节器";
+		mes "看起来完全正常。但你";
+		mes "再仔细检查一下，你";
+		mes "就会发现它发出奇怪的";
+		mes "摩擦声，而且表面有";
+		mes "几颗螺丝松动了。";
+		close;
+	}
+	end;
+}
+
+ein_in01,62,258,3	script	主控制面板#ins	111,{
+	if (EinFactory == 5 || EinFactory == 6) {
+		if (isbegin_quest(8021) == 1)
+			changequest 8021,8022;
+		set EinFactory,6;
+		mes "^3355FF主控面板";
+		mes "看起来并没有什么";
+		mes "问题。但轻敲";
+		mes "它的表面之后，";
+		mes "你会听到令人沮丧的";
+		mes "空响。看来";
+		mes "它缺少了一些零件……^000000";
+		close;
+	}
+	end;
+}
+
+ein_in01,46,197,3	script	传送带#ins	111,{
+	if (EinFactory == 7 || EinFactory == 8) {
+		if (isbegin_quest(8023) == 1)
+			changequest 8023,8024;
+		set EinFactory,8;
+		mes "^3355FF传送带的动作";
+		mes "显得晃动又笨拙。";
+		mes "机械臂也似乎";
+		mes "不够有力，无法承受";
+		mes "它所运载的货物。传送带上的螺丝";
+		mes "松动而且锈迹斑斑。^000000";
+		close;
+	}
+	end;
+}
+
+ein_in01,100,266,3	script	管道#ins	111,{
+	if (EinFactory == 9 || EinFactory == 10) {
+		if (isbegin_quest(8025) == 1)
+			changequest 8025,8026;
+		set EinFactory,10;
+		mes "^3355FF这条管道的检查";
+		mes "并没有花太久。";
+		mes "它膨胀变形、磨损严重，";
+		mes "由于长时间";
+		mes "承受超负荷的";
+		mes "压力。它到现在还没";
+		mes "爆开真是奇迹。";
+		close;
+	}
+	end;
+}
+
+ein_in01,95,239,3	script	传送带#ins2	111,{
+	if (EinFactory == 11 || EinFactory == 12) {
+		if (isbegin_quest(8027) == 1)
+			changequest 8027,8028;
+		set EinFactory,12;
+		mes "^3355FF这条传送带似乎";
+		mes "也有类似的问题，";
+		mes "就像它的小型版本。它的";
+		mes "动作笨拙、";
+		mes "忽快忽慢，而且几乎";
+		mes "所有螺丝都生锈了。^000000";
+		close;
+	}
+	end;
+}
+
+// Administrator NPC used to rig the invasion in Einbroch.
+sec_in02,127,86,3	script	工厂任务测试	851,{
+	set .@i, callfunc("F_GM_NPC",8028,0,0,9000);
+	if (.@i == -2) {
+		mes "[测试1]";
+		mes "吓到了吧～";
+		close;
+	} else if (.@i == -1) {
+		mes "[测试1]";
+		mes "你想要";
+		mes "取消吗～？";
+		close;
+	} else if (.@i == 0) {
+		mes "[测试1]";
+		mes "Whoa...";
+		mes "那真是";
+		mes "大错特错！";
+		close;
+	} else {
+		mes "[测试1]";
+		mes "现在的";
+		mes "全局变量值";
+		mes "（工厂任务）";
+		mes "是……^3355FF" + z + "^000000。";
+		mes "你想改吗？";
+		next;
+		switch(select("0:10:入侵")) {
+		case 1:
+			mes "[测试1]";
+			mes "好的……！";
+			mes "已经";
+			mes "改成 ''0.'' 了。";
+			set $EinPolution,0;
+			close;
+		case 2:
+			mes "[测试2]";
+			mes "好的……！";
+			mes "已经";
+			mes "改成 ''10.'' 了。";
+			set $EinPolution,10;
+			close;
+		case 3:
+			donpcevent "艾因布罗克烟雾警报::OnEnable";
+			close;
+		}
+	}
+}
+
+// Murder Quest :: ein_main_tre
+//============================================================ 
+einbech,165,105,7	script	布恩德·希克曼#ein	847,{
+	cutin "ein_hicman",2;
+	if (Shinokas_Quest == 0) {
+		mes "[宾德·海科曼]";
+		mes "...";
+		mes "......";
+		next;
+		mes "[宾德·海科曼]";
+		mes "...";
+		mes "......";
+		mes "......You...";
+		emotion ET_QUESTION, playerattached();
+		next;
+		mes "[宾德·海科曼]";
+		mes "...";
+		mes "......";
+		mes "......You...";
+		mes "......Stop it...";
+		next;
+		mes "[宾德·海科曼]";
+		mes "...";
+		mes "......";
+		mes "......You...";
+		mes "......Stop it...";
+		mes "...You ^FF0000bastard^000000!";
+		next;
+		mes "[宾德·海科曼]";
+		mes "呜啊啊啊啊啊！！";
+		next;
+		mes "^3355FF老人看到你";
+		mes "似乎有些恼火，";
+		mes "但遗憾的是，他的";
+		mes "尖叫与胡言乱语";
+		mes "完全语无伦次。^000000";
+		next;
+		mes "[宾德·海科曼]";
+		mes "真的^FF0000是^000000你！";
+		mes "都是你害的！";
+		mes "你夺走了我";
+		mes "的一切！！";
+		next;
+		switch(select("'你在说什么？':无视他。")) {
+		case 1:
+			mes "[宾德·海科曼]";
+			mes "你怎么敢……";
+			mes "你毁掉了我人生中";
+			mes "所有的幸福，";
+			mes "怎么还敢这样对我！";
+			next;
+			mes "[宾德·海科曼]";
+			mes "该死的……";
+			mes "你怎么还有脸";
+			mes "装作";
+			mes "什么都没发生过？！";
+			mes "^333333*咳、咳咳……*^000000";
+			next;
+			break;
+		case 2:
+			mes "[宾德·海科曼]";
+			mes "等……等等！";
+			mes "我说等一下！";
+			mes "^333333*咳！*^000000";
+			close2;
+			cutin "ein_hicman",255;
+			end;
+		}
+		mes "[宾德·海科曼]";
+		mes "你就这么恶毒，";
+		mes "就这样轻描淡写地忘掉";
+		mes "你对我们的人生";
+		mes "做过的事吗？你已经";
+		mes "忘了你在这里";
+		mes "做过什么吗？！";
+		next;
+		mes "[宾德·海科曼]";
+		mes "那已经是";
+		mes "很久以前的事了，但我永远";
+		mes "不会忘记。这座小镇";
+		mes "虽然小，却住着";
+		mes "心地温暖的人们……";
+		next;
+		mes "[宾德·海科曼]";
+		mes "我、卡托菲、阿努托、";
+		mes "马斯卡伦特……我们";
+		mes "都是被那位大商人";
+		mes "雇来的朋友，";
+		mes "在矿山里挖矿石。";
+		next;
+		mes "[宾德·海科曼]";
+		mes "然后";
+		mes "还有你！我们";
+		mes "聚在一起，就是";
+		mes "最棒的采矿队！";
+		mes "直到我们";
+		mes "发现了^FF0000它^000000。";
+		next;
+		mes "[宾德·海科曼]";
+		mes "Yes...";
+		mes "那块神秘的矿石";
+		mes "散发着";
+		mes "耀眼的光芒。";
+		next;
+		mes "[宾德·海科曼]";
+		mes "但我们早该知道，";
+		mes "^3131FF温古力安特^000000会";
+		mes "出现在那块矿石附近。我们";
+		mes "本该察觉到";
+		mes "这份危险……";
+		next;
+		mes "[宾德·海科曼]";
+		mes "我们把发现";
+		mes "报告给了雇主，然后";
+		mes "矿石就这样消失了。他";
+		mes "一定是把它送去了别处，";
+		mes "那与我们无关。";
+		next;
+		mes "[宾德·海科曼]";
+		mes "之后生活";
+		mes "平静了一段时间。";
+		mes "但有一天，你冲我们";
+		mes "大喊说你在矿里";
+		mes "又找到了另一块";
+		mes "特别而神秘的矿石。";
+		next;
+		mes "[宾德·海科曼]";
+		mes "但当我们";
+		mes "过来查看你";
+		mes "挖的洞时，你知道";
+		mes "我们发现了什么吗……？！";
+		next;
+		switch(select("温古力安特？:一块神秘矿石，对吧？:什么都没有……？")) {
+		case 1:
+			mes "[宾德·海科曼]";
+			mes "你不记得";
+			mes "发生了什么吗？你";
+			mes "当时对我们做了什么？！";
+			next;
+			break;
+		case 2:
+			mes "[宾德·海科曼]";
+			mes "你不记得";
+			mes "发生了什么吗？你";
+			mes "当时对我们做了什么？！";
+			next;
+			break;
+		case 3:
+			mes "[宾德·海科曼]";
+			mes "Yes...";
+			mes "Nothing.";
+			next;
+			break;
+		}
+		mes "[宾德·海科曼]";
+		mes "那个洞里";
+		mes "什么都没有！";
+		next;
+		mes "[宾德·海科曼]";
+		mes "然后你指着";
+		mes "我们身后的墙，";
+		mes "尖叫着说温古力安特";
+		mes "要来了！我们惊慌失措，";
+		mes "开始拼命挖路逃出去！";
+		next;
+		mes "[宾德·海科曼]";
+		mes "我记得你脸上的神情显得很古怪。我原以为你是在难过，但现在我确信你是被贪婪吞噬了！我们信任你，你却背叛了我们！^FFFFFFspace^000000";
+		next;
+		mes "[宾德·海科曼]";
+		mes "当我们终于砸开";
+		mes "最后那面墙时，一切";
+		mes "开始在我们周围崩塌。我们";
+		mes "是那场隧道塌方中";
+		mes "仅有的两个幸存者。";
+		next;
+		mes "[宾德·海科曼]";
+		mes "后来我才明白……";
+		mes "这一切都是你早就计划好的。";
+		setquest 2071;
+		set Shinokas_Quest,1;
+		close2;
+		cutin "ein_hicman",255;
+		end;
+	}
+	else if (Shinokas_Quest == 1) {
+		mes "[宾德·海科曼]";
+		mes "混蛋！";
+		mes "我受够了";
+		mes "你的谎言！";
+		next;
+		switch(select("我不是你想的那个人！:你是怎么在那场事故中活下来的？")) {
+		case 1:
+			mes "[宾德·海科曼]";
+			mes "哈……！";
+			mes "你以为";
+			mes "我会那么轻易";
+			mes "忘掉那张";
+			mes "毁掉我人生的";
+			mes "人的脸吗？！";
+			next;
+			break;
+		case 2:
+			break;
+		}
+		next;
+		mes "[宾德·海科曼]";
+		mes "我醒来的时候，";
+		mes "正趴在那条";
+		mes "昏暗隧道的";
+		mes "废墟里。";
+		next;
+		mes "[宾德·海科曼]";
+		mes "然后我发现了……";
+		mes "你知道我发现了什么。";
+		next;
+		mes "[宾德·海科曼]";
+		mes "^333333*咳咳*^000000";
+		mes "我朋友们的尸体！";
+		mes "卡托菲、阿努托、马斯卡伦特！";
+		mes "他们都是好人，是我最好的朋友。";
+		mes "可你在哪里？！";
+		next;
+		mes "[宾德·海科曼]";
+		mes "你的尸体";
+		mes "根本找不到。我搜遍了";
+		mes "隧道，最后";
+		mes "爬了出去，";
+		mes "被人发现时已经昏迷。";
+		next;
+		mes "[宾德·海科曼]";
+		mes "我太傻了。";
+		mes "都是因为";
+		mes "那块矿石！你为了那东西";
+		mes "害死了我们的朋友，";
+		mes "也毁了我的人生！";
+		next;
+		mes "[宾德·海科曼]";
+		mes "而现在……";
+		mes "你从藏身之处";
+		mes "出来露面了。";
+		mes "你还想要我";
+		mes "怎么样？你还能";
+		mes "从我这里夺走什么？！";
+		next;
+		switch(select("我不是你以为的那个人！:我想向你道歉。")) {
+		case 1:
+			mes "[宾德·海科曼]";
+			mes "别再撒谎了！";
+			mes "你一露面";
+			mes "就又勾起了";
+			mes "我的仇恨！我从来";
+			mes "没有忘记那一天！";
+			next;
+			break;
+		case 2:
+			mes "[宾德·海科曼]";
+			mes "哈哈……";
+			mes "道歉？";
+			mes "伤害已经";
+			mes "造成了……";
+			next;
+			break;
+		}
+		mes "[宾德·海科曼]";
+		mes "现在对你";
+		mes "来说太迟了。为了";
+		mes "我的朋友们，";
+		mes "我要报仇！";
+		next;
+		mes "[宾德·海科曼]";
+		mes "受死吧！";
+		mes "^3131FF西诺卡斯^000000！！！！";
+		next;
+		mes "[宾德·海科曼]";
+		mes "...!";
+		mes "^333333*咳！咳！*^000000";
+		mes "不……！不、不是现在……";
+		mes "^333333*咳！咳！*^000000";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "...";
+		mes "我最好";
+		mes "赶紧";
+		mes "离开他！";
+		next;
+		mes "^3355FF你从海科曼身边逃开，";
+		mes "他倒在了地上。";
+		mes "最好不要再";
+		mes "刺激这位老人，";
+		mes "无论有意与否。^000000";
+		changequest 2071,2072;
+		set Shinokas_Quest,2;
+		close2;
+		cutin "ein_hicman",255;
+		end;
+	}
+	else if (Shinokas_Quest == 2) {
+		mes "^3355FF目前最好";
+		mes "避免再惹";
+		mes "这位老人生气。^000000";
+		close2;
+		cutin "ein_hicman",255;
+		end;
+	}
+	else if (Shinokas_Quest == 10) {
+		mes "^3355FF海科曼在椅子上";
+		mes "打着瞌睡。从他脸上";
+		mes "不适的神情判断，";
+		mes "他似乎正在";
+		mes "做噩梦。";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "打扰一下……";
+		next;
+		mes "[宾德·海科曼]";
+		mes "嗯……？";
+		mes ".........!!";
+		mes "哈哈哈哈哈！";
+		mes "又回来";
+		mes "挨揍了，";
+		mes "是吗，西诺卡斯？！";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "你看……！";
+		mes "我不是西诺卡斯，";
+		mes "好吗？你怎么能";
+		mes "忘了他长什么样，";
+		mes "或者他多大年纪？";
+		mes "我比他年轻多了！";
+		next;
+		mes "[宾德·海科曼]";
+		mes "什么……？";
+		next;
+		mes "[宾德·海科曼]";
+		mes "................";
+		emotion ET_SURPRISE;
+		next;
+		mes "[宾德·海科曼]";
+		mes "Uhhhh......";
+		next;
+		mes "[宾德·海科曼]";
+		mes "Huh.";
+		next;
+		if (Sex == SEX_FEMALE) {
+			mes "["+strcharinfo(0)+"]";
+			mes "And...";
+			mes "我是可爱的女孩子！";
+			mes "西诺卡斯是男的，";
+			mes "而且有点……";
+			next;
+			mes "[宾德·海科曼]";
+			mes "什么……？";
+			mes "不可能！";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "...";
+			mes "......";
+			next;
+			mes "[宾德·海科曼]";
+			mes "...";
+			mes "......";
+			next;
+		}
+		mes "[宾德·海科曼]";
+		mes "看来……";
+		mes "我犯了一个";
+		mes "天大的错误。";
+		next;
+		mes "[宾德·海科曼]";
+		mes "自从那次事故之后，大家都说我和从前不一样了。也许他们说得对。";
+		next;
+		mes "[宾德·海科曼]";
+		mes "我一次又一次犯下";
+		mes "同样的错误，也许他们说我";
+		mes "老糊涂了，说得没错。";
+		mes "你来只是为了";
+		mes "解开这个误会吗？";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Um...";
+		mes "Actually...";
+		next;
+		switch(select("把西诺卡斯的死告诉海科曼。:不要通知海科曼。")) {
+		case 1:
+			mes "["+strcharinfo(0)+"]";
+			mes "西诺卡斯";
+			mes "不久前死在了";
+			mes "Einbroch.";
+			next;
+			mes "[宾德·海科曼]";
+			mes "什、什么……？";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "西诺卡斯被";
+			mes "一些人杀了。他认为他们";
+			mes "可能就是";
+			mes "雇用你们的人。到头来，";
+			mes "他也被背叛了……";
+			next;
+			mes "[宾德·海科曼]";
+			mes "I...";
+			mes "原来如此……";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "西诺卡斯也许";
+			mes "得到了一些钱，";
+			mes "但他余生都在";
+			mes "躲藏中度过，";
+			mes "一直被追杀。";
+			next;
+			mes "[宾德·海科曼]";
+			mes "什么都不剩了。";
+			mes "我没有什么";
+			mes "可期待的了。";
+			mes "我活着只是为了";
+			mes "替朋友们报仇……";
+			next;
+			mes "[宾德·海科曼]";
+			mes "Please...";
+			mes "回到你";
+			mes "来的地方去。";
+			mes "让我一个人待着……";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "...";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "^333333海科曼是真的想";
+			mes "向西诺卡斯复仇，";
+			mes "还是因为两人曾是好友，";
+			mes "想听他把话说完？^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "^333333如果我提起";
+			mes "他们发现的是";
+			mes "依美乐心脏堆积物，";
+			mes "海科曼可能也会";
+			mes "遭到追杀，所以";
+			mes "我最好什么都别说。^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "^333333那些人为什么";
+			mes "对那件依美乐";
+			mes "心脏堆积物如此执着？它";
+			mes "真的值得这样的";
+			mes "残忍吗？不管他们是谁，";
+			mes "他们的意图都不可能良善。";
+			close2;
+			cutin "ein_hicman",255;
+			completequest 2078;
+			set Shinokas_Quest,11;
+			if (checkre(3)) {
+				if (BaseLevel < 70) getexp 30000,30000;
+				else if ((BaseLevel > 69) && (BaseLevel < 80)) getexp 40000,40000;
+				else if ((BaseLevel > 79) && (BaseLevel < 90)) getexp 70000,70000;
+				else getexp 90000,90000;
+			} else {
+				if (BaseLevel < 70) getexp 100000,80000;
+				else if ((BaseLevel > 69) && (BaseLevel < 80)) getexp 300000,100000;
+				else if ((BaseLevel > 79) && (BaseLevel < 90)) getexp 500000,300000;
+				else getexp 700000,500000;
+			}
+			end;
+		case 2:
+			mes "["+strcharinfo(0)+"]";
+			mes "Yeah...";
+			mes "没错。";
+			mes "我想解开";
+			mes "这个误会，";
+			mes "好让你能冷静下来，";
+			mes "哪怕只是一点点。";
+			next;
+			mes "[宾德·海科曼]";
+			mes "其实，你不必";
+			mes "为我的压力";
+			mes "如此担心。我觉得";
+			mes "吹过这座小镇的";
+			mes "风让人非常放松。";
+			next;
+			mes "[宾德·海科曼]";
+			mes "每当风";
+			mes "吹过，我的视线就模糊，";
+			mes "记忆也变得朦胧，";
+			mes "我所有的仇恨就这样飘散了。";
+			next;
+			mes "[宾德·海科曼]";
+			mes "如果没有风，我剩下的";
+			mes "就只有对^FF0000他^000000的仇恨。";
+			mes "也许那是我活下去的";
+			mes "唯一理由，也许我很孤独，";
+			mes "但现在才为自己";
+			mes "感到惋惜已经太迟了。";
+			close2;
+			cutin "ein_hicman",255;
+			end;
+		}
+	}
+	else {
+		mes "^3355FF海科曼在椅子上";
+		mes "打着瞌睡。从他脸上";
+		mes "不适的神情判断，";
+		mes "他似乎正在";
+		mes "做噩梦。";
+		cutin "ein_hicman",255;
+		close;
+	}
+}
+
+ein_in01,231,163,7	script	生病的老人#ein	849,{
+	if (Shinokas_Quest < 2) {
+		mes "[生病的老人]";
+		mes "...!";
+		next;
+		mes "[生病的老人]";
+		mes "呃啊～";
+		mes "痛死我了！";
+		mes "啊啊！呃啊啊！";
+		mes "我儿子";
+		mes "什么时候才能";
+		mes "从工厂回来……？！";
+		next;
+		mes "^3355FF你看着这位老人";
+		mes "在床上猛烈地翻滚，";
+		mes "只是这样看着，";
+		mes "就觉得十分尴尬。^000000";
+		close;
+	}
+	else if (Shinokas_Quest == 2) {
+		mes "[生病的老人]";
+		mes "...!";
+		next;
+		mes "[生病的老人]";
+		mes "呃啊～";
+		mes "痛死我了！";
+		mes "啊啊！呃啊啊！";
+		mes "我儿子";
+		mes "什么时候才能";
+		mes "从工厂回来……？！";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "Shi...";
+		mes "西诺卡斯？";
+		next;
+		mes "[生病的老人]";
+		mes "嗯……？";
+		mes "不……！我、我的名字是";
+		mes "西诺塔罗斯。你、你们";
+		mes "认错人了！";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "^333333这一定就是";
+		mes "海科曼在艾音贝赫";
+		mes "提到的那个西诺卡斯。";
+		mes "嗯，可是我要怎么";
+		mes "让他承认呢？^000000";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "^333333*咳嗯！*^000000";
+		mes "打扰一下……";
+		next;
+		while(1) {
+			if (.@einbech > 6) {
+				if (select("你以前听说过^3131FF海科曼^000000吗？:你不是住在^3131FF艾音贝赫^000000吗？") == 1) {
+					break;
+				}
+				mes "[生病的老人]";
+				mes "艾音贝赫……？";
+				mes "不！我从来没";
+				mes "在那里住过！";
+				next;
+				mes "^3355FF这老人";
+				mes "似乎没有在";
+				mes "说实话……^000000";
+				set .@einbech,0;
+				next;
+			}
+			else {
+				switch(select("记得矿坑塌方的事吗？:你以前不是矿工吗？:你一辈子都住在艾音布罗克吗？")) {
+				case 1:
+					mes "[生病的老人]";
+					mes "不……！";
+					mes "我不知道";
+					mes "你到底在";
+					mes "说些";
+					mes "什么！";
+					set .@einbech,.@einbech+1;
+					next;
+					break;
+				case 2:
+					mes "[生病的老人]";
+					mes "不……！";
+					mes "你、你为什么要";
+					mes "问我这种";
+					mes "问题？！";
+					set .@einbech,.@einbech+1;
+					next;
+					break;
+				case 3:
+					mes "[生病的老人]";
+					mes "是、是的！";
+					mes "我在这里";
+					mes "出生长大，";
+					mes "艾音贝——艾音布罗克！";
+					next;
+					mes "^3355FF这老人";
+					mes "似乎没有在";
+					mes "说实话……^000000";
+					if (.@einbech > 0) {
+						set .@einbech,0;
+					}
+					next;
+					break;
+				}
+			}
+		}
+		mes "["+strcharinfo(0)+"]";
+		mes "你确定";
+		mes "你对";
+		mes "那个叫";
+		mes "^3131FF海科曼^000000的人一无所知吗？";
+		next;
+		mes "[西诺卡斯]";
+		mes "不……！";
+		mes "我这辈子";
+		mes "都没见过";
+		mes "宾德·海科曼——";
+		next;
+		mes "[西诺卡斯]";
+		mes "...";
+		mes ".......";
+		emotion ET_PROFUSELY_SWEAT;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "我猜对了。";
+		mes "你就是西诺卡斯！";
+		emotion ET_KIK, playerattached();
+		next;
+		mes "[西诺卡斯]";
+		mes "可恶！";
+		mes "我暴露了";
+		mes "身份！";
+		mes "等、等等！你到底";
+		mes "知道多少？！";
+		emotion ET_HUK;
+		next;
+		mes "[西诺卡斯]";
+		mes "是^3131FF他们^000000派你来的吗？";
+		mes "^333333*叹气*^000000我想这就是";
+		mes "结局了。我永远";
+		mes "都无法在死前";
+		mes "解开这个秘密了。";
+		next;
+		mes "[西诺卡斯]";
+		mes "Okay.";
+		mes "动手吧。";
+		mes "我准备好了……";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "全部告诉我吧";
+		mes "所有你知道的、";
+		mes "关于那起";
+		mes "矿山隧道";
+		mes "在你和";
+		mes "海科曼身边塌陷的事件。";
+		next;
+		mes "[西诺卡斯]";
+		mes "...?";
+		mes "Errr....";
+		mes "你不是";
+		mes "来杀我的吧？";
+		emotion ET_QUESTION;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "不……！";
+		mes "我是来查";
+		mes "出真相的！";
+		next;
+		mes "[西诺卡斯]";
+		mes "也就是说……";
+		mes "我还剩一点时间。";
+		mes "这一定是命运！";
+		mes "好吧，我告诉你";
+		mes "发生了什么。不过这是";
+		mes "一个很长的故事……";
+		changequest 2072,2073;
+		set Shinokas_Quest,3;
+		close;
+	}
+	else if (Shinokas_Quest == 3) {
+		mes "[西诺卡斯]";
+		mes "你对那起事故";
+		mes "知道多少？不，";
+		mes "等等。别回答。";
+		mes "我不想听。";
+		next;
+		mes "[西诺卡斯]";
+		mes "我承认。没错。";
+		mes "我在朋友背后";
+		mes "捅了一刀。那是";
+		mes "无法饶恕的罪，会";
+		mes "折磨我直到我死的那天。";
+		next;
+		mes "[西诺卡斯]";
+		mes "我为了钱出卖了";
+		mes "朋友。我毁了那条";
+		mes "隧道，害死了他们。但";
+		mes "我想我也是被耍了。^3131FF他们^000000从来没打算遵守约定。";
+		next;
+		mes "[西诺卡斯]";
+		mes "在我毁掉隧道之后，";
+		mes "他们就把目标转向我，我";
+		mes "余生都在被追捕、四处逃亡中度过。那^3131FF矿石^000000到底是什么，为什么那么重要？";
+		next;
+		mes "[西诺卡斯]";
+		mes "我得进一步了解";
+		mes "那种矿石，看看是否值得为之送命。所以我冒险潜入了艾音布罗克。据说，和我们发现的那种相似的矿石，最近";
+		mes "被运到了这里。";
+		next;
+		select("找到了吗？");
+		mes "[西诺卡斯]";
+		mes "不，还没有。";
+		mes "我每晚都在";
+		mes "寻找那种矿石。";
+		mes "白天，这位";
+		mes "铁匠一直";
+		mes "设法把我藏起来，躲开那些人。";
+		next;
+		mes "[西诺卡斯]";
+		mes "但我也安全不了";
+		mes "多久了。听着，我";
+		mes "不是什么圣人，但在我死之前，";
+		mes "我想做最后一件事，";
+		mes "看看这矿石到底";
+		mes "有什么了不起的……";
+		next;
+		select("等等，是谁在追你？");
+		mes "[西诺卡斯]";
+		mes "是谁想杀我？";
+		mes "就是当初雇用我和";
+		mes "朋友们去挖那种矿石的人。我们以为他们只是普通商人，";
+		mes "可是……他们很危险。";
+		next;
+		mes "[西诺卡斯]";
+		mes "我把一切都告诉你了，";
+		mes "现在你也知道，我的";
+		mes "日子可能不多了。";
+		mes "请帮一个老人一个忙，";
+		mes "在艾音布罗克寻找那种";
+		mes "奇异又神秘的矿石。";
+		next;
+		mes "[西诺卡斯]";
+		mes "我在这座镇上";
+		mes "学到的第一件事，就是最富有的家族是卡佩尔泰恩家。只有有钱有势的人，才可能牵扯进这么大的事。";
+		next;
+		mes "[西诺卡斯]";
+		mes "你能去";
+		mes "卡佩尔泰恩庄园";
+		mes "找那种矿石吗？它就在";
+		mes "去机场的路上，应该不难找。毕竟他们是艾音布罗克最富有的人。";
+		next;
+		mes "[西诺卡斯]";
+		mes "我太老、太虚弱，离不开";
+		mes "这栋房子，而且那些人说不定会找到我。如果你能体谅我的处境，请查清楚卡佩尔泰恩家有没有什么独特的矿石……";
+		changequest 2073,2074;
+		set Shinokas_Quest,4;
+		close;
+	}
+	else if (Shinokas_Quest == 4) {
+		mes "[西诺卡斯]";
+		mes "Please...";
+		mes "查清楚卡佩尔泰恩家";
+		mes "是不是藏着某种独特的";
+		mes "矿石。他们的庄园就在";
+		mes "通往机场的路上。";
+		close;
+	}
+	else if (Shinokas_Quest == 5) {
+		mes "[西诺卡斯]";
+		mes "那么，你在";
+		mes "卡佩尔泰恩家";
+		mes "那边查到了什么吗？";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "这个嘛，卡佩尔泰恩先生";
+		mes "有点粗暴，但";
+		mes "我没发现什么";
+		mes "真正可疑的东西。";
+		next;
+		mes "[西诺卡斯]";
+		mes "Huh...";
+		mes "那看来是";
+		mes "我搞错了……";
+		mes "还能在哪里呢？";
+		next;
+		mes "[西诺卡斯]";
+		mes "对了！艾音布罗克那座";
+		mes "巨大的工厂！";
+		mes "还有什么比那里";
+		mes "更可疑？那里有大批";
+		mes "工人，但没人真正";
+		mes "知道他们在里面做什么……";
+		next;
+		mes "[西诺卡斯]";
+		mes "如果那里如此神秘，";
+		mes "说不定他们就把";
+		mes "矿石藏在那里。";
+		mes "请尽快去";
+		mes "工厂搜寻";
+		mes "那种矿石。";
+		changequest 2074,2075;
+		set Shinokas_Quest,6;
+		close;
+	}
+	else if (Shinokas_Quest == 6) {
+		if (EinFactory > 12) {
+			mes "[西诺卡斯]";
+			mes "那么……？";
+			mes "你在工厂里";
+			mes "有没有查到";
+			mes "什么新线索？";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "Well...";
+			mes "工厂里有很多";
+			mes "可疑的勾当，";
+			mes "但我不觉得";
+			mes "其中任何一件";
+			mes "和你说的那种矿石有关。";
+			next;
+			mes "[西诺卡斯]";
+			mes "可恶……";
+			mes "那他们把它";
+			mes "藏在哪了？你觉得";
+			mes "那种矿石";
+			mes "可能在什么地方？";
+			next;
+			switch(select("机场:工厂:火车站:飞空艇维修厂:实验室")) {
+			case 1:
+				mes "[西诺卡斯]";
+				mes "No...";
+				mes "机场总是";
+				mes "挤满了人。";
+				mes "把那么重要的东西";
+				mes "藏在那样的地方";
+				mes "可不是好主意。";
+				close;
+			case 2:
+				mes "[西诺卡斯]";
+				mes "你不是刚查过";
+				mes "工厂吗？";
+				mes "你在那里";
+				mes "找不到任何";
+				mes "关于矿石的线索……";
+				close;
+			case 3:
+				mes "[西诺卡斯]";
+				mes "Hmm...";
+				mes "火车站里总是人来人往，";
+				mes "要把像矿石这么重要的东西藏在那里，可不是上策。";
+				close;
+			case 4:
+				mes "[西诺卡斯]";
+				mes "飞空艇？嗯，它确实";
+				mes "靠某种神秘的力量";
+				mes "飞行……但我已经亲自查过";
+				mes "飞空艇维修厂了。";
+				mes "我在那里没发现";
+				mes "矿石的任何踪迹。";
+				close;
+			case 5:
+				mes "[西诺卡斯]";
+				mes "...!";
+				mes "对。对……！";
+				mes "很可能就是那里！";
+				mes "我怎么没想到";
+				mes "实验室呢？";
+				mes "这太合理了！";
+				next;
+				mes "[西诺卡斯]";
+				mes "我有很好的预感，";
+				mes "对这件事。请你潜入";
+				mes "那间实验室，";
+				mes "看看能不能找到矿石！";
+				next;
+				mes "[西诺卡斯]";
+				mes "Remember...";
+				mes "不是随便什么人";
+				mes "都能进那种";
+				mes "地方的。但我相信";
+				mes "你会有办法的。";
+				changequest 2075,2076;
+				set Shinokas_Quest,7;
+				close;
+			}
+		}
+		else {
+			mes "[西诺卡斯]";
+			mes "我实在没脸";
+			mes "开口，也不是";
+			mes "故意为难你，";
+			mes "不过能不能请你";
+			mes "再去工厂查一查";
+			mes "有没有矿石的踪迹？";
+			close;
+		}
+	}
+	else if (Shinokas_Quest == 9) {
+		mes "["+strcharinfo(0)+"]";
+		mes "西诺卡斯，";
+		mes "我找到东西了！";
+		next;
+		mes "[西诺卡斯]";
+		mes "You...";
+		mes "回……来了……";
+		mes "就算……已经……";
+		mes "太迟了。";
+		mes "^333333*咳咳*^000000";
+		next;
+		mes "^3355FF你扶西诺卡斯";
+		mes "坐起来，却发现";
+		mes "你的双手已经";
+		mes "沾满了他的血。^000000";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "血……？！";
+		mes "西诺卡斯！";
+		mes "是谁把你弄成这样的？";
+		mes "我、我们得叫人帮忙！";
+		next;
+		mes "[西诺卡斯]";
+		mes "No...";
+		mes "已经";
+		mes "太迟了。";
+		mes "我早就";
+		mes "该死了……";
+		next;
+		mes "[西诺卡斯]";
+		mes "^333333*咳*^000000";
+		mes "我唯一遗憾的，";
+		mes "是我一直没能";
+		mes "向我的";
+		mes "朋友们道歉……^333333*咳！*^000000";
+		next;
+		mes "[西诺卡斯]";
+		mes "不过你";
+		mes "查到了吗？你、你";
+		mes "有没有查清楚";
+		mes "那种矿石到底";
+		mes "有什么特别？它、它";
+		mes "到底是什么……真的吗？";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "那是……";
+		next;
+		input .@input$;
+		mes "["+strcharinfo(0)+"]";
+		mes "那是";
+		mes "^3131FF"+.@input$+"^000000!";
+		next;
+		if (.@input$ == "Ymir") {
+			mes "[西诺卡斯]";
+			mes "伊、伊美乐……？";
+			mes "伊美乐的心、心脏？";
+			mes "能够支配";
+			mes "世界的力量……我们真的";
+			mes "找到了";
+			mes "了不起的东西，不是吗？";
+			next;
+			mes "[西诺卡斯]";
+			mes "我记得……";
+			mes "我们第一次";
+			mes "看到它的时候。我们……";
+			mes "我们那么兴奋。";
+			mes "那么惊叹，那么自豪……";
+			next;
+			mes "[西诺卡斯]";
+			mes "可是挖出……";
+			mes "那么了不起的东西……";
+			mes "之所以可能，";
+			mes "是因为—— ^333333*咳*^000000 ——";
+			mes "我、我的伙伴们……";
+			next;
+			mes "[西诺卡斯]";
+			mes "^333333*咳*^000000";
+			mes "天越来越……";
+			mes "暗了……我……";
+			mes "不用再";
+			mes "逃了。";
+			next;
+		}
+		else {
+			mes "[西诺卡斯]";
+			mes "等、等等……！";
+			mes "你说什么……";
+			mes "我听不清——";
+			mes "^333333*咳咳！*^000000";
+			next;
+		}
+		mes "["+strcharinfo(0)+"]";
+		mes "不……！";
+		mes "告诉我是谁";
+		mes "把你弄成这样的！";
+		mes "他们在哪？";
+		mes "求求你，跟我说话！";
+		next;
+		mes "[西诺卡斯]";
+		mes "什、什么……？";
+		mes "我告诉过你。";
+		mes "他、他们本——";
+		next;
+		mes "[西诺卡斯]";
+		mes "...";
+		mes "......";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "不！";
+		mes "西诺卡斯！";
+		mes "为什么，神啊？";
+		mes "Why...";
+		changequest 2077,2078;
+		set Shinokas_Quest,10;
+		close;
+	}
+	else if (Shinokas_Quest > 9) {
+		mes "^3355FF西诺卡斯的";
+		mes "身体已经";
+		mes "变得冰冷。^000000";
+		close;
+	}
+	else {
+		mes "[西诺卡斯]";
+		mes "...";
+		mes "......";
+		close;
+	}
+}
+
+ein_in01,32,133,7	script	女仆#ein	850,{
+	if (Shinokas_Quest == 4) {
+		mes "[女仆]";
+		mes "你刚才是问我";
+		mes "有没有在这附近";
+		mes "见过什么矿石吗？";
+		mes "真奇怪……";
+		next;
+		mes "[女仆]";
+		mes "这个嘛，我在这个家";
+		mes "已经待了很";
+		mes "长时间了。我可以保证，";
+		mes "这个家里没有什么秘密";
+		mes "能瞒得过我！";
+		next;
+		mes "[女仆]";
+		mes "很抱歉，不过我想";
+		mes "我们这里没有什么矿石，";
+		mes "不管是特别的还是普通的，";
+		mes "这座庄园里都没有。你究竟";
+		mes "要矿石做什么？";
+		set Shinokas_Quest,5;
+		close;
+	}
+	else {
+		mes "[女仆]";
+		mes "这些盘子";
+		mes "怎么也";
+		mes "擦不完……！";
+		close;
+	}
+}
+
+ein_in01,254,35,1	script	科学家#ein	749,{
+	mes "[科学家]";
+	mes "^333333*咕哝咕哝*^000000";
+	next;
+	mes "[科学家]";
+	mes "嗯……？";
+	mes "你是怎么";
+	mes "进来的？";
+	next;
+	mes "["+strcharinfo(0)+"]";
+	mes "哦！啊……";
+	mes "我是新来的……";
+	mes "守卫。很";
+	mes "高兴见到你。";
+	next;
+	mes "[科学家]";
+	mes "哦。是啊。";
+	mes "很高-兴-见到你。";
+	mes "..............";
+	mes "^333333*咕哝咕哝*^000000";
+	if (Shinokas_Quest == 7) {
+		next;
+		switch(select("怎么了？:回头见。")) {
+		case 1:
+			mes "[科学家]";
+			mes "怎么了……？！";
+			mes "哦，别提了！";
+			mes "我被困在这儿干所有的";
+			mes "活儿，可实验室主任倒好，天天往外跑！";
+			next;
+			mes "[科学家]";
+			mes "我在这儿当牛做马，";
+			mes "他却在";
+			mes "那艘飞空艇上，";
+			mes "忙着跟那个";
+			mes "女人调情。天啊……！";
+			mes "我真是气死了！";
+			set Shinokas_Quest,8;
+			close;
+		case 2:
+			mes "[科学家]";
+			mes "Right.";
+			mes "Yeah.";
+			mes "回头见，兄弟。";
+			close;
+		}
+	}
+	else if (Shinokas_Quest == 8) {
+		next;
+		mes "[科学家]";
+		mes "天哪！";
+		mes "让主任";
+		mes "进来";
+		mes "干点活，";
+		mes "哪怕偶尔一次也不行吗？！";
+		next;
+		mes "[科学家]";
+		mes "我说，拜托！";
+		mes "我不该替他";
+		mes "扛这些工作！";
+		close;
+	}
+	close;
+}
+
+ein_in01,266,27,3	script	不明物质#ein	111,{
+	mes "^3355FF有东西";
+	mes "连在一台巨大的";
+	mes "机器上，满是电线和";
+	mes "一圈圈带刺铁丝。^000000";
+	close;
+}
+		
+einbroch,51,46,5	script	实验室士兵#ein-1	852,{
+	mes "[实验室守卫]";
+	mes "此区域";
+	mes "禁止进入。";
+	mes "请离开";
+	mes "immediately.";
+	close;
+}
+	
+einbroch,51,56,5	script	实验室士兵#ein-2	852,{
+	mes "[实验室守卫]";
+	mes "呃……！";
+	mes "有一股";
+	mes "难闻的尘土味";
+	mes "就在我嘴里，";
+	mes "怎么都去不掉！";
+	next;
+	mes "[实验室守卫]";
+	mes "^333333*叹气*^000000";
+	mes "我想回家。";
+	mes "拿点漱口水。";
+	mes "你懂的。随便什么。";
+	close;
+}
+
+airplane,31,77,5	script	醉汉#ein	853,{
+	if (Shinokas_Quest == 8) {
+		mes "[醉汉]";
+		mes "好，好啦……";
+		mes "爸爸这次";
+		mes "一定能赢到";
+		mes "一些苹果！";
+		next;
+		mes "[醉汉]";
+		mes "来吧！";
+		mes "^3131FF伊美乐的心脏^000000是";
+		mes "站在我这边！冲！";
+		emotion ET_GO;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "嗯……？";
+		mes "他刚才说什么？";
+		mes "好像很重要！";
+		next;
+		mes "^3355FF*骰子滚动作响*^000000";
+		next;
+		emotion ET_CHUP;
+		mes "[卡西]";
+		mes "我总共有^FF000011^000000";
+		mes "而你总共有^FF00005^000000。";
+		mes "这局你输了。很";
+		mes "抱歉，不过希望我们下次";
+		mes "时间玩一次吧。";
+		next;
+		mes "[醉汉]";
+		mes "哇啊啊啊啊啊啊！";
+		mes "苹果！我的苹果！";
+		mes "苹果，我还要更多……！";
+		if (countitem(512) < 11) {
+			close;
+		}
+		else if ((countitem(512) > 10) && (countitem(512) < 100)) {
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "你想要";
+			mes "我的一些吗？";
+			next;
+			mes "[醉汉]";
+			mes "什么……？";
+			mes "我什么都做不了，";
+			mes "就凭这么点苹果！";
+			mes "我可是大玩家，";
+			mes "这可是高赌注的游戏！";
+			close;
+		}
+		else {
+			delitem 512,countitem(512); //Apple
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "你想要";
+			mes "我的一些吗？";
+			next;
+			mes "[醉汉]";
+			mes "什——？是的……";
+			mes "当然要！给我";
+			mes "一些你的苹果！";
+			mes "呀啊啊啊啊啊！";
+			mes "我回来了，宝贝！";
+			next;
+			mes "[醉汉]";
+			mes "现在，去赢！";
+			mes "爸爸需要爱……";
+			mes "该从";
+			mes "破烂变成体面了！";
+			next;
+			mes "^3355FF*骰子滚动作响*^000000";
+			next;
+			if (rand(1,10) > 7) {
+				emotion ET_CHUP;
+				mes "[卡西]";
+				mes "我总共得到^FF00008^000000，";
+				mes "而你总共有^FF000011^000000。";
+				mes "恭喜，你赢了！";
+				mes "我把赢的钱给你，";
+				mes "我们改天再玩~";
+				next;
+			}
+			else {
+				emotion ET_HUK;
+				mes "[卡西]";
+				mes "Oooh...";
+				mes "我总共得到^FF000010^000000，";
+				mes "而你总共有^FF00007^000000。";
+				mes "很遗憾，你又";
+				mes "输了。下次运气好一点……";
+				next;
+				mes "[醉汉]";
+				mes "哇啊啊啊啊啊啊啊！";
+				mes "哇啊啊啊啊啊！";
+				close;
+			}
+		}
+		mes "[醉汉]";
+		mes "哇哈哈哈哈哈！";
+		mes "哇哈哈哈哈哈哈哈哈！";
+		mes "所以他们才叫我";
+		mes "''复活小子！''";
+		mes "我总是能东山再起！";
+		next;
+		mes "[醉汉]";
+		mes "哦对，没错！";
+		mes "你……！是你借给";
+		mes "我那些幸运";
+		mes "苹果的。^333333*嗝*^000000";
+		next;
+		mes "[醉汉]";
+		mes "我是库尔申堡！";
+		mes "多亏了你，我";
+		mes "现在一直在赢！";
+		mes "哈哈哈！谢、谢谢你~";
+		mes "^333333*嗝、嗝、嗝！*^000000";
+		next;
+		switch(select("刚才说的伊美乐的心脏是怎么回事？:嘿嘿，不客气。")) {
+		case 1:
+			mes "[醉汉]";
+			mes "什么……？";
+			mes "伊美乐的心脏？";
+			mes "你怎么会";
+			mes "知道那个？^333333*嗝*^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "你、你……！";
+			mes "你刚才还在大喊";
+			mes "''伊美乐的心脏站在我";
+			mes "这边''，一边还";
+			mes "拿那些苹果在赌！";
+			next;
+			mes "[醉汉]";
+			mes "什么……？！";
+			mes "不会吧~";
+			mes "呃……？我有吗……？";
+			next;
+			mes "[醉汉]";
+			mes "嘿嘿……";
+			mes "其实我";
+			mes "不该";
+			mes "谈这个。身为";
+			mes "实验室主任，我曾发誓";
+			mes "对伊美乐的心脏保密。";
+			next;
+			mes "[醉汉]";
+			mes "可我在乎什么？！";
+			mes "他们想要的只是";
+			mes "我的研究成果！";
+			mes "他们根本不珍惜";
+			mes "我的工作！我的头衔";
+			mes "根本一文不值！";
+			next;
+			mes "[醉汉]";
+			mes "你不知道我在实验室";
+			mes "被关了多少年，也";
+			mes "不知道工作条件越来越差。管他呢！只要我在项目上做出点进展，就能一直拿钱！";
+			next;
+			select("项目？");
+			next;
+			mes "[醉汉]";
+			mes "对，我们在研究";
+			mes "伊美乐的心脏。它很久以前";
+			mes "在^3131FF艾音贝赫^000000被发现，";
+			mes "现在就在我们的实验室里。";
+			next;
+			mes "[醉汉]";
+			mes "大家都知道它应该";
+			mes "蕴含着某种传说中的力量，";
+			mes "但连我都对它的";
+			mes "能力感到惊讶。它既可怕又神奇，既令人恐惧";
+			mes "又令人惊叹……";
+			next;
+			mes "[醉汉]";
+			mes "So...";
+			mes "我想……";
+			mes "它甚至可能";
+			mes "拥有";
+			mes "让我赢骰子游戏的力量！";
+			mes "哇哈哈——^333333*嗝！*^000000";
+			next;
+			mes "["+strcharinfo(0)+"]";
+			mes "^333333（我看到的那个东西";
+			mes "连接着那些";
+			mes "研究所里的线路吧";
+			mes "那一定是";
+			mes "一块^3131FF依美乐心脏^333333。我得";
+			mes "把这件事告诉西诺卡斯。）^000000";
+			changequest 2076,2077;
+			set Shinokas_Quest,9;
+			close;
+		case 2:
+			mes "[醉汉]";
+			mes "哈哈哈哈！";
+			mes "你太厉害了！";
+			mes "我也感觉很好！";
+			mes "一切都好极了！";
+			mes "哇哈哈哈哈哈！";
+			mes "^333333*打嗝*^000000";
+			close;
+		}
+	}
+	else if (Shinokas_Quest == 9) {
+		mes "[醉汉]";
+		mes "哈哈哈哈！";
+		mes "你太厉害了！";
+		mes "我感觉很好！";
+		mes "一切都好极了！";
+		mes "哇哈哈哈哈哈！";
+		mes "^333333*打嗝*^000000";
+		close;
+	}
+	else {
+		mes "[醉汉]";
+		mes "好啦好啦……";
+		mes "爸爸这次";
+		mes "一定会赢到苹果";
+		mes "的！";
+		next;
+		mes "[醉汉]";
+		mes "上吧！";
+		mes "^3131FF依美乐心脏^000000 站在";
+		mes "我这边！冲啊！";
+		emotion ET_GO;
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "咦……？";
+		mes "他刚才说什么？";
+		mes "好像很重要！";
+		next;
+		mes "^3355FF*骰子滚动作响*^000000";
+		next;
+		emotion ET_CHUP;
+		mes "[卡西]";
+		mes "我总共有 ^FF00003^000000";
+		mes "而你总共有 ^FF00002^000000。";
+		mes "这局你输了。很";
+		mes "抱歉，但我希望我们";
+		mes "时间玩一次吧。";
+		next;
+		mes "[醉汉]";
+		mes "哇啊啊啊啊啊啊啊！";
+		mes "苹果！我的苹果！";
+		close;
+	}
+}
+
+ein_in01,231,170,0	script	#kenka	-1,2,2,{
+OnTouch_:
+	if (Shinokas_Quest > 8) {
+		mes "^3355FF敞开的窗户嘎吱作响";
+		mes "你走进房间，";
+		mes "迎面而来的是一阵";
+		mes "寒意。一串红色的脚印";
+		mes "就躺在你脚边。^000000";
+		next;
+		mes "^3355FF一条灰色的床单";
+		mes "皱巴巴地铺在床上，";
+		mes "但你能看到褶皱间";
+		mes "有暗红色的污渍。^000000";
+		close;
+	}
+	end;
+}
+
+einbech,57,210,3	script	年轻男子#Shinokas_Quest	855,{
+	mes "[年轻男子]";
+	mes "在酒馆后面，";
+	mes "你会看到那位老人";
+	mes "他总在自言自语";
+	mes "念叨着什么。";
+	next;
+	mes "[年轻男子]";
+	mes "有时他看起来非常";
+	mes "愤怒，但有时又显得";
+	mes "非常消沉。他一定";
+	mes "经历过非常可怕的事。我忍不住为这位老人感到难过。";
+	next;
+	mes "[年轻男子]";
+	mes "他说的话、做的事";
+	mes "很多都很奇怪。";
+	mes "看到有人";
+	mes "这把年纪还这样，真让人难过，但";
+	mes "这也让我好奇";
+	mes "他到底遭遇了什么。";
+	close;
+}
+
+// Typing Test :: ein_main_ma1
+//============================================================ 
+einbroch,51,52,0	script	警卫#ein	45,1,1,{
+	end;
+
+OnTouch_:
+	if (((Shinokas_Quest == 7) || (lhz_heart == 9)) || (lhz_heart == 10)) {
+		mes "[安全系统]";
+		mes "^8B0000*哔 啵*^000000";
+		mes "限制进入区域。";
+		mes "请通过系统";
+		mes "进行身份验证。";
+		next;
+		switch(select("身份验证:信息:取消")) {
+		case 1:
+			mes "[安全系统]";
+			mes "请尽快输入以下";
+			mes "密码，限时60秒。";
+			mes "否则将导致";
+			mes "锁定。请稍候。";
+			next;
+			set .@startseconds,gettimetick(1);
+			mes "[安全系统]";
+			switch(rand(1,7)) {
+			case 1:
+				set .@word1$,"burrdingdingdilidingdingphoohudaambandoorabambarambambamburanbamding";
+				set .@word2$,"burapaphurarlandreamduranbatuhiwooikabamturubamdingding";
+				mes "^3CBCBC"+.@word1$+"^000000";
+				next;
+				input .@input1$;
+				mes "[安全系统]";
+				mes "^FF1493"+.@word2$+"^000000";
+				break;
+			case 2:
+				set .@word1$,"...silence. quiet benevolence... soul mate... wonder. enigma... cloud.";
+				set .@word2$,"opeN,Open!op3n.openOpen0p3nOpEn0pen`open'0Pen open?open!111OPENSESAME";
+				mes "^3CBCBC"+.@word1$+"^000000";
+				next;
+				input .@input1$;
+				mes "[安全系统]";
+				mes "^FF1493"+.@word2$+"^000000";
+				break;
+			case 3:
+				set .@word1$,"Coboman no chikara-yumei na chikara-daiookii na chikara da ze! COBO ON";
+				set .@word2$,"hfjdkeldjsieldjshfjdjeiskdlefvbd";
+				mes "^3CBCBC"+.@word1$+"^000000";
+				next;
+				input .@input1$;
+				mes "[安全系统]";
+				mes "^FF1493"+.@word2$+"^000000";
+				break;
+			case 4:
+				set .@word1$,"belief love luck grimace sweat rush folktale rodimus optimus bumblebee";
+				set .@word2$,"LiGhTsPeEd RiGhT SPEed LeFT TURn RiGhT BuRn OrIGInAL GaNgSteR SmACk";
+				mes "^3CBCBC"+.@word1$+"^000000";
+				next;
+				input .@input1$;
+				mes "[安全系统]";
+				mes "^FF1493"+.@word2$+"^000000";
+				break;
+			case 5:
+				set .@word1$,"By the power of p-po-poi-po-poi-poin-poing GOD-POING. I NEVER LOSE!";
+				set .@word2$,"uNflAPPaBLe LoVaBLe SeCreTs AnD BoWLiNg aGaINST tHe KarMA of YoUtH";
+				mes "^3CBCBC以啵-啵-啵因-啵因-啵因之力";
+				mes "神之啵因。我绝不会输！^000000";
+				next;
+				input .@input1$;
+				mes "[安全系统]";
+				mes "^FF1493"+.@word2$+"^000000";
+				break;
+			case 6:
+				set .@word1$,"You give me no choice. I guess it's time for me to reveal my secret...";
+				set .@word2$,"fReeDoM eCstAcy JoUrnaLiSm ArMpIt DisCoverY hEaDaChE MoonbeAmS jUsTiCE";
+				mes "^3CBCBC"+.@word1$+"^000000";
+				next;
+				input .@input1$;
+				mes "[安全系统]";
+				mes "^800080"+.@word2$+"^000000";
+				break;
+			case 7:
+				set .@word1$,"I'm the King of All Weirdos! Now you know of my true power. Obey~!";
+				set .@word2$,"uNflAPPaBLe LoVaBLe SeCreTs AnD BoWLiNg aGaINST tHe KarMA of YoUtH";
+				mes "^3CBCBC"+.@word1$+"^000000";
+				next;
+				input .@input1$;
+				mes "[安全系统]";
+				mes "^800080"+.@word2$+"^000000";
+			}
+			next;
+			input .@input2$;
+			set .@endtime,gettimetick(1);
+			set .@time,.@endtime-.@startseconds;
+			mes "[安全系统]";
+			if ((.@input1$ == .@word1$) && (.@input2$ == .@word2$)) {
+				if (.@time > 60) {
+					mes "时间到。";
+					mes "你用了 ^ff0000" + .@time + "秒^000000";
+					mes "才输入完";
+					mes "密码。正在启动";
+					mes "锁定。拒绝进入。";
+					close;
+				}
+				else {
+					mes "你用了 ^ff0000" + .@time + "秒^000000";
+					mes "才输入完";
+					mes "密码。正在启动";
+					mes "覆盖。允许进入。";
+					close2;
+					warp "ein_in01",283,25;
+					end;
+				}
+			}
+			else {
+				mes "你未能通过";
+				mes "身份验证";
+				mes "检查。拒绝进入。";
+				close;
+			}
+		case 2:
+			mes "[安全系统]";
+			mes "你必须使用";
+			mes "安全系统才能";
+			mes "进入";
+			mes "艾音布罗克研究所。";
+			next;
+			mes "[安全系统]";
+			mes "系统会给你";
+			mes "一组密码，你";
+			mes "必须在60秒内";
+			mes "正确输入。";
+			mes "否则你将";
+			mes "无法通过安全检查。";
+			next;
+			mes "[安全系统]";
+			mes "如果你超过";
+			mes "3分钟才";
+			mes "输入密码，";
+			mes "安全系统";
+			mes "将启动锁定。";
+			close;
+		case 3:
+			mes "[安全系统]";
+			mes "你已取消";
+			mes "身份安全检查。";
+			close;
+		}
+	}
+	else {
+		mes "^3355FF门锁着。";
+		mes "你无法进入。^000000";
+		close;
+	}
+}
+
+// Lovers Quest :: ein_ryu
+//============================================================ 
+ein_in01,31,138,3	script	卡拉#ein	90,{
+	if (checkweight(908,70) == 0) {
+		mes "^3355FF请稍等！";
+		mes "你现在携带的";
+		mes "东西太多了。";
+		mes "请使用卡普拉服务";
+		mes "存放一些物品后";
+		mes "再回来。^000000";
+		close;
+	}
+	if (BaseLevel < 60) {
+		mes "[卡拉]";
+		mes "你好，冒险者。";
+		mes "我们的城市对你来说";
+		mes "大概也只是";
+		mes "待不了几天的";
+		mes "另一个地方吧。";
+		next;
+		mes "[卡拉]";
+		mes "你一定拥有很多";
+		mes "自由。真羡慕你。我无法";
+		mes "做自己想做的事。我甚至";
+		mes "没有勇气告诉";
+		mes "家人我真正想要什么，";
+		mes "更别说改变这里的一切了……";
+		next;
+		mes "[卡拉]";
+		mes "那是什么感觉？";
+		mes "想去哪里";
+		mes "就去哪里，跟随";
+		mes "内心真正的渴望？";
+		mes "我多么希望能";
+		mes "做到那样……";
+		close;
+	}
+	if (EIN_LOVERQ == 17) {
+		mes "[卡拉]";
+		mes "太感谢你了！";
+		mes "我会尽力说服";
+		mes "父母接受我们的";
+		mes "关系。这会很难，";
+		mes "但这是很好的第一步～";
+		next;
+		mes "[卡拉]";
+		mes "我希望我们大家都能";
+		mes "一起努力改善";
+		mes "艾音贝赫与";
+		mes "艾音布罗克的关系。两镇之间的";
+		mes "仇恨必须终结……";
+		next;
+		mes "[卡拉]";
+		mes "我真的很感激";
+		mes "你为我们大家";
+		mes "所做的一切。我会祈祷";
+		mes "你平安，冒险者。";
+		close;
+	}
+	if (EIN_LOVERQ == 16) {
+		mes "[卡拉]";
+		mes "我刚听母亲说";
+		mes "她打算和";
+		mes "克黎泽喝茶！我确信";
+		mes "这都多亏了你～";
+		next;
+		mes "[卡拉]";
+		mes "我从没想过";
+		mes "这么美好的事";
+		mes "会发生。";
+		mes "我太高兴了，都快哭了……";
+		mes "我会永远感激";
+		mes "你所做的一切。";
+		next;
+		mes "[卡拉]";
+		mes "我觉得自己真傻，";
+		mes "竟以为一切都毫无希望。";
+		mes "我会尽最大努力让";
+		mes "父母接受克黎泽，";
+		mes "总有一天我们会结婚～";
+		next;
+		mes "[卡拉]";
+		mes "我能给你的";
+		mes "不多，但我可以教你";
+		mes "一个我们家的秘技。";
+		mes "这是一种让人精神焕发的按摩";
+		mes "手法，只要十秒";
+		mes "就能让你健康许多。";
+		next;
+		mes "[卡拉]";
+		mes "那么，请脱下";
+		mes "你的装备，";
+		mes "站着别动，";
+		mes "我来按摩。刚";
+		mes "开始可能会有点疼……";
+		nude;
+		next;
+		mes "^3355FF*揉 揉 揉*";
+		mes "*捏 捏 捏*";
+		mes "*喀 喀喀喀——喀喀*";
+		mes "*咔 咔 喀啊啊啊啊*";
+		mes "*揉 喀啊啊啊啊啊啊*^000000";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "Ooooooooh...";
+		mes "我觉得好";
+		mes "酸痛，却又";
+		mes "好舒服。";
+		mes "等等。现在我只";
+		mes "觉得好舒服～";
+		percentheal 100,0;
+		set EIN_LOVERQ,17;
+		if (checkre(3)) {
+			if (BaseLevel < 41) getexp 61,0;
+			else if (BaseLevel < 61) getexp 600,0;
+			else if (BaseLevel < 81) getexp 3000,0;
+			else if (BaseLevel < 99) getexp 20000,0;
+			else getexp 30000,0;
+		} else {
+			if (BaseLevel < 41) getexp 610,0;
+			else if (BaseLevel < 61) getexp 6000,0;
+			else if (BaseLevel < 81) getexp 30000,0;
+			else getexp 200000,0;
+		}
+		next;
+		mes "[卡拉]";
+		mes "怎么样？";
+		mes "希望你觉得清爽。";
+		mes "请理解，";
+		mes "这是我用来表达感谢";
+		mes "所能给的最好的东西了。";
+		next;
+		mes "[卡拉]";
+		mes "再一次";
+		mes "衷心感谢";
+		mes "你，"+ strcharinfo(0) +".";
+		mes "我会一直祈祷";
+		mes "你旅途平安";
+		mes "一路顺风～";
+		completequest 8088;
+		close;
+	}
+	if ((EIN_LOVERQ == 5) && (countitem(712) > 0)) {
+		mes "[卡拉]";
+		mes "你和克黎泽";
+		mes "说过话了？他";
+		mes "怎么样？他说了什么？";
+		next;
+		mes "[卡拉]";
+		mes "哦……？";
+		mes "他让你把";
+		mes "这朵花";
+		mes "送给我？真贴心～";
+		mes "非常感谢你，";
+		mes "善良的冒险者～";
+		next;
+		mes "[卡拉]";
+		mes "啊，我真失礼！";
+		mes "我一直叫你";
+		mes "''冒险者''，";
+		mes "可你一直在";
+		mes "帮我！能请你";
+		mes "告诉我你的名字吗？";
+		next;
+		input .@input$;
+		if (.@input$ == strcharinfo(0)) {
+			mes "[卡拉]";
+			mes "啊，" + strcharinfo(0) + "！";
+			mes "多好听的名字～";
+			mes "我保证我绝不会";
+			mes "忘记。哦，如果你路过艾音贝赫，能替我谢谢克黎泽送的花吗？";
+			next;
+			mes "[卡拉]";
+			mes "还、还有……还有……";
+			mes "请告诉他";
+			mes "我真的很想他。";
+			mes "^333333*抽泣 抽泣……*^000000";
+			delitem 712,1; //Flower
+			set EIN_LOVERQ,6;
+			changequest 8079,8080;
+			close;
+		}
+		else {
+			mes "[卡拉]";
+			mes "对不起……";
+			mes "我没听清。";
+			mes "能请你再";
+			mes "告诉我一次你的名字吗？";
+			close;
+		}
+	}
+	if (EIN_LOVERQ == 4) {
+		mes "[卡拉]";
+		mes "天哪……";
+		mes "你还好吗？";
+		mes "我刚知道你";
+		mes "撞见了我父亲！";
+		next;
+		mes "[卡拉]";
+		mes "无论如何，";
+		mes "请尽量避开我父亲！";
+		mes "他不信任任何";
+		mes "不属于";
+		mes "上流社会的人，";
+		mes "就连你这样的冒险者也是！";
+		next;
+		mes "[卡拉]";
+		mes "能请你";
+		mes "带上这把小提琴，";
+		mes "这次想办法";
+		mes "送到克黎泽那里吗？谢谢";
+		mes "你的帮忙～";
+		set EIN_LOVERQ,3;
+		changequest 8078,8077;
+		getitem 1901,1; //Violin
+		close;
+	}
+	if ((EIN_LOVERQ == 3) || (EIN_LOVERQ == 5)) {
+		mes "[卡拉]";
+		mes "哦，请代我";
+		mes "向克黎泽问好。";
+		mes "我希望能亲自";
+		mes "安慰他，但眼下";
+		mes "我只能做到这些。";
+		close;
+	}
+	if (EIN_LOVERQ == 2) {
+		mes "[卡拉]";
+		mes "你就是之前";
+		mes "那位冒险者吧？";
+		mes "可惜这里";
+		mes "没什么可做的。这个";
+		mes "地方对我来说";
+		mes "就像监狱……";
+		next;
+		mes "[卡拉]";
+		mes "哦，你见过克黎泽了？";
+		mes "他是不是很善良，";
+		mes "又是个完美的绅士？";
+		next;
+		mes "[卡拉]";
+		mes "我真的很想";
+		mes "见他，但几乎";
+		mes "不可能。我父母觉得";
+		mes "他配不上我，";
+		mes "但他们错了！我";
+		mes "该怎么办？哦，克黎泽……";
+		next;
+		mes "[卡拉]";
+		mes "也许我见不到";
+		mes "他，但你能替我把";
+		mes "我的小提琴交给克黎泽吗？";
+		mes "我以前常为他";
+		mes "拉这首曲子……";
+		next;
+		set EIN_LOVERQ,3;
+		changequest 8076,8077;
+		getitem 1901,1; //Violin
+		mes "[卡拉]";
+		mes "抱歉麻烦你，";
+		mes "但请理解，";
+		mes "我想尽可能地";
+		mes "安慰我的";
+		mes "克黎泽。太";
+		mes "感谢你了，冒险者……";
+		close;
+	}
+	else {
+		mes "[卡拉]";
+		mes "你好，冒险者。";
+		mes "我们的城市对你来说";
+		mes "大概也只是";
+		mes "待不了几天的";
+		mes "另一个地方吧。";
+		next;
+		mes "[卡拉]";
+		mes "你一定拥有很多";
+		mes "自由。真羡慕你。我无法";
+		mes "做自己想做的事。我甚至";
+		mes "没有勇气告诉";
+		mes "家人我真正想要什么，";
+		mes "更别说改变这里的一切了……";
+		next;
+		if (EIN_LOVERQ == 0) {
+			set EIN_LOVERQ,1;
+		}
+		mes "[卡拉]";
+		mes "那是什么感觉？";
+		mes "想去哪里";
+		mes "就去哪里，跟随";
+		mes "内心真正的渴望？";
+		mes "我多么希望能";
+		mes "做到那样……";
+		close;
+	}
+}
+
+ein_in01,200,101,5	script	克利策#ein	854,{
+	if (EIN_LOVERQ == 16) {
+		mes "[克黎泽]";
+		mes "世界，看好了！";
+		mes "我要成为";
+		mes "配得上卡拉之爱的人！";
+		mes "总有一天，也许她的";
+		mes "父母也会认可我！";
+		close;
+	}
+	if ((EIN_LOVERQ == 15) && (countitem(7170) > 0)) {
+		mes "[克黎泽]";
+		mes "哇啊！";
+		mes "我该穿什么？！";
+		mes "我死活也";
+		mes "想不出来！那个，";
+		mes "嗯，正装？我从没穿过";
+		mes "那样的衣服！";
+		next;
+		mes "[克黎泽]";
+		mes "等等，" + strcharinfo(0) + ".";
+		mes "你手里拿的";
+		mes "是什么？我以前见过";
+		mes "那样的东西。它叫";
+		mes "燕尾服，对吧？";
+		mes "那样的东西再合适不过了！";
+		next;
+		switch(select("交给他:无视他")) {
+		case 1:
+			mes "[克黎泽]";
+			mes "这个可以给我？";
+			mes "哦，太感谢你了！";
+			mes "终于有件";
+			mes "像样的衣服能穿去";
+			mes "见卡拉的妈妈了！太好了！";
+			next;
+			mes "[克黎泽]";
+			mes "这次你一直在";
+			mes "帮我，我却没能好好表达感谢。抱歉";
+			mes "我太沉浸在自己的问题里了。我虽然穷，但总得回报你些什么……";
+			next;
+			mes "[克黎泽]";
+			mes "Wait...";
+			mes "这块矿石";
+			mes "给你吧？我不知道";
+			mes "它有多值钱，但我知道";
+			mes "它相当稀有。以后";
+			mes "说不定对你有用～";
+			delitem 7170,1; //Tuxedo
+			set EIN_LOVERQ,16;
+			changequest 8087,8088;
+			switch(rand(1,7)) {
+			case 1:
+				getitem 7289,1; //Olivine
+				break;
+			case 2:
+				getitem 7290,1; //Phlogopite
+				break;
+			case 3:
+				getitem 7291,1; //Agate
+				break;
+			case 4:
+				getitem 7293,1; //Rose_Quartz
+				break;
+			case 5:
+				getitem 7294,1; //Turquoise
+				break;
+			case 6:
+				getitem 7295,1; //Citrine
+				break;
+			case 7:
+				getitem 7296,1; //Pyroxene
+			}
+			next;
+			mes "[克黎泽]";
+			mes "" + strcharinfo(0) + "，";
+			mes "你真的让";
+			mes "我大开眼界。从今以后，";
+			mes "我会尽全力赢得";
+			mes "卡拉父母的认可，";
+			mes "成为配得上卡拉之爱的人。";
+			close;
+		case 2:
+			mes "[克黎泽]";
+			mes "可我要怎么弄到";
+			mes "一件燕尾服？唉，希望";
+			mes "它别太贵，";
+			mes "不然我短期内";
+			mes "可买不起……";
+			close;
+		}
+	}
+	if (EIN_LOVERQ == 15) {
+		mes "[克黎泽]";
+		mes "不要啊！";
+		mes "我得找到";
+		mes "最合适的";
+		mes "衣服，不然卡拉的";
+		mes "母亲可能会^FF0000讨厌^000000我！";
+		next;
+		mes "[克黎泽]";
+		mes "我该怎么办？！";
+		mes "好，不能太花哨，";
+		mes "也不能太暴露。不能让她";
+		mes "觉得我狂野、幼稚或";
+		mes "难以捉摸。我该";
+		mes "用背带还是腰带？！";
+		close;
+	}
+	if (EIN_LOVERQ == 14) {
+		mes "[克黎泽]";
+		mes "不要啊！";
+		mes "我得找到";
+		mes "最合适的";
+		mes "衣服，不然卡拉的";
+		mes "母亲可能会^FF0000讨厌^000000我！";
+		next;
+		mes "[克黎泽]";
+		mes "想想，克黎泽，想想！";
+		mes "好，不能穿太鲜艳的颜色。";
+		mes "我不想让她";
+		mes "觉得我对卡拉";
+		mes "不认真。条纹";
+		mes "可能也不行……";
+		close;
+	}
+	if (EIN_LOVERQ == 13) {
+		mes "[克黎泽]";
+		mes "诶……？";
+		mes "你刚才说什么？";
+		mes "你帮了";
+		mes "卡佩尔泰恩家？";
+		next;
+		mes "[克黎泽]";
+		mes "什么……？";
+		mes "你刚才说";
+		mes "卡拉的妈妈";
+		mes "想让我";
+		mes "和她喝茶？我的天……！";
+		next;
+		mes "[克黎泽]";
+		mes "好，好。";
+		mes "我、我得找件";
+		mes "像样的衣服，对吧？哦。";
+		mes "哇。这也太突然了！";
+		mes "我、我该怎么办？";
+		next;
+		set EIN_LOVERQ,14;
+		changequest 8085,8086;
+		mes "[克黎泽]";
+		mes "我身上这套";
+		mes "猴儿似的衣服";
+		mes "根本不行！啊啊！可我已经";
+		mes "穿不下我所有";
+		mes "像样的衣服了。唉，";
+		mes "我真是进退两难……";
+		close;
+	}
+	if (EIN_LOVERQ > 6) {
+		mes "[克黎泽]";
+		mes "*叹气……*";
+		mes "我能做什么";
+		mes "才能让卡拉的父母";
+		mes "接受我当她的";
+		mes "男朋友？我想";
+		mes "不出任何办法……";
+		close;
+	}
+	if (EIN_LOVERQ == 6) {
+		mes "[克黎泽]";
+		mes "你把花";
+		mes "交给她了？太";
+		mes "好了！谢谢你，";
+		mes "太感谢你——";
+		next;
+		mes "[克黎泽]";
+		mes "...Oh!";
+		mes "天哪！我光顾着";
+		mes "想自己的事，";
+		mes "都忘了问你的";
+		mes "name！对不起，我这么";
+		mes "死脑筋……";
+		next;
+		mes "[克黎泽]";
+		mes "So...";
+		mes "你叫什么名字？";
+		next;
+		input .@input$;
+		if (.@input$ == strcharinfo(0)) {
+			mes "[克黎泽]";
+			mes "" + strcharinfo(0) + "...";
+			mes "真是太好了。谢谢你，";
+			mes "真的很感谢你的帮助。虽然我没法亲眼见到卡拉，";
+			mes "但至少能托你转达";
+			mes "我的心意。";
+			next;
+			set EIN_LOVERQ,7;
+			changequest 8080,8081;
+			mes "[克黎泽]";
+			mes "我现在感觉";
+			mes "好多了。哦！";
+			mes "你有空的";
+			mes "时候，去和我母亲";
+			mes "聊聊吧？她一直";
+			mes "很喜欢见我的朋友。";
+			close;
+		}
+		else {
+			mes "[克黎泽]";
+			mes "嗯……？";
+			mes "哦，别这么";
+			mes "紧张嘛~";
+			mes "不过能不能";
+			mes "再告诉我一次你的名字？";
+			mes "我刚才没听清……";
+			close;
+		}
+	}
+	if (EIN_LOVERQ == 5) {
+		mes "[克黎泽]";
+		mes "你已经出发";
+		mes "替我去见卡拉了吗？";
+		mes "如果听起来";
+		mes "太强人所难，抱歉……";
+		next;
+		mes "[克黎泽]";
+		mes "总之，请";
+		mes "记得替我";
+		mes "送卡拉 ^FF00001 朵花^000000。";
+		mes "不用什么";
+		mes "名贵的，普通的一朵";
+		mes "就好。";
+		close;
+	}
+	if ((EIN_LOVERQ == 3) && (countitem(1901) == 1)) {
+		mes "[克黎泽]";
+		mes "你怎么来了？";
+		mes "你总听我哀叹抱怨";
+		mes "失去的爱情，";
+		mes "不觉得烦吗？^333333*唉……*^000000";
+		next;
+		mes "[克黎泽]";
+		mes "嘿，这把小提琴……";
+		mes "卡拉以前";
+		mes "常常用它为我";
+		mes "拉出美妙的乐曲。是";
+		mes "她把这把琴给你的吗？";
+		next;
+		mes "[克黎泽]";
+		mes "原来如此。卡拉一定是";
+		mes "知道我现在整个人都";
+		mes "垮掉了。她对我实在";
+		mes "太好了。她怎么能先";
+		mes "顾及我的感受，";
+		mes "而不想想她自己呢？";
+		next;
+		mes "[克黎泽]";
+		mes "我知道我这样";
+		mes "很不知羞，但我有";
+		mes "件事想求你。冒险者，";
+		mes "能不能替我";
+		mes "送卡拉一份礼物？";
+		next;
+		mes "[克黎泽]";
+		mes "你只需要";
+		mes "送她 ^FF00001 朵花^000000 就好。";
+		mes "我没有那些 Zeny，";
+		mes "我想我在卡佩尔塞恩";
+		mes "庄园也不受欢迎。";
+		next;
+		mes "[克黎泽]";
+		mes "来，作为回报，我";
+		mes "给你做一次";
+		mes "健康按摩。算不上";
+		mes "什么大事，但我";
+		mes "做完之后，你的身心";
+		mes "都会焕然一新。开始了！";
+		next;
+		mes "^3355FF*揉揉按按*";
+		mes "*搓搓搓搓*";
+		mes "*压压压*";
+		mes "*咔、咔、咔、咔、咔、咔、咔嚓！*";
+		next;
+		mes "["+ strcharinfo(0) +"]";
+		mes "哦——";
+		mes "太棒了！";
+		mes "就是这个感觉！";
+		percentheal 100,0;
+		delitem 1901,1; //Violin
+		set EIN_LOVERQ,5;
+		changequest 8077,8079;
+		if (checkre(3)) {
+			if (BaseLevel < 41) getexp 61,0;
+			else if (BaseLevel < 61) getexp 600,0;
+			else if (BaseLevel < 81) getexp 3000,0;
+			else if (BaseLevel < 99) getexp 20000,0;
+			else getexp 30000,0;
+		} else {
+			if (BaseLevel < 41) getexp 610,0;
+			else if (BaseLevel < 61) getexp 6000,0;
+			else if (BaseLevel < 81) getexp 30000,0;
+			else getexp 200000,0;
+		}
+		next;
+		mes "[克黎泽]";
+		mes "能不能替我";
+		mes "带 1 朵花给卡拉？";
+		mes "给你添麻烦了……";
+		close;
+	}
+	if (EIN_LOVERQ == 2) {
+		mes "[克黎泽]";
+		mes "^333333*叹气*^000000";
+		mes "我真的很感激你的";
+		mes "同情，但我不过是个";
+		mes "胆小鬼和傻瓜。";
+		next;
+		mes "[克黎泽]";
+		mes "Yeah...";
+		mes "我是个胆小鬼，";
+		mes "对自己的心意毫无行动，";
+		mes "也是个傻瓜，竟爱上了那样高贵的女孩。";
+		mes "从一开始就……哦，卡拉……";
+		close;
+	}
+	if (EIN_LOVERQ == 1) {
+		mes "[克黎泽]";
+		mes "那股淡淡的";
+		mes "甜美香气……";
+		mes "就和卡拉家中";
+		mes "用的香氛一样。";
+		next;
+		mes "[克黎泽]";
+		mes "啊，所以你去了";
+		mes "艾音布罗克见卡拉？";
+		mes "我好想好想她！";
+		mes "她过得还好吗？";
+		next;
+		mes "[克黎泽]";
+		mes "卡拉真美。";
+		mes "而且那么可爱。";
+		mes "每次我闭上";
+		mes "眼睛，都还能看见";
+		mes "她可爱的笑容。";
+		next;
+		mes "[克黎泽]";
+		mes "如果我说得";
+		mes "太傻，抱歉，但我";
+		mes "忍不住。我知道自己";
+		mes "像个十足的傻瓜。可我";
+		mes "愿意付出一切去见她……";
+		next;
+		set EIN_LOVERQ,2;
+		setquest 8076;
+		mes "[克黎泽]";
+		mes "Just...";
+		mes "别听我";
+		mes "胡说八道。";
+		mes "我只是个可怜的傻瓜，";
+		mes "爱上了不该爱的";
+		mes "人。一定是这样……";
+		close;
+	}
+	mes "[克黎泽]";
+	mes "有没有什么";
+	mes "是你人生中";
+	mes "真正渴望，却";
+	mes "遥不可及的？";
+	next;
+	mes "[克黎泽]";
+	mes "我希望自己能";
+	mes "更像你们冒险者。";
+	mes "像你们这样的人";
+	mes "永远不会放弃，无论";
+	mes "障碍有多大。";
+	mes "可我却这么无力……";
+	next;
+	mes "[克黎泽]";
+	mes "我连自己";
+	mes "唯一爱的";
+	mes "人都见不到。我们实在";
+	mes "相差太远，已经";
+	mes "不可能了……";
+	close;
+}
+
+ein_in01,21,147,3	script	梅加斯#EIN	853,3,3,{
+	end;
+
+OnTouch_:
+	if ((EIN_LOVERQ == 4) && (EIN_LOVERQ == 5)) {
+		mes "[梅加斯]";
+		mes "又是你？！";
+		mes "你到底";
+		mes "想从我这里要什么？！";
+		next;
+		mes "[梅加斯]";
+		mes "卫兵……！";
+		mes "用这家伙的脸";
+		mes "去扫车道，再";
+		mes "一直捶他的肚子，";
+		mes "直到他什么";
+		mes "都吐不出来！";
+		close2;
+		percentheal -90,0;
+		warp "einbroch",112,245;
+		end;
+	}
+	if ((EIN_LOVERQ == 3) && (countitem(1901) > 0)) {
+		mes "[梅加斯]";
+		mes "那是……";
+		mes "那是我";
+		mes "女儿的小提琴。";
+		mes "那是我在她";
+		mes "十六岁生日时送的……";
+		next;
+		mes "[梅加斯]";
+		mes "闯进我家";
+		mes "已经够可恶了，";
+		mes "竟还敢偷我卡拉的东西？！";
+		mes "你太过分了，小鬼！";
+		mes "卫兵！给我过来！";
+		next;
+		mes "[梅加斯]";
+		mes "你们听着，给我";
+		mes "把这蠢货";
+		mes "打得喘不过气，连他";
+		mes "肚里的东西也一起打出来！";
+		mes "确保这小混蛋";
+		mes "就算醒过来，也绝不是今天！";
+		delitem 1901,1; //Violin
+		set EIN_LOVERQ,4;
+		changequest 8077,8078;
+		percentheal -90,0;
+		close2;
+		warp "einbroch",112,245;
+		end;
+	}
+	mes "[梅加斯]";
+	mes "你竟敢……";
+	mes "像你这样的";
+	mes "流浪汉，也配";
+	mes "踏进我家！？";
+	mes "简直岂有此理！";
+	next;
+	mes "[梅加斯]";
+	mes "立刻滚出去，";
+	mes "不然我就以";
+	mes "非法闯入为由";
+	mes "把你报官！";
+	next;
+	warp "einbroch",112,245;
+	close;
+}
+
+ein_in01,31,151,3	script	萨特拉#ein	850,{
+	if (EIN_LOVERQ > 12) {
+		mes "[萨特拉]";
+		mes "我知道我的";
+		mes "宅邸华丽得";
+		mes "过分，能接近";
+		mes "任何卡佩尔塞恩家族的人，";
+		mes "对多数平民都是荣幸。";
+		next;
+		mes "[萨特拉]";
+		mes "不过，克黎泽";
+		mes "没有理由这么";
+		mes "害怕。告诉那可怜的";
+		mes "男孩，他已经赢得了";
+		mes "与我交谈的荣幸。";
+		close;
+	}
+	if ((EIN_LOVERQ == 12) && (countitem(1003) > 9)) {
+		mes "[萨特拉]";
+		mes "呵呵呵呵~";
+		mes "欢迎你，冒险者，";
+		mes "我很享受我们的小小闲谈。";
+		mes "来点餐前小点？";
+		next;
+		mes "[萨特拉]";
+		mes "哦！你这样子";
+		mes "可没法享用任何食物！";
+		mes "你的手脏得";
+		mes "吓人！能问问为什么吗？";
+		next;
+		mes "[萨特拉]";
+		mes "啊~";
+		mes "一高兴，";
+		mes "我差点忘了";
+		mes "我叫你再带";
+		mes "些煤矿来给我！";
+		mes "失礼了~";
+		next;
+		mes "[萨特拉]";
+		mes "你给我带了这么多煤矿，";
+		mes "我相信你比那些";
+		mes "艾音贝赫懒散的农民勤快多了。";
+		mes "我很感激你为了讨我欢心如此卖力。";
+		next;
+		mes "[萨特拉]";
+		mes "嗯，你说什么？";
+		mes "这些煤矿是别人";
+		mes "准备的，你只是";
+		mes "负责送来？那么";
+		mes "究竟是谁采集的？";
+		next;
+		input .@input$;
+		if (.@input$ == "Klitzer") {
+			mes "[萨特拉]";
+			mes "啊，克黎泽？";
+			mes "我得说，这名字";
+			mes "真是卑微。";
+			mes "可又这么耳熟……";
+			next;
+			mes "[萨特拉]";
+			mes "啊，我想起来了，";
+			mes "有个小流氓";
+			mes "一直纠缠我";
+			mes "那名叫克黎泽的女儿。";
+			mes "说不定就是";
+			mes "同一个人。嗯……";
+			next;
+			mes "[萨特拉]";
+			mes "我记得他模样";
+			mes "相当寒酸，而且";
+			mes "毫无半点";
+			mes "礼仪。显然，";
+			mes "他是个傻瓜兼胆小鬼，但现在我看得出他很真诚。";
+			next;
+			mes "[萨特拉]";
+			mes "也许还不能";
+			mes "马上让他和我";
+			mes "女儿交往，但";
+			mes "我会请他来喝";
+			mes "杯茶。如果卡拉喜欢他，";
+			mes "那他一定很特别。";
+			next;
+			mes "[萨特拉]";
+			mes "对一个卑微的农民来说，";
+			mes "这一定像梦想";
+			mes "成真！还能和";
+			mes "克黎泽喝茶。哦，";
+			mes "那些姑娘会怎么说？啊，可我当年";
+			mes "也嫁给了那个粗鲁的梅加斯~";
+			next;
+			delitem 1003,10; //Coal
+			set EIN_LOVERQ,13;
+			changequest 8084,8085;
+			mes "[萨特拉]";
+			mes "总之，你下次";
+			mes "见到克黎泽时，请告诉";
+			mes "他尽快来拜访我。";
+			mes "哦，再提醒他";
+			mes "为这个特别场合";
+			mes "穿得体些。呵呵呵呵呵~";
+			close;
+		}
+		else {
+			mes "[萨特拉]";
+			mes "抱歉，你说什么？";
+			mes .@input$ + "? Oh my...";
+			mes "我想我可能";
+			mes "听错了。呵呵呵呵~";
+			close;
+		}
+	}
+	if (EIN_LOVERQ == 12) {
+		mes "[萨特拉]";
+		mes "呵呵呵呵~";
+		mes "欢迎你，冒险者，";
+		mes "我很享受我们的小小闲谈。";
+		mes "来点餐前小点？";
+		next;
+		mes "[萨特拉]";
+		mes "Ah...";
+		mes "看来你";
+		mes "忘了你的 ^FF0000煤矿^000000。";
+		mes "虽是个愚蠢的疏忽，";
+		mes "但我愿意不计较。";
+		close;
+	}
+	if ((EIN_LOVERQ == 11) && (countitem(1003) > 9)) {
+		mes "[萨特拉]";
+		mes "哎呀，你好~";
+		mes "你最近的";
+		mes "几次来访";
+		mes "相当令人愉快，美丽的冒险者。";
+		next;
+		mes "[萨特拉]";
+		mes "继续向我表现";
+		mes "你的感激";
+		mes "与忠诚，";
+		mes "很快你就会成为";
+		mes "我最宠爱的";
+		mes "平民。呵呵呵呵~";
+		next;
+		mes "[萨特拉]";
+		mes "想必你如今已经";
+		mes "注意到艾音布罗克";
+		mes "与艾音贝赫之间";
+		mes "紧张的关系了。真是遗憾。";
+		next;
+		mes "[萨特拉]";
+		mes "随着艾音布罗克日益富裕，";
+		mes "艾音贝赫越发";
+		mes "贫困，富人们开始";
+		mes "鄙视穷人。";
+		mes "我想穷人也就自然而然地开始怨恨富人。";
+		next;
+		mes "[萨特拉]";
+		mes "可以说，";
+		mes "两座城镇一直";
+		mes "想方设法占";
+		mes "对方的便宜，但";
+		mes "很明显，艾音布罗克";
+		mes "始终占据上风。";
+		next;
+		mes "[萨特拉]";
+		mes "事实上，正因为";
+		mes "我们两座城市之间";
+		mes "的裂痕，我们家族";
+		mes "从小就被教导不要";
+		mes "与艾音贝赫的人来往。";
+		next;
+		mes "[萨特拉]";
+		mes "在我看来，住在艾音贝赫的";
+		mes "大多数人都是苦力，";
+		mes "但这并不";
+		mes "意味着我不会给他们";
+		mes "证明自身价值的机会。";
+		next;
+		delitem 1003,10; //Coal
+		set EIN_LOVERQ,12;
+		mes "[萨特拉]";
+		mes "如果他们能证明自己";
+		mes "值得赏识，我为何要";
+		mes "剥夺底层人";
+		mes "享有我恩泽的机会？";
+		mes "呵呵呵呵~";
+		next;
+		mes "[萨特拉]";
+		mes "哦，真是美味！";
+		mes "如果你还想再来";
+		mes "拜访我，别忘了带些煤矿来。回见~";
+		close;
+	}
+	if (EIN_LOVERQ == 11) {
+		mes "[萨特拉]";
+		mes "哎呀，你好~";
+		mes "你最近的";
+		mes "几次来访";
+		mes "相当令人愉快，美丽的冒险者。";
+		next;
+		mes "[萨特拉]";
+		mes "哦，失礼了！";
+		mes "我想你只是";
+		mes "来观光，";
+		mes "又或者是在跑";
+		mes "某种冒险者的";
+		mes "差事。我说得对吗？";
+		next;
+		mes "[萨特拉]";
+		mes "我足够了解你，";
+		mes "知道你不会";
+		mes "无礼到空手";
+		mes "过来闲聊，";
+		mes "一点 ^FF0000煤矿^000000 都不带。呵呵呵呵~";
+		close;
+	}
+	if ((EIN_LOVERQ == 10) && (countitem(1003) > 9)) {
+		mes "[萨特拉]";
+		mes "^333333*轻笑~*^000000";
+		mes "哎呀，这不是我";
+		mes "勇敢的冒险者吗。";
+		mes "呵呵呵呵~";
+		next;
+		mes "[萨特拉]";
+		mes "天哪！";
+		mes "你怎么随身带着";
+		mes "这么多脏兮兮的煤矿";
+		mes "？你这可怜的、";
+		mes "穷苦的小东西。";
+		next;
+		mes "[萨特拉]";
+		mes "哦！天哪，";
+		mes "我差点忘了~";
+		mes "我真是太傻了！";
+		mes "我就再一次";
+		mes "慷慨地收下你的小礼物，";
+		mes "谨代表卡佩尔塞恩家族。";
+		next;
+		mes "[萨特拉]";
+		mes "让我讲一点";
+		mes "关于我们美丽的";
+		mes "艾音布罗克的历史。曾经，";
+		mes "这里只有艾音贝赫，";
+		mes "那个采矿村落。你可以";
+		mes "想象那是多久以前。";
+		next;
+		mes "[萨特拉]";
+		mes "不过，在艾音贝赫";
+		mes "开采的矿物和矿石";
+		mes "需要在工厂里";
+		mes "加工提炼，而那些工厂";
+		mes "都建在附近的一个工业区，那里后来成了艾音布罗克。";
+		next;
+		mes "[萨特拉]";
+		mes "如今艾音布罗克的";
+		mes "每个市民都很富有，";
+		mes "众所周知，这里的";
+		mes "生活水平";
+		mes "比艾音贝赫更高。";
+		next;
+		delitem 1003,10; //Coal
+		set EIN_LOVERQ,11;
+		mes "[萨特拉]";
+		mes "天哪，我想";
+		mes "该喝杯茶了~";
+		mes "下次你想";
+		mes "来见我时，最好";
+		mes "再带上一份";
+		mes "煤矿作为礼物。拜拜~";
+		close;
+	}
+	if (EIN_LOVERQ == 10) {
+		mes "[萨特拉]";
+		mes "^333333*轻笑~*^000000";
+		mes "哎呀，这不是我";
+		mes "勇敢的冒险者吗。";
+		mes "呵呵呵呵~";
+		next;
+		mes "[萨特拉]";
+		mes "抱歉，但你必须";
+		mes "先向我证明";
+		mes "你有资格与我";
+		mes "交谈。不如";
+		mes "再多送些";
+		mes "^FF0000煤矿^000000 来，嗯？";
+		next;
+		mes "[萨特拉]";
+		mes "毕竟，我也没有";
+		mes "别的办法判断";
+		mes "你是否感激我";
+		mes "牺牲时间与你这种";
+		mes "身份的人交往。";
+		mes "呵呵呵呵~";
+		close;
+	}
+	if ((EIN_LOVERQ == 9) && (countitem(1003) > 9)) {
+		mes "[萨特拉]";
+		mes "哎呀，你已经";
+		mes "把煤矿带来了？";
+		mes "你真是";
+		mes "可爱又准时~";
+		next;
+		mes "[萨特拉]";
+		mes "我谨代表";
+		mes "卡佩尔塞恩家族，";
+		mes "不计较你卑微的";
+		mes "身份，慷慨地";
+		mes "收下你的小礼物。";
+		mes "呵呵呵呵~";
+		next;
+		mes "[萨特拉]";
+		mes "你是从艾音贝赫";
+		mes "来的吗，冒险者？";
+		mes "啊，卢恩-米德加尔特";
+		mes "王国！我去过你的";
+		mes "国家。那里相当古雅，";
+		mes "爪哇咿也很美。";
+		next;
+		delitem 1003,10; //Coal
+		set EIN_LOVERQ,10;
+		changequest 8083,8084;
+		mes "[萨特拉]";
+		mes "好吧，我会试着";
+		mes "给这些东西找点用处。";
+		mes "恐怕我向你要的礼物";
+		mes "不太实用。";
+		mes "煤矿通常怎么用？";
+		mes "啊，我有个新奇的主意！";
+		next;
+		mes "[萨特拉]";
+		mes "要是让梅加斯举办一场";
+		mes "那种下层阶级最爱的";
+		mes "社交活动，难道不会";
+		mes "狂野得令人陶醉吗？";
+		mes "就是那种“烧烤”，";
+		mes "对吧？";
+		next;
+		mes "[萨特拉]";
+		mes "总之，如果你";
+		mes "再多带些那种";
+		mes "煤矿给我，我就会";
+		mes "更加看重你，";
+		mes "你也会成为";
+		mes "我恩宠的受惠者。呵呵~";
+		close;
+	}
+	if (EIN_LOVERQ == 9) {
+		mes "[萨特拉]";
+		mes "四处漂泊的冒险者……？";
+		mes "真是令人心动的惊喜！";
+		mes "你一定是冒着生命危险";
+		mes "才躲过我丈夫的耳目";
+		mes "来欣赏这迷人的景色";
+		mes "我的家。呵呵呵呵~";
+		next;
+		mes "[萨特拉]";
+		mes "既然你是位非常";
+		mes "特别的客人，我就";
+		mes "赐予你一份独特的荣幸";
+		mes "屈尊与你交谈";
+		mes "吧，冒险者。";
+		next;
+		mes "[萨特拉]";
+		mes "艾因贝赫的存在，就是为了";
+		mes "为我家提供煤炭与";
+		mes "他们矿坑里的原料。";
+		mes "这是自然法则：工人";
+		mes "必须由少数精英领导。";
+		next;
+		mes "[萨特拉]";
+		mes "真是令人";
+		mes "觉得可笑，那些";
+		mes "工人竟妄想达到";
+		mes "我们这样的社会";
+		mes "地位。呵呵呵呵~";
+		next;
+		mes "[萨特拉]";
+		mes "哦，我已经很久没有";
+		mes "和下等阶层的人";
+		mes "说过话了！感觉";
+		mes "真是禁忌般的刺激！";
+		next;
+		mes "[萨特拉]";
+		mes "好了冒险者，我们";
+		mes "这场随意的交谈";
+		mes "就到此为止。我甚至允许";
+		mes "你尽情吹嘘";
+		mes "自己曾经";
+		mes "与萨特拉夫人交谈过。";
+		next;
+		mes "[萨特拉]";
+		mes "如果你还想";
+		mes "让我再与你说上";
+		mes "几句，就向我证明";
+		mes "你比那些";
+		mes "下贱工人更有资格";
+		mes "得到我优雅的接见。";
+		next;
+		mes "[萨特拉]";
+		mes "哦，我有个绝妙的";
+		mes "主意！你何不给我带来";
+		mes "一些^990000煤炭^000000？这对你这样的人";
+		mes "并非不可能，但";
+		mes "这种任务需要";
+		mes "你付出一些努力。";
+		next;
+		mes "[萨特拉]";
+		mes "再见啦，";
+		mes "冒险者~";
+		close;
+	}
+	if (EIN_LOVERQ == 8) {
+		mes "[萨特拉]";
+		mes "四处游荡的冒险者……？";
+		mes "多么令人陶醉啊！";
+		mes "你一定是冒着生命危险";
+		mes "才躲过我丈夫的耳目";
+		mes "来欣赏这迷人的景色";
+		mes "我的家。呵呵呵呵~";
+		next;
+		mes "[萨特拉]";
+		mes "既然你是位非常";
+		mes "特别的客人，我就";
+		mes "赐予你一份独特的荣幸";
+		mes "屈尊与你交谈";
+		mes "吧，冒险者。";
+		next;
+		mes "[萨特拉]";
+		mes "艾因贝赫的存在，就是为了";
+		mes "为我家提供煤炭与";
+		mes "他们矿坑里的原料。";
+		mes "这是自然法则：工人";
+		mes "必须由少数精英领导。";
+		next;
+		mes "[萨特拉]";
+		mes "真是令人";
+		mes "觉得可笑，那些";
+		mes "工人竟妄想达到";
+		mes "我们这样的社会";
+		mes "地位。呵呵呵呵~";
+		next;
+		mes "[萨特拉]";
+		mes "哦，我已经很久没有";
+		mes "和下等阶层的人";
+		mes "说过话了！感觉";
+		mes "真是禁忌般的刺激！";
+		next;
+		mes "[萨特拉]";
+		mes "好了冒险者，我们";
+		mes "这场随意的交谈";
+		mes "就到此为止。我甚至允许";
+		mes "你尽情吹嘘";
+		mes "自己曾经";
+		mes "与萨特拉夫人交谈过。";
+		next;
+		mes "[萨特拉]";
+		mes "如果你还想";
+		mes "让我再与你说上";
+		mes "几句，就向我证明";
+		mes "你比那些";
+		mes "下贱工人更有资格";
+		mes "得到我优雅的接见。";
+		next;
+		mes "[萨特拉]";
+		mes "哦，我有个绝妙的";
+		mes "主意！你何不给我带来";
+		mes "一些^990000煤炭^000000？这对你这样的人";
+		mes "并非不可能，但";
+		mes "这种任务需要";
+		mes "你付出一些努力。";
+		set EIN_LOVERQ,9;
+		if (isbegin_quest(8081) == 1)
+			changequest 8081,8083;
+		else
+			changequest 8082,8083;
+		next;
+		mes "[萨特拉]";
+		mes "再见啦，";
+		mes "冒险者~";
+		close;
+	}
+	mes "[萨特拉]";
+	mes "四处游荡的";
+	mes "冒险者……？";
+	mes "多么罪恶般";
+	mes "地诱人啊！";
+	mes "呵呵呵呵~";
+	next;
+	mes "[萨特拉]";
+	mes "哦，别担心。";
+	mes "我确信我家的";
+	mes "美景已经勾起了你的";
+	mes "好奇心。我那个粗野的";
+	mes "丈夫要是发现你，";
+	mes "一定会把你痛打一顿……";
+	next;
+	mes "[萨特拉]";
+	mes "但我可比梅加斯";
+	mes "文雅得多。你完全";
+	mes "可以尽情欣赏这里的";
+	mes "陈设。呵呵呵呵~";
+	close;
+}
+
+ein_in01,191,102,5	script	凯杰塔#ein	846,{
+	if (EIN_LOVERQ > 15) {
+		mes "[凯杰塔]";
+		mes "我儿子从你身上";
+		mes "学到了很多";
+		mes "好榜样。";
+		mes "作为一个母亲，我真的";
+		mes "很感激你为他";
+		mes "所做的一切。";
+		next;
+		mes "[凯杰塔]";
+		mes "那么，冒险者，";
+		mes "我会祈祷";
+		mes "你一路平安，";
+		mes "无论你的旅程";
+		mes "将你带往何处。";
+		close;
+	}
+	if (EIN_LOVERQ == 15) {
+		mes "[凯杰塔]";
+		mes "谢谢你帮助";
+		mes "我儿子克利策。可惜，这";
+		mes "小傻瓜对某些事";
+		mes "完全没概念，";
+		mes "比如挑选衣服。";
+		mes "他为此紧张得不行！";
+		next;
+		mes "[凯杰塔]";
+		mes "男人就该穿体面的";
+		mes "衣服，比如正式西装";
+		mes "或燕尾服，出席重要";
+		mes "会议和特殊场合。";
+		mes "希望他能早点明白这一点。";
+		close;
+	}
+	if (EIN_LOVERQ == 14) {
+		mes "[凯杰塔]";
+		mes "谢谢你帮助";
+		mes "我儿子克利策。可惜，这";
+		mes "小傻瓜对某些事";
+		mes "完全没概念，";
+		mes "比如挑选衣服。";
+		mes "他为此紧张得不行！";
+		next;
+		set EIN_LOVERQ,15;
+		changequest 8086,8087;
+		mes "[凯杰塔]";
+		mes "男人就该穿体面的";
+		mes "衣服，比如正式西装";
+		mes "或燕尾服，出席重要";
+		mes "会议和特殊场合。";
+		mes "希望他能早点明白这一点。";
+		close;
+	}
+	if (EIN_LOVERQ == 8) {
+		mes "[凯杰塔]";
+		mes "我实在不忍心看到";
+		mes "我们两镇之间的";
+		mes "狭隘仇恨，阻挠我儿子";
+		mes "去见他所爱的女人……";
+		if (isbegin_quest(8081) == 1)
+			changequest 8081,8082;
+		close;
+	}
+	if (EIN_LOVERQ == 7) {
+		mes "[凯杰塔]";
+		mes "谢谢你帮助我";
+		mes "儿子。他也许像个傻瓜，";
+		mes "竟爱上艾因布罗克的人，但他是个诚实";
+		mes "又勤劳的男人。";
+		next;
+		mes "[凯杰塔]";
+		mes "话说回来，这也是";
+		mes "迟早的事。艾因贝赫";
+		mes "是个非常贫穷的镇子，而艾因布罗克";
+		mes "是个非常富裕的镇子。你不认同我也能理解，但异性相吸是迟早的事。";
+		next;
+		mes "[凯杰塔]";
+		mes "^666666*叹气……*^000000";
+		mes "如果我儿子和卡拉能";
+		mes "把事情解决，也许";
+		mes "这能改善";
+		mes "我们两镇之间的关系。";
+		mes "我真心希望如此……";
+		next;
+		mes "[凯杰塔]";
+		mes "不过，我还是很困惑！";
+		mes "我把我儿子养大，是要他有";
+		mes "胆量，而不是心碎时";
+		mes "沉溺于痛苦。而且";
+		mes "我至今不明白他怎么会和这么有钱的女人在一起。";
+		next;
+		set EIN_LOVERQ,8;
+		mes "[凯杰塔]";
+		mes "你有什么办法";
+		mes "能让我们";
+		mes "两镇之间的仇恨";
+		mes "就此了结吗？我不想";
+		mes "看到这对恋人";
+		mes "因为这种狭隘而分开。";
+		close;
+	}
+	mes "[凯杰塔]";
+	mes "欢迎来到我简陋的";
+	mes "住处，冒险者。很抱歉";
+	mes "我招待不周。";
+	next;
+	mes "[凯杰塔]";
+	mes "如你所见，我们得";
+	mes "和其他家庭合住";
+	mes "这栋房子，所以我们";
+	mes "没有多少空地方，也";
+	mes "没有隐私。恐怕我们连";
+	mes "基本的舒适都负担不起。";
+	next;
+	mes "[凯杰塔]";
+	mes "眼下这是我们";
+	mes "能做到的最好程度。我们";
+	mes "没有买房子或";
+	mes "土地的Zeny，所以只能";
+	mes "忍耐着熬过去……";
+	close;
+}
+
+einbroch,188,72,3	script	凯内肖茨#ein	855,{
+	mes "[凯内肖茨]";
+	mes "这座城市到处都是高耸的";
+	mes "烟囱，还有";
+	mes "机器低沉的轰鸣声。";
+	next;
+	mes "[凯内肖茨]";
+	mes "当然，空气是脏的，";
+	mes "但我觉得为了财富和";
+	mes "舒适的现代生活，";
+	mes "这代价很公道。";
+	mes "去他的环境！";
+	next;
+	mes "[凯内肖茨]";
+	mes "我宁愿像这样";
+	mes "过日子，也不要像艾因贝赫";
+	mes "那些落后的流浪汉";
+	mes "一样。他们难道";
+	mes "不知道钱才是";
+	mes "世界运转的动力吗？";
+	close;
+}
+
+einbech,216,118,3	script	卡茨兰普#ein	854,{
+	mes "[卡茨兰普]";
+	mes "^333333*叹气……*^000000";
+	mes "朴素的快乐。";
+	mes "它们才让";
+	mes "生活值得一过，";
+	mes "你知道吗？";
+	next;
+	mes "[卡茨兰普]";
+	mes "对我来说，只要能";
+	mes "过上平凡快乐的生活就够了，";
+	mes "可我身边的每个人都想";
+	mes "越来越拼命地工作。如果";
+	mes "你从不休息，就是在";
+	mes "慢慢把自己耗死。";
+	next;
+	mes "[卡茨兰普]";
+	mes "我想你看得出";
+	mes "我没有其他人那种";
+	mes "关于钱的";
+	mes "烦恼。钱是好东西，但";
+	mes "不值得牺牲";
+	mes "你的生活质量，对吧？";
+	close;
+}
+
+einbroch,208,208,3	script	凯桑博斯#ein	850,{
+	mes "[凯桑博斯]";
+	mes "卡拉夫人是";
+	mes "优雅的化身，";
+	mes "是艾因布罗克";
+	mes "名副其实的女神。";
+	next;
+	mes "[凯桑博斯]";
+	mes "她温柔的声音、";
+	mes "天使般的笑容，还有她";
+	mes "对他人的";
+	mes "善良与温暖，";
+	mes "最重要的是……";
+	next;
+	mes "[凯桑博斯]";
+	mes "卡拉的家世";
+	mes "富有得";
+	mes "难以想象！她";
+	mes "太完美了！我不知道";
+	mes "她会嫁给谁，但那个人";
+	mes "一定是个幸运的绅士。";
+	next;
+	mes "[凯桑博斯]";
+	mes "卡拉夫人住在一座宏伟的宅邸里，相比之下其他房子";
+	mes "都像是破棚屋。";
+	mes "从这儿往北再往西，";
+	mes "如果你想惊叹于它的";
+	mes "美丽与优雅。";
+	close;
+}
+
+einbech,176,125,3	script	艾尔亨杰#ein	850,{
+	mes "[艾尔亨杰]";
+	mes "这个镇子也许";
+	mes "很糟，满是污染，";
+	mes "还有来自";
+	mes "艾因布罗克的";
+	mes "种种欺压……";
+	next;
+	mes "[艾尔亨杰]";
+	mes "但不知怎的，人们";
+	mes "还是过得下去。那是";
+	mes "因为有个";
+	mes "大家都喜欢的人……";
+	next;
+	mes "[艾尔亨杰]";
+	mes "我说的是克利策！";
+	mes "他老实得几乎过分，";
+	mes "也勤快得几乎过分。但最";
+	mes "重要的是，他是最好的人~";
+	next;
+	mes "[艾尔亨杰]";
+	mes "克利策出生在";
+	mes "艾因贝赫最贫穷的家庭之一，";
+	mes "但他总是很快乐，也总为别人着想。我想这就是为什么人们喜欢把他";
+	mes "当作整个艾因贝赫的代表。";
+	next;
+	mes "[艾尔亨杰]";
+	mes "最近有什么事情";
+	mes "一直困扰着他。我";
+	mes "不确定，但我想只有";
+	mes "感情烦恼才会让";
+	mes "一个男人这么沮丧。希望他";
+	mes "能快点好起来……";
+	close;
+}
+
+ein_in01,208,86,3	script	德西#ein	855,{
+	mes "[德西]";
+	mes "这真是";
+	mes "太烦人了！";
+	mes "我身边";
+	mes "全是这些^FF0000人^000000！";
+	next;
+	mes "[德西]";
+	mes "在这么拥挤的城市里";
+	mes "根本没有";
+	mes "隐私！我想";
+	mes "我该尽早";
+	mes "想办法搬出去。";
+	close;
+}
+
+ein_in01,192,90,3	script	苏皮内克#ein	849,{
+	mes "[苏皮内克]";
+	mes "Ugh...";
+	mes "我饿死了！";
+	next;
+	mes "[苏皮内克]";
+	mes "我已经太久没吃东西，";
+	mes "胃都开始";
+	mes "消化自己了！";
+	mes "太惨了……";
+	next;
+	mes "[苏皮内克]";
+	mes "我是说，我今天";
+	mes "是有东西";
+	mes "可以吃。可要是";
+	mes "吃完了，我明天";
+	mes "又能吃什么？";
+	close;
+}

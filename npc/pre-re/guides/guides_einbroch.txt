@@ -1,0 +1,351 @@
+//===== rAthena Script =======================================
+//= Einbroch Guides
+//===== By: ==================================================
+//= Muad_dib; L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.5
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Guides for the City of Einbroch
+//===== Additional Comments: =================================
+//= 1.0b missing tabs, fixed Guide coords [Lupus]
+//= 1.1 added 1 more Guide NPC, thanx to Justin84 [Lupus]
+//= 1.2 Optimized, updated common guide names [Lupus]
+//= 1.3 Fitted the many lines into 1 or 2, and corrected some typos [erKURITA]
+//= 1.4 Removed Duplicates [Silent]
+//= 1.5 Rescripted to official 10.3 standards. [L0ne_W0lf]
+//============================================================
+
+einbroch,72,202,4	script	向导#ein::EinGuide	852,{
+	cutin "ein_soldier",2;
+	mes "[艾音布罗克向导]";
+	mes "欢迎";
+	mes "来到艾音布罗克，";
+	mes "钢铁之城。";
+	mes "若有任何疑问，";
+	mes "请来问我。";
+	set .@loop1,1;
+	while (.@loop1) {
+		next;
+		switch(select("城市向导:移除小地图标记:注意事项:取消")) {
+		case 1:
+			mes "[艾音布罗克向导]";
+			mes "请从";
+			mes "下列菜单中";
+			mes "选择一处地点。";
+			if (.@compass_check == 0) {
+				mes "要我为您";
+				mes "在小地图上";
+				mes "标出地点吗？";
+				next;
+				if (select("是。:否。") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				switch(select("^FF0000机场^000000:火车站:工厂:广场:酒店:武器店:研究所:铁匠公会:艾音布罗克塔:取消")) {
+				case 1:
+					mes "[艾音布罗克向导]";
+					mes "^FF0000机场^000000位于";
+					mes "城市的西北部，";
+					mes "在那里您可以";
+					mes "看到我们城市的骄傲——飞空艇。请记住，搭乘飞空艇需要支付搭乘费。";
+					if (.@compass_check)
+						viewpoint 1,63,228,2,0xFF0000;
+					break;
+				case 2:
+					mes "[艾音布罗克向导]";
+					mes "火车站位于";
+					mes "艾音布罗克的东北部。";
+					mes "往返于此地";
+					mes "与艾音贝赫之间的";
+					mes "列车全天";
+					mes "运行，每天如此。";
+					if (.@compass_check)
+						viewpoint 1,236,279,3,0xFF00FF;
+					break;
+				case 3:
+					mes "[艾音布罗克向导]";
+					mes "工厂也许是";
+					mes "艾音布罗克最重要的";
+					mes "设施，位于城市的";
+					mes "南部。";
+					if (.@compass_check)
+						viewpoint 1,158,78,4,0xFF00FF;
+					break;
+				case 4:
+					mes "[艾音布罗克向导]";
+					mes "广场是我们最大的";
+					mes "购物区，从艾音布罗克";
+					mes "中心向东走一点";
+					mes "就能找到。";
+					if (.@compass_check)
+						viewpoint 1,232,190,5,0xFF00FF;
+					break;
+				case 5:
+					mes "[艾音布罗克向导]";
+					mes "酒店位于广场东边，";
+					mes "提供最高水准的";
+					mes "住宿服务。";
+					mes "在那里，您可以舒适地";
+					mes "享受在艾音布罗克的时光～";
+					if (.@compass_check)
+						viewpoint 1,260,201,6,0x00FF00;
+					break;
+				case 6:
+					mes "[艾音布罗克向导]";
+					mes "武器店";
+					mes "位于广场以北，";
+					mes "在那里您可以";
+					mes "购买适合自己";
+					mes "使用的武器。";
+					if (.@compass_check)
+						viewpoint 1,215,221,7,0x00FF00;
+					break;
+				case 7:
+					mes "[艾音布罗克向导]";
+					mes "研究所是工厂的";
+					mes "附属设施，位于";
+					mes "艾音布罗克的";
+					mes "西南区域。";
+					if (.@compass_check)
+						viewpoint 1,36,49,8,0x00FF;
+					break;
+				case 8:
+					mes "[艾音布罗克向导]";
+					mes "铁匠公会位于";
+					mes "艾音布罗克的东南部。";
+					mes "您可以";
+					mes "利用他们的服务";
+					mes "来强化装备。";
+					if (.@compass_check)
+						viewpoint 1,244,90,9,0x00FF00;
+					break;
+				case 9:
+					mes "[艾音布罗克向导]";
+					mes "艾音布罗克塔位于";
+					mes "城市的中心。";
+					mes "从塔顶";
+					mes "可以望见";
+					mes "艾音布罗克的全部景色。";
+					if (.@compass_check)
+						viewpoint 1,174,195,10,0xFFFF00;
+					break;
+				case 10:
+					mes "[艾音布罗克向导]";
+					mes "请对我说“移除";
+					mes "小地图标记”，";
+					mes "如果您不再希望";
+					mes "小地图上显示";
+					mes "地点标记。";
+					set .@loop2,0;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,63,228,2,0xFF0000;
+			viewpoint 2,236,279,3,0xFF00FF;
+			viewpoint 2,158,78,4,0xFF00FF;
+			viewpoint 2,232,190,5,0xFF00FF;
+			viewpoint 2,260,201,6,0x00FF00;
+			viewpoint 2,215,221,7,0x00FF00;
+			viewpoint 2,36,49,8,0x00FF00;
+			viewpoint 2,244,90,9,0x00FF00;
+			viewpoint 2,174,195,10,0xFFFF00;
+			set .@compass_check,0;
+			mes "[艾音布罗克向导]";
+			mes "好的，您小地图上的";
+			mes "标记已经";
+			mes "移除了。如果您在";
+			mes "艾音布罗克一带需要指引，";
+			mes "请告诉我或";
+			mes "其他艾音布罗克向导。";
+			break;
+		case 3:
+			mes "[艾音布罗克向导]";
+			mes "借助黑森林共和国的";
+			mes "技术，";
+			mes "我们升级了数字化";
+			mes "信息系统，让我们";
+			mes "能在您的小地图上";
+			mes "标出地点，让寻路更方便。";
+			next;
+			mes "[艾音布罗克向导]";
+			mes "您的小地图位于";
+			mes "屏幕的右上角。";
+			mes "如果看不到，";
+			mes "请按 Ctrl + Tab";
+			mes "键，或点击基本状态窗中的“Map”按钮。";
+			next;
+			mes "[艾音布罗克向导]";
+			mes "在您的小地图上，";
+			mes "点击“+”和“-”";
+			mes "符号即可放大和";
+			mes "缩小地图。我们";
+			mes "希望您喜欢";
+			mes "在艾音布罗克的旅程，冒险者。";
+			break;
+		case 4:
+			mes "[艾音布罗克向导]";
+			mes "希望您";
+			mes "旅途愉快，";
+			mes "在艾音布罗克。";
+			mes "哦，还有，请注意";
+			mes "雾霾警报。";
+			close2;
+			set .@loop1,0;
+		}
+	}
+	cutin "ein_soldier",255;
+	end;
+}
+
+einbroch,155,43,4	duplicate(EinGuide)	向导#2ein	852
+einbroch,162,317,4	duplicate(EinGuide)	向导#3ein	852
+
+einbech,67,37,4	script	向导#4ein::EinGuide2	852,{
+	cutin "ein_soldier",2;
+	mes "[艾音贝赫向导]";
+	mes "欢迎来到艾音贝赫，";
+	mes "矿业之城。我们";
+	mes "在此为游客提供帮助，";
+	mes "如有任何疑问，";
+	mes "请尽管问我们。";
+	set .@loop1,1;
+	while (.@loop1) {
+		next;
+		switch(select("城市向导:移除小地图标记:注意事项:取消")) {
+		case 1:
+			mes "[艾音贝赫向导]";
+			mes "请从";
+			mes "下列菜单中";
+			mes "选择一处地点。";
+			if (.@compass_check == 0) {
+				mes "要我为您";
+				mes "在小地图上";
+				mes "标出地点吗？";
+				next;
+				if (select("是。:否。") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while (.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				switch(select("火车站:酒馆:工具店:剑士公会:矿山:取消")) {
+				case 1:
+					mes "[艾音贝赫向导]";
+					mes "火车站分别位于";
+					mes "艾音贝赫的西北部";
+					mes "和东北部。";
+					mes "在那里您可以";
+					mes "搭乘前往艾音布罗克的列车。";
+					if (.@compass_check)
+						viewpoint 1,43,213,2,0xFF0000;
+					break;
+				case 2:
+					mes "[艾音贝赫向导]";
+					mes "酒馆位于";
+					mes "艾音贝赫的";
+					mes "南部。辛苦一天后，";
+					mes "在这里放松很不错。";
+					if (.@compass_check)
+						viewpoint 1,142,112,3,0xFF00FF;
+					break;
+				case 3:
+					mes "[艾音贝赫向导]";
+					mes "工具店位于";
+					mes "艾音贝赫中心，";
+					mes "在那里您可以";
+					mes "买到";
+					mes "旅途中需要的任何工具。";
+					if (.@compass_check)
+						viewpoint 1,176,136,4,0xFF00FF;
+					break;
+				case 4:
+					mes "[艾音贝赫向导]";
+					mes "剑士公会位于";
+					mes "艾音贝赫的东郊。";
+					mes "那里还在施工中，";
+					mes "他们还没有";
+					mes "开始接受";
+					mes "applications.";
+					if (.@compass_check)
+						viewpoint 1,250,110,5,0xFF00FF;
+					break;
+				case 5:
+					mes "[艾音贝赫向导]";
+					mes "矿山，它是";
+					mes "艾音贝赫的主要产业，";
+					mes "位于这座城镇的";
+					mes "北部。我们的矿石";
+					mes "都产自那里，不过怪物会妨碍矿工们。";
+					if (.@compass_check)
+						viewpoint 1,138,251,6,0x00FF00;
+					break;
+				case 6:
+					mes "[艾音贝赫向导]";
+					mes "请对我说“移除";
+					mes "小地图标记”，";
+					mes "如果您不再希望";
+					mes "小地图上显示";
+					mes "地点标记。";
+					set .@loop2,0;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,43,213,2,0xFF0000;
+			viewpoint 2,142,112,3,0xFF00FF;
+			viewpoint 2,176,136,4,0xFF00FF;
+			viewpoint 2,250,110,5,0xFF00FF;
+			viewpoint 2,138,251,6,0x00FF00;
+			set .@compass_check,0;
+			mes "[艾音贝赫向导]";
+			mes "好的，您小地图上的";
+			mes "标记已经";
+			mes "移除了。如果您在";
+			mes "艾音贝赫一带需要指引，";
+			mes "请告诉我或";
+			mes "其他艾音贝赫向导。";
+			break;
+		case 3:
+			mes "[艾音贝赫向导]";
+			mes "借助黑森林共和国的";
+			mes "技术，";
+			mes "我们升级了数字化";
+			mes "信息系统，让我们";
+			mes "能在您的小地图上";
+			mes "标出地点，让寻路更方便。";
+			next;
+			mes "[艾音贝赫向导]";
+			mes "您的小地图位于";
+			mes "屏幕的右上角。";
+			mes "如果看不到，";
+			mes "请按 Ctrl + Tab";
+			mes "键，或点击基本状态窗中的“Map”按钮。";
+			next;
+			mes "[艾音贝赫向导]";
+			mes "在您的小地图上，";
+			mes "点击“+”和“-”";
+			mes "符号即可放大和";
+			mes "缩小地图。我们";
+			mes "希望您喜欢";
+			mes "在艾音贝赫的旅程，冒险者。";
+			break;
+		case 4:
+			mes "[艾音贝赫向导]";
+			mes "希望您";
+			mes "旅途愉快，";
+			mes "在艾音贝赫。";
+			close2;
+			set .@loop1,0;
+		}
+	}
+	cutin "ein_soldier",255;
+	end;
+}
+
+einbech,48,214,4	duplicate(EinGuide2)	向导#5ein	852

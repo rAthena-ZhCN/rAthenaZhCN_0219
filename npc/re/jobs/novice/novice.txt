@@ -1,0 +1,3418 @@
+//===== rAthena Script =======================================
+//= Renewal Novice Training Grounds
+//===== By: ==================================================
+//= Kisuka
+//===== Current Version: =====================================
+//= 1.6
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= A tutorial for new players starting at new_1-1 (53,111).
+//=
+//= This script was replaced by the Izlude Academy in 2012.
+//===== Additional Comments: =================================
+//= 1.0 First version, hand scripted from iRO. [Kisuka]
+//= 1.1 Updated warps, savepoints, NPC locations. [Kisuka]
+//= 1.2 Cleaning. [Euphy]
+//= 1.3 Fixed Eden Group Officer's level requirement. [Joseph]
+//= 1.4 Fixed checkquest to check quest accordingly. [Joseph]
+//= 1.4a Added 'npcskill' command. [Euphy]
+//= 1.5 Replaced with the official kRO scripts. [Euphy]
+//= 1.6 Added VIP features. [Euphy]
+//============================================================
+
+// Main NPCs
+//============================================================
+-	script	Sprakki#newbe01::NvSprakkiA	-1,{
+	if (job_novice_q == 0) {
+		mes "[斯普拉基]";
+		mes "你好！欢迎来到仙境传说的世界。我叫斯普拉基，负责为你讲解基本的游戏玩法。";
+		mes "点击[下一步]按钮，或按[Enter]键继续。";
+		next;
+		mes "[斯普拉基]";
+		mes "首先，你需要学会操控角色的最基础知识。";
+		mes "基本的^4d4dff移动、选择物品和攻击^000000，都要使用^4d4dff鼠标左键^000000。";
+		next;
+		cutin "tutorial01",3;
+		mes "-! 提示 !-";
+		mes "点击地面即可移动角色。";
+		mes "攻击怪物或与这个世界的居民交谈，只需点击目标即可。";
+		next;
+		cutin "",255;
+		mes "[斯普拉基]";
+		mes "首先，试着四处走动一下。";
+		mes "你看到右边那座木桥了吗？";
+		next;
+		mes "[斯普拉基]";
+		mes "走过那座桥，就有一座被用作训练中心的城堡。";
+		mes "我会在那座城堡里等你。请自己走到城堡来。";
+		set job_novice_q,1;
+		setquest 7117;
+		next;
+		cutin "tutorial02",3;
+		mes "-! 提示 !-";
+		mes "你从斯普拉基那里接到了任务。";
+		mes "你可以在任务信息窗口中查看任务内容。";
+		next;
+		mes "[斯普拉基]";
+		mes "我会在桥对面的训练中心里等你。";
+		next;
+		mes "-! 提示 !-";
+		mes "同时按下^4d4dffAlt + U^000000键，即可打开任务信息窗口。";
+		next;
+		cutin "",255;
+		mes "[斯普拉基]";
+		mes "你查看过任务信息窗口了吗？";
+		mes "我会在桥对面的城堡里等你。";
+		close2;
+		cutin "",255;
+		end;
+	} else if (job_novice_q == 1) {
+		mes "[斯普拉基]";
+		mes "我会在东边的桥对面等你。";
+		close;
+	} else {
+		mes "[斯普拉基]";
+		mes "你迷路了吗？";
+		mes "你已经走过东边的那座桥了吗？";
+		mes "等我们在训练中心见面后，我会继续为你带路。";
+		close;
+	}
+}
+new_1-1,53,114,3	duplicate(NvSprakkiA)	Sprakki#nv1a	90
+new_2-1,53,114,3	duplicate(NvSprakkiA)	Sprakki#nv2a	90
+new_3-1,53,114,3	duplicate(NvSprakkiA)	Sprakki#nv3a	90
+new_4-1,53,114,3	duplicate(NvSprakkiA)	Sprakki#nv4a	90
+new_5-1,53,114,3	duplicate(NvSprakkiA)	Sprakki#nv5a	90
+
+-	script	Sprakki#newbe05::NvSprakkiB	-1,{
+	if (job_novice_q == 0) {
+		mes "[斯普拉基]";
+		mes "你好！欢迎来到仙境传说的世界。";
+		mes "我叫斯普拉基，负责为你讲解基本的游戏玩法。";
+		mes "点击[下一步]按钮，或按[Enter]键继续。";
+		next;
+		mes "[斯普拉基]";
+		mes "首先，你需要学会操控角色的最基础知识。";
+		mes "基本的^4d4dff移动、选择物品和攻击^000000，都要使用^4d4dff鼠标左键^000000。";
+		next;
+		cutin "tutorial01",3;
+		mes "-! 提示 !-";
+		mes "点击地面即可移动角色。";
+		mes "攻击怪物或与这个世界的居民交谈，只需点击目标即可。";
+		next;
+		cutin "",255;
+		mes "[斯普拉基]";
+		mes "那么，我就给你一个来找我交谈的任务。";
+		mes "对话结束后，用鼠标左键点击我，再来和我交谈。";
+		set job_novice_q,1;
+		setquest 7117;
+		next;
+		cutin "tutorial02",3;
+		mes "-! 提示 !-";
+		mes "你从斯普拉基那里接到了任务。";
+		mes "同时按下^4d4dffAlt + U^000000键，即可在任务信息窗口中查看任务内容。";
+		next;
+		cutin "",255;
+		mes "[斯普拉基]";
+		mes "你查看过任务信息窗口了吗？";
+		mes "那么，再来和我交谈吧。";
+		close;
+	} else if (job_novice_q < 3) {
+		if (job_novice_q == 1) {
+			mes "[斯普拉基]";
+			mes "太好了！";
+			mes "现在你已经知道如何移动和与他人交谈了吧？";
+			set job_novice_q,2;
+			getexp 600,5;
+			completequest 7117;
+			next;
+		}
+		mes "[斯普拉基]";
+		mes "训练中心就是为你这样的初心者准备的。";
+		mes "你将接受训练，以熟悉游戏的基础操作。";
+		next;
+		mes "[斯普拉基]";
+		mes "当然，这个训练过程是可选的；如果你想直接去城镇，也没有问题。";
+		mes "但是，你会错过训练中心里能得到的全部好处。";
+		next;
+		switch(select("开始训练:立刻开始游戏")) {
+		case 1:
+			mes "[斯普拉基]";
+			mes "我会引导你前往初心者训练中心。";
+			mes "在里面，布莱德教官正等着和你谈话。";
+			next;
+			mes "[斯普拉基]";
+			mes "之后布莱德教官会帮助你。";
+			mes "请去见他吧。";
+			setquest 7118;
+			next;
+			mes "^4d4dff- 你从斯普拉基那里接到了任务“初心者修炼场 -1”。";
+			mes "请查看任务信息窗口。 -^000000";
+			close2;
+			savepoint strnpcinfo(4),100,100,1,1;
+			warp strnpcinfo(4),100,100;
+			end;
+		case 2:
+			set nov_1st_cos,0;
+			set nov_2nd_cos,0;
+			set nov_3_swordman,0;
+			set nov_3_archer,0;
+			set nov_3_thief,0;
+			set nov_3_magician,0;
+			set nov_3_acolyte,0;
+			set nov_3_merchant,0;
+			mes "[斯普拉基]";
+			mes "好，你想立刻开始。";
+			mes "你想从哪座城镇开始？";
+			next;
+			set .@select, select("普隆德拉:梦罗克:吉芬:裴扬:阿尔贝塔:伊斯鲁得");
+			mes "[斯普拉基]";
+			mes "我明白了。";
+			mes "去吧，变得更强！放眼你前方更光明的未来。";
+			callfunc "F_NvErase";
+			close2;
+			switch(.@select) {
+			case 1:
+				savepoint "prontera",273,354,1,1;
+				warp "prontera",273,354;
+				break;
+			case 2:
+				savepoint "morocc",160,94,1,1;
+				warp "morocc",160,94;
+				break;
+			case 3:
+				savepoint "geffen",120,100,1,1;
+				warp "geffen",120,100;
+				break;
+			case 4:
+				savepoint "payon",70,100,1,1;
+				warp "payon",70,100;
+				break;
+			case 5:
+				savepoint "alberta",116,57,1,1;
+				warp "alberta",116,57;
+				break;
+			case 6: // Old coordinates: (94,103)
+				savepoint "izlude",128,98,1,1;
+				warp "izlude",128,98;
+				break;
+			}
+			end;
+		}
+	} else {
+		mes "[斯普拉基]";
+		mes "这里是初心者修炼场。";
+		mes "我会引导你前往初心者训练中心。";
+		close2;
+		savepoint strnpcinfo(4),100,100,1,1;
+		warp strnpcinfo(4),100,100;
+		end;
+	}
+}
+new_1-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv1b	90
+new_2-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv2b	90
+new_3-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv3b	90
+new_4-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv4b	90
+new_5-2,100,29,4	duplicate(NvSprakkiB)	Sprakki#nv5b	90
+
+-	script	Brade#newbe02::NvBradeA	-1,{
+	if (job_novice_q < 2) {
+		mes "[布莱德教官]";
+		mes "你好！欢迎来到仙境传说的世界。";
+		mes "你曾参加过之前的修炼场。";
+		mes "修炼场现在已由新的管理团队接手。";
+		next;
+		mes "[布莱德教官]";
+		mes "看来我们只好把你的训练从头再来了。";
+		next;
+		mes "[布莱德教官]";
+		mes "我是布莱德教官，负责为你讲解基本的游戏玩法。";
+		mes "点击[下一步]按钮，或按[Enter]键继续。";
+		next;
+		mes "[布莱德教官]";
+		mes "首先，你需要学会操控角色的最基础知识。";
+		mes "基本的^4d4dff移动、选择物品和攻击^000000，都要使用^4d4dff鼠标左键^000000。";
+		next;
+		cutin "tutorial01",3;
+		mes "-! 提示 !-";
+		mes "点击地面即可移动角色。";
+		mes "攻击怪物或与这个世界的居民交谈，只需点击目标即可。";
+		next;
+		cutin "",255;
+		next;
+		mes "[布莱德教官]";
+		mes "首先，试着四处走动一下。";
+		mes "走动过后，再来和我交谈。";
+		set nov_1st_cos,0;
+		set nov_2nd_cos,0;
+		set nov_3_swordman,0;
+		set nov_3_archer,0;
+		set nov_3_thief,0;
+		set nov_3_magician,0;
+		set nov_3_acolyte,0;
+		set nov_3_merchant,0;
+		set treasure_alb,0;
+		set job_novice_q,2;
+		setquest 7118;
+		next;
+		cutin "tutorial02",3;
+		mes "-! 提示 !-";
+		mes "你从布莱德教官那里接到了任务。";
+		mes "你可以在任务信息窗口中查看任务内容。";
+		next;
+		mes "-! 提示 !-";
+		mes "同时按下^4d4dffAlt + U^000000键，即可打开任务信息窗口。";
+		next;
+		cutin "",255;
+		mes "[布莱德教官]";
+		mes "你查看过任务信息窗口了吗？";
+		mes "那么，再来和我交谈吧。";
+		close;
+	} else if (job_novice_q < 4) {
+		if (job_novice_q == 2) {
+			mes "[布莱德教官]";
+			mes "Great.";
+			mes "你成功完成了交办的任务，因此我会奖励你经验值。";
+			set job_novice_q,3;
+			getexp 900,10;
+			completequest 7118;
+			next;
+			mes "[布莱德教官]";
+			mes "通过狩猎或完成任务获得的经验值，可以查看画面左上方的经验值条来确认。";
+			next;
+			mes "[布莱德教官]";
+			mes "唉……那我就简单说说吧。";
+			mes "...I just can't get used to 'politeness' you know.";
+			mes "别那样看着我！";
+			next;
+			mes "[布莱德教官]";
+			mes "好，打起精神来，你这小鬼。";
+			mes "接下来是物品和装备。";
+			next;
+			mes "[布莱德教官]";
+			mes "首先，这些给你。";
+			mes "这些是最基础的装备和恢复药水。";
+		} else {
+			mes "[布莱德教官]";
+			mes "呃……我们刚才说到哪了？哦对，继续吧。";
+			mes "是关于物品和装备的。";
+			next;
+			mes "[布莱德教官]";
+			mes "拿着这些。";
+			mes "基础装备和恢复药水。";
+		}
+		set job_novice_q,4;
+		getitem 2352,1; //Novice_Plate
+		getitem 2510,1; //Novice_Hood
+		getitem 2414,1; //Novice_Boots
+		getitem 5055,1; //Novice_Egg_Cap
+		getitem 1243,1; //Novice_Knife
+		getitem 2112,1; //Novice_Guard
+		getitem 569,300; //Novice_Potion
+		setquest 7119;
+		next;
+		mes "[布莱德教官]";
+		mes "在左上角的基本信息窗口中，点击“物品”图标即可打开物品窗口。";
+		mes "物品窗口分为……";
+		next;
+		mes "[布莱德教官]";
+		mes "3个区域：消耗品、装备和其他物品。";
+		mes "如果想使用或装备物品，只需双击该物品，或把它拖入装备窗口。";
+		next;
+		mes "[布莱德教官]";
+		mes "右键点击物品，即可查看每件物品的详细信息。";
+		mes "物品的详细信息就会弹出。";
+		next;
+		cutin "tutorial04",3;
+		mes "!- 提示 -!";
+		mes "右键点击物品即可查看它的详细信息。";
+		next;
+		mes "!- 提示 -!";
+		mes "右键点击其他玩家会显示社区菜单，你可以加入队伍，或向玩家请求交易等。";
+		next;
+		cutin "",255;
+		mes "[布莱德教官]";
+		mes "不如把我刚才给你的物品装备上吧？";
+		mes "^4d4dff双击^000000你想装备的物品。等你穿戴完毕，我们再继续。";
+		next;
+		cutin "tutorial03",3;
+		mes "!- 提示 -!";
+		mes "只需双击物品，就能轻松装备或使用它们。";
+		mes "打开物品栏窗口的快捷键是 ALT + E。";
+		next;
+		mes "!- 提示 -!";
+		mes "要查看当前装备的物品，请使用快捷键 ALT + Q。";
+		mes "或者，把物品拖到你想装备的对应栏位。";
+		next;
+		mes "!- 提示 -!";
+		mes "装备布莱德教官给你的全部装备。";
+		close2;
+		cutin "",255;
+		end;
+	} else if (job_novice_q == 4) {
+		if (isequipped(2414) + isequipped(2352) + isequipped(2510) + isequipped(2112) + isequipped(1243) < 4) {
+			mes "[布莱德教官]";
+			mes "至少把我给你的4件装备穿上。";
+			mes "穿上那双鞋，套上那些衣服，再拿起那把武器，你这小鬼。";
+			close;
+		}
+		mes "[布莱德教官]";
+		mes "你都准备好了。";
+		mes "你进展得不错。";
+		set job_novice_q,5;
+		getexp 1200,15;
+		getitem 12323,50; //N_Fly_Wing
+		getitem 12324,20; //N_Butterfly_Wing
+		completequest 7119;
+		next;
+		mes "[布莱德教官]";
+		mes "这些苍蝇翅膀和蝴蝶翅膀是给你的奖励。";
+		mes "在修炼场里用不到这些，但以后会派上用场。";
+		next;
+		mes "[布莱德教官]";
+		mes "接下来是快捷键。";
+		mes "按下键盘上的^4d4dffF12键^000000。";
+		mes "会弹出一个有9个栏位的框。";
+		next;
+		mes "[布莱德教官]";
+		mes "拖动快捷键窗口的右角，就能看到快捷键的其他页面。";
+		next;
+		mes "[布莱德教官]";
+		mes "F1到F9键就是指定的快捷键。";
+		mes "只要把技能或物品拖到快捷键窗口，再按下对应的按键，就能立刻使用。";
+		next;
+		cutin "tutorial05",3;
+		mes "!- 提示 -!";
+		mes "只要把技能或物品拖到快捷键栏位，就能将其登记到快捷键窗口。";
+		next;
+		mes "!- 提示 -!";
+		mes "已登记的技能或物品，只需按下对应按键即可使用或装备。";
+		next;
+		mes "!- 提示 -!";
+		mes "你可以在选项菜单中更改快捷键设置，把任意按键设为快捷键。";
+		next;
+		mes "!- 提示 -!";
+		mes "把常用的技能和物品登记起来，使用起来会更方便。";
+		next;
+		cutin "",255;
+		mes "[布莱德教官]";
+		mes "最后一部分是如何使用技能。";
+		mes "但在那之前，你需要先学点东西。";
+		next;
+		mes "[布莱德教官]";
+		mes "这个房间的某个地方，有个叫^4d4dff金河^000000的人。";
+		mes "找到金河，向他学习^4d4dff[紧急治疗]^000000技能。";
+		setquest 7120;
+		next;
+		mes "[布莱德教官]";
+		mes "你的课程在那之后。";
+		mes "去找金河学习[紧急治疗]技能，然后回来找我。";
+		close;
+	} else if (job_novice_q == 5) {
+		mes "[布莱德教官]";
+		mes "这个房间的某个地方，有个叫^4d4dff金河^000000的人。";
+		mes "找到金河，向他学习^4d4dff[紧急治疗]^000000技能。";
+		close;
+	} else if (job_novice_q == 6) {
+		mes "[布莱德教官]";
+		mes "现在你已经学会[紧急治疗]技能了。";
+		mes "就像我之前说的，把紧急治疗技能登记到快捷键窗口，就能快速方便地使用该技能。";
+		next;
+		mes "[布莱德教官]";
+		mes "就这样，我能教你的就这些了。";
+		mes "你看到西边的出口了吗？";
+		mes "到下一个房间去，会有另一位教官在等你。";
+		next;
+		mes "[布莱德教官]";
+		mes "我们很快就会再见的。";
+		mes "不过现在，先去西边的房间获取更多信息吧。";
+		next;
+		mes "[布莱德教官]";
+		mes "你到目前为止都进展得不错。";
+		mes "这虽然不多，但请收下作为奖励。";
+		set job_novice_q,7;
+		getitem 2393,1; //N_Adventurer's_Suit
+		completequest 7120;
+		close;
+	} else if (job_novice_q == 7) {
+		mes "[布莱德教官]";
+		mes "训练的下一步在这里西边的房间进行。";
+		mes "如果你迷路了，我可以送你过去。";
+		next;
+		switch(select("我自己能过去:请送我到下一个房间")) {
+		case 1:
+			mes "[布莱德教官]";
+			mes "很好。这才是你该有的态度。";
+			mes "你不能总是依赖别人帮你。";
+			mes "那么，去吧。";
+			close;
+		case 2:
+			mes "[布莱德教官]";
+			mes "好吧。";
+			mes "我觉得这总比看着你迷路乱转要好。";
+			mes "Hahahaha...";
+			close2;
+			warp strnpcinfo(4),41,172;
+			end;
+		}
+	} else {
+		mes "[布莱德教官]";
+		mes "你不是已经完成这里的课程了吗？";
+		mes "还是说你只是迷路了？";
+		next;
+		switch(select("送我去实战训练场:我想去城镇")) {
+		case 1:
+			mes "[布莱德教官]";
+			mes "Sure.";
+			mes "小心别再迷路了。";
+			close2;
+			warp "new_"+charat(strnpcinfo(4),4)+"-3",96,21;
+			end;
+		case 2:
+			mes "[布莱德教官]";
+			mes "城镇……嗯？";
+			mes "既然这样，我就把你送到卡普拉职员那里。";
+			mes "使用^4d4dff卡普拉的传送服务^000000前往城镇。";
+			close2;
+			warp strnpcinfo(4),41,172;
+			end;
+		}
+	}
+}
+new_1-2,100,105,3	duplicate(NvBradeA)	Brade#nv1a	733
+new_2-2,100,105,3	duplicate(NvBradeA)	Brade#nv2a	733
+new_3-2,100,105,3	duplicate(NvBradeA)	Brade#nv3a	733
+new_4-2,100,105,3	duplicate(NvBradeA)	Brade#nv4a	733
+new_5-2,100,105,3	duplicate(NvBradeA)	Brade#nv5a	733
+
+-	script	Jinha#newbe03::NvJinha	-1,{
+	if (job_novice_q < 5) {
+		mes "[金河]";
+		mes "有什么我可以帮你的吗？";
+		mes "嗯？你没有按课程顺序进行。";
+		next;
+		mes "[金河]";
+		mes "你必须先见过布莱德教官，再来找我。我送你去布莱德教官那里吧。";
+		close2;
+		warp strnpcinfo(4),100,100;
+		end;
+	} else if (job_novice_q == 5) {
+		if (getskilllv("NV_FIRSTAID") > 0) {
+			mes "[金河]";
+			mes "你好！";
+			mes "我负责教你[紧急治疗]技能。";
+			mes "布莱德教官让你来学的，对吧？";
+			next;
+			mes "[金河]";
+			mes "哇……真厉害！";
+			mes "你已经会紧急治疗技能了。";
+			mes "看来我没什么可教你的了。";
+			next;
+			mes "[金河]";
+			mes "很好。你之前的教官是旧管理团队时期的塞西尔吗？";
+			mes "嗯，我可以确认你已经学会紧急治疗了。";
+			next;
+			mes "[金河]";
+			mes "那么，你可以直接进入课程的下一步。";
+			mes "回到布莱德教官那里吧。";
+			set job_novice_q,6;
+			close;
+		} else {
+			mes "[金河]";
+			mes "你好！";
+			mes "我能帮你什么？";
+			next;
+			select("我想学习使用[紧急治疗]技能。");
+			mes "[金河]";
+			mes "没错。";
+			mes "紧急治疗是在危险时把SP转化为HP的技能。";
+			next;
+			mes "[金河]";
+			mes "它的恢复量很少。";
+			mes "但它仍能帮你避免因致命一击而昏倒。";
+			specialeffect2 EF_BEGINSPELL6;
+			specialeffect2 EF_SPELLBREAKER;
+			next;
+			mes "[金河]";
+			mes "点击基本窗口中的^4d4dff技能^000000按钮，即可打开技能窗口。";
+			mes "快捷键是^4d4dffALT + S^000000。";
+			mes "不如试着用一下这个技能？";
+			skill "NV_FIRSTAID",1,SKILL_PERM;
+			set skill_nov,3; // Has future uses - do not remove! [Euphy]
+			set job_novice_q,6;
+			next;
+			mes "[金河]";
+			mes "很好，现在你知道如何使用紧急治疗技能了，你得进入下一步了。";
+			mes "回到布莱德教官那里，让他看看你在这里学到的东西。";
+			close;
+		}
+	} else if (job_novice_q == 6) {
+		mes "[金河]";
+		mes "你不是已经学会紧急治疗技能了吗？";
+		mes "让布莱德教官确认一下吧。";
+		mes "如果你不知道怎么去他那里，我可以送你过去。";
+		next;
+		switch(select("我自己可以:请送我去他那里")) {
+		case 1:
+			mes "[金河]";
+			mes "非常好！";
+			mes "这才是正确的态度！";
+			mes "将来你会成为一名出色的冒险家。";
+			close;
+		case 2:
+			mes "[金河]";
+			mes "我送你去布莱德教官那里。";
+			close2;
+			warp strnpcinfo(4),100,100;
+			end;
+		}
+	} else {
+		mes "[金河]";
+		mes "有什么我能为你做的吗？";
+		mes "下一堂课将在西边的房间继续。";
+		mes "进入西边的房间吧。";
+		close;
+	}
+}
+new_1-2,115,120,3	duplicate(NvJinha)	Jinha#nv1	59
+new_2-2,115,120,3	duplicate(NvJinha)	Jinha#nv2	59
+new_3-2,115,120,3	duplicate(NvJinha)	Jinha#nv3	59
+new_4-2,115,120,3	duplicate(NvJinha)	Jinha#nv4	59
+new_5-2,115,120,3	duplicate(NvJinha)	Jinha#nv5	59
+
+// People/Services in Ragnarok
+//============================================================
+-	script	Chocolat#newbe06::NvChocolat	-1,{
+	if (job_novice_q < 7) {
+		mes "[巧克拉]";
+		mes "嗯？奇怪。";
+		mes "让我看一下那张训练生证。";
+		next;
+		if (job_novice_q < 2) {
+			mes "[巧克拉]";
+			mes "哦，原来如此……";
+			mes "你曾参加过之前的修炼场。";
+			mes "修炼场现在已由新的管理团队接手。";
+			next;
+			mes "[巧克拉]";
+			mes "如果你想上基础课程，";
+			mes "你应该回到布莱德教官那里。";
+			next;
+			mes "[巧克拉]";
+			mes "或者，你也可以直接开始理论训练。";
+			mes "你想怎么做？";
+			next;
+			switch(select("送我去基础训练:开始理论训练")) {
+			case 1:
+				mes "[巧克拉]";
+				mes "Sure.";
+				mes "我送你去布莱德教官那里。";
+				mes "布莱德教官会开始你的基础训练。";
+				close2;
+				warp strnpcinfo(4),100,100;
+				end;
+			case 2:
+				mes "[巧克拉]";
+				mes "我来给你讲讲你在城镇里会遇到的人。";
+				mes "城镇里有各种各样的人，认识其中一些会对你有帮助。";
+				next;
+				mes "[巧克拉]";
+				mes "城镇里人很多，但其中有几个人是最值得认识的。";
+				next;
+				mes "[巧克拉]";
+				mes "就是站在我身后的[卡普拉]职员，以及他们的竞争对手[酷活动公司]。";
+				mes "第一次到访城镇时，你应该去和情报[向导]谈谈";
+				next;
+				mes "[巧克拉]";
+				mes "那么，我们逐一听听他们的介绍吧。";
+				mes "先从和[卡普拉]职员交谈开始。";
+				set job_novice_q,8;
+				setquest 7121;
+				next;
+				mes "^4d4dff- 你从巧克拉那里接到了任务。";
+				mes "请查看任务信息窗口。 -^000000";
+				close;
+			}
+		} else {
+			mes "[巧克拉]";
+			mes "你还在上基础课程。";
+			mes "你应该回到布莱德教官或金河那里。";
+			next;
+			mes "[巧克拉]";
+			mes "如果你不知道怎么找到他们，我可以送你去布莱德教官那里，怎么样？";
+			next;
+			switch(select("我自己去:可以送我去吗？")) {
+			case 1:
+				mes "[巧克拉]";
+				mes "好的。从右边的门出去吧。";
+				close;
+			case 2:
+				mes "[巧克拉]";
+				mes "Sure.";
+				mes "回头见。";
+				close2;
+				warp strnpcinfo(4),100,100;
+				end;
+			}
+		}
+	} else if (job_novice_q == 7) {
+		mes "[巧克拉]";
+		mes "我来给你讲讲你在城镇里会遇到的人。";
+		mes "城镇里有各种各样的人，认识其中一些会对你有帮助。";
+		next;
+		mes "[巧克拉]";
+		mes "城镇里人很多，但其中有几个人是最值得认识的。";
+		next;
+		mes "[巧克拉]";
+		mes "就是站在我身后的[卡普拉]职员，以及他们的竞争对手[酷活动公司]。";
+		mes "第一次到访城镇时，你应该去和情报[向导]谈谈";
+		next;
+		mes "[巧克拉]";
+		mes "那么，我们逐一听听他们的介绍吧。";
+		mes "先从和[卡普拉]职员交谈开始。";
+		set job_novice_q,8;
+		setquest 7121;
+		close;
+	} else if (job_novice_q == 8) {
+		mes "[巧克拉]";
+		mes "来，和站在我身后的这些家伙谈谈吧。";
+		mes "先从站在我身后的[卡普拉]职员开始。";
+		close;
+	} else if (job_novice_q == 9) {
+		mes "[巧克拉]";
+		mes "你已经了解了不少卡普拉服务吧？";
+		mes "从现在起，你可以使用卡普拉服务了。";
+		next;
+		mes "[巧克拉]";
+		mes "在训练过程中，如果你想直接去城镇，可以使用卡普拉服务前往。";
+		mes "但是，一旦离开训练中心，你就再也回不来了。";
+		next;
+		mes "[巧克拉]";
+		mes "接下来是卡普拉的竞争对手——[酷活动公司]职员！";
+		mes "[酷活动公司]职员专门负责活动。";
+		mes "那么，不如你自己去和他谈谈？";
+		close;
+	} else if (job_novice_q == 10) {
+		mes "[巧克拉]";
+		mes "在[卡普拉]和[酷活动公司]之后，就是情报[向导]们了。";
+		mes "他们看起来或许不起眼，但需要时会给你很大帮助。";
+		next;
+		mes "[巧克拉]";
+		mes "我从普隆德拉城请来了一位情报向导。";
+		mes "问问他到底在城镇里做些什么。";
+		close;
+	} else if (job_novice_q == 11) {
+		mes "[巧克拉]";
+		mes "情报[向导]的说明怎么样？";
+		mes "最后是关于[旅馆]的使用。";
+		mes "每座城镇里都有一家旅馆。";
+		next;
+		mes "[巧克拉]";
+		mes "花一点钱，就可以在旅馆或酒店休息。";
+		mes "在那里休息，HP和SP会完全恢复。";
+		mes "用一次也没什么坏处，对吧？";
+		next;
+		mes "[巧克拉]";
+		mes "除了这些家伙，还有许多出售各种物品的商人，去看看吧。";
+		set job_novice_q,12;
+		completequest 7121;
+		getexp 1800,20;
+		getitem 7059,20; //Cargo_Free_Ticket
+		getitem 7060,30; //Warp_Free_Ticket
+		next;
+		mes "[巧克拉]";
+		mes "你已经完成了我交给你的所有任务。";
+		mes "作为奖励，我会给你卡普拉仓库和传送服务的免费券。";
+		mes "它们会派上用场的。";
+		next;
+		mes "[巧克拉]";
+		mes "我要说的就这些。";
+		mes "现在，是时候进行真正的战斗了！";
+		next;
+		mes "[巧克拉]";
+		mes "实战训练将由布莱德教官负责。你之前见过他。";
+		mes "我送你去实战训练场。";
+		close2;
+		set .@map$, "new_"+charat(strnpcinfo(4),4)+"-3";
+		savepoint .@map$,96,21,1,1;
+		warp .@map$,96,21;
+		end;
+	} else {
+		mes "[巧克拉]";
+		mes "你迷路了吗？";
+		next;
+		switch(select("不，只是随便看看:是的，送我去实战训练场")) {
+		case 1:
+			mes "[巧克拉]";
+			mes "好，如果你需要我";
+			mes "为你指路，就回来找我。";
+			close;
+		case 2:
+			mes "[巧克拉]";
+			mes "我送你去实战训练场。";
+			close2;
+			set .@map$, "new_"+charat(strnpcinfo(4),4)+"-3";
+			savepoint .@map$,96,21,1,1;
+			warp .@map$,96,21;
+			end;
+		}
+	}
+}
+new_1-2,33,172,4	duplicate(NvChocolat)	Chocolat#nv1	96
+new_2-2,33,172,4	duplicate(NvChocolat)	Chocolat#nv2	96
+new_3-2,33,172,4	duplicate(NvChocolat)	Chocolat#nv3	96
+new_4-2,33,172,4	duplicate(NvChocolat)	Chocolat#nv4	96
+new_5-2,33,172,4	duplicate(NvChocolat)	Chocolat#nv5	96
+
+-	script	卡普拉职员#newbe07::Nv卡普拉	-1,{
+	if (job_novice_q < 8) {
+		mes "[卡普拉职员]";
+		mes "Hello.";
+		mes "我想还没轮到我。";
+		mes "请先和“巧克拉”谈谈。";
+		close;
+	} else if (job_novice_q == 8) {
+		mes "[卡普拉职员]";
+		mes "Hello.";
+		mes "我是卡普拉总公司派来帮助训练生的。";
+		mes "卡普拉公司是世界上最大的企业，在米德加尔特大陆有着悠久而辉煌的历史。";
+		mes "对你们冒险家来说，与我们保持良好关系很重要。";
+		next;
+		mes "[卡普拉职员]";
+		mes "我来为你介绍你们最常使用的卡普拉服务，[记录]、[仓库]和[传送]服务。";
+		next;
+		mes "[卡普拉职员]";
+		mes "当你和卡普拉职员交谈并申请记录服务时，";
+		mes "在战斗中被打败后，您复活的地点将会改变。";
+		next;
+		mes "[卡普拉职员]";
+		mes "您的复活点始终是您最后保存的地点。使用蝴蝶翅膀会带您回到最后保存的地方。";
+		mes "这项服务是免费的，所以请随时使用保存服务。";
+		next;
+		callsub L_Services,2; //Storage
+		next;
+		callsub L_Services,3; //Teleport
+		set job_novice_q,9;
+		next;
+		mes "[卡普拉职员]";
+		mes "您想再听一次说明吗？";
+		next;
+		while(1) {
+			set .@select, select("关于保存:关于仓库:关于传送:关于手推车:没有了。");
+			if (.@select == 5) {
+				mes "[卡普拉职员]";
+				mes "希望您对我的说明感到满意";
+				mes "关于卡普拉服务。";
+				close;
+			}
+			callsub L_Services, .@select;
+			next;
+		}
+	} else {
+		mes "[卡普拉职员]";
+		mes "卡普拉服务为您效劳。";
+		mes "有什么可以为您效劳的吗？";
+		next;
+		mes "[卡普拉职员]";
+		mes "在您使用传送服务之前，请听我说明。";
+		mes "如果您传送到村庄，";
+		mes "^4d4dff您将永远无法回到初心者训练场。^000000";
+		mes "请记住这一点。";
+		next;
+		switch(select("传送服务:关于卡普拉服务")) {
+		case 1:
+			mes "[卡普拉职员]";
+			mes "那么，您要直接前往城镇啊。";
+			mes "让我为您简单介绍一下。";
+			mes "^4d4dff普隆德拉是卢恩-米德加尔特王国的首都，紧邻它的是伊斯鲁得^000000。";
+			next;
+			mes "[卡普拉职员]";
+			mes "^4d4dff梦罗克是沙漠之城，您可以在这里转职为盗贼和刺客^000000。";
+			mes "^4d4dff裴扬是山中的村庄，靠近弓箭手村^000000。";
+			mes "^4d4dff吉芬是魔法之城。如果您想成为魔法师，就去那里吧。^000000";
+			next;
+			mes "[卡普拉职员]";
+			mes "^4d4dff阿尔贝塔是港都，您可以在那里找到商人公会^000000。";
+			mes "另外，如果您想坐船去某个地方，必须先经过阿尔贝塔。";
+			mes "选择您想传送到的城镇。";
+			next;
+			switch(select("普隆德拉:梦罗克:裴扬:阿尔贝塔:吉芬")) {
+			case 1:
+				mes "[卡普拉职员]";
+				mes "卢恩-米德加尔特的首都，普隆德拉。";
+				mes "我会送您去普隆德拉。";
+				mes "愿芙蕾雅祝福您的旅程。";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "prontera",117,72,1,1;
+				warp "prontera",150,50;
+				end;
+			case 2:
+				mes "[卡普拉职员]";
+				mes "沙漠之城，梦罗克……";
+				mes "它已失去了往日的荣耀……";
+				mes "现在不要失去心中的梦想。";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "morocc",150,99,1,1;
+				warp "morocc",155,110;
+				end;
+			case 3:
+				mes "[卡普拉职员]";
+				mes "嗯，您想成为弓箭手？";
+				mes "我们去裴扬吧。";
+				mes "愿芙蕾雅祝福您。";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "payon",70,100,1,1;
+				warp "payon",166,67;
+				end;
+			case 4:
+				mes "[卡普拉职员]";
+				mes "港都，阿尔贝塔。";
+				mes "米德加尔特大陆上所有贸易的主要城市。";
+				mes "如果您想体验其他文明，必须先访问阿尔贝塔。";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "alberta",30,232,1,1;
+				warp "alberta",114,58;
+				end;
+			case 5:
+				mes "[卡普拉职员]";
+				mes "魔法之城！";
+				mes "吉芬塔矗立在吉芬城中央，看起来真不错。";
+				mes "我会送您到吉芬喷泉附近。";
+				mes "愿芙蕾雅女神祝福您！";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "geffen",119,37,1,1;
+				warp "geffen",122,65;
+				end;
+			}
+		case 2:
+			mes "[卡普拉职员]";
+			mes "我来为您说明卡普拉服务。";
+			mes "您想了解哪项服务";
+			mes "的说明呢？";
+			next;
+			while(1) {
+				set .@select, select("关于保存:关于仓库:关于传送:关于手推车:没有了。");
+				if (.@select == 5) {
+					mes "[卡普拉职员]";
+					mes "希望您对我的说明感到满意";
+					mes "关于卡普拉服务。";
+					close;
+				}
+				callsub L_Services, .@select;
+				next;
+			}
+		}
+	}
+	end;
+
+L_Services:
+	switch(getarg(0)) {
+	case 1:
+		mes "[卡普拉职员]";
+		mes "当您在战斗中死亡时，";
+		mes "您可以在这项服务保存的地点复活。";
+		mes "如果您在每个村庄的卡普拉处保存";
+		mes "就能在保存的村庄复活。";
+		next;
+		mes "[卡普拉职员]";
+		mes "保存地点始终是";
+		mes "您最后保存的地方，而使用蝴蝶翅膀，";
+		mes "就能直接传送到您的保存点。";
+		mes "所以请随意使用这项服务。";
+		break;
+	case 2:
+		mes "[卡普拉职员]";
+		mes "接下来是关于使用仓库服务。";
+		mes "您可以在任何城镇方便地存放和取出道具。";
+		next;
+		mes "[卡普拉职员]";
+		mes "在暂时不需要时把所有道具都带在身上是不合理的。";
+		mes "请使用我们的仓库，安全地保管您的道具。";
+		next;
+		mes "[卡普拉职员]";
+		mes "我们便利的仓库服务";
+		mes "以少量费用提供给顾客，费用因城镇而异。";
+		mes "不过，您必须达到";
+		mes "至少 ^3355FF基本技能等级 6^000000";
+		mes "才能使用仓库。";
+		next;
+		mes "[卡普拉职员]";
+		//mes "There are 3 different item sections of the Storage into which items are organized: Consumable, Equipment and Etc.";
+		mes "仓库分为 7 个道具分类：消耗品、卡普拉（商城）、防具、武器、弹药、卡片和其他道具。";
+		next;
+
+		// VIP System messages.
+		if (MIN_STORAGE != MAX_STORAGE) {
+			mes "[卡普拉职员]";
+			mes "卡普拉仓库最多可容纳"+MIN_STORAGE+"个道具栏位，也就是说最多可以存放"+MIN_STORAGE+"种不同的道具。";
+			next;
+			mes "[卡普拉职员]";
+			mes "如果您拥有高级订阅，卡普拉仓库的最大道具栏位数为"+MAX_STORAGE+"！";
+			mes "但请记住，装备类道具每件都会占用一个道具栏位。";
+			mes "卡普拉仓库最多可以存放 30,000 件道具。";
+			next;
+		} else {
+			mes "[卡普拉职员]";
+			mes "卡普拉仓库最多可容纳"+MAX_STORAGE+"个道具栏位，也就是说最多可以存放"+MAX_STORAGE+"种不同的道具。";
+			next;
+		}
+
+		mes "[卡普拉职员]";
+		mes "这个仓库由同一账号上的所有角色共享。";
+		mes "各城镇的仓库费用可能有所不同。";
+		mes "所以使用我们的仓库服务时，请记住这一点。";
+		break;
+	case 3:
+		mes "[卡普拉职员]";
+		mes "我们还提供传送服务，让您在长途移动时更加轻松。";
+		next;
+		mes "[卡普拉职员]";
+		mes "凭借我们资深传送师的技术，";
+		mes "您的旅程会更加安全舒适。";
+		mes "另外请记住，可传送的地点因城镇而异。";
+		next;
+		mes "[卡普拉职员]";
+		mes "这一切都是为了回报您";
+		mes "永无止境的支持。我们正努力";
+		mes "报答各位顾客的恩情。";
+		break;
+	case 4:
+		mes "[卡普拉职员]";
+		mes "卡普拉公司提供手推车租赁服务";
+		mes "面向从事商业交易的顾客。";
+		mes "最初这项手推车租赁服务仅由";
+		mes "阿尔贝塔的商人公会提供";
+		next;
+		mes "[卡普拉职员]";
+		mes "然而，自从我们接管这项服务后";
+		mes "我们的商人顾客几乎可以在任何地方租用手推车。";
+		mes "手推车租赁服务仅限从事商业交易的职业";
+		mes "例如^4d4dff商人、铁匠、炼金术师和超级初心者^000000。";
+		next;
+		mes "[卡普拉职员]";
+		mes "当然，您应该事先学会“手推车使用”技能，";
+		mes "否则将无法向我们租用手推车。";
+		mes "租金因城镇而异，";
+		mes "请记住这一点。";
+		break;
+	}
+	return;
+}
+new_1-2,30,176,4	duplicate(Nv卡普拉)	卡普拉职员#nv1	117
+new_2-2,30,176,4	duplicate(Nv卡普拉)	卡普拉职员#nv2	117
+new_3-2,30,176,4	duplicate(Nv卡普拉)	卡普拉职员#nv3	117
+new_4-2,30,176,4	duplicate(Nv卡普拉)	卡普拉职员#nv4	117
+new_5-2,30,176,4	duplicate(Nv卡普拉)	卡普拉职员#nv5	117
+
+-	script	Cool Event Corp. Staff::NvCool	-1,{
+	if (job_novice_q < 9) {
+		mes "[酷活动公司职员]";
+		mes "还没轮到我。";
+		mes "您已经和卡普拉职员谈完了吗？";
+		close;
+	} else if (job_novice_q == 9) {
+		mes "[酷活动公司职员]";
+		mes "Hello.";
+		mes "我们正努力在米德加尔特举办类似卡普拉服务的活动。";
+		next;
+		mes "[酷活动公司职员]";
+		mes "我们的职员会为您提供[仓库]、[保存]和[传送服务]。";
+		next;
+		mes "[酷活动公司职员]";
+		mes "如果您身边没有卡普拉，我们会在您身边提供帮助。";
+		next;
+		mes "[酷活动公司职员]";
+		mes "我们正努力构建活动网络，让您的生活更美好。";
+		mes "希望您能在阿尔贝塔见到我们的职员。";
+		next;
+		mes "[酷活动公司职员]";
+		mes "谁知道呢，我们也许会在学院外再见。";
+		next;
+		mes "[酷活动公司职员]";
+		mes "在卡普拉职员不工作的地方，我们大多都穿着红色外套。";
+		set job_novice_q,10;
+		close;
+	} else {
+		mes "[酷活动公司职员]";
+		mes "我们的大部分服务与卡普拉公司相似。";
+		close;
+	}
+}
+new_1-2,33,176,4	duplicate(NvCool)	Cool Event Corp. Staff::NvCool1	874
+new_2-2,33,176,4	duplicate(NvCool)	Cool Event Corp. Staff::NvCool2	874
+new_3-2,33,176,4	duplicate(NvCool)	Cool Event Corp. Staff::NvCool3	874
+new_4-2,33,176,4	duplicate(NvCool)	Cool Event Corp. Staff::NvCool4	874
+new_5-2,33,176,4	duplicate(NvCool)	Cool Event Corp. Staff::NvCool5	874
+
+-	script	Guide::NvGuide	-1,{
+	if (job_novice_q < 10) {
+		mes "[向导]";
+		mes "还没轮到我呢。";
+		mes "去听巧克拉说吧。";
+		close;
+	} else if (job_novice_q == 10) {
+		mes "[向导]";
+		mes "每个城镇都有向导，为您指引有用的地点。";
+		mes "告诉我们您想去哪里，我们会在您的小地图上标记一个 ^4d4dff+^000000。";
+		mes "别客气，尽管问我们。";
+		next;
+		mes "[向导]";
+		mes "我们在每个城镇的样子都不尽相同，但职责是一样的。";
+		mes "无论您去哪个新城镇，都请留意这一点。";
+		next;
+		mes "[向导]";
+		mes "如果您想去第一个城镇，可以问左边的卡普拉职员。";
+		mes "您可以使用传送服务前往那里。";
+		set job_novice_q,11;
+		close;
+	} else {
+		mes "[向导]";
+		mes "有什么我可以帮您的？";
+		mes "需要我再说明一下我的工作吗？";
+		next;
+		switch(select("是的，我需要说明。:不用了。")) {
+		case 1:
+			mes "[向导]";
+			mes "每个城镇都有向导，为您指引该城镇的有用地点。";
+			mes "告诉我们您想去哪里，我们会在您的小地图上标记一个 ^4d4dff+^000000。";
+			mes "别客气，尽管问我们。";
+			next;
+			mes "[向导]";
+			mes "我们在每个城镇的样子都不尽相同，但职责是一样的。";
+			mes "无论您去哪个新城镇，都请留意这一点。";
+			next;
+			mes "[向导]";
+			mes "如果您想去第一个城镇，可以问左边的卡普拉职员。";
+			mes "您可以使用传送服务前往那里。";
+			close;
+		case 2:
+			mes "[向导]";
+			mes "好的，如果您和我们谈完了，就去找巧克拉吧。";
+			close;
+		}
+	}
+}
+new_1-2,36,176,4	duplicate(NvGuide)	向导#nv1	105
+new_2-2,36,176,4	duplicate(NvGuide)	向导#nv2	105
+new_3-2,36,176,4	duplicate(NvGuide)	向导#nv3	105
+new_4-2,36,176,4	duplicate(NvGuide)	向导#nv4	105
+new_5-2,36,176,4	duplicate(NvGuide)	向导#nv5	105
+
+// Real Combat Training
+//============================================================
+-	script	Brade#newbe04::NvBradeB	-1,{
+	if (job_novice_q < 12) {
+		if (job_novice_q < 2) {
+			mes "[布莱德]";
+			mes "您参加过之前的训练场。";
+			mes "训练场现在已由新的管理者接管。";
+			next;
+			mes "[布莱德]";
+			mes "您想参加基础课程，";
+			mes "还是想直接从这里开始？";
+			next;
+			switch(select("送我去基础训练。:我从这里开始。")) {
+			case 1:
+				mes "[布莱德]";
+				mes "好的。我送您去基础课程。";
+				close2;
+				warp "new_"+charat(strnpcinfo(4),4)+"-2",100,100;
+				end;
+			case 2:
+				mes "[布莱德]";
+				mes "那么，我们将开始您的训练。";
+				mes "我来填写登记表。";
+				set job_novice_q,12;
+				close;
+			}
+		} else {
+			mes "[布莱德]";
+			mes "我想您是从理论训练课程回来的，";
+			mes "要我把您送回那里，还是您想直接从这里开始？";
+			next;
+			switch(select("送我回巧克拉那里。:我从这里开始。")) {
+			case 1:
+				mes "[布莱德]";
+				mes "好的。我送您去巧克拉那里。";
+				close2;
+				warp "new_"+charat(strnpcinfo(4),4)+"-2",41,172;
+				end;
+			case 2:
+				mes "[布莱德]";
+				mes "那么，我们将开始您的训练。";
+				mes "我来填写登记表。";
+				set job_novice_q,12;
+				close;
+			}
+		}
+	} else if (job_novice_q == 12) {
+		mes "[布莱德]";
+		mes "Welcome.";
+		mes "现在才是真正的实习。";
+		mes "我们可以在这里进行实战练习。";
+		next;
+		mes "[布莱德]";
+		mes "正如我第一次说明的，我们可以点击怪物。";
+		mes "每次点击攻击一次。";
+		next;
+		mes "[布莱德]";
+		mes "为了方便，";
+		mes "^4d4dff如果按住 Ctrl 键，^000000攻击时就会自动攻击。";
+		next;
+		mes "[布莱德]";
+		mes "您也可以在战斗前输入 ^4d4dff[ /nc ]^000000 来开启此模式。";
+		next;
+		mes "[布莱德]";
+		mes "那么，我们去猎杀波利吧。";
+		mes "请到训练场 1 层猎杀波利。";
+		set job_novice_q,13;
+		setquest 7122;
+		getitem 569,100; //Novice_Potion
+		savepoint strnpcinfo(4),96,21,1,1;
+		next;
+		mes "^4d4dff- 您已从教官布莱德处接到任务。";
+		mes "请查看任务信息窗口。 -^000000";
+		close2;
+	} else if (job_novice_q < 15) {
+		if (job_novice_q == 13) {
+			if (checkquest(7122,HUNTING) == 2) {
+				mes "[布莱德]";
+				mes "看吧，没那么难，对吧？";
+				mes "干得好。";
+				set job_novice_q,14;
+				getitem 13040,1; //N_Cutter
+				getexp 3000,30;
+				completequest 7122;
+				next;
+			} else {
+				mes "[布莱德]";
+				mes "猎杀足够多的波利。";
+				mes "波利很好对付，打起精神来。";
+				mes "再试一次。";
+				npcskill "AL_HEAL",11,99,60;
+				close;
+			}
+		}
+		mes "[布莱德]";
+		mes "现在所有课程都快结束了。";
+		mes "您现在是初心者，还不能转职。";
+		next;
+		mes "[布莱德]";
+		mes "当您职业等级达到 10 级并学会所有基本技能后，就可以转职了。";
+		next;
+		mes "[布莱德]";
+		mes "最初的职业分为 6 种。";
+		next;
+		mes "[布莱德]";
+		mes "6 种基础职业是";
+		mes "剑士、盗贼，";
+		mes "服事、魔法师，";
+		mes "弓箭手和商人。";
+		next;
+		mes "[布莱德]";
+		mes "让我们体验一下 6 种基础职业——剑士、盗贼、服事、魔法师、弓箭手和商人，看看这些职业能做些什么。";
+		next;
+		mes "[布莱德]";
+		mes "在我身后，有各基础职业公会派来的人。";
+		mes "这些人会给您说明书，让您体验各职业的部分技能。";
+		next;
+		mes "[布莱德]";
+		mes "装备您想体验的职业说明书，就能使用该职业的一些基本技能。";
+		mes "试试这些技能，再决定选择哪个职业。";
+		set job_novice_q,15;
+		close;
+	} else {
+		mes "[布莱德]";
+		mes "您试过说明书里的技能了吗？";
+		mes "如果想了解各职业的信息，就去和职业公会派来的人谈谈。";
+		next;
+		mes "[布莱德]";
+		mes "我想您已经学得够多了，要结束训练前往第一个城镇吗？";
+		next;
+		switch(select("我还想再待一会儿。:我想结束训练去城镇。")) {
+		case 1:
+			mes "[布莱德]";
+			mes "您可以留在这里练习，直到您觉得自己准备好了。";
+			next;
+			mes "[布莱德]";
+			mes "试着使用职业说明书，了解各职业技能的特点。";
+			mes "我会恢复您的 HP 和 SP……加油。";
+			npcskill "AL_HEAL",11,99,60;
+			percentheal 0,100;
+			close;
+		case 2:
+			mes "[布莱德]";
+			mes "看来您已经准备好了。";
+			mes "我猜您已经下定决心了，对吧？";
+			mes "那么，您想去哪里？";
+			next;
+			switch(select("普隆德拉:梦罗克:裴扬:阿尔贝塔:吉芬:取消")) {
+			case 1:
+				mes "[布莱德]";
+				mes "普隆德拉，卢恩-米德加尔特王国的首都。";
+				mes "路上小心，愿神祝福您的旅程。";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "prontera",117,72,1,1;
+				warp "prontera",150,50;
+				end;
+			case 2:
+				mes "[布莱德]";
+				mes "沙漠城镇，梦罗克……";
+				mes "那座城镇里隐藏着许多故事。";
+				mes "路上小心。";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "morocc",150,99,1,1;
+				warp "morocc",155,110;
+				end;
+			case 3:
+				mes "[布莱德]";
+				mes "您选择了裴扬。";
+				mes "愿神祝福您。";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "payon",70,100,1,1;
+				warp "payon",166,67;
+				end;
+			case 4:
+				mes "[布莱德]";
+				mes "阿尔贝塔，港都。";
+				mes "这里是所有贸易的主要枢纽。";
+				mes "如果您想结识其他文明，就必须先到阿尔贝塔。";
+				mes "那么，愿神祝福您的灵魂。";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "alberta",30,232,1,1;
+				warp "alberta",114,58;
+				end;
+			case 5:
+				mes "[布莱德]";
+				mes "吉芬，魔法之城。";
+				mes "城市中央的吉芬塔很漂亮。";
+				mes "我会把您送到吉芬喷泉附近。";
+				mes "愿芙蕾雅女神祝福您。";
+				callfunc "F_NvErase";
+				close2;
+				savepoint "geffen",119,37,1,1;
+				warp "geffen",122,65;
+				end;
+			case 6:
+				mes "[布莱德]";
+				mes "是啊……三思而后行吧。";
+				mes "...Meet up with the people from each guild.";
+				close;
+			}
+		}
+	}
+}
+new_1-3,96,30,4	duplicate(NvBradeB)	Brade#nv1b	733
+new_2-3,96,30,4	duplicate(NvBradeB)	Brade#nv2b	733
+new_3-3,96,30,4	duplicate(NvBradeB)	Brade#nv3b	733
+new_4-3,96,30,4	duplicate(NvBradeB)	Brade#nv4b	733
+new_5-3,96,30,4	duplicate(NvBradeB)	Brade#nv5b	733
+
+-	script	Swordman Guide#newbe10::NvSwordman	-1,{
+	if (job_novice_q < 15) {
+		mes "[剑士公会成员]";
+		mes "在您完成布莱德的指导之前，我不会帮您。";
+		close;
+	}
+	mes "[剑士公会成员]";
+	mes "有什么可以帮您的吗？";
+	next;
+	switch(select("关于剑士职业。:转职为剑士。:有任务吗？:取消。")) {
+	case 1:
+		mes "[剑士公会成员]";
+		mes "从字面上说，剑士就是";
+		mes "擅长使用剑的人。";
+		mes "但只要他们愿意，也可以选择使用长矛。";
+		next;
+		mes "[剑士公会成员]";
+		mes "我们拥有强健的体魄。";
+		mes "因此我们自然能够装备重型防具和武器。";
+		mes "除了弓和法杖之外，大多数武器";
+		mes "我们职业都能装备。";
+		next;
+		mes "[剑士公会成员]";
+		mes "剑士职业唯一的弱点就是无法使用魔法。";
+		mes "但我们通过使用属性武器弥补了这一点。";
+		next;
+		mes "[剑士公会成员]";
+		mes "成为剑士的优点是我们拥有极高的 HP。";
+		mes "我们大多数人能相对轻松地承受敌人的攻击。";
+		next;
+		mes "[剑士公会成员]";
+		mes "在一对一近身战中，我们无人能敌。";
+		next;
+		mes "[剑士公会成员]";
+		mes "选择成为剑士的人通常会担任肉盾。保护弱者是我们的职责。";
+		next;
+		mes "[剑士公会成员]";
+		mes "作为剑士，您可以二转成为^8E2323骑士^000000或^8E2323十字军^000000。";
+		mes "而最近，三转职业也已经被发现。";
+		next;
+		if (isequipped(2819) || countitem(2819)) {
+			mes "[剑士公会成员]";
+			mes "试试说明书里列出的剑士技能。";
+			mes "按 Alt + S 打开技能菜单";
+			mes "点击技能菜单右上角的最小化按钮，确保它处于列表模式。";
+			close;
+		}
+		mes "[剑士公会成员]";
+		mes "如果您有兴趣成为剑士，我会把这本说明书给您。";
+		mes "您想试试剑士的技能吗？";
+		next;
+		switch(select("我想试试剑士技能。:不用了。")) {
+		case 1:
+			mes "[剑士公会成员]";
+			mes "这是剑士说明书。";
+			mes "我会收走您手上其他职业的说明书。";
+			next;
+			callfunc "F_NvErase";
+			getitem 2819,1; //Swordman_Manual
+			next;
+			mes "[剑士公会成员]";
+			mes "装备说明书后，按 ALT+S 打开技能菜单。";
+			mes "点击技能树窗口右上角的“-”按钮，将技能树最小化。";
+			close;
+		case 2:
+			mes "[剑士公会成员]";
+			mes "嗯，您这么想吗？";
+			mes "好，我同意您的看法。选择职业在我们的人生中非常重要。";
+			mes "只要您想体验剑士技能，随时来找我。";
+			close;
+		}
+	case 2:
+		mes "[剑士公会成员]";
+		mes "您真的想转职为剑士吗？";
+		mes "如果您想成为剑士，我会立刻送您去剑士协会。";
+		next;
+		mes "[剑士公会成员]";
+		mes "我想您的职业等级已经足够了，对吧？";
+		mes "您想现在结束训练，前往剑士协会吗？";
+		next;
+		switch(select("我再考虑一下。:我要去剑士协会。")) {
+		case 1:
+			mes "[剑士公会成员]";
+			mes "请充分试用各职业的说明书，再仔细考虑。";
+			mes "当然，您随时都受欢迎。";
+			close;
+		case 2:
+			mes "[剑士公会成员]";
+			mes "我明白了。";
+			mes "那么，我将结束您的训练流程，送您去剑士公会。";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "izlude",128,98,1,1; // Old coordinates: (95,104)
+			warp "izlude_in",74,167;
+			end;
+		}
+	case 3:
+		set .@quest, checkquest(7123);
+		if (.@quest == -1) {
+			mes "[剑士公会成员]";
+			mes "您想让我给您一个任务？";
+			mes "嗯，让我看看。";
+			mes "好！去猎杀附近的两只小鸡吧？";
+			next;
+			mes "^4d4dff您收到了剑士公会职员的狩猎请求。";
+			mes "您可以在任务信息窗口中查看任务内容。^000000";
+			setquest 7123;
+			next;
+			mes "[剑士公会成员]";
+			mes "使用剑士说明书中的“狂击”技能。";
+			mes "按 ^4d4dffAlt + S^000000 打开技能树，并点击窗口右上角的 ^4d4dff“-”^000000 按钮将窗口最小化，即可查看可用的剑士技能。";
+			next;
+			mes "[剑士公会成员]";
+			mes "如果您想和更强的怪物战斗，就去找训练教官布鲁图斯谈谈。";
+			mes "我会在这里等您。";
+			mes "祝您好运。";
+			close;
+		} else if (.@quest == 0 || .@quest == 1) {
+			if (checkquest(7123,HUNTING) == 2) {
+				mes "[剑士公会成员]";
+				mes "Great.";
+				mes "我觉得您已经足够资格成为剑士了。";
+				mes "作为奖励，我会给您一些药水。";
+				completequest 7123;
+				getitem 569,200; //Novice_Potion
+				getexp 5000,100;
+				close;
+			} else {
+				mes "[剑士公会成员]";
+				mes "猎杀两只小鸡。";
+				mes "和训练教官布鲁图斯谈谈，就能在更难的训练场找到它们。";
+				close;
+			}
+		} else if (.@quest == 2) {
+			mes "[剑士公会成员]";
+			mes "我想您已经完成那个任务了吧？";
+			mes "随着您在这个世界成长为冒险者，您会经历更多这样的任务。";
+			next;
+			mes "[剑士公会成员]";
+			mes "您的训练现在完成了。";
+			mes "如果您选择成为剑士，祝您好运。";
+			close;
+		} else {
+			mes "[剑士公会成员]";
+			mes "抱歉，我现在没有任务可以给您。";
+			close;
+		}
+	case 4:
+		mes "[剑士公会成员]";
+		mes "如果您对剑士职业有任何疑问，请来问我。";
+		mes "剑士公会正等着像您这样的初心者。";
+		close;
+	}
+}
+new_1-3,97,41,3	duplicate(NvSwordman)	Swordman Guide#nv1	728
+new_2-3,97,41,3	duplicate(NvSwordman)	Swordman Guide#nv2	728
+new_3-3,97,41,3	duplicate(NvSwordman)	Swordman Guide#nv3	728
+new_4-3,97,41,3	duplicate(NvSwordman)	Swordman Guide#nv4	728
+new_5-3,97,41,3	duplicate(NvSwordman)	Swordman Guide#nv5	728
+
+-	script	Acolyte Guide#newbe10::NvAcolyte	-1,{
+	if (job_novice_q < 15) {
+		mes "[普隆德拉服事]";
+		mes "看来您还没完成教官布莱德的课程。";
+		close;
+	}
+	mes "[普隆德拉服事]";
+	mes "有什么可以为您效劳的吗？";
+	next;
+	switch(select("什么是服事？:转职为服事。:取消")) {
+	case 1:
+		mes "[普隆德拉服事]";
+		mes "服事是崇拜芙蕾雅女神、牺牲自己帮助他人的人。";
+		next;
+		mes "[普隆德拉服事]";
+		mes "服事使用辅助技能让战斗变得更轻松。";
+		mes "任何成功的队伍都必须有服事。";
+		next;
+		mes "[普隆德拉服事]";
+		mes "^8E2323作为服事，您将来的职业可以转职为牧师或武僧^8E2323。";
+		next;
+		if (isequipped(2821) || countitem(2821)) {
+			mes "[普隆德拉服事]";
+			mes "用您手上的说明书试试服事技能吧。这能帮助您更轻松地了解这个职业。";
+			mes "按 ^4d4dffAlt + S^000000 打开技能树，并点击窗口右上角的 ^4d4dff“-”^000000 按钮将窗口最小化，即可查看可用技能。";
+			close;
+		}
+		mes "[普隆德拉服事]";
+		mes "如果您愿意，我可以给您一本技能说明书，让您体验成为服事的感觉。";
+		mes "您想体验服事的技能吗？";
+		next;
+		switch(select("是的，请给我。:不，我没兴趣。")) {
+		case 1:
+			mes "[普隆德拉服事]";
+			mes "给您，服事的说明书。";
+			mes "在您学习这本说明书期间，我会收走其他职业的说明书。";
+			next;
+			callfunc "F_NvErase";
+			getitem 2821,1; //Acolyte_Manual
+			next;
+			mes "[普隆德拉服事]";
+			mes "请双击物品栏中的技能说明书来装备它。";
+			mes "按 ^4d4dffAlt + S^000000 打开技能树，并点击窗口右上角的 ^4d4dff“-”^000000 按钮将窗口最小化，即可查看可用技能。";
+			close;
+		case 2:
+			mes "[普隆德拉服事]";
+			mes "嗯，您这么想啊。";
+			mes "好，我同意您的看法。选择职业在我们的人生中非常重要。";
+			mes "只要您想了解服事，随时来找我。";
+			close;
+		}
+	case 2:
+		mes "[普隆德拉服事]";
+		mes "您真的想成为服事吗？";
+		mes "如果是，我会送您去普隆德拉的圣堂。";
+		next;
+		mes "[普隆德拉服事]";
+		mes "当然，我猜你已经达到转职服事所需的职业等级了吧？";
+		mes "你想退出训练流程，前往普隆德拉的圣堂吗？";
+		next;
+		switch(select("让我再考虑一下。:我要去圣堂。")) {
+		case 1:
+			mes "[普隆德拉服事]";
+			mes "你应该试试每种职业的手册。";
+			mes "仔细翻阅，慎重决定。";
+			mes "当然，我随时欢迎你。";
+			close;
+		case 2:
+			mes "[普隆德拉服事]";
+			mes "太好了。";
+			mes "那么我将彻底结束训练流程，把你送往普隆德拉的圣堂。";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "prontera",117,72,1,1;
+			warp "prt_church",172,19;
+			end;
+		}
+	case 3:
+		mes "[普隆德拉服事]";
+		mes "如果你对服事有任何疑问，随时问我。";
+		mes "我们的神奥丁正等待着像你这样的冒险者。";
+		close;
+	}
+}
+new_1-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv1	95
+new_2-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv2	95
+new_3-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv3	95
+new_4-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv4	95
+new_5-3,101,41,3	duplicate(NvAcolyte)	Acolyte Guide#nv5	95
+
+-	script	Thief Guide#newbe10::NvThief	-1,{
+	if (job_novice_q < 15) {
+		mes "[盗贼公会成员]";
+		mes "你看起来还没完成布莱依得教官的课程。";
+		close;
+	}
+	mes "[盗贼公会成员]";
+	mes "我能帮你什么？";
+	next;
+	switch(select("关于盗贼职业。:我想成为盗贼。:有任务吗？:取消。")) {
+	case 1:
+		mes "[盗贼公会成员]";
+		mes "盗贼是使用短剑类武器的专家。";
+		mes "他们出手迅速，能轻易避开敌人的攻击。";
+		next;
+		mes "[盗贼公会成员]";
+		mes "盗贼可以学习躲避敌人或从怪物身上偷取物品的技能。";
+		mes "他们还因使用毒药而令人畏惧，毒药会慢慢削弱敌人。";
+		next;
+		mes "[盗贼公会成员]";
+		mes "在危险之时，或者盗贼不想暴露自己时，";
+		mes "他们甚至能用自己的技能轻松隐藏起来。";
+		next;
+		mes "[盗贼公会成员]";
+		mes "盗贼可以转职为 ^8E2323刺客^000000 或 ^8E2323流氓^000000。";
+		next;
+		if (isequipped(2820) || countitem(2820)) {
+			mes "[盗贼公会成员]";
+			mes "职业手册可以让你使用盗贼必备的技能，从而了解身为盗贼是什么感觉。";
+			close;
+		}
+		mes "[盗贼公会成员]";
+		mes "如果你愿意，我可以给你一本盗贼技能手册。";
+		mes "你想体验盗贼的技能吗？";
+		next;
+		switch(select("是的，我想。:不，我不想。")) {
+		case 1:
+			mes "[盗贼公会成员]";
+			mes "来，请收下盗贼手册。";
+			mes "顺便把其他职业手册也收回来。";
+			next;
+			callfunc "F_NvErase";
+			getitem 2820,1; //Thief_Manual
+			next;
+			mes "[盗贼公会成员]";
+			mes "请在物品栏窗口中双击技能手册以完成装备。";
+			mes "按 ^4d4dffAlt + S^000000 打开技能树，再点击窗口右上角的 ^4d4dff'-'^000000 按钮将窗口最小化，即可查看可用技能。";
+			close;
+		case 2:
+			mes "[盗贼公会成员]";
+			mes "哦，你确定吗？";
+			mes "职业选择非常重要，请仔细考虑。";
+			mes "如果你想了解盗贼，随时来找我谈。";
+			close;
+		}
+	case 2:
+		mes "[盗贼公会成员]";
+		mes "你真的想成为盗贼吗？";
+		mes "既然如此，我会立刻送你去盗贼公会。";
+		next;
+		mes "[盗贼公会成员]";
+		mes "你已经达到所需的职业等级了吧？";
+		mes "你想结束初心者训练，前往盗贼公会吗？";
+		next;
+		switch(select("让我再考虑一下。:是的，我想。")) {
+		case 1:
+			mes "[盗贼公会成员]";
+			mes "你已经试过所有职业手册了吗？";
+			mes "如果你还没决定要选什么职业，我建议你先和所有向导谈谈。";
+			close;
+		case 2:
+			mes "[盗贼公会成员]";
+			mes "好，我明白了。";
+			mes "欢迎。那么你的初心者训练已全部完成，将立刻被送往盗贼公会。";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "morocc",150,99,1,1;
+			warp "moc_prydb1",99,185;
+			end;
+		}
+	case 3:
+		set .@quest, checkquest(7127);
+		if (.@quest == -1) {
+			mes "[盗贼公会成员]";
+			mes "任务？";
+			mes "嗯，什么对你比较好呢？";
+			mes "去猎杀一些树精如何？";
+			next;
+			mes "[盗贼公会成员]";
+			mes "这不能作弊，所以一定要杀死 5 只树精。完成后再来找我。";
+			mes "如果你和训练师布鲁图斯谈谈，他可以送你去更困难的训练场，那里有树精可以猎杀。";
+			setquest 7127;
+			next;
+			mes "[盗贼公会成员]";
+			mes "装备盗贼手册后，你就能获得‘二刀连击’技能的效果。";
+			mes "‘二刀连击’和‘躲藏’是盗贼的主要技能。";
+			close;
+		} else if (.@quest == 0 || .@quest == 1) {
+			if (checkquest(7127,HUNTING) == 2) {
+				mes "[盗贼公会成员]";
+				mes "你非常强。";
+				mes "这些不算多，但请让我为你的努力给你一点奖励。";
+				completequest 7127;
+				getitem 12323,50; //N_Fly_Wing
+				getexp 5000,100;
+				close;
+			} else {
+				mes "[盗贼公会成员]";
+				mes "猎杀 5 只树精，然后回来找我完成任务。";
+				close;
+			}
+		} else if (.@quest == 2) {
+			mes "[盗贼公会成员]";
+			mes "我想你已经完成那个任务了吧？";
+			mes "随着你在这个世界成长为冒险者，你会经历更多这样的任务。";
+			next;
+			mes "[盗贼公会成员]";
+			mes "你的训练现在完成了。";
+			mes "如果你选择成为盗贼，祝你好运。";
+			close;
+		} else {
+			mes "[盗贼公会成员]";
+			mes "抱歉，我现在没有任务可以给你。";
+			close;
+		}
+	case 4:
+		mes "[盗贼公会成员]";
+		mes "如果你有关于盗贼职业的问题，随时可以问我。";
+		close;
+	}
+}
+new_1-3,105,41,3	duplicate(NvThief)	盗贼向导#nv1	118
+new_2-3,105,41,3	duplicate(NvThief)	盗贼向导#nv2	118
+new_3-3,105,41,3	duplicate(NvThief)	盗贼向导#nv3	118
+new_4-3,105,41,3	duplicate(NvThief)	盗贼向导#nv4	118
+new_5-3,105,41,3	duplicate(NvThief)	盗贼向导#nv5	118
+
+-	script	Merchant Guide#newbe10::NvMerchant	-1,{
+	if (job_novice_q < 15) {
+		mes "[商人公会成员]";
+		mes "你还在接受布莱依得先生的训练。";
+		close;
+	}
+	mes "[商人公会成员]";
+	mes "我能帮你什么？";
+	next;
+	switch(select("跟我说说商人。:我想成为商人。:给我任务。:取消")) {
+	case 1:
+		mes "[商人公会成员]";
+		mes "商人？简单来说，就是贩卖货物赚钱的人。";
+		mes "这是所有商人的主要目标。";
+		next;
+		mes "[商人公会成员]";
+		mes "我们拥有赚钱的特殊技能。";
+		mes "我们可以用更低的价格买入货物，";
+		mes "再以更高的价格卖出。";
+		next;
+		mes "[商人公会成员]";
+		mes "此外，商人还可以拥有手推车，";
+		mes "里面可以存放大量物品。";
+		next;
+		mes "[商人公会成员]";
+		mes "^8E2323商人可以转职为铁匠";
+		mes "^8E2323或炼金术师^000000作为二转职业。";
+		next;
+		if (isequipped(2823) || countitem(2823)) {
+			mes "[商人公会成员]";
+			mes "我认为你应该先试试商人的技能，再做决定。";
+			close;
+		}
+		mes "[商人公会成员]";
+		mes "你想看看成为商人是什么感觉吗？";
+		next;
+		switch(select("我想试试商人的技能。:我不想试。")) {
+		case 1:
+			mes "[商人公会成员]";
+			mes "这是商人技能手册。";
+			mes "顺便把其他职业手册从你那里收回来。";
+			next;
+			callfunc "F_NvErase";
+			getitem 2823,1; //Merchant_Manual
+			next;
+			mes "[商人公会成员]";
+			mes "请在物品栏窗口中双击技能手册以完成装备。";
+			mes "按 ^4d4dffAlt + S^000000 打开技能树，再点击窗口右上角的 ^4d4dff'-'^000000 按钮将窗口最小化，即可查看可用技能。";
+			close;
+		case 2:
+			mes "[商人公会成员]";
+			mes "嗯。你是这么想的吗。";
+			mes "好，我同意你的看法。选择职业在我们的人生中非常重要。";
+			mes "想体验商人技能时，随时来找我。";
+			close;
+		}
+	case 2:
+		mes "[商人公会成员]";
+		mes "你想成为商人吗？";
+		mes "好，那么我立刻送你去商人公会。";
+		next;
+		mes "[商人公会成员]";
+		mes "等等，你查看过自己的职业等级了吗？";
+		mes "你想完成初心者训练，直接前往商人公会吗？";
+		next;
+		switch(select("我再考虑一下。:是的，我想去商人公会")) {
+		case 1:
+			mes "[商人公会成员]";
+			mes "好，希望你能考虑成为商人。";
+			mes "我们随时欢迎你！";
+			close;
+		case 2:
+			mes "[商人公会成员]";
+			mes "太好了。";
+			mes "那么我将结束训练流程，立刻把你送往商人公会。";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "alberta",30,232,1,1;
+			warp "alberta_in",62,44;
+			end;
+		}
+	case 3:
+		set .@quest, checkquest(7126);
+		if (.@quest == -1) {
+			mes "[商人公会成员]";
+			mes "咦？任务？？";
+			mes "嗯……什么才适合你呢……？";
+			mes "好，那么把一些物品卖给番薯商人，凑齐 ^5d5dff300 zeny^000000 带来给我。";
+			next;
+			mes "[商人公会成员]";
+			mes "如果你装备了商人手册，就能使用‘高价卖出’和‘低价买进’技能。";
+			setquest 7126;
+			next;
+			mes "[商人公会成员]";
+			mes "我会在这里等你。";
+			mes "祝你好运！";
+			close;
+		} else if (.@quest == 0 || .@quest == 1) {
+			if (Zeny >= 300) {
+				mes "[商人公会成员]";
+				mes "太棒了！";
+				mes "Zeny 是米德加尔特的货币。";
+				mes "你可以通过出售战利品，以及做出明智的商业决策来赚取 zeny。";
+				next;
+				mes "[商人公会成员]";
+				mes "我们可以用 zeny 施展极其强大的技能！";
+				mes "金钱攻击！那是我们的终极攻击技能！！";
+				mes "我们基本上就是把钱贴在武器上，然后砸向敌人。被 Zeny 砸死吧！哇哈哈哈！";
+				next;
+				mes "[商人公会成员]";
+				mes "对了，你做得非常出色。所以我该给你点什么……给什么好呢？";
+				mes "好！强化武器金属-级数一怎么样？";
+				mes "强化武器金属-级数一是一种可用于精炼武器的金属元素。";
+				completequest 7126;
+				getitem 1010,7; //Phracon
+				getexp 5000,100;
+				close;
+			} else {
+				mes "[商人公会成员]";
+				mes "Zeny 是米德加尔特的货币。";
+				mes "你可以通过出售战利品，以及做出明智的商业决策来赚取 zeny。";
+				next;
+				mes "[商人公会成员]";
+				mes "你可以通过击杀怪物获得战利品。猎杀怪物后，把战利品卖掉就能获利！";
+				mes "这是多么有价值的职业啊！不是吗？";
+				next;
+				mes "[商人公会成员]";
+				mes "你为什么不试着成为商人呢？赚钱并不容易，但会是很棒的体验！";
+				close;
+			}
+		} else if (.@quest == 2) {
+			mes "[商人公会成员]";
+			mes "你已经完成了这个任务。";
+			mes "一旦进入主世界，你就能在那里接到各种精彩的任务！";
+			next;
+			mes "[商人公会成员]";
+			mes "我想你现在已经足够强，可以转职了吧？哈哈哈，别在这里浪费太多时间，初心者。";
+			close;
+		} else {
+			mes "[商人公会成员]";
+			mes "抱歉，我现在没有任务可以给你。";
+			close;
+		}
+	case 4:
+		mes "[商人公会成员]";
+		mes "如果你对商人有任何疑问，随时来问我。";
+		mes "我觉得你能成为富有的商人。啊哈哈。";
+		close;
+	}
+}
+new_1-3,109,41,3	duplicate(NvMerchant)	Merchant Guide#nv1	97
+new_2-3,109,41,3	duplicate(NvMerchant)	Merchant Guide#nv2	97
+new_3-3,109,41,3	duplicate(NvMerchant)	Merchant Guide#nv3	97
+new_4-3,109,41,3	duplicate(NvMerchant)	Merchant Guide#nv4	97
+new_5-3,109,41,3	duplicate(NvMerchant)	Merchant Guide#nv5	97
+
+-	script	Archer Guide#newbe10::NvArcher	-1,{
+	if (job_novice_q < 15) {
+		mes "[弓箭手公会成员]";
+		mes "你还在接受布莱依得先生的训练。";
+		close;
+	}
+	mes "[弓箭手公会成员]";
+	mes "我能帮你什么？";
+	next;
+	switch(select("跟我说说弓箭手。:我想成为弓箭手。:取消")) {
+	case 1:
+		mes "[弓箭手公会成员]";
+		mes "弓箭手拥有使用弓的专门技能，并掌握多种强力技能。";
+		mes "弓箭手擅长留在后方，逐个解决目标。";
+		next;
+		mes "[弓箭手公会成员]";
+		mes "弓箭手的体质并不";
+		mes "强健，因此必须与敌人";
+		mes "保持距离。";
+		next;
+		mes "[弓箭手公会成员]";
+		mes "另一方面，弓箭手专注细致，眼力极其精准。";
+		mes "因此一旦准备好攻击，他们能在敌人察觉之前将其击杀。";
+		next;
+		mes "[弓箭手公会成员]";
+		mes "^8E2323弓箭手可以转职为猎人等多种二转职业。";
+		mes "除了猎人，男性弓箭手还可以转职为诗人。";
+		mes "女性则可以转职为舞娘^000000。";
+		next;
+		if (isequipped(2822) || countitem(2822)) {
+			mes "[弓箭手公会成员]";
+			mes "我认为你应该先试试弓箭手的技能，再做决定。";
+			mes "我可以提供我们的技能体验手册。";
+			close;
+		}
+		mes "[弓箭手公会成员]";
+		mes "你想登记参加技能体验吗？";
+		mes "想试试弓箭手的技能吗？";
+		next;
+		switch(select("我想试试弓箭手的技能。:我不想试。")) {
+		case 1:
+			mes "[弓箭手公会成员]";
+			mes "这是弓箭手手册。";
+			mes "在你试用弓箭手手册时，我会把其他职业手册从你那里收回来。";
+			next;
+			callfunc "F_NvErase";
+			getitem 2822,1; //Archer_Manual
+			next;
+			mes "[弓箭手公会成员]";
+			mes "请在物品栏窗口中双击技能手册以完成装备。";
+			mes "按 ^4d4dffAlt + S^000000 打开技能树，再点击窗口右上角的 ^4d4dff'-'^000000 按钮将窗口最小化，即可查看可用技能。";
+			close;
+		case 2:
+			mes "[弓箭手公会成员]";
+			mes "嗯。你是这么想的吗。";
+			mes "好，我同意你的看法。选择职业在我们的人生中非常重要。";
+			mes "想体验弓箭手技能时，随时来找我。";
+			close;
+		}
+	case 2:
+		mes "[弓箭手公会成员]";
+		mes "你想成为弓箭手吗？";
+		mes "好，那么我立刻送你去弓箭手公会。";
+		next;
+		mes "[弓箭手公会成员]";
+		mes "等等，你查看过自己的职业等级了吗？";
+		mes "你想现在就完成初心者训练场，前往弓箭手公会吗？";
+		next;
+		switch(select("我再考虑一下。:是的，我想去弓箭手公会")) {
+		case 1:
+			mes "[弓箭手公会成员]";
+			mes "如果必要的话，你可以把所有职业都试一遍，但要选弓箭手，因为我们是最棒的。";
+			mes "我们随时欢迎你！";
+			close;
+		case 2:
+			mes "[弓箭手公会成员]";
+			mes "太好了。";
+			mes "那么我将彻底结束训练流程，把你送往弓箭手公会。";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "payon",256,242,1,1;
+			warp "payon_in02",64,65;
+			end;
+		}
+	case 3:
+		mes "[弓箭手公会成员]";
+		mes "如果你对弓箭手有任何疑问，随时来问我。";
+		mes "我觉得你能成为一名强大的弓箭手，年轻的初心者。";
+		close;
+	}
+}
+new_1-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv1	727
+new_2-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv2	727
+new_3-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv3	727
+new_4-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv4	727
+new_5-3,113,41,3	duplicate(NvArcher)	Archer Guide#nv5	727
+
+-	script	Mage Guide#newbe10::NvMage	-1,{
+	if (job_novice_q < 15) {
+		mes "[魔法师公会成员]";
+		mes "你还在接受布莱依得教官的训练。";
+		close;
+	}
+	mes "[魔法师公会成员]";
+	mes "我能帮你什么？";
+	next;
+	switch(select("跟我说说魔法师。:我想成为魔法师。:给我任务。:取消")) {
+	case 1:
+		mes "[魔法师公会成员]";
+		mes "魔法师是在需要保护朋友时能够使用魔法的人。";
+		mes "魔法师可以运用火、水、地、雷等元素魔法来诅咒敌人。";
+		next;
+		mes "[魔法师公会成员]";
+		mes "不过他们只能装备法杖和书，无法装备其他武器。";
+		mes "因为他们太过柔弱，";
+		mes "无法携带沉重的武器。";
+		next;
+		mes "[魔法师公会成员]";
+		mes "但他们可以凭借卓越的魔法技能";
+		mes "弥补这一弱点。";
+		mes "正因如此，许多人才想";
+		mes "成为魔法师！";
+		next;
+		mes "[魔法师公会成员]";
+		mes "魔法师必须归属公会，以壮大公会的实力与荣誉。";
+		mes "这也是魔法师在任何队伍和公会中都很受欢迎的原因之一。";
+		mes "你为什么不成为魔法师呢？";
+		next;
+		mes "[魔法师公会成员]";
+		mes "^8E2323魔法师可以转职为巫师";
+		mes "^8E2323或贤者^000000作为二转职业。";
+		next;
+		if (isequipped(2824) || countitem(2824)) {
+			mes "[魔法师公会成员]";
+			mes "我认为你应该先试试魔法师的技能，再做决定。";
+			mes "我可以给你我们的技能体验登记表。";
+			close;
+		}
+		mes "[魔法师公会成员]";
+		mes "你想登记体验成为魔法师的感觉吗？";
+		mes "你想试试魔法师的技能吗？";
+		next;
+		switch(select("我想试试魔法师的技能。:我不想试。")) {
+		case 1:
+			mes "[魔法师公会成员]";
+			mes "这是魔法师手册。";
+			mes "我会把其他职业的登记表和手册从你那里收回来。";
+			next;
+			callfunc "F_NvErase";
+			getitem 2824,1; //Mage_Manual
+			next;
+			mes "[魔法师公会成员]";
+			mes "装备手册后，按 ALT+S 打开技能菜单。";
+			mes "请点击技能树窗口右上角的‘-’按钮，将技能树最小化。";
+			close;
+		case 2:
+			mes "[魔法师公会成员]";
+			mes "嗯。你是这么想的吗。";
+			mes "好，我同意你的看法。选择职业在我们的人生中非常重要。";
+			mes "想体验魔法师技能时，随时来找我。";
+			close;
+		}
+	case 2:
+		mes "[魔法师公会成员]";
+		mes "你想成为魔法师吗？";
+		mes "好，那么我立刻送你去吉芬的魔法师公会。";
+		next;
+		mes "[魔法师公会成员]";
+		mes "等等，你查看过自己的职业等级了吗？";
+		mes "你想完成初心者训练，直接前往魔法师公会吗？";
+		next;
+		switch(select("我再考虑一下。:是的，完成我的训练。")) {
+		case 1:
+			mes "[魔法师公会成员]";
+			mes "在决定之前，请先体验一下魔法师技能究竟是什么。";
+			mes "我们随时欢迎你！";
+			close;
+		case 2:
+			mes "[魔法师公会成员]";
+			mes "太好了。";
+			mes "那么我将结束训练流程，立刻把你送往吉芬的魔法师公会。";
+			callfunc "F_NvErase",1;
+			close2;
+			savepoint "geffen",119,37,1,1;
+			warp "geffen_in",163,98;
+			end;
+		}
+	case 3:
+		set .@quest, checkquest(7124);
+		if (.@quest == -1) {
+			mes "[魔法师公会成员]";
+			mes "咦？任务？";
+			mes "嗯……什么才适合你呢……？";
+			mes "你想用元素箭技能猎杀疯兔吗？";
+			next;
+			mes "^4d4dff你从魔法师向导那里接到了狩猎任务。";
+			mes "你可以在任务窗口中查看该任务的更多信息。^000000";
+			setquest 7124;
+			next;
+			mes "[魔法师公会成员]";
+			mes "你可以使用魔法师手册上记载的‘火箭术’技能。";
+			mes "我会在这里等你。";
+			mes "祝你好运！";
+			close;
+		} else if (.@quest == 0 || .@quest == 1) {
+			if (checkquest(7124,HUNTING) == 2) {
+				mes "[魔法师公会成员]";
+				mes "你做得非常出色。";
+				mes "那么，你对魔法师产生兴趣了吗？";
+				mes "好。我给你点什么……";
+				mes "这是初心者蝴蝶翅膀，请收下。";
+				completequest 7124;
+				getitem 12324,30; //N_Butterfly_Wing
+				getexp 5000,100;
+				close;
+			} else {
+				mes "[魔法师公会成员]";
+				mes "任务内容是，你必须";
+				mes "猎杀疯兔并带回 5 个四叶草。";
+				close;
+			}
+		} else if (.@quest == 2) {
+			mes "[魔法师公会成员]";
+			mes "你已经完成了这个任务。";
+			mes "一旦进入主世界，你就能在那里接到各种精彩的任务！";
+			next;
+			mes "[魔法师公会成员]";
+			mes "这对你的训练应该足够了。";
+			close;
+		} else {
+			mes "[魔法师公会成员]";
+			mes "抱歉，我现在没有任务可以给你。";
+			close;
+		}
+	case 4:
+		mes "[魔法师公会成员]";
+		mes "如果你对魔法师有任何疑问，随时来问我。";
+		mes "我觉得你能成为一名聪明的魔法师……";
+		close;
+	}
+}
+new_1-3,117,41,3	duplicate(NvMage)	Mage Guide#nv1	123
+new_2-3,117,41,3	duplicate(NvMage)	Mage Guide#nv2	123
+new_3-3,117,41,3	duplicate(NvMage)	Mage Guide#nv3	123
+new_4-3,117,41,3	duplicate(NvMage)	Mage Guide#nv4	123
+new_5-3,117,41,3	duplicate(NvMage)	Mage Guide#nv5	123
+
+-	script	Bruce#nv::NvBruce	-1,{
+	mes "[布鲁斯]";
+	mes "你好？";
+	mes "我来为你介绍扩展职业和特殊职业。";
+	next;
+	mes "[布鲁斯]";
+	mes "特殊职业有跆拳少年、跆拳少女、忍者、超级初心者、神枪手。";
+	mes "你想听哪个职业的说明？";
+	next;
+	while(1) {
+		switch(select("跆拳:忍者:超级初心者:神枪手:结束对话。")) {
+		case 1:
+			mes "[布鲁斯]";
+			mes "这是一个通常使用大量踢击技能的职业。";
+			mes "它属于特殊职业，日后还可以转职为拳圣，拥有更强大的攻击技能。";
+			next;
+			mes "[布鲁斯]";
+			mes "还可以选择名为悟灵士的二转职业，它也拥有强大的攻击能力。";
+			mes "你可以等变强之后再决定。";
+			next;
+			break;
+		case 2:
+			mes "[布鲁斯]";
+			mes "忍者的特长是快速移动。";
+			mes "他们擅长使用投掷武器。";
+			next;
+			mes "[布鲁斯]";
+			mes "忍者算是混合职业，可以使用各种闪避技能，并能根据喜好选择物理或魔法攻击。";
+			next;
+			break;
+		case 3:
+			mes "[布鲁斯]";
+			mes "被称为超级初心者的强化版初心者，最大的魅力就在于他们趋于平庸的吸引力。";
+			mes "他们就是俗话所说的样样通、样样松。";
+			next;
+			mes "[布鲁斯]";
+			mes "超级初心者可以学习大部分一转职业的技能。";
+			mes "如果成为超级初心者，就无法转职，这很可惜，但你可以成长为非常有个性的角色。";
+			next;
+			break;
+		case 4:
+			mes "[布鲁斯]";
+			mes "你可以直接从初心者转职为专精枪械远程攻击的特殊职业。";
+			next;
+			mes "[布鲁斯]";
+			mes "神枪手使用由钢铁之城‘艾音布罗克’制造的各种枪械。";
+			mes "我推荐想成为强大神射手的人选择这个职业。";
+			next;
+			break;
+		case 5:
+			mes "[布鲁斯]";
+			mes "如果需要更多信息，";
+			mes "你可以随时访问 ^2F4F4F'www.ragnarok.co.kr'^000000";
+			close;
+		}
+	}
+}
+new_1-3,121,41,3	duplicate(NvBruce)	Bruce#nv1	57
+new_2-3,121,41,3	duplicate(NvBruce)	Bruce#nv2	57
+new_3-3,121,41,3	duplicate(NvBruce)	Bruce#nv3	57
+new_4-3,121,41,3	duplicate(NvBruce)	Bruce#nv4	57
+new_5-3,121,41,3	duplicate(NvBruce)	Bruce#nv5	57
+
+// Eden Group Officer (iRO only)
+//============================================================
+/*
+-	script	Eden Group Officer::NvEden	-1,{
+	if (BaseLevel < 10) {
+		mes "[Eden Group Officer]";
+		mes "Hello, I am a representative of the Eden Group.";
+		mes "We are here to assist adventurers in Midgard.";
+		next;
+		mes "[Eden Group Officer]";
+		mes "We have agents all over the world waiting to send you to our secret headquarters where you can get some useful quests.";
+		next;
+		mes "[Eden Group Officer]";
+		mes "If you take our quests we even give you weapons and equipment so be sure to visit us once you are done with your training.";
+		next;
+		mes "[Eden Group Officer]";
+		mes "Speak to me again once you have reached Base Level 10 and I will send you out of the training grounds.";
+		mes "Have you taken the quests from all of the Guides yet?";
+		close;
+	}
+	mes "[Eden Group Officer]";
+	mes "Great! You are ready to take on the challenges of the world.";
+	mes "What would you like to do?";
+	next;
+	switch(select("I want to leave the training grounds:Tell me about the towns.:Cancel")) {
+	case 1:
+		mes "[Eden Group Officer]";
+		mes "Looks like you are ready.";
+		mes "I guess you have made up your mind, huh?";
+		next;
+		mes "[Eden Group Officer]";
+		mes "If you know what job you want to change to, you should ask the ^4A4AFFJob Guides^000000 to send you out of the training grounds.";
+		mes "What town would you like to go to?";
+		next;
+		switch(select("Prontera:Morocc:Payon:Alberta:Geffen:Cancel")) {
+		case 1:
+			mes "[Eden Group Officer]";
+			mes "Prontera, the Capital city of the Rune-Midgarts Kingdom.";
+			mes "Take care and may Freya bless you on your journey.";
+			callsub S_Warp,"prontera",121,77,121,76;
+		case 2:
+			mes "[Eden Group Officer]";
+			mes "The desert city of Morocc was recently destroyed.";
+			mes "I will send you to the camp where the survivors are.";
+			callsub S_Warp,"moc_ruins",71,157,70,158;
+		case 3:
+			mes "[Eden Group Officer]";
+			mes "Just north of Payon you'll find the Archer Village.";
+			mes "Good luck on your journeys.";
+			callsub S_Warp,"payon",167,68,172,111;
+		case 4:
+			mes "[Eden Group Officer]";
+			mes "Alberta, the Port City.";
+			mes "It's the main hub of all trades.";
+			mes "If you want to travel to other civilizations, Alberta is the only outlet.";
+			callsub S_Warp,"alberta",115,57,116,58;
+		case 5:
+			mes "[Eden Group Officer]";
+			mes "Geffen, is known as the Magical City of Rune-Midgarts.";
+			mes "I will send you near the Fountains.";
+			mes "Goddess Freya bless you.";
+			callsub S_Warp,"geffen",118,36,128,66;
+		case 6:
+			mes "[Eden Group Officer]";
+			mes "If you're still not sure what job you want, talk to the Job Guides for more help.";
+			close;
+		}
+	case 2:
+		mes "[Eden Group Officer]";
+		mes "Prontera is the main capital of the Rune-Midgarts Kingdom. Here you will find Merchants selling their items and is a favorite gathering point of adventurers.";
+		next;
+		mes "[Eden Group Officer]";
+		mes "The Acolyte Guild is here at the Prontera Church located to the northwest. The Swordman Guild can be found at Izlude, a town just southeast of Prontera.";
+		next;
+		mes "[Eden Group Officer]";
+		mes "Morocc is a city located in the desert that was recently destroyed due to an evil monster named Satan Morocc. The Thief Guild has been working to restore it to it's former glory.";
+		next;
+		mes "[Eden Group Officer]";
+		mes "Payon is where the Archer Guild has made it's home. You can also find the 卡普拉商店 Employees selling their Item Mall items near the center of this city.";
+		next;
+		mes "[Eden Group Officer]";
+		mes "Alberta is the trading hub of Rune-Midgarts. The Merchant Guild is located here and the docks have ships that will take you to different island cities.";
+		next;
+		mes "[Eden Group Officer]";
+		mes "Geffen is known as the magical city of Rune-Midgarts. The Mage Guild is located here and research for new magic is always being conducted at their headquarters.";
+		next;
+		mes "[Eden Group Officer]";
+		mes "If you wish to be sent directly to the Job Guilds, then speak to the Job Guides and tell them that you want to change your job.";
+		close;
+	case 3:
+		close;
+	}
+
+S_Warp:
+	close2;
+	callfunc "F_NvErase",1;
+	savepoint getarg(0),getarg(1),getarg(2),1,1;
+	warp getarg(0),getarg(3),getarg(4);
+	end;
+	
+OnTouch:
+	emotion ET_SURPRISE;
+	end;
+}
+new_1-3,97,50,4	duplicate(NvEden)	Eden Group Officer#nv1	729,5,5
+new_2-3,97,50,4	duplicate(NvEden)	Eden Group Officer#nv2	729,5,5
+new_3-3,97,50,4	duplicate(NvEden)	Eden Group Officer#nv3	729,5,5
+new_4-3,97,50,4	duplicate(NvEden)	Eden Group Officer#nv4	729,5,5
+new_5-3,97,50,4	duplicate(NvEden)	Eden Group Officer#nv5	729,5,5
+*/
+
+// Trainer
+//============================================================
+-	script	::NvBrutus	-1,{
+	mes "[训练师布鲁图斯]";
+	mes "这些怪物都很弱，很容易对付。但要小心，很多怪物都主动攻击，而且嗜血成性！";
+	next;
+	mes "[训练师布鲁图斯]";
+	mes "如果你觉得这里的怪物太弱，我可以送你去另一个训练场，那里的怪物比这里更强。";
+	next;
+	mes "[训练师布鲁图斯]";
+	mes "那么你想试试吗？";
+	next;
+	switch(select("送我去另一个等级:那里有什么怪物？:取消")) {
+	case 1:
+		mes "[训练师布鲁图斯]";
+		mes "我明白了，那么让我带你去另一个等级。你想去哪个等级？";
+		next;
+		for(set .@i,1; .@i<6; set .@i,.@i+1) {
+			if (!compare(strnpcinfo(2),"nv"+.@i))
+				set .@menu$, .@menu$+"送我去等级"+.@i;
+			set .@menu$, .@menu$+":";
+		}
+		set .@i, select(.@menu$+"取消");
+		if (.@i < 7)
+			warp "new_"+.@i+"-3",96,21;
+		close;
+	case 2:
+		mes "[训练师布鲁图斯]";
+		mes "你看起来很想战斗。";
+		mes "训练场的等级越高，怪物的等级也越高。";
+		next;
+		mes "[训练师布鲁图斯]";
+		mes "等级 1 的怪物最弱。";
+		mes "那里有波利、土波利和疯兔。";
+		next;
+		mes "[训练师布鲁图斯]";
+		mes "等级 2 更具挑战性。";
+		mes "那里有波利、疯兔、树精和苍蝇。";
+		next;
+		mes "[训练师布鲁图斯]";
+		mes "等级 3 与等级 2 相同。";
+		mes "那里有波利、疯兔、树精和苍蝇。";
+		next;
+		mes "[训练师布鲁图斯]";
+		mes "等级 4 的怪物更强。";
+		mes "那里有树精、蜂兵、小鸡和绿棉虫。";
+		next;
+		mes "[训练师布鲁图斯]";
+		mes "等级 5 与等级 4 相同。";
+		mes "那里有树精、蜂兵、小鸡和绿棉虫。";
+		close;
+	case 3:
+		mes "[布鲁图斯教官]";
+		mes "嗯……？";
+		mes "你担心前往更具挑战性的地方吗？这可以理解，毕竟你还是个新手冒险者。祝你好运~";
+		close;
+	}
+}
+new_1-3,103,50,4	duplicate(NvBrutus)	Level 1 Trainer#nv1	84
+new_2-3,103,50,4	duplicate(NvBrutus)	Level 2 Trainer#nv2	84
+new_3-3,103,50,4	duplicate(NvBrutus)	Level 3 Trainer#nv3	84
+new_4-3,103,50,4	duplicate(NvBrutus)	Level 4 Trainer#nv4	84
+new_5-3,103,50,4	duplicate(NvBrutus)	Level 5 Trainer#nv5	84
+
+// Monster Spawns
+//============================================================
+new_1-3,0,0	monster	波利	1002,20
+new_1-3,0,0	monster	土波利	1113,10
+new_1-3,0,0	monster	疯兔	1063,20
+
+new_2-3,0,0	monster	苍蝇	1011,10
+new_2-3,0,0	monster	疯兔	1063,15
+new_2-3,0,0	monster	树精	1010,10
+new_2-3,0,0	monster	波利	1002,15
+
+new_3-3,0,0	monster	苍蝇	1011,10
+new_3-3,0,0	monster	疯兔	1063,15
+new_3-3,0,0	monster	树精	1010,10
+new_3-3,0,0	monster	波利	1002,5
+
+new_4-3,0,0	monster	蜂兵	1004,5
+new_4-3,0,0	monster	树精	1010,15
+new_4-3,0,0	monster	绿棉虫	1184,5
+new_4-3,0,0	monster	小鸡	1049,15
+
+new_5-3,0,0	monster	蜂兵	1004,5
+new_5-3,0,0	monster	树精	1010,15
+new_5-3,0,0	monster	绿棉虫	1184,5
+new_5-3,0,0	monster	小鸡	1049,15
+
+// Potato Merchant
+//============================================================
+-	shop	Potato Merchant#newbe09::NvPotato	93,516:-1
+
+new_1-3,100,50,3	duplicate(NvPotato)	Potato Merchant#nv1	93
+new_2-3,100,50,3	duplicate(NvPotato)	Potato Merchant#nv2	93
+new_3-3,100,50,3	duplicate(NvPotato)	Potato Merchant#nv3	93
+new_4-3,100,50,3	duplicate(NvPotato)	Potato Merchant#nv4	93
+new_5-3,100,50,3	duplicate(NvPotato)	Potato Merchant#nv5	93
+
+// Random Stuff
+//============================================================
+-	script	Bulletin Board::NvBulletin	-1,{
+	mes "^FF0000=================================";
+	mes "^E40CAA[欢迎] ^CC0000来到^FF9000新手^7FFF00 训练^00FF00 场^E40CAA [欢迎]";
+	mes "^FF0000=================================^000000";
+	close;
+}
+new_1-1,66,114,4	duplicate(NvBulletin)	公告板#nv1	111
+new_2-1,66,114,4	duplicate(NvBulletin)	公告板#nv2	111
+new_3-1,66,114,4	duplicate(NvBulletin)	公告板#nv3	111
+new_4-1,66,114,4	duplicate(NvBulletin)	公告板#nv4	111
+new_5-1,66,114,4	duplicate(NvBulletin)	公告板#nv5	111
+
+-	script	Guard::NvGuardA	-1,{
+	mes "[训练场守卫]";
+	mes "欢迎来到训练场。";
+	mes "你现在位于外庭院。请进入城堡开始训练。";
+	close;
+}
+new_1-1,144,116,2	duplicate(NvGuardA)	守卫#nv1a	105
+new_2-1,144,116,2	duplicate(NvGuardA)	守卫#nv2a	105
+new_3-1,144,116,2	duplicate(NvGuardA)	守卫#nv3a	105
+new_4-1,144,116,2	duplicate(NvGuardA)	守卫#nv4a	105
+new_5-1,144,116,2	duplicate(NvGuardA)	守卫#nv5a	105
+
+-	script	Guard::NvGuardB	-1,{
+	mes "[训练场守卫]";
+	if (rand(2)) {
+		mes "请进！欢迎来到训练场！";
+		mes "在这里，你可以为未来在仙境传说世界中的冒险做好准备！";
+	} else {
+		mes "上吧，新手，上吧！";
+		mes "战斗吧，变得更强！向着更光明的明天前进！";
+	}
+	close;
+}
+new_1-1,144,107,2	duplicate(NvGuardB)	守卫#nv1b	105
+new_2-1,144,107,2	duplicate(NvGuardB)	守卫#nv2b	105
+new_3-1,144,107,2	duplicate(NvGuardB)	守卫#nv3b	105
+new_4-1,144,107,2	duplicate(NvGuardB)	守卫#nv4b	105
+new_5-1,144,107,2	duplicate(NvGuardB)	守卫#nv5b	105
+
+-	script	Instructor#Edwin::NvEdwin	-1,{
+	mes "[埃德温]";
+	mes "咦？你怎么还在这里？";
+	mes "你已经没有需要学习的课程了。";
+	next;
+	mes "[埃德温]";
+	mes "那么，我送你离开这里吧。";
+	mes "去找教官布莱德吧。";
+	close2;
+	savepoint strnpcinfo(4),100,100,1,1;
+	warp strnpcinfo(4),100,100;
+	end;
+}
+new_1-2,161,182,5	duplicate(NvEdwin)	教官#nv1	92
+new_2-2,161,182,5	duplicate(NvEdwin)	教官#nv2	92
+new_3-2,161,182,5	duplicate(NvEdwin)	教官#nv3	92
+new_4-2,161,182,5	duplicate(NvEdwin)	教官#nv4	92
+new_5-2,161,182,5	duplicate(NvEdwin)	教官#nv5	92
+
+function	script	F_NvErase	{
+	if (getarg(0,0)) {
+		if (checkquest(7123) > -1) erasequest 7123;
+		if (checkquest(7124) > -1) erasequest 7124;
+		if (checkquest(7126) > -1) erasequest 7126;
+		if (checkquest(7127) > -1) erasequest 7127;
+	}
+	nude;
+	setarray .@manuals[0],countitem(2819),countitem(2820),countitem(2821),countitem(2822),countitem(2823),countitem(2824);
+	if (.@manuals[0]) delitem 2819,.@manuals[0]; //Swordman_Manual
+	if (.@manuals[1]) delitem 2820,.@manuals[1]; //Thief_Manual
+	if (.@manuals[2]) delitem 2821,.@manuals[2]; //Acolyte_Manual
+	if (.@manuals[3]) delitem 2822,.@manuals[3]; //Archer_Manual
+	if (.@manuals[4]) delitem 2823,.@manuals[4]; //Merchant_Manual
+	if (.@manuals[5]) delitem 2824,.@manuals[5]; //Mage_Manual
+	return;
+}
+
+// Pre-Renewal Backwards Compatibility
+//============================================================
+-	script	Final Tester::NvHanson	-1,{
+	if (nov_3_swordman < 40) {
+		mes "[汉森]";
+		mes "咦？奇怪？";
+		next;
+		mes "[汉森]";
+		mes "训练场已经换了新的管理者……";
+		mes "你似乎是从上一任管理者那里来的。";
+		next;
+		mes "[汉森]";
+		mes "你可以继续，能走到这里，你应该已经有足够的经验了。";
+		next;
+		mes "[汉森]";
+		mes "我会送你去任何你想去的城镇。";
+		mes "或者，你有喜欢的职业吗？";
+		next;
+		switch(select("选择职业。:前往城镇。")) {
+		case 1:
+			mes "[汉森]";
+			mes "你想从事什么职业？";
+			next;
+			switch(select("剑士:服事:盗贼:商人:弓箭手:魔法师")) {
+			case 1:
+				mes "[汉森]";
+				mes "真是个好选择！";
+				mes "等你领取完所有补给品后，我会把你传送到剑士协会。";
+				next;
+				mes "[汉森]";
+				mes "你将被送往的城镇叫伊斯鲁德，它是普隆德拉的卫星城。剑士协会位于城镇西部。请记住这一点。";
+				next;
+				callsub L_Supplies;
+				savepoint "izlude",128,98,1,1; // Old coordinates: (95,104)
+				warp "izlude_in",74,167;
+				end;
+			case 2:
+				mes "[汉森]";
+				mes "你选择了";
+				mes "成为一名服事。";
+				mes "你将被送往";
+				mes "普隆德拉城。";
+				next;
+				mes "[汉森]";
+				mes "普隆德拉圣殿位于普隆德拉东北部。请记住这一点。";
+				next;
+				callsub L_Supplies;
+				savepoint "prontera",117,72,1,1;
+				warp "prt_church",172,19;
+				end;
+			case 3:
+				mes "[汉森]";
+				mes "你选择了";
+				mes "成为一名盗贼。";
+				mes "你将被送往";
+				mes "梦罗克城。";
+				next;
+				mes "[汉森]";
+				mes "盗贼公会位于城镇西北方金字塔的地下第一层。请记住这一点。";
+				next;
+				callsub L_Supplies;
+				savepoint "morocc",150,99,1,1;
+				warp "moc_ruins",155,44;
+				end;
+			case 4:
+				mes "[汉森]";
+				mes "你选择了";
+				mes "成为一名商人。";
+				mes "你将被送往";
+				mes "艾尔贝塔城。";
+				next;
+				callsub L_Supplies;
+				savepoint "alberta",30,232,1,1;
+				warp "alberta_in",62,44;
+				end;
+			case 5:
+				mes "[汉森]";
+				mes "你选择了";
+				mes "成为一名弓箭手。";
+				mes "你将被送往";
+				mes "斐扬城。";
+				next;
+				mes "[汉森]";
+				mes "弓箭手公会位于斐扬西北部。请记住这一点。";
+				next;
+				callsub L_Supplies;
+				savepoint "payon",256,242,1,1;
+				warp "payon_in02",64,65;
+				end;
+			case 6:
+				mes "[汉森]";
+				mes "你选择了";
+				mes "成为一名魔法师。";
+				mes "你将被送往";
+				mes "吉芬城。";
+				next;
+				mes "[汉森]";
+				mes "魔法师学院位于城镇西北部。请记住这一点。";
+				next;
+				callsub L_Supplies;
+				savepoint "geffen",119,37,1,1;
+				warp "geffen_in",163,98;
+				end;
+			}
+		case 2:
+			mes "[汉森]";
+			mes "你想去哪个城镇？";
+			next;
+			callsub L_Warp, select("普隆德拉:吉芬:梦罗克:斐扬:艾尔贝塔:算了");
+			end;
+		}
+	} else {
+		mes "[汉森]";
+		mes "你已经领取了所有补给品。";
+		mes "你想去哪个城镇？";
+		next;
+		callsub L_Warp, select("普隆德拉:吉芬:梦罗克:斐扬:艾尔贝塔");
+		end;
+	}
+	end;
+
+L_Supplies:
+	mes "[汉森]";
+	mes "让我给你";
+	mes "一些补给品。然后";
+	mes "你将被传送";
+	mes "到选定的城镇。";
+	next;
+	mes "^660000补给品清单^000000";
+	mes "^00003320 卡普拉仓库免费券^000000";
+	mes "^00003330 卡普拉传送免费券^000000";
+	mes "^0000331 新手短剑^000000";
+	mes "^0000331 新手冒险者套装^000000";
+	next;
+	mes "[汉森]";
+	mes "请检查你的物品栏";
+	mes "确认是否已领取清单上的所有补给品。让我简要说明一下你收到的物品。";
+	next;
+	mes "[汉森]";
+	mes "卡普拉仓库免费券和卡普拉传送免费券可用于卡普拉仓库和传送服务。";
+	set nov_3_swordman,40;
+	getitem 7059,20; //Cargo_Free_Ticket
+	getitem 7060,30; //Warp_Free_Ticket
+	getitem 2393,1; //N_Adventurer's_Suit
+	getitem 13040,1; //N_Cutter
+	next;
+	mes "[汉森]";
+	mes "你现在将";
+	mes "被传送。";
+	mes "祝你好运，";
+	mes "^A62A2A"+strcharinfo(0)+"^000000";
+	mes "后会有期。";
+	close2;
+	return;
+
+L_Warp:
+	mes "[汉森]";
+	switch(getarg(0)) {
+	case 1:
+		mes "我会把你送往首都普隆德拉。";
+		close2;
+		savepoint "prontera",117,72,1,1;
+		warp "prontera",150,50;
+		end;
+	case 2:
+		mes "我会把你送往魔法之城吉芬。";
+		close2;
+		savepoint "geffen",119,37,1,1;
+		warp "geffen",122,65;
+		end;
+	case 3:
+		mes "我会把你送往沙漠城镇梦罗克。";
+		close2;
+		savepoint "morocc",150,99,1,1;
+		warp "morocc",155,110;
+		end;
+	case 4:
+		mes "我会把你送往山间村落斐扬。";
+		close2;
+		savepoint "payon",70,100,1,1;
+		warp "payon",166,67;
+		end;
+	case 5:
+		mes "我会把你送往港口城市艾尔贝塔。";
+		close2;
+		savepoint "alberta",30,232,1,1;
+		warp "alberta",114,58;
+		end;
+	case 6:
+		mes "[汉森]";
+		mes "等你下定决心后再来吧。";
+		close;
+	}
+}
+new_1-4,100,29,1	duplicate(NvHanson)	Final Tester#nv1	46
+new_2-4,100,29,1	duplicate(NvHanson)	Final Tester#nv2	46
+new_3-4,100,29,1	duplicate(NvHanson)	Final Tester#nv3	46
+new_4-4,100,29,1	duplicate(NvHanson)	Final Tester#nv4	46
+new_5-4,100,29,1	duplicate(NvHanson)	Final Tester#nv5	46
+
+// Job Test
+//============================================================
+-	script	Job Guide Lark::NvLark	-1,{
+	mes "[拉克]";
+	mes "你决定好要选择什么职业了吗？";
+	next;
+	mes "[拉克]";
+	mes "我准备了一项测试，会根据你的回答找出最适合你的职业。";
+	next;
+	mes "[拉克]";
+	mes "怎么样？";
+	mes "你想参加测试吗？";
+	next;
+	set .@loop,1;
+	while(.@loop) {
+		switch(select("参加测试。:测试是做什么的？:不了，谢谢。")) {
+		case 1:
+			mes "[拉克]";
+			mes "太好了！";
+			mes "开始测试吧~";
+			next;
+			set .@loop,0;
+			break;
+		case 2:
+			mes "[拉克]";
+			mes "我会问你几个简单的问题。";
+			mes "通过这项测试，我们会检查"+strcharinfo(0)+"的性格与倾向，从而为你找到最合适的职业。";
+			next;
+			mes "[拉克]";
+			mes "测试分为3种类型，共30道题。";
+			next;
+			mes "[拉克]";
+			mes "你觉得如何？要参加测试吗？";
+			next;
+			break;
+		case 3:
+			mes "[拉克]";
+			mes "如果你还没有决定想做什么职业，";
+			mes "我建议你参加这项测试。";
+			close;
+		}
+	}
+	mes "[拉克]";
+	mes "开始第一项测试吧。";
+	mes "选择你最喜欢的答案。";
+	mes "^FF0000共有5道题。^000000";
+	next;
+	mes "[拉克]";
+	mes "深夜，你走在普隆德拉的街道上，忽然听到有人尖叫。";
+	next;
+	mes "'啊啊啊！！别伤害我~'";
+	next;
+	mes "你跑到那里，看见一个人被小混混围住。由于你突然出现，混混们吃了一惊。";
+	mes "在这种情况下，你会怎么做？";
+	next;
+	switch(select("与小混混战斗:施放魔法。:呼叫卫兵。:向他们扔石头。")) {
+	case 1:
+		set .@question_01$, "You subdue them easily.";
+		set .@swordman_p, .@swordman_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	case 2:
+		set .@question_01$, "You cast a spell on them.";
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 3:
+		set .@question_01$, "You call for help and Guards come to your aid.";
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	case 4:
+		set .@question_01$, "You skillfully throw rocks at the punks.";
+		set .@archer_p, .@archer_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes .@question_01$+"你击退了街头混混。";
+	mes "收拾完残局后，你走向那个被袭击的人。";
+	mes "你觉得那个被混混围住的人是男是女？";
+	next;
+	switch(select("男:女")) {
+	case 1:
+		set .@question_02_01$, "he";
+		set .@question_02_02$, "son";
+		break;
+	case 2:
+		set .@question_02_01$, "she";
+		set .@question_02_02$, "daughter";
+		break;
+	}
+	mes "[拉克]";
+	mes "你得知"+.@question_02_01$+"是"+.@question_02_02$+"，来自艾尔贝塔一个非常富裕的家庭；混混们趁"+.@question_02_01$+" was on an errand for the family.";
+	mes "当时"+.@question_02_01$+"在办什么事？";
+	next;
+	switch(select("送重要物品:送小纪念品:送信")) {
+	case 1:
+		set .@swordman_p, .@swordman_p+1;
+		set .@archer_p, .@archer_p+1;
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 2:
+		set .@thief_p, .@thief_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	case 3:
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "多亏你的勇敢，"+.@question_02_01$+"成了你的朋友，并决定去旅行。";
+	mes "你要去哪里？";
+	next;
+	switch(select("首都普隆德拉:山城斐扬:港口城市艾尔贝塔:魔法之城吉芬:卫星城市伊斯鲁德:沙漠城市梦罗克:工业城市艾因布罗克:自然生活之乡天津:花园城市休格尔")) {
+	case 1:
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	case 2:
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	case 3:
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	case 4:
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 5:
+		set .@swordman_p, .@swordman_p+1;
+		break;
+	case 6:
+		set .@thief_p, .@thief_p+1;
+		break;
+	case 7:
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	case 8:
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	case 9:
+		set .@archer_p, .@archer_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你玩得很开心。你觉得会不会发生什么事？";
+	next;
+	switch(select("会发生:不会发生。")) {
+	case 1:
+		set .@thief_p, .@thief_p+1;
+		set .@swordman_p, .@swordman_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		set .@magician_p, .@magician_p+1;
+		set .@thief_p, .@thief_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "现在进行第二项测试。请按你自己的想法选择最佳答案。";
+	mes "^FF0000共有5道题。^000000";
+	next;
+	switch(select("学习:运动:服务:暴力")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 2:
+		set .@thief_p, .@thief_p+1;
+		set .@swordman_p, .@swordman_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	case 3:
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	case 4:
+		set .@thief_p, .@thief_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	}
+	switch(select("改变:保守")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	}
+	switch(select("消费者:销售者:生产者")) {
+	case 1:
+		set .@swordman_p, .@swordman_p+1;
+		set .@thief_p, .@thief_p+1;
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@archer_p, .@archer_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	case 2:
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	case 3:
+		set .@magician_p, .@magician_p+1;
+		break;
+	}
+	switch(select("速度:谨慎")) {
+	case 1:
+		set .@thief_p, .@thief_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	case 2:
+		set .@archer_p, .@archer_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	switch(select("理论:经验")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 2:
+		set .@swordman_p, .@swordman_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "现在进行第三项测试。请对每道题回答（是）或（否）。";
+	mes "^FF0000共有20道题。^000000";
+	next;
+	mes "[拉克]";
+	mes "你总是会捡起地上看到的钱吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@merchant_p, .@merchant_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "如果你和某个异性的名字相同，你会因此对对方减少好感吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@ninja_p, .@ninja_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你喜欢一次携带很多物品吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@swordman_p, .@swordman_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	case 2:
+		set .@magician_p, .@magician_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你喜欢读书吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@taekwon_p, .@taekwon_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	case 2:
+		set .@ninja_p, .@ninja_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你会把杂志上的内容全部读完吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 2:
+		set .@archer_p, .@archer_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你会花时间在意自己的穿着吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@merchant_p, .@merchant_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	case 2:
+		set .@swordman_p, .@swordman_p+1;
+		set .@thief_p, .@thief_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你会告诉别人你最近吃了什么精致美食吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@thief_p, .@thief_p+1;
+		set .@swordman_p, .@swordman_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你经常把事情记在笔记本上吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	case 2:
+		set .@thief_p, .@thief_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你觉得自己的外表有魅力吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@ninja_p, .@ninja_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@swordman_p, .@swordman_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你喜欢待在人群聚集的地方吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@swordman_p, .@swordman_p+1;
+		break;
+	case 2:
+		set .@archer_p, .@archer_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你喜欢单身生活吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@thief_p, .@thief_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你喜欢和别人保持距离吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@gunslinger_p, .@gunslinger_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	case 2:
+		set .@taekwon_p, .@taekwon_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你认为在战斗中有一个好的藏身之处很重要吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	case 2:
+		set .@taekwon_p, .@taekwon_p+1;
+		set .@magician_p, .@magician_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "即使知道朋友错了，你也会为他们辩护吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@swordman_p, .@swordman_p+1;
+		break;
+	case 2:
+		set .@thief_p, .@thief_p+1;
+		set .@ninja_p, .@ninja_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你会试着用道理说服敌人不要与你战斗吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@archer_p, .@archer_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你能在同一个地方长时间坐着不动吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@taekwon_p, .@taekwon_p+1;
+		set .@thief_p, .@thief_p+1;
+		break;
+	case 2:
+		set .@archer_p, .@archer_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你觉得你能承受兽人正面打在腹部的一拳吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@swordman_p, .@swordman_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	case 2:
+		set .@magician_p, .@magician_p+1;
+		set .@thief_p, .@thief_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你会给朋友起绰号吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@gunslinger_p, .@gunslinger_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	case 2:
+		set .@acolyte_p, .@acolyte_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "你总是为各种情况准备备用方案吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@thief_p, .@thief_p+1;
+		set .@gunslinger_p, .@gunslinger_p+1;
+		break;
+	case 2:
+		set .@gunslinger_p, .@gunslinger_p+1;
+		set .@merchant_p, .@merchant_p+1;
+		break;
+	}
+	mes "[拉克]";
+	mes "和别人交谈时，你会放慢节奏，让对方有时间思考吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		set .@magician_p, .@magician_p+1;
+		break;
+	case 2:
+		set .@ninja_p, .@ninja_p+1;
+		set .@archer_p, .@archer_p+1;
+		break;
+	}
+
+	// Calculate player's job.
+	// In the official script, higher .@who_job value always wins in a tie.
+	setarray .@points[0],
+		.@swordman_p, .@magician_p, .@archer_p, .@merchant_p, .@thief_p, .@acolyte_p, .@taekwon_p, .@gunslinger_p, .@ninja_p;
+	set .@max, .@points[0];
+	for(set .@i,1; .@i<9; set .@i,.@i+1) {
+		if (.@points[.@i] >= .@max) {
+			set .@max, .@points[.@i];
+			set .@ele, .@i;
+		}
+	}
+	set .@who_job, .@ele+1; // To match the official script's numbering.
+
+	mes "[拉克]";
+	mes "谢谢，祝你长寿。";
+	mes "职业能力倾向评估已结束。";
+	next;
+	mes "[拉克]";
+	mes "... ... the result is an aggregate. ... ...";
+	next;
+	mes "[拉克]";
+	mes "统计已完成。";
+	mes "'^0000FF那么^000000'，如果你按下这个按钮";
+	mes "你就能看到结果。";
+	next;
+	switch(.@who_job) {
+	case 1:
+		set .@job$, "Swordman";
+		mes "[拉克]";
+		mes "...simple and straightforward...";
+		mes "...strong beliefs can affect the world...";
+		mes "...stands for hope that the people...";
+		mes "...to protect loyalty.";
+		mes "...thrusting you ...";
+		next;
+		break;
+	case 2:
+		set .@job$, "Wizard";
+		mes "[拉克]";
+		mes "...to understand all these things alone deulmyeo...";
+		mes "...hard work and independent thinking...";
+		mes "...type. Excellent judgement, naehyangjeok...";
+		mes "...and analytical, with insight...";
+		mes "...type : he observes everything...";
+		next;
+		break;
+	case 3:
+		set .@job$, "Archer";
+		mes "[拉克]";
+		mes "...immeasurable, have many emotions...";
+		mes "...to people who are trying to understand...";
+		mes "...trying to understand the type to receive. Also,...";
+		mes "...rejects mediocrity, and his true...";
+		mes "...type of life to live. Impressionable...";
+		mes "...rich and romantic ...";
+		next;
+		break;
+	case 4:
+		set .@job$, "Merchant";
+		mes "[拉克]";
+		mes "...to identify people's sense of hearing...";
+		mes "...outstanding determination and goals...";
+		mes "...oriented and a strong type of responsibility...";
+		mes "...seongchwiyok strong...";
+		next;
+		break;
+	case 5:
+		set .@job$, "Thief";
+		mes "[拉克]";
+		mes "...always makes life fun and who wants...";
+		mes "...always trying to find a new job...";
+		mes "...contribution to the world,...";
+		mes "...that type. Adventurer,...";
+		mes "...optimistic.";
+		next;
+		break;
+	case 6:
+		set .@job$, "Acolyte";
+		mes "[拉克]";
+		mes "...mentality makes him warm and considerate for others...";
+		mes "我知道我曾经爱过一个人，……";
+		mes "...be of help to others and for others...";
+		mes "...type of well-caring.";
+		mes "...always wants to help others.";
+		next;
+		break;
+	case 7:
+		set .@job$, "Taekwon Boy/Girl";
+		mes "[拉克]";
+		mes "...to believe with a stubborn conviction...";
+		mes "...heart and spirit of the grassland is consistent: it...";
+		mes "...make steps to move forward.";
+		mes "...type of comments or want to understand the beliefs...";
+		mes "...that type of effort to correct through training,...";
+		mes "...to have a sound mind...";
+		next;
+		break;
+	case 8:
+		set .@job$, "Gunslinger";
+		mes "[拉克]";
+		mes "人们常常赞颂正义。";
+		mes "有时恐惧与困惑也会存在……";
+		mes "...that time, the definition of confusion...";
+		mes "...to maintain the balance, you're carrying the burden...";
+		mes "...for you ...";
+		next;
+		break;
+	case 9:
+		set .@job$, "Ninja";
+		mes "[拉克]";
+		mes "...to avoid the type of self-aspiring...";
+		mes "...married to a prominent goal and quietly avoiding...";
+		mes "...step and their goals...";
+		mes "...type of reaching your goal until they're complete...";
+		mes "...I do not regret it as ...";
+		next;
+		break;
+	default:
+		mes "[拉克]";
+		mes "发生了错误。";
+		close;
+	}
+	mes "[拉克]";
+	mes "^8014EB"+.@job$+"是适合你的职业。^000000";
+	next;
+	mes "[拉克]";
+	mes "那么，"+.@job$+"，你可以在多种职业道路中做出选择。";
+	mes "你想确定适合自己的职业吗？";
+	mes "你想选择职业吗？";
+	next;
+	switch(select(.@job$+".:Any other profession.")) {
+	case 1:
+		mes "[拉克]";
+		mes "新手训练中心的课程已经结束了，"+.@job$+". Would you like to make this occupation your profession?";
+		next;
+		if(select("我再考虑一下。:我选择前者。") == 1) {
+			mes "[拉克]";
+			mes "你会收到一本对应各职业类型的书。";
+			mes "请积累足够的经验，仔细确定适合自己的职业。";
+			close;
+		}
+		break;
+	case 2:
+		mes "[拉克]";
+		mes "现在退出训练中心课程。你想选择一项职业作为自己的职业吗？";
+		next;
+		if(select("我再考虑一下。:我还是想转职。") == 1) {
+			mes "[拉克]";
+			mes "各职业的入门指南应该已经收到了。";
+			mes "请积累足够的经验，仔细考虑后再决定。";
+			close;
+		}
+		mes "[拉克]";
+		mes "好的。请选择你想要的职业。";
+		next;
+		set .@who_job, select("剑士:巫师:弓箭手:商人:盗贼:服事:跆拳少年/少女:神枪手:忍者:我再想想。");
+		if (.@who_job == 10) {
+			mes "[拉克]";
+			mes "新手训练中心有许多经验，途中请多加注意。";
+			close;
+		}
+		break;
+	}
+	callfunc "F_NvErase",1;
+	set .@str$, "^A62A2A'"+strcharinfo(0)+"^000000'! Take care and may Freya bless you on your journey.";
+	switch(.@who_job) {
+	case 1:
+		mes "[拉克]";
+		mes "我们会把你送往";
+		mes "卫星城市伊斯鲁德的剑士公会。";
+		mes .@str$;
+		mes "再见。";
+		close2;
+		savepoint "izlude",128,98,1,1; // Old coordinates: (95,104)
+		warp "izlude_in",74,167;
+		end;
+	case 2:
+		mes "[拉克]";
+		mes "我们会把你送往";
+		mes "魔法之城吉芬的魔法师公会。";
+		mes .@str$;
+		mes "再见。";
+		close2;
+		savepoint "geffen",119,37,1,1;
+		warp "geffen_in",163,98;
+		end;
+	case 3:
+		mes "[拉克]";
+		mes "我们会把你送往";
+		mes "山城斐扬的弓箭手公会。";
+		mes .@str$;
+		mes "再见。";
+		close2;
+		savepoint "payon",256,242,1,1;
+		warp "payon_in02",64,65;
+		end;
+	case 4:
+		mes "[拉克]";
+		mes "我们会把你送往";
+		mes "港口城市艾尔贝塔的商人公会。";
+		mes .@str$;
+		mes "再见。";
+		close2;
+		savepoint "alberta",30,232,1,1;
+		warp "alberta_in",62,44;
+		end;
+	case 5:
+		mes "[拉克]";
+		mes "我们会把你送往";
+		mes "沙漠城市梦罗克的盗贼公会。";
+		mes .@str$;
+		mes "再见。";
+		close2;
+		savepoint "morocc",150,99,1,1;
+		warp "moc_prydb1",99,185;
+		end;
+	case 6:
+		mes "[拉克]";
+		mes "我们会把你送往";
+		mes "卢恩—米德加尔特王国的首都普隆德拉。";
+		mes .@str$;
+		mes "再见。";
+		close2;
+		savepoint "prontera",117,72,1,1;
+		warp "prt_church",172,19;
+		end;
+	case 7:
+		mes "[拉克]";
+		mes "我们会把你送往";
+		mes "山城斐扬的凤凰。";
+		mes .@str$;
+		mes "再见。";
+		close2;
+		savepoint "payon",164,58,1,1;
+		warp "payon",163,141;
+		end;
+	case 8:
+		mes "[拉克]";
+		mes "你将被送往飞空艇";
+		mes "位于卫星城市伊斯鲁德。";
+		mes "你可以乘坐飞空艇前往工业城市艾因布罗克。";
+		mes .@str$;
+		mes "再见。";
+		close2;
+		savepoint "izlude",128,98,1,1; // Old coordinates: (95,104)
+		warp "izlude",128,67;
+		end;
+	case 9:
+		mes "[拉克]";
+		mes "我们会把你送往";
+		mes "走私船的船长那里。";
+		mes "你可以前往天津";
+		mes "在船长的帮助下。";
+		mes .@str$;
+		mes "再见。";
+		close2;
+		savepoint "alberta",117,56,1,1;
+		warp "alberta",171,132;
+		end;
+	default:
+		mes "[拉克]";
+		mes "发生了错误。如果问题持续出现，请联系当地GM团队。";
+		close;
+	}
+}
+new_1-3,106,50,4	duplicate(NvLark)	Job Guide Lark#01	706
+new_2-3,106,50,4	duplicate(NvLark)	Job Guide Lark#02	706
+new_3-3,106,50,4	duplicate(NvLark)	Job Guide Lark#03	706
+new_4-3,106,50,4	duplicate(NvLark)	Job Guide Lark#04	706
+new_5-3,106,50,4	duplicate(NvLark)	Job Guide Lark#05	706

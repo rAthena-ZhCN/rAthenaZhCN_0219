@@ -1,0 +1,46 @@
+# This file is a part of rAthena.
+#   Copyright(C) 2017 rAthena Development Team
+#   https://rathena.org - https://github.com/rathena
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+##########################################################################
+# 仓库数据库
+##########################################################################
+#
+# 仓库设置
+#
+##########################################################################
+#	- ID                       仓库 ID。
+#	  Name                     发送给客户端显示在标题栏的仓库名称。
+#	  Table                    保存仓库的 SQL 表名。表结构与默认仓库表相同。
+#	  Max                      最大物品数量。（默认：MAX_STORAGE）
+###########################################################################
+# 要访问高级仓库，请使用脚本命令 'openstorage2'。
+# 如果要添加更多高级仓库，请复制仓库表结构，并在此配置中匹配表名。
+# 高级仓库的 'Max' 不受 'vip_storage_increase' 配置和 MIN_STORAGE 调整。
+###########################################################################
+
+Header:
+  Type: INTER_SERVER_DB
+  Version: 1
+
+Body:
+  - ID: 0
+    Name: "Storage"
+    Table: storage
+
+Footer:
+  Imports:
+    - Path: conf/import/inter_server.yml

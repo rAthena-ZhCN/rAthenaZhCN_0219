@@ -1,0 +1,104 @@
+-	script	novice_vending_machine#main	-1,{
+	.@storage_ticket = 7059;	// Cargo_Free_Ticket
+	.@storage_ticket_name$ = "卡普拉仓库 免费利用券";
+
+	mes "【初心者自动贩售机】";
+	mes "上面有许多按钮。";
+	next;
+	switch( select( "使用说明", "兑换" + .@storage_ticket_name$, "兑换初心者装备" ) ) {
+	case 1:
+		mes "[兑换" + .@storage_ticket_name$ + "]";
+		mes "4 张 <ITEM>" + .@storage_ticket_name$ + "<INFO>7059</INFO></ITEM> 可兑换以下任意一项：";
+		mes "- <ITEM>卡普拉传送点 免费利用券<INFO>7060</INFO></ITEM> × 1";
+		mes "- <ITEM>飞空艇免费搭乘券<INFO>7311</INFO></ITEM> × 1";
+		mes "- <ITEM>卡普拉手推车 免费利用券<INFO>7061</INFO></ITEM> × 1";
+		mes "- <ITEM>大嘴鸟免费使用券<INFO>7310</INFO></ITEM> × 1";
+		mes "- <ITEM>非卖品 新手专用苍蝇翅膀<INFO>12323</INFO></ITEM> × 15";
+		mes "- <ITEM>非卖品 新手专用蝴蝶翅膀<INFO>12324</INFO></ITEM> × 5";
+		mes "- <ITEM>初学者专用药水<INFO>569</INFO></ITEM> × 30";
+		next;
+		mes "[兑换初心者装备]";
+		mes "克里图拉学院的初心者铠甲、头巾、凉鞋、左手短剑与守卫盾可兑换为 4 张 <ITEM>" + .@storage_ticket_name$ + "<INFO>7059</INFO></ITEM>。";
+		next;
+		mes "[兑换初心者装备]";
+		mes "初心者蛋壳可兑换为用于更换发型的 <ITEM>克里图拉美发券<INFO>6593</INFO></ITEM>。";
+		close;
+	case 2:
+		setarray .@exchange[0],
+			7060,1,		// Warp_Free_Ticket
+			7311,1,		// Free_Flying_Ship_Ticket
+			7061,1,		// Cart_Free_Ticket
+			7310,1,		// Free_Peco_Ticket
+			12323,15,	// N_Fly_Wing
+			12324,5,	// N_Butterfly_Wing
+			569,30;		// Novice_Potion
+		setarray .@names$[0],
+			"卡普拉传送点 免费利用券",
+			"飞空艇免费搭乘券",
+			"卡普拉手推车 免费利用券",
+			"大嘴鸟免费使用券",
+			"非卖品 新手专用苍蝇翅膀",
+			"非卖品 新手专用蝴蝶翅膀",
+			"初学者专用药水";
+		.@size = getarraysize(.@exchange);
+
+		for ( .@i = 0; .@i < .@size; .@i += 2 ) {
+			if (.@exchange[.@i+1] > 1)
+				.@menu$ += .@exchange[.@i+1] + " ";
+			.@menu$ += .@names$[.@i/2] + ":";
+		}
+		.@s = (select(.@menu$) - 1) * 2;
+		if (countitem(.@storage_ticket) < 4) {
+			mes "所需 <ITEM>" + .@storage_ticket_name$ + "<INFO>7059</INFO></ITEM> 数量不足，无法进行兑换。";
+			close;
+		}
+		mes "已将 4 张 <ITEM>" + .@storage_ticket_name$ + "<INFO>7059</INFO></ITEM> 兑换为 <ITEM>" + .@names$[.@s/2] + "<INFO>" + .@exchange[.@s] + "</INFO></ITEM> × " + .@exchange[.@s+1];
+		delitem .@storage_ticket,4;
+		getitem .@exchange[.@s],.@exchange[.@s+1];
+		close;
+	case 3:
+		mes "将全部初心者装备兑换为兑换券。";
+		mes "选择“继续”以进行。";
+		next;
+		if (select( "继续", "取消。" ) == 2) {
+			mes "兑换已中断。";
+			close;
+		}
+		mes "正在将全部装备兑换为兑换券。";
+		setarray .@list[0],2352,2510,2414,1243,2112,5055;
+		.@size = getarraysize(.@list);
+
+		for ( .@i = 0, .@i < .@size; .@i++ ) {
+			.@count = countitem(.@list[.@i]);	// note: maybe check if equipped items are skipped
+			if (.@count < 1)
+				continue;
+			switch(.@list[.@i]) {
+			case 2352:	// Novice_Plate
+			case 2510:	// Novice_Hood
+			case 2414:	// Novice_Boots
+			case 1243:	// Novice_Knife
+			case 2112:	// Novice_Guard
+				delitem .@list[.@i], .@count;
+				getitem .@storage_ticket,(4*.@count);	// Cargo_Free_Ticket
+				break;
+			case 5055:	// Novice_Egg_Cap
+				delitem .@list[.@i], .@count;
+				getitem 6593,.@count;	// Cryptura_Hair_Coupon
+				break;
+			}
+		}
+		close;
+	}
+}
+izlude_in,69,177,5	duplicate(novice_vending_machine#main)	初心者自动贩售机#iz	2_VENDING_MACHINE1
+payon_in02,71,75,5	duplicate(novice_vending_machine#main)	初心者自动贩售机#pay	2_VENDING_MACHINE1
+prt_church,187,27,3	duplicate(novice_vending_machine#main)	初心者自动贩售机#prt	2_VENDING_MACHINE1
+
+// unknown facing
+alberta_in,60,52,3	duplicate(novice_vending_machine#main)	初心者自动贩售机#alb	2_VENDING_MACHINE1
+geffen_in,158,107,3	duplicate(novice_vending_machine#main)	初心者自动贩售机#gef	2_VENDING_MACHINE1
+moc_para01,17,37,3	duplicate(novice_vending_machine#main)	初心者自动贩售机#para	2_VENDING_MACHINE1
+moc_prydb1,38,124,3	duplicate(novice_vending_machine#main)	初心者自动贩售机#pryd	2_VENDING_MACHINE1
+payon_in01,59,20,3	duplicate(novice_vending_machine#main)	初心者自动贩售机#pay2	2_VENDING_MACHINE1
+que_ng,28,73,3	duplicate(novice_vending_machine#main)	初心者自动贩售机#que_ng1	2_VENDING_MACHINE1
+que_ng,168,39,3	duplicate(novice_vending_machine#main)	初心者自动贩售机#que_ng2	2_VENDING_MACHINE1

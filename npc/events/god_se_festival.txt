@@ -1,0 +1,773 @@
+//===== rAthena Script ======================================= 
+//= Valkyrie's Gift NPCs
+//===== By: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Post-God Item SE Creation Summoning Event 
+//= Second Sister is a custom translation.
+//===== Additional Comments: ================================= 
+//= 1.0 First version. [L0ne_W0lf]
+//= 1.1 Added GM management function. [Euphy]
+//============================================================ 
+
+// Original name: "Festival Manager#god_se_fes00"
+yuno,1,1,0	script	庆典管理员#gq_fes0	891,{
+	callfunc "F_GM_NPC";
+	mes "[庆典管理员]";
+	mes "我是负责 God SE 任务的庆典 NPC 管理员。";
+	mes "请输入密码。";
+	next;
+	if (callfunc("F_GM_NPC","07godsefes",1) == 0) {
+		mes "[庆典管理员]";
+		mes "密码不正确。";
+		close;
+	}
+	mes "[庆典管理员]";
+	mes "你想做什么？";
+	next;
+	switch(select("关闭庆典NPC:开启庆典NPC")) {
+	case 1:
+		mes "[庆典管理员]";
+		mes "结束庆典并关闭NPC。";
+		donpcevent "露米米·拉维斯#gq_fes01::Onover";
+		donpcevent "露米米·拉维斯#gq_fes01::Onover";
+		close;
+	case 2:
+		mes "[庆典管理员]";
+		mes "重置庆典并开启NPC。";
+		donpcevent "露米米·拉维斯#gq_fes01::Onover";
+		donpcevent "露米米·拉维斯#gq_fes01::OnEnable";
+		close;
+	}
+}
+
+yuno,118,192,5	script	露米米·拉维斯#gq_fes01	891,{
+	if (countitem(7840) > 0) {
+		mes "[露米米·拉维斯]";
+		mes "这就是那朵花。";
+		mes "这只是形式上的手续，让我确认一下你的资格。";
+		next;
+		if (is_guild_leader() == true) {
+			mes "[露米米·拉维斯]";
+			mes "你的资格已确认为公会会长。";
+			next;
+			mes "[露米米·拉维斯]";
+			mes "不知你是否知道这朵花的用途……让我来为你说明吧。";
+			next;
+			mes "[露米米·拉维斯]";
+			mes "这是巴基力的祈愿女神所赐予的神圣之花，可以由特定的召唤师召唤出特定的怪物。";
+			next;
+			mes "[露米米·拉维斯]";
+			mes "这世上只有两位召唤师……";
+			mes "我和我姐姐蕾赫……";
+			next;
+			mes "[露米米·拉维斯]";
+			mes "我们完全不一样，但是我们能……";
+			next;
+			mes "[露米米·拉维斯]";
+			mes "...................................";
+			next;
+			mes "[露米米·拉维斯]";
+			mes "总之，";
+			mes "你想召唤怪物吗？";
+			next;
+			switch(select("不要召唤:请召唤")) {
+			case 1:
+				mes "[露米米·拉维斯]";
+				mes "我不喜欢被别人打扰……";
+				next;
+				mes "[露米米·拉维斯]";
+				mes "但这只是生意。";
+				close;
+			case 2:
+				break;
+			}
+			mes "[露米米·拉维斯]";
+			mes "我会向你说明如何召唤怪物。";
+			mes "这朵花可以在朱诺这里召唤出'巴基力的祝福'和'巴基力的贺礼'这两种怪物，持续一小时。";
+			next;
+			mes "[露米米·拉维斯]";
+			mes "系统会公告所召唤的怪物是什么。";
+			mes "这场庆典是祈愿女神为世界各地的冒险者举办的，愿大家尽情享受。";
+			next;
+			mes "[露米米·拉维斯]";
+			mes "那么，你准备好召唤怪物了吗？";
+			next;
+			switch(select("不，我还没准备好。:是的！我准备好了。")) {
+			case 1:
+				mes "[露米米·拉维斯]";
+				mes "如果你还没准备好，为什么来找我？";
+				next;
+				mes "[露米米·拉维斯]";
+				mes "我会一直等到你准备好。";
+				mes "毕竟这只是一桩生意。";
+				close;
+			case 2:
+				break;
+			}
+			mes "[露米米·拉维斯]";
+			mes "现在我们准备好了。";
+			next;
+			if ($@gqse_festival == 0) {
+				mes "[露米米·拉维斯]";
+				mes "好，我们这就开始召唤怪物。";
+				delitem 7840,1; //Valkyrie's_Gift
+				next;
+				mes "[露米米·拉维斯]";
+				mes "祝您玩得开心。";
+				donpcevent "露米米·拉维斯#gq_fes01::OnStart";
+				
+				announce "["+ strcharinfo(0) +"] 所属公会 ["+ GetGuildName( getcharid(2) ) +"] 正在朱诺召唤'巴基力的贺礼'。",bc_all,"0x70dbdb";
+				close;
+			}
+			else {
+				mes "[露米米·拉维斯]";
+				mes "似乎别处正在进行巴基力的祝福召唤仪式。";
+				next;
+				mes "[露米米·拉维斯]";
+				mes "请稍后再试。";
+				close;
+			}
+		}
+		else {
+			mes "[露米米·拉维斯]";
+			mes "看来你并不够格。";
+			next;
+			mes "[露米米·拉维斯]";
+			mes "我不知道你是怎么得到那朵花的，但如果你没有领导他人的能力……那就无法继续了。";
+			next;
+			mes "[露米米·拉维斯]";
+			mes "太难了？";
+			mes "唉，也没办法，这也是工作的一部分。";
+			close;
+		}
+	}
+	else {
+		mes "[露米米·拉维斯]";
+		mes "你没有凭证吗？";
+		close;
+	}
+
+OnInit:
+	enablenpc "露米米·拉维斯#gq_fes01";
+	end;
+
+OnEnable:
+	enablenpc "露米米·拉维斯#gq_fes01";
+	end;
+
+OnDisable:
+	disablenpc "露米米·拉维斯#gq_fes01";
+	end;
+
+OnStart:
+	initnpctimer;
+	set $@gqse_festival,1;
+	end;
+
+Oncall:
+	if (mobcount("yuno","Rmimi Ravies#gq_fes01::OnMyMobDead") < 31) {
+		monster "yuno",0,0,"Valkyrie's Blessing",1083,100,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Gift",1951,25,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Gift",1952,25,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Gift",1953,25,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Gift",1954,25,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Prank",1002,10,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+	}
+	else if (mobcount("yuno","Rmimi Ravies#gq_fes01::OnMyMobDead") > 149) {
+		monster "yuno",0,0,"Valkyrie's Blessing",1083,1,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Gift",1951,1,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Gift",1952,1,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Gift",1953,1,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Gift",1954,1,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+	}
+	else {
+		monster "yuno",0,0,"Valkyrie's Blessing",1083,50,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Gift",1951,10,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Gift",1952,10,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Gift",1953,10,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Gift",1954,10,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+		monster "yuno",0,0,"Valkyrie's Prank",1002,5,"露米米·拉维斯#gq_fes01::OnMyMobDead";
+	}
+	end;
+
+Onover:
+	killmonster "yuno","露米米·拉维斯#gq_fes01::OnMyMobDead";
+	set $@gqse_festival,0;
+	stopnpctimer;
+	end;
+
+OnMyMobDead:
+	end;
+
+OnTimer10000:
+	announce "朱诺的召唤仪式将在5分钟后开始。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer13000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer120000:
+	announce "朱诺的召唤仪式将在3分钟后开始。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer123000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer240000:
+	announce "朱诺的召唤仪式将在1分钟后开始。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer243000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer300000:
+	announce "祈愿女神已在朱诺召唤出第一个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::Oncall";
+	end;
+
+OnTimer303000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer308000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer600000:
+	announce "祈愿女神已在朱诺召唤出第二个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::oncall";
+	end;
+
+OnTimer603000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer608000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer900000:
+	announce "祈愿女神已在朱诺召唤出第三个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::Oncall";
+	end;
+
+OnTimer903000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer908000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer1200000:
+	announce "祈愿女神已在朱诺召唤出第四个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::Oncall";
+	end;
+
+OnTimer1203000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer1208000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer1500000:
+	announce "祈愿女神已在朱诺召唤出第五个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::Oncall";
+	end;
+
+OnTimer1503000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer1508000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer1800000:
+	announce "祈愿女神已在朱诺召唤出第六个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::Oncall";
+	end;
+
+OnTimer1803000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer1808000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer2100000:
+	announce "祈愿女神已在朱诺召唤出第七个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::Oncall";
+	end;
+
+OnTimer2103000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer2108000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer2400000:
+	announce "祈愿女神已在朱诺召唤出第八个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::Oncall";
+	end;
+
+OnTimer2403000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer2408000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer2700000:
+	announce "祈愿女神已在朱诺召唤出第九个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::Oncall";
+	end;
+
+OnTimer2703000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer2708000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3000000:
+	announce "祈愿女神已在朱诺召唤出第一个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::Oncall";
+	end;
+
+OnTimer3003000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3008000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3300000:
+	announce "祈愿女神已在朱诺召唤出第十一个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::Oncall";
+	end;
+
+OnTimer3303000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3308000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3600000:
+	announce "祈愿女神已在朱诺召唤出第十二个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::Oncall";
+	end;
+
+OnTimer3603000:
+	announce "最后的仪式将持续5分钟。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3608000:
+	announce "请来朱诺见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3900000:
+	announce "整个仪式到此结束，相信各位都玩得开心。",bc_all,"0x70dbdb";
+	donpcevent "露米米·拉维斯#gq_fes01::Onover";
+	end;
+}
+
+
+// Original name: "Festival Manager#god_se_fes02"
+rachel,1,1,0	script	庆典管理员#gq_fes2	891,{
+	callfunc "F_GM_NPC";
+	mes "[庆典管理员]";
+	mes "我是负责 God SE 任务的庆典 NPC 管理员。";
+	mes "请输入密码。";
+	next;
+	if (callfunc("F_GM_NPC","07godsefes",1) == 0) {
+		mes "[庆典管理员]";
+		mes "密码不正确。";
+		close;
+	}
+	mes "[庆典管理员]";
+	mes "你想做什么？";
+	next;
+	switch(select("关闭庆典NPC:开启庆典NPC")) {
+	case 1:
+		mes "[庆典管理员]";
+		mes "结束庆典并关闭NPC。";
+		donpcevent "蕾赫·拉维斯#gq_fes03::Onover";
+		donpcevent "蕾赫·拉维斯#gq_fes03::Ondisable";
+		close;
+	case 2:
+		mes "[庆典管理员]";
+		mes "重置庆典并开启NPC。";
+		donpcevent "蕾赫·拉维斯#gq_fes03::Onover";
+		donpcevent "蕾赫·拉维斯#gq_fes03::OnEnable";
+		close;
+	}
+}
+
+rachel,132,117,3	script	蕾赫·拉维斯#gq_fes03	891,{
+	if (countitem(7840) > 0) {
+		mes "[蕾赫·拉维斯]";
+		mes "是花！！";
+		mes "要开始吗？";
+		next;
+		if (is_guild_leader() == true) {
+			mes "[蕾赫·拉维斯]";
+			mes "哎呀，这么年轻就当上公会会长了？你的公会成员一定很嫉妒吧。";
+			next;
+			mes "[露米米·拉维斯]";
+			mes "我不确定你是否了解那朵花的用途，所以我简单说明一下。";
+			next;
+			mes "[露米米·拉维斯]";
+			mes "那朵花是巴基力祈愿女神亲自赐予、流传下来的。";
+			mes "它可以由召唤师在特定区域用来召唤特殊的怪物。";
+			next;
+			mes "[蕾赫·拉维斯]";
+			mes "世上能使用那朵花的召唤师只有两位。";
+			mes "一个是我，另一个是我的孪生姐姐露米米。";
+			next;
+			mes "[蕾赫·拉维斯]";
+			mes "虽是孪生姐妹，我们却不太相像，眼前的小指……";
+			next;
+			mes "[蕾赫·拉维斯]";
+			mes "..................................";
+			mes ".....Oops! I wasn't supposed to tell anyone...";
+			next;
+			mes "[蕾赫·拉维斯]";
+			mes "... Hehehe, anyways let's move on.";
+			mes "那你到底要不要召唤！？";
+			next;
+			switch(select("不要召唤:召唤")) {
+			case 1:
+				mes "[蕾赫·拉维斯]";
+				mes "...*Cries*.";
+				next;
+				mes "[蕾赫·拉维斯]";
+				mes "如果你和我没什么事，请不要随便搭话。";
+				mes "要是换作我姐姐，她会为此羞辱你的。";
+				close;
+			case 2:
+				break;
+			}
+			mes "[蕾赫·拉维斯]";
+			mes "那么，我就简单说明一下召唤仪式。";
+			mes "在朱诺这里，用那朵花进行召唤仪式，可以召唤出巴基力的祝福与巴基力的礼物。";
+			mes "召唤仪式的效果大约会持续一小时。";
+			next;
+			mes "[蕾赫·拉维斯]";
+			mes "召唤仪式期间，系统会持续进行公告。";
+			mes "这是巴基力祈愿女神的好意，为了让各地的冒险者齐聚一堂、共同参与庆典。";
+			next;
+			mes "[蕾赫·拉维斯]";
+			mes "准备好开始召唤仪式了吗～？";
+			next;
+			switch(select("还没有。:是的！我准备好了！")) {
+			case 1:
+				mes "[蕾赫·拉维斯]";
+				mes "你都没准备好，还来找我说话做什么？";
+				next;
+				mes "[蕾赫·拉维斯]";
+				mes "好吧，如果你还有别的事要办，那我就等着。";
+				mes "毕竟，这也是我工作的一部分。";
+				close;
+			case 2:
+				break;
+			}
+			mes "[蕾赫·拉维斯]";
+			mes "好吧，那我就找一个合适的时机开始召唤仪式。";
+			next;
+			if ($@gqse_festival == 0) {
+				mes "[蕾赫·拉维斯]";
+				mes "好！现在正是好时机，那就开始吧！";
+				delitem 7840,1; //Valkyrie_Gift
+				next;
+				mes "[蕾赫·拉维斯]";
+				mes "希望你玩得开心！";
+				donpcevent "蕾赫·拉维斯#gq_fes03::OnStart";
+				announce "["+ strcharinfo(0) +"] 所属公会 ["+ GetGuildName( getcharid(2) ) +"] 正在拉赫召唤'巴基力的贺礼'。",bc_all,"0x70dbdb";
+				close;
+			}
+			else {
+				mes "[蕾赫·拉维斯]";
+				mes "*哭泣*";
+				mes "现在似乎不是好时机。";
+				next;
+				mes "[蕾赫·拉维斯]";
+				mes "请稍后再试。";
+				close;
+			}
+		}
+		else {
+			mes "[蕾赫·拉维斯]";
+			mes "...Seems like you're not in a worthy position for me to talk to?";
+			next;
+			mes "[蕾赫·拉维斯]";
+			mes "我不知道你是怎么得到那朵花的，但如果你没有领导他人的能力……那就无法继续了。";
+			next;
+			mes "[蕾赫·拉维斯]";
+			mes "太难了？";
+			mes "唉，也没办法，这也是工作的一部分。";
+			close;
+		}
+	}
+	else {
+		mes "[蕾赫·拉维斯]";
+		mes "你没有能证明自己的东西给我吗？";
+		close;
+	}
+
+OnInit:
+	enablenpc "蕾赫·拉维斯#gq_fes03";
+	end;
+
+OnEnable:
+	enablenpc "蕾赫·拉维斯#gq_fes03";
+	end;
+
+OnDisable:
+	disablenpc "蕾赫·拉维斯#gq_fes03";
+	end;
+
+OnStart:
+	initnpctimer;
+	set $@gqse_festival,1;
+	end;
+
+Oncall:
+	if (mobcount("rachel","Rhehe Ravies#gq_fes03::OnMyMobDead") < 31) {
+		monster "rachel",0,0,"Valkyrie's Blessing",1083,100,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Gift",1951,25,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Gift",1952,25,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Gift",1953,25,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Gift",1954,25,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Prank",1002,10,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+	}
+	else if (mobcount("rachel","Rhehe Ravies#gq_fes03::OnMyMobDead") > 149) {
+		monster "rachel",0,0,"Valkyrie's Blessing",1083,1,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Gift",1951,1,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Gift",1952,1,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Gift",1953,1,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Gift",1954,1,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+	}
+	else {
+		monster "rachel",0,0,"Valkyrie's Blessing",1083,50,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Gift",1951,10,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Gift",1952,10,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Gift",1953,10,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Gift",1954,10,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+		monster "rachel",0,0,"Valkyrie's Prank",1002,5,"蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+	}
+	end;
+
+Onover:
+	killmonster "rachel","蕾赫·拉维斯#gq_fes03::OnMyMobDead";
+	set $@gqse_festival,0;
+	stopnpctimer;
+	end;
+
+OnMyMobDead:
+	end;
+
+OnTimer10000:
+	announce "拉赫的召唤仪式将在5分钟后开始。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer13000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer120000:
+	announce "拉赫将在约3分钟后开始召唤巴基力的礼物。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer123000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer240000:
+	announce "拉赫的召唤仪式将在1分钟后开始。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer243000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer300000:
+	announce "祈愿女神已在拉赫召唤出第一个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Oncall";
+	end;
+
+OnTimer303000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer308000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer600000:
+	announce "祈愿女神已在拉赫召唤出第二个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Oncall";
+	end;
+
+OnTimer603000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer608000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer900000:
+	announce "祈愿女神已在拉赫召唤出第三个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Oncall";
+	end;
+
+OnTimer903000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer908000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer1200000:
+	announce "祈愿女神已在拉赫召唤出第四个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Oncall";
+	end;
+
+OnTimer1203000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer1208000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer1500000:
+	announce "祈愿女神已在拉赫召唤出第五个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Oncall";
+	end;
+
+OnTimer1503000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer1508000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer1800000:
+	announce "祈愿女神已在拉赫召唤出第六个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Oncall";
+	end;
+
+OnTimer1803000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer1808000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer2100000:
+	announce "祈愿女神已在拉赫召唤出第七个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Oncall";
+	end;
+
+OnTimer2103000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer2108000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer2400000:
+	announce "祈愿女神已在拉赫召唤出第八个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Oncall";
+	end;
+
+OnTimer2403000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer2408000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer2700000:
+	announce "祈愿女神已在拉赫召唤出第九个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Oncall";
+	end;
+
+OnTimer2703000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer2708000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3000000:
+	announce "祈愿女神已在拉赫召唤出第十个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Oncall";
+	end;
+
+OnTimer3003000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3008000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3300000:
+	announce "祈愿女神已在拉赫召唤出第十一个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Oncall";
+	end;
+
+OnTimer3303000:
+	announce "召唤仪式将每隔五分钟举行一次，共12次，历时约一小时。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3308000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3600000:
+	announce "祈愿女神已在拉赫召唤出第十二个'巴基力的贺礼'。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Oncall";
+	end;
+
+OnTimer3603000:
+	announce "最后的仪式将持续5分钟。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3608000:
+	announce "请来拉赫见证召唤仪式。",bc_all,"0x70dbdb";
+	end;
+
+OnTimer3900000:
+	announce "整个仪式到此结束，相信各位都玩得开心。",bc_all,"0x70dbdb";
+	donpcevent "蕾赫·拉维斯#gq_fes03::Onover";
+	end;
+}

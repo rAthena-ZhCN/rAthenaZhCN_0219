@@ -1,0 +1,285 @@
+//===== rAthena Script =======================================
+//= Valentine Event Script + EXP bonus
+//===== By: ==================================================
+//= Lupus (based on Muad_Dib's work)
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= rAthena Project; SVN r4500+
+//===== Description: =========================================
+// Close to other official stValentine event (added white chocolate)
+// Custom: Handmade choco gives some EXP bonuses to married people
+//===== Additional Comments: =================================
+//= WARNING!! To use this event, disable original valentinesday.txt
+//= You can use this event from 12 till 16 February 8) [Lupus]
+//= 1.1 Removed Duplicates [Silent]
+//============================================================
+
+// Tine - Valentine Event Chocolate Even Guide ------------------
+prontera,156,172,4	script	缇妮	58,{
+//  Debug info for item effects and tricky conditions 8)
+//	mes "@dsv: "+@dsv;
+//	mes "ispartneron()=="+ispartneron();
+//	mes "Sex == "+Sex;
+//	if(@dsv == gettime(DT_HOUR)+1) mes "@dsv == gettime(DT_HOUR)+1";
+
+	mes "[缇妮]";
+	mes "传说在 2 月 14 日……在圣瓦伦丁节那天……";
+	mes "只有在卢恩-米德加尔特王国……";
+	next;
+	specialeffect EF_HITBODY;
+	mes "[缇妮]";
+	mes "有些已婚的巧克力爱好者，在训练时经验几乎翻倍！";
+	mes "但事情并没有那么简单……";
+	next;
+	menu "哇！再多说点！",M_INFO,"结……什么？",-;
+
+	mes "[缇妮]";
+	mes "你是单身吗？";
+	mes "今天可是个大好日子，正好向你心爱的另一半求婚！";
+	next;
+	mes "[缇妮]";
+	mes "最近结婚的费用低得离谱！";
+	close;
+
+M_INFO:
+	mes "[缇妮]";
+	mes "只有依照祖祖祖辈传下的配方亲手做的巧克力，才拥有这种魔力效果！";
+	next;
+	mes "[缇妮]";
+	mes "众所周知，黑色手工巧克力对已婚男性有效……而白色手工巧克力对已婚女性有效！";
+	mes "如果你弄丢了结婚戒指……那就可惜了，它对你就不起作用了。";
+	next;
+	mes "[缇妮]";
+	mes "拿到巧克力后，你要先摘下戒指，然后再……戴回去。如果你的伴侣在线，魔法会持续到下一个整点！";
+	next;
+	mes "[缇妮]";
+	mes "有传闻说，男女玩家对五种不同种族的怪物可获得 +50% 经验加成……当然，那些该死的 Boss 不在此列。";
+	next;
+	mes "[缇妮]";
+	mes "普隆德拉城堡里有一位著名的糖果师！你该去找他。";
+	close;
+
+OnInit:
+	//559,Hand-made_Chocolate
+	setitemscript 559,"{ itemheal 50,50; if(Sex==SEX_FEMALE || @dsv == gettime(DT_HOUR)+1 || ispartneron()==0)end; set @dsv,gettime(DT_HOUR)+1; misceffect EF_MAGNUS; }";
+	//560,Hand-made_White_Chocolate
+	setitemscript 560,"{ itemheal 50,50; if(Sex==SEX_MALE || @dsv == gettime(DT_HOUR)+1 || ispartneron()==0)end; set @dsv,gettime(DT_HOUR)+1; misceffect EF_MAGNUS; }";
+
+	//2634,Wedding_Ring_M,Wedding Ring,5,,10,0,,0,,0,127918079,7,1,136,,0,0,0,{ skill 334,1; skill 335,1; skill 336,1; }
+	setitemscript 2634,"{ skill 334,1; skill 335,1; skill 336,1; if(@dsv == gettime(DT_HOUR)+1 && ispartneron()){ bonus2 bExpAddRace,5,50; bonus2 bExpAddRace,6,50; bonus2 bExpAddRace,7,50; bonus2 bExpAddRace,8,50; bonus2 bExpAddRace,1,50; } }";
+	//2635,Wedding_Ring_F,Wedding Ring,5,,10,0,,0,,0,127918079,7,0,136,,0,0,0,{ skill 334,1; skill 335,1; skill 336,1; }
+	setitemscript 2635,"{ skill 334,1; skill 335,1; skill 336,1; if(@dsv == gettime(DT_HOUR)+1 && ispartneron()){ bonus2 bExpAddRace,0,50; bonus2 bExpAddRace,9,50; bonus2 bExpAddRace,2,50; bonus2 bExpAddRace,3,50; bonus2 bExpAddRace,4,50; } }";
+	end;
+}
+
+// Stephen - Valentine Event Chocolate seller ------------------
+alberta,26,243,4	script	史蒂芬#val1	58,{
+	mes "[史蒂芬]";
+	mes "猜我弄到了什么？";
+	mes "一样在米德加尔特不容易找到的美味……";
+	next;
+	mes "[史蒂芬]";
+	mes "巧克力！";
+	mes "没错，你不喜欢巧克力吗……我可喜欢了。";
+	mes "你运气不错，因为我一块只卖 5,000 zeny！";
+	next;
+	menu "我要买巧克力！",M_CHOCO,"不用了。",-;
+
+	mes "[史蒂芬]";
+	mes "你不要巧克力吗？";
+	mes "我可提醒你！你会后悔的！";
+	mes "你最好现在就买……这样的巧克力以后可再也遇不到了！";
+	mes "好好想想，改天再来找我吧。";
+	close;
+
+M_CHOCO:
+	mes "[史蒂芬]";
+	mes "哈！";
+	mes "我就知道！";
+	mes "不过我一次最多只能卖你 5 块……但如果你真的需要更多……";
+	mes "你可以再来一趟。";
+	mes "那你要几块？";
+	next;
+	set @needmon,0;
+	input @flag_num;
+	if (@flag_num <= 0) goto L_NONE;
+	if (@flag_num > 5) goto L_ERR;
+	set @needmon,@flag_num*5000;
+	if (Zeny < @needmon) goto L_NOTENO;
+	set Zeny,Zeny - @needmon;
+	getitem 558,@flag_num;
+	mes "[史蒂芬]";
+	mes "拿好了！";
+	mes "你可以把它送给别人当礼物，也可以自己享用！";
+	mes "嗯……甜甜的巧克力……";
+	mes "随时来找我……！";
+	close;
+
+L_ERR:
+	mes "[史蒂芬]";
+	mes "很抱歉，我不能给你那么多。";
+L_NONE:
+	close;
+
+L_NOTENO:
+	mes "[史蒂芬]";
+	mes "很抱歉，看来你买不起我的东西。";
+	close;
+}
+
+// Jainie -- Gives information about Valentine Event ------------------------
+alberta,29,243,4	script	洁妮#val1	53,{
+	mes "[洁妮]";
+	mes "你知道吗？我男朋友卖的那些巧克力，都是我做的！";
+	mes "都是我自己做的。现在我需要一些牛奶来做我的特制白巧克力。";
+	next;
+	mes "[洁妮]";
+	mes "你知道吗……在某些国家，有向心爱之人赠送巧克力的传统……";
+	mes "他们称之为^3355FF情人节^000000。";
+	next;
+	mes "[洁妮]";
+	mes "所以我把美味的巧克力送给了他……";
+	mes "然后他就让我做了更多……";
+	mes "而现在他把它们卖给所有人。";
+	mes "我猜他真的很喜欢吧。";
+	mes "不过，看到人们买我亲手做的东西，我心里还是很高兴。";
+	next;
+	mes "[洁妮]";
+	mes "如果你也买一些，那就太好了……";
+	mes "我会做一阵子白巧克力，所以……";
+	next;
+	menu "我要买白巧克力！",M_CHOCO,"不用了。",-;
+
+	mes "[洁妮]";
+	mes "你不喜欢白巧克力吗？";
+	mes "那就去买史蒂芬的黑巧克力吧！";
+	close;
+
+M_CHOCO:
+	mes "[洁妮]";
+	mes "我一次最多只能卖你 5 块……但如果你真的需要更多……";
+	mes "你可以再来一趟。";
+	mes "那你要几份？1 份是 4500z + 1 个牛奶。";
+	next;
+	set @needmon,0;
+	input @flag_num;
+	if (@flag_num == 0) goto L_NONE;
+	if (@flag_num > 5) goto L_ERR;
+	set @needmon,@flag_num*4500;
+	if (Zeny < @needmon) goto L_NOTENO;
+	if (countitem(519) < @flag_num) goto L_NOMILK;
+	set Zeny,Zeny - @needmon;
+	delitem 519,@flag_num;
+	getitem 561,@flag_num;
+	mes "[洁妮]";
+	mes "拿好了！";
+	mes "你可以把它送给别人当礼物，也可以自己享用！";
+	mes "嗯……甜甜的巧克力……";
+	mes "随时来找我……！";
+	close;
+
+L_ERR:
+	mes "[洁妮]";
+	mes "很抱歉，我不能给你那么多。";
+L_NONE:
+	close;
+
+L_NOTENO:
+	mes "[洁妮]";
+	mes "很抱歉，看来你买不起我的东西。";
+	close;
+
+L_NOMILK:
+	mes "[洁妮]";
+	mes "你需要"+@flag_num+"个牛奶，用来制作"+@flag_num+" portions of my special White Chocolate...";
+	close;
+}
+
+// Carl Orleans -- Valentine Event Chocolate maker ------------------
+prt_castle,54,34,4	script	卡尔·奥尔良#val1	47,{
+	mes "[卡尔·奥尔良]";
+	mes "嗯？要我为你做点什么？";
+	next;
+	menu "请给我黑色手工巧克力",-,"我想要白色手工巧克力……",M_WHITE,"我迷路了，抱歉打扰你。",M_END;
+     
+	mes "[卡尔·奥尔良]";
+	mes "嗯，说不定我正好能满足你的需求……";
+	next;
+	if (countitem(558)<3) {
+		mes "[卡尔·奥尔良]";
+		mes "很抱歉，你的巧克力棒不够，做不了这个。";
+		if(rand(2))mes "听说阿尔贝塔的史蒂芬以前卖过不错的巧克力。";
+		close;
+	}
+	delitem 558,3;
+	mes "[卡尔·奥尔良]";
+	mes "我看到你带来了 3 块纯巧克力。";
+	mes "把它们交给我……";
+	next;
+	mes "[卡尔·奥尔良]";
+	mes "好，只要你答应会善加使用，我就为你制作我的特制手工巧克力。";
+	next;
+	mes "[卡尔·奥尔良]";
+	mes "....Hmmmmmm.....";
+	mes "Well...";
+	next;
+	getitem 559,1;
+	mes "[卡尔·奥尔良]";
+	mes "Here.";
+	if(rand(2))close;
+	mes "希望你能把它送给特别的人，因为这是特别的巧克力。";
+	mes "如你所知……只有我能做出这个。";
+	next;
+	mes "[卡尔·奥尔良]";
+	mes "Enjoy.";
+	close;
+
+M_WHITE:
+	mes "[卡尔·奥尔良]";
+	mes "嗯，说不定我正好能满足你的需求……";
+	next;
+	if (countitem(561)<3) {
+		mes "[卡尔·奥尔良]";
+		mes "很抱歉，你的白巧克力棒不够，做不了这个。";
+		if(rand(2))mes "听说阿尔贝塔的洁妮以前卖过不错的白巧克力。";
+		close;
+	}
+	delitem 561,3;
+	mes "[卡尔·奥尔良]";
+	mes "我看到你带来了 3 块纯白巧克力。";
+	mes "把它们交给我……";
+	next;
+	mes "[卡尔·奥尔良]";
+	mes "好，只要你答应会善加使用，我就为你制作我的特制手工巧克力。";
+	next;
+	mes "[卡尔·奥尔良]";
+	mes "....Hmmmmmm.....";
+	mes "Well...";
+	next;
+	getitem 560,1;
+	mes "[卡尔·奥尔良]";
+	mes "Here.";
+	if(rand(2))close;
+	mes "希望你能把它送给特别的人，因为这是特别的巧克力。";
+	mes "如你所知……只有我能做出这个。";
+	next;
+	mes "[卡尔·奥尔良]";
+	mes "Enjoy.";
+	close;
+
+M_END:
+	mes "[卡尔·奥尔良]";
+	mes "哦……好吧，如果你想要我做一些特制手工巧克力……";
+	mes "你至少得给我^0000FF 3 块巧克力^000000 或 ^0000FF 3 块白巧克力^000000。";
+	if(rand(2))close;
+	next;
+	mes "[卡尔·奥尔良]";
+	mes "没错，只有^0000FF 3 块巧克力^000000 或 ^0000FF 3 块白巧克力^000000。";
+	mes "把它们带来给我，你就能得到想要的东西。";
+	if(rand(2))close;
+	next;
+	mes "[卡尔·奥尔良]";
+	mes "再见。";
+	close;
+}

@@ -1,0 +1,467 @@
+//===== rAthena Script =======================================
+//= Comodo Town
+//===== By: ==================================================
+//= rAthena Dev Team
+//===== Current Version: =====================================
+//= 2.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Comodo Town NPCs
+//===== Additional Comments: =================================
+//= Not complete.
+//= 1.1 Rolled back from the wrong Kashy's fix
+//= Implemented the 'Cheese'/Stone of Awakening quest.  Re-organized stuff. [kobra_k88]
+//= 1.2b Added Baby Class support [Lupus]
+//= 1.3 Spell Checked and Fixed [massdriller]
+//= 1.4 Fixed typos [Nexon]
+//= 1.5 Removed Duplicates [Silent]
+//= 1.6 Split doomed sword quest to quests/quests_comodo.txt [Evera]
+//= 1.7 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//= 1.8 Fixed a small bug. (close -> close2) [L0ne_W0lf]
+//= 1.9 Added a missing Kafra NPC. [L0ne_W0lf]
+//= 2.0 Added Izlude RE coordinates. [Euphy]
+//============================================================
+
+// Inside Comodo
+//============================================================
+cmd_in02,73,81,4	script	马汀#cmd	48,{
+	mes "[马汀]";
+	mes "赌博……？克魔岛赌场";
+	mes "这里提供的游戏，";
+	mes "比起赌博，是更高层次的";
+	mes "娱乐。";
+	mes "你明白我的意思吗？";
+	next;
+	mes "[马汀]";
+	mes "诚然，我确实在这家";
+	mes "赌场里输光了";
+	mes "所有的 zeny，但我";
+	mes "一点也不后悔。我只会再赚";
+	mes "更多钱，然后再把它全";
+	mes "花光。又或者，我会大赢一笔！";
+	next;
+	mes "[马汀]";
+	mes "哇哈哈哈哈~！";
+	mes "没错，我顶多";
+	mes "再输这么多次，就会";
+	mes "中头奖！你看，你看？";
+	mes "我就是在跟概率死磕。";
+	close;
+}
+
+cmd_in02,48,55,4	script	斯科塞奇#cmd	51,{
+	mes "[斯科塞奇]";
+	mes "可恶！那家伙";
+	mes "跑哪去了？他跟我保证";
+	mes "能轻松让我的钱翻倍！";
+	mes "等等。哦，等等。哦……遭了……";
+	next;
+	mes "[斯科塞奇]";
+	mes "别告诉我，我刚刚";
+	mes "就这么被骗走了钱！";
+	mes "完了！不过，我最好还是把";
+	mes "这件事报告给有关当局，";
+	mes "不管我有多丢脸……";
+	close;
+}
+
+cmd_in02,64,43,4	script	罗贝托#cmd	709,{
+	mes "[罗贝托]";
+	mes "嘿嘿嘿……";
+	mes "多么容易上当的";
+	mes "家伙。我这么轻松";
+	mes "就拿到了他的钱！我是说，我";
+	mes "都没编出多么高明的";
+	mes "谎话，他就自己送上门了！";
+	close;
+}
+
+cmd_in02,89,72,4	script	德尼罗兹#cmd	89,{
+	mes "[德尼罗兹]";
+	mes "我只需要这颗";
+	mes "小钢珠掉进";
+	mes "正确的洞里。然后，";
+	mes "我就中头奖了。好。";
+	mes "来吧。最后一次……";
+	next;
+	mes "[德尼罗兹]";
+	mes "不！不，就差一点！";
+	mes "好，下一次我应该";
+	mes "会更接近，对吧？没错。";
+	mes "好，这次才是";
+	mes "最后一次。绝不再来了！好，";
+	mes "就、就再来一、一次……";
+	close;
+}
+
+cmd_in02,178,92,4	script	夏隆#cmd	101,{
+	mes "[夏隆]";
+	mes "哦，非常抱歉，先生，";
+	mes "不过看来您";
+	mes "又输了。也许您";
+	mes "该先收手了……";
+	mes "您这段日子";
+	mes "运气实在不太好……";
+	close;
+}
+
+cmd_in02,178,86,4	script	斯托奈#cmd	98,{
+	mes "[斯托奈]";
+	mes "不、不会吧……";
+	mes "我又输了？！";
+	mes "可我不能就";
+	mes "这样放弃！我要继续";
+	mes "玩下去，然后";
+	mes "以赢家的身份离开这里！";
+	close;
+}
+
+cmd_in02,172,105,4	script	G . J#cmd	86,{
+	mes "[G . J]";
+	mes "我越想越觉得，";
+	mes "靠工作、储蓄和";
+	mes "明智的投资致富，";
+	mes "似乎比……怎么说呢，";
+	mes "把希望寄托在某种";
+	mes "巨额头奖上，要容易得多。";
+	next;
+	mes "[G . J]";
+	mes "赌博似乎很有趣，但";
+	mes "用别的方式赚钱";
+	mes "似乎更聪明。当然，";
+	mes "努力工作没什么乐趣，但";
+	mes "总有办法用钱生出更多钱来，对吧？";
+	next;
+	mes "[G . J]";
+	mes "还有一点，就是";
+	mes "对钱要精明";
+	mes "也要负责——我是说，钱要是赢来的，";
+	mes "你反倒更容易把它全花光，对吧？是啊，你";
+	mes "凡事都得明智一些……";
+	close;
+}
+
+cmd_in02,174,126,4	script	洛亚#cmd	83,{
+	mes "[洛亚]";
+	mes "克魔岛赌场的内部";
+	mes "设计真是赏心悦目，";
+	mes "干净又简洁。";
+	mes "这里的氛围棒极了，";
+	mes "让我忍不住想再";
+	mes "多玩几把。好，走吧！";
+	next;
+	switch(rand(1,3)) {
+	case 1:
+		mes "[洛亚]";
+		mes "嗯……也许我该";
+		mes "早点回家。我还没";
+		mes "把留着赌博的钱";
+		mes "花光，不过";
+		mes "在外面待太久";
+		mes "可不是什么好主意。";
+		close;
+	case 2:
+		mes "[洛亚]";
+		mes "我得承认，这里的";
+		mes "气氛令人兴奋";
+		mes "又让人上瘾。";
+		mes "就算累了，这里的";
+		mes "活力也会";
+		mes "感染你，你懂吗？";
+		next;
+		mes "[洛亚]";
+		mes "虽说这种地方";
+		mes "可能会助长有严重";
+		mes "赌瘾的人，";
+		mes "但在这里赌博，";
+		mes "总比在那些更肮脏、";
+		mes "更来路不明的地方好得多。";
+		close;
+	case 3:
+		mes "[洛亚]";
+		mes "哇哇哇……";
+		mes "那家伙为什么";
+		mes "下那种注？真是个外行……";
+		mes "呃，我猜你对这游戏";
+		mes "也不太了解吧。";
+		mes "至于我，只是个爱好者~";
+		next;
+		mes "[洛亚]";
+		mes "我很喜欢这里的";
+		mes "许多游戏，不过我";
+		mes "得承认，我更是";
+		mes "个赢的爱好者！不过，我有";
+		mes "足够的理智，不去碰";
+		mes "那些高额赌注的游戏。";
+		close;
+	}
+}
+
+cmd_in02,57,62,4	script	穆#cmd	109,{
+	mes "[穆]";
+	if (rand(1,10) == 1) {
+		mes "那些出老千的小混混！";
+		mes "他们要是再敢在这里";
+		mes "露面，那就等着";
+		mes "换一张新脸吧！";
+		mes "哦——抱歉，我没";
+		mes "看到您在呢~ 哈哈哈~";
+		close;
+	}
+	mes "您好，我是穆，";
+	mes "克魔岛赌场的";
+	mes "经理。我们以";
+	mes "满足所有顾客的需求";
+	mes "为荣，竭尽所能让您在此的到访难忘。";
+	next;
+	mes "[穆]";
+	mes "所有客人都可以享用";
+	mes "我们的普通游戏区，";
+	mes "我们还设有 VIP 区，";
+	mes "供豪客们畅玩";
+	mes "刺激的高额赌注游戏。";
+	next;
+	mes "[穆]";
+	mes "我们随时欢迎";
+	mes "您的建议，也";
+	mes "始终致力于提升";
+	mes "您在克魔岛赌场的";
+	mes "体验。";
+	close;
+}
+
+// Comodo Field
+//============================================================
+cmd_fild04,188,74,4	script	乔瑟女孩#cmd	93,{
+	mes "[乔瑟女孩]";
+	mes "大家都叫我";
+	mes "海之女，因为我";
+	mes "总在这里工作，";
+	mes "采集蛤蜊和其他";
+	mes "海产来卖。说实话，";
+	mes "收入还挺不错的。";
+	next;
+	mes "[乔瑟女孩]";
+	mes "能在户外工作";
+	mes "是很好，但总有一天，我想";
+	mes "攒够钱搬到";
+	mes "城里去。你知道，我还年轻，我还有";
+	mes "想实现的梦想~";
+	close;
+}
+
+cmd_fild04,248,86,4	script	齐亚欧#cmd	709,{
+	mes "[齐亚欧]";
+	mes "啊啊，当个渔夫";
+	mes "真不错。你只要";
+	mes "放松下来，让鱼";
+	mes "自己来找你。不过，要想";
+	mes "像我这样毫不费力地";
+	mes "钓到这么多鱼，还得有点本事~";
+	next;
+	mes "[齐亚欧]";
+	mes "我喜欢这份工作里";
+	mes "的悠闲，可是事情";
+	mes "总是一桩接一桩。是啊，我那个";
+	mes "女儿在那边";
+	mes "总是唠叨着要";
+	mes "搬到大大的城市去。";
+	next;
+	mes "[齐亚欧]";
+	mes "她为什么就那么";
+	mes "想离开我呢？！可要是我不";
+	mes "放她走，她会自己跑掉。";
+	mes "我该拿那孩子";
+	mes "怎么办呢？唉，我实在";
+	mes "没法阻止她做梦……";
+	close;
+}
+
+cmd_fild04,267,137,4	script	戴古罗#cmd	703,{
+	mes "[戴古罗]";
+	mes "我喜欢在";
+	mes "沙子里玩——沙子又软";
+	mes "又干净又漂亮！";
+	mes "等我长大了，";
+	mes "我想去阿尔贝塔";
+	mes "看遍所有能看的东西！";
+	close;
+}
+
+cmd_fild07,192,58,4	script	拉哈苏#cmd	100,{
+	mes "[拉哈苏]";
+	mes "嘿，我是拉哈苏。";
+	mes "如果你想多了解";
+	mes "一些关于";
+	mes "发乐斯灯塔的事，我";
+	mes "很乐意告诉你。";
+	next;
+	if (select("发乐斯灯塔？:取消") == 1) {
+		mes "[拉哈苏]";
+		mes "许多年来，这座";
+		mes "灯塔指引着许多";
+		mes "船只靠岸。那是";
+		mes "很久以前的事了：如今这座";
+		mes "灯塔静静伫立，";
+		mes "虽已无人使用，却从未被遗忘。";
+		next;
+		mes "[拉哈苏]";
+		mes "虽说这里";
+		mes "已不再是昔日的";
+		mes "贸易与商业中心，";
+		mes "仍有不少人";
+		mes "会来到这一带";
+		mes "徘徊。到底是为了什么呢……";
+		close;
+	}
+	mes "[拉哈苏]";
+	mes "嘿，在你离开之前，";
+	mes "真该去看看";
+	mes "灯塔上的风景。";
+	mes "那真是……真是令人屏息……";
+	close;
+}
+
+cmd_fild07,52,280,4	script	哈洛苏#cmd	100,{
+	mes "[哈洛苏]";
+	mes "你好，这里是构成";
+	mes "发乐斯灯塔的";
+	mes "其中一座灯塔。不过，";
+	mes "它目前正在";
+	mes "整修，因此";
+	mes "未对公众开放。";
+	close;
+}
+
+cmd_fild07,299,83,4	script	扎因#cmd	100,{
+	set .@n$,"["+strnpcinfo(1)+"]";
+	mes .@n$;
+	mes "您想搭乘";
+	mes "行驶雷德卢斯航线的";
+	mes "船吗？您可以";
+	mes "乘雷德卢斯号";
+	mes "前往阿尔贝塔或伊斯鲁得。";
+	next;
+	switch(select("阿尔贝塔 - 600 Zeny:伊斯鲁得 - 800 Zeny:取消")) {
+	case 1:
+		if (Zeny < 600) break;
+		set Zeny, Zeny-600;
+		warp "alberta",192,169;
+		end;
+	case 2:
+		if (Zeny < 800) break;
+		set Zeny, Zeny-800;
+		if(checkre(0))
+			warp "izlude",195,212;
+		else
+			warp "izlude",176,182;
+		end;
+	case 3:
+		mes .@n$;
+		mes "乘船旅行";
+		mes "至今仍是最安全、";
+		mes "最可靠的";
+		mes "交通方式之一。诚邀您";
+		mes "早日体验雷德卢斯之旅~";
+		close;
+	}
+	mes .@n$;
+	mes "很抱歉，你";
+	mes "没有足够的";
+	mes "zeny 支付船费。";
+	close;
+}
+cmd_fild07,94,134,4	duplicate(扎因#cmd)	Sarumane#cmd	100
+
+cmd_in02,146,180,4	script	卡普拉职员::kaf_comodo2	721,{
+	cutin "kafra_07",2;
+	mes "[卡普拉·米丝蒂]";
+	mes "欢迎来到";
+	mes "卡普拉公司。";
+	mes "您知道，我们的";
+	mes "服务始终";
+	mes "站在您这边~";
+	next;
+	mes "[卡普拉·米丝蒂]";
+	mes "卡普拉公司";
+	mes "西部事业部承诺";
+	mes "提供最优质的服务，";
+	mes "重视可靠性，以及";
+	mes "消费者的完全满意。";
+	mes "感谢您的惠顾~";
+	close2;
+	cutin "", 255;
+	end;
+}
+
+// Morocc Field
+//============================================================
+moc_fild12,35,303,4	script	塞鲁特罗#cmd	59,{
+	mes "[塞鲁特罗]";
+	mes "你好，我是塞鲁特罗，";
+	mes "守护着通往";
+	mes "桑达鲁曼要塞的道路。";
+	mes "如果你真的想去那里，";
+	mes "我会允许你继续前行，但你必须提防其中的危险……";
+	next;
+	switch(select("我要去那里！:桑达鲁曼要塞？:取消")) {
+	case 1:
+		mes "[塞鲁特罗]";
+		mes "看来你真的";
+		mes "要去桑达鲁曼";
+		mes "要塞了。那么，";
+		mes "祝你好运，务必小心！";
+		close2;
+		warp "cmd_fild08",331,319;
+		end;
+	case 2:
+		mes "[塞鲁特罗]";
+		mes "虽说桑达鲁曼";
+		mes "要塞如今";
+		mes "怪物横行，但它曾经是";
+		mes "人们居住的领地。";
+		mes "然而，那里总是";
+		mes "遭到入侵和劫掠……";
+		next;
+		mes "[塞鲁特罗]";
+		mes "桑达鲁曼的居民";
+		mes "最终适应了这些";
+		mes "入侵，发明了烽火";
+		mes "信号和防御工事，";
+		mes "以抵御战火的蹂躏。";
+		mes "后来，克魔岛建了起来……";
+		next;
+		mes "[塞鲁特罗]";
+		mes "克魔岛的实力与";
+		mes "影响力日益壮大，最终吞并了桑达鲁曼。越来越多的人";
+		mes "从要塞搬到克魔岛，直到桑达鲁曼要塞";
+		mes "几乎被废弃。";
+		next;
+		mes "[塞鲁特罗]";
+		mes "当时还有少数人";
+		mes "留在桑达鲁曼，";
+		mes "但他们发动叛乱，一个";
+		mes "初生的政府";
+		mes "在那里掌了权。怪物们便趁";
+		mes "机占领了那里……";
+		next;
+		mes "[塞鲁特罗]";
+		mes "如今桑达鲁曼";
+		mes "周围什么都没有了。嗯，除了";
+		mes "也许还有发乐斯灯塔，";
+		mes "它位于这里的西南方。听说那地方可能会让";
+		mes "有志向的流氓们感兴趣……";
+		close;
+	case 3:
+		mes "[塞鲁特罗]";
+		mes "你知道，如果你";
+		mes "厌倦了旅行，可以到";
+		mes "^3355FF克魔岛^000000 休息。那";
+		mes "地方是相当受欢迎的";
+		mes "旅游胜地，尤其对";
+		mes "你们这些冒险者而言。";
+		close;
+	}
+}

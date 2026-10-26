@@ -1,0 +1,1054 @@
+//===== rAthena Script ======================================= 
+//= Genetic Job Quest
+//===== By: ================================================== 
+//= Muad_Dib, Aeomin
+//===== Current Version: ===================================== 
+//= 1.4
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Job change Quest from Alchemist / Creator -> Genetic.
+//===== Additional Comments: ================================= 
+//= 1.0 First Version. [Masao]
+//= 1.1 Fixed Scatter Stuff NPCs [JayPee].
+//= 1.2 Updated dialogue. Credits to Muad_Dib. [Joseph]
+//= 1.3 Updated script, optimized. [Euphy]
+//= 1.3a Moved warps to separate file. [Euphy]
+//= 1.4 Added VIP features. [Euphy]
+//============================================================
+
+alde_alche,35,186,5	script	炼金术师公会成员	805,{
+	mes "[炼金术师联合会成员]";
+	if (BaseLevel > 98 && JobLevel > 49){
+		if (BaseJob == Job_Alchemist) {
+			if (SkillPoint != 0) {
+				mes "- 你还有未使用的技能点。等全部用完后再来吧。 -";
+				close;
+			}
+			if (job_gen == 0) {
+				mes "我们炼金术师联合会通过各类晋升与调查，培养了许多初级炼金术师。";
+				next;
+				mes "[炼金术师联合会成员]";
+				mes "他们遍布米德加尔特的各个角落，活跃于科学、特殊物品制作方法等诸多领域。";
+				next;
+				mes "[炼金术师联合会成员]";
+				mes "我们新联合会的成员被称为^3131FF“基因学者”^000000。";
+				next;
+				mes "[炼金术师联合会成员]";
+				mes "基因学者是在炼金术世界中达到潜力巅峰的人。如今正是他们引领着整个米德加尔特的炼金术。";
+				next;
+				mes "[炼金术师联合会成员]";
+				mes "看来你是这一领域的专家，要不要去见见其他基因学者？";
+				next;
+				mes "[炼金术师联合会成员]";
+				mes "不久前，有一位基因学者发表了一项轰动一时的全新生命研究成果。";
+				mes "你学识渊博。你觉得你能理解她的研究吗？";
+				next;
+				mes "[炼金术师联合会成员]";
+				mes "她的研究或许能让你获得知识，帮助你成为基因学者！";
+				next;
+				mes "[炼金术师联合会成员]";
+				mes "听起来如何？你想去见见基因学者吗？";
+				next;
+				switch(select("当然，我想见见基因学者。:我不想见基因学者。")) {
+				case 1:
+					if (VIP_SCRIPT) {
+						callfunc "VIP_Third_Class";
+						set job_gen,1;
+						setquest 2215;
+						next;
+					}
+					mes "[炼金术师联合会成员]";
+					mes "明智的选择！";
+					mes "那位颇有名气的基因学者“德布里斯”。";
+					next;
+					mes "[炼金术师联合会成员]";
+					mes "你可以在里希塔乐镇西部的炼金实验室找到她。那里还有另一位研究武器的基因学者，也许你也可以去拜访她。";
+					set job_gen,1;
+					setquest 2215;
+					close;
+				case 2:
+					mes "[炼金术师联合会成员]";
+					mes "你对生命研究不感兴趣吗？";
+					close;
+				}
+			}
+			mes "那位颇有名气的基因学者正在里希塔乐镇西部的炼金实验室做研究。";
+			mes "如果你感兴趣，就去见见她吧。";
+			close;
+		}
+	}
+	mes "我们炼金术师联合会通过各类晋升与调查，培养了许多初级炼金术师。";
+	next;
+	mes "[炼金术师联合会成员]";
+	mes "他们遍布米德加尔特的各个角落，活跃于科学、特殊物品制作方法等诸多领域。";
+	next;
+	mes "[炼金术师联合会成员]";
+	mes "我们新联合会的成员被称为^3131FF“基因学者”^000000。";
+	next;
+	mes "[炼金术师联合会成员]";
+	mes "基因学者是在炼金术世界中达到潜力巅峰的人。如今正是他们引领着整个米德加尔特的炼金术。";
+	close;
+}
+
+job3_gen01,25,58,3	script	德布里斯#gen	865,{
+	if (SkillPoint != 0) {
+		mes "- 你还有一些未使用的技能点。 -";
+		close;
+	}
+	if (job_gen == 1) {
+		mes "[德布里斯]";
+		mes "哦！吸血植物样本C又枯萎了。";
+		mes "我是不是该更换生长护理的配料？";
+		mes "喂，请快点振作起来！";
+		next;
+		mes "[德布里斯]";
+		mes "哦？陌生人？";
+		mes "看你的样子，你也在研究炼金术吧？";
+		next;
+		mes "[德布里斯]";
+		mes "人们说如今炼金术师越来越多，但真正好好钻研这一领域的人却没几个！";
+		next;
+		mes "[德布里斯]";
+		mes "他们整天只在意说些“看看我的炸弹伤害！”或者“我的生命体是不是更漂亮？”之类的话。";
+		next;
+		mes "[德布里斯]";
+		mes "炼金术师联合会嘴上说要支持研究者，可实际上你从研究里得到的只有“容易培育的孢子”！";
+		next;
+		mes "[德布里斯]";
+		mes "多亏了那个，我的实验室里到处都是孢子！到处都是孢子！";
+		next;
+		select("你为什么那样说话？");
+		mes "[德布里斯]";
+		mes "因为我来自卢恩-米德加尔特！";
+		mes "你去过卢恩-米德加尔特吗？那里的人都这么说话。";
+		next;
+		switch(select("不可能？！:我也来自卢恩-米德加尔特。")) {
+		case 1:
+			mes "[德布里斯]";
+			mes "不可能？";
+			mes "你是从卢恩-米德加尔特的村庄来的吗？";
+			mes "我的村庄很大，那里的人都这么说话。";
+			break;
+		case 2:
+			emotion ET_THROB;
+			mes "[德布里斯]";
+			mes "真的！难怪我觉得你身上有种熟悉的感觉。";
+			mes "能在黑森林遇到同乡，很高兴见到你！";
+			break;
+		}
+		next;
+		mes "- 砰！！ -";
+		next;
+		emotion ET_ANGER;
+		mes "[德布里斯]";
+		mes "呃啊啊啊！那个女人又开始了！";
+		next;
+		select("那是什么声音？");
+		mes "[德布里斯]";
+		mes "那是我的室友黛米凯柏林做实验的声音……";
+		mes "黛米是火焰炮弹技师，所以她总是那么吵。";
+		next;
+		emotion ET_CRY;
+		mes "[德布里斯]";
+		mes "你看看那个！";
+		mes "我的孢子和植物都被吓坏了！";
+		mes "那些噪音让我没法工作。真是压力山大！！";
+		next;
+		mes "- 咔嚓咔嚓 -";
+		next;
+		mes "[德布里斯]";
+		mes "心情不好的时候，我会一点一点地品尝奥兰斯先生的手工饼干。";
+		next;
+		mes "[德布里斯]";
+		mes "这是我从普隆德拉买来的高级饼干。咬上一口，感觉就像飘向阿斯加德。";
+		mes "甜美饼干的柔软口感，盖过了黛米凯柏林的撞击声。";
+		next;
+		mes "[德布里斯]";
+		mes "要尝一块吗？";
+		mes "啊，已经全被我吃完了。";
+		next;
+		mes "[德布里斯]";
+		mes "不过没关系！我房间的二楼还有好几箱呢！";
+		mes "我忍不住成批成批地买。呵呵呵。";
+		next;
+		mes "- 嗡嗡嗡嗡———— -";
+		specialeffect EF_ENDURE;
+		next;
+		specialeffect EF_REPAIRWEAPON,AREA,"#from1to2gen";
+		mes "- （刺耳的声音）！！！ -";
+		mes "- （刺耳的声响）！！！ -";
+		next;
+		specialeffect EF_CRASHEARTH,AREA,"#from1to2gen";
+		mes "- 咚！咚！咚！ -";
+		next;
+		mes "[德布里斯]";
+		mes "..................";
+		next;
+		mes "[德布里斯]";
+		mes "呀啊啊啊啊啊啊";
+		mes "呀呼————！！！";
+		next;
+		mes "[德布里斯]";
+		mes "黛米————！！！";
+		mes "黛米————！！！";
+		next;
+		mes "- 现在看来，我 -";
+		mes "- 得让德布里斯冷静下来。 -";
+		set job_gen,2;
+		close;
+	} else if (job_gen == 2) {
+		mes "[德布里斯]";
+		mes "呀呼————！！！";
+		mes "黛米——！！！";
+		mes "黛米————！！！";
+		next;
+		mes "- 嗯。 -";
+		mes "- 怎样才能让她冷静下来？ -";
+		close;
+	} else if (job_gen == 3) {
+		mes "[德布里斯]";
+		mes "呀呼————！！！";
+		mes "黛米——！！！";
+		mes "黛米————！！！";
+		next;
+		select("把饼干递给德布里斯。");
+		mes "- 德布里斯迅速抢过 -";
+		mes "- 饼干，然后塞 -";
+		mes "- 进嘴里。 -";
+		next;
+		mes "- 咔嚓咔嚓咔嚓 -";
+		mes "- 咔嚓咔嚓咔嚓 -";
+		mes "- 咔嚓咔嚓咔嚓 -";
+		next;
+		mes "[德布里斯]";
+		mes "啊，香甜的奶油味还留在舌尖。";
+		mes "这真是让我心情平静。";
+		next;
+		emotion ET_HNG;
+		mes "[德布里斯]";
+		mes "黛米今天也在努力学习呢";
+		mes "呵呵呵。她真是个努力的人。";
+		next;
+		mes "- 那块饼干让她的心情一下子就变好了。 -";
+		emotion ET_BEST, playerattached();
+		next;
+		mes "[德布里斯]";
+		mes "你是怀着对炼金术的热爱来到这里的吗？";
+		next;
+		mes "[德布里斯]";
+		mes "哦，等等，我们还没自我介绍呢。";
+		mes "我叫德布里斯。";
+		mes "我对创造展现出新奇生长形态的生命体非常感兴趣。";
+		next;
+		mes "[德布里斯]";
+		mes "你叫什么名字，年轻的炼金术师？";
+		next;
+		select("我是"+strcharinfo(0)+".");
+		mes "[德布里斯]";
+		mes "哦，"+strcharinfo(0)+"！";
+		mes "真是个特别的名字。很高兴见到你。";
+		next;
+		mes "[德布里斯]";
+		mes "不过我记不太住这个名字。";
+		mes "所以我就叫你<波波>吧。可以吗？";
+		next;
+		select("我，呃……");
+		mes "[德布里斯]";
+		mes "Great...";
+		mes "波波，你听说过我的研究吗？";
+		mes "你就是为此而来的，对吧？";
+		next;
+		switch(select("不是。:是的。")) {
+		case 1:
+			mes "[德布里斯]";
+			mes "嗯，全都写在脸上了。";
+			mes "不用害羞。";
+			break;
+		case 2:
+			mes "[德布里斯]";
+			mes "果然没错吧？";
+			mes "嗯，果然如此，同乡之间真的有一种彼此相通的东西";
+			break;
+		}
+		next;
+		mes "[德布里斯]";
+		mes "你看到我那样狂热的状态时，想起了我之前说过的话，这才让我冷静下来。";
+		next;
+		mes "[德布里斯]";
+		mes "我喜欢你处事的方式，也欣赏你用心记住小细节。";
+		mes "你有成为基因学者的天赋。";
+		next;
+		mes "[德布里斯]";
+		mes "^FF0000如果你成为基因学者，就无法再选修你此前尚未研究过的炼金术师或创造者课程。^000000";
+		mes "如果这对你没问题，要不要现在就试一试？";
+		next;
+		switch(select("我以后再试。:我想成为基因学者！")) {
+		case 1:
+			mes "[德布里斯]";
+			mes "Alright.";
+			mes "虽然你的知识还比不上基因学者，但基础知识同样重要。";
+			mes "波波，等你完成学业后再来找我。";
+			set job_gen,4;
+			close;
+		case 2:
+			mes "[德布里斯]";
+			mes "很好！";
+			mes "开始吧！";
+			set job_gen,5;
+			close;
+		}
+	} else if (job_gen == 4) {
+		mes "[德布里斯]";
+		mes "波波！";
+		mes "你准备好试一试了吗？";
+		next;
+		switch(select("不是。:是的！")) {
+		case 1:
+			mes "[德布里斯]";
+			mes "你必须全力以赴！追寻知识没有捷径！";
+			close;
+		case 2:
+			mes "[德布里斯]";
+			mes "很好！";
+			mes "开始吧！";
+			set job_gen,5;
+			close;
+		}
+	} else if (job_gen == 5) {
+		mes "[德布里斯]";
+		mes "波波，你怎么看待植物";
+		mes "你喜欢植物吗？你对哪种植物感兴趣？";
+		next;
+		mes "- 轰，轰，轰 -";
+		next;
+		emotion ET_SWEAT;
+		mes "[德布里斯]";
+		mes "啊，拜托告诉我黛米凯柏林不是又开始了？";
+		mes "拜托让我猜错吧……拜托了……黛米，拜托……";
+		next;
+		mes "[德布里斯]";
+		mes "我刚才说到哪儿了";
+		mes "哦，对了。植物在炼金术中非常重要。";
+		next;
+		mes "[德布里斯]";
+		mes "炼金术能让噬人花和邪恶向日葵急速生长，让它们能在战斗中助战，就像那些炼金术师……";
+		next;
+		mes "- 轰！！轰！！轰！！轰！！ -";
+		next;
+		emotion ET_THINK;
+		mes "[德布里斯]";
+		mes ".......................";
+		next;
+		emotion ET_THINK;
+		mes "[德布里斯]";
+		mes "技巧上，植物相对容易……";
+		next;
+		mes "- 轰！！！！！！ -";
+		next;
+		emotion ET_THINK;
+		mes "[德布里斯]";
+		mes "Crossbreed...";
+		next;
+		mes "- 啪！！！！！！ -";
+		mes "- 吱————！！！！ -";
+		mes "- 轰隆隆————！！！！ -";
+		mes "- 轰！！轰！！轰！！ -";
+		next;
+		emotion ET_THINK;
+		mes "[德布里斯]";
+		mes ".......................";
+		next;
+		emotion ET_THINK;
+		mes "[德布里斯]";
+		mes "Popo.";
+		next;
+		emotion ET_THINK;
+		mes "[德布里斯]";
+		mes "我会给你成为基因学者的考试。";
+		next;
+		mes "[德布里斯]";
+		mes "题目是<完美的隔音系统>！";
+		mes "请利用实验室一楼的植物和实验设备，想个办法把我从黛米凯柏林的噪音中解救出来。";
+		next;
+		mes "[德布里斯]";
+		mes "好了，你最好快点开始！";
+		set job_gen,6;
+		close;
+	} else if (job_gen == 6) {
+		mes "[德布里斯]";
+		mes "题目是<完美的隔音系统>！";
+		mes "请利用实验室一楼的植物和实验设备，想个办法把我从黛米凯柏林的噪音中解救出来。";
+		next;
+		mes "[德布里斯]";
+		mes "柜子里有些指南，你可以使用。";
+		mes "好了，你最好快点开始！";
+		close;
+	} else if (job_gen > 6 && job_gen < 60) {
+		mes "[德布里斯]";
+		mes "有什么问题吗？";
+		next;
+		switch(select("没什么。:实验失败了。")) {
+		case 1:
+			mes "[德布里斯]";
+			mes "最好快点开始，不然我要尖叫了！！！";
+			close;
+		case 2:
+			mes "[德布里斯]";
+			mes "那你可以从头开始吗？";
+			mes "你为什么问我这种事？";
+			set job_gen,7;
+			if (checkquest(2209) == 1) erasequest 2209;
+			if (checkquest(2210) == 1) erasequest 2210;
+			if (checkquest(2211) == 1) erasequest 2211;
+			if (checkquest(2212) == 1) erasequest 2212;
+			if (checkquest(2213) == 1) erasequest 2213;
+			if (checkquest(2214) == 1) erasequest 2214;
+			close;
+		}
+	} else if (job_gen == 60 || job_gen == 61) {
+		mes "- 叮 叮 吱 吱 -";
+		next;
+		mes "- 叮 叮 吱 吱 -";
+		next;
+		mes "[德布里斯]";
+		mes "黛米凯柏林到底在干什么？";
+		mes "真是够吵的。";
+		next;
+		mes "[德布里斯]";
+		mes "波波，你的研究完成了吗？";
+		mes "把那些种子给我。";
+		next;
+		if (countitem(6273) == 0 && countitem(6272) == 0) {
+			mes "[德布里斯]";
+			mes "发生什么了？";
+			mes "没有任何结果，你怎么能说研究完成了？";
+			mes "重新开始。";
+			set job_gen,7;
+		} else {
+			mes "[德布里斯]";
+			mes "好，我来看看波波做的种子。";
+			mes "结果如何？";
+			next;
+			mes "[德布里斯]";
+			mes "把种子放进超级栽培器，再调节温度……";
+			next;
+			mes "[德布里斯]";
+			mes "可恶！";
+			next;
+			if (job_gen == 60) {
+				specialeffect EF_FLASHER,AREA,"超级培育器#gen";
+				specialeffect EF_PHARMACY_OK,AREA,"超级培育器#gen";
+				mes "[德布里斯]";
+				mes "波波，你看那个！";
+				mes "真是株神奇的植物！";
+				next;
+				mes "[德布里斯]";
+				mes "栽培器里现在长满了带刺的茎！";
+				mes "那些茎仿佛筑成了一道墙，长得十分结实，还彼此缠绕在一起！";
+				next;
+				mes "[德布里斯]";
+				mes "就是这个，波波！";
+				mes "这株植物的特性可以用于许多用途！";
+				next;
+				mes "[德布里斯]";
+				mes "这真是太棒了，波波。";
+				mes "我知道你学识渊博，但你的能力远不止如此！";
+				next;
+				mes "[德布里斯]";
+				mes "我会把结果告诉炼金术师联合会。";
+				mes "我会寄一封推荐信，说明你的能力非常出色，能够成为优秀的成员。";
+				next;
+				mes "[德布里斯]";
+				mes "等联合会的回复需要一些时间，你能稍等一会儿吗？";
+				mes "不如你上楼去找黛米凯柏林吧？";
+				next;
+				mes "[德布里斯]";
+				mes "她也是一位基因学者，专精小型火炮。";
+				mes "去看看她的实验结果吧。";
+				mes "你能帮我带个口信给她吗？告诉她做实验时安静一点。";
+				delitem 6273,1; //Altered_Seed
+				set job_gen,62;
+				changequest 2215,2216;
+			} else {
+				specialeffect EF_SPELLBREAKER,AREA,"超级培育器#gen";
+				specialeffect EF_PHARMACY_FAIL,AREA,"超级培育器#gen";
+				mes "[德布里斯]";
+				mes "哎呀！你失败了，波波。";
+				mes "完全没长起来，已经枯萎了。";
+				mes "去重新开始吧！";
+				delitem 6272,1; //Experiment_Seed
+				set job_gen,7;
+			}
+		}
+		if (checkquest(2209) == 1) erasequest 2209;
+		if (checkquest(2210) == 1) erasequest 2210;
+		if (checkquest(2211) == 1) erasequest 2211;
+		if (checkquest(2212) == 1) erasequest 2212;
+		if (checkquest(2213) == 1) erasequest 2213;
+		if (checkquest(2214) == 1) erasequest 2214;
+		close;
+	} else if (job_gen > 61 && job_gen < 76) {
+		if (checkquest(2223,HUNTING) == 2) {
+			mes "[德布里斯]";
+			mes "哦，等一下。";
+			mes "好像邮件到了。";
+			set job_gen,76;
+			completequest 2223;
+			close;
+		}
+		mes "[德布里斯]";
+		mes "在等待联合会回复的时候，你可以去看看黛米凯柏林的工作场所。";
+		close;
+	} else if (job_gen == 76) {
+		mes "[德布里斯]";
+		mes "波波！";
+		mes "我有好消息告诉你！";
+		next;
+		if (checkweight(1201,2) == 0 || MaxWeight - Weight < 2000) {
+			mes "- 请等一下！！ -";
+			mes "- 您目前携带的 -";
+			mes "- 物品太多了。 -";
+			mes "- 请减轻负重后 -";
+			mes "- 再行尝试。 -";
+			close;
+		}
+		mes "[德布里斯]";
+		if (BaseJob != Job_Alchemist || BaseLevel < 99 || JobLevel < 50) {
+			mes "哦，看来你还没准备好听这个消息。";
+			close;
+		}
+		if (checkcart()){
+			mes "先卸下那辆又重又脏的推车吧，在这么开心的时刻可不适合带着它。";
+			close;
+		}
+		if (SkillPoint != 0) {
+			mes "不过你看起来对之前的研究还有留恋。";
+			close;
+		}
+		mes "炼金术师联合会来信了。";
+		mes "我念给你听，波波！";
+		next;
+		mes "<亲爱的德布里斯小姐，>";
+		mes "<我们非常清楚你近来的出色表现。>";
+		next;
+		mes "<德布里斯小姐>";
+		mes "这位也是我的同乡。";
+		next;
+		mes "<我听说了一个好消息，你的研究成果正要迈向商业化。>";
+		mes "<我相信这会给其他炼金术师带来极大的启发。>";
+		next;
+		mes "<说起来，你还附了一篇论文？>";
+		mes "<那是一种能让植物超快速生长的新植物，由一位名叫"+strcharinfo(0)+">";
+		next;
+		mes "<我和炼金术师联合会的许多其他炼金术师都对此很感兴趣。>";
+		next;
+		mes "<我们期待看到更多研究论文与成果，尤其是来自听说这个消息的其他基因学者的。>";
+		next;
+		mes "<德布里斯小姐>";
+		mes "<我认为"+strcharinfo(0)+"有足够的能力与天赋成为基因学者。>";
+		next;
+		mes "<请尽快告诉"+strcharinfo(0)+"，我们期待你今后作为基因学者的出色表现。>";
+		next;
+		mes "<炼金术师联合会为德布里斯小姐、黛米凯柏林小姐以及"+strcharinfo(0)+"这些优秀的人才感到非常自豪。>";
+		mes "<希望你们今后也能结出丰硕的果实。>";
+		next;
+		mes "[德布里斯]";
+		if (ismounting()) {
+			mes "你正骑在骑乘宠物上，";
+			mes "所以无法转职。";
+			mes "请卸下骑乘宠物后再试！";
+			close;
+		}
+		mes "恭喜你，波波！";
+		mes "从今天起你就是基因学者了！！";
+		jobchange roclass(eaclass()|EAJL_THIRD);
+		set job_gen,77;
+		getitem 5752,1; //Midas_Whisper
+		getitem 2795,1; //Green_Apple_Ring
+		next;
+		mes "[德布里斯]";
+		mes "正如联合会在信中所说，我也期待你的精彩表现。";
+		mes "我们一起努力吧！成为最棒的基因学者！";
+		close;
+	} else if (job_gen == 77) {
+		mes "[德布里斯]";
+		mes "波波，你要加入我的“爱奥兰斯”俱乐部吗？这是为饼干爱好者设立的俱乐部。当然，我们没打算对查尔斯·奥兰斯做什么奇怪的事。";
+		close;
+	}
+	mes "[德布里斯]";
+	mes "我对你来说有那么漂亮吗？你为什么那样盯着我看？";
+	close;
+}
+
+job3_gen01,83,72,3	script	送货的木箱子#generic	111,{
+	mes "- 有一个大箱子。 -";
+	if (job_gen == 2) {
+		next;
+		switch(select("打开箱子。:查看地址。:什么都不做。")) {
+		case 1:
+			mes "- 箱子里有几个仔细包装好的饼干袋。 -";
+			next;
+			switch(select("取出一袋饼干。:什么都不做。")) {
+			case 1:
+				mes "- 你从箱子里取出了一袋饼干。 -";
+				set job_gen,3;
+				close;
+			case 2:
+				mes "你什么也没做。";
+				close;
+			}
+		case 2:
+			mes "[寄件人：卢恩米德加尔特王国，普隆德拉，查尔斯·奥兰斯]";
+			mes "[收件人：黑森林共和国，里希塔乐镇，德布里斯]";
+			close;
+		case 3:
+			mes "你什么也没做。";
+			close;
+		}
+	}
+	close;
+}
+
+job3_gen01,12,56,3	script	植物指南#generic	111,{
+	mes "<世界上最简单的炼金术>";
+	mes "作者：鲍勃·罗斯。";
+	next;
+	switch(select("动物:植物:矿物:其他")) {
+	case 1:
+		mes "...Using animals in Alchemy can easily be practiced by anyone.";
+		mes "你可以把想使用的动物放在白托盘上，想象你想要达成的目标，然后进行炼金术。";
+		mes "非常简单。";
+		next;
+		mes "...The animals that are used in Alchemy might in the danger of getting extinct because of being captured by thoughtless alchemists.";
+		mes "所以我就不提了。";
+		close;
+	case 2:
+		mes "...The guide of Alchemy using plants is easy to follow, even for a little kid.";
+		mes "你可以把植物放在桌上，把它们折断或切开，用简单的工具连接起来，然后进行炼金术。";
+		mes "真是种非凡的方法。";
+		next;
+		mes "...The plants usually used for Alchemy are Bigibigi Grass and Muka Trees that have sharp thorns but are delicate inside and Bogi Creeper whose growth speed is really fast but parasitic on living things.";
+		if (job_gen == 6)
+			set job_gen,7;
+		close;
+	case 3:
+		mes "...Using minerals in Alchemy is a way that beginners find pretty easy.";
+		mes "你可以把想要的矿物放进精心制作的盒子里，把你能想到的任何歌哼唱两遍，然后进行炼金术。";
+		mes "真是种简单的方法。";
+		next;
+		mes "...A mineral that's usually used for Alchemy is 'Phracon' which doesn't cost a lot.";
+		close;
+	case 4:
+		mes "...Alchemy is the easiest thing in the world.";
+		mes "这位作者每周都会在学生面前演示钴蓝色的炼金术，总是赢得他们的热烈掌声。";
+		mes "我相信你读这本书的那一刻，就会迷上炼金术的世界。";
+		close;
+	}
+}
+
+// QuestID,PlantName,Description{,Part?}
+function	script	Genetic_Job_Plant	{
+	if (job_gen == 7) {
+		if (isbegin_quest(getarg(0)) == 0) {
+			mes "- "+getarg(2)+" -";
+			next;
+			switch(select("用作材料。:不使用。")) {
+			case 1:
+				if (getarg(3,0)) set .@str$,"some of the ";
+				mes "- 你获得了"+.@str$+getarg(1)+". -";
+				setquest getarg(0);
+				close;
+			case 2:
+				mes "- 这株植物似乎不适合作为实验样本。 -";
+				close;
+			}
+		}
+		mes "- 你已经获得了"+getarg(1)+". -";
+		close;
+	} else if (job_gen == 6) {
+		mes "有关这株植物的信息可以在柜子里的植物指南中找到。";
+		close;
+	}
+	mes "- "+getarg(2)+" -";
+	close;
+}
+
+job3_gen01,36,55,3	script	比比吉草#gen	844,{
+	callfunc "Genetic_Job_Plant",2209,"Bigibigi Grass","The size is quite big to be normal grass so it's called Bigibigi Grass.";
+	end;
+}
+job3_gen01,36,45,3	script	摩卡树#gen	844,{
+	callfunc "Genetic_Job_Plant",2210,"Muka Tree","This is the Muka Tree which protects its delicate inside with sharp thorns.",1;
+	end;
+}
+job3_gen01,42,55,3	script	波吉藤#gen	844,{
+	callfunc "Genetic_Job_Plant",2211,"Bogi Vine","This is a Bogi Vine which has a very fast growth speed.",1;
+	end;
+}
+job3_gen01,30,58,3	script	奥拉图拉#gen	844,{
+	callfunc "Genetic_Job_Plant",2212,"Aolatura","This is known to blossom then thousand flowers as it only blooms once per lifetime.";
+	end;
+}
+job3_gen01,30,63,3	script	康格拉#gen	844,{
+	callfunc "Genetic_Job_Plant",2213,"Congra","It's a plant that has a big and solid stem with enormous leaves.";
+	end;
+}
+job3_gen01,32,38,3	script	黏草#gen	844,{
+	callfunc "Genetic_Job_Plant",2214,"Sticky Grass","I may not know the name but it's sticky and can stick to just about anything.";
+	end;
+}
+
+job3_gen01,7,50,3	script	试验台#gen	844,{
+	if (job_gen == 7) {
+		mes "- 这是一张摆满设备的实验台。我想我可以在这里用植物研究各种组合。 -";
+		next;
+		if(select("进行实验。:不进行实验。") == 2) {
+			mes "- 现在还不是开始实验的时候。 -";
+			close;
+		}
+		if ((checkquest(2209) == -1 || checkquest(2209) == 0) &&
+		    (checkquest(2210) == -1 || checkquest(2210) == 0) &&
+		    (checkquest(2211) == -1 || checkquest(2211) == 0) &&
+		    (checkquest(2212) == -1 || checkquest(2212) == 0) &&
+		    (checkquest(2213) == -1 || checkquest(2213) == 0) &&
+		    (checkquest(2214) == -1 || checkquest(2214) == 0)) {
+			mes "["+strcharinfo(0)+"]";
+			mes "唔，我得先收集植物材料。";
+			close;
+		}
+		mes "这些植物材料该怎么处理？";
+		next;
+		select("折断。:敲碎。:碾碎。");
+		while (1) {
+			mes "现在该怎么做？";
+			next;
+			if (rand(2))
+				select("烧成灰烬。:浸入蒸馏水。:蒸。");
+			else
+				select("放进试验瓶摇晃。:冷冻。:加热。");
+			if (!rand(7)) break;
+		}
+		mes "现在该怎么做？";
+		next;
+		select("把它注入试验种子。");
+		mes "该选哪种种子？";
+		next;
+		select("试验种子 - A型:试验种子 - B型:试验种子 - C型:试验种子 - D型");
+		mes "我已把准备好的材料放进选定的试验种子中。";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "好。现在可以让德布里斯小姐看看这颗种子了！";
+		if ((checkquest(2209) == -1 || checkquest(2209) == 0) &&
+		    (checkquest(2210) == -1 || checkquest(2210) == 0) &&
+		    (checkquest(2211) == -1 || checkquest(2211) == 0)){
+			set job_gen,61;
+			getitem 6272,1; //Experiment_Seed
+			close;
+		}
+		if (checkquest(2209) == 1) set job_gen,job_gen+10;
+		if (checkquest(2210) == 1) set job_gen,job_gen+10;
+		if (checkquest(2211) == 1) set job_gen,job_gen+10;
+		set .@score, job_gen + JobLevel - 20;
+		if (rand(1,100) < .@score) {
+			set job_gen,60;
+			getitem 6273,1; //Altered_Seed
+			close;
+		} else {
+			set job_gen,61;
+			getitem 6272,1; //Experiment_Seed
+			close;
+		}
+	} else if (job_gen > 7 && job_gen < 60) {
+		mes "- 看来实验失败了。我最好重新开始。 -";
+		set job_gen,7;
+		if (countitem(6273)) delitem 6273,1; //Altered_Seed
+		if (countitem(6272)) delitem 6272,1; //Experiment_Seed
+		if (checkquest(2209) == 1) erasequest 2209;
+		if (checkquest(2210) == 1) erasequest 2210;
+		if (checkquest(2211) == 1) erasequest 2211;
+		if (checkquest(2212) == 1) erasequest 2212;
+		if (checkquest(2213) == 1) erasequest 2213;
+		if (checkquest(2214) == 1) erasequest 2214;
+		close;
+	} else if (job_gen == 60 || job_gen == 61) {
+		mes "- 看来我得让德布里斯小姐看看这颗种子！ -";
+		end;
+	}
+	mes "- 这是一张摆满设备的实验台。我想我可以在这里用植物研究各种组合。 -";
+	close;
+}
+
+job3_gen01,21,67,3	script	超级培育器#gen	844,{
+	end;
+}
+
+job3_gen01,91,48,3	script	黛米·凯柏林#gen	982,{
+	mes "[黛米凯柏林]";
+	if (job_gen < 62) {
+		mes "嗯～那颗螺栓去哪儿了？";
+		close;
+	} else if (job_gen == 62) {
+		mes "哦，那辆蓝色推车～";
+		mes "装填画一样的火炮～";
+		mes "和我可爱的宝贝一起～";
+		mes "想把火炮永远射下去～～";
+		next;
+		mes "[黛米凯柏林]";
+		mes "呃～螺栓在哪儿？";
+		mes "螺丝怎么不够了？我不是最近才订了新的吗？";
+		next;
+		select("你好～？");
+		mes "[黛米凯柏林]";
+		mes "哎呀～？";
+		mes "你什么时候……你是谁？";
+		next;
+		mes "[黛米凯柏林]";
+		mes "哦，天哪！";
+		mes "喂！请帮帮我！";
+		next;
+		mes "[黛米凯柏林]";
+		mes "我今天必须完成一台订好的小型火炮，可我找不到零件！";
+		next;
+		mes "[黛米凯柏林]";
+		mes "呃～我想是掉在这附近了。";
+		mes "我只需要10个！我得先把其他零件组装起来……你能帮帮我吗？！";
+		changequest 2216,2217;
+		set job_gen,63;
+		close;
+	} else if (job_gen > 62 && job_gen < 74) {
+		mes "啊，糟了，糟了～～～";
+		mes "你找到零件了吗？没有，还没找到？你答应过的，请快点！";
+		close;
+	} else if (job_gen == 74) {
+		mes "用这辆推车的话，火力会不行，那就这样装……";
+		next;
+		select("我拿到零件了。");
+		mes "[黛米凯柏林]";
+		mes "哦，天哪！";
+		mes "你吓死我了！！";
+		mes "哦，这些是我丢失的螺丝和螺栓吗？";
+		mes "你是在哪里找到这些的？";
+		next;
+		select("是你让我去找的！");
+		mes "[黛米·凯柏林]";
+		mes "哦？真的吗？";
+		mes "我有吗？呵呵呵呵呵。";
+		mes "我连自己的心思在哪儿都不知道。";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "请稍等一下。";
+		mes "我很快就能把这些弄好。";
+		next;
+		mes "- 咔嚓 咔嚓 咔嚓 -";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "好，我已经把火炮装到手推车上了……现在要试试性能吗？";
+		next;
+		mes "- 嘶嘶…… -";
+		next;
+		mes "- 砰！砰！砰！砰！ -";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "太好了！成功了！";
+		mes "呼。你帮了我大忙。";
+		mes "非常感谢你。";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "哦，对了，你怎么会来这里？";
+		mes "你是来订购什么东西的吗";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "我是来申请成为基因学者的。";
+		mes "我听说你对便携式迷你火炮之类的东西很在行。";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "是啊，我经手过很多种火炮。";
+		mes "现在有人想改良自己的手推车，所以我一直在给他们的手推车加装迷你火炮之类的附加功能。";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "手推车改良？";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "是啊，你下坡的时候难道不想飞驰而下吗？";
+		mes "又或者，你从没觉得拖着那辆普普通通的旧手推车很无聊吗？";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "手推车不再只是用来装东西的货车了。";
+		mes "你可以在手推车上装一门火炮，让它帮你提升攻击力。";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "德布里斯小姐好像在楼下研究些幼稚的实验。";
+		mes "我不明白那些研究论文为什么会这么受欢迎。";
+		emotion ET_HNG;
+		next;
+		mes "[黛米·凯柏林]";
+		mes "看看这门迷你迷你火炮。";
+		mes "这是世界上最小、最轻的火炮。";
+		mes "这是我做的，是不是很可爱？太棒了~";
+		emotion ET_COOL;
+		next;
+		select("可以帮我改良手推车吗？");
+		mes "[黛米·凯柏林]";
+		mes "很遗憾，手推车改良只允许基因学者进行。";
+		mes "这是炼金术师公会的规矩，我也没办法。";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "不过别失望。";
+		mes "你也可以成为基因学者！";
+		mes "Hohoho.";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "而且，手推车改良也不是随便哪辆手推车都能做的。";
+		mes "只有经过长期打磨、获得品质认证的手推车才可以。";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "在成为基因学者之前，你应该一有空就练习手推车技巧。";
+		mes "直到你的肌肉与手推车强劲而协调地融为一体，手推车也能优美地移动，";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "如果你愿意，^FF0000我可以给你指个好训练场。^000000";
+		mes "^FF0000德布里斯不会太喜欢那里^000000，但那儿是最好的地方。哈哈。";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "不如挥动手推车来练习，怎么样？";
+		mes "只要你挥动手推车至少^FF0000100^000000次，就能消除压力，手推车也会被磨得足够光亮。";
+		next;
+		mes "[黛米·凯柏林]";
+		mes "好了，我得去忙下一份订单了。";
+		mes "需要训练的时候随时来找我。";
+		mes "你需要改良手推车的时候，我会帮你的。";
+		next;
+		mes "- 咔嗒 -";
+		next;
+		mes "- 这是怎么回事？我感觉某处的地板不见了。 -";
+		set job_gen,75;
+		changequest 2217,2223;
+		close2;
+		warp "job3_gen01",23,32;
+		end;
+	} else if (job_gen == 75) {
+		if (checkquest(2223,HUNTING) == 2) {
+			mes "看来德布里斯小姐发现我把你放进她的孢子围栏了。";
+			mes "你把她那些孢子全杀掉之后，再看看她的表情，可真有意思。";
+			close;
+		}
+		mes "唉，你还没练完吗？";
+		mes "你想进孢子围栏吗？";
+		next;
+		switch(select("是。:否。")) {
+		case 1:
+			mes "[黛米·凯柏林]";
+			mes "挥动手推车玩得开心~";
+			close2;
+			warp "job3_gen01",23,32;
+			end;
+		case 2:
+			mes "[黛米·凯柏林]";
+			mes "真可惜！我还想看看德布里斯小姐生气的样子呢。";
+			close;
+		}
+	} else if (job_gen > 75) {
+		mes "看来德布里斯小姐发现我把你放进她的孢子围栏了。";
+		mes "你把她那些孢子全杀掉之后，再看看她的表情，可真有意思。";
+		close;
+	}
+}
+
+-	script	Scattered Stuff#gen	-1,{
+	if (job_gen > 62 && job_gen < 74) {
+		mes "- 地板上散落着太多东西，实验室里一片混乱。 -";
+		next;
+		mes "- 你找到了一块小金属碎片。 -";
+		set job_gen, job_gen+1;
+		specialeffect EF_BASH;
+		disablenpc();
+		initnpctimer;
+		close;
+	} else if (job_gen == 74) {
+		mes "- 我想我已经收集齐所有零件了。 -";
+		close;
+	}
+	end;
+OnTimer7000:
+	enablenpc();
+	stopnpctimer;
+	end;
+}
+job3_gen01,84,45,3	duplicate(Scattered Stuff#gen)	Scattered Stuff#gen1	111
+job3_gen01,77,41,3	duplicate(Scattered Stuff#gen)	Scattered Stuff#gen2	111
+job3_gen01,78,57,3	duplicate(Scattered Stuff#gen)	Scattered Stuff#gen3	111
+job3_gen01,89,59,3	duplicate(Scattered Stuff#gen)	Scattered Stuff#gen4	111
+job3_gen01,90,51,3	duplicate(Scattered Stuff#gen)	Scattered Stuff#gen5	111
+job3_gen01,83,27,3	duplicate(Scattered Stuff#gen)	Scattered Stuff#gen6	111
+job3_gen01,74,45,3	duplicate(Scattered Stuff#gen)	Scattered Stuff#gen7	111
+
+job3_gen01,18,39,3	script	警告#gen	837,{
+	mes "= 警告 =";
+	mes "你要是欺负我的孢子，我就尖叫！！！";
+	if (job_gen < 75) close;
+	next;
+	switch(select("离开围栏。:待着别动。")) {
+	case 1:
+		mes "- 我最好在德布里斯小姐发现之前出去。 -";
+		close2;
+		warp "job3_gen01",21,38;
+		end;
+	case 2:
+		mes "- 我决定待着不动。 -";
+		close;
+	}
+}
+
+job3_gen01,80,12,1	script	堆叠的杂志#gen	111,{
+	mes "- 《月刊砰！》杂志乱七八糟地堆在一起。 -";
+	close;
+}
+
+job3_gen01,83,20,1	script	床#gen	111,{
+	mes "- 一套像是精心挑选的格子花纹床品，放在这张脏床上实在太可惜了。 -";
+	close;
+}
+
+job3_gen01,85,25,1	script	翻开的书#gen	111,{
+	mes "< 想要拥有我这样漂亮的房间吗？你的Zeny够吗？房间够宽敞吗？那就立刻去里希塔乐镇百货商店，把最高级的墙纸和室内装饰品都买回来吧！ >";
+	next;
+	mes "< 能让房间明亮起来的奢华蜡烛，每位淑女都拥有的巨大金色镜子，这些你一样都不能错过！ >";
+	close;
+}
+
+job3_gen01,81,81,0	script	#dbroom	139,2,2,{
+OnTouch_:
+	mes "- 多亏房间里堆了这么多包裹，这房间看起来简直像个仓库。 -";
+	close;
+}
+
+job3_gen01,24,32,0	script	德布里斯的凝视	139,2,2,{
+OnTouch:
+	if (checkquest(2223,HUNTING) == 2) {
+		mapannounce "job3_gen01","德布里斯：哎呀？孢子围栏里怎么有只迷路的小猫？",bc_map,"0x99CC00"; //FW_NORMAL 12 0 0
+		emotion ET_HUK, playerattached();
+		warp "job3_gen01",21,38;
+	}
+	end;
+}
+
+job3_gen01,26,34	monster	毒魔菇	1428,1,7000
+job3_gen01,23,33	monster	毒魔菇	1428,1,7000
+job3_gen01,21,30	monster	毒魔菇	1428,1,7000
+job3_gen01,26,34	monster	毒魔菇	1428,1,7000
+job3_gen01,23,33	monster	毒魔菇	1428,1,7000
+job3_gen01,21,30	monster	毒魔菇	1428,1,7000
+job3_gen01,26,34	monster	毒魔菇	1428,1,7000
+job3_gen01,23,33	monster	毒魔菇	1428,1,7000
+job3_gen01,21,30	monster	毒魔菇	1428,1,7000
+job3_gen01,26,34	monster	毒魔菇	1428,1,7000
+job3_gen01,23,33	monster	毒魔菇	1428,1,7000
+job3_gen01,21,30	monster	毒魔菇	1428,1,7000
+job3_gen01,26,34	monster	毒魔菇	1428,1,7000
+job3_gen01,23,33	monster	毒魔菇	1428,1,7000
+job3_gen01,21,30	monster	毒魔菇	1428,1,7000
+job3_gen01,26,34	monster	毒魔菇	1428,1,7000
+job3_gen01,23,33	monster	毒魔菇	1428,1,7000
+job3_gen01,21,30	monster	毒魔菇	1428,1,7000

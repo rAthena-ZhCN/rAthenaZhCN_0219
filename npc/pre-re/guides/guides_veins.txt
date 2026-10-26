@@ -1,0 +1,129 @@
+//===== rAthena Script =======================================
+//= Veins Guide
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Veins City guide
+//===== Additional Comments: =================================
+//= 1.0 First version. [L0ne_W0lf]
+//= 1.1 Added second Veins guide NPC. [L0ne_W0lf]
+//= 1.2 Fixed a few small typos. [L0ne_W0lf]
+//============================================================
+
+veins,210,345,5	script	维恩向导#1::ve_guide	934,{
+	mes "[维恩向导]";
+	mes "沙漠城市维恩欢迎前来躲避猛烈沙尘暴的冒险者们。";
+	mes "如果您是第一次使用向导服务，不如先看看……";
+	set .@loop1,1;
+	while(.@loop1) {
+		next;
+		switch(select("村庄指南:移除小地图标记:公告:取消")) {
+		case 1:
+			mes "[维恩向导]";
+			mes "只要是维恩境内的建筑，我都能告诉您其位置。";
+			mes "那么，您想去哪里？";
+			if (.@compass_check == 0) {
+				mes "需要我";
+				mes "在小地图上";
+				mes "标记地点吗？";
+				next;
+				if (select("是:否") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+
+				switch(select("神殿:旅馆:武器店:道具店:飞空艇:酒馆:地质研究所:取消")) {
+				case 1:
+					mes "[维恩向导]";
+					mes "我们的神殿位于北方，";
+					mes "那里总是挤满了虔诚的芙蕾雅女神信徒。";
+					if (.@compass_check == 1) viewpoint 1,196,258,1,0xFF0000;
+					break;
+				case 2:
+					mes "[维恩向导]";
+					mes "您可以在旅馆洗去旅途的疲劳。";
+					mes "我左边的建筑就是维恩的旅馆。";
+					if (.@compass_check == 1) viewpoint 1,128,266,2,0xFF00FF;
+					break;
+				case 3:
+					mes "[维恩向导]";
+					mes "是的，您得靠自己防范危险。";
+					mes "以实惠的价格购买高品质武器吧。";
+					mes "维恩武器店位于西边。";
+					if (.@compass_check == 1) viewpoint 1,150,175,3,0x99FFFF;
+					break;
+				case 4:
+					mes "[维恩向导]";
+					mes "您的冒险必需品带够了吗？";
+					mes "如果没有，建议您去中央的维恩看看有什么可买。";
+					if (.@compass_check == 1) viewpoint 1,230,161,4,0x0000FF;
+					break;
+				case 5:
+					mes "[维恩向导]";
+					mes "请注意，维恩只运行货运飞空艇。";
+					if (.@compass_check == 1) viewpoint 1,273,285,5,0x00FF00;
+					break;
+				case 6:
+					mes "[维恩向导]";
+					mes "如果您想和镇上的人";
+					mes "交朋友，我建议您";
+					mes "去西边的酒馆";
+					mes "喝一杯。";
+					if (.@compass_check == 1) viewpoint 1,150,217,6,0x00FF00;
+					break;
+				case 7:
+					mes "[维恩向导]";
+					mes "您对研究地质感兴趣吗？";
+					mes "那您最好去武器店";
+					mes "二楼的";
+					mes "地质研究所看看。";
+					if (.@compass_check == 1) viewpoint 1,150,175,7,0x00FF00;
+					break;
+				case 8:
+					mes "[维恩向导]";
+					mes "如果您想清除小地图上的所有地点标记，";
+					mes "再找我一次，选择“移除小地图标记”菜单即可。";
+					set .@loop2,0;
+					break;
+				}
+			}
+			break;
+
+		case 2:
+			viewpoint 2,196,258,1,0xFF0000;
+			viewpoint 2,128,266,2,0xFF00FF;
+			viewpoint 2,150,175,3,0x99FFFF;
+			viewpoint 2,230,161,4,0x0000FF;
+			viewpoint 2,273,285,5,0x00FF00;
+			viewpoint 2,150,217,6,0x00FF00;
+			viewpoint 2,150,175,7,0x00FF00;
+			mes "[维恩向导]";
+			mes "好了，标记都已清除。如果您还想查询其他地点，随时告诉我。";
+			mes "愿您在维恩过得愉快。";
+			break;
+		case 3:
+			mes "[维恩向导]";
+			mes "使用“村庄指南”菜单时，";
+			mes "建筑位置会标记在屏幕右上方的小地图上，请注意查看。";
+			mes "如果看不到小地图，请使用快捷键“ctrl+tab”，或按下基本信息窗口上的“地图”按钮，明白了吗？";
+			mes "若无法看到村庄全图，您还可以用“-”按钮缩小地图。";
+			break;
+		case 4:
+			mes "[维恩向导]";
+			mes "愿您在维恩过得愉快。";
+			close2;
+			set .@loop1,0;
+			break;
+		}
+	}
+	close;
+}
+
+veins,189,101,5	duplicate(ve_guide)	维恩向导#2	934

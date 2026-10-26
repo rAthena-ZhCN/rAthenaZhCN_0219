@@ -1,0 +1,242 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Added Monster Killing quests.
+//= Repeatable EXP Quest (Porcupine Quills)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+mjolnir_01,296,29,6	script	尤洛#Caramel_Hunt	95,{
+	if (checkquest(60116) != -1) {
+		if (checkquest(60116,HUNTING) != 2 ) {
+			mes "[尤洛]";
+			mes "你已经猎杀完50只刺猬虫了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[尤洛]";
+				mes "嗯，我看你还没猎杀到50只……";
+				close;
+			case 2:
+				mes "[尤洛]";
+				mes "记住，我需要有人帮忙猎杀刺猬虫，去猎杀50只吧。";
+				close;
+			case 3:
+				mes "[尤洛]";
+				mes "你确定要放弃猎杀吗？";
+				mes "你目前的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[尤洛]";
+					mes "那好吧，改变主意的话就回来找我。";
+					erasequest 60116;
+					close;
+				case 2:
+					mes "[尤洛]";
+					mes "请猎杀50只刺猬虫。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[尤洛]";
+			mes "太厉害了，你动作真快。";
+			getexp 10425,6272;
+			erasequest 60116;
+			close;
+		}
+	}
+	if (checkquest(60117) != -1) {
+		if (checkquest(60117,HUNTING) != 2 ) {
+			mes "[尤洛]";
+			mes "你已经猎杀完50只刺猬虫了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[尤洛]";
+				mes "嗯，我看你还没猎杀到100只……";
+				close;
+			case 2:
+				mes "[尤洛]";
+				mes "记住，我需要有人帮忙猎杀刺猬虫，去猎杀100只吧。";
+				close;
+			case 3:
+				mes "[尤洛]";
+				mes "你确定要放弃猎杀吗？";
+				mes "你目前的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[尤洛]";
+					mes "那好吧，改变主意的话就回来找我。";
+					erasequest 60117;
+					close;
+				case 2:
+					mes "[尤洛]";
+					mes "请猎杀100只刺猬虫。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[尤洛]";
+			mes "太厉害了，你动作真快。";
+			getexp 10425,6272;
+			getexp 10425,6272;
+			erasequest 60117;
+			close;
+		}
+	}
+	if (checkquest(60118) != -1) {
+		if (checkquest(60118,HUNTING) != 2 ) {
+			mes "[尤洛]";
+			mes "你已经猎杀完150只刺猬虫了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[尤洛]";
+				mes "嗯，我看你还没猎杀到150只……";
+				close;
+			case 2:
+				mes "[尤洛]";
+				mes "记住，我需要有人帮忙猎杀刺猬虫，去猎杀150只吧。";
+				close;
+			case 3:
+				mes "[尤洛]";
+				mes "你确定要放弃猎杀吗？";
+				mes "你目前的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[尤洛]";
+					mes "那好吧，改变主意的话就回来找我。";
+					erasequest 60118;
+					close;
+				case 2:
+					mes "[尤洛]";
+					mes "请猎杀150只刺猬虫。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[尤洛]";
+			mes "太厉害了，你动作真快。";
+			getexp 10425,6272;
+			getexp 10425,6272;
+			getexp 10425,6272;
+			erasequest 60118;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel > 23) {
+		//for maximum level
+		if (BaseLevel < 61) {
+			mes "[尤洛]";
+			mes "我不行了，再也不干了，我是认真的。";
+			mes "看着我，我是认真的，我再也杀不动这些东西了。";
+			next;
+			switch(select("什么东西？:无视。")) {
+			case 1:
+				mes "[尤洛]";
+				mes "我跟你讲，我有个主意。";
+				mes "你可以去收集它们，我会为你的辛苦给点报酬！";
+				next;
+				switch(select("收集物品:猎杀刺猬虫:取消")) {
+				case 1:
+					// Item turn in
+					mes "[尤洛]";
+					mes "好，那我需要25个刺猬";
+					mes "尖刺。";
+					mes "拜托告诉我你有，或者能";
+					mes "帮帮我";
+					next;
+					switch(select("我有刺猬尖刺:这个我恐怕帮不上忙。")) {
+					case 1:
+						/*
+						if (checkweight(501,10) == 0) {
+							mes "[Yullo]";
+							mes "Hey, it looks like that the weight on";
+							mes "your back will crush you. Come back";
+							mes "after you have lost some weight.";
+							close;
+						}
+						*/
+						if (countitem(1027) > 24) {
+							mes "[尤洛]";
+							mes "太好了，你带够了！";
+							mes "就像我答应过的，一点小奖励。";
+							delitem 1027,25; //Porcupine_Spike
+							getexp 10425,6272;
+							//getitem 501,10; //Red_Potion
+							close;
+						}
+						else {
+							mes "[尤洛]";
+							mes "刺猬尖刺在哪儿？";
+							mes "你以为我会看不出来？";
+							close;
+						}
+					case 2:
+						mes "[尤洛]";
+						mes "我需要 ^00CE0025 刺猬尖刺^000000。";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[尤洛]";
+					mes "啊，好吧，我看你可以帮我猎杀一些刺猬虫。";
+					mes "你想猎杀多少只？";
+					next;
+					switch(select("50只刺猬虫:100只刺猬虫:150只刺猬虫")) {
+					case 1:
+						mes "[尤洛]";
+						mes "完成任务后再回来，我会给你一点小奖励。";
+						setquest 60116;
+						close;
+					case 2:
+						mes "[尤洛]";
+						mes "完成任务后再回来，我会给你一点小奖励。";
+						setquest 60117;
+						close;
+					case 3:
+						mes "[尤洛]";
+						mes "完成任务后再回来，我会给你一点小奖励。";
+						setquest 60118;
+						close;
+					}
+				case 3:
+					mes "[尤洛]";
+					mes "如果你改变主意，请再回来。";
+					close;
+				}
+			case 2:
+				mes "[尤洛]";
+				mes "如果你改变主意，请再回来。";
+				close;
+			}
+		}
+		else {
+			mes "[尤洛]";
+			mes "你好，我叫尤洛。";
+			mes "等等，你的等级做这个是不是太高了点？";
+			close;
+		}
+	}
+	else {
+		mes "[尤洛]";
+		mes "嗯，这个请求对你来说可能有点勉强。";
+		mes "等你长得更高更壮再来吧。";
+		close;
+	}
+}

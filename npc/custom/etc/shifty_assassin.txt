@@ -1,0 +1,187 @@
+//===== rAthena Script =======================================
+//= Shifty Assassin
+//===== By: ==================================================
+//= acky
+//===== Current Version: =====================================
+//= 1.1.2
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Players buy ninjas to assassinate other players
+//===== Additional Comments: =================================
+//= 1.1.1 Changed all gmcommand to atcommand as Poki#3 suggested. [Vicious]
+//= 1.1.2 Updated WoE Check. [Paradox924X]
+//============================================================
+
+morocc,148,86,5	script	可疑的刺客	725,{
+	set .@ninja_price,250000;
+
+	// STARTS THE MENU //
+M_Start:
+	mes "[鬼祟刺客]";
+	mes "有什么事吗？";
+	next;
+	menu "购买忍者",M_Buy,"暗杀某人",M_Kill,"查看忍者",M_Check, ( getgmlevel() > 90 ? "添加忍者" : "" ),-,"取消",M_Exit;
+
+	// GM MENU TO ADD NINJAS //
+	mes "[鬼祟刺客]";
+	mes "你想让多少名忍者可供使用？";
+	next;
+	input .@add;
+	set $ninja_avail, $ninja_avail+.@add;
+	mes .@add +"名忍者已添加。";
+	close;
+
+	// BUY NINJAS //
+M_Buy:
+	mes "[鬼祟刺客]";
+	mes "你想购买多少名忍者？";
+	mes "现有 ^0000FF" + $ninja_avail + "^000000 名忍者可供使用。";
+	mes "每名需要 ^0000FF" + .@ninja_price + "Zeny^000000。";
+
+	input .@buy;
+	next;
+	if ($ninja_avail < 1) goto NoNinjas;
+	if ($ninja_avail < .@buy) goto NotEnoughNinjas;
+	set .@price, .@buy*.@ninja_price;
+	if (Zeny < .@price) goto NoZeny;
+
+	mes "[鬼祟刺客]";
+	mes "这需要花费 ^0000FF"+ .@price +"Zeny^000000。";
+	next;
+	menu "继续",-,"取消",M_Exit;
+
+	set Zeny, Zeny - .@price;
+	set #ninjas, #ninjas + .@buy;
+	set $ninja_avail, $ninja_avail - .@buy;
+
+	mes "[鬼祟刺客]";
+	mes "谢谢。";
+	close;
+
+	// ASSASSINATE SOMEBODY //
+M_Kill:
+	if (agitcheck()) goto M_Busy;
+	mes "[鬼祟刺客]";
+	mes "请输入目标的名字。";
+	mes "^FF0000请准确输入名字，否则我无法找到目标。^000000";
+	next;
+	menu "继续",-,"取消",M_Exit;
+	input .@name$;
+	if ( !getcharid( 3,.@name$ ) ) {
+		mes "[鬼祟刺客]";
+		mes .@name$ +"不在线。";
+		close;
+	}
+	next;
+	mes "[鬼祟刺客]";
+	mes "活动忍者："+#ninjas;
+	mes "休整忍者："+#ninjasr;
+	mes "你想派出多少名？";
+	input .@number;
+	if (.@number < 1) goto NoNinjasSent;
+	if (.@number > #ninjas) goto NotEnoughNinjas1;
+	if (.@number > 10) goto TooManyNinjas;
+	set .@chance, rand(1,12);
+	set #ninjas,#ninjas-.@number;
+	set #ninjas,#ninjas+#ninjasr;
+	set #ninjasr,0;
+	if (.@number < .@chance) goto M_Failure;
+
+	// SUCCESSFUL ATTACK //
+	mes "正在派出忍者。";
+	next;
+	mes "[鬼祟刺客]";
+	set .@ninjasurvived, rand(1,.@number);
+	set #ninjasr,.@number-.@ninjasurvived;
+	mes "你的袭击成功了，但只有 ^FF0000" + #ninjasr + "^000000 名忍者存活。";
+	set .@acc_id, getcharid( 3,.@name$ );
+	if ( .@acc_id )
+		unitkill .@acc_id;
+	announce .@name$ +"已被" + strcharinfo(0) +"的忍者暗杀。",bc_npc;
+	close;
+
+	// FAILED ATTACK //
+M_Failure:
+	mes "正在派出忍者。";
+	next;
+	mes "[鬼祟刺客]";
+	set .@ninjasurvived, rand(1,.@number);
+	set #ninjasr, .@number-.@ninjasurvived;
+	mes "你的袭击失败了，只有 ^FF0000" + #ninjasr + "^000000 名忍者存活。";
+
+	announce .@name$+"在" + strcharinfo(0) +"的忍者袭击中幸存。",8;
+	close;
+
+	// NINJAS BUSY FOR WOE //
+M_Busy:
+	mes "[鬼祟刺客]";
+	mes "抱歉，我的忍者都在忙着参加攻城战。";
+	close;
+
+	// CHECK YOUR NINJAS //
+M_Check:
+	mes "[鬼祟刺客]";
+	mes "你拥有：";
+	mes "^FF0000" + #ninjas + "^000000 名活动忍者。";
+	mes "^0000ff" + #ninjasr + "^000000 名休整忍者。";
+	next;
+	goto M_Start;
+
+
+	// LIMIT //
+NoNinjasSent:
+	mes "[鬼祟刺客]";
+	mes "没有忍者，你谁也杀不了。";
+	next;
+	goto M_Start;
+
+TooManyNinjas:
+	mes "[鬼祟刺客]";
+	mes "你最多只能派出 10 名忍者。";
+	next;
+	goto M_Start;
+
+NoZeny:
+	mes "[鬼祟刺客]";
+	mes "你的 Zeny 不足。";
+	close;
+
+NotEnoughNinjas:
+	mes "[鬼祟刺客]";
+	mes "可购买的忍者没有那么多。";
+	next;
+	goto M_Start;
+
+NoNinjas:
+	mes "[鬼祟刺客]";
+	mes "已经没有可购买的忍者了。";
+	close;
+
+NotEnoughNinjas1:
+	mes "[鬼祟刺客]";
+	mes "你没有那么多忍者。";
+	next;
+	goto M_Start;
+
+M_Exit:
+	mes "[鬼祟刺客]";
+	mes "Goodbye.";
+	close;
+
+// TIMER DELAY NINJA ADDER //
+OnClock0600:
+OnClock1200:
+OnClock1500:
+OnClock1900:
+OnClock2000:
+OnClock0000:
+	set $ninja_avail,$ninja_avail+2;
+	end;
+OnClock1800:
+	set $ninja_avail,$ninja_avail+3;
+	end;
+OnInit:
+	set $ninja_avail,$ninja_avail+1;
+	end;
+}

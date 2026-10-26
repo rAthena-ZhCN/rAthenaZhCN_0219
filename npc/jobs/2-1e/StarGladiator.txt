@@ -1,0 +1,1646 @@
+//===== rAthena Script ======================================= 
+//= Star Gladiator Job Quest
+//===== By: ================================================== 
+//= Celestria, Samuray22
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Job Change quest for Star Gladiator class.
+//===== Additional Comments: ================================= 
+//= 1.1 Updated to the Aegis Standards. [Samuray22]
+//= 1.1a Corrected a minor error respect to the header. [Samuray22]
+//= 1.1b Corrected NPC name length warning. [L0ne_W0lf]
+//= 1.1c Changed item names to item IDs. [Samuray22]
+//= 1.2 Another round of updates to the script. [L0ne_W0lf]
+//=     Removes the use of labels, and correcets other errors.
+//= 1.3 Added Quest Log commands. [Kisuka]
+//============================================================
+
+payon,215,102,3	script	武贤#job_star	828,3,3,{
+	if (Class == Job_Taekwon) {
+		if (STGL_Q == 0) {
+			mes "[武贤]";
+			if (Sex == SEX_MALE)
+				mes "喂，跆拳少年！";
+			else
+				mes "喂，跆拳少女！";
+			mes "过来一下。";
+			mes "我有个提议";
+			mes "想听的话就过来！";
+			next;
+			if (select( "Sure.","不用了，谢谢！") == 1) {
+				mes "[武贤]";
+				mes "好吧，孩子。";
+				mes "你叫什么名字？";
+				next;
+				mes "[" + strcharinfo(0) + "]";
+				mes "" + strcharinfo(0) + ".";
+				next;
+				mes "[武贤]";
+				mes "哎呀，你可真直接。";
+				mes "多一点温情、多一点";
+				mes "友善，又不会要了";
+				mes "你的命吧？话说回来，";
+				mes "你有没有想过";
+				mes "自己究竟想成为什么？";
+				next;
+				mes "[武贤]";
+				mes "如果你的心还没有";
+				mes "定下来，何不成为";
+				mes "一名 ^4D4DFF太阳、月亮^FFFFFF ^4D4DFF与星辰的战士^000000？不妨考虑一下。";
+				next;
+				mes "[" + strcharinfo(0) + "]";
+				mes "什么战士——？";
+				mes "我从没听说过这种";
+				mes "职业。但我知道我可以";
+				mes "转职成悟灵士，";
+				mes "或是拳圣。";
+				next;
+				mes "[武贤]";
+				mes "对。对，没错。";
+				mes "拳圣是太阳、月亮";
+				mes "与星辰的战士，还能操纵宇宙之力！";
+				mes "很帅吧？总之，你有兴趣";
+				mes "成为拳圣吗？";
+				next;
+				if (select("是的，我有兴趣！:不太想。") == 1) {
+					if (JobLevel > 39) {
+						mes "[武贤]";
+						mes "太好了，太好了～我就知道你会";
+						mes "跟我看法一致。好吧，";
+						mes "你看起来已经准备得差不多了。";
+						mes "现在你只差一个";
+						mes "能训练你成为";
+						mes "拳圣的人。";
+						next;
+						mes "[武贤]";
+						mes "你愿意 ^4D4dff转职";
+						mes "成为拳圣吗^000000？";
+						mes "如果你愿意，我会介绍一位能帮你";
+						mes "达成目标的人。";
+						next;
+						if (select("我愿意。","让我考虑一下……") == 1) {
+							mes "[武贤]";
+							mes "太好了！那么，你或许";
+							mes "也猜到了，拳圣们";
+							mes "并没有组成正式的公会。所以我们很难";
+							mes "聚在一起，但规矩也少，也更自由。";
+							next;
+							mes "[武贤]";
+							mes "现在有谁在呢……？嗯……";
+							mes "啊，你该去拜访 ^4D4DFF武强^000000。";
+							mes "他是少数愿意收";
+							mes "新弟子的拳圣";
+							mes "之一，他一定会";
+							mes "指导你的修行。";
+							next;
+							mes "[武贤]";
+							mes "好了，你可以在克魔岛";
+							mes "找到武强，据说就在";
+							mes "离天空最近的地方。这段时间，我会写一封";
+							mes "推荐信，";
+							mes "替你寄给他。";
+							set STGL_Q,1;
+							setquest 7007;
+							close;
+						}
+						mes "[武贤]";
+						mes "没关系。转职";
+						mes "是很重要的决定，";
+						mes "你应该仔细考虑所有事。不过我可以向你保证，";
+						mes "成为杰出的宇宙战士，你绝不会后悔！";
+						close;
+					}
+					mes "[武贤]";
+					mes "太好了，太好了～";
+					mes "不过首先，你";
+					mes "至少得有 Job等级 40";
+					mes "才能开始拳圣";
+					mes "的修行。否则，";
+					mes "你根本听不懂。";
+					next;
+					mes "[武贤]";
+					mes "我知道你做得到，";
+					mes "而且应该花不了";
+					mes "太久。答应我";
+					mes "会回来，好让";
+					mes "我能帮你成为";
+					mes "出色的拳圣～";
+					close;
+				}
+				mes "[武贤]";
+				mes "真的吗？不过，我还是";
+				mes "觉得你更适合";
+				mes "当拳圣，";
+				mes "而不是悟灵士。但这个";
+				mes "决定终究在你。";
+				next;
+				mes "[武贤]";
+				mes "好吧，如果你改变";
+				mes "主意，就回来";
+				mes "告诉我。我知道";
+				mes "只要你肯努力，你会成为";
+				mes "出色的拳圣。";
+				close;
+			}
+			mes "[武贤]";
+			mes "哎呀，别这样。";
+			mes "听我唠叨几句";
+			mes "又不会花你一个 Zeny。来";
+			mes "吧，就听我说完……";
+			close;
+		}
+		else if (STGL_Q == 1) {
+			mes "[武贤]";
+			mes "我已经把我的";
+			mes "推荐信";
+			mes "寄给他了，你这就";
+			mes "去克魔岛拜访武强吧。";
+			mes "他会开始训练你";
+			mes "成为拳圣。";
+			close;
+		}
+		else if (STGL_Q == 7) {
+			mes "[武贤]";
+			mes "那么，测试";
+			mes "进行得怎么样？哦，你";
+			mes "看起来很担心。是不是";
+			mes "遇上什么麻烦了？";
+			next;
+			if (select("不，我没事。:关于比琉的谜题……") == 1) {
+				mes "[武贤]";
+				mes "独立自主、";
+				mes "自己解决问题";
+				mes "是好事，但真的需要时";
+				mes "也该寻求帮助。";
+				mes "一个人做不到某些事，";
+				mes "并不是什么羞耻……";
+				close;
+			}
+			mes "[武贤]";
+			mes "啊，那件事。比琉";
+			mes "给了你那个谜题";
+			mes "让你解开。嗯，首先";
+			mes "你得带给他";
+			mes "非常重要的东西，";
+			mes "但那并不是实体物品。";
+			next;
+			mes "[武贤]";
+			mes "你得向他";
+			mes "证明些什么。那么告诉我，";
+			mes "当你在人生中遇到困难、";
+			mes "实现目标遇到阻碍时，";
+			mes "你会怎么应对？你的";
+			mes "心感受到什么？";
+			next;
+			mes "[武贤]";
+			mes "我知道比琉要求你";
+			mes "向他证明你的耐心，";
+			mes "但这是耐心背后";
+			mes "最重要的因素。当";
+			mes "人生看似无望时，";
+			mes "你会对自己说什么？";
+			next;
+			if (select("我绝不放弃！:我……我不知道？") == 1) {
+				mes "[" + strcharinfo(0) + "]";
+				mes "我绝不放弃！";
+				mes "无论要花";
+				mes "多久，我都要";
+				mes "让梦想实现！";
+				next;
+				mes "[武贤]";
+				mes "对，就是这样！";
+				mes "当你的决心";
+				mes "有钢铁般的意志支撑，";
+				mes "你就会有耐心";
+				mes "去承受一切。";
+				mes "向比琉展现你的决心……";
+				next;
+				mes "[武贤]";
+				mes "太好了，我想你";
+				mes "已经准备好了。请去";
+				mes "找武强谈谈，然后回到";
+				mes "月之间。很快，";
+				mes "或许我们就能以拳圣的";
+				mes "身份彼此问候了！";
+				set STGL_Q,8;
+				close;
+			}
+			mes "[武贤]";
+			mes "你……你不知道？";
+			mes "如果你能迎头";
+			mes "面对阻碍，直接对抗";
+			mes "你的恐惧、敌人，以及";
+			mes "人生的一切挑战，那么答案自然会浮现。";
+			next;
+			mes "[武贤]";
+			mes "Hmm...";
+			mes "你何不思考一下";
+			mes "勇气的价值，";
+			mes "花点时间？是的，那";
+			mes "或许暂时会有用。";
+			close;
+		}
+		else if (STGL_Q == 8) {
+			mes "[武贤]";
+			mes "太好了，我想你";
+			mes "已经准备好了。请去";
+			mes "找武强谈谈，然后回到";
+			mes "月之间。很快，";
+			mes "或许我们就能以拳圣的";
+			mes "身份彼此问候了！";
+			close;
+		}
+		mes "[武贤]";
+		mes "那么，你最近";
+		mes "过得怎么样？我相信";
+		mes "你会成为";
+		mes "出色的拳圣，所以";
+		mes "我很期待你的表现。";
+		close;
+	}
+	else if (BaseJob == Job_Star_Gladiator) {
+		mes "[武贤]";
+		mes "嘿，你最近";
+		mes "过得怎么样？看来你";
+		mes "已经和自然";
+		mes "融为一体了。呵呵，";
+		mes "宇宙难道不是";
+		mes "很美妙吗？";
+		close;
+	}
+	else if (Class== Job_Novice) {
+		mes "[武贤]";
+		mes "嘿，孩子。你想不想";
+		mes "学跆拳道？";
+		mes "如果你学了，";
+		mes "保证会变得";
+		mes "强得多！";
+		next;
+		mes "[武贤]";
+		mes "我看看……";
+		mes "有个叫";
+		mes "凤凰的人能教你";
+		mes "跆拳道。他就在";
+		mes "这附近……";
+		next;
+		mes "[武贤]";
+		mes "总之，等你";
+		mes "学了一段时间";
+		mes "跆拳道，如果你真想";
+		mes "精进所学、掌握超越身心的事物，";
+		mes "就尽管回来找我。";
+		close;
+	}
+	mes "[武贤]";
+	mes "Dude...";
+	mes "你想干嘛？";
+	if (Sex == SEX_MALE) {
+		mes "你想加入";
+		mes "我的武术";
+		mes "道场吗？对你来说";
+		mes "太迟了，抱歉啦～";
+	}
+	else {
+		mes "哦，我没注意到——";
+		mes "你——你真是位美丽的";
+		mes "小姐！我想我应该，你";
+		mes "知道的，为我的无礼道歉。";
+	}
+	next;
+	mes "[武贤]";
+	mes "总之，如果你觉得我";
+	mes "只是个混混，我承认";
+	mes "我的样子和做派都像。";
+	mes "但其实，我是";
+	mes "太阳、月亮与星辰的战士。";
+	next;
+	mes "[武贤]";
+	mes "对你来说可能";
+	mes "有点晚了，但如果你认识";
+	mes "想成为";
+	mes "拳圣的人，就让他们";
+	mes "来找我。我会确保";
+	mes "他们见到对的人～";
+	close;
+
+OnTouch_:
+	if (Class == Job_Taekwon) {
+		if (STGL_Q == 0) {
+			mes "[武贤]";
+			mes "嗯……？哦，你正是";
+			mes "我在找的";
+			mes "那种人。来，我";
+			mes "有个提议给你，";
+			mes "如果你愿意听……";
+			close;
+		}
+	}
+	else if (BaseJob == Job_Star_Gladiator) {
+		mes "[武贤]";
+		mes "最近怎么样，战士？";
+		mes "请继续把你的";
+		mes "本领用在正确的";
+		mes "事业上。为各地的";
+		mes "拳圣们带来荣耀！";
+		close;
+	}
+	mes "[武贤]";
+	mes "喂喂～";
+	mes "让开一下好吗？";
+	mes "你挡住我的阳光了！";
+	close;
+}
+	
+comodo,172,230,3	script	流浪拳圣#job_sta	730,{
+	if (Class == Job_Taekwon) {
+		if (STGL_Q == 1) {
+			mes "[武强]";
+			mes ""+ strcharinfo(0) + "...";
+			mes "我一直在等你。";
+			mes "武贤已经告诉我";
+			mes "你要来，以及你想";
+			mes "成为拳圣的愿望。";
+			mes "我相信他的判断……";
+			next;
+			mes "[武强]";
+			mes "是的，武贤擅长";
+			mes "看出他人内在的";
+			mes "长处。你应该会有好表现。";
+			mes "你准备好接受第一项测试，用你的拳脚";
+			mes "为伟大的宇宙效力了吗？";
+			next;
+			if (select("好，我接受测试！:等等，让我想想！") == 1) {
+				if (SkillPoint) {
+					mes "[武强]";
+					mes "嗯？你还有技能";
+					mes "点尚未";
+					mes "分配。用掉它们，学习并提升你的";
+					if (Sex == SEX_FEMALE)
+						mes "跆拳少女";
+					else
+						mes "跆拳少年";
+					mes "技能。完成后就回来这里接受训练。";
+					close;
+				}
+				mes "[武强]";
+				mes "跆拳道奠定基础。";
+				mes "心、身、灵。它们不是";
+				mes "各自分离，而是运作的整体。你的自我与自身";
+				mes "有所联系，但它是否与";
+				mes "外界相连呢？";
+				next;
+				mes "[武强]";
+				mes "闭上眼睛。去捕捉";
+				mes "风的感觉。";
+				mes "张开双臂，拥抱";
+				mes "天空。你感觉到了吗？那";
+				mes "不断扩散的";
+				mes "宇宙之流？";
+				next;
+				mes "[武强]";
+				mes "自然的法则无法被打破，";
+				mes "但随着你对自然的理解加深，你将能抓住";
+				mes "阳光、握住月光、塑造星光。这项测试将";
+				mes "帮助你与自然调合……";
+				next;
+				mes "[武强]";
+				mes "去吧，收集";
+				mes "散落于世界各处的";
+				mes "自然之力。带给我";
+				mes "狂风、";
+				mes "坚实大地、寒冰";
+				mes "与燃烧火焰的碎片。";
+				next;
+				mes "[武强]";
+				mes "换句话说……";
+				mes "^4D4DFF风灵原石^000000，";
+				mes "^4D4DFF土灵原石^000000，";
+				mes "^4D4DFF水灵原石^000000与";
+				mes "^4D4DFF火灵原石^000000。";
+				mes "现在去吧……";
+				set STGL_Q,2;
+				changequest 7007,7008;
+				close;
+			}
+			mes "[武强]";
+			mes "我尊重你的决定，";
+			mes "虽然我看不出";
+			mes "你有犹豫的理由。但就像";
+			mes "月亮的盈亏，一切";
+			mes "变化都必须遵循";
+			mes "万物的宏大安排。";
+			close;
+		}
+		else if (STGL_Q == 2) {
+			if (countitem(996) > 0 && countitem(997) > 0 && countitem(995) > 0 && countitem(994) > 0) {
+				mes "[武强]";
+				mes "啊，你完成了";
+				mes "我交给你的任务。非常";
+				mes "好。现在，当你握着这些";
+				mes "风、大地、冰";
+				mes "与火焰的碎片时，你感觉到";
+				mes "它们之间的联系了吗？";
+				next;
+				mes "[武强]";
+				mes "风带来轻柔而";
+				mes "舒适的微风，也会带来";
+				mes "毁灭性的飓风。大地";
+				mes "承载着一切生命，";
+				mes "但它也能让建筑";
+				mes "下陷、摇晃。";
+				next;
+				mes "[武强]";
+				mes "水赋予生命，带来";
+				mes "清凉的慰藉，但它也能";
+				mes "淹没、冻结生命。火能带来温暖的慰藉，";
+				mes "但也能将生命化为";
+				mes "灰色的灰烬。这就是自然。";
+				next;
+				mes "[武强]";
+				mes "这就是自然的力量。";
+				mes "任何力量都可以用来行";
+				mes "善或作恶，取决于";
+				mes "你如何使用它。那么你";
+				mes "现在明白了吗？宇宙";
+				mes "就是这样彼此交织的。";
+				next;
+				mes "[武强]";
+				mes "然而，宇宙中最原始、";
+				mes "最纯净的";
+				mes "元素，正对应着";
+				mes "宇宙：太阳、月亮";
+				mes "与星辰。好好思考";
+				mes "这个真理吧……";
+				next;
+				mes "[武强]";
+				mes "领悟了";
+				mes "宇宙的本质，";
+				mes "就会对自然";
+				mes "与万物生出敬意。那么，当你";
+				mes "准备好接受下一项测试时，";
+				mes "我会指引你前往祭坛。";
+				delitem 996,1; //Rough_Wind
+				delitem 997,1; //Great_Nature
+				delitem 995,1; //Mistic_Frozen
+				delitem 994,1; //Flame_Heart
+				set STGL_Q,3;
+				changequest 7008,7009;
+				close;
+			}
+			mes "[武强]";
+			mes "在你成为";
+			mes "拳圣的旅途上，";
+			mes "第一项测试是带给我";
+			mes "自然元素的碎片。";
+			mes "我希望你理解它们彼此之间天生的和谐。";
+			next;
+			mes "[武强]";
+			mes "Bring...";
+			mes "^4D4DFF风灵原石^000000，";
+			mes "^4D4DFF土灵原石^000000，";
+			mes "^4D4DFF水灵原石^000000与";
+			mes "^4D4DFF火灵原石^000000。";
+			mes "现在去吧……";
+			close;
+		}
+		else if (STGL_Q == 3) {
+			mes "[武强]";
+			mes "你准备好接受";
+			mes "成为拳圣的";
+			mes "下一项测试了吗？那么，";
+			mes "我会指引你前往祭坛。";
+			next;
+			if (select("等等，我需要更多时间！:是的，我准备好了。") == 1) {
+				mes "[武强]";
+				mes "我明白了。那么，请";
+				mes "在你准备好";
+				mes "继续时告诉我。";
+				close;
+			}
+			mes "[武强]";
+			mes "在祭坛，和";
+			mes "达鲁交谈，他会";
+			mes "担任那项测试的";
+			mes "向导。完成测试后，";
+			mes "回来找我谈谈。";
+			close2;
+			warp "job_star",34,12;
+			end;
+		}
+		else if (STGL_Q > 3 && STGL_Q < 7) {
+			mes "[武强]";
+			mes "真奇怪……";
+			mes "你现在不可能已经";
+			mes "完成那项测试。啊，一定";
+			mes "发生了什么事。我会";
+			mes "把你送回祭坛，";
+			mes "让达鲁测试你。";
+			close2;
+			warp "job_star",34,12;
+			end;
+		}
+		else if (STGL_Q == 7) {
+			mes "[武强]";
+			mes "Hmm...";
+			mes "你似乎有心事。";
+			mes "啊，你一定是在想";
+			mes "比琉的谜题，对吧？";
+			mes "你是唯一能";
+			mes "找到答案的人……";
+			next;
+			mes "[武强]";
+			mes "嗯。或许你最好";
+			mes "去请教";
+			mes "裴扬的 ^4D4DFF武贤^000000，";
+			mes "这样你或许能理解";
+			mes "比琉关于耐心";
+			mes "价值的测试。";
+			next;
+			mes "[武强]";
+			mes "一旦你发现了";
+			mes "比琉想让你找到的";
+			mes "耐心的意义，";
+			mes "就回来找我，";
+			mes "好让我把你送回";
+			mes "月之间接受测试。";
+			close;
+		}
+		else if (STGL_Q == 8) {
+			mes "[武强]";
+			mes "啊，看来武贤";
+			mes "帮你达到了";
+			mes "新的理解层次。";
+			mes "很好，很好。让我";
+			mes "把你送到月之间，";
+			mes "比琉正在那里等你……";
+			close2;
+			warp "job_star",100,13;
+			end;
+		}
+		else if (STGL_Q == 9 || STGL_Q == 11) {
+			mes "[武强]";
+			mes "您想搭乘";
+			mes "回到星之间";
+			mes "完成你的拳圣";
+			mes "测试与训练吗？";
+			next;
+			if (select("好的。:以后再说。") == 1) {
+				mes "[武强]";
+				mes "别灰心……";
+				mes "我相信你很快";
+				mes "就会实现";
+				mes "成为拳圣的";
+				mes "目标。";
+				close2;
+				warp "job_star",166,29;
+				end;
+			}
+			mes "[武强]";
+			mes "我明白了。那么，当";
+			mes "你的身心与";
+			mes "灵魂都准备好时，请";
+			mes "再来找我谈谈。";
+			close;
+		}
+		else if (STGL_Q == 10) {
+			mes "[武强]";
+			mes "啊，你来这里";
+			mes "是为了找琪熙说话。";
+			mes "要我送你";
+			mes "去星之间吗？";
+			next;
+			if (select("好的。:以后再说。") == 1) {
+				mes "[武强]";
+				mes "别灰心……";
+				mes "我相信你";
+				mes "很快就能实现";
+				mes "成为拳圣";
+				mes "的目标。";
+				close2;
+				warp "job_star",166,29;
+				end;
+			}
+			mes "[武强]";
+			mes "我明白了。那么，当";
+			mes "你的心智、身体与";
+			mes "精神都准备好后，请";
+			mes "再来找我谈谈吧。";
+			close;
+		}
+		else if (STGL_Q == 12) {
+			mes "[武强]";
+			mes "啊，你回来了，";
+			mes "而且比从前更加睿智，";
+			mes "也更亲近自然了。";
+			mes "是的，我从你眼中看得出来。";
+			mes "那么告诉我，你学到了什么？";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "我能感受到";
+			mes "太阳、月亮与星辰";
+			mes "之间的羁绊。它们都散发光芒，";
+			mes "但那不同的光辉";
+			mes "赐予不同的恩惠。";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "太阳赐予辉煌的";
+			mes "温暖，是生命的";
+			mes "源泉。月光温柔，给人以慰藉。星辰闪烁，";
+			mes "即使在最黑暗的";
+			mes "夜晚也能带来希望。";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "我也知晓太阳那";
+			mes "灼热而毁灭性的";
+			mes "高温、月亮的孤独，";
+			mes "以及星辰的哀伤。";
+			mes "如今我已领悟";
+			mes "宇宙的光谱！";
+			next;
+			mes "[" + strcharinfo(0) + "]";
+			mes "宇宙汇聚的怒火";
+			mes "能召唤出";
+			mes "彻底黑暗的恶魔。";
+			mes "宇宙汇聚的爱";
+			mes "则赐予无穷的";
+			mes "祝福与光明……";
+			next;
+			mes "[武强]";
+			mes "我别无所求。";
+			mes "你已经";
+			mes "是一名战士——";
+			mes "太阳、月亮与";
+			mes "星辰的战士。欢迎踏入我们的";
+			mes "武道之路，朋友。";
+			completequest 7011;
+			callfunc "Job_Change",Job_Star_Gladiator;
+			callfunc "F_ClearJobVar";		//clears all job variables for the current player
+			next;
+			mes "[武强]";
+			mes "从今往后，请";
+			mes "在做决定时";
+			mes "务必万分谨慎。";
+			mes "你的抉择将决定";
+			mes "你一生的道路。还有，";
+			mes "永远不要忘记这首歌……";
+			next;
+			mes "[武强]";
+			mes "''^4D4DFF太阳在偶数日闪耀。";
+			mes "月亮在奇数日生辉。";
+			mes "星辰每逢第五日";
+			mes "必定闪烁。^000000''";
+			next;
+			mes "[武强]";
+			mes "我能与你分享的";
+			mes "就这些了。永远不要忘记，";
+			mes "身为拳圣的我们，";
+			mes "无法离开";
+			mes "太阳、月亮与星辰而独存……";
+			close;
+		}
+		mes "[武强]";
+		mes "哦，你好。你是";
+		mes "跆拳道的弟子吧？";
+		mes "很高兴见到你。";
+		mes "请叫我";
+		mes "武强吧。我也曾";
+		mes "修习过这门跆拳道。";
+		next;
+		mes "[武强]";
+		mes "Um...";
+		mes "你有没有";
+		mes "想过成为……";
+		mes "嗯……不，等等。唔……";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "嗯……？";
+		next;
+		mes "[武强]";
+		mes "唉呀！我跟别人说话，";
+		mes "总是有点";
+		mes "不太自在。";
+		mes "这样吧，你何不去";
+		mes "找我那位好朋友";
+		mes "武贤谈谈呢？";
+		next;
+		mes "[武强]";
+		mes "只是……";
+		mes "我太激动了！";
+		mes "很有可能，";
+		mes "你也许正是";
+		mes "我在寻找的战士！";
+		close;
+	}
+	else if (BaseJob == Job_Star_Gladiator) {
+		mes "[武强]";
+		mes "哦，很高兴";
+		mes "再次见到你。最近";
+		mes "你去了哪里？我想";
+		mes "你一定去过那些";
+		mes "受太阳、月亮";
+		mes "与星辰庇佑之地，对吧？";
+		next;
+		mes "[武强]";
+		mes "我的朋友，请把";
+		mes "我的忠告记在心里，";
+		mes "做决定时总是";
+		mes "多加谨慎。我可不";
+		mes "想看到你日后为决定后悔……";
+		next;
+		mes "[武强]";
+		mes "啊，如果你想再去";
+		mes "太阳房间、";
+		mes "月亮房间或星星房间，";
+		mes "我随时都能送你过去。";
+		mes "你现在想去";
+		mes "其中哪一个吗？";
+		next;
+		switch(select("下次再说。:前往太阳房间！:前往月亮房间！:前往星星房间！")) {
+		case 1:
+			mes "[武强]";
+			mes "好的。我会一直";
+			mes "在这里，无论何时";
+			mes "你想去那些";
+			mes "地方，都来找";
+			mes "我聊聊就好。那么，";
+			mes "再会了，"+strcharinfo(0)+"~";
+			close;
+		case 2:
+			mes "[武强]";
+			mes "啊，你一定很想念";
+			mes "太阳那辉煌的";
+			mes "温暖吧？让我";
+			mes "送你过去，";
+			mes "马上……";
+			close2;
+			warp "job_star",34,12;
+			end;
+		case 3:
+			mes "[武强]";
+			mes "嗯？你需要";
+			mes "月亮那抚慰人心的";
+			mes "光芒吗？那么，我希望";
+			mes "你能在它宁静的";
+			mes "影响中找到安宁……";
+			close2;
+			warp "job_star",100,13;
+			end;
+		case 4:
+			mes "[武强]";
+			mes "啊，想要欣赏";
+			mes "星辰闪烁的理由";
+			mes "数不胜数。那么，";
+			mes "就让我送你";
+			mes "前往星星房间吧～";
+			close2;
+			warp "job_star",166,29;
+			end;
+		}
+	}
+	mes "[流浪的武术家]";
+	mes "你喜欢徒步旅行吗？";
+	mes "清新的空气、漫游中的";
+	mes "自在感觉，以及";
+	mes "自然之美，都是";
+	mes "令人愉悦的收获。";
+	next;
+	mes "[流浪的武术家]";
+	mes "当然，夜间徒步时";
+	mes "我无法像你那样";
+	mes "尽情欣赏月光";
+	mes "与星光。那么，愿";
+	mes "太阳、月亮与星辰";
+	mes "守护你所有的旅程～";
+	close;
+}
+
+job_star,29,33,0	script	达鲁#job_star	59,{
+	if (Class == Job_Taekwon) {
+		if (STGL_Q == 3) {
+			mes "[达鲁]";
+			mes "啊，你好。";
+			mes "我是达鲁，将";
+			mes "担任这个房间的向导。";
+			mes "在这次考验中，你必须睁开";
+			mes "双眼，回答我的";
+			mes "问题。我们开始吧。";
+			next;
+			mes "[达鲁]";
+			mes "告诉我。";
+			mes "你看到了";
+			mes "什么？";
+			next;
+			switch(select("太阳。:月亮。:星辰。:我不知道。")) {
+			case 1:
+				mes "[达鲁]";
+				mes "是的！是太阳！";
+				mes "我想，你可以把";
+				mes "人类看作是太阳之子。";
+				mes "好，非常好……";
+				set .@sun_point,.@sun_point+10;
+				break;
+			case 2:
+				mes "[达鲁]";
+				mes "月……月亮？";
+				mes "嗯。可这里是";
+				mes "太阳房间。唔……";
+				break;
+			case 3:
+				mes "[达鲁]";
+				mes "星辰。唔，嗯。";
+				mes "我想，你可以把";
+				mes "太阳看作宇宙中";
+				mes "千万星辰之一……";
+				set .@sun_point,.@sun_point+5;
+				break;
+			case 4:
+				mes "[达鲁]";
+				mes "不……知道？";
+				mes "嗯。你应该";
+				mes "不仅睁开双眼，";
+				mes "也要敞开心胸。";
+				mes "试着猜一个答案";
+				mes "也无妨……";
+			}
+			next;
+			mes "[达鲁]";
+			mes "如今，没有";
+			mes "任何生命能离开";
+			mes "太阳。你知道人";
+			mes "最需要太阳的什么吗？";
+			next;
+			switch(select("温暖:慰藉:光明:都不需要")) {
+			case 1:
+				mes "[达鲁]";
+				mes "没错。";
+				mes "没有太阳的";
+				mes "温暖，我们的世界";
+				mes "不仅会寒冷，";
+				mes "更会变得毫无生机。";
+				set .@sun_point,.@sun_point+10;
+				break;
+			case 2:
+				mes "[达鲁]";
+				mes "慰藉……？";
+				mes "啊，是的。太阳的";
+				mes "温暖带来慰藉。";
+				mes "而若没有慰藉，生命";
+				mes "还值得活吗？回答得好。";
+				set .@sun_point,.@sun_point+10;
+				break;
+			case 3:
+				mes "[达鲁]";
+				mes "是的。没有";
+				mes "太阳的辉煌之光，";
+				mes "我们将什么也看不见。";
+				mes "我们将一无所知。";
+				mes "我们将一无所有。";
+				set .@sun_point,.@sun_point+10;
+				break;
+			case 4:
+				mes "[达鲁]";
+				mes "Mmm...";
+				mes "答案应当";
+				mes "发自你的内心，";
+				mes "而不是你的头脑。";
+				mes "每个人都需要";
+				mes "太阳的某种恩赐。让我想想……";
+				break;
+			}
+			next;
+			mes "[达鲁]";
+			mes "有一首歌这样唱：";
+			mes "''^4D4DFF太阳在偶数日闪耀。";
+			mes "月亮在奇数日生辉。";
+			mes "星辰每逢第五日";
+			mes "必定闪烁。^000000''";
+			next;
+			mes "[达鲁]";
+			mes "''^4D4DFF沙漠是太阳之地，";
+			mes "其沙粒为太阳所亲吻。";
+			mes "沼泽是月亮之地，";
+			mes "其狼群为月亮所驱使。";
+			mes "深洞是星辰之地，其骑士为星辰所魅惑。^000000''";
+			next;
+			mes "[达鲁]";
+			mes "那么，以下";
+			mes "哪个组合";
+			mes "在其中最为";
+			mes "耀眼？仔细想想……";
+			next;
+			if (select("第2日，沼泽，骑士:第4日，沙漠，沙子:第10日，沙漠，骑士:第5日，深洞，狼") == 2)
+				set .@sun_point,.@sun_point+10;
+			mes "[达鲁]";
+			mes "好了，就这样吧。";
+			mes "仅凭三个问题，";
+			mes "我不可能了解";
+			mes "关于你的一切……";
+			mes "不过，眼下这应该";
+			mes "已经足够了。";
+			next;
+			if (.@sun_point == 30) {
+				mes "[达鲁]";
+				mes "我承认，你对";
+				mes "太阳的理解令我";
+				mes "印象深刻。它是万物";
+				mes "生命之源，是温暖";
+				mes "与慰藉的起源。现在，让我";
+				mes "带你去月亮房间。";
+				set STGL_Q,4;
+				close2;
+				warp "job_star",100,13;
+				end;
+			}
+			else if (.@sun_point == 25) {
+				mes "[达鲁]";
+				mes "虽然你对";
+				mes "太阳的理解并不完美，";
+				mes "但你似乎明白";
+				mes "它是我们世界中温暖";
+				mes "与生命的源泉。";
+				next;
+				mes "[达鲁]";
+				mes "这个道理是基础之一，";
+				mes "能帮助你更加";
+				mes "贴近宇宙的力量。";
+				mes "现在，请往这边走，";
+				mes "前往月亮房间……";
+				set STGL_Q,4;
+				close2;
+				warp "job_star",100,13;
+				end;
+			}
+			mes "[达鲁]";
+			mes "嗯……如果你不";
+			mes "理解太阳在宇宙";
+			mes "与人类世界中的";
+			mes "作用，你将";
+			mes "永远无法与自然、";
+			mes "与宇宙相契合。";
+			next;
+			mes "[达鲁]";
+			mes "我建议你仔细";
+			mes "冥想自然的根本";
+			mes "真理，然后再来";
+			mes "与我交谈。";
+			mes "去思索太阳那";
+			mes "无穷的力量吧……";
+			set STGL_Q,5;
+			close;
+		}
+		else if (STGL_Q == 4) {
+			mes "[达鲁]";
+			mes "我们已不必";
+			mes "再留在这里。";
+			mes "让我们一起";
+			mes "前往月亮房间吧。";
+			close2;
+			warp "job_star",100,13;
+			end;
+		}
+		else if (STGL_Q == 5) {
+			if (rand(1,5) == 3) {
+				mes "[达鲁]";
+				mes "嗯。我相信你已";
+				mes "花了足够的时间思考";
+				mes "太阳的荣耀，";
+				mes "以及它对人类";
+				mes "与世界的重要性。做得好。现在，";
+				mes "我们前往月亮房间吧。";
+				set STGL_Q,4;
+				close2;
+				warp "job_star",100,13;
+				end;
+			}
+			mes "[达鲁]";
+			mes "放松你全身";
+			mes "的每一块肌肉。闭上双眼。";
+			mes "感受太阳的温暖";
+			mes "透过眼睑传来，";
+			mes "冥想它在世界中的角色，以及你在宇宙中的位置。";
+			close;
+		}
+		else if (STGL_Q == 6) {
+			mes "[达鲁]";
+			mes "嗯？你待在";
+			mes "太阳房间的";
+			mes "时间已过。我们";
+			mes "现在前往星星房间吧……";
+			close2;
+			warp "job_star",166,29;
+			end;
+		}
+		else if (STGL_Q == 7) {
+			mes "[达鲁]";
+			mes "啊，比柳一定";
+			mes "给了你一道谜题";
+			mes "去解开。那么，你需要";
+			mes "回到城里才能";
+			mes "想出答案，所以";
+			mes "让我现在送你过去吧～";
+			close2;
+			warp "payon",164,58;
+			end;
+		}
+		else if (STGL_Q == 8) {
+			mes "[达鲁]";
+			mes "嗯？比柳正在";
+			mes "月亮房间等你。让我";
+			mes "马上送你过去……";
+			close2;
+			warp "job_star",100,13;
+			end;
+		}
+		else if (STGL_Q > 8 && STGL_Q < 12) {
+			mes "[达鲁]";
+			mes "嗯。你这么喜欢";
+			mes "太阳房间，";
+			mes "我也不能怪你，";
+			mes "但现在你该去";
+			mes "星星房间了。";
+			mes "我这就送你过去……";
+			close2;
+			warp "job_star",166,29;
+			end;
+		}
+		mes "[达鲁]";
+		mes "嗯。你这么喜欢";
+		mes "太阳房间，";
+		mes "我也不能怪你，";
+		mes "但你现在还有";
+		mes "很重要的任务要完成。";
+		mes "让我送你回城吧。";
+		close2;
+		warp "payon",164,58;
+		end;
+	}
+	mes "[达鲁]";
+	mes "你在这里期间，";
+	mes "请勿打扰";
+	mes "任何可能正在";
+	mes "参加转职考验的人。";
+	mes "那么，你想";
+	mes "回城里去吗？";
+	next;
+	if (select("回到裴扬:取消") == 1) {
+		mes "[达鲁]";
+		mes "我明白了。那么，";
+		mes "让我带你";
+		mes "回到裴扬吧。";
+		close2;
+		warp "payon",164,58;
+		end;
+	}
+	mes "[达鲁]";
+	mes "请慢慢来，";
+	mes "在此期间";
+	mes "尽情欣赏太阳的";
+	mes "光辉吧。";
+	close;
+}
+
+job_star,95,33,0	script	比流#job_star	106,{
+	if (Class == Job_Taekwon) {
+		if (STGL_Q == 4) {
+			mes "[比柳]";
+			mes "欢迎来到月亮房间。";
+			mes "我是比柳，这座";
+			mes "圣地的向导。我会问你";
+			mes "一连串问题，所以请";
+			mes "在回答之前仔细";
+			mes "思考，并诚实地回答我。";
+			next;
+			mes "[比柳]";
+			mes "我们最需要、最渴望的";
+			mes "是哪一轮月亮？想想";
+			mes "月亮那不同的";
+			mes "色彩，以及它在";
+			mes "某些夜晚的变化。";
+			next;
+			switch(select("红月:蓝月:金月:……？")) {
+			case 1:
+				mes "[比柳]";
+				mes "红月……？";
+				mes "那是令人畏惧的景象，";
+				mes "常被比作以鲜血之色浸染天空。";
+				mes "红月会激起我们不该完全拥抱的黑暗情感……";
+				break;
+			case 2:
+				mes "[比柳]";
+				mes "蓝月……？";
+				mes "啊，是的。它是宁静而";
+				mes "柔和的月亮，其柔和的";
+				mes "光芒能助你清晰地思考。";
+				mes "那是安宁休憩之月……";
+				set .@moon_point,.@moon_point+10;
+				break;
+			case 3:
+				mes "[比柳]";
+				mes "金月……？";
+				mes "啊，那是象征";
+				mes "富足与财富的月亮。";
+				mes "渴望获得繁荣";
+				mes "是人之常情，而实现";
+				mes "抱负则是人生的巅峰。";
+				set .@moon_point,.@moon_point+10;
+				break;
+			case 4:
+				mes "[比柳]";
+				mes "嗯……？";
+				mes "你难道对月亮";
+				mes "没有自己的看法吗？";
+				mes "你应该自信地";
+				mes "告诉我，你更喜欢";
+				mes "月亮哪一种色彩……";
+			}
+			next;
+			mes "[比柳]";
+			mes "现在，如果月亮的";
+			mes "阴影将力量";
+			mes "借予你，";
+			mes "你会为了什么目的";
+			mes "使用这月之";
+			mes "宇宙的力量？";
+			next;
+			switch(select("正义:自我修行:保护自然:复仇")) {
+			case 1:
+				mes "[比柳]";
+				mes "是的。正义始终是值得";
+				mes "为之奋斗的目标。";
+				mes "请记住，";
+				mes "力量与慈悲";
+				mes "二者兼备，才能实现";
+				mes "最纯粹的正义。";
+				set .@moon_point,.@moon_point+10;
+				break;
+			case 2:
+				mes "[比柳]";
+				mes "自我修行？";
+				mes "这是个可以接受的";
+				mes "答案。不过，你必须";
+				mes "永远不要忘记自己";
+				mes "追求自我精进的";
+				mes "理由，否则会迷失方向。";
+				set .@moon_point,.@moon_point+10;
+				break;
+			case 3:
+				mes "[比柳]";
+				mes "保护自然";
+				mes "是每个在世之人的";
+				mes "责任。不过，";
+				mes "就跆拳武术而言，";
+				mes "我原本期待的是";
+				mes "另一个答案……";
+				break;
+			case 4:
+				mes "[比柳]";
+				mes "有时，复仇似乎";
+				mes "是最好的行动";
+				mes "方式，尤其是当它";
+				mes "出于正义";
+				mes "之名时。然而，复仇";
+				mes "本身通常是卑劣的。";
+				next;
+				mes "[比柳]";
+				mes "问问你自己：";
+				mes "达成复仇之后，";
+				mes "你打算做什么？";
+				mes "当你任由怒火";
+				mes "灼烧自己时，你伤害最深的";
+				mes "其实是你自己……";
+				break;
+			}
+			next;
+			mes "[比柳]";
+			mes "现在，仔细听";
+			mes "这首歌的";
+			mes "歌词。我相信达鲁";
+			mes "已经唱给你听过了……";
+			next;
+			mes "[比柳]";
+			mes "''^4D4DFF太阳在偶数日闪耀。";
+			mes "月亮在奇数日生辉。";
+			mes "星辰每逢第五日";
+			mes "必定闪烁。^000000''";
+			next;
+			mes "[比柳]";
+			mes "''^4D4DFF沙漠是太阳之地，";
+			mes "其沙粒为太阳所亲吻。";
+			mes "沼泽是月亮之地，";
+			mes "其狼群为月亮所驱使。";
+			mes "深洞是星辰之地，其骑士为星辰所魅惑。^000000''";
+			next;
+			mes "[比柳]";
+			mes "根据这些";
+			mes "歌词，下列哪一项";
+			mes "最能让人";
+			mes "联想到";
+			mes "月光？";
+			next;
+			if (select("第2日，沼泽，黑暗骑士:第4日，沙漠，沙子:第10日，深洞，黑暗骑士:第5日，沼泽，狼") == 4)
+				set .@moon_point,.@moon_point+10;
+			mes "[比柳]";
+			mes "那个，我已经把";
+			mes "想问你的问题";
+			mes "都摆在你面前了。你必须领悟";
+			if (.@moon_point > 20) {
+				mes "月光与月影之间";
+				mes "相连的羁绊。";
+				mes "然后，你就能成为大师。";
+				next;
+				mes "[比流]";
+				mes "柔和的月光";
+				mes "照亮了最深的黑夜。";
+				mes "月影平衡着";
+				mes "太阳辉煌的光芒。";
+				mes "以智慧御力量，以冷静御";
+				mes "愤怒。好好思量吧……";
+				next;
+				mes "[比流]";
+				mes "我相信你很快就会";
+				mes "成为伟大的拳圣。";
+				mes "现在，是时候";
+				mes "进入星之房间了。来，";
+				mes "随我这边走……";
+				set STGL_Q,6;
+				close2;
+				warp "job_star",166,29;
+				end;
+			}
+			mes "要像月亮柔和的光辉般";
+			mes "耐心而温柔。";
+			next;
+			mes "[比流]";
+			mes "请你认真";
+			mes "思考这件事。真正的";
+			mes "拳圣能够在";
+			mes "一切境况中保持";
+			mes "内心的平静，无论";
+			mes "代价如何。";
+			next;
+			mes "[比流]";
+			mes "现在，我希望你";
+			mes "借此机会";
+			mes "试着体会";
+			mes "明月心境。静下心来，";
+			mes "平息思绪，";
+			mes "让浮躁的心安定下来……";
+			next;
+			mes "[比流]";
+			mes "现在，我先把";
+			mes "你送到裴扬。出去";
+			mes "领悟^4D4DFF耐心的";
+			mes "真正含义^000000。之后，当你";
+			mes "准备好，就去找武强";
+			mes "让他把你送到我这里。";
+			set STGL_Q,7;
+			close2;
+			warp "payon",164,58;
+			end;
+		}
+		else if (STGL_Q == 5) {
+			mes "[比流]";
+			mes "嗯。你必须先通过";
+			mes "太阳之房间的考验，";
+			mes "才能在这里";
+			mes "接受月亮之房间的考验。让我送";
+			mes "你去该去的地方……";
+			close2;
+			warp "job_star",34,12;
+			end;
+		}
+		else if (STGL_Q == 6) {
+			mes "[比流]";
+			mes "你怎么还在这里？";
+			mes "满月的光辉";
+			mes "令人安心，但你必须";
+			mes "继续前行，如果你想成为";
+			mes "拳圣。来吧，我会";
+			mes "带你前往星之房间。";
+			close2;
+			warp "job_star",166,29;
+			end;
+		}
+		else if (STGL_Q == 7) {
+			mes "[比流]";
+			mes "我要你带给我";
+			mes "证据，证明你明白";
+			mes "与月亮相伴的";
+			mes "耐心的本质。";
+			mes "若没有这份心境，你无法";
+			mes "成为拳圣……";
+			next;
+			mes "[比流]";
+			mes "我要你拿出的证明";
+			mes "必须具体而";
+			mes "无可辩驳。请想一想";
+			mes "那会是什么。现在，";
+			mes "我送你回城里……";
+			close2;
+			warp "payon",164,58;
+			end;
+		}
+		else if (STGL_Q == 8) {
+			mes "[比流]";
+			mes "啊，你终于";
+			mes "回来了。从你的";
+			mes "举止之间，我能看出";
+			mes "你的决心";
+			mes "已经更加坚定。很好。";
+			mes "希望你如今已明白何为耐心……";
+			next;
+			mes "[比流]";
+			mes "耐心与决心";
+			mes "是活得无怨无悔";
+			mes "所必需的。你必须相信自己，";
+			mes "同时也要";
+			mes "体贴并理解";
+			mes "他人，与宇宙和谐共处。";
+			next;
+			mes "[比流]";
+			mes "学会通过精神修行";
+			mes "掌控自己的";
+			mes "力量。学会拥有";
+			mes "自豪而不傲慢。你已";
+			mes "准备好进入星之房间，所以";
+			mes "我现在就送你去找琪熙。";
+			set STGL_Q,6;
+			close2;
+			warp "job_star",166,29;
+			end;
+		}
+		else if (STGL_Q > 8 && STGL_Q < 12) {
+			mes "[比流]";
+			mes "你现在应该";
+			mes "正在星之房间";
+			mes "接受琪熙的指导。";
+			mes "来，让我带你";
+			mes "过去。希望不久后能看到你";
+			mes "成为拳圣……";
+			close2;
+			warp "job_star",166,29;
+			end;
+		}
+		mes "[比流]";
+		mes "你为什么还在这里？";
+		mes "你有更重要的事";
+		mes "要做，所以";
+		mes "让我送你回城里吧……";
+		close2;
+		warp "payon",164,58;
+		end;
+	}
+	mes "[比流]";
+	mes "你在这里时，尽量不要";
+	mes "打扰跆拳少年和少女";
+	mes "完成他们的";
+	mes "转职测试。";
+	mes "啊，还有，等你想";
+	mes "回裴扬时告诉我。";
+	next;
+	if (select("返回裴扬:取消") == 1) {
+		mes "[比流]";
+		mes "路上小心！";
+		close2;
+		warp "payon",164,58;
+		end;
+	}
+	mes "[比流]";
+	mes "......";
+	mes ".........";
+	close;
+}
+
+job_star,161,33,0	script	琪熙#job_star	77,{
+	if (Class == Job_Taekwon) {
+		if (STGL_Q == 6) {
+			mes "[琪熙]";
+			mes "你不觉得星星";
+			mes "很美吗？它们就像";
+			mes "美丽少女的泪珠，";
+			mes "洒在";
+			mes "漆黑的夜空之中……";
+			set STGL_Q,9;
+			close;
+		}
+		else if (STGL_Q == 9) {
+			if (rand(1,5) == 3) {
+				mes "[琪熙]";
+				mes "我给你的";
+				mes "考验很简单。只要";
+				mes "给我带来这片大地上";
+				mes "来自星星的";
+				mes "物品。给我带来一块星之碎片和星之沙……";
+				set STGL_Q,10;
+				changequest 7009,7010;
+				close;
+			}
+			mes "[琪熙]";
+			mes "......";
+			mes ".........";
+			next;
+			mes "^3355FF琪熙看得入了迷，";
+			mes "凝望着天空，仿佛在数着每一颗";
+			mes "天上闪耀的星星。^000000";
+			close;
+		}
+		else if (STGL_Q == 10) {
+			if (countitem(1000) > 0 && countitem(1001) > 0) {
+				mes "[琪熙]";
+				mes "哦？你带来的正是";
+				mes "我要你带的东西。";
+				mes "你知道星星的";
+				mes "精气被用来强化";
+				mes "所有冒险者在战斗中使用";
+				mes "的防具和武器吗？";
+				next;
+				mes "[琪熙]";
+				mes "星星总是与";
+				mes "愿望、梦想、";
+				mes "希望、魔法和浪漫相连。";
+				mes "有时，星星也会";
+				mes "令人感伤，但那是一种";
+				mes "很甜美的感伤……";
+				delitem 1000,1; //Star_Crumb
+				delitem 1001,1; //Sparkling_Dust
+				set STGL_Q,11;
+				close;
+			}
+			mes "[琪熙]";
+			mes "星之碎片……";
+			mes "星之沙。如果你";
+			mes "没有把它们带来，在这里是找不到的。你";
+			mes "得出去到外面找到它们，再拿来给我。";
+			close2;
+			warp "payon",164,58;
+			end;
+		}
+		else if (STGL_Q == 11) {
+			mes "[琪熙]";
+			mes "你有没有想过";
+			mes "从星星那里";
+			mes "感受感伤？也许这首歌";
+			mes "能帮你更好地";
+			mes "理解，虽然我知道";
+			mes "你已经听过了……";
+			next;
+			mes "[琪熙]";
+			mes "''^4D4DFF太阳照耀双数之日。";
+			mes "月亮辉映单数之日。";
+			mes "星星每逢第五日";
+			mes "必定闪耀，从无例外。^000000''";
+			next;
+			mes "[琪熙]";
+			mes "''^4D4DFF沙漠是太阳之地，";
+			mes "沙粒受太阳亲吻。";
+			mes "沼泽是月亮之地，";
+			mes "狼群受月亮驱使。";
+			mes "深洞是星辰之地，骑士们受星星眷顾。^000000''";
+			next;
+			mes "[琪熙]";
+			mes "Now...";
+			mes "以下哪一组";
+			mes "在星光下";
+			mes "最为明亮？";
+			next;
+			if (select("第5日，深洞，沙:第10日，沙漠，沙:第25日，深洞，骑士:第10日，沙漠，骑士") == 3) {
+				mes "[琪熙]";
+				mes "没错。第25日";
+				mes "是5的倍数，";
+				mes "与驻守深洞的";
+				mes "骑士这一组合";
+				mes "在星光下最为明亮。";
+				next;
+				mes "[琪熙]";
+				mes "如果你能听懂";
+				mes "这首歌的歌词，";
+				mes "就应该明白";
+				mes "身为拳圣的";
+				mes "真谛。记住，光芒";
+				mes "有深浅之分……";
+				next;
+				mes "[琪熙]";
+				mes "太阳的荣耀、";
+				mes "柔和月光，以及";
+				mes "星星忧郁的";
+				mes "闪烁，彼此";
+				mes "各不相同。请在这个房间里尽情欣赏星光吧。";
+				next;
+				mes "[琪熙]";
+				mes "当你准备好时，";
+				mes "请再去";
+				mes "找武强。我会";
+				mes "告诉他，你";
+				mes "已完成我们的考验。";
+				set STGL_Q,12;
+				changequest 7010,7011;
+				close;
+			}
+			mes "[琪熙]";
+			mes "Hmm...";
+			mes "你必须更多地";
+			mes "了解星星的";
+			mes "本质。你必须理解";
+			mes "这宇宙，如果你要";
+			mes "成为拳圣。";
+			next;
+			mes "[琪熙]";
+			mes "如果你能听懂";
+			mes "这首歌的歌词，";
+			mes "就应该明白";
+			mes "身为拳圣的";
+			mes "真谛。记住，光芒";
+			mes "有深浅之分……";
+			next;
+			mes "[琪熙]";
+			mes "太阳的荣耀、";
+			mes "柔和月光，以及";
+			mes "星星忧郁的";
+			mes "闪烁，彼此";
+			mes "各不相同。请在这个房间里尽情欣赏星光吧。";
+			next;
+			mes "[琪熙]";
+			mes "当你准备好时，";
+			mes "请再去";
+			mes "找武强。我会";
+			mes "告诉他，你";
+			mes "已完成我们的考验。";
+			set STGL_Q,12;
+			changequest 7010,7011;
+			close;
+		}
+		else if (STGL_Q == 12) {
+			mes "[琪熙]";
+			mes "你想要";
+			mes "离开星之房间吗？";
+			next;
+			if (select("是:否") == 1) {
+				mes "[琪熙]";
+				mes "那么，我就带你";
+				mes "前往最近的城镇";
+				mes "裴扬吧。暂且告辞……";
+				close2;
+				warp "payon",164,58;
+				end;
+			}
+			mes "[琪熙]";
+			mes "请慢慢";
+			mes "欣赏这房间里的";
+			mes "星光吧……";
+			close;
+		}
+		mes "[琪熙]";
+		mes "星星确实";
+		mes "很美，不是";
+		mes "吗？你现在";
+		mes "想回裴扬吗？";
+		next;
+		if (select("是:否") == 1) {
+			mes "[琪熙]";
+			mes "我明白了。";
+			mes "让我带你";
+			mes "回裴扬。";
+			close2;
+			warp "payon",164,58;
+			end;
+		}
+		mes "[琪熙]";
+		mes "请慢慢";
+		mes "欣赏这房间里的";
+		mes "星光吧……";
+		close;
+	}
+	mes "[琪熙]";
+	mes "星星确实";
+	mes "很美，不是";
+	mes "吗？你现在";
+	mes "想回裴扬吗？";
+	next;
+	if (select("是:否") == 1) {
+		mes "[琪熙]";
+		mes "我明白了。";
+		mes "让我带你";
+		mes "回裴扬。";
+		close2;
+		warp "payon",164,58;
+		end;
+	}
+	mes "[琪熙]";
+	mes "请慢慢";
+	mes "欣赏这房间里的";
+	mes "星光吧……";
+	close;
+}
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= A temp Star Gladiator Job Changer based on the kRO quest.
+//= Quest info from RagnaInfo.
+//= Sprites from kRO screenshots, bar two which I just had to guess at.
+//= 1.0 Optimized, updated [Lupus]
+//============================================================ 

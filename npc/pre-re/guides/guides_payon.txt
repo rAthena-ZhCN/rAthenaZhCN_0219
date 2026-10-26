@@ -1,0 +1,296 @@
+//===== rAthena Script =======================================
+//= Payon Guides
+//===== By: ==================================================
+//= kobra_k88; L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.6
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official COnversion]
+//= Guides for the City of Payon
+//===== Additional Comments: =================================
+//= 1.1 Now using duplicate command.New Payon Locations [Darkchild]
+//= 1.2 Optimized, updated common guide names [Lupus]
+//= 1.3 Updated the guide according to how it is on iRO, thanks [MasterOfMuppets]
+//=     to Muad_Dib
+//= 1.3a Fixed some problems with duplicated text, thanks to muad_dib [MasterOfMuppets]
+//= 1.4 Fitted the many lines into 1 or 2, and corrected some typos [erKURITA]
+//= 1.4a Tixed Archer Village Guide [Lupus] 
+//= 1.5 Removed Duplicates [Silent]
+//= 1.6 Rescripted to official 10.3 standards. [L0ne_W0lf]
+//============================================================
+
+payon,162,67,4	script	向导#pay	708,{
+	cutin "pay_soldier",2;
+	mes "[裴扬向导]";
+	mes "欢迎来到";
+	mes "山岳之都裴扬。";
+	mes "如果您不熟悉这一带，";
+	mes "我可以帮您找到";
+	mes "您想找的地方。";
+	set .@loop1,1;
+	while (.@loop1) {
+		next;
+		switch(select("城市向导:清除小地图标记:公告:取消")) {
+		case 1:
+			mes "[裴扬向导]";
+			mes "请从下列";
+			mes "菜单中选择";
+			mes "一个地点。";
+			if (.@compass_check == 0) {
+				mes "要我把地点";
+				mes "标记在您的";
+				mes "小地图上吗？";
+				next;
+				if (select("是。:否。") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				switch(select("^FF0000弓箭手公会^000000:武器店:道具店:酒馆:中央宫殿:女皇:宫殿别馆:皇家厨房:铁匠铺:取消")) {
+				case 1:
+					mes "[裴扬向导]";
+					mes "弓箭手公会负责";
+					mes "弓箭手职业的";
+					mes "转职。您需要前往";
+					mes "位于裴扬东北方的";
+					mes "弓箭手村。";
+					if (.@compass_check)
+						viewpoint 1,227,328,2,0xFF0000;
+					break;
+				case 2:
+					mes "[裴扬向导]";
+					mes "武器店";
+					mes "位于裴扬城的";
+					mes "西北角，";
+					mes "就在那一带。";
+					if (.@compass_check)
+						viewpoint 1,139,159,3,0xFF00FF;
+					break;
+				case 3:
+					mes "[裴扬向导]";
+					mes "道具店";
+					mes "位于裴扬城的";
+					mes "西北角";
+					mes "附近。";
+					if (.@compass_check)
+						viewpoint 1,144,85,4,0xFF00FF;
+					break;
+				case 4:
+					mes "[裴扬向导]";
+					mes "酒馆位于";
+					mes "裴扬城的东北部，";
+					mes "那里是";
+					mes "漫长狩猎之后";
+					mes "最好的放松去处。";
+					if (.@compass_check)
+						viewpoint 1,220,117,5,0xFF00FF;
+					break;
+				case 5:
+					mes "[裴扬向导]";
+					mes "中央宫殿";
+					mes "位于裴扬城";
+					mes "北侧。";
+					if (.@compass_check)
+						viewpoint 1,155,245,6,0x00FF00;
+					break;
+				case 6:
+					mes "[裴扬向导]";
+					mes "女皇";
+					mes "就在裴扬城";
+					mes "西北方。";
+					if (.@compass_check)
+						viewpoint 1,107,324,7,0x00FF00;
+					break;
+				case 7:
+					mes "[裴扬向导]";
+					mes "宫殿别馆";
+					mes "位于裴扬城的";
+					mes "西部。";
+					if (.@compass_check)
+						viewpoint 1,130,204,8,0x00FF00;
+					break;
+				case 8:
+					mes "[裴扬向导]";
+					mes "皇家厨房";
+					mes "位于裴扬城";
+					mes "北端附近。";
+					if (.@compass_check)
+						viewpoint 1,154,325,9,0x00FF00;
+					break;
+				case 9:
+					mes "[裴扬向导]";
+					mes "铁匠铺就在";
+					mes "裴扬城";
+					mes "中心附近。";
+					if (.@compass_check)
+						viewpoint 1,126,169,10,0xFFFF00;
+					break;
+				case 10:
+					mes "[裴扬向导]";
+					mes "如果您不再需要";
+					mes "小地图上的标记，";
+					mes "请对我说";
+					mes "“清除小地图标记”，";
+					mes "就能清除它们。";
+					set .@loop2,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,237,41,2,0x00FF00;
+			viewpoint 2,237,41,3,0x0000FF;
+			viewpoint 2,46,345,4,0xFF00FF;
+			viewpoint 2,175,220,5,0xFF0000;
+			viewpoint 2,175,220,6,0xFF0000;
+			viewpoint 2,175,220,7,0xFF0000;
+			viewpoint 2,237,41,8,0x0000FF;
+			viewpoint 2,46,345,9,0x00FF00;
+			viewpoint 2,175,220,10,0xFF0000;
+			set .@compass_check,0;
+			break;
+		case 3:
+			mes "[裴扬向导]";
+			mes "魔法与科技的";
+			mes "进步，让我们";
+			mes "得以更新信息";
+			mes "系统，最多可在";
+			mes "小地图上标记";
+			mes "地点，方便导航。";
+			next;
+			mes "[裴扬向导]";
+			mes "您的小地图位于";
+			mes "屏幕的右上角。";
+			mes "如果看不到，";
+			mes "请按 Ctrl + Tab";
+			mes "键，或点击基本状态窗口中的“地图”按钮。";
+			next;
+			mes "[裴扬向导]";
+			mes "在小地图上，";
+			mes "点击“+”和“-”";
+			mes "符号，即可放大";
+			mes "或缩小地图。我们";
+			mes "希望您在这里";
+			mes "旅途愉快。";
+			break;
+		case 4:
+			mes "[裴扬向导]";
+			mes "祝您旅途";
+			mes "平安，";
+			mes "勇敢的冒险者。";
+			close2;
+			set .@loop1,0;
+			break;
+		}
+	}
+	cutin "",255;
+	end;
+}
+
+pay_arche,85,30,2	script	向导#2pay	708,{
+	cutin "pay_soldier",2;
+	mes "[裴扬向导]";
+	mes "欢迎来到";
+	mes "山岳之都裴扬。";
+	mes "如果您不熟悉这一带，";
+	mes "我可以帮您找到";
+	mes "您想找的地方。";
+	set .@loop1,1;
+	while (.@loop1) {
+		next;
+		switch(select("城市向导:清除小地图标记:公告:取消")) {
+		case 1:
+			mes "[裴扬向导]";
+			mes "请选择一个菜单。";
+			if (.@compass_check == 0) {
+				mes "您想在小地图上留下标记吗？";
+				next;
+				if (select("是。:否。") == 1) set .@compass_check,1;
+			}
+			set .@loop2,1;
+			while(.@loop2) {
+				if (.@wait_button_chk == 0) set .@wait_button_chk,1;
+				else next;
+				switch(select("^FF0000弓箭手公会^000000:道具店:裴扬洞穴:取消")) {
+				case 1:
+					mes "[裴扬向导]";
+					mes "弓箭手公会";
+					mes "位于东北方的";
+					mes "弓箭手村，";
+					mes "负责转职为";
+					mes "弓箭手职业。";
+					if (.@compass_check)
+						viewpoint 1,144,164,0,0xFFFF00;
+					break;
+				case 2:
+					mes "[裴扬向导]";
+					mes "您可以在";
+					mes "弓箭手村的";
+					mes "东北角";
+					mes "找到道具店。";
+					if (.@compass_check)
+						viewpoint 1,71,156,1,0xFFFF00;
+					break;
+				case 3:
+					mes "[裴扬向导]";
+					mes "裴扬洞穴的";
+					mes "入口";
+					mes "位于村庄";
+					mes "西端。";
+					if (.@compass_check)
+						viewpoint 1,34,132,2,0xFFFFFF;
+					break;
+				case 4:
+					mes "[裴扬向导]";
+					mes "如果想清除小地图上的标记，请选择菜单“清除小地图上的所有标记”。";
+					set .@loop2,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			viewpoint 2,237,41,0,0xFF00FF;
+			viewpoint 2,237,41,1,0xFF0000;
+			viewpoint 2,46,345,2,0xFF00FF;
+			set .@compass_check,0;
+			break;
+		case 3:
+			mes "[裴扬向导]";
+			mes "魔法与科技的";
+			mes "进步，让我们";
+			mes "得以更新信息";
+			mes "系统，最多可在";
+			mes "小地图上标记";
+			mes "地点，方便导航。";
+			next;
+			mes "[裴扬向导]";
+			mes "您的小地图位于";
+			mes "屏幕的右上角。";
+			mes "如果看不到，";
+			mes "请按 Ctrl + Tab";
+			mes "键，或点击基本状态窗口中的“地图”按钮。";
+			next;
+			mes "[裴扬向导]";
+			mes "在小地图上，";
+			mes "点击“+”和“-”";
+			mes "符号，即可放大";
+			mes "或缩小地图。我们";
+			mes "希望您在这里";
+			mes "旅途愉快。";
+			break;
+		case 4:
+			mes "[裴扬向导]";
+			mes "祝您旅途";
+			mes "平安，";
+			mes "勇敢的冒险者。";
+			close2;
+			set .@loop1,0;
+			break;
+		}
+	}
+	cutin "",255;
+	end;
+}

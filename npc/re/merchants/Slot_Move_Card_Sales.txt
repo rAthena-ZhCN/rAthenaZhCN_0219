@@ -1,0 +1,32 @@
+//===== rAthena Script ======================================= 
+//= Slot Move Card Sales
+//===== By: ================================================== 
+//= Pokye
+//===== Current Version: ===================================== 
+//= 1.0
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Character Position Change Coupon seller.
+//===== Additional Comments: ================================= 
+//= 1.0 Special thanks for Balfear and Everade
+//============================================================ 
+
+prt_in,211,173,3	script	插槽移动卡销售#slo	4_F_01,{
+	mes "[店员]";
+	mes "Howdy.";
+	mes "我在出售" + mesitemlink( 12786 ) + ".";
+	mes "使用这张卡片可以^4d4dff改变角色的插槽位置^000000。";
+	next;
+	mes "[店员]";
+	mes "我每周限量出售，所以如果您什么都没看到，";
+	mes "就说明所有物品都已售罄，请下次再来。";
+	close2;
+	callshop "change_slot#slo";
+	end;
+
+OnMon0000:
+	npcshopupdate "change_slot#slo",12786,0,9999;
+	end;
+}
+-	marketshop	change_slot#slo	FAKE_NPC,12786:100000:9999

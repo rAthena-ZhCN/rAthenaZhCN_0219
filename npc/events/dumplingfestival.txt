@@ -1,0 +1,106 @@
+//===== rAthena Script =======================================
+//= Imitation of Dumpling Festival
+//===== By ===================================================
+//= Massdriller
+//===== Version ==============================================
+//= 1.01
+//===== Compatible With ======================================
+//= rAthena Project; 0.52+
+//===== Description ==========================================
+//= A complete redering of the Dumpling Festival.
+//===== Comments =============================================
+//= Ver 1.0- Duplicate of MRO's Dumpling Event
+//= 1.01 fixed bugs [Lupus]
+//============================================================
+  
+payon,93,81,4	script	驱魔师法海	834,{
+
+	mes "[驱魔师法海]";
+	mes "年轻的勇士，你好，我是驱魔师法海。";
+	mes "我追踪那行踪诡秘的白素贞已有一段时日了。";
+	next;
+	mes "[驱魔师法海]";
+	mes "我觉得是时候让另一位勇士尝试完成";
+	mes "我的委托了。我有些物品，可以助你完成我的委托。";
+	next;
+	menu "我要购买",-, "不用了",M_FIN;
+  
+	mes "[驱魔师法海]";
+	mes "我有2件物品，或许对你有用。";
+	next;
+	menu "雄黄酒",-, "驱魔草",M_HERB;
+  
+	mes "[驱魔师法海]";
+	mes "你需要多少？";
+	mes "一次最多只能购买5个。";
+	mes "每个售价20000z。";
+	mes "（输入0取消）";
+	next;
+	input @input;
+	if(@input==0) close;
+	if(@input>5) goto L_SORRY;
+	if(Zeny< @input*20000) goto L_NOZENY;
+	set Zeny,Zeny-20000*@input;
+	getitem 682,@input;
+	mes "[驱魔师法海]";
+	mes "给你，希望你能完成我的委托。";
+	close;
+  
+L_SORRY:
+	mes "[驱魔师法海]";
+	mes "不可吝啬，诚实才是侍奉神之道。";
+	close;
+  
+M_FIN:
+	mes "[驱魔师法海]";
+	mes "彻底驱除邪恶之路漫长，请以神之道助我一臂之力。";
+	close;
+  
+M_HERB:
+	mes "[驱魔师法海]";
+	mes "你需要多少？";
+	mes "一次最多只能购买5个。";
+	mes "每个售价10000z。";
+	mes "（输入0取消）";
+	next;
+	input @input;
+	if(@input==0) close;
+	if(@input>5) goto L_SORRY;
+	if(Zeny< @input*10000) goto L_NOZENY;
+	set Zeny,Zeny-10000*@input;
+	getitem 683,@input;
+	mes "[驱魔师法海]";
+	mes "给你，希望你能完成我的委托。";
+	close;
+
+L_NOZENY:
+	mes "[驱魔师法海]";
+	mes "金钱并不能给每个人带来快乐，但我们需要它来维持神庙和我的生计。请你试着去击杀一些魔物，取回它们的掉落物吧。";
+	close;
+}
+  
+// Monsters
+//============================================================
+gef_fild00,0,0	monster	肉粽怪	1520,20,60000,66000
+gef_fild07,0,0	monster	肉粽怪	1520,20,60000,66000
+gef_fild04,0,0	monster	肉粽怪	1520,20,60000,66000
+gef_fild00,0,0	monster	肉粽怪	1520,20,60000,66000
+prt_fild06,0,0	monster	肉粽怪	1520,20,60000,66000
+prt_fild01,0,0	monster	肉粽怪	1520,20,60000,66000
+prt_fild05,0,0	monster	肉粽怪	1520,20,60000,66000
+prt_fild08,0,0	monster	肉粽怪	1520,20,60000,66000
+pay_fild04,0,0	monster	肉粽怪	1520,20,60000,66000
+moc_fild02,0,0	monster	肉粽怪	1520,20,60000,66000
+pay_fild01,0,0	monster	肉粽怪	1520,20,60000,66000
+pay_fild07,0,0	monster	肉粽怪	1520,20,60000,66000
+moc_fild03,0,0	monster	肉粽怪	1520,20,60000,66000
+pay_fild06,0,0	monster	肉粽怪	1520,20,60000,66000
+pay_fild05,0,0	monster	肉粽怪	1520,20,60000,66000
+pay_fild02,0,0	monster	肉粽怪	1520,20,60000,66000
+pay_fild09,0,0	monster	肉粽怪	1520,20,60000,66000
+
+moc_fild03,0,0	monster	白素贞	1518,1,60000,66000
+
+moc_fild03,0,0	monster	小青	1519,1,60000,66000
+moc_fild13,0,0	monster	小青	1519,1,60000,66000
+pay_fild01,0,0	monster	小青	1519,1,60000,66000

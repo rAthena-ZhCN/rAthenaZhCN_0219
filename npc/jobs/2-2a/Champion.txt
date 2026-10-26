@@ -1,0 +1,87 @@
+//===== rAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= 1.1 Made all into functions, additional checks, etc. [Lupus]
+//= 1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,42,3	script	武术宗师#Valkyrie	52,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[武术宗师]";
+			mes "Congratulations.";
+			mes "荣耀归于战士们！";
+			close;
+		}
+		mes "[武术宗师]";
+		mes "Skill.";
+		mes "Speed.";
+		mes "Strength.";
+		mes "Agility.";
+		next;
+		mes "[武术宗师]";
+		mes "武术宗师能够";
+		mes "从这一切中";
+		mes "受益。但人一生";
+		mes "所能掌握的";
+		mes "终究有限……";
+		close;
+	}
+	else if (ADVJOB == Job_Champion && Class == Job_Acolyte_High && JobLevel > 39) {
+		mes "[武术宗师]";
+		mes "时候到了。";
+		mes "是伟大英雄";
+		mes "挺身对抗";
+		mes "肆虐米德加尔特的";
+		mes "邪恶势力之时！";
+		next;
+		mes "[武术宗师]";
+		mes "你想";
+		mes "成为武术宗师吗？";
+		next;
+		if (select("否:是") == 1) {
+			mes "[武术宗师]";
+			mes "等你准备好，";
+			mes "随时回来。";
+			mes "荣耀归于战士们！";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[武术宗师]";
+			mes "你仍可以学习更多技能。请用完";
+			mes "所有剩余的技能点，再来找我。";
+			close;
+		}
+		jobchange Job_Champion;
+		set ADVJOB,0;
+		mes "[武术宗师]";
+		mes "恭喜！";
+		mes "作为武术宗师而活，";
+		mes "以你的双拳";
+		mes "之力为世界";
+		mes "带来光明。";
+		close;
+	}
+	mes "[武术宗师]";
+	mes "欢迎";
+	mes "前往巴哈拉宫，";
+	mes "荣誉殿堂。";
+	next;
+	mes "[武术宗师]";
+	mes "请在这里";
+	mes "放松一下";
+	mes "不必拘束。";
+	mes "荣耀归于战士们！";
+	close;
+}

@@ -1,0 +1,74 @@
+//===== rAthena Script =======================================
+//= Mergician
+//===== By: ==================================================
+//= Euphy
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Merges items taking up multiple slots in a player's
+//= inventory.
+//===== Additional Comments: =================================
+//= 1.0 First version, currently useless/disabled.
+//= 1.1 Implemented the 'mergeitem' script command. [Cydh]
+//= 1.2 Updated and moved to Cash Mall [Lemongrass]
+//============================================================
+
+//prontera,146,95,3	script	Mergician#pron	1_M_WIZARD,{
+itemmall,35,75,3	script	融合法师#mall	1_M_WIZARD,{
+	if (checkweight(1301,1) == 0) {
+		mes "- 等一下！！ -";
+		mes "- 你携带的物品太多了 -";
+		mes "- 或负重过高，无法继续。 -";
+		mes "- 请整理好 -";
+		mes "- 背包后再来。 -";
+		close;
+	}
+	mes "[融合法师]";
+	mes "你相信融合之神的奇迹吗？？若相信，就跟着我大声念出咒语！！！";
+	mes "融合融合，融——合！！！";
+	next;
+	switch(select("融——合！！！！:什么是融合的奇迹？:放弃……")) {
+	case 2:
+		mes "[融合法师]";
+		mes "世间存在着一种秩序，它支配着世界，让世界正常运转。";
+		next;
+		mes "[融合法师]";
+		mes "但出现了一个恶劣的因素，彻底破坏了这条法则！！";
+		next;
+		mes "[融合法师]";
+		mes "就是那些明明由相同材料构成，却被分隔开的东西！！";
+		next;
+		mes "[融合法师]";
+		mes "你难道从未经历过这种糟糕的事吗？？";
+		mes "我明明^3131FF有同样的药水，它却在你的背包里出现了不止两次！！^000000 太令人不快了！！！";
+		next;
+		mes "[融合法师]";
+		mes "信仰融合教义吧。那就是真理。";
+		mes "这样我就能帮你获得幸福与满足。";
+		close;
+	case 1:
+		mes "[融合法师]";
+		mes "这是向伟大的融合之神祈祷的完整神圣仪式！我只是暂时借用这份力量！！";
+		next;
+		mes "[融合法师]";
+		mes "如果你渴望得到融合的祝福，就谦卑地大声喊出来！融合融合，融——合！！！";
+		next;
+		switch(select("融——合！:别听他的。")) {
+		case 1:
+			mergeitem;
+			mes "[融合法师]";
+			mes "融合之神刚刚听到了你的愿望，并让它实现了！";
+			mes "打开你的背包，见证奇迹吧！";
+			close;
+		case 2:
+			mes "[融合法师]";
+			mes "你这家伙！！！你把整个节奏都打乱了！你怎么就不能跟上我的节奏呢？！笨蛋！";
+			close;
+		}
+	case 3:
+		close;
+	}
+}

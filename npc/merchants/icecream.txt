@@ -1,0 +1,88 @@
+//===== rAthena Script =======================================
+//= Ice Cream Maker
+//===== By: ==================================================
+//= KOOK SWU, Kisuka
+//===== Current Version: =====================================
+//= 1.5
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= A man makes you ice-cream
+//===== Additional Comments: =================================
+//= 1.1 Optimized, changed overlapping coords in Alberta [Lupus]
+//= 1.2 According to the patch, IceCream seller has been removed from Morocc [Lupus]
+//= 1.3 No more label menu and updated to match AEGIS script. [Kisuka]
+//= 1.4 Duplicates now spawn from floating NPCs. [L0ne_W0lf]
+//= 1.5 Fixed small checkweight issue. [Kisuka]
+//============================================================
+
+-	script	Ice Cream Maker::IceCreamer	-1,{
+	mes "[冰淇淋小贩]";
+	mes "用姜饼城的雪做成的新鲜冰淇淋！";
+	mes "趁现在享用吧，很快就要停售了！";
+	mes "^3355FF100 Zeny^000000 冰淇淋，";
+	mes "冰淇淋！";
+	next;
+	if(select("给我冰淇淋！:取消交易") == 2) {
+		mes "你确定不要吗？";
+		mes "我卖不了多久了，";
+		mes "一旦卖完，";
+		mes "就再也没有了！！！";
+		close;
+	}
+	mes "[冰淇淋小贩]";
+	mes "用姜饼城的雪做成的新鲜冰淇淋！";
+	mes "大家都想要我们美味的冰淇淋，";
+	mes "但我们的量有限，";
+	mes "所以一次只能买 5 个！！";
+	next;
+	while(true) {
+		input .@input;
+		if(.@input < 1) {
+			mes "[冰淇淋小贩]";
+			mes "如果你不想买，";
+			mes "能不能请让下一位顾客";
+			mes "购买？";
+			mes "谢谢。";
+			close;
+		}
+		if(.@input > 5) {
+			mes "[冰淇淋小贩]";
+			mes "好痛";
+			mes "你期望太高了。";
+			mes "亲爱的顾客，";
+			mes "如果吃超过 5 个冰淇淋，";
+			mes "今晚你可能会";
+			mes "频繁跑厕所。";
+			next;
+			continue;
+		}
+		break;
+	}
+	if(Zeny<.@input*100) {
+		mes "[冰淇淋小贩]";
+		mes "亲爱的顾客，您的钱包似乎有点轻。";
+		mes "每个冰淇淋的价格是 ^3355FF100 Zeny^000000。";
+		close;
+	}
+	if(checkweight(536,.@input) == 0) {
+		mes "[冰淇淋小贩]";
+		mes "亲爱的顾客，您看起来带了不少东西。";
+		mes "冰淇淋是没问题，";
+		mes "但您得考虑自己的体重";
+		mes "再决定购买。";
+		close;
+	}
+	set Zeny,Zeny-100*.@input;
+	getitem 536,.@input;	// Ice_Cream
+	close;
+}
+
+// Alberta
+alberta,120,45,2	duplicate(IceCreamer)	Ice Cream Maker#1	85
+
+// Morocc Field
+moc_fild16,88,304,4	duplicate(IceCreamer)	Ice Cream Maker#2	85
+
+// Morocc
+//morocc,160,144,4	duplicate(IceCreamer)	Ice Cream Maker#3	85

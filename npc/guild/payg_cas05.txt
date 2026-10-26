@@ -1,0 +1,134 @@
+//===== rAthena Script =======================================
+//= War of Emperium (Payon) - Bamboo Grove Hill
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.3
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= NPCs that relate to Payon Guild Castle 5
+//===== Additional Comments: =================================
+//= 1.0 First Version. No longer uses functions. [L0ne_W0lf]
+//= 1.1 Corrected flag-in spawn point. [L0ne_W0lf]
+//= 1.2 Removed dialog from interior flags. [L0ne_W0lf]
+//=     Fixed position of Guild dungeon switch.
+//= 1.3 Partially rewrote Script. [Masao]
+//============================================================
+
+// Guild Flags (Outside Castle)
+//============================================================
+-	script	Bamboo Grove Hill#1::OutsideFlagsPA5	722,{
+
+	set .@GID, GetCastleData("payg_cas05",1);
+
+	if (.@GID == 0) {
+		mes "[ 神圣卢恩-米德加尔特王国敕令 ]";
+		mes " ";
+		mes "1. 谨遵神圣卢恩-米德加尔特王国的敕令，";
+		mes "本王国宣告";
+		mes "此城并无正式城主。";
+		mes " ";
+		mes "2. 凡能";
+		mes "历经一切试炼";
+		mes "并摧毁华丽金属者，";
+		mes "国王将赐予其";
+		mes "此城的所有权。";
+		close;
+	}
+	if (getcharid(2) == .@GID) {
+		mes "[ 回响之声 ]";
+		mes "勇敢的人们……";
+		mes "你愿意回到属于你的荣耀之地吗？";
+		next;
+		if(select("返回公会城堡:退出") == 1) {
+			close2;
+			if (getcharid(2) == GetCastleData("payg_cas05",1)) {
+					warp "payg_cas05",243,27;
+				end;
+			}
+			end;
+		}
+		close;
+	}
+	mes "[ 神圣卢恩-米德加尔特王国敕令 ]";
+	mes " ";
+	mes "1. 谨遵神圣卢恩-米德加尔特王国的敕令，";
+	mes "本王国认可此地属于";
+	mes "^ff0000"+GetGuildName(.@GID)+"^000000公会的私有领地。";
+	mes " ";
+	mes "2. ^ff0000"+GetGuildName(.@GID)+"^000000公会的会长是";
+	mes "^FF0000"+GetGuildMaster(.@GID)+"^000000";
+	mes "若有任何人对此持有异议，";
+	mes "便请手持钢刃，证明你的力量与荣誉。";
+	close;
+
+OnRecvCastlePy05:
+	FlagEmblem GetCastleData("payg_cas05",1);
+	end;
+}
+
+pay_gld,208,268,4	duplicate(OutsideFlagsPA5)	Bamboo Grove Hill#1-2	722
+pay_gld,199,268,4	duplicate(OutsideFlagsPA5)	Bamboo Grove Hill#2	722
+pay_gld,190,277,3	duplicate(OutsideFlagsPA5)	Bamboo Grove Hill#3	722
+pay_gld,187,294,2	duplicate(OutsideFlagsPA5)	Bamboo Grove Hill#4	722
+
+// Guild Flags (Inside Castle)
+//============================================================
+-	script	Bamboo Grove Hill#5::InsideFlagsPA5	722,{
+	end;
+
+OnRecvCastlePy05:
+	FlagEmblem GetCastleData("payg_cas05",1);
+	end;
+}
+
+payg_cas05,32,249,4	duplicate(InsideFlagsPA5)	Bamboo Grove Hill#5-2	722
+payg_cas05,24,249,4	duplicate(InsideFlagsPA5)	Bamboo Grove Hill#6	722
+payg_cas05,62,271,0	duplicate(InsideFlagsPA5)	Bamboo Grove Hill#7	722
+payg_cas05,57,271,0	duplicate(InsideFlagsPA5)	Bamboo Grove Hill#8	722
+payg_cas05,55,252,2	duplicate(InsideFlagsPA5)	Bamboo Grove Hill#9	722
+payg_cas05,55,260,2	duplicate(InsideFlagsPA5)	Bamboo Grove Hill#10	722
+
+// Guild Flag (Town)
+//============================================================
+payon,123,322,4	duplicate(InsideFlagsPA5)	Bamboo Grove Hill#11	722
+payon,166,161,3	duplicate(InsideFlagsPA5)	Bamboo Grove Hill#12	722
+
+// 卡普拉职员
+//============================================================
+payg_cas05,276,227,1	duplicate(guildkafra)	卡普拉职员#payg_cas05	117
+
+// Steward
+//============================================================
+payg_cas05,277,249,3	duplicate(cm)	Nahzarf#payg_cas05	55
+
+// Treasure Room Exit
+//============================================================
+payg_cas05,161,136,0	script	#lever_PA05	111,{
+	mes " ";
+	mes "这里有一个小拉杆。要拉动它吗？";
+	next;
+	if(select("拉动:不拉动") == 1) {
+		close2;
+		warp "payg_cas05",277,250;
+		end;
+	}
+	close;
+}
+
+// Guild Dungeon Switch
+//============================================================
+payg_cas05,249,15,0	duplicate(gdlever)	#payg_cas05	111
+
+// Guild Treasure Spawns
+//============================================================
+payg_cas05,157,132,0	duplicate(Gld_Trea_Spawn)	Treasure#payg_cas05	-1
+
+// AGIT Manager
+//============================================================
+payg_cas05,30,30,0	duplicate(Gld_Agit_Manager)	Agit#payg_cas05	-1
+
+// Guardians
+//============================================================
+payg_cas05,277,249,3	duplicate(Gld_Guard_Template)	守护者#payg_cas05	-1

@@ -1,0 +1,110 @@
+//===== rAthena Script ======================================= 
+//= Veins Guides
+//===== By: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.1
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Guides for the city of Veins
+//===== Additional Comments: ================================= 
+//= 1.0 First version, Renewal guides.
+//= 1.1 Navigation system update. [Euphy]
+//============================================================ 
+
+veins,210,345,5	script	维恩斯向导#veins01::GuideVeins	934,{
+	mes "[维恩斯向导]";
+	mes "感谢您穿越猛烈的沙暴而来。欢迎来到峡谷之村^8B4513维恩斯^000000。";
+	mes "如果您是第一次使用向导服务，不妨先看看“公告”菜单？";
+	F_Navi("[Veins Guide]");
+	next;
+	while (1) {
+		switch(select("[ 神殿 ]:[ 旅馆 ]:[ 酒馆 ]:[ 武器店 ]:[ 道具店 ]:[ 机场 ]:[ 地质研究所 ]:[ 活动企业员工 ]:清除小地图标记:取消")) {
+		case 1:
+			mes "[维恩斯向导]";
+			mes "这座"+F_Navi("神殿","veins,197,256")+"里总是挤满了向女神芙蕾雅化身祈祷的信徒。";
+			mes "它位于维恩斯北侧。";
+			mes "您还想查看其他地点吗？";
+			viewpoint 1,197,256,0,0xFF0000;
+			next;
+			break;
+		case 2:
+			mes "[维恩斯向导]";
+			mes "旅途劳累时，您可以到"+F_Navi("旅馆","veins,110,278")+". The Inn is located on the North-West side of Veins.";
+			mes "您还想查看其他地点吗？";
+			viewpoint 1,110,278,1,0xFF4500;
+			next;
+			break;
+		case 3:
+			mes "[维恩斯向导]";
+			mes "如果想和维恩斯的居民交谈，请去维恩斯的"+F_Navi("酒馆","veins,150,215")+".";
+			mes "酒馆位于维恩斯西侧。";
+			mes "您还想查看其他地点吗？";
+			viewpoint 1,150,215,2,0xDAA520;
+			next;
+			break;
+		case 4:
+			mes "[维恩斯向导]";
+			mes "您必须有能力保护自己。";
+			mes "这家"+F_Navi("武器店","veins,150,175")+"位于维恩斯，以合理的价格出售上好的武器。";
+			mes "它位于维恩斯西侧。";
+			mes "您还想查看其他地点吗？";
+			viewpoint 1,150,175,3,0x008000;
+			next;
+			break;
+		case 5:
+			mes "[维恩斯向导]";
+			mes "必备之物！去看看维恩斯的"+F_Navi("道具店","veins,230,161")+"，它位于城镇中心。";
+			mes "您还想查看其他地点吗？";
+			viewpoint 1,230,161,4,0x0000FF;
+			next;
+			break;
+		case 6:
+			mes "[维恩斯向导]";
+			mes "维恩斯的这座"+F_Navi("机场","veins,273,287")+"目前仅用于货物运输。";
+			mes "您还想查看其他地点吗？";
+			viewpoint 1,273,287,5,0x000080;
+			next;
+			break;
+		case 7:
+			mes "[维恩斯向导]";
+			mes "您对地质学感兴趣吗？";
+			mes "如果是，请前往";
+			mes F_Navi("地质研究所","veins,150,175")+"，它位于武器店二楼。";
+			mes "您还想查看其他地点吗？";
+			viewpoint 1,150,175,6,0x800080;
+			next;
+			break;
+		case 8:
+			mes "[维恩斯向导]";
+			mes "我会标出";
+			mes "该"+F_Navi("活动企业员工","veins,209,127","^808080");
+			mes "的位置，并显示在您的小地图上。";
+			mes "您还想查看其他地点吗？";
+			viewpoint 1,209,127,7,0x808080;
+			next;
+			break;
+		case 9:
+			mes "[维恩斯向导]";
+			mes "好的，我会清除您小地图上的所有标记。";
+			mes "还有什么需要我帮忙的吗？";
+			viewpoint 2,197,256,0,0xFFFFFF;
+			viewpoint 2,110,278,1,0xFFFFFF;
+			viewpoint 2,150,215,2,0xFFFFFF;
+			viewpoint 2,150,175,3,0xFFFFFF;
+			viewpoint 2,230,161,4,0xFFFFFF;
+			viewpoint 2,273,287,5,0xFFFFFF;
+			viewpoint 2,150,175,6,0xFFFFFF;
+			viewpoint 2,209,127,7,0xFFFFFF;
+			next;
+			break;
+		case 10:
+			mes "[维恩斯向导]";
+			mes "祝您旅途平安！";
+			close;
+		}
+	}
+}
+veins,189,101,5	duplicate(GuideVeins)	维恩向导#veins02	934

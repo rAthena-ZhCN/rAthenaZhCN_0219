@@ -1,0 +1,240 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Added Monster Killing quests.
+//= Repeatable EXP Quest (Frills)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+moc_fild17,66,273,5	script	莱姆利#Frilldora_Hunt	725,{
+	if (checkquest(60134) != -1) {
+		if (checkquest(60134,HUNTING) != 2 ) {
+			mes "[莱姆利]";
+			mes "你已经猎杀完50只伞蜥了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[莱姆利]";
+				mes "嗯，我觉得你还没猎杀到50只……";
+				close;
+			case 2:
+				mes "[莱姆利]";
+				mes "记住，我需要人帮忙猎杀伞蜥，去猎杀50只吧。";
+				close;
+			case 3:
+				mes "[莱姆利]";
+				mes "你确定要停止猎杀吗？";
+				mes "你已取得的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[莱姆利]";
+					mes "那好吧，如果你改变主意就回来找我。";
+					erasequest 60134;
+					close;
+				case 2:
+					mes "[莱姆利]";
+					mes "请猎杀50只伞蜥。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[莱姆利]";
+			mes "太厉害了，你完成得真快。";
+			getexp 30000,23000;
+			erasequest 60134;
+			close;
+		}
+	}
+	if (checkquest(60135) != -1) {
+		if (checkquest(60135,HUNTING) != 2 ) {
+			mes "[莱姆利]";
+			mes "你已经猎杀完50只伞蜥了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[莱姆利]";
+				mes "嗯，我觉得你还没猎杀到100只……";
+				close;
+			case 2:
+				mes "[莱姆利]";
+				mes "记住，我需要人帮忙猎杀伞蜥，去猎杀100只吧。";
+				close;
+			case 3:
+				mes "[莱姆利]";
+				mes "你确定要停止猎杀吗？";
+				mes "你已取得的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[莱姆利]";
+					mes "那好吧，如果你改变主意就回来找我。";
+					erasequest 60135;
+					close;
+				case 2:
+					mes "[莱姆利]";
+					mes "请猎杀100只伞蜥。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[莱姆利]";
+			mes "太厉害了，你完成得真快。";
+			getexp 30000,23000;
+			getexp 30000,23000;
+			erasequest 60135;
+			close;
+		}
+	}
+	if (checkquest(60136) != -1) {
+		if (checkquest(60136,HUNTING) != 2 ) {
+			mes "[莱姆利]";
+			mes "你已经猎杀完150只伞蜥了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[莱姆利]";
+				mes "嗯，我觉得你还没猎杀到150只……";
+				close;
+			case 2:
+				mes "[莱姆利]";
+				mes "记住，我需要人帮忙猎杀伞蜥，去猎杀150只吧。";
+				close;
+			case 3:
+				mes "[莱姆利]";
+				mes "你确定要停止猎杀吗？";
+				mes "你已取得的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[莱姆利]";
+					mes "那好吧，如果你改变主意就回来找我。";
+					erasequest 60136;
+					close;
+				case 2:
+					mes "[莱姆利]";
+					mes "请猎杀150只伞蜥。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[莱姆利]";
+			mes "太厉害了，你完成得真快。";
+			getexp 30000,23000;
+			getexp 30000,23000;
+			getexp 30000,23000;
+			erasequest 60136;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel > 29) {
+		//for maximum level
+		if (BaseLevel < 66) {
+			mes "[莱姆利]";
+			mes "嗨，小可爱！";
+			next;
+			mes "[莱姆利]";
+			mes "能抽点时间帮我一把吗？";
+			next;
+			switch(select("好的:不用")) {
+			case 1:
+				mes "[莱姆利]";
+				mes "我在找蜥蜴的^FF0000伞蜥皮^000000。";
+				next;
+				mes "[莱姆利]";
+				mes "这一带的蜥蜴天生具有隐匿能力，刺客公会想研究这种特性。";
+				next;
+				switch(select("收集物品:猎杀伞蜥:取消")) {
+				case 1:
+					// Item turn in
+					switch(select("我有伞蜥皮:你需要什么？")) {
+					case 1:
+						if (countitem(1012) > 24) {
+							mes "[莱姆利]";
+							mes "嘿，谢谢你。";
+							mes "不过这些东西挺恶心的。";
+							delitem 1012,25; //Lizard_Scruff
+							getexp 30000,23000;
+							close;
+						}
+						else {
+							mes "[莱姆利]";
+							mes "唉，";
+							mes "拜托，别浪费我的时间。";
+							next;
+							mes "[莱姆利]";
+							mes "刺客公会需要^FF000025张伞蜥皮^000000。";
+							close;
+						}
+					case 2:
+						mes "[莱姆利]";
+						mes "刺客公会需要^FF000025张伞蜥皮^000000。";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[莱姆利]";
+					mes "啊，好吧，我想你可以帮我猎杀一些伞蜥。";
+					mes "你想猎杀多少只？";
+					next;
+					switch(select("50只伞蜥:100只伞蜥:150只伞蜥")) {
+					case 1:
+						mes "[莱姆利]";
+						mes "完成任务后回来找我，我会给你一点小奖励。";
+						setquest 60134;
+						close;
+					case 2:
+						mes "[莱姆利]";
+						mes "完成任务后回来找我，我会给你一点小奖励。";
+						setquest 60135;
+						close;
+					case 3:
+						mes "[莱姆利]";
+						mes "完成任务后回来找我，我会给你一点小奖励。";
+						setquest 60136;
+						close;
+					}
+				case 3:
+					mes "[莱姆利]";
+					mes "如果你改变主意，请回来找我。";
+					close;
+				}
+			case 2:
+				mes "[莱姆利]";
+				mes "如果你改变主意，请回来找我。";
+				close;
+			}
+		}
+		else {
+			mes "[莱姆利]";
+			mes "你好。";
+			next;
+			mes "[莱姆利]";
+			mes "这些蜥蜴真恶心。";
+			next;
+			mes "[莱姆利]";
+			mes "真不敢相信我竟被困在这里干这种事。";
+			close;
+		}
+	}
+	else {
+		mes "[莱姆利]";
+		mes "你在这里做什么？";
+		mes "这里的沙漠会要了你的命！";
+		close;
+	}
+}
+
+

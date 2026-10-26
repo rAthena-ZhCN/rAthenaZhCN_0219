@@ -1,0 +1,2648 @@
+//===== rAthena Script ======================================= 
+//= Monk Job Quest
+//===== By: ==================================================
+//= Dino9021, Edited / Translated by Celest
+//===== Current Version: ===================================== 
+//= 2.5
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Job quest for Monk classes
+//===== Additional Comments: ================================= 
+//= 2.2 Rescripted to Aegis 10.3 stadards. [L0ne_W0lf]
+//=     No longer uses function "F_BlockHigh"
+//= 2.3 Corrected NPC names to fall within proper restrictions. [L0ne_W0lf]
+//= 2.3a Deleted unused variables. [Samuray22]
+//= 2.4 Added Quest Log commands. [Kisuka]
+//= 2.5 Removed the need for use of 'goto.' [L0ne_W0lf]
+//============================================================ 
+
+prt_monk,59,247,1	script	守卫武僧#mk	120,6,2,{
+	if (Upper == 1) {
+		mes "[多霍布]";
+		mes "嗯？你来这里有什么事？";
+		mes "若你想进入这处神圣之地，";
+		mes "就必须告诉我你的名字和职业等级！";
+		next;
+		mes "[多霍布]";
+		mes "....Eh?";
+		mes "哦！^FF0000天哪^000000！抱歉，我想是我把你和我认识的某个人弄混了。";
+		next;
+		mes "[多霍布]";
+		mes ".......";
+		mes "........";
+		next;
+		mes "[多霍布]";
+		mes "真奇怪……我从不会认错人的……唉，算了。祝你今天愉快。";
+		close;
+	}
+	if (BaseJob == Job_Acolyte && MONK_Q == 0) {
+		mes "[多霍布]";
+		mes "嗯？你来这里有什么事？";
+		mes "若你想进入这处神圣之地，";
+		mes "就必须告诉我你的名字和职业等级！";
+		next;
+		mes "[多霍布]";
+		mes "那么，请告诉我你的名字和职业等级。";
+		next;
+		if (select("无视他:告诉他") == 1) {
+			mes "[多霍布]";
+			mes "无视他人是无礼之举，出去！";
+			close2;
+			warp "prt_fild03",357,256;
+			end;
+		}
+		mes "[多霍布]";
+		mes "嗯……" + strcharinfo(0) + "，是你的名字吗？";
+		mes "...did I say it right?";
+		mes "好的，你的职业等级是" + JobLevel + "，对吗？";
+		next;
+		mes "[多霍布]";
+		mes "很好……你为什么会来到这里";
+		mes "" + strcharinfo(0) + "？";
+		next;
+		switch(select("参观并了解武僧:我想成为武僧……:我累了，想休息……")) {
+		case 1:
+			mes "[多霍布]";
+			mes "原来如此……";
+			mes "我们武僧一生都在追求精神上的觉悟。";
+			mes "我们锻炼身心，以求达到真正的内心平静。";
+			mes "愿你也找到自己的内心平静。";
+			set MONK_Q,1;
+			close;
+		case 2:
+			if (BaseJob == Job_Acolyte && JobLevel > 39) {
+				mes "[多霍布]";
+				mes "嗯，你看起来似乎为此锻炼过了……";
+				mes "很好。去见我们的武海长老吧，和他谈谈。";
+				mes "他会帮助你开始修行。";
+				set MONK_Q,2;
+				setquest 3016;
+				close;
+			}
+			else if (BaseJob == Job_Acolyte && JobLevel < 40) {
+				mes "[多霍布]";
+				mes "嗯，你似乎还没准备好成为武僧。";
+				mes "要成为武僧，你必须";
+				mes "至少是职业等级40的服事。";
+				mes "若达不到，就说明你还没准备好成为武僧。";
+				next;
+				mes "[多霍布]";
+				mes "等你多加锻炼之后，再来找我";
+				mes "我会告诉你是否已经准备好了。";
+				next;
+				mes "[多霍布]";
+				mes "希望你能很快加入我们，走上";
+				mes "内心平静与觉悟之路。";
+				mes "我会在这里等着你。";
+				set MONK_Q,1;
+				close;
+			}
+			else {
+				mes "[多霍布]";
+				mes "哈哈哈，这玩笑开得不错！";
+				close;
+			}
+		case 3:
+			mes "[多霍布]";
+			mes "是啊，我们偶尔都需要休息一下……";
+			mes "别让自己太劳累，这样很好。";
+			mes "进来吧，随意一些。";
+			mes "想休息多久就休息多久。";
+			next;
+			mes "[多霍布]";
+			mes "希望你在观察我们的弟兄们";
+			mes "追求精神觉悟之时，";
+			mes "能够重获活力。";
+			mes "希望你也能够达到。";
+			set MONK_Q,1;
+			close;
+		}
+	}
+	else {
+		if (MONK_Q == 1 && BaseJob == Job_Acolyte) {
+			mes "[多霍布]";
+			mes "你觉得如何？这趟造访可让你的心灵有所领悟？";
+			next;
+			switch(select("不是……:我想成为武僧……:我需要休息……")) {
+			case 1:
+				mes "[多霍布]";
+				mes "我明白了，这并没有什么可羞愧的。";
+				mes "希望在这里与弟兄们相处的经历，";
+				mes "能帮助你向真正的觉悟";
+				mes "更近一步。";
+				set MONK_Q,1;
+				close;
+			case 2:
+				if (BaseJob == Job_Acolyte && JobLevel > 39) {
+					mes "[多霍布]";
+					mes "嗯，你看起来似乎为此锻炼过了……";
+					mes "很好。去见我们的武海长老吧，和他谈谈。";
+					mes "他会帮助你开始修行。";
+					set MONK_Q,2;
+					setquest 3016;
+					close;
+				}
+				else if (BaseJob == Job_Acolyte && JobLevel < 40) {
+					mes "[多霍布]";
+					mes "嗯，你似乎还没准备好成为武僧。";
+					mes "要成为武僧，你必须";
+					mes "至少是职业等级40的服事。";
+					mes "若达不到，就说明你还没准备好成为武僧。";
+					next;
+					mes "[多霍布]";
+					mes "等你独自多加锻炼之后，再来找我";
+					mes "我会告诉你是否已经准备好了。";
+					next;
+					mes "[多霍布]";
+					mes "希望你能很快加入我们，走上";
+					mes "内心平静与觉悟之路。";
+					mes "我会在这里等着你。";
+					set MONK_Q,1;
+					close;
+				}
+				else {
+					mes "[多霍布]";
+					mes "哈哈哈，这玩笑开得不错！";
+					close;
+				}
+			case 3:
+				mes "[多霍布]";
+				mes "是啊，我们偶尔都需要休息一下……";
+				mes "别让自己太劳累，这样很好。";
+				mes "进来吧，随意一些。";
+				mes "想休息多久就休息多久。";
+				next;
+				mes "[多霍布]";
+				mes "希望你在观察我们的弟兄们";
+				mes "追求精神觉悟之时，";
+				mes "能够重获活力。";
+				mes "希望你也能够达到。";
+				set MONK_Q,1;
+				close;
+			}
+		}
+		if (MONK_Q == 0) {
+			mes "[多霍布]";
+			mes "嗯？你来这里有什么事？";
+			mes "若你想进入这处神圣之地，";
+			mes "你必须告诉我你的名字、职业等级和等级！";
+			next;
+			mes "[多霍布]";
+			mes "那么，请告诉我你的名字以及职业等级！";
+			next;
+			if (select("无视:告诉他") == 1) {
+				mes "[多霍布]";
+				mes "无视他人是无礼之举，出去！";
+				close2;
+				warp "prt_fild03",357,256;
+				end;
+			}
+			mes "[多霍布]";
+			mes "嗯……" + strcharinfo(0) + "，是你的名字吗？";
+			mes "...did I say it right?";
+			mes "好的，你的职业等级是" + JobLevel + "，对吗？";
+			next;
+			mes "[多霍布]";
+			mes "好的，那么，你为什么会来到这里";
+			mes "" + strcharinfo(0) + "？";
+			next;
+			switch(select("参观并了解武僧:我想成为武僧……:我累了，想休息……")) {
+			case 1:
+				mes "[多霍布]";
+				mes "原来如此……";
+				mes "我们武僧为神而活，并追求精神上的觉悟。";
+				mes "我们锻炼身心，以求达到真正的内心平静。";
+				mes "愿你也找到自己的内心平静。";
+				set MONK_Q,1;
+				close;
+			case 2:
+				if (BaseJob == Job_Acolyte && JobLevel > 39) {
+					mes "[多霍布]";
+					mes "嗯，你看起来似乎为此锻炼过了……";
+					mes "很好。去见我们的武海长老，和他谈谈";
+					mes "他会帮助你开始新的修行。";
+					set MONK_Q,2;
+					setquest 3016;
+					close;
+				}
+				else if (BaseJob == Job_Acolyte && JobLevel < 40) {
+					mes "[多霍布]";
+					mes "嗯，你似乎还没准备好成为武僧。";
+					mes "要成为武僧，你必须";
+					mes "至少是职业等级40的服事。";
+					mes "若达不到，就说明你还没准备好成为武僧。";
+					next;
+					mes "[多霍布]";
+					mes "等你独自多加锻炼之后，再来找我";
+					mes "我会告诉你是否已经准备好了。";
+					next;
+					mes "[多霍布]";
+					mes "希望你能很快加入我们，走上";
+					mes "内心平静与觉悟之路。";
+					mes "我会在这里等着你。";
+					set MONK_Q,1;
+					close;
+				}
+				else {
+					mes "[多霍布]";
+					mes "哈哈哈，这玩笑开得不错！";
+					close;
+				}
+			case 3:
+				mes "[多霍布]";
+				mes "是啊，我们偶尔都需要休息一下……";
+				mes "别让自己太劳累，这样很好。";
+				mes "进来吧，随意一些。";
+				mes "想休息多久就休息多久。";
+				next;
+				mes "[多霍布]";
+				mes "希望你在观察我们的弟兄们";
+				mes "追求精神觉悟之时，";
+				mes "能够重获活力。";
+				mes "希望你也能够达到。";
+				set MONK_Q,1;
+				close;
+			}
+		}
+		else if (MONK_Q == 1) {
+			mes "[多霍布]";
+			mes "旅途之中，仔细倾听。";
+			mes "要学的东西还有很多。";
+			close;
+		}
+		else if (BaseJob == Job_Acolyte && MONK_Q == 2) {
+			mes "[多霍布]";
+			mes "嗯……你想见武海长老吗？";
+			mes "他在“武僧殿堂”的东南区域。";
+			close;
+		}
+		else if (BaseJob == Job_Acolyte && MONK_Q > 2) {
+			mes "[多霍布]";
+			mes "希望你的修行顺利，期待与你再见。";
+			close;
+		}
+		else {
+			mes "[多霍布]";
+			mes "欢迎来到我们教会的中央大厅。";
+			mes "请尽量不要打扰其他武僧。";
+			mes "即使你自己也是武僧。";
+			close;
+		}
+	}
+
+OnTouch_:
+	if (MONK_Q == 0) {
+		mes "[多霍布]";
+		mes "你竟敢踏入";
+		mes "这座神圣的建筑！！！";
+		mes "你的敬意到哪里去了？！";
+		next;
+		mes "[多霍布]";
+		mes "离开这里！！！";
+		close;
+	}
+	if (MONK_Q == 1) {
+		mes "[多霍布]";
+		mes "嗯……进来吧。";
+		mes "你或许能学到些什么……";
+		close;
+	}
+	if (BaseJob == Job_Acolyte && MONK_Q == 2) {
+		mes "[多霍布]";
+		mes "嗯……你想见我们的武海长老吗？";
+		mes "他在这座建筑的东南区域。";
+		close;
+	}
+	if (BaseJob == Job_Acolyte && MONK_Q > 2) {
+		mes "[多霍布]";
+		mes "我期待看到你成为武僧，加入我们。";
+		close;
+	}
+	end;
+}
+
+function	script	F_MonkItem	{
+	switch(getarg(0)) {
+	case 938: return "<ITEM>粘稠液体<INFO>938</INFO></ITEM>";
+	case 1055: return "<ITEM>蚯蚓皮<INFO>1055</INFO></ITEM>";
+	case 511: return "<ITEM>绿色药草<INFO>511</INFO></ITEM>";
+	case 942: return "<ITEM>猴子尾巴<INFO>942</INFO></ITEM>";
+	case 1002: return "<ITEM>铁矿石<INFO>1002</INFO></ITEM>";
+	case 510: return "<ITEM>蓝色药草<INFO>510</INFO></ITEM>";
+	case 905: return "<ITEM>植物梗<INFO>905</INFO></ITEM>";
+	case 909: return "<ITEM>杰勒比结晶<INFO>909</INFO></ITEM>";
+	case 955: return "<ITEM>昆虫外壳<INFO>955</INFO></ITEM>";
+	case 943: return "<ITEM>坚硬外皮<INFO>943</INFO></ITEM>";
+	case 935: return "<ITEM>坚硬外壳<INFO>935</INFO></ITEM>";
+	case 912: return "<ITEM>剎勒空结晶<INFO>912</INFO></ITEM>";
+	case 7053: return "<ITEM>赛依伐<INFO>7053</INFO></ITEM>";
+	case 509: return "<ITEM>白色药草<INFO>509</INFO></ITEM>";
+	case 508: return "<ITEM>黄色药草<INFO>508</INFO></ITEM>";
+	case 913: return "<ITEM>蝙蝠牙<INFO>913</INFO></ITEM>";
+	case 948: return "<ITEM>熊掌<INFO>948</INFO></ITEM>";
+	case 7033: return "<ITEM>毒魔菇芽孢<INFO>7033</INFO></ITEM>";
+	case 1027: return "<ITEM>刺猬尖刺<INFO>1027</INFO></ITEM>";
+	case 1025: return "<ITEM>蜘蛛丝<INFO>1025</INFO></ITEM>";
+	case 1042: return "<ITEM>昆虫后脚<INFO>1042</INFO></ITEM>";
+	default: return getitemname(getarg(0));
+	}
+}
+
+monk_in,99,58,1	script	武海长老#mk	60,{
+	mes "[武海长老]";
+	mes "你好，你似乎走在纯洁的道路上。";
+	mes "进来吧，快进来，今天有什么我能帮你的吗？";
+	next;
+	if (SkillPoint) {
+		mes "[武海长老]";
+		mes "如果你还有未使用的技能点，转职时会全部失去。";
+		mes "请务必用完你持有的技能点。";
+		close;
+	}
+	if (BaseJob == Job_Acolyte && MONK_Q == 2 && JobLevel > 39) {
+		mes "[武海长老]";
+		mes "我感受到了一股战斗的意志，你想成为武僧吗？";
+		next;
+		if (select("是。:否。") == 2) {
+			mes "[武海长老]";
+			mes "抱歉……已经很久";
+			mes "没有感受到像你这样强的人了。";
+			mes "年轻人，希望你能找到属于自己的道路。";
+			close;
+		}
+		mes "[武海长老]";
+		mes "如今仍有人愿意遵循古老的方式。";
+		if (Sex == SEX_MALE)
+			mes "强壮的年轻人。我很高兴你有意加入我们。";
+		else
+			mes "如此娇弱的花朵。我很高兴看到你有意加入我们。";
+		next;
+		mes "[武海长老]";
+		mes "哦，你就是那位想加入我们的新弟子……";
+		mes "在开始修行之前，有几件事你应该先知道。";
+		next;
+		mes "[武海长老]";
+		mes "我们武僧行走在内心平静与觉悟之路上。";
+		mes "我们努力以极大的用心将这份平静带给所有人。";
+		next;
+		mes "[武海长老]";
+		mes "我们武僧通过身心的修炼来达成这一点。";
+		mes "我们在周遭的环境与自然之中寻求觉悟。";
+		next;
+		mes "[武海长老]";
+		mes "当然，始终保有对神最初的信仰也很重要。";
+		next;
+		mes "[武海长老]";
+		mes "这不是轻松的生活，成为武僧的真正考验，是有能力承受我方才所说的一切……";
+		mes "武僧的生活并非人人适合，只有足够坚强的人才能成为武僧。";
+		next;
+		mes "[武海长老]";
+		mes "既然你已经明白了这一切，";
+		mes "就做好准备，修炼";
+		mes "你的力量与精神。";
+		next;
+		mes "[武海长老]";
+		mes "我们就从一项简单的任务开始吧。";
+		next;
+		switch(rand(1,7)) {
+		case 1: setarray .@items[0], 938,5, 1055,10, 511,20, 3; changequest 3016,3017; break;
+		case 2: setarray .@items[0], 942,20, 1002,5, 510,3, 4; changequest 3016,3018; break;
+		case 3: setarray .@items[0], 905,30, 909,5, 955,10, 5; changequest 3016,3019; break;
+		case 4: setarray .@items[0], 943,5, 935,20, 912,5, 6; changequest 3016,3020; break;
+		case 5: setarray .@items[0], 7053,5, 509,10, 508,10, 7; changequest 3016,3021; break;
+		case 6: setarray .@items[0], 913,10, 948,5, 7033,20, 8; changequest 3016,3022; break;
+		case 7: setarray .@items[0], 1027,5, 1025,20, 1042,10, 9; changequest 3016,3023; break;
+		}
+		mes "[武海长老]";
+		mes .@items[1]+" "+callfunc("F_MonkItem", .@items[0])+"，";
+		mes .@items[3]+" "+callfunc("F_MonkItem", .@items[2])+"，";
+		mes .@items[5]+" "+callfunc("F_MonkItem", .@items[4])+"。";
+		mes "找到这些物品，然后回来找我。";
+		set MONK_Q,.@items[6];
+		next;
+		mes "[武海长老]";
+		switch (.@items[6]) {
+		case 3: mes "为什么这副表情？这是对你能力的考验。"; break; 
+		case 4: mes "怎么了？这是对你能力的考验。"; break; 
+		case 5: mes "你明白吧？这是对你能力的考验。"; break; 
+		case 6: mes "别那样看着我。这是对你能力的考验。"; break; 
+		case 7: mes "你似乎毫不在意，这是对你能力的考验，你该认真对待。"; break; 
+		case 8: mes "这是对你能力的考验，所以一定要靠你自己取得这些物品。"; break; 
+		case 9: mes "别担心，我相信你能做到。这只是为了考验你的能力。"; break; 
+		}
+		next;
+		mes "[武海长老]";
+		mes "如果你无法带着这些物品回来，就说明你还没准备好成为武僧。";
+		mes "一定要集齐我列出的所有物品。";
+		mes "愿神与你同在。";
+		close;
+	}
+	else if (MONK_Q == 3) {
+		mes "[武海长老]";
+		mes "你回来了，我要的东西带来了吗？";
+		next;
+		if (countitem(938) > 4 && countitem(1055) > 9 && countitem(511) > 19) {
+			mes "[武海长老]";
+			mes "做得好，你找到了所有物品。";
+			mes "我会把这件事禀报给长老们。";
+			set MONK_Q,10;
+			changequest 3017,3024;
+			delitem 938,5; //Sticky_Mucus
+			delitem 1055,10; //Earthworm_Peeling
+			delitem 511,20; //Green_Herb
+			next;
+			mes "[武海长老]";
+			mes "让我看看接下来该由谁来见你……";
+			mes "啊……去找多哈长老吧。";
+			mes "他在西北方。";
+			close;
+		}
+		else {
+			mes "[武海长老]";
+			mes "你怎么会觉得已经完成了？";
+			mes "你并没有我要求的东西！";
+			mes "5个<ITEM>粘稠液体<INFO>938</INFO></ITEM>，";
+			mes "10个<ITEM>蚯蚓皮<INFO>1055</INFO></ITEM>，";
+			mes "20个<ITEM>绿色药草<INFO>511</INFO></ITEM>。";
+			mes "这些就是我所需要的物品，全都去找来吧。";
+			close;
+		}
+	}
+	else if (MONK_Q == 4) {
+		mes "[武海长老]";
+		mes "……嗯？";
+		next;
+		if (countitem(942) > 19 && countitem(1002) > 4 && countitem(510) > 2) {
+			mes "[武海长老]";
+			mes "很好，你找到了所有物品。";
+			mes "我会把这件事禀报给长老们。";
+			set MONK_Q,10;
+			changequest 3018,3024;
+			delitem 942,20; //Yoyo_Tail
+			delitem 1002,5; //Iron_Ore
+			delitem 510,3; //Blue_Herb
+			next;
+			mes "[武海长老]";
+			mes "让我看看接下来该由谁来见你……";
+			mes "啊……去找多哈长老吧。";
+			mes "他在西北方。";
+			close;
+		}
+		else {
+			mes "[武海长老]";
+			mes "你为什么回来了？";
+			mes "你并没有我要求的东西！";
+			mes "20个<ITEM>猴子尾巴<INFO>942</INFO></ITEM>，";
+			mes "5个<ITEM>铁矿石<INFO>1002</INFO></ITEM>，";
+			mes "3个<ITEM>蓝色药草<INFO>510</INFO></ITEM>。";
+			mes "这些就是我所需要的物品，全都去找来吧。";
+			close;
+		}
+	}
+	else if (MONK_Q == 5) {
+		mes "[武海长老]";
+		mes "嗯？";
+		next;
+		if (countitem(905) > 29 && countitem(909) > 4 && countitem(955) > 9) {
+			mes "[武海长老]";
+			mes "看吧，也没那么难，你真的找到了所有物品。";
+			mes "我会把这件事禀报给长老们。";
+			set MONK_Q,10;
+			changequest 3019,3024;
+			delitem 905,30; //Stem
+			delitem 909,5; //Jellopy
+			delitem 955,10; //Worm_Peelings
+			next;
+			mes "[武海长老]";
+			mes "接下来的步骤会由";
+			mes "多哈交给你。";
+			mes "他在西北方。";
+			close;
+		}
+		else {
+			mes "[武海长老]";
+			mes "你怎么会觉得已经完成了？";
+			mes "你并没有我要求的东西！";
+			mes "30个<ITEM>植物梗<INFO>905</INFO></ITEM>，";
+			mes "5个<ITEM>杰勒比结晶<INFO>909</INFO></ITEM>";
+			mes "10个<ITEM>昆虫外壳<INFO>955</INFO></ITEM>";
+			mes "这些就是我所需要的物品，全都去找来吧。";
+			close;
+		}
+	}
+	else if (MONK_Q == 6) {
+		mes "[武海长老]";
+		mes "我一直在等你。";
+		next;
+		if (countitem(943) > 4 && countitem(935) > 19 && countitem(912) > 4) {
+			mes "[武海长老]";
+			mes "令人佩服，你真的找到了所有物品。";
+			mes "我会把这件事禀报给长老们。";
+			set MONK_Q,10;
+			changequest 3020,3024;
+			delitem 943,5; //Solid_Shell
+			delitem 935,20; //Shell
+			delitem 912,5; //Zargon
+			next;
+			mes "[武海长老]";
+			mes "你接下来的步骤将由……";
+			mes "多哈长老指导。去找他吧。";
+			mes "他在西北方。";
+			close;
+		}
+		else {
+			mes "[武海长老]";
+			mes "你怎么会觉得已经完成了？";
+			mes "你并没有我要求的东西！";
+			mes "5个<ITEM>坚硬外皮<INFO>943</INFO></ITEM>，";
+			mes "20个<ITEM>坚硬外壳<INFO>935</INFO></ITEM>，";
+			mes "5个<ITEM>剎勒空结晶<INFO>912</INFO></ITEM>。";
+			mes "这些就是我所需要的物品，全都去找来吧。";
+			close;
+		}
+	}
+	else if (MONK_Q == 7) {
+		mes "[武海长老]";
+		mes "又见面了。这么快就回来了？";
+		next;
+		if (countitem(7053) > 4 && countitem(509) > 9 && countitem(508) > 9) {
+			mes "[武海长老]";
+			mes "非常好，你找到了所有物品。";
+			mes "我会把这件事禀报给长老们。";
+			set MONK_Q,10;
+			changequest 3021,3024;
+			delitem 7053,5; //Cyfar
+			delitem 509,10; //White_Herb
+			delitem 508,10; //Yellow_Herb
+			next;
+			mes "[武海长老]";
+			mes "让我看看接下来该由谁来见你……";
+			mes "啊……去找多哈长老吧。";
+			mes "他在西北方。";
+			close;
+		}
+		else {
+			mes "[武海长老]";
+			mes "那些物品在哪里……？";
+			mes "你并没有我要求的东西！";
+			mes "5个<ITEM>赛依伐<INFO>7053</INFO></ITEM>，";
+			mes "10个<ITEM>白色药草<INFO>509</INFO></ITEM>，";
+			mes "10个<ITEM>黄色药草<INFO>508</INFO></ITEM>。";
+			mes "这些就是我所需要的物品，全都去找来吧。";
+			close;
+		}
+	}
+	else if (MONK_Q == 8) {
+		mes "[武海长老]";
+		mes "嗯？";
+		next;
+		if (countitem(913) > 9 && countitem(948) > 4 && countitem(7033) > 19) {
+			mes "[武海长老]";
+			mes "太好了，我要的物品都在。";
+			mes "我会把这件事禀报给长老们。";
+			set MONK_Q,10;
+			changequest 3022,3024;
+			delitem 913,10; //Tooth_Of_Bat
+			delitem 948,5; //Bear's_Foot
+			delitem 7033,20; //Poison_Spore
+			next;
+			mes "[武海长老]";
+			mes "让我看看接下来该由谁来见你……";
+			mes "啊……去找多哈长老吧。";
+			mes "他在西北方。";
+			close;
+		}
+		else {
+			mes "[武海长老]";
+			mes "你怎么会觉得已经完成了？";
+			mes "你并没有我要求的东西！";
+			mes "10个<ITEM>蝙蝠牙<INFO>913</INFO></ITEM>，";
+			mes "5个<ITEM>熊掌<INFO>948</INFO></ITEM>";
+			mes "20个<ITEM>毒魔菇芽孢<INFO>7033</INFO></ITEM>";
+			mes "这些就是我所需要的物品，全都去找来吧。";
+			close;
+		}
+	}
+	else if (MONK_Q == 9) {
+		mes "[武海长老]";
+		mes "欢迎回来。";
+		next;
+		if (countitem(1027) > 4 && countitem(1025) > 19 && countitem(1042) > 9) {
+			mes "[武海长老]";
+			mes "哇，你找到了所有物品！！";
+			mes "我会把这件事禀报给长老们。";
+			set MONK_Q,10;
+			changequest 3023,3024;
+			delitem 1027,5; //Porcupine_Spike
+			delitem 1025,20; //Spiderweb
+			delitem 1042,10; //Short_Leg
+			next;
+			mes "[武海长老]";
+			mes "让我看看接下来该由谁来见你……";
+			mes "啊……去找多哈长老吧。";
+			mes "他在西北方。";
+			close;
+		}
+		else {
+			mes "[武海长老]";
+			mes "你怎么会觉得已经完成了？";
+			mes "你并没有我要求的东西！";
+			mes "5个<ITEM>刺猬尖刺<INFO>1027</INFO></ITEM>，";
+			mes "20个<ITEM>蜘蛛丝<INFO>1025</INFO></ITEM>，";
+			mes "10个<ITEM>昆虫后脚<INFO>1042</INFO></ITEM>。";
+			mes "这些就是我所需要的物品，全都去找来吧。";
+			close;
+		}
+	}
+	else if (MONK_Q > 9 && MONK_Q < 14) {
+		mes "[武海长老]";
+		mes "我已经告诉过你了。";
+		mes "去找^CC0000多哈^000000。";
+		mes "他就在这里的西北方不远处。";
+		close;
+	}
+	else if (MONK_Q > 13 && MONK_Q < 26) {
+		mes "[武海长老]";
+		mes "哦，你还在修行途中吗？";
+		mes "快点完成吧！";
+		close;
+	}
+	else if (MONK_Q > 25 && MONK_Q < 27) {
+		mes "[武海长老]";
+		mes "我听说你的修行进展不错。";
+		mes "祝你好运，好好努力。身为武僧，你会成就一番大事。";
+		close;
+	}
+	else if (MONK_Q == 27 && BaseJob == Job_Acolyte) {
+		mes "[武海长老]";
+		mes ".......Hmmm.....";
+		mes "去道门那里，从他手中拿一瓶特殊药水。它看起来像绿色药水，但其实不是。把它带来给我……";
+		close;
+	}
+	else if (MONK_Q == 28 && BaseJob == Job_Acolyte) {
+		if (countitem(506) > 0) {
+			mes "[武海长老]";
+			mes "你该带来的那瓶药还在吗？";
+			mes "你必须喝下那瓶绿色药水，为成为武僧强化自身。";
+		}
+		else if (countitem(506) == 0) {
+			mes "[武海长老]";
+			mes "任务完成了吗？很好，看来你确实有成为武僧的资质。";
+			mes "你没有把那瓶珍贵的药水丢掉吧？";
+			next;
+			mes "[武海长老]";
+			mes "你先前喝下的药水，现在应该开始生效了。";
+			mes "既然你喝下了药水，你的武僧修行很快就会开始……";
+			next;
+			mes "[武海长老]";
+			mes "但首先，回答我这些问题。";
+			mes "你愿意将余生奉献给对纯洁的追求吗？";
+			next;
+			if (select("是。:否。") == 2) {
+				mes "[武海长老]";
+				mes "....with that kind of reply...";
+				mes "你没有足够的决心成为武僧吗？";
+				mes "你觉得自己受的苦还不够吗？";
+				next;
+				mes "[武海长老]";
+				mes "再好好想一想，然后再回来！";
+				mes "我们无法接纳被疑虑玷污的武僧……";
+				close;
+			}
+			mes "[武海长老]";
+			mes "你会利用通过我们修行获得的能力来谋取私利吗？";
+			next;
+			if (select("是。:否。") == 1) {
+				mes "[武海长老]";
+				mes "...then we cannot accept you as a monk. We, monks do not practice for personal benefit.";
+				mes "我们活得光明磊落，并作为对罪人的神圣处刑者而活。";
+				next;
+				mes "[武海长老]";
+				mes "回到你来的地方，重新思量成为武僧意味着什么……";
+				mes "以你如今站在我面前的样子，你根本不可能坚持做一名武僧，终将被邪恶所玷污……";
+				close;
+			}
+			mes "[武海长老]";
+			mes "你会去惩罚那些违背";
+			mes "veritas 与 aequitas 的人吗？^CCCCCC（真实与正义）^000000";
+			next;
+			if (select("是。:否。") == 2) {
+				mes "[武海长老]";
+				mes "你以为我们武僧是为谁而存在的！";
+				mes "任何违背这一意志的存在，都是从世界的渣滓中诞生的！";
+				mes "它们根本不配存在！";
+				next;
+				mes "[武海长老]";
+				mes "当你准备好面对并消灭邪恶之时，再回来吧。";
+				mes "到那时，无需我的指示，你也会知道自己接下来该做什么。";
+				close;
+			}
+			mes "[武海长老]";
+			mes "你会与目标相同的人合作，并为了达成目的而牺牲自己吗？";
+			next;
+			if (select("是。:否。") == 2) {
+				mes "[武海长老]";
+				mes "你说不……？这不可接受……";
+				mes "如果你能通过牺牲自己来帮助同伴，那才是真正的纯洁。";
+				next;
+				mes "[武海长老]";
+				mes "回去吧，好好思量为自己在乎的人牺牲意味着什么。";
+				mes "为他人牺牲自己看似容易，但作为一个人，这是最困难的事。";
+				close;
+			}
+			mes "[武海长老]";
+			mes "你会通过吸引怪物跟随自己来协助同伴吗？";
+			next;
+			if (select("是。:否。") == 1) {
+				mes "[武海长老]";
+				mes "这不可接受。故意挑衅怪物让它们跟着你，会非常危险，也会伤害他人。这不是武僧之道。";
+				mes "... that behavior is regarded as careless and is not tolerated.";
+				next;
+				mes "[武海长老]";
+				mes "即使你硬化身体后几乎无人能伤，那项技能也只该用于紧急状况，不应被如此无礼地使用！";
+				next;
+				mes "[武海长老]";
+				mes "你也许觉得那是在帮助别人，但事实并非如此。";
+				mes "重新想一想，身为武僧你该为他人做些什么。";
+				close;
+			}
+			mes "[武海长老]";
+			mes "你会在城镇或野外一遍又一遍地大声叫喊同样的话吗？";
+			next;
+			if (select("是。:否。") == 1) {
+				mes "[武海长老]";
+				mes "不可以那样做。这并不只针对武僧，而是对所有人都一样。";
+				mes "没有人希望自己的安宁被打扰！";
+				mes "即使你出于好意，那也是无礼的，不被允许。";
+				close;
+			}
+			mes "[武海长老]";
+			mes "在身为神圣行刑者的武僧之路上，你愿意为他人而死吗？";
+			next;
+			if (select("是。:否。") == 2) {
+				mes "[武海长老]";
+				mes "抱着这种态度，你无法成为武僧！！！";
+				mes "若我们能牺牲自己，至少再多消灭一个敌人，那便是身为神圣行刑者的你所应做到的——我们正是为此受训。";
+				next;
+				mes "[武海长老]";
+				mes "如果你不愿为你所珍视的人牺牲自己，";
+				mes "又怎能指望达到真正的觉悟？";
+				mes "好好思索生与死的真正意义！！";
+				close;
+			}
+			mes "最后，立下誓言，表明你会遵守这些誓约。";
+			next;
+			if (select("我愿立誓遵守这些誓言。:……呃……不……") == 2) {
+				mes "[武海长老]";
+				mes "..............";
+				next;
+				mes "[武海长老]";
+				mes "那么你的修行尚未完成。";
+				if (Sex == SEX_MALE)
+					mes "孩子，你无法成为武僧。";
+				else
+					mes "小姑娘，你无法成为武僧。";
+				next;
+				mes "[武海长老]";
+				mes "既然如此，你的修行将从最初重新开始……";
+				next;
+				mes "冷静下来……我重新考虑了一下……也许你只是还没准备好承担这份责任。";
+				mes "等你准备好之后再回来……";
+				next;
+				mes "[武海长老]";
+				if (Sex == SEX_MALE)
+					mes "孩子，我希望你能早日明白自己将成为什么……";
+				else
+					mes "姑娘，我希望你能早日明白自己将成为什么……";
+				close;
+			}
+			mes "[武海长老]";
+			mes "那么你的修行完成了……";
+			mes "请靠近一些。";
+			if (Sex == SEX_MALE)
+				mes "兄弟，欢迎你加入我们对抗邪恶的神圣之战！";
+			else
+				mes "姐妹，欢迎你加入我们对抗邪恶的神圣之战！";
+			next;
+			mes "[武海长老]";
+			if (Sex == SEX_MALE)
+				mes "我的兄弟，你的誓言已被我们周围所有人听见。";
+			else
+				mes "我的姐妹，你的誓言已被我们周围所有人听见。";
+			next;
+			mes "[武海长老]";
+			mes "现在，我将对你的身体施展终极技法……";
+			next;
+			mes "[武海长老]";
+			mes "我将运用这些古老技法，通过刺激你身上的穴位来增强你的力量。";
+			next;
+			mes "[武海长老]";
+			mes "闭上眼睛……";
+			next;
+			mes "[武海长老]";
+			mes "然后放松你的身体……";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "^00CCCC- 你深深地吸了一口气 -^000000";
+			next;
+			mes "["+ strcharinfo(0) +"]";
+			mes "^CC0000- 你感到手指飞快地在你全身各处点戳 -^000000";
+			next;
+			mes "[武海长老]";
+			mes "嘿咿~~~呀啊啊啊啊啊！！！";
+			next;
+			mes "[武海长老]";
+			mes "喔喔喔哈啊！！！";
+			next;
+			mes "[武海长老]";
+			mes "嘿咿~~~呀啊啊啊啊啊！！！";
+			next;
+			mes "[武海长老]";
+			mes "哈~ 哈~ 哈~！！！！！";
+			next;
+			mes "[武海长老]";
+			mes ".... now open your eyes......";
+			next;
+			mes "[武海长老]";
+			mes "....and see life through the eyes of a monk.";
+			next;
+			set .@jlevel,JobLevel;
+			completequest 3032;
+			callfunc "Job_Change",Job_Monk;
+			callfunc "F_ClearJobVar";
+			mes "[武海长老]";
+			mes "....You are a monk.";
+			next;
+			mes "[武海长老]";
+			mes "...heh.";
+			next;
+			mes "[武海长老]";
+			mes "唉……看来我太老了，已经做不了这个了……年轻时我可是更在行……";
+			next;
+			mes "[武海长老]";
+			mes "...anyways, you are a monk now.";
+			mes "欢迎！";
+			next;
+			mes "[武海长老]";
+			mes "希望你遵守你的誓言……";
+			next;
+			mes "[武海长老]";
+			mes "在你的道路上继续修行，更加刻苦地练习。";
+			next;
+			mes "[武海长老]";
+			mes "现在……你可以随风去向任何地方了。";
+			mes "哦，在你离开之前，我有一份礼物要送给你。";
+			if (.@jlevel == 50)
+				getitem 1804,1; //Knuckle_Duster_
+			else
+				getitem 1801,1; //Waghnakh
+		}
+		close;
+	}
+	else if (BaseJob == Job_Acolyte) {
+		mes "[武海长老]";
+		mes "你是……一名服事……？";
+		mes "若想寻求指点，请前往普隆德拉圣堂。这里是武僧的地方，不是为你准备的。";
+		mes "除非你打算成为武僧……否则请离开。";
+		close;
+	}
+	else if (BaseJob == Job_Monk) {
+		mes "[武海长老]";
+		mes "你的修行进展如何？";
+		mes "希望你仍在修行，并遵守着你的誓言。";
+		next;
+		mes "[武海长老]";
+		mes "我们必须终生不断修行，忠于自己的道路。";
+		mes "否则邪恶便会来袭，以不洁玷污我们的心灵。";
+		next;
+		mes "[武海长老]";
+		mes "不要忘记你的誓言，坚守你的道路，并且";
+		mes "不要让任何邪恶玷污你纯洁的心。";
+		close;
+	}
+	else {
+		mes "[武海长老]";
+		mes "若想寻求指点，请前往普隆德拉圣堂。";
+		mes "这里没有你会感兴趣的东西，请离开，不要打扰其他武僧。";
+		close;
+	}
+}
+
+prt_monk,251,255,1	script	多哈#mk	79,{
+	if (MONK_Q >= 10 && MONK_Q < 14) {
+		if (MONK_Q == 10) {
+			mes "[多哈]";
+			mes "你找我有何事？";
+			mes "你愿意与我谈谈吗？";
+			next;
+			mes "[多哈]";
+			mes "哦，我明白了。你正在接受武僧的修行。";
+			mes "你已经具备了与武僧相似的心志。";
+			next;
+			mes "[多哈]";
+			mes "从你的样子看来，似乎你";
+			mes "已经拜访过武海长老了。很好。";
+			next;
+			mes "[多哈]";
+			mes "让我告诉你一些身为武僧必须知道的事。";
+			mes "那么我会帮你强健身体，好让你能承受接下来的修行。";
+			next;
+			mes "[多哈]";
+			mes "静下心来。";
+			mes "放松身体……准备好了吗？";
+			next;
+			if (select("是。:否。") == 2) {
+				mes "[多哈]";
+				mes "准备好之后再回来吧。";
+				close;
+			}
+			mes "[多哈]";
+			mes "好……那么。";
+			next;
+			mes "[多哈]";
+			mes "请跟我念。";
+			next;
+			changequest 3024,3025;
+		}
+		else {
+			mes "[多哈]";
+			mes "现在，这次要专心……";
+			next;
+		}
+		mes "[多哈]";
+		set .@rand,rand(1,3);
+		if ((.@rand == 1) || (MONK_Q == 11)) {
+			set MONK_Q,11;
+			mes "为了神传达着神的声明";
+			next;
+			mes "[多哈]";
+			mes "以我们拥有的肉体来显示我们的光荣";
+			next;
+			mes "[多哈]";
+			mes "我们武僧";
+			next;
+			mes "[多哈]";
+			mes "神罚的地上代行者";
+			next;
+			mes "[多哈]";
+			mes "神的地上代理人";
+			next;
+			mes "[多哈]";
+			mes "我们武僧的使命是";
+			next;
+			mes "[多哈]";
+			mes "违背神者";
+			next;
+			mes "[多哈]";
+			mes "未死亡者之肉身";
+			next;
+			mes "[多哈]";
+			mes "把愚蠢的人之肉体";
+			next;
+			mes "[多哈]";
+			mes "彻底的追击让他消灭";
+		}
+		else if ((.@rand == 2) || (MONK_Q == 12)) {
+			set MONK_Q,12;
+			mes "神的地上代理人";
+			next;
+			mes "[多哈]";
+			mes "神罚的地上代行者";
+			next;
+			mes "[多哈]";
+			mes "我们武僧";
+			next;
+			mes "[多哈]";
+			mes "我们的使命是";
+			next;
+			mes "[多哈]";
+			mes "以我们极限的肉体";
+			next;
+			mes "[多哈]";
+			mes "违背神者";
+			next;
+			mes "[多哈]";
+			mes "把愚蠢的人之肉体";
+			next;
+			mes "[多哈]";
+			mes "徘徊的人之肉身";
+			next;
+			mes "[多哈]";
+			mes "彻底的追击";
+			next;
+			mes "[多哈]";
+			mes "把他抹杀及消灭";
+		}
+		else if ((.@rand == 3) || (MONK_Q == 13)) {
+			set MONK_Q,13;
+			mes "违背神者给予审判！";
+			next;
+			mes "[多哈]";
+			mes "违背神者给予最后！";
+			next;
+			mes "[多哈]";
+			mes "违背神者给予绝灭！";
+			next;
+			mes "[多哈]";
+			mes "我们，武僧";
+			next;
+			mes "[多哈]";
+			mes "以拥有的肉体来代替神的光荣";
+			next;
+			mes "[多哈]";
+			mes "神的地上代理人";
+			next;
+			mes "[多哈]";
+			mes "神罚的地上代行者";
+			next;
+			mes "[多哈]";
+			mes "就算骨骼及肉体被切割";
+			next;
+			mes "[多哈]";
+			mes "所有都是为了神的光荣";
+			next;
+			mes "[多哈]";
+			mes "为了审判所有对抗神者";
+		}
+		next;
+		if (MONK_Q == 10) {
+			mes "[多哈]";
+			mes "好，就是这些。现在把我所说的话重复一遍。";
+			mes "" + strcharinfo(0) + "，轮到你了。";
+			next;
+		}
+		if (MONK_Q == 11) {
+			switch(select("神罚的地上代行者:我们武僧:我们武僧的使命是:违背神者:把愚蠢的人之肉体:神的地上代理人:为了神传达着神的声明:未死亡者之肉身:彻底的追击让他消灭:以我们拥有的肉体来显示我们的光荣")) {
+			case 1:
+				mes "[" + strcharinfo(0) + "]";
+				mes "神罚的地上代行者";
+				break;
+			case 2:
+				mes "[" + strcharinfo(0) + "]";
+				mes "我们武僧";
+				break;
+			case 3:
+				mes "[" + strcharinfo(0) + "]";
+				mes "我们武僧的使命是";
+				break;
+			case 4:
+				mes "[" + strcharinfo(0) + "]";
+				mes "违背神者";
+				break;
+			case 5:
+				mes "[" + strcharinfo(0) + "]";
+				mes "把愚蠢的人之肉体";
+				break;
+			case 6:
+				mes "[" + strcharinfo(0) + "]";
+				mes "神的地上代理人";
+				break;
+			case 7:
+				set .@monk_t,.@monk_t+10;
+				mes "[" + strcharinfo(0) + "]";
+				mes "为了神传达着神的声明";
+				break;
+			case 8:
+				mes "[" + strcharinfo(0) + "]";
+				mes "未死亡者之肉身";
+				break;
+			case 9:
+				mes "[" + strcharinfo(0) + "]";
+				mes "彻底的追击让他消灭";
+				break;
+			case 10:
+				mes "[" + strcharinfo(0) + "]";
+				mes "以我们拥有的肉体来显示我们的光荣";
+				break;
+			}
+			switch(select("我们武僧:把愚蠢的人之肉体:为了神传达着神的声明:神罚的地上代行者:以我们拥有的肉体来显示我们的光荣:我们武僧的使命是:未死亡者之肉身:违背神者:神的地上代理人:彻底的追击让他消灭")) {
+			case 1: mes "我们武僧"; break;
+			case 2: mes "把愚蠢的人之肉体"; break;
+			case 3: mes "为了神传达着神的声明"; break;
+			case 4: mes "神罚的地上代行者"; break;
+			case 5:
+				set .@monk_t,.@monk_t+10;
+				mes "以我们拥有的肉体来显示我们的光荣";
+				break;
+			case 6: mes "我们武僧的使命是";  break;
+			case 7: mes "未死亡者之肉身"; break;
+			case 8: mes "违背神者"; break;
+			case 9: mes "神的地上代理人"; break;
+			case 10: mes "彻底的追击让他消灭"; break;
+			}
+			switch(select("神的地上代理人:我们武僧:为了神传达着神的声明:神罚的地上代行者:以我们拥有的肉体来显示我们的光荣:未死亡者之肉身:把愚蠢的人之肉体:我们武僧的使命是:违背神者:彻底的追击让他消灭")) {
+			case 1: mes "神的地上代理人"; break;
+			case 2:
+				set .@monk_t,.@monk_t+10;
+				mes "我们武僧";
+				break;
+			case 3: mes "为了神传达着神的声明"; break;
+			case 4: mes "神罚的地上代行者"; break;
+			case 5: mes "以我们拥有的肉体来显示我们的光荣"; break;
+			case 6: mes "未死亡者之肉身"; break;
+			case 7: mes "把愚蠢的人之肉体"; break;
+			case 8: mes "我们武僧的使命是"; break;
+			case 9: mes "违背神者"; break;
+			case 10: mes "彻底的追击让他消灭"; break;
+			}
+			switch(select("神罚的地上代行者:为了神传达着神的声明:我们武僧:把愚蠢的人之肉体:以我们拥有的肉体来显示我们的光荣:彻底的追击让他消灭:神的地上代理人:未死亡者之肉身:我们武僧的使命是:违背神者")) {
+			case 1:
+				set .@monk_t,.@monk_t+10;
+				mes "神罚的地上代行者";
+				break;
+			case 2: mes "为了神传达着神的声明"; break;
+			case 3: mes "我们武僧";
+				break;
+			case 4: mes "把愚蠢的人之肉体"; break;
+			case 5: mes "以我们拥有的肉体来显示我们的光荣"; break;
+			case 6: mes "彻底的追击让他消灭"; break;
+			case 7: mes "神的地上代理人"; break;
+			case 8: mes "未死亡者之肉身"; break;
+			case 9: mes "我们武僧的使命是"; break;
+			case 10: mes "违背神者"; break;
+			}
+			switch(select("以我们拥有的肉体来显示我们的光荣:为了神传达着神的声明:我们武僧:神罚的地上代行者:我们武僧的使命是:违背神者:未死亡者之肉身:把愚蠢的人之肉体:神的地上代理人:彻底的追击让他消灭")) {
+			case 1: mes "以我们拥有的肉体来显示我们的光荣"; break;
+			case 2: mes "为了神传达着神的声明"; break;
+			case 3: mes "我们武僧"; break;
+			case 4: mes "神罚的地上代行者"; break;
+			case 5: mes "我们武僧的使命是"; break;
+			case 6: mes "违背神者"; break;
+			case 7: mes "未死亡者之肉身"; break;
+			case 8: mes "把愚蠢的人之肉体"; break;
+			case 9:
+				set .@monk_t,.@monk_t+10;
+				mes "神的地上代理人";
+				break;
+			case 10: mes "彻底的追击让他消灭"; break;
+			}
+			switch(select("为了神传达着神的声明:违背神者:我们武僧的使命是:以我们拥有的肉体来显示我们的光荣:神罚的地上代行者:彻底的追击让他消灭:把愚蠢的人之肉体:神的地上代理人:我们武僧:未死亡者之肉身")) {
+			case 1: mes "为了神传达着神的声明"; break;
+			case 2: mes "违背神者"; break;
+			case 3:
+				set .@monk_t,.@monk_t+10;
+				mes "我们武僧的使命是";
+				break;
+			case 4: mes "以我们拥有的肉体来显示我们的光荣"; break;
+			case 5: mes "神罚的地上代行者"; break;
+			case 6: mes "彻底的追击让他消灭"; break;
+			case 7: mes "把愚蠢的人之肉体"; break;
+			case 8: mes "神的地上代理人"; break;
+			case 9: mes "我们武僧"; break;
+			case 10: mes "未死亡者之肉身"; break;
+			}
+			switch(select("未死亡者之肉身:把愚蠢的人之肉体:彻底的追击让他消灭:为了神传达着神的声明:以我们拥有的肉体来显示我们的光荣:神的地上代理人:我们武僧:神罚的地上代行者:我们武僧的使命是:违背神者")) {
+			case 1: mes "未死亡者之肉身"; break;
+			case 2: mes "把愚蠢的人之肉体"; break;
+			case 3: mes "彻底的追击让他消灭"; break;
+			case 4: mes "为了神传达着神的声明"; break;
+			case 5: mes "以我们拥有的肉体来显示我们的光荣"; break;
+			case 6: mes "神的地上代理人"; break;
+			case 7: mes "我们武僧"; break;
+			case 8: mes "神罚的地上代行者"; break;
+			case 9: mes "我们武僧的使命是"; break;
+			case 10:
+				set .@monk_t,.@monk_t+10;
+				mes "违背神者";
+				break;
+			}
+			switch(select("未死亡者之肉身:把愚蠢的人之肉体:违背神者:为了神传达着神的声明:我们武僧:神罚的地上代行者:神的地上代理人:我们武僧的使命是:以我们拥有的肉体来显示我们的光荣:彻底的追击让他消灭")) {
+			case 1:
+				set .@monk_t,.@monk_t+10;
+				mes "未死亡者之肉身";
+				break;
+			case 2: mes "把愚蠢的人之肉体"; break;
+			case 3: mes "违背神者"; break;
+			case 4: mes "为了神传达着神的声明"; break;
+			case 5: mes "我们武僧"; break;
+			case 6: mes "神罚的地上代行者"; break;
+			case 7: mes "神的地上代理人"; break;
+			case 8: mes "我们武僧的使命是"; break;
+			case 9: mes "以我们拥有的肉体来显示我们的光荣"; break;
+			case 10: mes "彻底的追击让他消灭"; break;
+			}
+			switch(select("为了神传达着神的声明:以我们拥有的肉体来显示我们的光荣:我们武僧:神罚的地上代行者:神的地上代理人:彻底的追击让他消灭:我们武僧的使命是:违背神者:未死亡者之肉身:把愚蠢的人之肉体")) {
+			case 1: mes "为了神传达着神的声明"; break;
+			case 2: mes "以我们拥有的肉体来显示我们的光荣"; break;
+			case 3: mes "我们武僧"; break;
+			case 4: mes "神罚的地上代行者"; break;
+			case 5: mes "神的地上代理人"; break;
+			case 6: mes "彻底的追击让他消灭"; break;
+			case 7: mes "我们武僧的使命是"; break;
+			case 8: mes "违背神者"; break;
+			case 9: mes "未死亡者之肉身"; break;
+			case 10:
+				set .@monk_t,.@monk_t+10;
+				mes "把愚蠢的人之肉体";
+				break;
+			}
+			switch(select("为了神传达着神的声明:以我们拥有的肉体来显示我们的光荣:我们武僧:神罚的地上代行者:神的地上代理人:我们武僧的使命是:违背神者:未死亡者之肉身:把愚蠢的人之肉体:彻底的追击让他消灭")) {
+			case 1: mes "为了神传达着神的声明"; break;
+			case 2: mes "以我们拥有的肉体来显示我们的光荣"; break;
+			case 3: mes "我们武僧"; break;
+			case 4: mes "神罚的地上代行者"; break;
+			case 5: mes "神的地上代理人"; break;
+			case 6: mes "我们武僧的使命是"; break;
+			case 7: mes "违背神者"; break;
+			case 8: mes "未死亡者之肉身"; break;
+			case 9: mes "把愚蠢的人之肉体"; break;
+			case 10:
+				set .@monk_t,.@monk_t+10;
+				mes "彻底的追击让他消灭";
+				break;
+			}
+		}
+		else if (MONK_Q == 12) {
+			switch(select("我们武僧:神罚的地上代行者:我们的使命是:神的地上代理人:以我们极限的肉体:徘徊的人之肉身:违背神者:把愚蠢的人之肉体:彻底的追击:把他抹杀及消灭")) {
+			case 1:
+				mes "[" + strcharinfo(0) + "]";
+				mes "我们武僧";
+				break;
+			case 2:
+				mes "[" + strcharinfo(0) + "]";
+				mes "神罚的地上代行者";
+				break;
+			case 3:
+				mes "[" + strcharinfo(0) + "]";
+				mes "我们的使命是";
+				break;
+			case 4:
+				mes "[" + strcharinfo(0) + "]";
+				set .@monk_t,.@monk_t+10;
+				mes "神的地上代理人";
+				break;
+			case 5:
+				mes "[" + strcharinfo(0) + "]";
+				mes "以我们极限的肉体";
+				break;
+			case 6:
+				mes "[" + strcharinfo(0) + "]";
+				mes "徘徊的人之肉身";
+				break;
+			case 7:
+				mes "[" + strcharinfo(0) + "]";
+				mes "违背神者";
+				break;
+			case 8:
+				mes "[" + strcharinfo(0) + "]";
+				mes "把愚蠢的人之肉体";
+				break;
+			case 9:
+				mes "[" + strcharinfo(0) + "]";
+				mes "彻底的追击";
+				break;
+			case 10:
+				mes "[" + strcharinfo(0) + "]";
+				mes "把他抹杀及消灭";
+				break;
+			}
+			switch(select("我们武僧:以我们极限的肉体:违背神者:我们的使命是:把愚蠢的人之肉体:徘徊的人之肉身:把他抹杀及消灭:神的地上代理人:神罚的地上代行者:彻底的追击")) {
+			case 1: mes "我们武僧"; break;
+			case 2: mes "以我们极限的肉体"; break;
+			case 3: mes "违背神者"; break;
+			case 4: mes "我们的使命是"; break;
+			case 5: mes "把愚蠢的人之肉体"; break;
+			case 6: mes "徘徊的人之肉身"; break;
+			case 7: mes "把他抹杀及消灭"; break;
+			case 8: mes "神的地上代理人"; break;
+			case 9:
+				set .@monk_t,.@monk_t+10;
+				mes "神罚的地上代行者";
+				break;
+			case 10: mes "彻底的追击"; break;
+			}
+			switch(select("我们武僧:神罚的地上代行者:神的地上代理人:把他抹杀及消灭:把愚蠢的人之肉体:我们的使命是:彻底的追击:以我们极限的肉体:违背神者:徘徊的人之肉身")) {
+			case 1:
+				set .@monk_t,.@monk_t+10;
+				mes "我们武僧";
+				break;
+			case 2: mes "神罚的地上代行者"; break;
+			case 3: mes "神的地上代理人"; break;
+			case 4: mes "把他抹杀及消灭"; break;
+			case 5: mes "把愚蠢的人之肉体"; break;
+			case 6: mes "我们的使命是"; break;
+			case 7: mes "彻底的追击"; break;
+			case 8: mes "以我们极限的肉体"; break;
+			case 9: mes "违背神者"; break;
+			case 10: mes "徘徊的人之肉身"; break;
+			}
+			switch(select("神罚的地上代行者:把愚蠢的人之肉体:我们武僧:以我们极限的肉体:徘徊的人之肉身:我们的使命是:违背神者:彻底的追击:把他抹杀及消灭:神的地上代理人")) {
+			case 1: mes "神罚的地上代行者"; break;
+			case 2: mes "把愚蠢的人之肉体"; break;
+			case 3: mes "我们武僧"; break;
+			case 4: mes "以我们极限的肉体"; break;
+			case 5: mes "徘徊的人之肉身"; break;
+			case 6:
+				set .@monk_t,.@monk_t+10;
+				mes "我们的使命是";
+				break;
+			case 7: mes "违背神者"; break;
+			case 8: mes "彻底的追击"; break;
+			case 9: mes "把他抹杀及消灭"; break;
+			case 10: mes "神的地上代理人"; break;
+			}
+			switch(select("徘徊的人之肉身:神的地上代理人:我们的使命是:违背神者:把愚蠢的人之肉体:彻底的追击:把他抹杀及消灭:我们武僧:神罚的地上代行者:以我们极限的肉体")) {
+			case 1: mes "徘徊的人之肉身"; break;
+			case 2: mes "神的地上代理人"; break;
+			case 3: mes "我们的使命是"; break;
+			case 4: mes "违背神者"; break;
+			case 5: mes "把愚蠢的人之肉体"; break;
+			case 6: mes "彻底的追击"; break;
+			case 7: mes "把他抹杀及消灭"; break;
+			case 8: mes "我们武僧"; break;
+			case 9: mes "神罚的地上代行者"; break;
+			case 10:
+				set .@monk_t,.@monk_t+10;
+				mes "以我们极限的肉体";
+				break;
+			}
+			switch(select("我们的使命是:我们武僧:神罚的地上代行者:神的地上代理人:违背神者:以我们极限的肉体:徘徊的人之肉身:把愚蠢的人之肉体:把他抹杀及消灭:彻底的追击")) {
+			case 1: mes "我们的使命是"; break;
+			case 2: mes "我们武僧"; break;
+			case 3: mes "神罚的地上代行者"; break;
+			case 4: mes "神的地上代理人"; break;
+			case 5:
+				set .@monk_t,.@monk_t+10;
+				mes "违背神者";
+				break;
+			case 6: mes "以我们极限的肉体"; break;
+			case 7: mes "徘徊的人之肉身"; break;
+			case 8: mes "把愚蠢的人之肉体"; break;
+			case 9: mes "把他抹杀及消灭"; break;
+			case 10: mes "彻底的追击"; break;
+			}
+			switch(select("神罚的地上代行者:把愚蠢的人之肉体:违背神者:徘徊的人之肉身:我们武僧:我们的使命是:以我们极限的肉体:彻底的追击:把他抹杀及消灭:神的地上代理人")) {
+			case 1: mes "神罚的地上代行者"; break;
+			case 2:
+				set .@monk_t,.@monk_t+10;
+				mes "把愚蠢的人之肉体";
+				break;
+			case 3: mes "违背神者"; break;
+			case 4: mes "徘徊的人之肉身"; break;
+			case 5: mes "我们武僧"; break;
+			case 6: mes "我们的使命是"; break;
+			case 7: mes "以我们极限的肉体"; break;
+			case 8: mes "彻底的追击"; break;
+			case 9: mes "把他抹杀及消灭"; break;
+			case 10: mes "神的地上代理人"; break;
+			}
+			switch(select("徘徊的人之肉身:我们的使命是:以我们极限的肉体:神罚的地上代行者:违背神者:我们武僧:把愚蠢的人之肉体:彻底的追击:神的地上代理人:把他抹杀及消灭")) {
+			case 1:
+				set .@monk_t,.@monk_t+10;
+				mes "徘徊的人之肉身";
+				break;
+			case 2: mes "我们的使命是"; break;
+			case 3: mes "以我们极限的肉体"; break;
+			case 4: mes "神罚的地上代行者"; break;
+			case 5: mes "违背神者"; break;
+			case 6: mes "我们武僧"; break;
+			case 7: mes "把愚蠢的人之肉体"; break;
+			case 8: mes "彻底的追击"; break;
+			case 9: mes "神的地上代理人"; break;
+			case 10: mes "把他抹杀及消灭"; break;
+			}
+			switch(select("神的地上代理人:我们武僧:神罚的地上代行者:以我们极限的肉体:我们的使命是:违背神者:把愚蠢的人之肉体:彻底的追击:徘徊的人之肉身:把他抹杀及消灭")) {
+			case 1: mes "神的地上代理人"; break;
+			case 2: mes "我们武僧"; break;
+			case 3: mes "神罚的地上代行者"; break;
+			case 4: mes "以我们极限的肉体"; break;
+			case 5: mes "我们的使命是"; break;
+			case 6: mes "违背神者"; break;
+			case 7: mes "把愚蠢的人之肉体"; break;
+			case 8:
+				set .@monk_t,.@monk_t+10;
+				mes "彻底的追击";
+				break;
+			case 9: mes "徘徊的人之肉身"; break;
+			case 10: mes "把他抹杀及消灭"; break;
+			}
+			switch(select("神的地上代理人:神罚的地上代行者:我们武僧:我们的使命是:以我们极限的肉体:违背神者:把愚蠢的人之肉体:徘徊的人之肉身:彻底的追击:把他抹杀及消灭")) {
+			case 1: mes "神的地上代理人"; break;
+			case 2: mes "神罚的地上代行者"; break;
+			case 3: mes "我们武僧"; break;
+			case 4: mes "我们的使命是"; break;
+			case 5: mes "以我们极限的肉体"; break;
+			case 6: mes "违背神者"; break;
+			case 7: mes "把愚蠢的人之肉体"; break;
+			case 8: mes "徘徊的人之肉身"; break;
+			case 9: mes "彻底的追击"; break;
+			case 10:
+				set .@monk_t,.@monk_t+10;
+				mes "把他抹杀及消灭";
+				break;
+			}
+		}
+		else if (MONK_Q == 13) {
+			switch(select("违背神者给予最后！:违背神者给予审判！:违背神者给予绝灭！:神的地上代理人:我们，武僧:神罚的地上代行者:以拥有的肉体来代替神的光荣:就算骨骼及肉体被切割:为了审判所有对抗神者:所有都是为了神的光荣")) {
+			case 1:
+				mes "[" + strcharinfo(0) + "]";
+				mes "违背神者给予最后！";
+				break;
+			case 2:
+				mes "[" + strcharinfo(0) + "]";
+				set .@monk_t,.@monk_t+10;
+				mes "违背神者给予审判！";
+				break;
+			case 3:
+				mes "[" + strcharinfo(0) + "]";
+				mes "违背神者给予绝灭！";
+				break;
+			case 4:
+				mes "[" + strcharinfo(0) + "]";
+				mes "执行你的旨意。我们将";
+				break;
+			case 5:
+				mes "[" + strcharinfo(0) + "]";
+				mes "我们，武僧";
+				break;
+			case 6:
+				mes "[" + strcharinfo(0) + "]";
+				mes "向你流淌成河，";
+				break;
+			case 7:
+				mes "[" + strcharinfo(0) + "]";
+				mes "让我们的脚步迅速地";
+				break;
+			case 8:
+				mes "[" + strcharinfo(0) + "]";
+				mes "永远充盈着灵魂";
+				break;
+			case 9:
+				mes "[" + strcharinfo(0) + "]";
+				mes "为了审判所有对抗神者";
+				break;
+			case 10:
+				mes "[" + strcharinfo(0) + "]";
+				mes "因父及子之名";
+				break;
+			}
+			switch(select("永远充盈着灵魂:向你流淌成河，:让我们的脚步迅速地:因父及子之名:为了审判所有对抗神者:力量已经降临:我们将成为牧羊人，:违背神者给予最后！:我们，武僧:执行你的旨意。我们将")) {
+			case 1: mes "永远充盈着灵魂"; break;
+			case 2: mes "向你流淌成河，"; break;
+			case 3: mes "让我们的脚步迅速地"; break;
+			case 4: mes "因父及子之名"; break;
+			case 5: mes "为了审判所有对抗神者"; break;
+			case 6: mes "力量已经降临"; break;
+			case 7: mes "我们将成为牧羊人，"; break;
+			case 8:
+				set .@monk_t,.@monk_t+10;
+				mes "违背神者给予最后！";
+				break;
+			case 9: mes "我们，武僧"; break;
+			case 10: mes "执行你的旨意。我们将"; break;
+			}
+			switch(select("我们将成为牧羊人，:违背神者给予最后！:力量已经降临:我们，武僧:永远充盈着灵魂:为了审判所有对抗神者:因父及子之名:让我们的脚步迅速地:执行你的旨意。我们将:向你流淌成河，")) {
+			case 1: mes "我们将成为牧羊人，"; break;
+			case 2: mes "违背神者给予最后！"; break;
+			case 3:
+				set .@monk_t,.@monk_t+10;
+				mes "力量已经降临";
+				break;
+			case 4: mes "我们，武僧"; break;
+			case 5: mes "永远充盈着灵魂"; break;
+			case 6: mes "为了审判所有对抗神者"; break;
+			case 7: mes "因父及子之名"; break;
+			case 8: mes "让我们的脚步迅速地"; break;
+			case 9: mes "执行你的旨意。我们将"; break;
+			case 10: mes "向你流淌成河，"; break;
+			}
+			switch(select("违背神者给予最后！:我们将成为牧羊人，:力量已经降临:让我们的脚步迅速地:我们，武僧:向你流淌成河，:执行你的旨意。我们将:因父及子之名:永远充盈着灵魂:为了审判所有对抗神者")) {
+			case 1: mes "违背神者给予最后！"; break;
+			case 2: mes "我们将成为牧羊人，"; break;
+			case 3: mes "力量已经降临"; break;
+			case 4: mes "让我们的脚步迅速地"; break;
+			case 5:
+				set .@monk_t,.@monk_t+10;
+				mes "我们，武僧";
+				break;
+			case 6: mes "向你流淌成河，"; break;
+			case 7: mes "执行你的旨意。我们将"; break;
+			case 8: mes "因父及子之名"; break;
+			case 9: mes "永远充盈着灵魂"; break;
+			case 10: mes "为了审判所有对抗神者"; break;
+			}
+			switch(select("我们将成为牧羊人，:违背神者给予最后！:力量已经降临:让我们的脚步迅速地:我们，武僧:让我们的脚步迅速地:向你流淌成河，:因父及子之名:永远充盈着灵魂:为了审判所有对抗神者")) {
+			case 1: mes "我们将成为牧羊人，"; break;
+			case 2: mes "违背神者给予最后！"; break;
+			case 3: mes "力量已经降临"; break;
+			case 4:
+				set .@monk_t,.@monk_t+10;
+				mes "让我们的脚步迅速地";
+				break;
+			case 5: mes "我们，武僧"; break;
+			case 6: mes "让我们的脚步迅速地"; break;
+			case 7: mes "向你流淌成河，"; break;
+			case 8: mes "因父及子之名"; break;
+			case 9: mes "永远充盈着灵魂"; break;
+			case 10: mes "为了审判所有对抗神者"; break;
+			}
+			switch(select("违背神者给予最后！:力量已经降临:我们将成为牧羊人，:我们，武僧:让我们的脚步迅速地:向你流淌成河，:执行你的旨意。我们将:永远充盈着灵魂:因父及子之名:为了审判所有对抗神者")) {
+			case 1: mes "违背神者给予最后！"; break;
+			case 2: mes "力量已经降临"; break;
+			case 3: mes "我们将成为牧羊人，"; break;
+			case 4: mes "我们，武僧"; break;
+			case 5: mes "让我们的脚步迅速地"; break;
+			case 6: mes "向你流淌成河，"; break;
+			case 7:
+				set .@monk_t,.@monk_t+10;
+				mes "执行你的旨意。我们将";
+				break;
+			case 8: mes "永远充盈着灵魂"; break;
+			case 9: mes "因父及子之名"; break;
+			case 10: mes "为了审判所有对抗神者"; break;
+			}
+			switch(select("违背神者给予最后！:永远充盈着灵魂:向你流淌成河，:因父及子之名:为了审判所有对抗神者:力量已经降临:我们将成为牧羊人，:让我们的脚步迅速地:我们，武僧:执行你的旨意。我们将")) {
+			case 1: mes "违背神者给予最后！"; break;
+			case 2: mes "永远充盈着灵魂"; break;
+			case 3:
+				set .@monk_t,.@monk_t+10;
+				mes "向你流淌成河，";
+				break;
+			case 4: mes "因父及子之名"; break;
+			case 5: mes "为了审判所有对抗神者"; break;
+			case 6: mes "力量已经降临"; break;
+			case 7: mes "我们将成为牧羊人，"; break;
+			case 8: mes "让我们的脚步迅速地"; break;
+			case 9: mes "我们，武僧"; break;
+			case 10: mes "执行你的旨意。我们将"; break;
+			}
+			switch(select("永远充盈着灵魂:因父及子之名:我们将成为牧羊人，:违背神者给予最后！:力量已经降临:我们，武僧:让我们的脚步迅速地:执行你的旨意。我们将:向你流淌成河，:为了审判所有对抗神者")) {
+			case 1:
+				set .@monk_t,.@monk_t+10;
+				mes "永远充盈着灵魂";
+				break;
+			case 2: mes "因父及子之名"; break;
+			case 3: mes "我们将成为牧羊人，"; break;
+			case 4: mes "违背神者给予最后！"; break;
+			case 5: mes "力量已经降临"; break;
+			case 6: mes "我们，武僧"; break;
+			case 7: mes "让我们的脚步迅速地"; break;
+			case 8: mes "执行你的旨意。我们将"; break;
+			case 9: mes "向你流淌成河，"; break;
+			case 10: mes "为了审判所有对抗神者"; break;
+			}
+			switch(select("力量已经降临:违背神者给予最后！:我们将成为牧羊人，:因父及子之名:让我们的脚步迅速地:我们，武僧:永远充盈着灵魂:向你流淌成河，:执行你的旨意。我们将:为了审判所有对抗神者")) {
+			case 1: mes "力量已经降临"; break;
+			case 2: mes "违背神者给予最后！"; break;
+			case 3: mes "我们将成为牧羊人，"; break;
+			case 4:
+				set .@monk_t,.@monk_t+10;
+				mes "因父及子之名";
+				break;
+			case 5: mes "让我们的脚步迅速地"; break;
+			case 6: mes "我们，武僧"; break;
+			case 7: mes "永远充盈着灵魂"; break;
+			case 8: mes "向你流淌成河，"; break;
+			case 9: mes "执行你的旨意。我们将"; break;
+			case 10: mes "为了审判所有对抗神者"; break;
+			}
+			switch(select("我们将成为牧羊人，:违背神者给予最后！:力量已经降临:我们，武僧:执行你的旨意。我们将:让我们的脚步迅速地:向你流淌成河，:永远充盈着灵魂:因父及子之名:为了审判所有对抗神者")) {
+			case 1: mes "我们将成为牧羊人，"; break;
+			case 2: mes "违背神者给予最后！"; break;
+			case 3: mes "力量已经降临"; break;
+			case 4: mes "我们，武僧"; break;
+			case 5: mes "执行你的旨意。我们将"; break;
+			case 6: mes "让我们的脚步迅速地"; break;
+			case 7: mes "向你流淌成河，"; break;
+			case 8: mes "永远充盈着灵魂"; break;
+			case 9: mes "因父及子之名"; break;
+			case 10:
+				set .@monk_t,.@monk_t+10;
+				mes "为了审判所有对抗神者";
+				break;
+			}
+		}
+		next;
+		mes "[多哈]";
+		mes "...";
+		next;
+		mes "[多哈]";
+		mes "Hmm...";
+		next;
+		if (.@monk_t > 90) {
+			set MONK_Q,14;
+			changequest 3025,3026;
+			mes "[多哈]";
+			mes "...well done, that was perfect. You pay attention well...";
+			next;
+			mes "[多哈]";
+			mes "不过，现在还不是放松的时候。你前面的路还很长。";
+			next;
+			mes "[多哈]";
+			mes "现在，就如我承诺的，我会帮你强健体魄。";
+			next;
+			mes "凝神静气，不要动。";
+			next;
+			mes "^33CCFF你感到风环绕着全身。^000000";
+			next;
+			mes "^33CCFF你体内的能量在增长。^000000";
+			next;
+			mes "[多哈]";
+			mes "我感受到你体内增长的东西。";
+			mes "你现在可以继续前行了……";
+			next;
+			mes "[多哈]";
+			mes "...the next course will be with Boohae.";
+			next;
+			mes "[多哈]";
+			mes "祝你旅途顺利。";
+			mes "别忘了，他叫^CC0000布海^000000。";
+			close;
+		}
+		else {
+			mes "[多哈]";
+			mes "看来你没有专心……若想成为武僧，就必须认真对待。";
+			next;
+			mes "[多哈]";
+			mes "或许武僧之路对你来说太艰难了？";
+			mes "若想继续下去，你必须认真对待……";
+			next;
+			mes "[多哈]";
+			mes "我再给你一次机会。";
+			next;
+			mes "[多哈]";
+			mes "如果你不能专心复述我要求你复述的内容，我就不允许你在这里继续修行……";
+			close;
+		}
+	}
+	else if (MONK_Q == 14) {
+		mes "[多哈]";
+		mes "嗯……你忘了该去见谁吗？";
+		next;
+		mes "[多哈]";
+		mes "连这么简单的事都记不住，我真怀疑你的能力。";
+		next;
+		mes "[多哈]";
+		mes "...are you testing my patience?";
+		next;
+		mes "[多哈]";
+		mes "你快要耗尽我的耐心了……";
+		mes "... go visit Boohae.";
+		close;
+	}
+	else if (MONK_Q > 14 && BaseJob == Job_Acolyte) {
+		mes "[多哈]";
+		mes "...do your best for the final test.";
+		close;
+	}
+	else {
+		mes "[多哈]";
+		mes "无辜者的血绝不应流。";
+		next;
+		mes "[多哈]";
+		mes "然而恶人的血将如河流淌。";
+		next;
+		mes "[多哈]";
+		mes "我们将展开漆黑的羽翼，成为神复仇的重锤。";
+		next;
+		mes "[多哈]";
+		mes "我们将向你流淌成河，愿它永远充盈着灵魂。";
+		next;
+		mes "[多哈]";
+		mes "所有都是为了神的光荣、为了审判所有对抗神者";
+		next;
+		mes "[多哈]";
+		mes "...You don't have to be afraid of me...";
+		close;
+	}
+}
+
+prt_monk,57,179,1	script	布海#mk	110,{
+	if (MONK_Q == 14 && BaseJob == Job_Acolyte) {
+		mes "[布海]";
+		mes "...";
+		next;
+		mes "[布海]";
+		mes "......";
+		next;
+		mes "[布海]";
+		mes ".........";
+		next;
+		mes "[布海]";
+		mes "............";
+		next;
+		select("...excuse me...?");
+		mes "[布海]";
+		mes "...";
+		mes "你竟敢打断我的冥想，我真该打断你的腿……";
+		next;
+		mes "[布海]";
+		mes "........";
+		mes "我给你一个解释为何打断我的机会。";
+		next;
+		mes "[布海]";
+		mes ".....";
+		next;
+		mes "[布海]";
+		mes "那么，开始解释吧……否则你很快就要爬着出去了……";
+		next;
+		if (select("是多哈派我来的。:抱歉，没什么。") == 2) {
+			mes "[布海]";
+			mes "........";
+			mes "...you must have a death wish to have interrupted me intentionally...";
+			close;
+		}
+		mes "[布海]";
+		mes "原来如此……";
+		mes "那么，让我看看……";
+		next;
+		mes "[布海]";
+		mes "....your body seems..";
+		mes "变得强健了。很好……";
+		next;
+		mes "[布海]";
+		mes "你和多哈做了什么？";
+		next;
+		switch(select("嗯……这个……啊……:我们背诵了神圣的誓词。:他检查了我的身体状况。")) {
+		case 1:
+			mes "[布海]";
+			mes "如果连一个简单的问题都";
+			mes "回答不了，你就还没准备好。";
+			mes "别打扰我祈祷。";
+			close;
+		case 2:
+			mes "[布海]";
+			mes "... I see...";
+			mes "他什么都没为你做吗？";
+			next;
+			switch(select("嗯……这个……啊……:他检查了我的身体状况。:他教了我武僧之道。:他改造了我的身体。")) {
+			case 1:
+				mes "[布海]";
+				mes "如果连一个简单的问题都";
+				mes "回答不了，你就还没准备好。";
+				mes "别打扰我祈祷。";
+				close;
+			case 2:
+				mes "[布海]";
+				mes "那对我来说无关紧要……";
+				mes "别再打扰我，滚开！";
+				close;
+			case 3:
+				mes "[布海]";
+				mes "成为武僧的教诲，要在成为武僧之后才能学习。";
+				mes "这不是我要找的答案……";
+				close;
+			case 4:
+				mes "[布海]";
+				mes "很好，看来你已经察觉到体内有某种新的东西。";
+				mes "那么，我们进入下一步……";
+				next;
+				break;
+			}
+			break;
+		case 3:
+			mes "[布海]";
+			mes "...You interrupted me to tell me that...?";
+			mes "滚开，趁我还没打断你的腿……";
+			close;
+		}
+		mes "[布海]";
+		mes "好吧……我们有两项测试……";
+		mes "选择你想做的那一项……";
+		next;
+		if (select("采集蘑菇:马拉松") == 1) {
+			set MONK_Q,15;
+			changequest 3026,3027;
+			mes "[布海]";
+			mes "嗯……采集蘑菇。看来你想考验自己的忍耐力？";
+			mes "去准备吧，准备好后再回来。";
+			close;
+		}
+		set MONK_Q,16;
+		changequest 3026,3028;
+		mes "[布海]";
+		mes "不错的选择。将体力逼到极限，能获得更强的自制力。";
+		mes "去准备吧，准备好后再回来。";
+		close;
+	}
+	if (MONK_Q == 15) {
+		mes "[布海]";
+		mes "那么，你准备好了吗？你只需要有十足的决心。";
+		next;
+		mes "[布海]";
+		mes "采集蘑菇这项测试，是为了";
+		mes "考验你的耐心。";
+		next;
+		mes "[布海]";
+		mes "进入这座修道院附近的建筑吧。";
+		next;
+		mes "[布海]";
+		mes "其他武僧候选人也将和你一起参加同样的测试，";
+		next;
+		mes "[布海]";
+		mes "在场的人越多，他们能采到的蘑菇就越少。";
+		mes "所以我希望你能理解，他们和你一样是在考验自己的耐心。";
+		close;
+	}
+	if (MONK_Q == 16) {
+		mes "[布海]";
+		mes "欢迎回来，准备好了吗？你只需要一双强健的腿。";
+		next;
+		mes "[布海]";
+		mes "马拉松这项测试，是为了";
+		mes "考验你的自制力。";
+		next;
+		mes "[布海]";
+		mes "进入这座修道院附近的建筑吧。";
+		next;
+		mes "[布海]";
+		mes "你只需绕着这栋建筑跑完规定的圈数。";
+		mes "那么……出发吧。";
+		close;
+	}
+	if (MONK_Q == 17) {
+		mes "[布海]";
+		mes "现在，去见'托蒙'。这话要我说多少遍？";
+		mes "你现在疲惫不堪，很容易伤到身体。";
+		mes "'托蒙'就在这座修道院附近一栋建筑的最深处。";
+		close;
+	}
+	if (MONK_Q > 17 && MONK_Q < 24) {
+		mes "[布海]";
+		mes "...........";
+		next;
+		mes "-他似乎正在冥想。-";
+		close;
+	}
+	else {
+		mes "[布海]";
+		mes "嗯嗯……！！";
+		next;
+		mes "-他似乎正在冥想。-";
+		close;
+	}
+}
+
+prt_monk,199,169,3	script	守门人#mk	746,{
+	mes "[看守人乔里普]";
+	mes "....this place is for those";
+	mes "正在接受成为武僧考验之人的地方。";
+	next;
+	if (MONK_Q == 14) {
+		mes "[看守人乔里普]";
+		mes "咦？你刚才说布海？";
+		next;
+		mes "[看守人乔里普]";
+		mes "布海……喜欢躲在一些安静的地方，所以你也许找不到他。比如……某个角落……";
+		close;
+	}
+	else if (MONK_Q > 14 && MONK_Q < 25) {
+		mes "[看守人乔里普]";
+		mes "你的名字是" + strcharinfo(0) + "吗？";
+		next;
+		if (select("是。:否。") == 1) {
+			mes "[看守人乔里普]";
+			mes "好，你还不错……进去吧。你的测试正等着你。祝你好运。";
+			close;
+		}
+		mes "[看守人乔里普]";
+		mes "得了吧，我认得你……进去吧……你的测试已经准备好了。";
+		close;
+	}
+	else {
+		mes "[看守人乔里普]";
+		mes "...please be quiet inside.";
+		close;
+	}
+}
+
+monk_test,329,61,3	script	巴修#mk	753,{
+	if (MONK_Q > 14 && MONK_Q < 25) {
+		if (MONK_Q == 15) {
+			mes "[巴修]";
+			mes "那么，你想参加哪项测试……？";
+			next;
+			mes "[巴修]";
+			mes "听说你选择了蘑菇测试……";
+			mes "算了，这终究是你的选择。";
+		}
+		else if (MONK_Q == 16) {
+			mes "[巴修]";
+			mes "你想进入哪个测试厅？";
+			next;
+			mes "[巴修]";
+			mes "据我所知，你选择了马拉松测试……";
+			mes "算了，这是你的选择。";
+		}
+		else {
+			mes "[巴修]";
+			mes "你想进入哪个测试厅？";
+			mes "你可以选择自己想要的那一项。";
+			next;
+		}
+		next;
+		if (select("忍耐 - 采集蘑菇:自制 - 马拉松") == 1) {
+			mes "你已决定通过^FF0000采集蘑菇^000000来接受忍耐的测试。";
+			close2;
+			warp "job_monk",226,175;
+			end;
+		}
+		mes "你已决定通过^FF0000马拉松^000000来接受自制力的测试。";
+		close2;
+		warp "monk_test",386,387;
+		end;
+	}
+	else {
+		mes "[巴修]";
+		mes "欢迎……这里是武僧的修行之地——圣●卡毕利那修道院。";
+		mes "进去之后……你会见到托蒙，他是继承前人的最年长武僧，";
+		next;
+		mes "[巴修]";
+		mes "请注意，不要触碰任何东西。";
+		mes "另外，在托蒙面前请勿大声说话。";
+		next;
+		mes "[巴修]";
+		mes "希望你在这里过得愉快。";
+		close;
+	}
+}
+
+monk_test,386,388,4	script	见习武僧#mk	110,{
+	mes "[见习武僧]";
+	mes "欢……欢迎！";
+	mes "这……这里是测试武僧候选人忍耐力的地方！";
+	next;
+	mes "[见习武僧]";
+	mes "快……快跑……";
+	mes "直到有人叫你停下，";
+	mes "跑……跑……快跑！";
+	next;
+	mes "[见习武僧]";
+	mes "我……我？我总有一天会跑的！";
+	next;
+	mes "[见习武僧]";
+	mes "武……武僧……你要成为……一名……武……武僧吗？？";
+	next;
+	mes "[见习武僧]";
+	mes "你……你……确定……你不会……放弃吗？";
+	next;
+	if (select("放弃:继续跑") == 1) {
+		mes "[见习武僧]";
+		mes "" + strcharinfo(0) + "...q.q..q. .quit! ...the marathon!! Y...you do not have what it takes to be a m... monk!";
+		mapannounce "monk_test","" + strcharinfo(0) + "...q.q..q. .quit! ...the marathon!! Y...you do not have what it takes to be a m... monk!",bc_map;
+		close2;
+		set MONK_Q,15;
+		changequest 3028,3027;
+		warp "prt_monk",194,168;
+		end;
+	}
+	mes "[见习武僧]";
+	mes "直到有人叫你停下，";
+	mes "跑……跑……快跑！";
+	close;
+}
+
+monk_test,387,350,0	script	负责人#race_monk	45,2,2,{
+OnTouch_:
+	if (MONK_Q >= 15 && MONK_Q <= 24) {
+		set MONK_Q,25;
+		changequest 3028,3029;
+		mapannounce "monk_test","恭喜！"+ strcharinfo(0) +"！你完成了马拉松测试！",bc_map;
+		warp "monk_test",385,388;
+		end;
+	}
+	else if (MONK_Q == 25) {
+		mes "[负责人]";
+		mes "现在……你可以去见托蒙了。";
+		mes "托蒙就在这座修道院附近一栋建筑最里面的房间里。";
+		mapannounce "monk_test","恭喜！" + strcharinfo(0) +"！！你完成了马拉松！",bc_map;
+		close2;
+		warp "prt_monk",194,168;
+		end;
+	}
+}
+
+monk_test,82,384,0	script	陷阱#t_monk1_1::MonkTrap	-1,{
+OnTouch_:
+	mapannounce "monk_test",""+ strcharinfo(0) + "，你被困住了。你将被送回。",bc_map;
+	warp "monk_test",387,387;
+	end;
+}
+
+monk_test,83,384,0	duplicate(MonkTrap)	陷阱#t_monk1_2	-1
+monk_test,82,385,0	duplicate(MonkTrap)	陷阱#t_monk1_3	-1
+monk_test,83,385,0	duplicate(MonkTrap)	陷阱#t_monk1_4	-1
+monk_test,38,388,0	duplicate(MonkTrap)	陷阱#t_monk2_1	-1,0,1
+monk_test,39,388,0	duplicate(MonkTrap)	陷阱#t_monk2_2	-1,0,1
+monk_test,38,386,0	duplicate(MonkTrap)	陷阱#t_monk2_3	-1
+monk_test,39,386,0	duplicate(MonkTrap)	陷阱#t_monk2_4	-1
+monk_test,11,158,0	duplicate(MonkTrap)	陷阱#t_monk3_1	-1,1,0
+monk_test,11,159,0	duplicate(MonkTrap)	陷阱#t_monk3_2	-1,1,0
+monk_test,13,159,0	duplicate(MonkTrap)	陷阱#t_monk3_3	-1
+monk_test,13,158,0	duplicate(MonkTrap)	陷阱#t_monk3_4	-1
+monk_test,11,30,0	duplicate(MonkTrap)	陷阱#t_monk4_1	-1,3,0
+monk_test,11,31,0	duplicate(MonkTrap)	陷阱#t_monk4_2	-1,3,0
+monk_test,15,30,0	duplicate(MonkTrap)	陷阱#t_monk4_3	-1
+monk_test,15,31,0	duplicate(MonkTrap)	陷阱#t_monk4_4	-1
+monk_test,70,12,0	duplicate(MonkTrap)	陷阱#t_monk5_1	-1,0,1
+monk_test,71,12,0	duplicate(MonkTrap)	陷阱#t_monk5_2	-1,0,1
+monk_test,70,10,0	duplicate(MonkTrap)	陷阱#t_monk5_3	-1
+monk_test,71,10,0	duplicate(MonkTrap)	陷阱#t_monk5_4	-1
+monk_test,186,11,0	duplicate(MonkTrap)	陷阱#t_monk6_1	-1,2,3
+monk_test,189,11,0	duplicate(MonkTrap)	陷阱#t_monk6_2	-1,0,3
+monk_test,387,43,0	duplicate(MonkTrap)	陷阱#t_monk7_1	-1,1,0
+monk_test,387,42,0	duplicate(MonkTrap)	陷阱#t_monk7_2	-1,1,0
+monk_test,389,43,0	duplicate(MonkTrap)	陷阱#t_monk7_3	-1
+monk_test,389,42,0	duplicate(MonkTrap)	陷阱#t_monk7_4	-1
+
+job_monk,225,180,1	script	玄武#mk	89,{
+	if ((countitem(1069) > 0 || countitem(1070) > 0) && countitem(1069) < 30 && countitem(1070) < 30) {
+		mes "[玄武]";
+		mes "你带来的蘑菇不够……再去采一些吧。";
+		next;
+		mes "[玄武]";
+		mes "还是说你想放弃……你想放弃吗？";
+		next;
+		switch(select("否:是") == 1) {
+			mes "[玄武]";
+			mes "那就快走！";
+			close;
+		}
+		mes "[玄武]";
+		mes ".....I figured as much....you don't have a spirit.";
+		mapannounce "job_monk","" + strcharinfo(0) + "，放弃了成为武僧的测试。",bc_map;
+		close2;
+		set MONK_Q,16;
+		changequest 3027,3028;
+		warp "prt_monk",194,168;
+		end;
+	}
+	else if (MONK_Q > 14 && MONK_Q < 25 && (countitem(1069) == 0 || countitem(1070)  == 0)) {
+		mes "[玄武]";
+		mes "很高兴见到你。我叫玄武，负责蘑菇测试。";
+		next;
+		mes "[玄武]";
+		mes "你的任务是采集蘑菇。";
+		mes "明白了吗？";
+		next;
+		mes "[玄武]";
+		mes "采蘑菇是为了锻炼你的忍耐力。";
+		mes "我们开辟菜园，既是为了生存，也是为了磨炼心志。";
+		next;
+		mes "[玄武]";
+		mes "我相信，要寻求真正的内心平静，最好的方式就是与自然融为一体。";
+		mes "于是我们开辟了菜园，可是这些蘑菇开始到处疯长！";
+		next;
+		mes "[玄武]";
+		mes "作为修行的一部分，我们要你清除这些蘑菇。";
+		mes "去帮其他人尽量多采些蘑菇，然后带回来给我，";
+		mes "带回足够的^FF0000橘色网菇^000000和^FF0000恶臭香菇^000000作为证明。";
+		next;
+		mes "[玄武]";
+		mes "现在，去采些蘑菇吧。";
+		mes "采到一些后回来找我，我会告诉你够不够。";
+		mes "记住，在园艺中寻求平静。";
+		next;
+		mes "[玄武]";
+		mes "...or do you want to quit?";
+		next;
+		if (select("否:是") == 1) {
+			mes "[玄武]";
+			mes "那就继续吧。";
+			close;
+		}
+		mes "[玄武]";
+		mes ".....yeah I thought as much....you don't have the spirit needed to become a monk.";
+		mapannounce "job_monk","" + strcharinfo(0) + "，放弃了成为武僧的测试。",bc_map;
+		delitem 1069,countitem(1069); //Mushroom_Of_Thief_1
+		delitem 1070,countitem(1070); //Mushroom_Of_Thief_2
+		close2;
+		mapannounce "job_monk","" + strcharinfo(0) + "，放弃了成为武僧的修行。",bc_map;
+		warp "prt_monk",194,168;
+		set MONK_Q,16;
+		changequest 3027,3028;
+		end;
+	}
+	else if (MONK_Q > 14 && MONK_Q < 25 && (countitem(1069) > 29 || countitem(1070) > 29)) {
+		mes "[玄武]";
+		mes "...hmm... not bad.";
+		mes "好，你通过了。";
+		next;
+		mes "[玄武]";
+		mes "去见托蒙，接受下一项测试。";
+		mes "托蒙就在这座修道院附近一栋建筑最里面的房间里。";
+		set MONK_Q,25;
+		changequest 3027,3029;
+		delitem 1069,countitem(1069); //Mushroom_Of_Thief_1
+		delitem 1070,countitem(1070); //Mushroom_Of_Thief_2
+		close2;
+		warp "prt_monk",194,168;
+		end;
+	}
+	else if (MONK_Q > 24) {
+		mes "[玄武]";
+		mes "我不是让你去见^FF0000托蒙^000000吗？还是说你想再采些蘑菇？";
+		mes "托蒙就在这座修道院附近一栋建筑最里面的房间里。";
+		close;
+	}
+}
+
+prt_monk,225,180,1	script	玄武#mk2	89,{
+	if (MONK_Q < 25) {
+		mes "[玄武]";
+		mes "看着蔬菜生长，我感到自己内心也在成长。";
+		next;
+		mes "[玄武]";
+		mes "看着其他武僧辛勤种植蔬菜，";
+		mes "看到别人也像我一样享受园艺，我心里很温暖。";
+		next;
+		mes "[玄武]";
+		mes "老实说，我觉得园艺是最了不起的事……";
+		mes "我们应该感谢那些辛勤劳动、为我们准备食物的弟兄们。";
+		next;
+		mes "[玄武]";
+		mes "路过时别忘了感谢他们的辛劳。";
+		close;
+	}
+	else if (MONK_Q > 24 && BaseJob == Job_Acolyte) {
+		mes "[玄武]";
+		mes "我不是让你去见托蒙吗？还是说你想再采些蘑菇？";
+		mes "托蒙就在这座修道院附近一栋建筑最里面的房间里。";
+		close;
+	}
+	else {
+		mes "[玄武]";
+		mes "看着蔬菜生长，我感到自己内心也在成长。";
+		next;
+		mes "[玄武]";
+		mes "看着其他武僧辛勤种植蔬菜，";
+		mes "看到别人也像我一样享受园艺，我心里很温暖。";
+		next;
+		mes "[玄武]";
+		mes "老实说，我觉得园艺是最了不起的事……";
+		mes "我们应该感谢那些辛勤劳动、为我们准备食物的弟兄们。";
+		next;
+		mes "[玄武]";
+		mes "路过时别忘了感谢他们的辛劳。";
+		close;
+	}
+}
+
+monk_test,319,139,1	script	道文#mk	52,{
+	if (MONK_Q == 25) {
+		mes "[托蒙]";
+		mes "欢迎你，年轻人。";
+		mes "我叫托蒙，负责精神修行的最后一项测试！";
+		next;
+		mes "[托蒙]";
+		mes "现在，我不需要再多说什么了：";
+		mes "^990000清除你面前的一切活物！^000000 就是这样！";
+		next;
+		mes "[托蒙]";
+		mes "在迷宫中游走时，若遇到任何邪恶生物，就直接杀了它们！解放它们受尽折磨的灵魂！！";
+		next;
+		mes "[托蒙]";
+		mes "别把我和那些软弱的牧师相提并论！我们是武僧，永远是最强的！！";
+		next;
+		mes "[托蒙]";
+		mes "我们不像牧师那样躲在别人的力量后面畏缩不前！";
+		next;
+		mes "[托蒙]";
+		mes "现在，集中精神！！握紧拳头，睁大眼睛！是时候让我看看你的本事了。";
+		next;
+		mes "[托蒙]";
+		mes "让我看看你有没有成为真正武僧的本事！！";
+		close2;
+		set MONK_Q,26;
+		changequest 3029,3031;
+		warp "monk_test",88,74;
+		end;
+	}
+	else if (MONK_Q == 26) {
+		mes "[托蒙]";
+		mes "嗯……你失败了？";
+		mes "振作起来！失败只是通往成功的过程！";
+		mes "去吧！重新开始！把它们全部杀光！！";
+		close2;
+		warp "monk_test",88,74;
+		end;
+	}
+	else if (MONK_Q == 27) {
+		mes "[托蒙]";
+		mes "做得非常好！！";
+		mes "我就知道你能通过！";
+		mes "现在……我将赐给你一瓶秘药，它能让你的力量变为两倍。";
+		next;
+		getitem 506,1; //Green_Potion
+		mes "喝下这瓶药，你就能成为武僧了！！！";
+		mes "... now go back to sensei Moohae!!!";
+		set MONK_Q,28;
+		changequest 3031,3032;
+		close;
+	}
+	else if (MONK_Q == 28) {
+		mes "[道文]";
+		mes "我已经说过了，回到武海长老那里去！！！";
+		close;
+	}
+	else {
+		mes "[道文]";
+		mes "....be quiet.";
+		mes ".....";
+		next;
+		mes "[道文]";
+		mes "我不会允许任何人在此修道院中惹事。";
+		next;
+		mes "[道文]";
+		mes "你最好别想着惹出什么麻烦。";
+		close;
+	}
+}
+
+monk_test,82,85,1	script	监考官#mk	95,{
+	mes "[监考官]";
+	mes "那么，你准备好接受精神修行了吗？";
+	next;
+	switch(select("是！:否。:我该怎么做？")) {
+	case 1:
+		mes "[监考官]";
+		mes "很好！祝你好运。如果你迷了路找不到出口，只要登出再登入即可。";
+		mes "然后你就会回到你的储存点。那是什么意思？我怎么知道，我只是被要求这么说。对了，还有，请与同伴合作。";
+		close2;
+		set MONK_Q,26;
+		warp "monk_test",125,277;
+		end;
+	case 2:
+		mes "[监考官]";
+		mes "我明白了。你慢慢来。";
+		close;
+	case 3:
+		mes "[监考官]";
+		mes "这座考场内是精灵的迷宫。";
+		mes "里面的精灵会阻碍你自由行动。";
+		next;
+		mes "[监考官]";
+		mes "若想离开考场，你必须前往位于起点对面的传送门。";
+		next;
+		mes "[监考官]";
+		mes "....Oh yes and also there are monsters wandering around in the maze, please clear them.";
+		mes "祝你好运。";
+		close;
+	}
+}
+
+monk_test,144,277,0	script	mob_monk#1_1	-1,1,1,{
+OnTouch_:
+	monster "monk_test",144,277,"Zombie",1015,1;
+	monster "monk_test",144,277,"Zombie",1015,1;
+	monster "monk_test",144,277,"Zombie",1015,1;
+	monster "monk_test",144,277,"Zombie",1015,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,134,291,0	script	mob_monk#1_2	-1,1,1,{
+OnTouch_:
+	monster "monk_test",134,291,"Zombie",1015,1;
+	monster "monk_test",134,291,"Zombie",1015,1;
+	monster "monk_test",134,291,"Zombie",1015,1;
+	monster "monk_test",134,291,"Zombie",1015,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,157,284,0	script	mob_monk#1_3	-1,1,1,{
+OnTouch_:
+	monster "monk_test",157,284,"Mummy",1041,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,156,261,0	script	mob_monk#1_4	-1,1,1,{
+OnTouch_:
+	monster "monk_test",156,261,"Mummy",1041,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,149,268,0	script	mob_monk#1_5	-1,1,1,{
+OnTouch_:
+	monster "monk_test",149,268,"Zombie",1015,1;
+	monster "monk_test",149,268,"Zombie",1015,1;
+	monster "monk_test",149,268,"Zombie",1015,1;
+	monster "monk_test",149,268,"Zombie",1015,1;
+	monster "monk_test",149,268,"Zombie",1015,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,166,278,0	script	exit_monk#1	45,1,1,{
+OnTouch_:
+	mes "[监考官]";
+	mes "你做得很好。请回到道文那里，他正在等你。";
+	set MONK_Q,27;
+	donpcevent "mob_monk#1_5::OnDisable";
+	donpcevent "mob_monk#1_4::OnDisable";
+	donpcevent "mob_monk#1_3::OnDisable";
+	donpcevent "mob_monk#1_2::OnDisable";
+	donpcevent "mob_monk#1_1::OnDisable";
+	close2;
+	warp "prt_monk",196,168;
+	end;
+}
+
+monk_test,88,91,1	script	监考官#mk2	52,{
+	mes "[监考官]";
+	mes "那么，你准备好接受这场精神修行了吗？";
+	next;
+	switch(select("是！:否。:查看考试注意事项。")) {
+	case 1:
+		mes "[监考官]";
+		mes "很好！祝你好运。如果你迷了路找不到出口，只要登出再登入即可。";
+		mes "然后你就会回到你的储存点。那是什么意思？我怎么知道，我只是被要求这么说。对了，还有，请与同伴合作。";
+		close2;
+		set MONK_Q,26;
+		warp "monk_test",125,177;
+		end;
+	case 2:
+		mes "[监考官]";
+		mes "我明白了。你慢慢来。";
+		close;
+	case 3:
+		mes "[监考官]";
+		mes "这座考场内是精灵的迷宫。";
+		mes "里面的精灵会阻碍你自由行动。";
+		next;
+		mes "[监考官]";
+		mes "若想离开考场，你必须前往位于起点对面的传送门。";
+		next;
+		mes "[监考官]";
+		mes "....Oh yes and also there are monsters wandering around in the maze, please clear them.";
+		mes "祝你好运。";
+		close;
+	}
+}
+
+monk_test,140,181,0	script	mob_monk#2_1	-1,1,1,{
+OnTouch_:
+	monster "monk_test",140,181,"Zombie",1015,1;
+	monster "monk_test",140,181,"Zombie",1015,1;
+	monster "monk_test",140,181,"Zombie",1015,1;
+	monster "monk_test",140,181,"Zombie",1015,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,150,164,0	script	mob_monk#2_2	-1,1,1,{
+OnTouch_:
+	monster "monk_test",150,164,"Zombie",1015,1;
+	monster "monk_test",150,164,"Zombie",1015,1;
+	monster "monk_test",150,164,"Zombie",1015,1;
+	monster "monk_test",150,164,"Zombie",1015,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,158,192,0	script	mob_monk#2_3	-1,1,1,{
+OnTouch_:
+	monster "monk_test",158,192,"Mummy",1041,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,165,186,0	script	mob_monk#2_4	-1,1,1,{
+OnTouch_:
+	monster "monk_test",165,186,"Mummy",1041,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,162,182,0	script	mob_monk#2_5	-1,1,1,{
+OnTouch_:
+	monster "monk_test",162,182,"Zombie",1015,1;
+	monster "monk_test",162,182,"Zombie",1015,1;
+	monster "monk_test",162,182,"Zombie",1015,1;
+	monster "monk_test",162,182,"Zombie",1015,1;
+	monster "monk_test",162,182,"Zombie",1015,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,166,178,0	script	exit_monk#2	45,1,1,{
+OnTouch_:
+	mes "[监考官]";
+	mes "你做得很好。请回到道文那里，他正在等你。";
+	set MONK_Q,27;
+	donpcevent "mob_monk#2_5::OnDisable";
+	donpcevent "mob_monk#2_4::OnDisable";
+	donpcevent "mob_monk#2_3::OnDisable";
+	donpcevent "mob_monk#2_2::OnDisable";
+	donpcevent "mob_monk#2_1::OnDisable";
+	close2;
+	warp "prt_monk",196,168;
+	end;
+}
+
+monk_test,95,85,1	script	监考官#btl#3	79,{
+	mes "[监考官]";
+	mes "那么，你准备好接受这场精神修行了吗？";
+	next;
+	switch(select("是！:否。:查看考试注意事项。")) {
+	case 1:
+		mes "[监考官]";
+		mes "很好！祝你好运。如果你迷了路找不到出口，只要登出再登入即可。";
+		mes "然后你就会回到你的储存点。那是什么意思？我怎么知道，我只是被要求这么说。对了，还有，请与同伴合作。";
+		close2;
+		set MONK_Q,26;
+		warp "monk_test",230,277;
+		end;
+	case 2:
+		mes "[监考官]";
+		mes "我明白了。你慢慢来。";
+		close;
+	case 3:
+		mes "[监考官]";
+		mes "这座考场内是精灵的迷宫。";
+		mes "里面的精灵会阻碍你自由行动。";
+		next;
+		mes "[监考官]";
+		mes "若想离开考场，你必须前往位于起点对面的传送门。";
+		next;
+		mes "[监考官]";
+		mes "....Oh yes and also there are monsters wandering around in the maze, please clear them.";
+		mes "祝你好运。";
+		close;
+	}
+}
+
+monk_test,249,277,0	script	mob_monk#3_1	-1,1,1,{
+OnTouch_:
+	monster "monk_test",249,277,"Zombie",1015,1;
+	monster "monk_test",249,277,"Zombie",1015,1;
+	monster "monk_test",249,277,"Zombie",1015,1;
+	monster "monk_test",249,277,"Zombie",1015,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+}
+
+monk_test,231,296,0	script	mob_monk#3_2	-1,1,1,{
+OnTouch_:
+	monster "monk_test",231,296,"Zombie",1015,1;
+	monster "monk_test",231,296,"Zombie",1015,1;
+	monster "monk_test",231,296,"Zombie",1015,1;
+	monster "monk_test",231,296,"Zombie",1015,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,264,292,0	script	mob_monk#3_3	-1,1,1,{
+OnTouch_:
+	monster "monk_test",264,292,"Mummy",1041,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,252,284,0	script	mob_monk#3_4	-1,1,1,{
+OnTouch_:
+	monster "monk_test",252,284,"Mummy",1041,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,257,285,0	script	mob_monk#3_5	-1,1,1,{
+OnTouch_:
+	monster "monk_test",257,285,"Zombie",1015,1;
+	monster "monk_test",257,285,"Zombie",1015,1;
+	monster "monk_test",257,285,"Zombie",1015,1;
+	monster "monk_test",257,285,"Zombie",1015,1;
+	monster "monk_test",257,285,"Zombie",1015,1;
+	monster "monk_test",257,285,"Zombie",1015,1;
+	end;
+
+OnDisable:
+	killmonsterall "monk_test";
+	end;
+}
+
+monk_test,270,278,0	script	exit_monk#3	45,1,1,{
+OnTouch_:
+	mes "[监考官]";
+	mes "你做得很好。请回到道文那里，他正在等你。";
+	set MONK_Q,27;
+	donpcevent "mob_monk#3_5::OnDisable";
+	donpcevent "mob_monk#3_4::OnDisable";
+	donpcevent "mob_monk#3_3::OnDisable";
+	donpcevent "mob_monk#3_2::OnDisable";
+	donpcevent "mob_monk#3_1::OnDisable";
+	close2;
+	warp "prt_monk",196,168;
+	end;
+}
+
+monk_test,3,3,0	script	resetter#monk	-1,{
+OnTimer500000:
+	donpcevent "mob_monk#1_1::OnDisable";
+	donpcevent "mob_monk#1_2::OnDisable";
+	donpcevent "mob_monk#1_3::OnDisable";
+	donpcevent "mob_monk#1_4::OnDisable";
+	donpcevent "mob_monk#1_5::OnDisable";
+	donpcevent "mob_monk#2_1::OnDisable";
+	donpcevent "mob_monk#2_2::OnDisable";
+	donpcevent "mob_monk#2_3::OnDisable";
+	donpcevent "mob_monk#2_4::OnDisable";
+	donpcevent "mob_monk#2_5::OnDisable";
+	donpcevent "mob_monk#3_1::OnDisable";
+	donpcevent "mob_monk#3_2::OnDisable";
+	donpcevent "mob_monk#3_3::OnDisable";
+	donpcevent "mob_monk#3_4::OnDisable";
+	donpcevent "mob_monk#3_5::OnDisable";
+	initnpctimer;
+	end;
+
+
+OnInit:
+OnEnable:
+	initnpctimer;
+	end;
+}
+
+monk_test,137,338,1	script	switchreset#monkmonk	79,{
+	mes "Grrrr...";
+	mes "武僧转职考场内的所有怪物已被重置。";
+	mes "计时器已启动。";
+	donpcevent "mob_monk#1_1::OnDisable";
+	donpcevent "mob_monk#1_2::OnDisable";
+	donpcevent "mob_monk#1_3::OnDisable";
+	donpcevent "mob_monk#1_4::OnDisable";
+	donpcevent "mob_monk#1_5::OnDisable";
+	donpcevent "mob_monk#2_1::OnDisable";
+	donpcevent "mob_monk#2_2::OnDisable";
+	donpcevent "mob_monk#2_3::OnDisable";
+	donpcevent "mob_monk#2_4::OnDisable";
+	donpcevent "mob_monk#2_5::OnDisable";
+	donpcevent "mob_monk#3_1::OnDisable";
+	donpcevent "mob_monk#3_2::OnDisable";
+	donpcevent "mob_monk#3_3::OnDisable";
+	donpcevent "mob_monk#3_4::OnDisable";
+	donpcevent "mob_monk#3_5::OnDisable";
+	donpcevent "resetter#monk::OnEnable";
+	close;
+}
+
+//============================================================ 
+// Monsters of Mushroom Collecting
+//============================================================ 
+job_monk,0,0	monster	蘑菇	1182,70
+job_monk,0,0	monster	盗虫	1051,20
+
+//============================================================ 
+// Old changelog
+//============================================================ 
+//= 1.1 Fixed missing '";'. Now it's loading fine [Lupus]
+//= 1.1+ Edited/Translated 5% [Celest]
+//= 1.2 Made Poetry Quiz passable, Fixed Marathon Part [Lupus]
+//= 1.3 Added Baby Class Support [Lupus]
+//= 1.5 Fixed possible EXP abuse [Lupus]
+//= 1.6 Added a func which prevent advanced classes passing
+//=     2nd Job Quests again. It also guides adv classes where
+//=     to go. [Lupus]
+//= 1.7 Fixed warps19/20 [Yor]
+//= 1.8 Fixed bugs. Fixed Green Potion exploit. Getting rid of Jfunc mess [Lupus]
+//= 1.9 Added a missing check in Fuhai and fixed a LOT of Engrish. [Zephiris]
+//= 1.9b Fixed another bug in Fuhai. [Zephiris]
+//= 2.0 Changed numbers to constants. [Vicious]
+//= 2.1 Removed Duplicates [Silent]
+//============================================================ 

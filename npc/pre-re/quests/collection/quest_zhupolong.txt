@@ -1,0 +1,101 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= Masao
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Custom Version.
+//= Repeatable EXP Quest : Kill 50 Zhu Po Long.
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+lou_dun02,161,264,4	script	猎龙者	732,{
+
+	if (checkquest(60182) != -1) {
+		if (checkquest(60182,HUNTING) != 2 ) {
+			mes "[猎龙者]";
+			mes "你猎杀完50只舞狮了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[猎龙者]";
+				mes "嗯……我觉得你还没有猎杀满50只。";
+				close;
+			case 2:
+				mes "[猎龙者]";
+				mes "记住，我需要人帮忙猎杀舞狮，去猎杀50只吧。";
+				close;
+			case 3:
+				mes "[猎龙者]";
+				mes "你确定要停止狩猎吗？";
+				mes "你已经取得的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[猎龙者]";
+					mes "那好吧，如果你改变主意就回来这里。";
+					erasequest 60182;
+					close;
+				case 2:
+					mes "[猎龙者]";
+					mes "请猎杀50只舞狮，让这里成为人们能来获取经验值的地方。";
+					close;
+				}
+			}
+		}
+		mes "[猎龙者]";
+		mes "了不起，你做得真快。";
+		getexp 151300,60520;
+		erasequest 60182;
+		close;
+	}
+	if ((BaseLevel > 49) && (BaseLevel < 91)) {
+		mes "[猎龙者]";
+		mes "太好了！";
+		mes "你是来帮我的，对吧？";
+		mes "如果不是，我真不知道该怎么对付这里的怪物了！";
+		next;
+		switch(select("当然:不")) {
+		case 1:
+			mes "[猎龙者]";
+			mes "太好了！我一见到你就知道可以指望你！";
+			mes "我需要你减少现在在这张地图上横行的怪物数量！";
+			mes "这附近有太多舞狮，低等级玩家根本无法在这里好好获取经验。";
+			next;
+			mes "[猎龙者]";
+			mes "那么，你还愿意帮我吗？";
+			next;
+			switch(select("当然:取消")) {
+			case 1:
+				if (BaseLevel > 90) {
+					mes "[猎龙者]";
+					mes "非常感谢你帮忙对付舞狮！";
+					mes "目前情况已经稳定，我不再需要你帮忙猎杀它们了。";
+					close;
+				}
+				mes "[猎龙者]";
+				mes "去猎杀50只舞狮，完成后告诉我。我会为你的付出给予报酬。";
+				setquest 60182;
+				close;
+			case 2:
+				mes "[猎龙者]";
+				mes "如果你改变主意，请回来。";
+				close;
+			}
+		case 2:
+			mes "[猎龙者]";
+			mes "如果你改变主意，请回来。";
+			close;
+		}
+	}
+	mes "[猎龙者]";
+	mes "天哪，天哪！";
+	next;
+	mes "[猎龙者]";
+	mes "抱歉，我现在没法说话，我痛得要命，这些该死的舞狮要杀了我。";
+	close;
+}

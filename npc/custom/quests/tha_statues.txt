@@ -1,0 +1,269 @@
+//===== rAthena Script =======================================
+//= Custom Thanatos Tower Quest
+//===== By: ==================================================
+//= Bibilol, Moryagorn
+//===== Current Version: =====================================
+//= 1.1
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= Custom Thanatos Tower Quest
+//===== Additional Comments: =================================
+//= 1.1 Fixed wrong NPC names in their dialogues, added
+//=     Justin84's gems check in Sox NPC [Lupus]
+//============================================================
+
+//Statue (NPC)(U: UP, D: DOWN, R: RIGHT, L: LEFT) :
+// Explain Npc
+tha_t08,69,106,4	script	雕像	111,{
+	mes "你可以读到雕像背面的文字：";
+	mes "'远古之灵，墙门紧闭";
+	mes "上层楼，或异邦禁忌";
+	mes "依雕像之序，你将寻得道路";
+	mes "或许某日，它将引你来到我身边。";
+	mes ".....Thanatos '";
+	close;
+}
+
+//Tha_t09 :
+//(Thalos)(U,L)-->tha_t09,17,158,4
+//(Mediane)(D,R)-->tha_t09,84,99,4
+//Script:
+
+tha_t09,17,158,4	script	塔洛斯	111,{
+	if(TSQ_CHK == 1) goto done;
+	mes "[塔洛斯]";
+	mes "现在你必须找到第2座雕像。";
+	set TSQ_CHK,1;
+	close;
+done:
+	mes "[塔洛斯]";
+	mes "去搜寻第2座雕像吧！";
+	close;
+	
+}
+
+tha_t09,84,99,4	script	梅迪安	111,{
+	if(TSQ_CHK != 1) goto nook;
+	mes "[梅迪安]";
+	mes "好，我现在把你传送到下一层。";
+	next;
+	set TSQ_CHK,0;
+	warp "tha_t10",	165,	138; 
+	close;
+nook:
+	mes "[梅迪安]";
+	mes "你必须与第1座雕像中的精灵交谈。";
+	close;
+}
+
+//Tha_t10 :
+//(Melkor)(U)-->tha_t10,130,159,4
+//(Zebrus)(D,R)-->tha_t10,160,98,4
+//(Veriaelle)(D,L)-->tha_t10,99,97,4
+//Script:
+
+tha_t10,130,159,4	script	梅尔克	111,{
+	if(TSQ_CHK == 1) goto done;
+	mes "[梅尔克]";
+	mes "现在你必须找到其他精灵。";
+	mes "我们共有3位。";
+	set TSQ_CHK,1;
+	close;
+done:
+	mes "[梅尔克]";
+	mes "去找吧，他们就在这一层。";
+	close;
+}
+
+tha_t10,160,98,4	script	泽布勒斯	111,{
+	if(TSQ_CHK != 1) goto nook;
+	mes "[泽布勒斯]";
+	mes "继续前进，还剩1位精灵";
+	set TSQ_CHK,2;
+	close;
+nook:
+	mes "[泽布勒斯]";
+	mes "你似乎迷路了，回去和梅尔克谈谈吧。";
+	next;
+	set TSQ_CHK,0;
+	close;
+}
+
+tha_t10,99,97,4	script	薇莉艾尔	111,{
+	if(TSQ_CHK != 2) goto nook;
+	mes "[薇莉艾尔]";
+	mes "好，我现在把你传送到下一层。";
+	next;
+	set TSQ_CHK,0;
+	warp "tha_t11",	86,	38;
+	close;
+nook:
+	mes "[薇莉艾尔]";
+	mes "你似乎迷路了，回去和梅尔克谈谈吧。";
+	next;
+	set TSQ_CHK,0;
+	close;
+}
+
+//Tha_t11 :
+//(Throtre)(U,L)-->tha_t11,16,85,4
+//(Klermaz)(D,R)-->tha_t11,85,16,4
+//(Mihane)(D,L)-->tha_t11,16,16,4
+//(Seranes)(U,R)-->tha_t11,85,85,4
+//Script:
+
+tha_t11,16,85,4	script	斯洛特	111,{
+	if(TSQ_CHK == 1) goto done;
+	mes "[斯洛特]";
+	mes "你已获得我前往下一层的许可";
+	mes "不过，你必须向其他精灵展示你的实力";
+	set TSQ_CHK,1;
+	close;
+done:
+	mes "[斯洛特]";
+	mes "去找吧，他们离不开这一层。";
+	close;
+}
+
+tha_t11,85,16,4	script	克莱马兹	111,{
+	if(TSQ_CHK != 1) goto nook;
+	mes "[克莱马兹]";
+	mes "嗯，看来斯洛特允许你通过了。";
+	mes "那么你已得到我的祝福，还剩2位精灵。";
+	set TSQ_CHK,2;
+	close;
+nook:
+	mes "[克莱马兹]";
+	mes "你似乎迷路了，回去和斯洛特谈谈吧。";
+	next;
+	set TSQ_CHK,0;
+	close;
+}
+
+tha_t11,16,16,4	script	米哈内	111,{
+	if(TSQ_CHK != 2) goto nook;
+	mes "[米哈内]";
+	mes "继续前进，只剩1位。";
+	set TSQ_CHK,3;
+	close;
+nook:
+	mes "[米哈内]";
+	mes "抱歉，你必须从头开始。";
+	next;
+	set TSQ_CHK,0;
+	close;
+}
+
+tha_t11,85,85,4	script	塞兰尼斯	111,{
+	if(TSQ_CHK != 3 ) goto nook;
+	mes "[塞兰尼斯]";
+	mes "很好，看来其他精灵已准许你通行。";
+	mes "我这就把你传送到下一层。";
+	next;
+	set TSQ_CHK,0;
+	warp "tha_t12",	129,	58;
+	close;
+nook:
+	mes "[塞兰尼斯]";
+	mes "你没有按照正确的顺序，请从头再来。";
+	next;
+	set TSQ_CHK,0;
+	close;
+}
+
+//Tha_t12 ( M: Middle):
+//(Nox)(D,L)-->tha_t12,103,18,4
+//(Vox)(R)-->tha_t12,162,58,4
+//(Hox)(L)-->tha_t12,96,57,4
+//(Dox)(D,R)-->tha_t12,153,17,4
+//(Sox)(U)-->tha_t12,128,88,4
+//Script:
+
+tha_t12,103,18,4	script	诺克斯	111,{
+	if(TSQ_CHK == 1 ) goto done;
+	mes "[诺克斯]";
+	mes "很好，还剩4位精灵。";
+	set TSQ_CHK,1;
+	close;
+done:
+	mes "[诺克斯]";
+	mes "去找吧，他们离不开这一层。";
+	close;
+}
+
+tha_t12,162,58,4	script	沃克斯	111,{
+	if(TSQ_CHK != 1 ) goto nook;
+	mes "[沃克斯]";
+	mes "继续前进，还剩3位精灵！";
+	set TSQ_CHK,2;
+	close;
+nook:
+	mes "[沃克斯]";
+	mes "抱歉，回去和诺克斯谈谈吧。";
+	next;
+	set TSQ_CHK,0;
+	close;
+}
+
+tha_t12,96,57,4	script	霍克斯	111,{
+	if(TSQ_CHK != 2 ) goto nook;
+	mes "[霍克斯]";
+	mes "你走在正确的路上，还剩2位精灵！";
+	set TSQ_CHK,3;
+	close;
+nook:
+	mes "[霍克斯]";
+	mes "抱歉，回去和沃克斯谈谈吧。";
+	next;
+	set TSQ_CHK,0;
+	close;
+}
+
+tha_t12,153,17,4	script	多克斯	111,{
+	if(TSQ_CHK != 3 ) goto nook;
+	mes "[多克斯]";
+	mes "很好，还剩1位精灵。";
+	set TSQ_CHK,4;
+	close;
+nook:
+	mes "[多克斯]";
+	mes "抱歉，回去和霍克斯谈谈吧。";
+	next;
+	set TSQ_CHK,0;
+	close;
+}
+
+tha_t12,128,88,4	script	索克斯	111,{
+	if(TSQ_CHK != 4 ) goto nook;
+	mes "[索克斯]";
+	mes "你刚刚成功通过了考验。";
+	next;
+	mes "[索克斯]";
+	mes "你必须给我红色魔法石、黄色魔法石、蓝色魔法石和绿色魔法石。";
+	next;
+	if(countitem(7426) < 1 || countitem(7427) < 1 || countitem(7428) < 1 || countitem(7429) < 1) goto nostone;
+	delitem 7426,1;
+	delitem 7427,1;
+	delitem 7428,1;
+	delitem 7429,1;
+	mes "[索克斯]";
+	mes "我现在将把你传送到命运之阶。";
+	mes "再见。";
+	next;
+	set TSQ_CHK,0;
+	warp "thana_step", 186, 223;
+	close;
+
+nostone:
+	mes "[索克斯]";
+	mes "唉，看来你的石头不够。";
+	close;
+
+nook:
+	mes "[索克斯]";
+	mes "抱歉，回去和多克斯谈谈吧。";
+	next;
+	set TSQ_CHK,0;
+	close;
+}

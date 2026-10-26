@@ -1,0 +1,202 @@
+//===== rAthena Script ======================================= 
+//= Dye Maker
+//===== By: ================================================== 
+//= rAthena Dev Team
+//===== Current Version: ===================================== 
+//= 1.4
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Quests to create the eight colored Dyestuffs.
+//===== Additional Comments: ================================= 
+//= 1.0 Fully working [kobra_k88]
+//= 1.1 Spell Checked [Nexon] 
+//= 1.2 Rescripted to Aegis 10.3 standard. [L0ne_W0lf]
+//= 1.2b Fixed typos in variable names [ultramage]
+//= 1.3 Made the checks more dynamic [ultramage]
+//= 1.3b Fixed incorrect checking loop structure [ultramage]
+//= 1.4 Added a checkweight. [L0ne_W0lf]
+//============================================================ 
+
+morocc_in,146,99,3	script	贾瓦·杜利汉	58,{
+	if ((MaxWeight-Weight) < 200 || checkweight(1201,1) == 0) {
+		mes "- 请稍等！-";
+		mes "- 您目前携带的 -";
+		mes "- 物品太多了。 -";
+		mes "- 请稍后再来 -";
+		mes "- 请先把一些物品放进卡普拉仓库 -";
+		close;
+	}
+	mes "[染料师 贾瓦·杜利汉]";
+	mes "Wow...";
+	mes "天气真好。这样的日子最适合做染料了。";
+	next;
+	switch(select("交谈:制作染料:取消")) {
+	case 1:
+		mes "[染料师 贾瓦·杜利汉]";
+		mes "呃，其实我没什么好跟你说的。不过，如果你想听我讲讲我的人生，我倒是可以讲讲。有点长、有点无聊，你愿意听吗？";
+		next;
+		if (select("听:不听") == 1) {
+			mes "[染料师 贾瓦·杜利汉]";
+			mes "从我记事起，父亲就一直在做染料。他常常花上无数个小时，调制各种颜色的染料。即使母亲去世时，他也没有停下来。";
+			next;
+			mes "[染料师 贾瓦·杜利汉]";
+			mes "我人生中有一段时期很叛逆，离家出走了。我不想被绑在家业上，想试试别的事情。";
+			next;
+			mes "[染料师 贾瓦·杜利汉]";
+			mes "Anyways...";
+			mes "最后我还是回到了家，继承家业，做染料已经 15 年了。看来这真的是我的天性。";
+			next;
+			mes "[染料师 贾瓦·杜利汉]";
+			mes "最近我才发现，我现在能理解父亲了。理解他为什么把一切都投入到做染料上……";
+			next;
+			mes "[染料师 贾瓦·杜利汉]";
+			mes "在那枯燥又辛苦的工作中，他大概感受到了那些色彩把许多梦想传递给别人的魔力。";
+			next;
+			mes "[染料师 贾瓦·杜利汉]";
+			mes "也许正是为了那些梦想，他才那么努力地为客人制作染料……";
+			next;
+			mes "[染料师 贾瓦·杜利汉]";
+			mes "嘿……我怎么知道？嗯，因为我现在的感受就是这样。从几年前开始，我就能听见色彩在说的话……";
+			next;
+			mes "[染料师 贾瓦·杜利汉]";
+			mes "你等着看吧。总有一天，我会成功做出父亲想做、却始终没有机会做出来的那种颜色。";
+			close;
+		}
+		mes "[染料师 贾瓦·杜利汉]";
+		mes "Ahahahaha...";
+		mes "唉，反正也不会有人想听一个微不足道的染料师的故事吧。哈哈哈……";
+		close;
+
+	case 2:
+		mes "[染料师 贾瓦·杜利汉]";
+		mes "太好了！只要你想要，我就给你做。我保证做出你想要的颜色。不过你想做什么颜色的染料？颜色不同，费用也不同。";
+		next;
+		mes "[染料师 贾瓦·杜利汉]";
+		mes "你问为什么？你要知道，有些颜色容易做，有些颜色则要多费功夫。请不要觉得费用太贵。";
+		next;
+		mes "[染料师 贾瓦·杜利汉]";
+		mes "染料之色是特别的，是我倾注全部心血做出来的。";
+		next;
+		switch(select("红色染料:黄色染料:蓝色染料:绿色染料:赤色染料:紫色染料:白色染料:黑色染料:取消")) {
+		case 1: callsub S_MakeDye,1,1; break;
+		case 2: callsub S_MakeDye,2,1; break;
+		case 3: callsub S_MakeDye,3,2; break;
+		case 4: callsub S_MakeDye,4,3; break;
+		case 5: callsub S_MakeDye,5,4; break;
+		case 6: callsub S_MakeDye,6,4; break;
+		case 7: callsub S_MakeDye,7,4; break;
+		case 8: callsub S_MakeDye,8,4; break;
+		case 9:
+			mes "[染料师 贾瓦·杜利汉]";
+			mes "咦——！！怎么回事？你现在改变主意了！？真让人失望……";
+			close;
+		}
+
+	case 3:
+		mes "[染料师 贾瓦·杜利汉]";
+		mes "我不是在自夸。但我确实有做染料的手艺。如果你需要染料，尽管来找我，我会以合理的价格为你制作。";
+		close;
+	}
+
+S_MakeDye:
+	mes "[染料师 贾瓦·杜利汉]";
+	switch(getarg(0)) {
+	case 1:
+		mes "嗯……做红色染料需要 30 个红色药草、1 个解毒剂和 1 个空瓶。制作费只要 3000 zeny。";
+		setarray .@item[0], 507, 973, 713;
+		setarray .@count[0], 30,   1,   1;
+		set .@cost,3000;
+		set .@dyestuff,975;
+		break;
+	case 2:
+		mes "嗯……做黄色染料需要 30 个黄色药草、1 个解毒剂和 1 个空瓶。制作费只要 3000 zeny。";
+		setarray .@item[0], 508, 973, 713;
+		setarray .@count[0], 30,   1,   1;
+		set .@cost,3000;
+		set .@dyestuff,976;
+		break;
+	case 3:
+		mes "嗯……做蓝色染料需要 20 个蓝色药草、1 个解毒剂和 1 个空瓶。蓝色药草比较难处理，所以费用要 3500 zeny。";
+		setarray .@item[0], 510, 973, 713;
+		setarray .@count[0], 20,   1,   1;
+		set .@cost,3500;
+		set .@dyestuff,978;
+		break;
+	case 4:
+		mes "嗯……做绿色染料需要 5 个蓝色药草、20 个绿色药草、20 个黄色药草、1 个解毒剂、1 个混合物和 1 个空瓶。别把材料弄混了。费用只要 5000 zeny。";
+		setarray .@item[0], 510, 511, 508, 974, 973, 713;
+		setarray .@count[0],  5,  20,  20,   1,   1,   1;
+		set .@cost,5000;
+		set .@dyestuff,979;
+		break;
+	case 5:
+		mes "嗯……做赤色染料需要 20 个红色药草、20 个黄色药草、1 个解毒剂、1 个混合物和 1 个空瓶。费用要 5000 zeny。";
+		setarray .@item[0], 507, 508, 974, 973, 713;
+		setarray .@count[0], 20,  20,   1,   1,   1;
+		set .@cost,5000;
+		set .@dyestuff,980;
+		break;
+	case 6:
+		mes "嗯……做紫色染料需要 10 个蓝色药草、30 个红色药草、1 个解毒剂、1 个混合物和 1 个空瓶。费用是 5000 zeny。";
+		setarray .@item[0], 510, 507, 974, 973, 713;
+		setarray .@count[0], 10,  30,   1,   1,   1;
+		set .@cost,5000;
+		set .@dyestuff,981;
+		break;
+	case 7:
+		mes "嗯……做白色染料需要 30 个白色药草、1 个解毒剂和 1 个空瓶。费用是 3000 zeny。";
+		setarray .@item[0], 509, 973, 713;
+		setarray .@count[0], 30,   1,   1; 
+		set .@cost,3000;
+		set .@dyestuff,982;
+		break;
+	case 8:
+		mes "嗯……需要红色、黄色、绿色药草各 30 个，蓝色药草 5 个，1 个解毒剂、1 个混合物和 1 个空瓶。这道工序比其他颜色更花时间、更费功夫，所以要 7000 zeny。";
+		setarray .@item[0], 507, 508, 511, 510, 974, 973, 713;
+		setarray .@count[0], 30,  30,  30,   5,   1,   1,   1;
+		set .@cost,7000;
+		set .@dyestuff,983;
+		break;
+	}
+	next;
+	mes "[染料师 贾瓦·杜利汉]";
+	switch(getarg(1)) {
+	case 1: mes "啊！我想你应该都准备好了。要开始制作吗？"; break;
+	case 2: mes "好！我想你应该都准备好了。要开始制作吗？"; break;
+	case 3: mes "好！我想你应该都准备好了。我们开始制作吧？"; break;
+	case 4: mes "好！我想你应该都准备好了。开始制作吗？"; break;
+	}
+	next;
+	if (select("制作染料:取消") == 1) {
+		set .@size, getarraysize(.@item);
+		// check requirements
+		for( set .@i,0 ; .@i < .@size ; set .@i,.@i+1 )
+			if( countitem(.@item[.@i]) < .@count[.@i] )
+				break;
+		if( .@i < .@size || Zeny < .@cost ) {
+			mes "[染料师 贾瓦·杜利汉]";
+			mes "嗯……不够啊……";
+			mes "这些材料恐怕做不出你想要的颜色。你再去多收集一些材料吧……？";
+			close;
+		}
+		// delete items
+		for (set .@i, 0; .@i < .@size ; set .@i, .@i+1)
+			delitem .@item[.@i], .@count[.@i];
+		set Zeny, Zeny-.@cost;
+		// get dyestuff
+		getitem .@dyestuff,1;
+		
+		mes "[染料师 贾瓦·杜利汉]";
+		mes "嗯……成品还不错。颜色很饱满。当然，我还会更努力，做出更迷人的颜色……";
+		next;
+		mes "[染料师 贾瓦·杜利汉]";
+		mes "那么，需要更多染料时随时来。";
+		close;
+	}
+	mes "[染料师 贾瓦·杜利汉]";
+	mes "咦——！！怎么回事？";
+	mes "你现在改变主意了！？真让人失望……";
+	return;
+}

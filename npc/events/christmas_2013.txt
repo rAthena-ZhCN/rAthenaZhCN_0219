@@ -1,0 +1,1711 @@
+//===== rAthena Script =======================================
+//= iRO/kRO 2013 Christmas Event
+//===== By: ==================================================
+//= Euphy
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Join the Singles Union Army to break up couples and hunt
+//= raccoons for rewards.
+//===== Additional Comments: =================================
+//= 1.0 First version. [Euphy]
+//============================================================
+
+// Main Quest :: 2013_xmas_en
+//============================================================
+xmas,10,1,5	script	2013任务重置2#xmas	10086,{
+	if (callfunc("F_GM_NPC",1854,0) == 1) {
+		setarray .@quests[0], 15055,15056,15057,15059,15060,15061,15062,15063,15064;
+		for (set .@i,0; .@i<=getarraysize(.@quests); set .@i,.@i+1)
+			if (isbegin_quest(.@i)) erasequest .@i;
+	}
+	end;
+}
+
+xmas,150,134,3	script	单身军团司令克里夫	10086,{
+	if (BaseLevel < 40) {
+		mes "[同盟军指挥官克里夫]";
+		mes "菜鸟免谈！！未满40级的人不能加入单身同盟军！";
+		close;
+	}
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 1) {
+		mes "^ff0000你负重过重。请整理背包后再来找我。^000000";
+		close;
+	}
+	set .@playtime, checkquest(15059,PLAYTIME);
+	if (.@playtime == 0 || .@playtime == 1) {
+		mes "- 24小时后可以再次接取此任务。";
+		close;
+	} else if (checkquest(15059,PLAYTIME) > 1) {
+		erasequest 15059;
+		set xmas2013_01,0;
+	}
+	set .@que_allmem, isbegin_quest(15060) + isbegin_quest(15061) + isbegin_quest(15062) + isbegin_quest(15063) + isbegin_quest(15064);
+	if (isbegin_quest(15057) == 1) {
+		if (countitem(7909) < 10 || countitem(7910) < 10 || countitem(6682) < 10) {
+			mes "[同盟军指挥官克里夫]";
+			mes "我们还需要更多材料，才能为单身同盟军举办圣诞派对！";
+			next;
+			mes "[同盟军指挥官克里夫]";
+			mes "去那些该死的浣熊那里，带回^ff000010个被偷的饼干、10个被偷的糖果、10个商品袋^000000！";
+			close;
+		}
+		mes "[同盟军指挥官克里夫]";
+		mes "你狠狠教训过浣熊万岁队了吗？哦！你把我们要的东西全带来了。这样我们也能感受到一点圣诞气氛了！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "你带来的东西我全都要了。作为交换，我会给你单身同盟军专属的奖励。你-必-须-一-个-人-打-开！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "夺下这个节日！";
+		mes "单身同盟军万岁！嘻嘻嘻 哈哈哈哈哈！！";
+		delitem 7909, countitem(7909); //Stolen_Cookie
+		delitem 7910, countitem(7910); //Stolen_Candy
+		delitem 6682, countitem(6682); //Bag_Of_Selling_Goods
+		erasequest 15057;
+		setquest 15059;
+		getitem 22685,1; //Solo_Christmas_Gift
+		specialeffect2 EF_MAGICALATTHIT;
+		specialeffect2 EF_POTION2;
+		specialeffect2 EF_ANGEL2;
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 < 5) {
+		mes "[同盟军指挥官克里夫]";
+		mes "你的情侣拆散点数总共为" + xmas2013_01 + "点。";
+		mes "至少拆散5对情侣，然后回来找我！";
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 > 4) {
+		mes "[同盟军指挥官克里夫]";
+		mes "没错！你办到了！！越来越多人加入单身同盟军了！！嘻嘻嘻 哈哈哈哈哈！胜利属于我们！！";
+		erasequest 15056;
+		setquest 15057;
+		getitem 22686,5; //Solo_Cookie
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "但是！！！就在我们忙着拆散情侣的时候，那些该死的浣熊万岁队小鬼偷走了我们大部分物资。没有那些东西，我们根本感受不到圣诞气氛。";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "该惩罚他们，为单身同盟军夺回物资了！！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "^ff0000>10个被偷的饼干、10个被偷的糖果、10个商品袋^000000应该够办派对了。到野外地图和地下城里去找那些浣熊吧！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "多带一些也没关系，我全都要！！";
+		close;
+	} else if (isbegin_quest(15055) == 0) {
+		mes "[同盟军指挥官克里夫]";
+		mes "喂，你！！对！就是你！你！！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "我就直说了。";
+		mes "你一定是单身。我有预感。对吧？！？？";
+		next;
+		if(select("- ……也许吧……？:什么！我有对象！！") == 2) {
+			mes "[同盟军指挥官克里夫]";
+			mes "什么？……有对象？！";
+			mes "...Not single, but a couple...";
+			mes "......";
+			mes "可恶！尝尝单身同盟军的怒火吧！！！";
+			close2;
+			specialeffect2 EF_MAGICALATTHIT;
+			specialeffect2 EF_POTION2;
+			specialeffect2 EF_CRASHEARTH;
+			specialeffect2 EF_COIN;
+			end;
+		}
+		mes "[同盟军指挥官克里夫]";
+		mes "嘻嘻嘻 哈哈哈哈哈！";
+		mes "我就知道！我一眼就能看出来！";
+		mes "别小看我，我这辈子都是单身！嘻嘻嘻 哈哈哈哈哈！";
+		mes "我是同盟军指挥官克里夫！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "总之，这个十二月，那个日子就要来了……";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "到处都是圣诞歌曲、五彩缤纷的彩灯、纷飞的白雪，还有面对面微笑的情侣……情侣……情——侣——……！！！！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "最初这明明是庆祝我主诞生的日子！那么，为什么……怎么会……什么时候变成情侣的节日了？？！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "我实在看不下去了……";
+		mes "我绝不会原谅他们独享快乐！！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "圣诞节是情侣的节日？";
+		mes "休想！这个圣诞节要成为单身者的节日！！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "不过，我需要成员来与他们对抗。名字就叫——单身同盟军！！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "你觉得如何？愿意加入我的单身同盟军，把圣诞节变成单身者的节日吗？";
+		next;
+		select("算我一个！:我来帮忙。:我好像没得拒绝吧？");
+		mes "[同盟军指挥官克里夫]";
+		mes "对！就是这样！不过我们还需要更多成员来对抗情侣。";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "这是你的第一个任务！";
+		mes "去露缇找些人，让他们加入我们。5个单身者应该就够了，快去快去～！";
+		mes "嘻嘻嘻 哈哈哈哈哈！";
+		close2;
+		setquest 15055;
+		end;
+	} else if (isbegin_quest(15055) == 1 && .@que_allmem < 10) {
+		mes "[同盟军指挥官克里夫]";
+		mes "没时间浪费了！";
+		mes "去露缇找到5个单身者，让他们加入！";
+		close;
+	} else if (isbegin_quest(15055) == 1 && .@que_allmem > 9) {
+		mes "[同盟军指挥官克里夫]";
+		mes "干得好！我都见过他们了！他们有资格加入我们的事业。嘻嘻嘻 哈哈哈哈哈！！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "在你召集更多单身同盟军成员的时候，我做了一些徽章……";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "虽然可能没什么用，但这种小纪念品能让我们的羁绊更牢固！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "好了，拿着这个！现在你是单身同盟军的光荣成员了！！";
+		set xmas2013_01,0;
+		completequest 15055;
+		getitem 6821,1; //Solo_Troops_Badge
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "现在我们成员够多了，该让情侣们见识我们的力量了！！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "接着进行第二个任务！";
+		mes "去露缇把情侣拆散。不管你用什么方法，只要让他们分手就行！！";
+		mes "嘻嘻嘻 哈哈哈哈哈！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "对了，还有一件事……";
+		mes "你去干扰情侣时，如果他们分手了，你能得到2点；如果只是单纯吵架，只能得到1点。";
+		mes "但如果他们反而更亲密了，你的分数会扣1点。所以当你拿到5点后回来报告，就代表任务完成。";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "你肯定不会变成负分，所以别担心。";
+		setquest 15056;
+		close;
+	} else if (isbegin_quest(15055) == 2) {
+		mes "[同盟军指挥官克里夫]";
+		mes "现在我们兵力够多了，该让情侣们见识我们的力量了！！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "去执行第二个任务吧！";
+		mes "去露缇把情侣拆散。不管他们是什么情况，只要让他们分手就行！！";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "对了，还有一件事……";
+		mes "你去干扰情侣时，如果他们分手了，你能得到2点；如果只是单纯吵架，只能得到1点。";
+		mes "但如果他们反而更亲密了，你的分数会扣1点。所以当你拿到5点后回来报告，就代表任务完成。";
+		next;
+		mes "[同盟军指挥官克里夫]";
+		mes "你肯定不会变成负分，所以别担心。";
+		setquest 15056;
+		close;
+	}
+	end;
+}
+
+xmas,172,126,3	script	孤独的夸米#xmas	10089,{
+	if (isbegin_quest(15055) == 0) {
+		mes "[夸米]";
+		mes "唉……在圣诞前夕分手了……我孤零零的……是个单身者！……我是吗？？！！";
+		close;
+	} else if (isbegin_quest(15055) == 1 && isbegin_quest(15060) == 0) {
+		mes "[夸米]";
+		mes "唉……在圣诞前夕分手了……我孤零零的……是个单身者！……我是吗？？！！";
+		next;
+		mes "[夸米]";
+		mes "你是谁！？";
+		mes "你找我有什么事？";
+		next;
+		select("- 单身同盟军来找你了。 -");
+		mes "[夸米]";
+		mes "呃？单身同盟军？那是什么？";
+		next;
+		select("- 说明这个社团的事 -");
+		mes "[夸米]";
+		mes "...yeah. You're right!";
+		next;
+		mes "[夸米]";
+		mes "我既然是单身者！就绝不让情侣们享受这个圣诞节！！";
+		next;
+		mes "[夸米]";
+		mes "我要加入单身同盟军！！";
+		next;
+		mes "- 夸米成为单身同盟军的成员。 -";
+		setquest 15060;
+		completequest 15060;
+		close;
+	} else {
+		mes "[单身同盟军 夸米]";
+		mes "首先，我得向前任报仇……不对吗？";
+		close;
+	}
+}
+
+xmas,113,161,5	script	孤独的威勒#xmas	10090,{
+	if (isbegin_quest(15055) == 0) {
+		mes "[威勒]";
+		mes "呼啊啊……一个人玩好无聊啊……";
+		close;
+	} else if (isbegin_quest(15055) == 1 && isbegin_quest(15061) == 0) {
+		mes "[威勒]";
+		mes "呼啊啊……一个人玩好无聊啊……";
+		next;
+		mes "[威勒]";
+		mes "有没有什么有趣的事啊？";
+		mes "...hey, would you play with me??";
+		next;
+		select("- 单身同盟军来找你了。 -");
+		mes "[威勒]";
+		mes "单身同盟什么？为什么来找我？";
+		next;
+		select("- 说明这个社团的事 -");
+		mes "[威勒]";
+		mes "Sooo...";
+		mes "拆散情侣，办一场只有单身者的圣诞派对？";
+		next;
+		mes "[威勒]";
+		mes "那一定很好玩！虽然我听不太懂，不过我要加入，算我一个！！";
+		next;
+		mes "- 威勒成为单身同盟军的成员。 -";
+		setquest 15061;
+		completequest 15061;
+		close;
+	} else {
+		mes "[单身同盟军 威勒]";
+		mes "拆散情侣……这应该很好玩！！";
+		close;
+	}
+}
+
+xmas,131,97,5	script	孤独的玲卡#xmas	10091,{
+	if (isbegin_quest(15055) == 0) {
+		mes "[琳卡]";
+		mes "咦呃！可恶……哪有这种只会炫耀男朋友的朋友，真恶心！她真以为我交不到对象吗？！？";
+		close;
+	} else if (isbegin_quest(15055) == 1 && isbegin_quest(15062) == 0) {
+		mes "[琳卡]";
+		mes "咦呃！可恶……哪有这种只会炫耀男朋友的朋友，真恶心！她真以为我交不到对象吗？！？";
+		next;
+		mes "[琳卡]";
+		mes "- 抽泣 -";
+		next;
+		mes "[琳卡]";
+		mes "我交不到……其实，根本没有人……我一个都没有！！！！！！！！！！！！！！";
+		next;
+		select("- 单身同盟军来找你了。 -");
+		mes "[琳卡]";
+		mes "哎呀！哇！！";
+		mes "你吓我一跳。你在说什么，那是什么？！";
+		next;
+		select("- 说明这个社团的事 -");
+		mes "[琳卡]";
+		mes "呵呵……还有这种事？";
+		mes "拆散情侣……";
+		mes "好！让我加入吧！";
+		next;
+		mes "[琳卡]";
+		mes "还有空位再收一个成员吗？";
+		mes "...soon another member will join!";
+		mes "等着瞧吧～我的朋友！！……";
+		next;
+		mes "- 琳卡成为单身同盟军的成员。 -";
+		setquest 15062;
+		completequest 15062;
+		close;
+	} else {
+		mes "[单身同盟军 琳卡]";
+		mes "等着瞧吧～我的朋友！！你很快……也会加入的！！";
+		close;
+	}
+}
+
+xmas,121,127,5	script	孤独的芝怡#xmas	10088,{
+	if (isbegin_quest(15055) == 0) {
+		mes "[吉]";
+		mes "单身是多么美好……";
+		close;
+	} else if ((isbegin_quest(15055) == 1) && (isbegin_quest(15063) == 0)) {
+		mes "[吉]";
+		mes "单身是多么美好……";
+		next;
+		mes "[吉]";
+		mes "没有人会来烦你。没有需要照顾的人。不会再有别人交代的额外差事。有更多时间独自度过。";
+		next;
+		mes "[吉]";
+		mes "为什么人们要放弃这种优势，偏偏想当情侣呢？？";
+		next;
+		select("- 单身同盟军来找你了。 -");
+		mes "[吉]";
+		mes "是啊，我最近听说过。我就知道你会来找我。";
+		next;
+		mes "[吉]";
+		mes "不必多说了。我要宣扬单身的优势！";
+		next;
+		mes "- 吉成为单身同盟军的成员。 -";
+		setquest 15063;
+		completequest 15063;
+		close;
+	} else {
+		mes "[单身同盟军 吉]";
+		mes "我要宣扬单身的优势！";
+		close;
+	}
+}
+
+xmas,150,169,3	script	孤独的玛帝#xmas	10087,{
+	if (isbegin_quest(15055) == 0) {
+		mes "[马蒂]";
+		mes "唔……Zzz……嚼嚼……";
+		close;
+	} else if (isbegin_quest(15055) == 1 && isbegin_quest(15064) == 0) {
+		mes "[马蒂]";
+		mes "唔……Zzz……嚼嚼……";
+		next;
+		select("- 单身同盟军来找你了。 -");
+		mes "[马蒂]";
+		mes "嚼……嚼嚼……咕……Zzz";
+		next;
+		select("- 说明这个社团的事 -");
+		mes "[马蒂]";
+		mes "唔嗯……喵啊……Zzz";
+		next;
+		mes "- ……就当他已经答应加入了吧。 -";
+		next;
+		mes "- 马蒂成为单身同盟军的成员。 -";
+		setquest 15064;
+		completequest 15064;
+		close;
+	} else {
+		mes "[单身同盟军 马蒂]";
+		mes "嚼……嚼嚼……咕……Zzz";
+		close;
+	}
+}
+
+xmas,108,149,5	script	掉宝机#xmas	562,{
+	if (isbegin_quest(15056) == 0) {
+		mes "[掉宝机]";
+		mes "叮叮咚 叮！～";
+		emotion ET_THROB;
+		next;
+		mes "[老虎机]";
+		mes "！～";
+		emotion ET_THROB, getnpcid(0, "老虎机#xmas");
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 < 5) {
+		mes "[掉宝机]";
+		mes "叮叮叮 叮！～";
+		emotion ET_THROB;
+		next;
+		mes "[老虎机]";
+		mes "恰啦啦啦 沙啦啦啦啦 叮！～";
+		emotion ET_THROB, getnpcid(0, "老虎机#xmas");
+		next;
+		mes "- 哎呀，又是一对情侣！";
+		mes "- 虽然他们只是机器……";
+		mes "- 我实在看不下去了！";
+		next;
+		select("- 把机器开到最大功率。 -");
+		mes "[掉宝机]";
+		mes "叮叮叮咚 叮叮叮咚 叮叮叮咚 叮叮叮咚";
+		next;
+		mes "[老虎机]";
+		mes "咔啦啦啦啦 叮叮咚 咔啦啦 叮叮 咔啦啦啦啦 叮 咔啦啦啦";
+		next;
+		set .@cu_bre, rand(1,10);
+		if (.@cu_bre < 3) {
+			mes "- 我……";
+			mes "- 我好像把两个都弄坏了！";
+			mes "- 成功拆散了一对情侣！";
+			mes "- 干得漂亮，获得2点！";
+			set xmas2013_01, xmas2013_01 + 2;
+		} else if (.@cu_bre > 7) {
+			mes "- 我把机器开了一会儿";
+			mes "- 但机器发出的声音";
+			mes "- 似乎越来越大了。";
+			mes "- 没能拆散他们，扣1点！";
+			if (xmas2013_01 > 0)
+				set xmas2013_01, xmas2013_01 - 1;
+		} else {
+			mes "- 把机器开了一阵子之后";
+			mes "- 我好像终于弄坏了一个！";
+			mes "- 干得不错，给你1点！";
+			set xmas2013_01, xmas2013_01 + 1;
+		}
+		mes "- 当前情侣拆散点数为" + xmas2013_01 + ".";
+		hideonnpc "掉宝机#xmas";
+		hideonnpc "老虎机#xmas";
+		initnpctimer;
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 > 4) {
+		mes "- 情侣拆散点数";
+		mes "- 现在已经超过5了。";
+		mes "- 我该回去找同盟军指挥官克里夫了。";
+		close;
+	}
+	end;
+OnTimer100000:
+	hideoffnpc "掉宝机#xmas";
+	hideoffnpc "老虎机#xmas";
+	stopnpctimer;
+	end;
+}
+xmas,111,149,3	script	老虎机#xmas	563,{ end; }
+
+xmas,181,150,5	script	受惊的男子#xmas	711,{
+	if (isbegin_quest(15056) == 0) {
+		mes "[害怕的男人]";
+		mes "是我的错，对不起。请别生气。";
+		emotion ET_SORRY;
+		next;
+		mes "[生气的女人]";
+		mes "对不起？你知道自己做了什么吗？你知道我为什么生气吗？";
+		emotion ET_FRET, getnpcid(0, "愤怒的女子#xmas");
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 < 5) {
+		mes "[害怕的男人]";
+		mes "是我不好，对不起。请别生气";
+		emotion ET_SORRY;
+		next;
+		mes "[生气的女人]";
+		mes "对不起？你知道自己做了什么吗？你知道我为什么生气吗？";
+		emotion ET_FRET, getnpcid(0, "愤怒的女子#xmas");
+		next;
+		mes "[害怕的男人]";
+		mes "嗯，我只是觉得一切都是我的错";
+		next;
+		mes "[生气的女人]";
+		mes "你总是这样！";
+		mes "你永远不知道该为什么道歉！！";
+		next;
+		mes "[害怕的男人]";
+		mes "唉……我该怎么办？";
+		mes "喂，你觉得我该对女朋友说什么好？";
+		next;
+		select("- 告诉她「我们还是不要再见面了」！");
+		mes "[害怕的男人]";
+		mes "我们……或许还是不要再见面了？";
+		mes "糟了，我刚刚说出口了！";
+		next;
+		set .@cu_bre, rand(1,10);
+		if (.@cu_bre < 3) {
+			mes "[生气的女人]";
+			mes "什么？你刚刚说什么？别再见面了？你怎么能对我说这种话？！明明都是你做错了！好，你听好了，我们干脆分手吧！我受够了！";
+			set xmas2013_01, xmas2013_01 + 2;
+			hideonnpc "受惊的男子#xmas";
+			hideonnpc "愤怒的女子#xmas";
+			initnpctimer;
+			next;
+			mes "[害怕的男人]";
+			mes "不，我不是那个意思……好，就这样吧！我也受够了，受够你整天唠叨！今天就到此为止！！";
+			next;
+			mes "- 成功拆散了一对情侣！！";
+			mes "- 2点！";
+		} else if (.@cu_bre > 7) {
+			mes "[生气的女人]";
+			mes "什么？……你刚刚说什么？别再见面了？";
+			if (xmas2013_01 > 0)
+				set xmas2013_01, xmas2013_01 - 1;
+			hideonnpc "受惊的男子#xmas";
+			hideonnpc "愤怒的女子#xmas";
+			initnpctimer;
+			next;
+			mes "[生气的女人]";
+			mes "真不敢相信你居然这么有男子气概！我好像又爱上你了！";
+			next;
+			mes "[生气的女人]";
+			mes "亲爱的，你能不能再讲一次，再粗鲁一点？";
+			next;
+			mes "[害怕的男人]";
+			mes "咦？好……我们……今天就到此为止吧！！！";
+			next;
+			mes "[生气的女人]";
+			mes "哈哈哈哈！你太棒了！太棒了！再说一次！快说！";
+			next;
+			mes "[害怕的男人]";
+			mes "我们分手吧！我要离开你！！";
+			next;
+			mes "[生气的女人]";
+			mes "哈哈哈哈哈！太棒了！你最棒了！";
+			next;
+			mes "- ……这些人不太正常。";
+			mes "- 因为失败，扣1点！";
+		} else {
+			set xmas2013_01, xmas2013_01 + 1;
+			hideonnpc "受惊的男子#xmas";
+			hideonnpc "愤怒的女子#xmas";
+			initnpctimer;
+			mes "[生气的女人]";
+			mes "什么？……你刚刚说什么？别再见面了？";
+			next;
+			mes "[生气的女人]";
+			mes "...I think we're both too upset now. Let's just talk about it later...";
+			next;
+			mes "[害怕的男人]";
+			mes "嗯？……啊，对，你说得对……再见，路上小心……";
+			next;
+			mes "- 破坏了他们的约会，给你1点！";
+		}
+		mes "- 当前情侣拆散点数为" + xmas2013_01 + ".";
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 > 4) {
+		mes "- 情侣拆散点数";
+		mes "- 现在已经超过5了。";
+		mes "- 我该回去找同盟军指挥官克里夫了。";
+		close;
+	}
+	end;
+OnTimer100000:
+	hideoffnpc "受惊的男子#xmas";
+	hideoffnpc "愤怒的女子#xmas";
+	stopnpctimer;
+	end;
+}
+xmas,183,150,3	script	愤怒的女子#xmas	714,{ end; }
+
+xmas_in,32,99,5	script	单身军团夸米	10089,{
+	if (isbegin_quest(15056) == 0) {
+		mes "[单身同盟军 夸米]";
+		mes "琳卡。像你这么漂亮的女孩竟然会加入单身同盟军，真是个天大的谜。";
+		emotion ET_THROB;
+		next;
+		mes "[单身同盟军 琳卡]";
+		mes "你觉得我漂亮？呵呵……像你这样英俊的男人会加入单身同盟军，对我来说也是个谜。";
+		emotion ET_THROB, getnpcid(0, "单身军团玲卡");
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 < 5) {
+		mes "[单身同盟军 夸米]";
+		mes "琳卡。像你这么漂亮的女孩竟然会加入单身同盟军，真是个天大的谜。";
+		emotion ET_THROB;
+		next;
+		mes "[单身同盟军 琳卡]";
+		mes "你觉得我漂亮？呵呵……像你这样英俊的男人会加入单身同盟军，对我来说也是个谜。";
+		emotion ET_THROB, getnpcid(0, "单身军团玲卡");
+		next;
+		mes "[单身同盟军 夸米]";
+		mes "话说，我们两个都要独自过圣诞，岂不是很可惜？你说呢，琳卡，你和我……";
+		next;
+		select("- 成为情侣就是背叛者！背叛我们的人只有死！！！");
+		set xmas2013_01, xmas2013_01 + 1;
+		hideonnpc "单身军团夸米";
+		hideonnpc "单身军团玲卡";
+		initnpctimer;
+		mes "[单身同盟军 琳卡]";
+		mes "啊！！！是谁？！";
+		mes "这不就是硬把我们拉进单身同盟军的那个人吗？！";
+		next;
+		mes "[单身同盟军 夸米]";
+		mes "你……你刚才在偷听？！";
+		mes "我只是想说，我们该为社团找更多成员！哈哈哈哈！";
+		next;
+		mes "[单身同盟军 夸米]";
+		mes "回头见，琳卡。我要出去猎捕更多情侣了。别告诉老大！";
+		next;
+		mes "[单身同盟军 琳卡]";
+		mes "嗯，我也该走了。回头见，夸米，也跟你道别了～";
+		next;
+		mes "- 成功阻止了一对情侣诞生！";
+		mes "- 干得好，获得1点！";
+		mes "- 当前情侣拆散点数为" + xmas2013_01 + ".";
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 > 4) {
+		mes "- 情侣拆散点数";
+		mes "- 现在已经超过5了。";
+		mes "- 我该回去找同盟军指挥官克里夫了。";
+		close;
+	}
+	end;
+OnTimer300000:
+	hideoffnpc "单身军团夸米";
+	hideoffnpc "单身军团玲卡";
+	stopnpctimer;
+	end;
+}
+xmas_in,34,99,3	script	单身军团玲卡	10091,{ end; }
+
+xmas,156,109,5	script	贫穷的炼金术师#xmas	749,{
+	if (isbegin_quest(15056) == 0) {
+		mes "[贫穷的炼金术士]";
+		mes "哦，你好。";
+		emotion ET_PROFUSELY_SWEAT;
+		next;
+		mes "[花店老板]";
+		mes "你好，炼金术士先生。";
+		mes "你今天也在工作吗？";
+		emotion ET_DELIGHT, getnpcid(0, "花商#xmas");
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 < 5) {
+		mes "[贫穷的炼金术士]";
+		mes "哦，你好。";
+		emotion ET_PROFUSELY_SWEAT;
+		next;
+		mes "[花店老板]";
+		mes "你好，炼金术士先生。";
+		mes "你今天也在工作吗？";
+		emotion ET_DELIGHT, getnpcid(0, "花商#xmas");
+		next;
+		mes "[贫穷的炼金术士]";
+		mes "其实，我有件事要告诉你。";
+		mes "这件事非常重要，请仔细听。";
+		next;
+		mes "[花店老板]";
+		mes "哦，当然，请尽管说。";
+		next;
+		mes "[贫穷的炼金术士]";
+		mes "从生物学上来说，大脑中的边缘系统让我们能够社交、与人沟通、获得乐趣等等。";
+		next;
+		mes "[贫穷的炼金术士]";
+		mes "所以当你看到一位美丽的女性时，她的容貌、气味、声调等信息都会传到边缘系统。";
+		next;
+		mes "[贫穷的炼金术士]";
+		mes "接着边缘系统会评估这些信息，判断这位女士是友善、有攻击性，还是迷人等等。";
+		next;
+		mes "[贫穷的炼金术士]";
+		mes "评估完成后，边缘系统会立刻开始分泌化学物质。";
+		next;
+		mes "[贫穷的炼金术士]";
+		mes "所以如果你被这位女士吸引，就会分泌一种叫做多巴胺的激素，让你感到些许愉悦。";
+		next;
+		mes "[贫穷的炼金术士]";
+		mes "这个阶段结束后，肾上腺素开始分泌，你就会变得更直接、更热情。";
+		next;
+		mes "[贫穷的炼金术士]";
+		mes "我现在对你正处在这个阶段！换句话说，我非常……！！";
+		next;
+		select("- 非常饿，对吧？！");
+		mes "[花店老板]";
+		mes "咦？是这样吗？";
+		mes "炼金术士先生，你现在饿了吗？";
+		next;
+		mes "[贫穷的炼金术士]";
+		mes "啊……是的……我想是吧……";
+		mes "...very hungry..";
+		next;
+		set .@cu_bre, rand(1,10);
+		if (.@cu_bre < 3) {
+			mes "[花店老板]";
+			mes "这附近有家不错的餐厅。你要不要去那里吃顿饭？";
+			set xmas2013_01, xmas2013_01 + 2;
+			hideonnpc "贫穷的炼金术师#xmas";
+			hideonnpc "花商#xmas";
+			initnpctimer;
+			next;
+			mes "[贫穷的炼金术士]";
+			mes "...Sure, thank you. Have a good day...";
+			next;
+			mes "- 成功阻止了一对情侣诞生！";
+			mes "- 干得漂亮，获得2点！";
+		} else if (.@cu_bre > 7) {
+			mes "[花店老板]";
+			mes "原来如此。我明白你的意思了。";
+			if (xmas2013_01 > 0)
+				set xmas2013_01, xmas2013_01 - 1;
+			hideonnpc "贫穷的炼金术师#xmas";
+			hideonnpc "花商#xmas";
+			initnpctimer;
+			next;
+			mes "[花店老板]";
+			mes "那要不要我为你做顿好吃的？";
+			next;
+			mes "[花店老板]";
+			mes "...For the rest of my life, if you want...";
+			next;
+			mes "[贫穷的炼金术士]";
+			mes "Okay...";
+			mes "......";
+			mes "等等，什么？？？？？";
+			next;
+			mes "[贫穷的炼金术士]";
+			mes "......";
+			mes "...... Yes! I want!!!!!!!!";
+			next;
+			mes "- 没能拆散这对情侣";
+			mes "- 因为失败，扣1点！";
+		} else {
+			set xmas2013_01, xmas2013_01 + 1;
+			hideonnpc "贫穷的炼金术师#xmas";
+			hideonnpc "花商#xmas";
+			initnpctimer;
+			mes "[花店老板]";
+			mes "店里有吃的，请进来吧。";
+			next;
+			mes "[贫穷的炼金术士]";
+			mes "啊……好的，谢谢你。";
+			next;
+			mes "- 你多少也算打扰了他们。给你1点！";
+		}
+		mes "- 当前情侣拆散点数为" + xmas2013_01 + ".";
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 > 4) {
+		mes "- 情侣拆散点数";
+		mes "- 现在已经超过5了。";
+		mes "- 我该回去找同盟军指挥官克里夫了。";
+		close;
+	}
+	end;
+OnTimer100000:
+	hideoffnpc "贫穷的炼金术师#xmas";
+	hideoffnpc "花商#xmas";
+	stopnpctimer;
+	end;
+}
+xmas,158,109,3	script	花商#xmas	91,{ end; }
+
+xmas,166,164,5	script	拉菲尼少年#xmas	443,{
+	if (isbegin_quest(15056) == 0) {
+		mes "[拉菲尼男孩]";
+		mes "这里是露缇村……";
+		emotion ET_STARE_ABOUT;
+		next;
+		mes "[拉菲尼女孩]";
+		mes "好美的白色雪花啊。";
+		mes "不过这里太冷了……";
+		emotion ET_CRY, getnpcid(0, "拉菲尼少女#xmas");
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 < 5) {
+		mes "[拉菲尼男孩]";
+		mes "这里是露缇村……";
+		emotion ET_STARE_ABOUT;
+		next;
+		mes "[拉菲尼女孩]";
+		mes "好美的白色雪花啊。";
+		mes "不过这里太冷了……";
+		emotion ET_CRY, getnpcid(0, "拉菲尼少女#xmas");
+		next;
+		mes "[拉菲尼男孩]";
+		mes "可是，是你说这个圣诞想看雪的。";
+		next;
+		mes "[拉菲尼女孩]";
+		mes "哦，可我不知道会这么冷……哎呀……";
+		next;
+		mes "[拉菲尼男孩]";
+		mes "好吧，我知道了……那就靠近我一点。";
+		next;
+		mes "[拉菲尼女孩]";
+		mes "什么？我听不见。你刚才说什么？";
+		next;
+		mes "[拉菲尼男孩]";
+		mes "...Come closer to me. To my side.";
+		next;
+		mes "[拉菲尼女孩]";
+		mes "哦哦，好吧……";
+		next;
+		mes "- 嗯……完全没有空隙";
+		mes "- 让我能插进去……";
+		next;
+		hideonnpc "拉菲尼少年#xmas";
+		hideonnpc "拉菲尼少女#xmas";
+		initnpctimer;
+		set .@cu_bre, rand(1,10);
+		if (.@cu_bre < 6) {
+			set xmas2013_01, xmas2013_01 + 1;
+			mes "[拉菲尼女孩]";
+			mes "....But it's still too cold! I don't want to be here any more.";
+			next;
+			mes "[拉菲尼少女]";
+			mes "我想回埃克拉珠！";
+			next;
+			mes "[拉菲尼少年]";
+			mes "哦？喂……我们好不容易才来到这里，你现在就要回去？";
+			next;
+			mes "[拉菲尼少年]";
+			mes "喂！一起走吧！！";
+			next;
+			mes "- 不费吹灰之力，一切顺利。";
+			mes "- 获得1分！";
+		} else {
+			if (xmas2013_01 > 0)
+				set xmas2013_01, xmas2013_01 - 1;
+			mes "[拉菲尼少女]";
+			mes "哦！比刚才暖和多了……嘿嘿";
+			next;
+			mes "[拉菲尼少年]";
+			mes "别、别靠我这么近！";
+			next;
+			mes "[拉菲尼少女]";
+			mes "为什么不行？管他呢。我们去吃点好吃的吧。";
+			next;
+			mes "[拉菲尼少年]";
+			mes "你靠得太近了！我、我能感觉到你的……呃……喂！";
+			next;
+			mes "- 哎呀，我什么都没做就被那对情侣攻击了。";
+			mes "- 失败，获得-1分！";
+		}
+		mes "- 当前拆散情侣点数为" + xmas2013_01 + ".";
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 > 4) {
+		mes "- 拆散情侣点数";
+		mes "- 现在已超过5点。";
+		mes "- 我该回去找单身军团司令克里夫了。";
+		close;
+	}
+	end;
+OnTimer100000:
+	hideoffnpc "拉菲尼少年#xmas";
+	hideoffnpc "拉菲尼少女#xmas";
+	stopnpctimer;
+	end;
+}
+xmas,168,164,3	script	拉菲尼少女#xmas	438,{ end; }
+
+xmas,147,123,5	script	天使波利#xmas	948,{
+	if (isbegin_quest(15056) == 0) {
+		mes "[天使波利]";
+		mes "咕嘤～";
+		emotion ET_THROB;
+		next;
+		mes "[圣天使波利]";
+		mes "咕嘤 咕嘤～";
+		emotion ET_THROB, getnpcid(0, "圣天使波利#xmas");
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 < 5) {
+		mes "[天使波利]";
+		mes "咕嘤～";
+		emotion ET_THROB;
+		next;
+		mes "[圣天使波利]";
+		mes "咕嘤 咕嘤～";
+		emotion ET_THROB, getnpcid(0, "圣天使波利#xmas");
+		next;
+		mes "- 不过我不能去打扰它们。";
+		mes "- 连话都说不上，";
+		mes "- 算了。";
+		next;
+		mes "- 干脆去狩猎它们？";
+		mes "- ……不行。";
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 > 4) {
+		mes "- 拆散情侣点数";
+		mes "- 现在已超过5点。";
+		mes "- 我该回去找单身军团司令克里夫了。";
+		close;
+	}
+	end;
+}
+xmas,149,123,3	script	圣天使波利#xmas	949,{ end; }
+
+xmas,129,115,5	script	普蕾妮坦#xmas	783,{
+	if (isbegin_quest(15056) == 0) {
+		mes "[普蕾妮坦]";
+		mes "翁巴～ 翁巴 翁巴！";
+		mes "翁巴 乌姆姆姆姆！";
+		next;
+		mes "[普蕾妮坦]";
+		mes "总算抓到你了？你一直背着我偷情，还让我追着你跑？我要杀了你，小子！";
+		emotion ET_FRET;
+		next;
+		mes "[乌姆波科里奥坦]";
+		mes "哎哟……我老婆太凶了。哎哟……好疼！";
+		emotion ET_CRY, getnpcid(0, "乌姆波科里奥坦#xmas");
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 < 5) {
+		mes "[普蕾妮坦]";
+		mes "翁巴～ 翁巴 翁巴！";
+		mes "翁巴 乌姆姆姆姆！";
+		next;
+		mes "[普蕾妮坦]";
+		mes "总算抓到你了？你一直背着我偷情，还让我追着你跑？我要杀了你，小子！";
+		emotion ET_FRET;
+		next;
+		mes "[乌姆波科里奥坦]";
+		mes "哎哟……我老婆太凶了。哎哟……好疼！";
+		emotion ET_CRY, getnpcid(0, "乌姆波科里奥坦#xmas");
+		next;
+		mes "[乌姆波科里奥坦]";
+		mes "维纳坦、贝尔兹坦、查比玛坦";
+		mes "哦哦……汶巴拉的姑娘们来了……她们现在正等着我……啊！别碰我！";
+		next;
+		mes "[普蕾妮坦]";
+		mes "你真是太蠢了！";
+		mes "那些姑娘根本不想见你，她们说要来这里根本就是骗你的！！";
+		next;
+		select("- 不。她们都在这儿！");
+		hideonnpc "普蕾妮坦#xmas";
+		hideonnpc "乌姆波科里奥坦#xmas";
+		initnpctimer;
+		set .@cu_bre, rand(1,10);
+		if (.@cu_bre < 6) {
+			set xmas2013_01, xmas2013_01 + 1;
+			mes "[乌姆波科里奥坦]";
+			mes "嗯……我知道……那些姑娘真的在这儿吗？";
+			next;
+			mes "[乌姆波科里奥坦]";
+			mes "...Oh I got a stomachache... Did I have something wrong... Darling, just a second. I'll be right back soon to go to the restroom! Just wait for a while here!";
+			next;
+			mes "[普蕾妮坦]";
+			mes "喂，你这个笨蛋！给我站住！站住！……站住！！！";
+			next;
+			mes "- 嗯，事情挺简单的。获得1分！";
+		} else {
+			set xmas2013_01, xmas2013_01 + 1;
+			mes "[普蕾妮坦]";
+			mes "谁在那儿？你也想死吗？";
+			next;
+			mes "- 糟了";
+			next;
+			mes "[普蕾妮坦]";
+			mes "你还是什么都不明白。过来，我带你回汶巴拉！";
+			next;
+			mes "[乌姆波科里奥坦]";
+			mes "啊！……啊啊啊啊啊啊！！好疼！不要啊！！！她们在等我！！！";
+			next;
+			mes "- 唉，他反而把事情弄得更糟了。获得1分！";
+		}
+		mes "- 当前拆散情侣点数为" + xmas2013_01 + ".";
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 > 4) {
+		mes "- 拆散情侣点数";
+		mes "- 现在已超过5点。";
+		mes "- 我该回去找单身军团司令克里夫了。";
+		close;
+	}
+	end;
+OnTimer100000:
+	hideoffnpc "普蕾妮坦#xmas";
+	hideoffnpc "乌姆波科里奥坦#xmas";
+	stopnpctimer;
+	end;
+}
+xmas,131,115,3	script	乌姆波科里奥坦#xmas	789,{ end; }
+
+xmas,138,174,5	script	黑暗之王#xmas	737,{
+	if (isbegin_quest(15056) == 0) {
+		mes "[黑暗之王]";
+		mes "哇哈哈哈哈，世界很快就会陷入黑暗，所有人都将跪倒在我面前！！";
+		emotion ET_SURPRISE;
+		next;
+		mes "[恶魔女仆]";
+		mes "我的主人。所有世界都将遵从您的意志。";
+		emotion ET_THROB, getnpcid(0, "恶魔女仆#xmas");
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 < 5) {
+		mes "[黑暗之王]";
+		mes "哇哈哈哈哈，世界很快就会陷入黑暗，所有人都将跪倒在我面前！！";
+		emotion ET_SURPRISE;
+		next;
+		mes "[恶魔女仆]";
+		mes "我的主人。所有世界都将遵从您的意志。";
+		emotion ET_THROB, getnpcid(0, "恶魔女仆#xmas");
+		next;
+		mes "[黑暗之王]";
+		mes "即使我一直下达艰难的命令，你却始终对我忠心耿耿。你理应得到奖赏。你现在想要什么？我一定会为你实现。我甚至可以赐予你更强大的力量！";
+		next;
+		mes "[恶魔女仆]";
+		mes "......";
+		mes "您真的能给我任何我想要的东西吗……？";
+		next;
+		mes "[恶魔女仆]";
+		mes "我真正需要的是……";
+		mes "......";
+		mes "只有您，我的主人。";
+		next;
+		mes "[黑暗之王]";
+		mes "......";
+		mes "？！！！！！";
+		next;
+		mes "[恶魔女仆]";
+		mes "我一直爱着您……";
+		mes "已经很久很久了……";
+		next;
+		mes "[黑暗之王]";
+		mes "......";
+		next;
+		mes "[黑暗之王]";
+		mes "我并非不知道这件事。";
+		next;
+		mes "[黑暗之王]";
+		mes "我也……";
+		next;
+		mes "[黑暗之王]";
+		mes "...But we're demons. Demons choosing a path towards love?! Ridiculous, the dark world will never forgive us! We will be hiding for the rest of our lives!";
+		next;
+		mes "[恶魔女仆]";
+		mes "只要能和您在一起，我什么都不在乎，我的主人……";
+		next;
+		select("- 抱歉打扰你们……你们刚才不是在讨论征服世界的事吗？");
+		hideonnpc "黑暗之王#xmas";
+		hideonnpc "恶魔女仆#xmas";
+		initnpctimer;
+		set .@cu_bre, rand(1,10);
+		if (.@cu_bre < 5) {
+			set xmas2013_01, xmas2013_01 + 2;
+			mes "[黑暗之王]";
+			mes "对、对。没错，恶魔女仆！我们早已立下如此宏大的目标！";
+			next;
+			mes "[黑暗之王]";
+			mes "你的心意我心领了，但要认清自己的身份！就像现在这样，继续当我的部下吧。";
+			next;
+			mes "[恶魔女仆]";
+			mes "是……我的主人，请原谅我。我会尽全力让这个世界归您所有。";
+			next;
+			mes "[黑暗之王]";
+			mes "没错！没有什么比让这个世界陷入黑暗更好的了。所有人都将跪倒在我面前。哈哈哈哈哈哈哈哈！！！";
+			next;
+			mes "- 尽管世界即将";
+			mes "- 被黑暗吞噬……";
+			mes "- 我成功拆散了一对情侣！";
+			mes "- 获得2分！";
+		} else {
+			if (xmas2013_01 > 0)
+				set xmas2013_01, xmas2013_01 - 1;
+			mes "[黑暗之王]";
+			mes "征服世界……与我们现在的感受相比，根本毫无意义。";
+			mes "亲爱的恶魔女仆，只要和我在一起，你真的能承受任何痛苦吗？";
+			next;
+			mes "[恶魔女仆]";
+			mes "...Master!";
+			next;
+			mes "[恶魔女仆]";
+			mes "当然，我已做好准备，会继续走下去……无论承受怎样的痛苦，我都会永远追随您。";
+			next;
+			mes "[恶魔女仆]";
+			mes "我永远都是您的人！";
+			next;
+			mes "[黑暗之王]";
+			mes "我明白了……我现在能感受到你的心。好，一起走吧……无论前路多么艰难！！";
+			next;
+			mes "- 我从黑暗中拯救了这个世界。";
+			mes "- 不过却有一对情侣结成了！";
+			mes "- 真令人难过……";
+			mes "- 失败，-1分！";
+		}
+		mes "- 当前拆散情侣点数为" + xmas2013_01 + ".";
+		close;
+	} else if (isbegin_quest(15056) == 1 && xmas2013_01 > 4) {
+		mes "- 拆散情侣点数";
+		mes "- 现在已超过5点。";
+		mes "- 我该回去找单身军团司令克里夫了。";
+		close;
+	}
+	end;
+OnTimer100000:
+	hideoffnpc "黑暗之王#xmas";
+	hideoffnpc "恶魔女仆#xmas";
+	stopnpctimer;
+	end;
+}
+xmas,141,174,3	script	恶魔女仆#xmas	1370,{ end; }
+
+// Monster Spawns :: EventMonster-131209_xmas
+//============================================================
+gld_dun01_2,0,0	monster	狸猫礼物赞	2380,5,5000
+gld_dun02_2,0,0	monster	狸猫礼物赞	2380,5,5000
+gld_dun03_2,0,0	monster	狸猫礼物赞	2380,5,5000
+gld_dun04_2,0,0	monster	狸猫礼物赞	2380,5,5000
+gld2_ald,0,0	monster	狸猫礼物赞	2380,5,5000
+gld2_gef,0,0	monster	狸猫礼物赞	2380,5,5000
+gld2_pay,0,0	monster	狸猫礼物赞	2380,5,5000
+gld2_prt,0,0	monster	狸猫礼物赞	2380,5,5000
+lhz_dun04,0,0	monster	狸猫礼物赞	2380,5,5000
+iz_dun05,0,0	monster	狸猫礼物赞	2380,5,5000
+mal_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+dic_dun03,0,0	monster	狸猫礼物赞	2380,5,5000
+dew_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+dew_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+dew_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+mal_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+iz_dun05,0,0	monster	狸猫礼物赞	2380,5,5000
+man_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+man_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+spl_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+spl_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+man_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+spl_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+nyd_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+bra_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+bra_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+bra_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+dic_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+dic_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+dic_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+dic_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+bif_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+bif_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+abbey01,0,0	monster	狸猫礼物赞	2380,5,5000
+abbey02,0,0	monster	狸猫礼物赞	2380,5,5000
+abbey03,0,0	monster	狸猫礼物赞	2380,5,5000
+abyss_01,0,0	monster	狸猫礼物赞	2380,5,5000
+abyss_02,0,0	monster	狸猫礼物赞	2380,5,5000
+abyss_03,0,0	monster	狸猫礼物赞	2380,5,5000
+alde_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+alde_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+alde_dun03,0,0	monster	狸猫礼物赞	2380,5,5000
+alde_dun04,0,0	monster	狸猫礼物赞	2380,5,5000
+ama_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+ama_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+ama_dun03,0,0	monster	狸猫礼物赞	2380,5,5000
+ama_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+anthell01,0,0	monster	狸猫礼物赞	2380,5,5000
+anthell02,0,0	monster	狸猫礼物赞	2380,5,5000
+ayo_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+ayo_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+ayo_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+ayo_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+beach_dun,0,0	monster	狸猫礼物赞	2380,5,5000
+beach_dun2,0,0	monster	狸猫礼物赞	2380,5,5000
+beach_dun3,0,0	monster	狸猫礼物赞	2380,5,5000
+c_tower1,0,0	monster	狸猫礼物赞	2380,5,5000
+c_tower2,0,0	monster	狸猫礼物赞	2380,5,5000
+c_tower3,0,0	monster	狸猫礼物赞	2380,5,5000
+c_tower4,0,0	monster	狸猫礼物赞	2380,5,5000
+cmd_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+cmd_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+cmd_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+cmd_fild04,0,0	monster	狸猫礼物赞	2380,5,5000
+cmd_fild06,0,0	monster	狸猫礼物赞	2380,5,5000
+cmd_fild07,0,0	monster	狸猫礼物赞	2380,5,5000
+cmd_fild08,0,0	monster	狸猫礼物赞	2380,5,5000
+cmd_fild09,0,0	monster	狸猫礼物赞	2380,5,5000
+ein_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+ein_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+ein_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+ein_fild04,0,0	monster	狸猫礼物赞	2380,5,5000
+ein_fild05,0,0	monster	狸猫礼物赞	2380,5,5000
+ein_fild06,0,0	monster	狸猫礼物赞	2380,5,5000
+ein_fild07,0,0	monster	狸猫礼物赞	2380,5,5000
+ein_fild08,0,0	monster	狸猫礼物赞	2380,5,5000
+ein_fild09,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_dun00,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild00,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild04,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild05,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild06,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild07,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild08,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild09,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild10,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild11,0,0	monster	狸猫礼物赞	2380,5,5000
+gef_fild13,0,0	monster	狸猫礼物赞	2380,5,5000
+gefenia01,0,0	monster	狸猫礼物赞	2380,5,5000
+gefenia02,0,0	monster	狸猫礼物赞	2380,5,5000
+gefenia03,0,0	monster	狸猫礼物赞	2380,5,5000
+gefenia04,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_cas01,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_cas02,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_church,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_chyard,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_in01,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_knt01,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_knt02,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_prison,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_prison1,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_sew01,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_sew02,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_sew03,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_sew04,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_step,0,0	monster	狸猫礼物赞	2380,5,5000
+glast_01,0,0	monster	狸猫礼物赞	2380,5,5000
+gon_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+gon_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+gon_dun03,0,0	monster	狸猫礼物赞	2380,5,5000
+gon_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+hu_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+hu_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+hu_fild04,0,0	monster	狸猫礼物赞	2380,5,5000
+hu_fild05,0,0	monster	狸猫礼物赞	2380,5,5000
+hu_fild06,0,0	monster	狸猫礼物赞	2380,5,5000
+ice_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+ice_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+ice_dun03,0,0	monster	狸猫礼物赞	2380,5,5000
+in_sphinx1,0,0	monster	狸猫礼物赞	2380,5,5000
+in_sphinx2,0,0	monster	狸猫礼物赞	2380,5,5000
+in_sphinx3,0,0	monster	狸猫礼物赞	2380,5,5000
+in_sphinx4,0,0	monster	狸猫礼物赞	2380,5,5000
+in_sphinx5,0,0	monster	狸猫礼物赞	2380,5,5000
+iz_dun00,0,0	monster	狸猫礼物赞	2380,5,5000
+iz_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+iz_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+iz_dun03,0,0	monster	狸猫礼物赞	2380,5,5000
+iz_dun04,0,0	monster	狸猫礼物赞	2380,5,5000
+jupe_core,0,0	monster	狸猫礼物赞	2380,5,5000
+juperos_01,0,0	monster	狸猫礼物赞	2380,5,5000
+juperos_02,0,0	monster	狸猫礼物赞	2380,5,5000
+kh_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+kh_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+lhz_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+lhz_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+lhz_dun03,0,0	monster	狸猫礼物赞	2380,5,5000
+lhz_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+lhz_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+lhz_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+lou_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+lou_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+lou_dun03,0,0	monster	狸猫礼物赞	2380,5,5000
+lou_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+mag_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+mag_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+man_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+mjo_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+mjo_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+mjo_dun03,0,0	monster	狸猫礼物赞	2380,5,5000
+mjolnir_01,0,0	monster	狸猫礼物赞	2380,5,5000
+mjolnir_02,0,0	monster	狸猫礼物赞	2380,5,5000
+mjolnir_03,0,0	monster	狸猫礼物赞	2380,5,5000
+mjolnir_04,0,0	monster	狸猫礼物赞	2380,5,5000
+mjolnir_05,0,0	monster	狸猫礼物赞	2380,5,5000
+mjolnir_06,0,0	monster	狸猫礼物赞	2380,5,5000
+mjolnir_07,0,0	monster	狸猫礼物赞	2380,5,5000
+mjolnir_08,0,0	monster	狸猫礼物赞	2380,5,5000
+mjolnir_09,0,0	monster	狸猫礼物赞	2380,5,5000
+mjolnir_10,0,0	monster	狸猫礼物赞	2380,5,5000
+mjolnir_11,0,0	monster	狸猫礼物赞	2380,5,5000
+mjolnir_12,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild04,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild05,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild06,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild07,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild08,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild09,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild10,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild11,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild12,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild13,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild14,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild15,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild16,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild17,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_fild18,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_pryd01,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_pryd02,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_pryd03,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_pryd04,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_pryd05,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_pryd06,0,0	monster	狸猫礼物赞	2380,5,5000
+nameless_n,0,0	monster	狸猫礼物赞	2380,5,5000
+nif_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+nif_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+nyd_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+odin_tem01,0,0	monster	狸猫礼物赞	2380,5,5000
+odin_tem02,0,0	monster	狸猫礼物赞	2380,5,5000
+odin_tem03,0,0	monster	狸猫礼物赞	2380,5,5000
+orcsdun01,0,0	monster	狸猫礼物赞	2380,5,5000
+orcsdun02,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_dun00,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_dun03,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_dun04,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_fild04,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_fild06,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_fild07,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_fild08,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_fild09,0,0	monster	狸猫礼物赞	2380,5,5000
+pay_fild10,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild00,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild04,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild05,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild06,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild07,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild08,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild09,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild10,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild11,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_maze01,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_maze02,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_maze03,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_sewb1,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_sewb2,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_sewb3,0,0	monster	狸猫礼物赞	2380,5,5000
+ra_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+ra_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+ra_fild04,0,0	monster	狸猫礼物赞	2380,5,5000
+ra_fild05,0,0	monster	狸猫礼物赞	2380,5,5000
+ra_fild06,0,0	monster	狸猫礼物赞	2380,5,5000
+ra_fild08,0,0	monster	狸猫礼物赞	2380,5,5000
+ra_fild12,0,0	monster	狸猫礼物赞	2380,5,5000
+ra_san01,0,0	monster	狸猫礼物赞	2380,5,5000
+ra_san02,0,0	monster	狸猫礼物赞	2380,5,5000
+ra_san03,0,0	monster	狸猫礼物赞	2380,5,5000
+ra_san04,0,0	monster	狸猫礼物赞	2380,5,5000
+ra_san05,0,0	monster	狸猫礼物赞	2380,5,5000
+spl_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+tha_t01,0,0	monster	狸猫礼物赞	2380,5,5000
+tha_t02,0,0	monster	狸猫礼物赞	2380,5,5000
+tha_t03,0,0	monster	狸猫礼物赞	2380,5,5000
+tha_t04,0,0	monster	狸猫礼物赞	2380,5,5000
+tha_t05,0,0	monster	狸猫礼物赞	2380,5,5000
+tha_t06,0,0	monster	狸猫礼物赞	2380,5,5000
+tha_t07,0,0	monster	狸猫礼物赞	2380,5,5000
+tha_t08,0,0	monster	狸猫礼物赞	2380,5,5000
+tha_t09,0,0	monster	狸猫礼物赞	2380,5,5000
+tha_t10,0,0	monster	狸猫礼物赞	2380,5,5000
+tha_t11,0,0	monster	狸猫礼物赞	2380,5,5000
+tha_t12,0,0	monster	狸猫礼物赞	2380,5,5000
+thor_v01,0,0	monster	狸猫礼物赞	2380,5,5000
+thor_v02,0,0	monster	狸猫礼物赞	2380,5,5000
+thor_v03,0,0	monster	狸猫礼物赞	2380,5,5000
+treasure01,0,0	monster	狸猫礼物赞	2380,5,5000
+treasure02,0,0	monster	狸猫礼物赞	2380,5,5000
+tur_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+tur_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+tur_dun03,0,0	monster	狸猫礼物赞	2380,5,5000
+tur_dun04,0,0	monster	狸猫礼物赞	2380,5,5000
+um_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+um_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+um_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+um_fild04,0,0	monster	狸猫礼物赞	2380,5,5000
+ve_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+ve_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+ve_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+ve_fild04,0,0	monster	狸猫礼物赞	2380,5,5000
+ve_fild05,0,0	monster	狸猫礼物赞	2380,5,5000
+ve_fild07,0,0	monster	狸猫礼物赞	2380,5,5000
+xmas_dun01,0,0	monster	狸猫礼物赞	2380,5,5000
+xmas_dun02,0,0	monster	狸猫礼物赞	2380,5,5000
+xmas_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+yuno_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+yuno_fild02,0,0	monster	狸猫礼物赞	2380,5,5000
+yuno_fild03,0,0	monster	狸猫礼物赞	2380,5,5000
+yuno_fild04,0,0	monster	狸猫礼物赞	2380,5,5000
+yuno_fild06,0,0	monster	狸猫礼物赞	2380,5,5000
+yuno_fild07,0,0	monster	狸猫礼物赞	2380,5,5000
+yuno_fild08,0,0	monster	狸猫礼物赞	2380,5,5000
+yuno_fild09,0,0	monster	狸猫礼物赞	2380,5,5000
+yuno_fild10,0,0	monster	狸猫礼物赞	2380,5,5000
+yuno_fild12,0,0	monster	狸猫礼物赞	2380,5,5000
+gld_dun01_2,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gld_dun02_2,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gld_dun03_2,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gld_dun04_2,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gld2_ald,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gld2_gef,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gld2_pay,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gld2_prt,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+lhz_dun04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+iz_dun05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mal_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+dic_dun03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+dew_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+dew_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+dew_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mal_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+iz_dun05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+man_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+man_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+spl_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+spl_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+man_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+spl_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+nyd_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+bra_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+bra_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+bra_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+dic_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+dic_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+dic_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+dic_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+bif_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+bif_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+abbey01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+abbey02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+abbey03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+abyss_01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+abyss_02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+abyss_03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+alde_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+alde_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+alde_dun03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+alde_dun04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ama_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ama_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ama_dun03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ama_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+anthell01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+anthell02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ayo_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ayo_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ayo_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ayo_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+beach_dun,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+beach_dun2,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+beach_dun3,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+c_tower1,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+c_tower2,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+c_tower3,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+c_tower4,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+cmd_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+cmd_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+cmd_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+cmd_fild04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+cmd_fild06,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+cmd_fild07,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+cmd_fild08,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+cmd_fild09,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ein_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ein_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ein_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ein_fild04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ein_fild05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ein_fild06,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ein_fild07,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ein_fild08,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ein_fild09,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_dun00,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild00,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild06,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild07,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild08,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild09,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild10,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild11,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gef_fild13,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gefenia01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gefenia02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gefenia03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gefenia04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_cas01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_cas02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_church,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_chyard,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_in01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_knt01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_knt02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_prison,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_prison1,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_sew01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_sew02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_sew03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_sew04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_step,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+glast_01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gon_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gon_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gon_dun03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gon_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+hu_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+hu_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+hu_fild04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+hu_fild05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+hu_fild06,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ice_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ice_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ice_dun03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+in_sphinx1,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+in_sphinx2,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+in_sphinx3,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+in_sphinx4,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+in_sphinx5,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+iz_dun00,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+iz_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+iz_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+iz_dun03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+iz_dun04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+jupe_core,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+juperos_01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+juperos_02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+kh_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+kh_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+lhz_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+lhz_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+lhz_dun03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+lhz_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+lhz_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+lhz_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+lou_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+lou_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+lou_dun03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+lou_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mag_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mag_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+man_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjo_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjo_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjo_dun03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjolnir_01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjolnir_02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjolnir_03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjolnir_04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjolnir_05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjolnir_06,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjolnir_07,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjolnir_08,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjolnir_09,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjolnir_10,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjolnir_11,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+mjolnir_12,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild06,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild07,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild08,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild09,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild10,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild11,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild12,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild13,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild14,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild15,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild16,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild17,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_fild18,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_pryd01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_pryd02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_pryd03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_pryd04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_pryd05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_pryd06,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+nameless_n,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+nif_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+nif_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+nyd_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+odin_tem01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+odin_tem02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+odin_tem03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+orcsdun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+orcsdun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_dun00,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_dun03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_dun04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_fild04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_fild06,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_fild07,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_fild08,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_fild09,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+pay_fild10,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild00,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild06,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild07,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild08,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild09,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild10,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild11,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_maze01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_maze02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_maze03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_sewb1,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_sewb2,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_sewb3,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ra_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ra_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ra_fild04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ra_fild05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ra_fild06,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ra_fild08,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ra_fild12,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ra_san01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ra_san02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ra_san03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ra_san04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ra_san05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+spl_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tha_t01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tha_t02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tha_t03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tha_t04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tha_t05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tha_t06,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tha_t07,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tha_t08,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tha_t09,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tha_t10,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tha_t11,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tha_t12,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+thor_v01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+thor_v02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+thor_v03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+treasure01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+treasure02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tur_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tur_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tur_dun03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+tur_dun04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+um_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+um_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+um_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+um_fild04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ve_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ve_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ve_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ve_fild04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ve_fild05,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ve_fild07,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+xmas_dun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+xmas_dun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+xmas_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+yuno_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+yuno_fild02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+yuno_fild03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+yuno_fild04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+yuno_fild06,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+yuno_fild07,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+yuno_fild08,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+yuno_fild09,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+yuno_fild10,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+yuno_fild12,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ecl_fild01,0,0	monster	狸猫礼物赞	2380,5,5000
+ecl_fild01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ecl_tdun01,0,0	monster	狸猫礼物赞	2380,5,5000
+ecl_tdun01,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ecl_tdun02,0,0	monster	狸猫礼物赞	2380,5,5000
+ecl_tdun02,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+ecl_tdun03,0,0	monster	狸猫礼物赞	2380,5,5000
+ecl_tdun03,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+//ecl_tdun04,0,0	monster	狸猫礼物赞	2380,5,5000
+//ecl_tdun04,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_prydn1,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_prydn1,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+moc_prydn2,0,0	monster	狸猫礼物赞	2380,5,5000
+moc_prydn2,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild08a,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild08a,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild08b,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild08b,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild08c,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild08c,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+prt_fild08d,0,0	monster	狸猫礼物赞	2380,5,5000
+prt_fild08d,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_chyard_,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_chyard_,0,0	monster	圣诞袜万岁狸猫	2379,5,5000
+gl_cas02_,0,0	monster	狸猫礼物赞	2380,5,5000
+gl_cas02_,0,0	monster	圣诞袜万岁狸猫	2379,5,5000

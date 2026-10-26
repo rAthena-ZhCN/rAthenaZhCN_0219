@@ -1,0 +1,75 @@
+//===== rAthena Script =======================================
+//= Spirit Liquor trader.
+//===== By: ==================================================
+//= rAthena Dev Team
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Trade Broken Liquor Jars and alcohol for wanderer
+//= pet food, 'Spirit Liquor'
+//===== Additional Comments: =================================
+//= 1.0 First version 
+//============================================================
+
+prontera,218,218,3	script	宠物爱好者	96,{
+	mes "[宠物爱好者珍妮]";
+	mes "哦，你好！";
+	mes "你像我一样喜欢动物吗？";
+	next;
+	mes "[宠物爱好者珍妮]";
+	mes "我知道要让可爱的宠物保持开心真的很难。";
+	mes "只要喂对食物就行了。";
+	next;
+	mes "[宠物爱好者珍妮]";
+	mes "我知道有时候很难为你的宠物找到合适的食物。";
+	next;
+	mes "[宠物爱好者珍妮]";
+	mes "你有什么在找的食物吗？";
+	next;
+	switch(select("是:否")) {
+	case 1:
+		if ((countitem(7158) > 19) && (countitem(970) > 0)) {
+			mes "[宠物爱好者珍妮]";
+			mes "哦，你有 ^ff000020 个破酒壶^000000和 ^ff00001 个酒精^000000！";
+			mes "你想把它们换成";
+			mes "^ff000020 个灵魂酒^000000 给你的流浪者宠物吗？";
+			next;
+			switch(select("好的，拜托了！:不用了，谢谢。")) {
+			case 1:
+				mes "[宠物爱好者珍妮]";
+				mes "好，那给你。";
+				mes "希望它能让你的";
+				mes "可爱宠物开心。";
+				delitem 7158,20; //Broken_Wine_Vessel
+				delitem 970,1; //Alchol
+				getitem 7824,20; //Spirit_Liquor
+				close;
+			case 2:
+				mes "[宠物爱好者珍妮]";
+				mes "嘿嘿，如果你改变主意，随时告诉我。";
+				close;
+			}
+		}
+		else {
+			mes "[宠物爱好者珍妮]";
+			mes "其实现在我可以帮你弄到流浪者宠物用的灵魂酒。";
+			next;
+			mes "[宠物爱好者珍妮]";
+			mes "你只需要带给我 ^FF0000 20 个破酒壶^000000 和 ^FF0000 1 个酒精^000000。";
+			mes "作为交换，我可以给你 ^FF0000 20 个灵魂酒^000000。";
+			next;
+			mes "你可以从天津地下城的天狗身上获得破酒壶。";
+			close;
+		}
+	case 2:
+		close;
+	}
+}
+
+prontera,220,218,3	script	贝里托	955,{
+	specialeffect EF_CHANGEDARK;
+	end;
+}

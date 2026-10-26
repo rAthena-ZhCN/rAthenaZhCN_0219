@@ -1,0 +1,383 @@
+//===== rAthena Script ======================================= 
+//= Cash Mall
+//===== Changelogs: ==========================================
+//= 1.0 Initial version from replays. [Lemongrass]
+//= 1.1 Cash Hair Stylist [Kisuka]
+//= 1.2 Updated Hair Stylist [Lemongrass]
+//= 1.3 Added an NPC to exchange coupons for Good, Evil or Wrath equipment. [Atemo]
+//============================================================
+
+prontera,137,125,4	script	现金销售向导#prontera::cashmall_warper	4_M_HUMAN_02,{
+	mes "[向导]";
+	mes "你好~";
+	mes "本向导想亲自带你去一个特别的地方。";
+	mes "那是什么地方？";
+	next;
+	mes "[向导]";
+	mes "那是一个充满神秘物品、可以收集和出售的地方。";
+	mes "在那里买东西需要特殊的货币。";
+	next;
+	mes "[向导]";
+	mes "那么，你准备好去了吗？";
+	next;
+	if (select( "是", "否" ) == 2) {
+		mes "[向导]";
+		mes "好的~";
+		mes "不过别灰心。";
+		mes "机会总是有的~";
+		close;
+	}
+	mes "[向导]";
+	mes "好~ 你真的准备好了。";
+	mes "那么，去挑些好东西吧~";
+	mes "啊，我忘了。出来以后一定要回到这里来。";
+	mes "记住哦~";
+	close2;
+	setarray .@maparray$[0], "prontera", "morocc", "moc_ruins", "geffen", "payon", "lighthalzen", "rachel";
+	.@return = inarray(.@maparray$[0], strcharinfo(3));
+
+	if (.@return > 0)
+		cashmall_return = .@return;
+	else // Default to Prontera if not found
+		cashmall_return = 0;
+
+	warp "itemmall",22,43;
+	end;
+}
+morocc,164,39,4	duplicate(cashmall_warper)	现金销售向导#morocc	4_M_HUMAN_02
+moc_ruins,115,143,4	duplicate(cashmall_warper)	现金销售向导#moc_ruins	4_M_HUMAN_02
+geffen,115,168,4	duplicate(cashmall_warper)	现金销售向导#geffen	4_M_HUMAN_02
+payon,164,157,4	duplicate(cashmall_warper)	现金销售向导#payon	4_M_HUMAN_02
+lighthalzen,206,144,4	duplicate(cashmall_warper)	现金销售向导#lighthalzen	4_M_HUMAN_02
+rachel,128,144,4	duplicate(cashmall_warper)	现金销售向导#rachel	4_M_HUMAN_02
+
+itemmall,21,45,4	script	出口向导#cashmall_exit	4_M_HUMAN_02,{
+	mes "[向导]";
+	mes "玩得开心吗？";
+	mes "非常感谢你使用我们的道具商城。";
+	mes "我们会继续为你带来珍贵的道具。";
+	next;
+	mes "[向导]";
+	mes "要回到你来的地方吗？";
+	next;
+	if (select( "是", "否" ) == 2) {
+		mes "[向导]";
+		mes "还有很多东西可以看。";
+		mes "祝你玩得愉快。";
+		close;
+	}
+	mes "[向导]";
+	mes "感谢光临。";
+	mes "我会把你送回原来的地方。";
+	close2;
+	switch(cashmall_return) {
+		default:
+		case 0:
+			.@returnmap$ = "prontera";
+			setarray .@xy[0],116,72;
+			break;
+		case 1:
+			.@returnmap$ = "morocc";
+			setarray .@xy[0],159,46;
+			break;
+		case 2:
+			.@returnmap$ = "moc_ruins";
+			setarray .@xy[0],109,137;
+			break;
+		case 3:
+			.@returnmap$ = "geffen";
+			setarray .@xy[0],120,38;
+			break;
+		case 4:
+			.@returnmap$ = "payon";
+			setarray .@xy[0],161,58;
+			break;
+		case 5:
+			.@returnmap$ = "lighthalzen";
+			setarray .@xy[0],159,95;
+			break;
+		case 6:
+			.@returnmap$ = "rachel";
+			setarray .@xy[0],115,125;
+			break;
+	}
+	cashmall_return = 0;
+	warp .@returnmap$,.@xy[0],.@xy[1];
+	end;
+}
+
+itemmall,41,53,3	script	猫手销售员马卡龙#cashmall	4_M_MERCAT1,{
+	mes "[马卡龙]";
+	mes "欢迎！";
+	mes "今天可不是常有的！";
+	mes "今天要看的东西~ 瞧好啦！";
+	mes "只能用" + mesitemlink( 1000274 ) + "！";
+	mes "请随意挑选！";
+	next;
+	switch( select( "3-1职业群技能影子", "3-2职业群技能影子", "扩展职业群技能影子", "职业通用影子", "影子箱", "冶炼、改造、实用道具", "掉落箱", "魔法书" ) ){
+		case 1:
+			mes "[马卡龙]";
+			mes "^FF00663-1职业群技能影子^000000，是吧！";
+			mes "都在这儿！";
+			close2;
+			callshop "CachuaCoupon01";
+			end;
+
+		case 2:
+			mes "[马卡龙]";
+			mes "^FF00663-2职业群技能影子^000000，是吧！";
+			mes "都在这儿！";
+			close2;
+			callshop "CachuaCoupon02";
+			end;
+
+		case 3:
+			mes "[马卡龙]";
+			mes "^FF0066扩展职业群技能影子^000000，是吧！";
+			mes "都在这儿！";
+			close2;
+			callshop "CachuaCoupon03";
+			end;
+
+		case 4:
+			mes "[马卡龙]";
+			mes "^FF0066职业通用影子^000000，是吧！";
+			mes "都在这儿！";
+			close2;
+			callshop "CachuaCoupon04";
+			end;
+
+		case 5:
+			mes "[马卡龙]";
+			mes "^FF0066影子箱^000000，是吧！";
+			mes "都在这儿！";
+			close2;
+			callshop "CachuaCoupon05";
+			end;
+
+		case 6:
+			mes "[马卡龙]";
+			mes "^FF0066冶炼、改造、实用道具^000000，是吧！";
+			mes "都在这儿！";
+			close2;
+			callshop "CachuaCoupon06";
+			end;
+
+		case 7:
+			mes "[马卡龙]";
+			mes "^FF0066掉落箱^000000，是吧！";
+			mes "都在这儿！";
+			close2;
+			callshop "CachuaCoupon07";
+			end;
+
+		case 8:
+			mes "[马卡龙]";
+			mes "^FF0066魔法书^000000，是吧！";
+			mes "都在这儿！";
+			close2;
+			callshop "CachuaCoupon08";
+			end;
+	}
+}
+
+itemmall,24,77,4	script	铁匠巴斯塔#pr	4_M_DWARF,{
+	if( !getbattleflag( "feature.refineui" ) ){
+		end;
+	}
+
+	mes "[铁匠巴斯塔]";
+	mes "我接手了巨锤、布洛克和影子铁匠的工作。从今往后我可要忙起来了。";
+	close2;
+	refineui();
+	end;
+}
+
+itemmall,27,77,4	script	巨锤#im	4_M_DWARF,{
+	mes "[铁匠巨锤]";
+	mes "精炼的事去问巴斯塔。我已经退休了。";
+	close;
+}
+
+itemmall,24,74,5	script	铁匠布洛克#im	4_M_HUMAN_01,{
+	mes "[铁匠布洛克]";
+	mes "我现在已经退休了。精炼的事，就去找那边的巴斯塔吧。";
+	close;
+}
+
+itemmall,19,74,5	script	美发师#cash	91,{
+	if( getbattleflag( "feature.stylist" ) ){
+		mes "[杰里米]";
+		mes "你好呀，小可爱~";
+		mes "请叫我首席美发师杰里米。";
+		next;
+		if( select( "更换造型:结束对话" ) == 2 ){
+			mes "[杰里米]";
+			mes "我的店一直营业，随时欢迎再来。";
+			close;
+		}
+		close2;
+		openstylist();
+		end;
+	}
+
+	mes "[美发师]";
+	mes "嘿，我是卡尼基。";
+	mes "我来这里，是想用我的";
+	mes "全新特别发型，";
+	mes "掀起新的潮流！";
+	mes "给我一张^FF0000美发礼券^000000，";
+	mes "我就给你换个发型~";
+	next;
+	if (Sex == SEX_MALE) {
+		mes "[卡尼基]";
+		mes "我有两种特别的";
+		mes "男士发型，分别是";
+		mes "紧急治疗烫";
+		mes "以及灵气刃剪。";
+		mes "以及灵气刃剪。";
+		next;
+		cutin "hair_m_24.bmp",4;
+		mes "[卡尼基]";
+		mes "这是紧急治疗";
+		mes "烫。这是我最近";
+		mes "发明的全新造型。";
+		mes "你觉得怎么样？很酷吧？";
+		next;
+		cutin "",255;
+		cutin "hair_m_25.bmp",4;
+		mes "[卡尼基]";
+		mes "接下来是灵气";
+		mes "刃剪。你以前";
+		mes "从没见过";
+		mes "这样的吧？";
+		next;
+		cutin "",255;
+	}else{
+		mes "[卡尼基]";
+		mes "我有两款新发型，是给";
+		mes "女士的，分别是圣母之祈福烫";
+		mes "以及换魂剪。";
+		mes "你想看看";
+		mes "这些造型的效果吗？";
+		next;
+		cutin "hair_f_24.bmp",4;
+		mes "[卡尼基]";
+		mes "这是圣母之祈福";
+		mes "烫。真的很适合";
+		mes "你，不是吗？";
+		next;
+		cutin "",255;
+		cutin "hair_f_25.bmp",4;
+		mes "[卡尼基]";
+		mes "接下来是换魂";
+		mes "剪。你觉得";
+		mes "怎么样？不错吧？";
+		next;
+		cutin "",255;
+	}
+	mes "[卡尼基]";
+	mes "你决定好";
+	mes "要不要我";
+	mes "给你换发型了吗？";
+	next;
+	if (select( "更换发型", "不更换" ) == 2) {
+		mes "[卡尼基]";
+		mes "真的吗？唉，太可惜了。";
+		mes "好吧，如果你改变主意";
+		mes "想要更新";
+		mes "发型，就回来";
+		mes "告诉我，好吗？";
+		close;
+	}
+	if (countitem(7622) < 1) {
+		mes "[卡尼基]";
+		mes "很抱歉，我只有";
+		mes "在你带来美发礼券时";
+		mes "才能提供";
+		mes "美发服务。请拿到";
+		mes "礼券后";
+		mes "再来找我，好吗？";
+		close;
+	}
+	mes "[卡尼基]";
+	mes "太好了，你带来了";
+	mes "一张美发礼券！";
+	mes "好，你想要";
+	mes "哪种发型？";
+	next;
+	if (Sex == SEX_MALE) {
+		if(select("紧急治疗烫", "灵气刃剪") == 1) {
+			delitem 7622,1;	// New_Style_Coupon
+			setlook 1,24;
+		}else{
+			delitem 7622,1;	// New_Style_Coupon
+			setlook 1,25;
+		}
+	}else{
+		if(select("圣母之祈福烫", "换魂剪") == 1) {
+			delitem 7622,1;	// New_Style_Coupon
+			setlook 1,24;
+		}else{
+			delitem 7622,1;	// New_Style_Coupon
+			setlook 1,25;
+		}
+	}
+	mes "[卡尼基]";
+	mes "好——！完成了！";
+	mes "你觉得你的";
+	mes "新发型怎么样？嗯，希望";
+	mes "能再见到你。保重！";
+	close;
+}
+
+itemmall,41,55,3	script	猫手销售员通卡洛姆	4_M_MERCAT1,{
+	mes "[通卡洛姆]";
+	mes "欢迎！";
+	mes "如果你有特别礼券，我们可以为你兑换想要的产品！";
+	mes "可兑换的礼券如下：";
+	mes mesitemicon(1001583) + " " + mesitemicon(1001581) + " " + mesitemicon(1001584) + " " + mesitemicon(1001588) + " " + mesitemicon(1001809) + " " + mesitemicon(1001810);
+	next;
+	switch( select( "兑换善恶靴子", "兑换善恶王冠", "兑换善之武器", "兑换恶之武器", "兑换愤怒武器", "兑换愤怒王冠", "取消" ) ) {
+	case 1:
+		mes "[通卡洛姆]";
+		mes "这里是善恶靴子的兑换。真是好选择~！";
+		close2;
+		callshop( "barter_mall_coupon_1" );
+		end;
+	case 2:
+		mes "[通卡洛姆]";
+		mes "这里是善恶王冠的兑换。真是绝佳的选择~！";
+		close2;
+		callshop( "barter_mall_coupon_2" );
+		end;
+	case 3:
+		mes "[通卡洛姆]";
+		mes "这里是善之武器的兑换。真是绝佳的选择~！";
+		close2;
+		callshop( "barter_mall_coupon_3" );
+		end;
+	case 4:
+		mes "[通卡洛姆]";
+		mes "这里是恶之武器的兑换。真是绝佳的选择~！";
+		close2;
+		callshop( "barter_mall_coupon_4" );
+		end;
+	case 5:
+		mes "[通卡洛姆]";
+		mes "这里是愤怒武器的兑换。真是绝佳的选择~！";
+		close2;
+		callshop( "barter_mall_coupon_5" );
+		end;
+	case 6:
+		mes "[通卡洛姆]";
+		mes "这里是愤怒王冠的兑换。真是绝佳的选择~！";
+		close2;
+		callshop( "barter_mall_coupon_6" );
+		end;
+	case 7:
+		mes "[通卡洛姆]";
+		mes "找不到想要的？下次再来吧。";
+		close;
+	}
+}

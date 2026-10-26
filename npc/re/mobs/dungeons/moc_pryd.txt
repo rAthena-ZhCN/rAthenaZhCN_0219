@@ -1,0 +1,82 @@
+//===== rAthena Script =======================================
+//= Morocc Pyramid Dungeon Monster Spawn Script
+//===== By: ==================================================
+//= Athena (1.0)
+//===== Current Version: =====================================
+//= 1.5
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Additional Comments: =================================
+//= 1.1 Official kRO 10.1 spawns [Playtester]
+//= 1.2 More accurate spawns [Playtester]
+//= 1.3 Corrected MVP spawn variance. [L0ne_W0lf]
+//= 1.4 Added Nightmare spawns. [Euphy]
+//= 1.5 Correct Spawn by Navigation's mob data. [attackjom]
+//============================================================
+
+//==================================================
+// moc_pryd01 - Inside Pyramid F1
+//==================================================
+moc_pryd01,0,0	monster	--ja--	1005,72,5000
+moc_pryd01,0,0	monster	--ja--	1031,28,5000
+
+//==================================================
+// moc_pryd02 - Inside Pyramid F2
+//==================================================
+moc_pryd02,0,0	monster	--ja--	1041,31,5000
+moc_pryd02,0,0	monster	--ja--	1028,31,5000
+moc_pryd02,0,0	monster	--ja--	1016,31,5000
+moc_pryd02,0,0	monster	--ja--	1111,20,5000
+moc_pryd02,0,0	monster	--ja--	1031,20,5000
+moc_pryd02,0,0	monster	--ja--	1029,5,5000
+
+//==================================================
+// moc_pryd03 - Inside Pyramid F3
+//==================================================
+moc_pryd03,0,0	monster	--ja--	1041,70,5000
+moc_pryd03,0,0	monster	--ja--	1032,20,5000
+moc_pryd03,0,0	monster	--ja--	1146,10,5000
+moc_pryd03,0,0	monster	--ja--	1111,5,5000
+moc_pryd03,0,0	monster	--ja--	1191,5,5000
+
+//==================================================
+// moc_pryd04 - Inside Pyramid F4
+//==================================================
+moc_pryd04,0,0	monster	--ja--	1029,62,5000
+moc_pryd04,0,0	monster	--ja--	1041,31,5000
+moc_pryd04,0,0	monster	--ja--	1146,24,5000
+moc_pryd04,0,0	monster	--ja--	1191,18,5000
+moc_pryd04,0,0	monster	--ja--	1297,3,5000
+moc_pryd04,0,0,0,0	boss_monster	俄塞里斯	1038,1,3600000,600000,0
+
+//==================================================
+// moc_pryd05 - Inside Pyramid B1
+//==================================================
+moc_pryd05,0,0	monster	--ja--	1149,78,5000
+moc_pryd05,0,0	monster	--ja--	1032,65,5000
+moc_pryd05,0,0	monster	--ja--	1041,13,5000
+
+//==================================================
+// moc_pryd06 - Inside Pyramid B2
+//==================================================
+moc_pryd06,0,0	monster	--ja--	1191,35,5000
+moc_pryd06,0,0	monster	--ja--	1032,35,5000
+moc_pryd06,0,0	monster	--ja--	1194,23,5000
+moc_pryd06,0,0	monster	--ja--	1297,23,5000
+moc_pryd06,102,85,1,1	boss_monster	古埃及王	1511,1,3600000,600000,0
+
+//==================================================
+// moc_prydn1 - Nightmare Mode B1
+//==================================================
+moc_prydn1,0,0	monster	--ja--	2353,78,5000
+moc_prydn1,0,0	monster	--ja--	2354,13,5000
+moc_prydn1,0,0	monster	--ja--	2355,65,5000
+
+//==================================================
+// moc_prydn2 - Nightmare Mode B2
+//==================================================
+moc_prydn2,0,0	monster	--ja--	2356,35,5000
+moc_prydn2,0,0	monster	--ja--	2355,35,5000
+moc_prydn2,0,0	monster	--ja--	2358,23,5000
+moc_prydn2,0,0	monster	--ja--	2360,23,5000
+moc_prydn2,102,85,1,1	boss_monster	古埃及王-梦魇	2362,1,3600000,600000,1

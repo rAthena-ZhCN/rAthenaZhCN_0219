@@ -1,0 +1,245 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Added Monster Killing quests.
+//= Repeatable EXP Quest (Antelope Horns)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+ein_fild06,82,171,0	script	蔬菜农夫#Goat	919,{
+	if (checkquest(60137) != -1) {
+		if (checkquest(60137,HUNTING) != 2 ) {
+			mes "[蔬菜农夫]";
+			mes "你已经猎杀完50只魔羌了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[蔬菜农夫]";
+				mes "嗯，我觉得你还没猎杀到50只。";
+				close;
+			case 2:
+				mes "[蔬菜农夫]";
+				mes "记住，我需要人帮忙猎杀魔羌，去猎杀50只吧。";
+				close;
+			case 3:
+				mes "[蔬菜农夫]";
+				mes "你确定要停止猎杀吗？";
+				mes "你已取得的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[蔬菜农夫]";
+					mes "那好吧，如果你改变主意就回来找我。";
+					erasequest 60137;
+					close;
+				case 2:
+					mes "[蔬菜农夫]";
+					mes "请猎杀50只魔羌，这样我就能安心种菜了。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[蔬菜农夫]";
+			mes "太厉害了，你完成得真快。";
+			getexp 258489,155155;
+			erasequest 60137;
+			close;
+		}
+	}
+	if (checkquest(60138) != -1) {
+		if (checkquest(60138,HUNTING) != 2) {
+			mes "[蔬菜农夫]";
+			mes "你已经猎杀完100只魔羌了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[蔬菜农夫]";
+				mes "嗯，我觉得你还没猎杀到100只。";
+				close;
+			case 2:
+				mes "[蔬菜农夫]";
+				mes "记住，我需要人帮忙猎杀魔羌，去猎杀100只吧。";
+				close;
+			case 3:
+				mes "[蔬菜农夫]";
+				mes "你确定要停止猎杀吗？";
+				mes "你已取得的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[蔬菜农夫]";
+					mes "那好吧，如果你改变主意就回来找我。";
+					erasequest 60138;
+					close;
+				case 2:
+					mes "[蔬菜农夫]";
+					mes "请猎杀100只魔羌，这样我就能安心种菜了。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[蔬菜农夫]";
+			mes "太厉害了，你完成得真快。";
+			getexp 258489,155155;
+			getexp 258489,155155;
+			erasequest 60138;
+			close;
+		}
+	}
+	if (checkquest(60139) != -1) {
+		if (checkquest(60139,HUNTING) != 2) {
+			mes "[蔬菜农夫]";
+			mes "你已经猎杀完150只魔羌了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[蔬菜农夫]";
+				mes "嗯，我觉得你还没猎杀到150只。";
+				close;
+			case 2:
+				mes "[蔬菜农夫]";
+				mes "记住，我需要人帮忙猎杀魔羌，去猎杀150只吧。";
+				close;
+			case 3:
+				mes "[蔬菜农夫]";
+				mes "你确定要停止猎杀吗？";
+				mes "你已取得的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[蔬菜农夫]";
+					mes "那好吧，如果你改变主意就回来找我。";
+					erasequest 60139;
+					close;
+				case 2:
+					mes "[蔬菜农夫]";
+					mes "请猎杀150只魔羌，这样我就能安心种菜了。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[蔬菜农夫]";
+			mes "太厉害了，你完成得真快。";
+			getexp 258489,155155;
+			getexp 258489,155155;
+			getexp 258489,155155;
+			erasequest 60139;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel > 69) {
+		//for maximum level
+		if (BaseLevel < 85) {
+			mes "[蔬菜农夫]";
+			mes "哦，太好了！";
+			mes "你是来帮我的，对吧？";
+			mes "要不是的话，我可就惨了。";
+			next;
+			switch(select("好的:不用")) {
+			case 1:
+				mes "[蔬菜农夫]";
+				mes "这些魔羌一直在吃我的蔬菜。";
+				mes "你能尽力帮帮我吗？";
+				next;
+				switch(select("收集物品:猎杀魔羌:取消")) {
+				case 1:
+					// Item turn in
+					mes "[蔬菜农夫]";
+					mes "我需要^FF0000魔羌之角^000000来证明你的努力，我会给你报酬。";
+					next;
+					switch(select("我有魔羌之角:你需要什么？")) {
+					case 1:
+						/*
+						if (checkweight(504,10) == 0) {
+							mes "[Vegetable Farmer]";
+							mes "Hey, it looks like that the weight on";
+							mes "your back will crush you. Come back";
+							mes "after you have lost some weight.";
+							close;
+						}
+						*/
+						if (countitem(7106) > 49) {
+							mes "[蔬菜农夫]";
+							mes "太厉害了，你完成得真快。";
+							mes "我由衷地感谢你。";
+							delitem 7106,50; //Goat's_Horn
+							getexp 258489,155155;
+							//getitem 504,10; //White_Potion
+							close;
+						}
+						else {
+							mes "[蔬菜农夫]";
+							mes "你好像还不够。";
+							next;
+							mes "[蔬菜农夫]";
+							mes "我要看到你收集了^FF000050个魔羌之角^000000，然后才能给你报酬。";
+							close;
+						}
+					case 2:
+						mes "[蔬菜农夫]";
+						mes "我要看到你收集了^FF000050个魔羌之角^000000，然后才能给你报酬。";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[蔬菜农夫]";
+					mes "谢谢。";
+					mes "你想猎杀多少只魔羌？";
+					next;
+					switch(select("50只魔羌:100只魔羌:150只魔羌")) {
+					case 1:
+						mes "[蔬菜农夫]";
+						mes "去猎杀50只魔羌，完成后告诉我。我会为你的努力给你报酬。";
+						setquest 60137;
+						close;
+					case 2:
+						mes "[蔬菜农夫]";
+						mes "去猎杀100只魔羌，完成后告诉我。我会为你的努力给你报酬。";
+						setquest 60138;
+						close;
+					case 3:
+						mes "[蔬菜农夫]";
+						mes "去猎杀150只魔羌，完成后告诉我。我会为你的努力给你报酬。";
+						setquest 60139;
+						close;
+					}
+				case 3:
+					mes "[蔬菜农夫]";
+					mes "如果你改变主意，请回来找我。";
+					close;
+				}
+			case 2:
+				mes "[蔬菜农夫]";
+				mes "如果你改变主意，请回来找我。";
+				close;
+			}
+		}
+		else {
+			mes "[蔬菜农夫]";
+			mes "太好了，太好了！";
+			next;
+			mes "[蔬菜农夫]";
+			mes "抱歉，我现在没法说话，我这边情况糟透了，这些该死的魔羌要弄死我了。";
+			close;
+		}
+	}
+	else {
+		mes "[蔬菜农夫]";
+		mes "我的蔬菜，都到哪里去了？";
+		mes "哦，不……不！！！";
+		close;
+	}
+}
+

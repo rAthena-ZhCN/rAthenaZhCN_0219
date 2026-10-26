@@ -1,0 +1,41 @@
+# This file is a part of rAthena.
+#   Copyright(C) 2022 rAthena Development Team
+#   https://rathena.org - https://github.com/rathena
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <http://www.gnu.org/licenses/>.
+#
+###########################################################################
+# 玩家组数据库
+###########################################################################
+#
+# 玩家组设置
+#
+###########################################################################
+# - Id                    组 ID。
+#   Name                  组名称。
+#   Level                 用于组排序的 GM 等级。（默认：0）
+#   LogCommands           @命令是否记录日志。（默认：false）
+#   Commands:             此组可使用的 @命令列表。（默认：无）
+#     <atcommand name>    指定 @命令是否可被此组使用。
+#   CharCommands:         此组可使用的 charcommand 列表。（默认：无）
+#     <charcommand name>  指定 charcommand 是否可被此组使用。
+#   Permissions:          此组拥有的权限列表。（默认：无）
+#     <permission name>   此组是否拥有该权限。
+#   Inherit:              要继承的组列表。（默认：无）
+#     <group name>        是否继承该组。
+###########################################################################
+
+Header:
+  Type: PLAYER_GROUP_DB
+  Version: 1

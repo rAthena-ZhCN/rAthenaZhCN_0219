@@ -1,0 +1,428 @@
+//===== rAthena Script ======================================= 
+//= Gunslinger Job Quest
+//===== By: ================================================== 
+//= erKURITA, RockmanEXE, Kisuka
+//===== Current Version: ===================================== 
+//= 2.2
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Gunslinger Job Change Quest
+//===== Additional Comments: ================================= 
+//= 1.0 Made the NPC [erKURITA]
+//= 1.5 Couple fixes to the npc, aswell as adding the missing
+//=     3 green herbs. [erKURITA]
+//= 1.6 job number->const, commonized variable name,
+//=     optimized [Lupus]
+//= 1.7 Now uses only ONE variable GUNS_Q [Lupus]
+//= 1.7a Grammar fixes, few spelling fixes, etc [CBMaster]
+//= 1.7b Parenthesis fixes [KarLaeda]
+//= 1.8 Fixed the reward you can get [Playtester]
+//= 1.9 Removed some 'clever' script constructs [ultramage]
+//= 2.0 Updated to official version - Thanks to Omega for
+//=     his first try [SinSloth] 1.10b - removed .GATs [Lupus]
+//= 2.1 Wise Bull Horn now deletes all items. Thanks to yyCC. [L0ne_W0lf]
+//= 2.1a Corrected a Typo error ";;". [Samuray22]
+//= 2.1b Corrected some typos errors. (bugreport:1549) [Samuray22]
+//= 2.1c Fixed some missing/messed up item checks. (bugreport:2693) [Kisuka]
+//= 2.2 Updated to match AEGIS script and Added Quest Log commands. [Kisuka]
+//============================================================ 
+
+que_ng,152,167,3	script	米勒教官	901,{
+	if (Upper == 2) {
+		mes "[米勒教官]";
+		mes "哎呀，真是个";
+		mes "可爱的小家伙~";
+		mes "你妈妈在哪里呢？";
+		mes "这里很危险，所以";
+		mes "请你快点回家，好吗？";
+		close;
+	}
+	if (Class == Job_Novice) {
+		if (!callfunc("F_CanChangeJob")) {
+			mes "[米勒教官]";
+			mes "你有兴趣成为";
+			mes "神枪手吗？你确实";
+			mes "有潜力，不过你还";
+			mes "不够老练。";
+			mes "再多锻炼一阵子，";
+			mes "然后再来找我吧，听见了吗？";
+			close;
+		}
+		if (GUNS_Q == 0) {
+			mes "[米勒教官]";
+			mes "我是米勒，全职的";
+			mes "神枪手教官，也是";
+			mes "赛琳娜女士的专职";
+			mes "护卫。说吧，你";
+			mes "有什么事？如果不是要紧事，我可没时间陪你。";
+			next;
+			if(select("没什么。:我想成为神枪手。") == 1) {
+				mes "[米勒教官]";
+				mes "别浪费我的时间。";
+				mes "如果你真想成为";
+				mes "神枪手，那就";
+				mes "回来找我谈。";
+				close;
+			}
+			mes "[米勒教官]";
+			mes "嗯。你年纪轻轻，但";
+			mes "你的眼神告诉我，你";
+			mes "相当有野心。你必须通过我们的面试和培训";
+			mes "课程，才能成为神枪手。你要申请这个职业吗？";
+			next;
+			if(select("让我考虑一下。:好的！") == 1) {
+				mes "[米勒教官]";
+				mes "Understandable.";
+				mes "如果你下定决心";
+				mes "想要成为";
+				mes "神枪手，那就";
+				mes "立刻告诉我。";
+				mes "我会带你入门。";
+				close;
+			}
+			mes "[米勒教官]";
+			mes "很好，很好。那么，";
+			mes "我们就开始吧。请把这";
+			mes "封信交给黄牛角先生，";
+			mes "他人在裴扬。他是一位萨满，";
+			mes "他会判断你是否";
+			mes "有资格成为神枪手。";
+			set GUNS_Q,1;
+			setquest 6020;
+			close;
+		}
+		else if (GUNS_Q == 1) {
+			mes "[米勒教官]";
+			mes "把我写的那封";
+			mes "介绍信带上，";
+			mes "去裴扬交给黄牛角";
+			mes "先生。他会考验你，";
+			mes "看看你是不是真的";
+			mes "具备神枪手的资质。";
+			close;
+		}
+		else if (GUNS_Q == 2) {
+			mes "[米勒教官]";
+			mes "嗯……黄牛角";
+			mes "让你去收集制作";
+			mes "凭证所需的材料吗？";
+			mes "嗯。我想那也是";
+			mes "他的资格测试的一部分。";
+			close;
+		}
+		else if (GUNS_Q == 3) {
+			mes "[米勒教官]";
+			mes "黄牛角让你";
+			mes "给他带一些";
+			mes "牛奶？他一定很喜欢";
+			mes "你，才会这么快就";
+			mes "开始请你帮忙。祝你好运，朋友。";
+			close;
+		}
+		else if (GUNS_Q == 4) {
+			mes "[米勒教官]";
+			mes "我期待很快听到";
+			mes "你的好消息。你";
+			mes "知道，我毫不怀疑";
+			mes "你会成为神枪手。";
+			close;
+		}
+		else if (GUNS_Q == 5) {
+			if (SkillPoint != 0) {
+				mes "[米勒教官]";
+				mes "嘿，你还剩着";
+				mes "技能点。你最好";
+				mes "在再次来找我之前";
+				mes "把它们全部用完。";
+				close;
+			}
+			mes "[米勒教官]";
+			mes "哦，你带来了";
+			mes "黄牛角的凭证？";
+			mes "他已经很久没有";
+			mes "给任何人发过凭证了，所以";
+			mes "我真的为你感到骄傲！";
+			next;
+			mes "[米勒教官]";
+			mes "如果黄牛角认可你，";
+			mes "那我没有理由";
+			mes "拒绝你。那么，我就";
+			mes "升你为神枪手。";
+			mes "不过在此之前，让我";
+			mes "更详细地说明我们的职责。";
+			next;
+			mes "[米勒教官]";
+			mes "身为神枪手，你必须";
+			mes "时刻随身携带";
+			mes "你的枪。神枪手";
+			mes "公会记录着每一把枪";
+			mes "和每颗子弹，因此你只能";
+			mes "从我们的公会成员那里获得。";
+			next;
+			mes "[米勒教官]";
+			mes "别担心，神枪手";
+			mes "公会的成员如今";
+			mes "几乎到处都能找到。总之，";
+			mes "这是公会会长赛琳娜女士的命令，必须如此。";
+			next;
+			mes "[米勒教官]";
+			mes "你或许有机会";
+			mes "在近日见到她。";
+			mes "总之，正因为我们";
+			mes "必须管制枪和子弹的买卖，以免它们落入邪恶";
+			mes "或不法之徒手中。";
+			next;
+			mes "[米勒教官]";
+			mes "不管怎样，和另一位";
+			mes "神枪手交谈，";
+			mes "总让我很高兴，所以";
+			mes "我们保持联系吧。愿";
+			mes "大地的力量守护";
+			mes "你的每一段冒险~";
+			callfunc "Job_Change",Job_Gunslinger;
+			set GUNS_Q,6;
+			completequest 6024;
+			if (checkre(0)) {
+				getitem 13180,1;		// Novice_Rifle
+				getitem 12149,2;		// Bullet_Case
+				getitem 12151,1;		// Bullet_Case_Silver
+			} else {
+				if (rand(2))
+					getitem 13100,1;	// Six_Shooter
+				else
+					getitem 13150,1;	// Branch
+			}
+			close;
+		}
+	} else {
+		if (Class == Job_Gunslinger) {
+			mes "[米勒教官]";
+			mes "哦！好久不见，";
+			mes "朋友。你最近过得怎么样？";
+			mes "希望你一直把";
+			mes "你的枪保养得很好。";
+			mes "好好爱护它，它就会";
+			mes "照顾你。记住这一点。";
+			close;
+		} else {
+			mes "[米勒教官]";
+			mes "如果你没有";
+			mes "什么事找我，";
+			mes "那就请便吧。";
+			close;
+		}
+	}
+}
+
+payon,184,65,3	script	黄牛角	866,{
+	if (GUNS_Q == 1) {
+		mes "[黄牛角]";
+		mes "你好，年轻的狼。";
+		mes "是什么事";
+		mes "让你来到我面前？";
+		next;
+		mes "["+strcharinfo(0)+"]";
+		mes "米勒先生派我来";
+		mes "把这封信交给您。";
+		mes "其实，我有兴趣";
+		mes "成为神枪手……";
+		next;
+		mes "[黄牛角]";
+		mes "你提到米勒？";
+		mes "嗯，黑狐不会";
+		mes "为任何他不认为";
+		mes "能成为优秀神枪手的";
+		mes "人写介绍信。是的，我想";
+		mes "我知道他为什么让你来找我。";
+		next;
+		mes "[黄牛角]";
+		mes "我从你的眼中看得出来：";
+		mes "你有一颗温暖的心，还有";
+		mes "强烈的责任感。";
+		mes "你所需要的，只是";
+		mes "大地的祝福，让你以";
+		mes "神枪手的身份受到守护。";
+		next;
+		mes "[黄牛角]";
+		mes "我可以制作一张凭证，";
+		mes "证明你渴望";
+		mes "成为大地";
+		mes "战士的意志，让你拿去呈交";
+		mes "给神枪手教官们。";
+		mes "我需要这些物品……";
+		next;
+		mes "[黄牛角]";
+		mes "^3355FF1 玛哪树枝^000000，";
+		mes "^3355FF3 柔毛^000000，";
+		mes "^3355FF3 刹勒空结晶^000000，";
+		mes "^3355FF10 坚硬外壳^000000，";
+		mes "^3355FF3 绿色药草^000000，以及";
+		mes "^3355FF3 彩色昆虫外壳^000000。";
+		next;
+		mes "[黄牛角]";
+		mes "等我做好";
+		mes "凭证后，你可以";
+		mes "把它交给黑狐，他";
+		mes "会帮助你实现";
+		mes "成为神枪手";
+		mes "的目标。";
+		set GUNS_Q,2;
+		changequest 6020,6021;
+		close;
+	}
+	else if (GUNS_Q == 2) {
+		if (countitem(912) < 3 || countitem(914) < 3 || countitem(1019) < 1 || countitem(935) < 10 || countitem(511) < 3 || countitem(1013) < 3) {
+			mes "[黄牛角]";
+			mes "我可以制作一张凭证，";
+			mes "证明你渴望";
+			mes "成为大地";
+			mes "战士的意志，让你拿去呈交";
+			mes "给神枪手教官们。";
+			mes "我需要这些物品……";
+			next;
+			mes "[黄牛角]";
+			mes "^3355FF1 玛哪树枝^000000，";
+			mes "^3355FF3 柔毛^000000，";
+			mes "^3355FF3 刹勒空结晶^000000，";
+			mes "^3355FF10 坚硬外壳^000000，";
+			mes "^3355FF3 绿色药草^000000，以及";
+			mes "^3355FF3 彩色昆虫外壳^000000。";
+			next;
+			mes "[黄牛角]";
+			mes "等我做好";
+			mes "凭证后，你可以";
+			mes "把它交给黑狐，他";
+			mes "会帮助你实现";
+			mes "成为神枪手";
+			mes "的目标。";
+			close;
+		}
+		delitem 912,3; // Zargon
+		delitem 914,3; // Fluff
+		delitem 1019,1; // Wooden_Block
+		delitem 935,10; // Shell
+		delitem 511,3; // Green_Herb
+		delitem 1013,3; // Colorful_Shell
+		set GUNS_Q,3;
+		changequest 6021,6022;
+		mes "[黄牛角]";
+		mes "啊，你回来了，";
+		mes "带齐了我需要的东西。";
+		mes "请给我一些时间";
+		mes "来制作凭证。如果你";
+		mes "过一会儿再来，";
+		mes "我应该就完成了。";
+		close;
+	}
+	else if (GUNS_Q == 3) {
+		mes "[黄牛角]";
+		mes "哦，你来得正是";
+		mes "时候。我已经很久";
+		mes "没有做过这种凭证了，所以可能有点";
+		mes "生疏。不过，这真让我回想起年轻时的日子。";
+		next;
+		mes "[黄牛角]";
+		mes "我担任这个";
+		mes "挑选合格神枪手";
+		mes "凭证领取者的";
+		mes "职位，已有数十年";
+		mes "之久。不过在那之前，我曾是";
+		mes "和你一样的年轻冒险家。";
+		next;
+		mes "[黄牛角]";
+		mes "感觉就像是";
+		mes "昨天，我才拿着自己的";
+		mes "小小凭证，作为一名神枪手，";
+		mes "大地的战士。也就是";
+		mes "那时，我遇见了赛琳娜的父亲……";
+		mes "时间怎能过得如此之快？";
+		next;
+		mes "[黄牛角]";
+		mes "啊……我真的很感谢";
+		mes "赛琳娜和黑狐在招募";
+		mes "年轻神枪手时给予的";
+		mes "所有帮助。我如今";
+		mes "已经老了，无法独自完成所有事。*唉……*人生便是如此。";
+		next;
+		mes "[黄牛角]";
+		mes "在你离开之前，能";
+		mes "请你帮我一个小忙吗？";
+		mes "我口渴了，想喝";
+		mes "一杯冰牛奶。你";
+		mes "能帮我拿一些来吗？";
+		set GUNS_Q,4;
+		changequest 6022,6023;
+		close;
+	}
+	else if (GUNS_Q == 4) {
+		if (countitem(519) < 1) {
+			mes "[黄牛角]";
+			mes "我是个即将";
+			mes "与大地母亲";
+			mes "重逢的老人。你愿意帮这";
+			mes "位老神枪手一个忙，给我";
+			mes "拿一杯冰牛奶来吗？";
+			close;
+		}
+		delitem 519,1; // Milk
+		set GUNS_Q,5;
+		changequest 6023,6024;
+		mes "[黄牛角]";
+		mes "哦，谢谢你的";
+		mes "慷慨——我看出";
+		mes "你给我带来了";
+		mes "牛奶。啊，真好喝~";
+		next;
+		mes "[黄牛角]";
+		mes "我欣赏这份耐心、";
+		mes "温柔与善良，";
+		mes "你送来这些";
+		mes "东西，证明了这一点。是的，这正是我们希望神枪手拥有的品质。";
+		next;
+		mes "[黄牛角]";
+		mes "现在，请把这张凭证";
+		mes "交给黑狐米勒，并带上";
+		mes "我全心的认可。";
+		mes "希望你用你的";
+		mes "枪匡扶正义，成为";
+		mes "高尚的大地战士。";
+		next;
+		mes "[黄牛角]";
+		mes "咿~呀~咿~呼姆";
+		mes "咿~呀~咿~呼姆";
+		mes "玛阿阿阿——娜咿~";
+		mes "呀比 呀比 呀 哟卡呀呀~";
+		close;
+	}
+	else if (GUNS_Q == 5) {
+		mes "[黄牛角]";
+		mes "请把这张凭证";
+		mes "交给黑狐米勒，并带上";
+		mes "我全心的认可。";
+		mes "希望你用你的";
+		mes "枪匡扶正义，成为";
+		mes "高尚的大地战士。";
+		next;
+		mes "[黄牛角]";
+		mes "咿~呀~咿~呼姆";
+		mes "咿~呀~咿~呼姆";
+		mes "玛阿阿阿——娜咿~";
+		mes "呀比 呀比 呀 哟卡呀呀~";
+		close;
+	}
+	else if (GUNS_Q == 6) {
+		mes "[黄牛角]";
+		mes "啊，好久不见。";
+		mes "希望你成为";
+		mes "聪明的野兽，用";
+		mes "你身为神枪手的力量，守护善良与正义。";
+		close;
+	}
+	else {
+		mes "[黄牛角]";
+		mes "呼噜噜~";
+		mes "^333333*呼*^000000";
+		close;
+	}
+}

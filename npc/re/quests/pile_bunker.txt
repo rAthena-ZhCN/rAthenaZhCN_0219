@@ -1,0 +1,124 @@
+//===== rAthena Script ======================================= 
+//= Pile Bunker Quest
+//===== By: ================================================== 
+//= JayPee Mateo
+//===== Current Version: ===================================== 
+//= 2.2
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= 1.0 A Pile Bunker quest based on iRO WiKi. [JayPee Mateo]
+//= 2.0 Rewrited the Script a little so it looks a bit better. [Masao]
+//= 2.1 Switched to official script, coded by Gennosuke Kouga. [Euphy]
+//= 2.2 Updated to match the official script. [Euphy]
+//============================================================ 
+
+// Main NPC :: mech_book
+//============================================================
+yuno,179,174,4	script	戈默	851,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 1000) {
+		mes "[戈默]";
+		mes "你带的东西太多了。卸下一些行李后再来找我吧。";
+		close;
+	}
+	if (countitem(1549)) {
+		mes "[戈默]";
+		mes "那门破甲炮用起来怎么样？";
+		close;
+	}
+	if (Class != Job_Mechanic && Class != Job_Mechanic_T && Class != Job_Baby_Mechanic) {
+		mes "[戈默]";
+		mes "我是退休的机匠，我想我和你没什么好谈的。";
+		close;
+	}
+	mes "[戈默]";
+	mes "那么？驾驶魔导机甲的感觉如何？";
+	mes "那是未能寻得自己道路之人不允许触碰的东西。";
+	next;
+	mes "[戈默]";
+	mes "我？我很久以前就退休了。因为我出了事故……受了重伤，再也不能驾驶了。我对此很不甘心。";
+	next;
+	mes "[戈默]";
+	mes "所以我决定留在这里，为魔导机甲锻造部件。";
+	mes "嗯？我可没说对这份工作有什么不满。";
+	next;
+	mes "[戈默]";
+	mes "被迫做自己不喜欢的事，没有比这更痛苦的了。";
+	next;
+	mes "[戈默]";
+	mes "有些人光是当个陪衬就心满意足了，你知道的，就像做别人倚靠的墙。";
+	next;
+	mes "[戈默]";
+	mes "这让我心情不错，我正准备做一件新部件。我想请你帮忙。你觉得如何？";
+	next;
+	switch(select("我不太感兴趣。:你打算做什么？:材料从哪里来？:我把材料带来了。")) {
+	case 1:
+		mes "[戈默]";
+		mes "我也没办法";
+		mes "那就这样吧。";
+		mes "下次见！";
+		close;
+	case 2:
+		mes "[戈默]";
+		mes "嗯，一根能一击砸碎对手的巨大金属棒！";
+		next;
+		mes "[戈默]";
+		mes "外表不起眼，但我设计了弹簧装置，能以极大的力量发动攻击。";
+		next;
+		mes "[戈默]";
+		mes "它是隐藏式的，只要找到机会，一击就能让对手陷入濒死状态！";
+		mes "我已经等不及想看它上场了！";
+		next;
+		mes "[戈默]";
+		mes "你尽管想象这种武器能有多好，我会让它成真。";
+		next;
+		mes "[戈默]";
+		mes "给我带来200个钢铁、30根软管和1个布罗卡。有这些材料，我就能做出我刚才说的东西。";
+		close;
+	case 3:
+		mes "[戈默]";
+		mes "你可以从犬妖等许多怪物身上取得钢铁。";
+		next;
+		mes "[戈默]";
+		mes "软管比较稀有，由艾音布罗克与里希塔乐镇一带的金属波利掉落。";
+		next;
+		mes "[戈默]";
+		mes "最后，找到布罗卡非常困难，但你应该能想出办法。哈哈，去拿来吧！";
+		close;
+	case 4:
+		if (countitem(999) < 200 || countitem(7325) < 30 || countitem(1415) < 1) {
+			mes "[戈默]";
+			mes "我要的材料你还没带齐。";
+			next;
+			mes "[戈默]";
+			mes "我有个习惯，一旦来了灵感，就会放下手头在做的东西，转而去尝试新玩意。";
+			mes "你最好快点！";
+			close;
+		} else {
+			mes "[戈默]";
+			mes "哦，我一直在等。你没按时来，我还以为你忘了。请在那儿稍等一下。";
+			specialeffect EF_REPAIRWEAPON;
+			next;
+			mes "[戈默]";
+			mes "做好了。你觉得如何？不错吧？虽然是我自己做的，但我得说做得相当不错。";
+			next;
+			mes "[戈默]";
+			mes "重量、体积的搭配，再加上那色泽与光泽。真是合我心意！";
+			next;
+			mes "[戈默]";
+			mes "...........";
+			next;
+			mes "[戈默]";
+			mes "呃，只要稍加改良，就能量产并交付。我确定还能做出更多，所以这件就给你了。";
+			next;
+			mes "[戈默]";
+			mes "哦，还有，结果我根本用不了那么多钢铁。来，把大部分拿回去吧。";
+			delitem 999,50; //Steel
+			delitem 7325,30; //Tube
+			delitem 1415,1; //Skewer
+			getitem 1549,1; //Pilebuncker
+			getitem 1360,1; //Two_Handed_Axe
+			close;
+		}
+	}
+}

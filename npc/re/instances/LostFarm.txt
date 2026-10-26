@@ -1,0 +1,1473 @@
+//===== rAthena Script =======================================
+//= Lost Farm in Time
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//= Episode 17.2 Lost Farm in Time
+//===== Changelog: ===========================================
+//= 1.0 Initial release [crazyarashi]
+//= 1.1 Optimizations and cleanup [Everade]
+//= 1.2 Cleanup [Capuche]
+//============================================================
+
+ba_maison,311,206,3	script	露依纳#greeen	4_EP17_BASIC_B,{
+	if (checkweight(1000103,20) == 0) {
+		mes "- 由于道具过多，无法继续任务。-";
+		close;
+	}
+	if (BaseLevel < 150) {
+		mes "[柯顿]";
+		mes "嗯，你看起来太虚弱了，根本干不了活。我觉得你现在还不行。";
+		next;
+		mes "- 此任务需要等级 150 以上 -";
+		close;
+	}
+	if (ep17_2_main < 9) {
+		mes "- 我与农场设施前的机器人对上了视线。-";
+		next;
+		mes "- 那机器人把我上下打量了一番，然后转过头去。-";
+		close;
+	}
+	if (isbegin_quest(8586) == 0) {
+		mes "- 我与农场设施前的机器人对上了视线。-";
+		next;
+		mes "[机器人]";
+		mes "心率、血压与体温均正常。";
+		mes "呼吸正常。眼部稳定性正常。";
+		mes "正在核对登记信息……";
+		next;
+		mes "- 那机器人把我上下打量了一番，似乎很满意。-";
+		next;
+		mes "[机器人]";
+		mes "你好，" + strcharinfo(0) + "？";
+		mes "你是来看农场设施的吗？";
+		npctalk "Meow.", "Kitty#greeen", bc_self;
+		next;
+		if (select( "Huh.", "No." ) == 2) {
+			mes "[机器人]";
+			mes "这里是农场设施，喵喵它们就住在这里。";
+			mes "如果有兴趣，就跟我谈谈吧。";
+			mes "我会为你详细说明。";
+			close;
+		}
+		mes "[机器人]";
+		mes "喵喵，乖乖别动。好孩子~";
+		mes "我负责管理这里的农场设施。";
+		mes "我照料植物、施肥，还喂养这里的喵喵和它的伙伴们。";
+		npctalk "Purr.", "Kitty#greeen", bc_self;
+		next;
+		mes "[机器人]";
+		mes "食堂供应的甜点原料就是在这里采收的。";
+		mes "Ehem.";
+		next;
+		mes "[机器人]";
+		mes "最近客人很多，我们接到的采收订单也增加了。";
+		mes "我那位从别的岗位调来的同事刚被分配到这里，不过她有点笨手笨脚。";
+		mes "只要大家听话，就能轻松获得好收成。";
+		next;
+		select( "你真健谈。" );
+		mes "[露依纳]";
+		mes "啊，我忘了，想和客人长谈的话，应该先自我介绍。";
+		mes "我叫露依纳。";
+		next;
+		mes "[露依纳]";
+		mes "喵喵是名为肉食人火龙果的植物。它是曾栖息在这座岛某处的古代种改良而来。";
+		mes "不知道这算不算奇怪，我虽然不是肉食人火龙果，却很擅长倾听。";
+		next;
+		mes "- 露依纳轻抚着肉食人火龙果。-";
+		npctalk "Purr.", "Kitty#greeen", bc_self;
+		next;
+		mes "[露依纳]";
+		mes "主人吩咐过我，要给可爱的小家伙们取名字。";
+		mes "喵喵、蝴蝶、快乐，等等。";
+		mes "肉食人火龙果是又小又可爱的生物，所以我给它们取了名字。";
+		next;
+		mes "[露依纳]";
+		mes "喵喵是最可爱的，这边的肉食人火龙果就是喵喵。";
+		next;
+		mes "[露依纳]";
+		mes "So...";
+		mes "你是来切尾巴的吗？";
+		next;
+		select( "尾巴？", "我没有尾巴。" );
+		mes "[露依纳]";
+		mes "你是来切尾巴的，对吧？";
+		mes "啊，我说错了。";
+		mes "请稍等一会儿。我来整理一下说明。";
+		setquest 8586;
+		close;
+	}
+	if (isbegin_quest(8586) == 1) {
+		mes "[露依纳]";
+		mes "你现在看喵喵，它没有根吧？";
+		mes "即使没有根，它也能从空气中吸收水分进行光合作用。";
+		mes "只需要一些肥料……还有一些食物。";
+		next;
+		mes "[露依纳]";
+		mes "播下种子后它们会从土里长出来，但我从没见过多株萌芽的情况。";
+		next;
+		mes "[露依纳]";
+		mes "至于尾巴，只要抓住肉食人火龙果，像这样抚摸，再放开就行。";
+		next;
+		mes "- 露依纳抱起肉食人火龙果，示范了如何取下尾巴再放下它。-";
+		next;
+		mes "[露依纳]";
+		mes "不，不。我没有硬扯。";
+		mes "采收下来的尾巴未必够吃。";
+		mes "你得把损耗考虑进去。";
+		npctalk "咕咕……！", "Kitty#greeen", bc_self;
+		next;
+		mes "[露依纳]";
+		mes "需要去掉种子和外皮，但并不难。";
+		mes "处理过后，采收的肉食人火龙果尾巴就能端上餐桌。";
+		next;
+		mes "[露依纳]";
+		mes "采收其实有点困难，所以我的同事“席克”会引导你。";
+		mes "就算不采收也能进去。我就这样让你无向导进入这里。";
+		next;
+		mes "[露依纳]";
+		mes "如果有空，就跟这里的“柯顿”谈谈，她是游乐管理员，会告诉你该做什么。";
+		mes "我知道这对你有点难，不过……如果你肯帮忙，我们会好好酬谢你。";
+		npctalk "柯顿：要是再高一点就好了……", "Cotton#172_lost_0", bc_self;
+		next;
+		mes "[露依纳]";
+		mes "既然你已经听完说明，现在可以进去了。";
+		mes "如果只是想四处看看，直接进去就好。";
+		next;
+		mes "[露依纳]";
+		mes "我们先说了柯顿的工作，但其实采收更紧急。";
+		mes "如果你对自己的战斗能力有信心，我希望你能帮忙采收。";
+		mes "希望你能帮我采收……";
+		mes "我们还得喂喵喵大王。";
+		next;
+		select( "喵喵大王？" );
+		mes "[露依纳]";
+		mes "我只是这么叫它。它和其他家伙有点不同，躲在不容易看见的地方。";
+		mes "想见到它，就得撒些食物，把农场周围弄得热闹一点。";
+		next;
+		mes "[露依纳]";
+		mes "我负责采收，所以随时都可以来找我谈！";
+		completequest 8586;
+		next;
+		mes "[露依纳]";
+		mes "等你想帮忙时，我们再谈细节。";
+		close;
+	}
+	if (isbegin_quest(8589) == 1) {
+		mes "[露依纳]";
+		mes "小家伙们来找你玩了吗？";
+		mes "真奇怪……我听得很清楚啊。";
+		mes "... what? Even Silk?";
+		mes "怎么了？";
+		next;
+		select( "它在假装自己是猫。" );
+		emotion ET_FRET, getnpcid(0,"Kitty#greeen");
+		mes "[喵喵]";
+		mes "Cluck.";
+		next;
+		mes "-- 那只猫在露依纳伸手之前就躲到了她身后。--";
+		next;
+		mes "[露依纳]";
+		mes "What...";
+		next;
+		mes "[露依纳]";
+		mes "也许……只是也许？";
+		mes "它在听我说话？";
+		next;
+		select( "我想是吧。" );
+		mes "[露依纳]";
+		mes "Kitty.";
+		npctalk "*低吼*", "Kitty#greeen", bc_self;
+		next;
+		mes "[露依纳]";
+		mes "...";
+		mes "客人说的“害羞”就是这个意思吗？";
+		npctalk "*呱*", "Kitty#greeen", bc_self;
+		next;
+		mes "- 露依纳向猫伸出手，它便把头凑到她手上。-";
+		next;
+		mes "- 露依纳抚摸着猫，脸上浮现出满足又复杂的神情。-";
+		next;
+		mes "[露依纳]";
+		mes "Hmm...";
+		mes "客人总有一天也能和喵喵成为朋友吧？";
+		next;
+		mes "[露依纳]";
+		mes "要是能就这样一直和它们玩下去，该多好？";
+		npctalk "*呱*", "Kitty#greeen", bc_self;
+		next;
+		mes "[露依纳]";
+		mes "是的！明天也请再帮帮席克。";
+		mes "那么，总有一天……你就能和所有肉食人火龙果成为朋友！";
+		mes "给你……这是约定的信物。";
+		completequest 8589;
+		getitem 1000103,20;
+		getexp 3094009,0;
+		next;
+		mes "[露依纳]";
+		mes "Probably.";
+		npctalk "嘎嘎。", "Kitty#greeen", bc_self;
+		next;
+		mes "- 那猫兴奋似地发出高亢的叫声。-";
+		next;
+	}
+	switch( checkquest(8587,PLAYTIME) ) {
+	case -1:
+		break;
+	case 0:
+	case 1:
+		mes "[露依纳]";
+		mes "今天的必要采收已经完成了。";
+		mes "天亮时我们会再次开始采收。到时候再来吧。";
+		close;
+	case 2:
+		mes "[露依纳]";
+		mes "^0000FF与肉食人火龙果的苦战仿佛已是很久以前的事了。^000000";
+		mes "^0000FF我现在又有勇气再次回到农场设施了。^000000";
+		erasequest 8587;
+		close;
+	}
+	.@party_id = getcharid(1);
+	if (.@party_id < 1) {
+		mes "^FF0000必须至少组好一人以上的队伍或加入队伍才能进入。^000000";
+		close;
+	}
+	.@md_name$ = "Farm Lost in Time";
+
+	setarray .@item[0],1000093,1000094,1000095,1000096,1000097,1000098;
+	for ( .@i = 0; .@i < 6; ++.@i ) {
+		if (countitem(.@item[.@i]) > 0) {
+			.@count = 1;
+			delitem .@item[.@i], countitem(.@item[.@i]);
+		}
+	}
+	if (.@count > 0) {
+		mes "[露依纳]";
+		mes "！？怎么了？你的尾巴断了。";
+		mes "那个我来处理吧，请交给我。";
+		mes "谢谢你……下次采收体验结束后，一定要把它交给席克再出来。";
+		next;
+	}
+	mes "[露依纳]";
+	mes "你好，" + strcharinfo(0) + ".";
+	mes "你今天要进入农场设施吗？";
+	next;
+	switch( select( (is_party_leader() ? "创建" + .@md_name$ : ""), "进入副本。", "取消" ) ) {
+	case 1:
+		if (instance_create(.@md_name$) == -3)
+			dispbottom "The reservation of the instance '" + .@md_name$ + "' has failed due to an active instance.";
+		mes "[露依纳]";
+		mes "请稍等一会儿~";
+		mes "我来准备今天的食物。";
+		close;
+	case 2:
+		if (instance_enter(.@md_name$) != IE_OK) {
+			mes "^FF0000纪念副本尚未创建。^000000";
+			close;
+		}
+		setquest 8587;
+		if (isbegin_quest(8588) > 0)
+			erasequest 8588;
+		setquest 8588;
+		mapannounce "ba_maison", "" + strcharinfo(0) + "的队伍，" + .@party_name$ + ", is entering the " + .@md_name$ + ".", bc_map, "0x00FF99";
+		end;
+	case 3:
+		end;
+	}
+	end;
+
+OnInit:
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(8587,PLAYTIME) == -1" );	// condition on ep17_2_main not required
+	questinfo( QTYPE_QUEST, QMARK_YELLOW, "checkquest(8587,PLAYTIME) == 2" );
+	end;
+}
+
+
+1@lost,1,1,0	script	#lost_farm_control	-1,{
+	end;
+OnInstanceInit:
+	'lost_farm = 0;
+	deletearray 'banghae;
+	'map_lost$ = instance_mapname("1@lost");
+	end;
+}
+
+1@lost,161,40,0	script	#startline	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch:
+	if (!is_party_leader())
+		end;
+	disablenpc();
+	'lost_farm = 0;
+	enablenpc instance_npcname("Wooden Box#01");
+	npctalk "哦！客人！这边！！", instance_npcname("Wooden Box#01");
+	end;
+}
+
+1@lost,163,47,3	script(DISABLED)	Wooden Box#01	4_WOODBOX,{
+	if (!is_party_leader()) {
+		mes "[席克]";
+		mes "我要和客人中的领队谈谈！";
+		mes "请把领队带过来！";
+		close;
+	}
+	if ('lost_farm == 0) {
+		mes "[席克]";
+		mes "欢迎来到培育场！我是负责采集的席克！";
+		npctalk "席克：欢迎来到培育场！我是负责采集的席克！";
+		next;
+		mes "[席克]";
+		mes "咿呀……救命！";
+		npctalk "席克：咿呀……救命！";
+		close2;
+		if ('lost_farm == 0) {
+			'lost_farm = 1;
+			donpcevent instance_npcname("Wooden Box#01") + "::OnStart";
+		}
+		end;
+	}
+	npctalk "席克：让肉食人火龙果冷静下来！";
+	end;
+
+OnStart:
+	sleep 1000;
+	.@event$ = instance_npcname("Wooden Box#01") + "::OnMobDead";
+	monster 'map_lost$,155,43,"King Eyes",20660,1, .@event$;
+	monster 'map_lost$,154,50,"Happy",20664,1, .@event$;
+	monster 'map_lost$,158,49,"Toto",20661,1, .@event$;
+	monster 'map_lost$,162,48,"Lightning",20662,1, .@event$;
+	monster 'map_lost$,168,49,"Cutie",20660,1, .@event$;
+	monster 'map_lost$,170,45,"Woody",20663,1, .@event$;
+	monster 'map_lost$,165,42,"Rusk",20664,1, .@event$;
+	end;
+OnMobDead:
+	if (mobcount('map_lost$, instance_npcname("Wooden Box#01") + "::OnMobDead") == 0) {
+		'lost_farm = 2;
+		disablenpc();
+		enablenpc instance_npcname("Silk#01");
+		sleep 1000;
+		npctalk "席克：！！", instance_npcname("Silk#01");
+	}
+	end;
+}
+
+
+1@lost,163,47,3	script(DISABLED)	Silk#01	4_EP17_BASKET,{
+	if (!is_party_leader()) {
+		mes "[席克]";
+		mes "我要和客人中的领队谈谈！";
+		mes "请把领队带过来！";
+		close;
+	}
+	if ('lost_farm != 2)
+		end;
+	mes "[席克]";
+	mes "谢谢你救了我！听露依纳说，肉食人火龙果是温顺的生物！";
+	npctalk "席克：谢谢你救了我！听露依纳说，肉食人火龙果是温顺的生物！";
+	next;
+	mes "[席克]";
+	mes "你也看见了吧！我好害怕！";
+	npctalk "席克：你也看见了吧！我好害怕！";
+	next;
+	mes "[席克]";
+	mes "喂食和拥抱各五分钟？它们一直龇着牙，我怎么抚摸它们啊？";
+	npctalk "席克：喂食和拥抱各五分钟？它们一直龇着牙，我怎么抚摸它们啊？";
+	next;
+	mes "[席克]";
+	mes "五分钟里还能做什么啊！";
+	npctalk "席克：五分钟里还能做什么啊！";
+	next;
+	mes "[席克]";
+	mes "...";
+	npctalk "席克：……";
+	next;
+	mes "[席克]";
+	mes "亲爱的客人……";
+	npctalk "席克：亲爱的客人……";
+	next;
+	mes "[席克]";
+	mes "我明白露依纳为什么要多找人手了，因为她自己没法很快采收。";
+	npctalk "席克：我明白露依纳为什么要多找人手了，因为她自己没法很快采收。";
+	next;
+	mes "[席克]";
+	mes "但像你那样抱起它陪它玩，会比抚摸五分钟快得多。";
+	npctalk "席克：但像你那样抱起它陪它玩，会比抚摸五分钟快得多。";
+	next;
+	mes "[席克]";
+	mes "... though I can't hold onto it.";
+	npctalk "席克：……不过我可抓不住它。";
+	next;
+	mes "[席克]";
+	mes "我们去下一个栖息地吧，就在这附近。准备好了吗？走吧！";
+	npctalk "席克：我们去下一个栖息地吧，就在这附近。准备好了吗？走吧！";
+	close2;
+	if ('lost_farm == 2) {
+		'lost_farm = 3;
+		disablenpc();
+		enablenpc instance_npcname("Silk#02");
+		instance_warpall 'map_lost$,218,149,instance_id();
+	}
+	end;
+}
+
+
+1@lost,214,146,3	script(DISABLED)	Silk#02	4_EP17_BASKET,{
+	if (!is_party_leader()) {
+		mes "[席克]";
+		mes "我要和客人中的领队谈谈！";
+		mes "请把领队带过来！";
+		close;
+	}
+	if ('lost_farm == 3) {
+		mes "[席克]";
+		mes "这个设施……如你所见，是为我们这些有鳞的朋友准备的便利培育场。";
+		npctalk "席克：这个设施……如你所见，是为我们这些有鳞的朋友准备的便利培育场。";
+		next;
+		mes "[席克]";
+		mes "无论是植物还是动物。这里的温度与湿度始终保持恒定。";
+		npctalk "席克：无论是植物还是动物。这里的温度与湿度始终保持恒定。";
+		next;
+		mes "[席克]";
+		mes "听说对人类来说不太舒服，呼吸没问题吗？";
+		npctalk "席克：听说对人类来说不太舒服，呼吸没问题吗？";
+		next;
+		mes "[席克]";
+		mes "我现在也要在这里撒些食物。赶紧结束吧。我去躲起来……";
+		npctalk "席克：我现在也要在这里撒些食物。赶紧结束吧……我去躲起来。";
+		next;
+		mes "[席克]";
+		mes "喂……各位，吃饭时间到了~";
+		npctalk "席克：喂……各位，吃饭时间到了~";
+		close2;
+		if ('lost_farm == 3) {
+			'lost_farm = 4;
+			npctalk "席克：食物已经撒好了，它们很快就会出来！";
+			disablenpc();
+			donpcevent instance_npcname("Wooden Box#02") + "::OnStart";
+		}
+		end;
+	}
+	if ('lost_farm == 4) {
+		mes "[席克]";
+		mes "哈啊，哈啊……吓死我了……";
+		npctalk "席克：哈啊，哈啊……吓死我了……";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "你确定你现在不是在玩吗？";
+		unittalk getcharid(3), "" + strcharinfo(0) + "：你确定你现在不是在玩吗？";
+		next;
+		mes "[席克]";
+		mes "我觉得这对它们来说很正常。我之前说过，它们只有在心情好的时候才会长出尾巴。";
+		npctalk "席克：我觉得这对它们来说很正常。我之前说过，它们只有在心情好的时候才会长出尾巴。";
+		next;
+		mes "[席克]";
+		mes "对了，我们要不要前往下一个地点……？还没结束呢，所以……";
+		npctalk "席克：对了，我们要不要前往下一个地点……？还没结束呢，所以……";
+		next;
+		mes "[席克]";
+		mes "下一个是有岩石和沙子的游乐场。采收时我得先把沙子抖掉……";
+		npctalk "席克：下一个是有岩石和沙子的游乐场。采收时我得先把沙子抖掉……";
+		close2;
+		if ('lost_farm == 4) {
+			'lost_farm = 5;
+			disablenpc();
+			enablenpc instance_npcname("Silk#03");
+			instance_warpall 'map_lost$,86,101,instance_id();
+		}
+		end;
+	}
+	end;
+}
+
+1@lost,214,146,3	script(DISABLED)	Wooden Box#02	4_WOODBOX,{
+	npctalk "席克：救命！我要被肉食人火龙果吃掉了！";
+	end;
+OnStart:
+	enablenpc();
+	sleep 1000;
+	.@event$ = instance_npcname("Wooden Box#02") + "::OnMobDead";
+	monster 'map_lost$,210,148,"Lucy",20662,1, .@event$;
+	monster 'map_lost$,208,153,"Elizabeth",20660,1, .@event$;
+	monster 'map_lost$,215,151,"Dorothy",20664,1, .@event$;
+	monster 'map_lost$,216,151,"Clara",20661,1, .@event$;
+	monster 'map_lost$,211,143,"Coco",20662,1, .@event$;
+	monster 'map_lost$,211,144,"Cloud",20663,1, .@event$;
+	monster 'map_lost$,216,151,"Harmony",20660,1, .@event$;
+	sleep 3000;
+	npctalk "席克：救、救命~~~~";
+	sleep 3000;
+	npctalk "席克：救救机器人~~~~~";
+	end;
+OnMobDead:
+	.@count = mobcount('map_lost$, instance_npcname("Wooden Box#02") + "::OnMobDead");
+	if (.@count == 0) {
+		'lost_farm = 4;
+		disablenpc();
+		enablenpc instance_npcname("Silk#02");
+		npctalk "席克：……结束了吗？", instance_npcname("Silk#02");
+		end;
+	}
+	npctalk "席克：剩下" + (.@count == 1 ? "的" : "的") + " " + .@count + "只！";
+	end;
+}
+
+
+1@lost,91,92,3	script(DISABLED)	Silk#03	4_EP17_BASKET,{
+	if (!is_party_leader()) {
+		mes "[席克]";
+		mes "我要和客人中的领队谈谈！";
+		mes "请把领队带过来！";
+		close;
+	}
+	if ('lost_farm == 5) {
+		mes "[席克]";
+		mes "别在意我所在的位置……";
+		npctalk "席克：别在意我所在的位置……";
+		next;
+		mes "[席克]";
+		mes "就算过来玩是对的，至少别找我。";
+		npctalk "席克：就算过来玩是对的，至少别找我。";
+		next;
+		mes "[席克]";
+		mes "但我觉得它们应该和你玩！没错！";
+		npctalk "席克：但我觉得它们应该和你玩！没错！";
+		next;
+		mes "[席克]";
+		mes "总之，帮我进行下一次采收吧！喂，各位~吃饭时间到了~~";
+		npctalk "席克：总之，帮我进行下一次采收吧！喂，各位~吃饭时间到了~~";
+		close2;
+		if ('lost_farm == 5) {
+			'lost_farm = 6;
+			npctalk "席克：食物已经撒好了，它们很快就会出来！";
+			disablenpc();
+			donpcevent instance_npcname("Wooden Box#03") + "::OnStart";
+		}
+		end;
+	}
+	if ('lost_farm == 7) {
+		mes "[席克]";
+		mes "Woo...";
+		npctalk "席克：呜……";
+		next;
+		mes "[席克]";
+		mes "你和我……都满身是沙……";
+		npctalk "席克：你和我……都满身是沙……";
+		next;
+		mes "[席克]";
+		mes "哦，我防水防尘，核心没事。";
+		npctalk "席克：哦，我防水防尘，核心没事。";
+		next;
+		mes "[席克]";
+		mes "我生气了吗？对客人？没有……";
+		npctalk "席克：我生气了吗？对客人？没有……";
+		next;
+		mes "[席克]";
+		mes "机器人……我可以生气吗？……嗯……";
+		npctalk "席克：机器人……我可以生气吗？……嗯……";
+		next;
+		mes "[席克]";
+		mes "...not now, but I feel like I can... hmmm.";
+		npctalk "席克：……现在不行，不过我觉得我可以……嗯。";
+		next;
+		mes "[席克]";
+		mes "下一个是有着绿洲般水池的游乐场。我们走吧……";
+		npctalk "席克：下一个是有着绿洲般水池的游乐场。我们走吧……";
+		close2;
+		if ('lost_farm == 7) {
+			'lost_farm = 8;
+			disablenpc();
+			enablenpc instance_npcname("Silk#04");
+			instance_warpall 'map_lost$,226,256,instance_id();
+		}
+		end;
+	}
+	end;
+}
+
+1@lost,91,92,3	script(DISABLED)	Wooden Box#03	4_WOODBOX,{
+	npctalk "席克：呀啊啊！";
+	end;
+OnStart:
+	enablenpc();
+	sleep 1000;
+	.@event$ = instance_npcname("Wooden Box#03") + "::OnMobDead";
+	monster 'map_lost$,81,103,"Lotti",20661,1, .@event$;
+	monster 'map_lost$,81,99,"Sally",20660,1, .@event$;
+	monster 'map_lost$,82,95,"Glory",20662,1, .@event$;
+	monster 'map_lost$,91,108,"Connie",20664,1, .@event$;
+	monster 'map_lost$,92,105,"Boris",20661,1, .@event$;
+	monster 'map_lost$,92,99,"Rony",20664,1, .@event$;
+	monster 'map_lost$,89,94,"Mikey",20663,1, .@event$;
+	sleep 3000;
+	npctalk "席克：哦，别过来~~~";
+	sleep 3000;
+	npctalk "席克：不是我，不是我啊~~~";
+	end;
+OnMobDead:
+	.@count = mobcount('map_lost$, instance_npcname("Wooden Box#03") + "::OnMobDead");
+	if (.@count == 0) {
+		'lost_farm = 7;
+		disablenpc();
+		enablenpc instance_npcname("Silk#03");
+		end;
+	}
+	npctalk "席克：剩下" + (.@count == 1 ? "的" : "的") + " " + .@count + "只！";
+	end;
+}
+
+
+
+
+
+
+1@lost,232,257,3	script(DISABLED)	Silk#04	4_EP17_BASKET,{
+	if (!is_party_leader()) {
+		mes "[席克]";
+		mes "我要和客人中的领队谈谈！";
+		mes "请把领队带过来！";
+		close;
+	}
+	if ('lost_farm == 8) {
+		mes "[席克]";
+		mes "再说一次，别在意我所在的位置……";
+		npctalk "席克：再说一次，别在意我所在的位置……";
+		next;
+		mes "[席克]";
+		mes "你觉得呢？我认为你作为新手做得不错。";
+		npctalk "席克：你觉得呢？我认为你作为新手做得不错。";
+		next;
+		mes "[席克]";
+		mes "果然，你在这方面很有天赋！我说得没错！";
+		npctalk "席克：果然，你在这方面很有天赋！我说得没错！";
+		next;
+		mes "[席克]";
+		mes "你觉得机器人会奉承人吗？我只是说了实话。";
+		npctalk "席克：你觉得机器人会奉承人吗？我只是说了实话。";
+		next;
+		mes "[席克]";
+		mes "让我看看你的本事，再撒食物吧！各位~~吃饭时间到了~~~";
+		npctalk "席克：让我看看你的本事，再撒食物吧！各位~~吃饭时间到了~~~";
+		close2;
+		if ('lost_farm == 8) {
+			'lost_farm = 9;
+			disablenpc();
+			donpcevent instance_npcname("Wooden Box#04") + "::OnStart";
+		}
+		end;
+	}
+	if ('lost_farm == 10) {
+		mes "[席克]";
+		mes "...";
+		npctalk "席克：……";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "你没事吧？";
+		unittalk getcharid(3), "" + strcharinfo(0) + "：你没事吧？";
+		next;
+		mes "[席克]";
+		mes "我觉得这和习惯接待客人、习惯这类工作有点不同。";
+		npctalk "席克：我觉得这和习惯接待客人、习惯这类工作有点不同。";
+		next;
+		mes "[席克]";
+		mes "我们前往下一个地点吧！";
+		npctalk "席克：我们前往下一个地点吧！";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "还有另一个吗？";
+		unittalk getcharid(3), "" + strcharinfo(0) + "：还有另一个吗？";
+		next;
+		mes "[席克]";
+		mes "从外面看或许只是个小温室，但那是错觉。看看天花板……很高吧？";
+		npctalk "席克：从外面看或许只是个小温室，但那是错觉。看看天花板……很高吧？";
+		next;
+		mes "[席克]";
+		mes "我总为客人带路是有原因的。";
+		npctalk "席克：我总为客人带路是有原因的。";
+		next;
+		mes "[席克]";
+		mes "接下来是入口附近，但根据露依纳的情报，那是一片沉睡的区域。你觉得它快要醒了吗？";
+		npctalk "席克：接下来是入口附近，但根据露依纳的情报，那是一片沉睡的区域。你觉得它快要醒了吗？";
+		close2;
+		if ('lost_farm == 10) {
+			'lost_farm = 11;
+			disablenpc();
+			enablenpc instance_npcname("Silk#05");
+			instance_warpall 'map_lost$,242,117,instance_id();
+		}
+		end;
+	}
+	end;
+}
+
+1@lost,232,257,3	script(DISABLED)	Wooden Box#04	4_WOODBOX,{
+	npctalk "席克：别过来！别过来！";
+	end;
+OnStart:
+	enablenpc();
+	npctalk "席克：喂，各位~不是我~";
+	sleep 1000;
+	.@event$ = instance_npcname("Wooden Box#04") + "::OnMobDead";
+	monster 'map_lost$,227,261,"Rudolf",20664,1, .@event$;
+	monster 'map_lost$,223,262,"Daisy",20663,1, .@event$;
+	monster 'map_lost$,217,260,"Adonis",20660,1, .@event$;
+	monster 'map_lost$,216,252,"Bingo",20662,1, .@event$;
+	monster 'map_lost$,223,253,"Molly",20663,1, .@event$;
+	monster 'map_lost$,228,247,"Sammy",20661,1, .@event$;
+	monster 'map_lost$,234,253,"Joy",20662,1, .@event$;
+	sleep 3000;
+	npctalk "席克：别过来！别过来啊！";
+	sleep 3000;
+	npctalk "席克：别往这边来啊啊啊！";
+	end;
+OnMobDead:
+	.@count = mobcount('map_lost$, instance_npcname("Wooden Box#04") + "::OnMobDead");
+	if (.@count == 0) {
+		'lost_farm = 10;
+		disablenpc();
+		enablenpc instance_npcname("Silk#04");
+		npctalk "席克：……哦，天哪……", instance_npcname("Silk#04");
+		end;
+	}
+	npctalk "席克：剩下" + (.@count == 1 ? "的" : "的") + " " + .@count + "只！";
+	end;
+}
+
+
+1@lost,247,119,3	script(DISABLED)	Silk#05	4_EP17_BASKET,{
+	if (!is_party_leader()) {
+		mes "[席克]";
+		mes "我要和客人中的领队谈谈！";
+		mes "请把领队带过来！";
+		close;
+	}
+	if ('lost_farm == 11) {
+		mes "[席克]";
+		mes "深呼吸……深呼吸……";
+		npctalk "席克：深呼吸……深呼吸……";
+		next;
+		mes "[席克]";
+		mes "什么？机器人也会深呼吸吗？心绪控制不住的时候，谁不想喘口气呢？";
+		npctalk "席克：什么？机器人也会深呼吸吗？心绪控制不住的时候，谁不想喘口气呢？";
+		next;
+		mes "[席克]";
+		mes "不是用肺，不过……说起来，肉食人火龙果是怎么发出声音的？";
+		npctalk "席克：不是用肺，不过……说起来，肉食人火龙果是怎么发出声音的？";
+		next;
+		mes "[席克]";
+		mes "...I don't want to be afraid.";
+		npctalk "席克：……我不想害怕。";
+		next;
+		mes "[席克]";
+		mes "那我们继续吧……这里的肉食人火龙果是贪睡鬼，反应可能会有点不同。好了，各位……过来吧……";
+		npctalk "席克：那我们继续吧……这里的肉食人火龙果是贪睡鬼，反应可能会有点不同。好了，各位……过来吧……";
+		close2;
+		if ('lost_farm == 11) {
+			'lost_farm = 12;
+			disablenpc();
+			donpcevent instance_npcname("Wooden Box#05") + "::OnStart";
+		}
+		end;
+	}
+	if ('lost_farm == 13) {
+		mes "[席克]";
+		mes "Phew...";
+		npctalk "席克：呼……";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "你没事吧？";
+		unittalk getcharid(3), "" + strcharinfo(0) + "：你没事吧？";
+		next;
+		mes "[席克]";
+		mes "“猫”会咬人吗？";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "我想是的。";
+		unittalk getcharid(3), "" + strcharinfo(0) + "：我想是的。";
+		next;
+		mes "[席克]";
+		mes "难道要咬人才算可爱吗？";
+		npctalk "席克：难道要咬人才算可爱吗？";
+		next;
+		mes "[席克]";
+		mes "果然……快乐是有代价的。";
+		npctalk "席克：果然……快乐是有代价的。";
+		next;
+		mes "[席克]";
+		mes "为了享受它的可爱，我连手脚都愿意付出……！";
+		npctalk "席克：为了享受它的可爱，我连手脚都愿意付出……！";
+		next;
+		mes "[席克]";
+		mes "我又见到客人了。我尊敬你。哦，当然，从一开始就令人敬佩。";
+		npctalk "席克：我又见到客人了。我尊敬你。哦，当然，从一开始就令人敬佩。";
+		next;
+		mes "[席克]";
+		mes "机器人会开玩笑吗？哦，你还挺会开玩笑的。我一向是认真的。";
+		npctalk "席克：机器人会开玩笑吗？哦，你还挺会开玩笑的。我一向是认真的。";
+		next;
+		mes "[席克]";
+		mes "我们还有要采收的吗？对此我也很抱歉。我们前往下一个区域吧。";
+		npctalk "席克：我们还有要采收的吗？对此我也很抱歉。我们前往下一个区域吧。";
+		close2;
+		if ('lost_farm == 13) {
+			'lost_farm = 14;
+			disablenpc();
+			enablenpc instance_npcname("Silk#06");
+			instance_warpall 'map_lost$,116,165,instance_id();
+		}
+		end;
+	}
+	end;
+}
+
+1@lost,247,119,3	script(DISABLED)	Wooden Box#05	4_WOODBOX,{
+	npctalk "席克：救救机器人！";
+	end;
+OnStart:
+	enablenpc();
+	npctalk "席克：……";
+	sleep 1000;
+	.@event$ = instance_npcname("Wooden Box#05") + "::OnMobDead";
+	monster 'map_lost$,248,115,"Dough",20664,1, .@event$;
+	monster 'map_lost$,247,110,"Roro",20663,1, .@event$;
+	monster 'map_lost$,246,120,"Jasmine",20661,1, .@event$;
+	monster 'map_lost$,243,124,"Melody",20660,1, .@event$;
+	monster 'map_lost$,247,120,"Misty",20664,1, .@event$;
+	monster 'map_lost$,244,115,"Sandy",20662,1, .@event$;
+	monster 'map_lost$,243,116,"Bonnie",20661,1, .@event$;
+	sleep 3000;
+	npctalk "席克：……";
+	sleep 3000;
+	npctalk "席克：……到底有什么区别！";
+	end;
+OnMobDead:
+	.@count = mobcount('map_lost$, instance_npcname("Wooden Box#05") + "::OnMobDead");
+	if (.@count == 0) {
+		'lost_farm = 13;
+		disablenpc();
+		enablenpc instance_npcname("Silk#05");
+		npctalk "席克：结束了吗？！", instance_npcname("Silk#05");
+		end;
+	}
+	npctalk "席克：剩下" + (.@count == 1 ? "的" : "有") + " " + .@count + "个！";
+	end;
+}
+
+
+1@lost,106,160,3	script(DISABLED)	Silk#06	4_EP17_BASKET,{
+	if (!is_party_leader()) {
+		mes "[席尔克]";
+		mes "我要和客人中的领队谈谈！";
+		mes "请把领队带到这里来！";
+		close;
+	}
+	if ('lost_farm == 14) {
+		mes "[席尔克]";
+		mes "我很担心……";
+		npctalk "席尔克：我很担心……";
+		next;
+		mes "[席尔克]";
+		mes "我们之间没有区别，但他们是怎么分辨我们的？";
+		npctalk "席尔克：我们之间没有区别，但他们是怎么分辨我们的？";
+		next;
+		mes "[席尔克]";
+		mes "我闻到了……？嗅嗅。";
+		npctalk "席尔克：我闻到了……？嗅嗅。";
+		next;
+		mes "[席尔克]";
+		mes "话说回来……今天的配额终于过半了。";
+		npctalk "席尔克：话说回来……今天的配额终于过半了。";
+		next;
+		mes "[席尔克]";
+		mes "这全靠你的帮助……真是太感谢了。";
+		npctalk "席尔克：这全靠你的帮助……真是太感谢了。";
+		next;
+		mes "[席尔克]";
+		mes "那就让我把附近的肉食人火龙果叫过来……";
+		npctalk "席尔克：那就让我把附近的肉食人火龙果叫过来……";
+		close2;
+		if ('lost_farm == 14) {
+			'lost_farm = 15;
+			disablenpc();
+			donpcevent instance_npcname("Wooden Box#06") + "::OnStart";
+		}
+		end;
+	}
+	if ('lost_farm == 16) {
+		mes "[席尔克]";
+		mes "Sigh...";
+		npctalk "席尔克：唉……";
+		next;
+		mes "[席尔克]";
+		mes "按照露依纳的指示，接下来只剩下……";
+		npctalk "席尔克：按照露依纳的指示，接下来只剩下……";
+		next;
+		mes "[席尔克]";
+		mes "只剩下大王喵喵……";
+		npctalk "席尔克：只剩下大王喵喵……";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "大王喵喵？";
+		unittalk getcharid(3), "" + strcharinfo(0) + "：大王喵喵？";
+		next;
+		mes "[席尔克]";
+		mes "如果可爱的条件是咬人，那大王喵喵就是最可爱的，咬起来也不输给其他家伙……";
+		npctalk "席尔克：如果可爱的条件是咬人，那大王喵喵就是最可爱的，咬起来也不输给其他家伙……";
+		next;
+		mes "[席尔克]";
+		mes "...will bite well...?";
+		npctalk "席尔克：……它会咬得很好……？";
+		next;
+		mes "[席尔克]";
+		mes "为了欣赏它的可爱，我不只愿意献出手脚，连同事们也愿意献上……！";
+		npctalk "席尔克：为了欣赏它的可爱，我不只愿意献出手脚，连同事们也愿意献上……！";
+		next;
+		mes "[席尔克]";
+		mes "怎么样……亲爱的客人？";
+		npctalk "席尔克：怎么样……亲爱的客人？";
+		next;
+		mes "[席尔克]";
+		mes "我们走吧？";
+		npctalk "席尔克：我们走吧？";
+		close2;
+		if ('lost_farm == 16) {
+			'lost_farm = 17;
+			sleep 3000;
+			npctalk "席尔克：玫瑰花园在二楼，那里是大王喵喵平时睡觉的地方。";
+			sleep 3000;
+			npctalk "席尔克：我看看，露依纳的记录……我需要叫醒一只大喵喵。要到达那里……";
+			sleep 3000;
+			npctalk "席尔克：……那么，两只大喵喵……大王喵喵和大喵喵有等级之分，所以它们在饭前打盹都有固定的位置……";
+			sleep 3000;
+			npctalk "席尔克：我想我们只要安抚好其中一只，让它们让开路就行。这样吧，你选一边，我去……我去喂另一边……";
+			sleep 3000;
+			npctalk "席尔克：没关系，我视力很好，你到了那里给我个信号，我就来处理！那么，先从最近的那个开始，我在地图上给你显示坐标……";
+			enablenpc instance_npcname("#compass01");
+			viewpointmap 'map_lost$,1,38,253,1,0xFFFF00;
+			viewpointmap 'map_lost$,1,287,253,2,0xFFFF00;
+		}
+		end;
+	}
+	if ('lost_farm == 17) {
+		mes "[席尔克]";
+		mes "你可以从地图上选择一个地点前往。";
+		viewpointmap 'map_lost$,1,38,253,1,0xFFFF00;
+		viewpointmap 'map_lost$,1,287,253,2,0xFFFF00;
+		close;
+	}
+	end;
+}
+
+1@lost,113,168,0	script(DISABLED)	#compass01	HIDDEN_WARP_NPC,30,30,{
+	end;
+OnTouch:
+	disablenpc();
+	viewpointmap 'map_lost$,1,38,253,1,0xFFFF00;
+	viewpointmap 'map_lost$,1,287,253,2,0xFFFF00;
+	end;
+}
+
+1@lost,106,160,3	script(DISABLED)	Wooden Box#06	4_WOODBOX,{
+	npctalk "席尔克：救救我！";
+	end;
+OnStart:
+	enablenpc();
+	sleep 1000;
+	.@event$ = instance_npcname("Wooden Box#06") + "::OnMobDead";
+	monster 'map_lost$,108,164,"Berry",20661,1, .@event$;
+	monster 'map_lost$,107,169,"Rain",20660,1, .@event$;
+	monster 'map_lost$,111,173,"Windy",20663,1, .@event$;
+	monster 'map_lost$,115,173,"Poppie",20661,1, .@event$;
+	monster 'map_lost$,119,169,"Lala",20662,1, .@event$;
+	monster 'map_lost$,111,160,"Sasha",20664,1, .@event$;
+	monster 'map_lost$,115,161,"Emerald",20660,1, .@event$;
+	npctalk "席尔克：我~~~";
+	sleep 1000;
+	npctalk "席尔克：……没~~~~~事";
+	sleep 1000;
+	npctalk "席尔克：我说，我跟你讲~~~~~~~~ 呃啊！";
+	end;
+OnMobDead:
+	.@count = mobcount('map_lost$, instance_npcname("Wooden Box#06") + "::OnMobDead");
+	if (.@count == 0) {
+		'lost_farm = 16;
+		disablenpc();
+		enablenpc instance_npcname("Silk#06");
+		npctalk "席尔克：唉……", instance_npcname("Silk#06");
+		end;
+	}
+	npctalk "席尔克：还" + (.@count == 1 ? "有" : "有") + " " + .@count + "个！";
+	end;
+}
+
+
+// traps left side
+1@lost,38,257,3	script	大喵喵#01	MD_PITAYA_B,{
+	mes "[大喵喵]";
+	mes "Purr.";
+	next;
+	mes "-- 大喵喵正在打盹。 --";
+	close;
+}
+
+1@lost,38,256,0	script	#cat01warp	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if ('lost_farm == 17) {
+		'lost_farm = 18;
+		npctalk "大喵喵：咕噜噜噜噜。", instance_npcname("Big Meow#01");
+		disablenpc instance_npcname("Big Meow#01");
+		disablenpc instance_npcname("#cat01warp");
+		disablenpc instance_npcname("#compass01");
+		disablenpc instance_npcname("Silk#06");
+
+		enablenpc instance_npcname("banghae#101");
+		enablenpc instance_npcname("banghae#102");
+		enablenpc instance_npcname("banghae#103");
+		enablenpc instance_npcname("banghae#104");
+		enablenpc instance_npcname("banghae#105");
+		donpcevent instance_npcname("Wooden Box#10") + "::OnStart";
+
+		monster 'map_lost$,38,257,"Big Meow",20662,1, instance_npcname("Wooden Box#10") + "::OnMobDead";
+		end;
+	}
+	npctalk "大喵喵：*打喷嚏*";
+	warp 'map_lost$,38,226;
+	end;
+}
+
+1@lost,38,265,0	script(DISABLED)	banghae#101	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[0] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,39,269,"Pearl",20663,1, .@event$;
+	monster 'map_lost$,37,269,"Sapphire",20662,1, .@event$;
+	monster 'map_lost$,36,264,"Ruby",20660,1, .@event$;
+	monster 'map_lost$,38,268,"Diamond",20661,1, .@event$;
+	monster 'map_lost$,36,269,"Emerald",20664,1, .@event$;
+	end;
+}
+
+1@lost,38,296,0	script(DISABLED)	banghae#102	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[1] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,35,296,"Sardonyx",20660,1, .@event$;
+	monster 'map_lost$,40,296,"Opal",20664,1, .@event$;
+	monster 'map_lost$,36,294,"Topaz",20662,1, .@event$;
+	monster 'map_lost$,38,299,"Zircon",20661,1, .@event$;
+	monster 'map_lost$,34,298,"Amethyst",20663,1, .@event$;
+	end;
+}
+
+1@lost,51,317,0	script(DISABLED)	banghae#103	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[2] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,48,319,"Aquamarine",20662,1, .@event$;
+	monster 'map_lost$,51,319,"Garnet",20660,1, .@event$;
+	monster 'map_lost$,45,317,"Iolite",20663,1, .@event$;
+	monster 'map_lost$,49,314,"Citrine",20661,1, .@event$;
+	monster 'map_lost$,49,320,"Peridot",20664,1, .@event$;
+	monster 'map_lost$,39,300,"Sardonyx",20660,1, .@event$;
+	monster 'map_lost$,39,300,"Opal",20664,1, .@event$;
+	monster 'map_lost$,39,300,"Topaz",20662,1, .@event$;
+	monster 'map_lost$,39,300,"Zircon",20661,1, .@event$;
+	monster 'map_lost$,39,300,"Amethyst",20663,1, .@event$;
+	end;
+}
+
+1@lost,92,317,0	script(DISABLED)	banghae#104	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[3] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,92,318,"Rutile",20660,1, .@event$;
+	monster 'map_lost$,95,317,"Aragonite",20662,1, .@event$;
+	monster 'map_lost$,91,316,"Amber",20661,1, .@event$;
+	monster 'map_lost$,90,315,"Tanzanite",20662,1, .@event$;
+	monster 'map_lost$,89,316,"Obsidian",20662,1, .@event$;
+	end;
+}
+
+1@lost,135,317,0	script(DISABLED)	banghae#105	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[4] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,139,317,"Onyx",20660,1, .@event$;
+	monster 'map_lost$,139,318,"Tanzite",20663,1, .@event$;
+	monster 'map_lost$,132,314,"Jasper",20660,1, .@event$;
+	monster 'map_lost$,137,313,"Rodonite",20660,1, .@event$;
+	monster 'map_lost$,133,319,"Jet",20662,1, .@event$;
+	end;
+}
+
+
+// traps right side
+1@lost,286,253,3	duplicate(大喵喵#01)	大喵喵#02	MD_PITAYA_Y
+
+1@lost,287,253,0	script	#cat02warp	HIDDEN_WARP_NPC,4,4,{
+	end;
+OnTouch:
+	if ('lost_farm == 17) {
+		'lost_farm = 18;
+		npctalk "大喵喵：咕噜噜噜噜。", instance_npcname("Big Meow#02");
+		disablenpc instance_npcname("Big Meow#02");
+		disablenpc instance_npcname("#cat02warp");
+		disablenpc instance_npcname("#compass01");
+		disablenpc instance_npcname("Silk#06");
+
+		enablenpc instance_npcname("banghae#201");
+		enablenpc instance_npcname("banghae#202");
+		enablenpc instance_npcname("banghae#203");
+		enablenpc instance_npcname("banghae#204");
+		enablenpc instance_npcname("banghae#205");
+		donpcevent instance_npcname("Wooden Box#10") + "::OnStart";
+
+		monster 'map_lost$,286,253,"Big Meow",20661,1, instance_npcname("Wooden Box#10") + "::OnMobDead";
+		end;
+	}
+	npctalk "大喵喵：*打喷嚏*";
+	warp 'map_lost$,287,226;
+	end;
+}
+
+1@lost,286,267,0	script(DISABLED)	banghae#201	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[0] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,283,265,"Pearl",20663,1, .@event$;
+	monster 'map_lost$,287,267,"Sapphire",20662,1, .@event$;
+	monster 'map_lost$,288,268,"Ruby",20660,1, .@event$;
+	monster 'map_lost$,290,265,"Diamond",20661,1, .@event$;
+	monster 'map_lost$,288,262,"Emerald",20664,1, .@event$;
+	end;
+}
+
+1@lost,287,296,0	script(DISABLED)	banghae#202	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[1] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,287,299,"Sardonyx",20660,1, .@event$;
+	monster 'map_lost$,289,298,"Opal",20664,1, .@event$;
+	monster 'map_lost$,284,295,"Topaz",20662,1, .@event$;
+	monster 'map_lost$,290,291,"Zircon",20661,1, .@event$;
+	monster 'map_lost$,287,293,"Amethyst",20663,1, .@event$;
+	end;
+}
+
+1@lost,270,317,0	script(DISABLED)	banghae#203	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[2] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,274,318,"Aquamarine",20662,1, .@event$;
+	monster 'map_lost$,272,316,"Garnet",20660,1, .@event$;
+	monster 'map_lost$,279,318,"Iolite",20663,1, .@event$;
+	monster 'map_lost$,278,316,"Citrine",20661,1, .@event$;
+	monster 'map_lost$,275,315,"Peridot",20664,1, .@event$;
+	end;
+}
+
+1@lost,232,317,0	script(DISABLED)	banghae#204	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[3] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,236,318,"Rutile",20660,1, .@event$;
+	monster 'map_lost$,234,318,"Aragonite",20662,1, .@event$;
+	monster 'map_lost$,241,316,"Amber",20661,1, .@event$;
+	monster 'map_lost$,241,315,"Tanzanite",20662,1, .@event$;
+	monster 'map_lost$,239,315,"Obsidian",20662,1, .@event$;
+	end;
+}
+
+1@lost,195,317,0	script(DISABLED)	banghae#205	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	disablenpc();
+	'banghae[4] = 1;
+	.@event$ = instance_npcname("Wooden Box#10") + "::OnMobDead";
+	monster 'map_lost$,201,317,"Onyx",20662,1, .@event$;
+	monster 'map_lost$,199,315,"Tanzite",20663,1, .@event$;
+	monster 'map_lost$,201,314,"Jasper",20660,1, .@event$;
+	monster 'map_lost$,202,317,"Rodonite",20660,1, .@event$;
+	monster 'map_lost$,202,318,"Jet",20662,1, .@event$;
+	end;
+}
+
+
+// boss
+1@lost,161,315,3	script(DISABLED)	Wooden Box#10	4_WOODBOX,{
+	if ('lost_farm < 19) {
+		npctalk "席尔克：来这里的一路上，你必须和所有的肉食人火龙果玩耍。";
+		end;
+	}
+	if (!is_party_leader()) {
+		mes "[席尔克]";
+		mes "我要和客人中的领队谈谈！";
+		mes "请把领队带到这里来！";
+		close;
+	}
+	if ('lost_farm == 19) {
+		mes "[席尔克]";
+		mes ".... come this way.";
+		npctalk "席尔克：……请往这边来。";
+		next;
+		mes "[席尔克]";
+		mes "大王喵喵……！";
+		npctalk "席尔克：大王喵喵……！";
+		close2;
+		disablenpc();
+		enablenpc instance_npcname("Wooden Box#10-1");
+		sleep 2000;
+		if ('lost_farm == 19) {
+			'lost_farm = 20;
+			donpcevent instance_npcname("#1_lost_boss") + "::OnBossSummon";
+		}
+		end;
+	}
+	if ('lost_farm == 21) {
+		mes "[席尔克]";
+		mes "客人……嗯……";
+		npctalk "席尔克：客人……嗯……";
+		next;
+		mes "[席尔克]";
+		mes "这是……不是恐惧，更像是怨恨……";
+		npctalk "席尔克：这是……不是恐惧，更像是怨恨……";
+		next;
+		mes "[席尔克]";
+		mes "我们都是一样的，但我没法像露依纳那样完成同样的工作……";
+		npctalk "席尔克：我们都是一样的，但我没法像露依纳那样完成同样的工作……";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "先出来吧。";
+		unittalk getcharid(3), "" + strcharinfo(0) + "：先出来吧。";
+		close2;
+		disablenpc();
+		enablenpc instance_npcname("Silk#10");
+		npctalk "席尔克：呀！", instance_npcname("Silk#10");
+		end;
+	}
+	end;
+
+OnStart:
+	enablenpc();
+	sleep 3000;
+	mapannounce 'map_lost$, "席尔克：啊啊啊啊啊啊啊啊！救救我！！",bc_yellow;
+	sleep 3000;
+	mapannounce 'map_lost$, "席尔克：我成功了！！！！！！",bc_yellow;
+	sleep 3000;
+	mapannounce 'map_lost$, "席尔克：我会在大王喵喵前面等着！",bc_yellow;
+	end;
+
+OnMobDead:
+	if ('lost_farm != 18 || 'banghae[0] == 0 || 'banghae[1] == 0 || 'banghae[2] == 0 || 'banghae[3] == 0 || 'banghae[4] == 0)
+		end;
+	if (mobcount('map_lost$, instance_npcname("Wooden Box#10") + "::OnMobDead") == 0) {
+		'lost_farm = 19;
+		npctalk "席尔克：嘘。";
+	}
+	end;
+}
+
+1@lost,161,315,3	script(DISABLED)	Wooden Box#10-1	4_WOODBOX,{
+	switch (rand(1,3)) {
+	case 1:
+		npctalk "席尔克：救、救救我~~~~！";
+		break;
+	case 2:
+		npctalk "席尔克：让、让大王喵喵冷静下来~~~";
+		break;
+	case 3:
+		npctalk "席尔克：这里~~ 我的手臂给你~~";
+		break;
+	}
+	end;
+}
+
+1@lost,161,315,3	script(DISABLED)	Silk#10	4_EP17_BASKET,{
+	if (!is_party_leader() && 'lost_farm < 22) {
+		mes "[席尔克]";
+		mes "我要和客人中的领队谈谈！";
+		mes "请把领队带到这里来！";
+		close;
+	}
+	if ('lost_farm == 21) {
+		mes "[席尔克]";
+		mes "每一只的组成部位都不同，那我们能用这个做什么……？";
+		next;
+		mes "[席尔克]";
+		mes "所以今后只能这样采收了吗……？";
+		next;
+		mes "[席尔克]";
+		mes "唉，没办法！客人们玩得开心吗？";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "玩得开心吗？";
+		unittalk getcharid(3), "" + strcharinfo(0) + "：玩得开心吗？";
+		next;
+		mes "[席尔克]";
+		mes "是啊！结束了！工作结束的时候不就是最开心的吗？";
+		next;
+		mes "[席尔克]";
+		mes "把你收集到的肉食人火龙果尾巴交给我，今天的农场体验就结束了！来吧，我们到外面去！";
+		if ('lost_farm == 21)
+			'lost_farm = 22;
+		close;
+	}
+	if (isbegin_quest(8588) == 1) {
+		if (checkweight(1000103,8) == 0) {	// (custom)
+			mes "^008800等一下！！";
+			mes "你携带的物品太多，无法再获得物品。请减轻负重后再试。^000000";
+			close;
+		}
+		mes "[席尔克]";
+		mes "我看看……你收集了多少？";
+		next;
+		setarray .@item[0],1000093,1000094,1000095,1000096,1000097;
+		for ( .@i = 0; .@i < 5; ++.@i ) {
+			if (countitem(.@item[.@i]) > 0) {
+				.@count += countitem(.@item[.@i]);
+				delitem .@item[.@i], countitem(.@item[.@i]);
+			}
+		}
+		if (.@count >= 20)
+			.@reward = 4;
+		else
+			.@reward = 2;
+		if (countitem(1000098) > 0) {
+			delitem 1000098, countitem(1000098);
+			.@reward += 2;
+		}
+		mes "[席尔克]";
+		mes "总共是" + .@count + ".";
+		mes "辛苦了！";
+		erasequest 8588;
+		getitem 1000103, .@reward;
+		next;
+	}
+	mes "[席尔克]";
+	mes "那么……你想出去吗？";
+	next;
+	if (select( "出去。", "不出去。" ) == 2) {
+		mes "[席尔克]";
+		mes "你在等同伴吗？";
+		mes "我会等你的，想出去的时候告诉我~";
+		close;
+	}
+	if (isbegin_quest(8589) == 0) {	// first time entering the instance
+		mes "[席尔克]";
+		mes "露依纳……扩建报告我写完了，接下来请跟客人说几句吧！";
+		mes "我干得很棒……*抽泣*";
+		setquest 8589;
+	}
+	mes "下次见！";
+	close2;
+	warp "ba_maison",308,202;
+	end;
+}
+
+
+1@lost,1,1,0	script	#1_lost_boss	HIDDEN_WARP_NPC,{
+	end;
+OnBossSummon:
+	monster 'map_lost$,167,318,"Boss Meow",20659,1, instance_npcname("#1_lost_boss") + "::OnBossKill";
+	donpcevent instance_npcname("#1_lost_boss") + "::OnSlaveSummon";
+	enablenpc instance_npcname("bossbang#301");
+	enablenpc instance_npcname("bossbang#302");
+	enablenpc instance_npcname("bossbang#401");
+	enablenpc instance_npcname("bossbang#402");
+	end;
+OnBossKill:
+	killmonster 'map_lost$, instance_npcname("#1_lost_boss") + "::OnBossKill";
+	if ('lost_farm == 20)
+		'lost_farm = 21;
+	disablenpc instance_npcname("Wooden Box#10-1");
+	disablenpc instance_npcname("bossbang#301");
+	disablenpc instance_npcname("bossbang#302");
+	disablenpc instance_npcname("bossbang#401");
+	disablenpc instance_npcname("bossbang#402");
+	enablenpc instance_npcname("Wooden Box#10");
+	end;
+OnSlaveSummon:
+	// note: mobs not killed when the boss dies
+	monster 'map_lost$,157,316,"Mora",20661,1;
+	monster 'map_lost$,167,314,"Max",20664,1;
+	monster 'map_lost$,166,319,"Cache",20664,1;
+	sleep 3000;
+	monster 'map_lost$,172,318,"Sammy",20655,1;
+	monster 'map_lost$,172,325,"Lightning",20656,1;
+	monster 'map_lost$,169,329,"Daisy",20657,1;
+	monster 'map_lost$,156,329,"Rudolf",20658,1;
+	monster 'map_lost$,155,318,"Happy",20654,1;
+	sleep 3000;
+	monster 'map_lost$,156,329,"Joy",20658,1;
+	monster 'map_lost$,169,329,"Glory",20657,1;
+	monster 'map_lost$,150,323,"King Eyes",20664,1;
+	monster 'map_lost$,161,332,"Elizabeth",20656,1;
+	sleep 6000;
+	monster 'map_lost$,150,320,"Roro",20660,1;
+	monster 'map_lost$,152,314,"Toto",20661,1;
+	monster 'map_lost$,166,327,"Dough",20664,1;
+	monster 'map_lost$,174,318,"Adonis",20660,1;
+	monster 'map_lost$,172,313,"Coco",20662,1;
+	end;
+}
+
+1@lost,135,317,0	script(DISABLED)	bossbang#301	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:	// note: mobs not killed when the boss dies
+	monster 'map_lost$,135,319,"Onyx",20656,1;
+	monster 'map_lost$,135,316,"Tanzanite","G_PITAYA_V",1;
+	monster 'map_lost$,131,313,"Jasper","G_PITAYA_R",1;
+	monster 'map_lost$,137,315,"Rhodonite","G_PITAYA_R",1;
+	monster 'map_lost$,133,319,"Jet",20656,1;
+	end;
+}
+
+1@lost,129,317,0	script(DISABLED)	bossbang#302	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	monster 'map_lost$,129,316,"Rutile","G_PITAYA_R",1;
+	monster 'map_lost$,132,317,"Aragonite",20656,1;
+	monster 'map_lost$,134,316,"Amber","G_PITAYA_Y",1;
+	monster 'map_lost$,130,316,"Joysite",20656,1;
+	monster 'map_lost$,131,316,"Obsidian",20656,1;
+	end;
+}
+
+1@lost,195,317,0	script(DISABLED)	bossbang#401	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	monster 'map_lost$,197,313,"Onyx",20656,1;
+	monster 'map_lost$,194,315,"Tanzanite","G_PITAYA_V",1;
+	monster 'map_lost$,201,313,"Jasper","G_PITAYA_R",1;
+	monster 'map_lost$,200,315,"Rhodonite","G_PITAYA_R",1;
+	monster 'map_lost$,202,318,"Jet",20656,1;
+	end;
+}
+
+1@lost,201,317,0	script(DISABLED)	bossbang#402	HIDDEN_WARP_NPC,5,5,{
+	end;
+OnTouch_:
+	monster 'map_lost$,199,316,"Rutile","G_PITAYA_R",1;
+	monster 'map_lost$,203,317,"Aragonite",20656,1;
+	monster 'map_lost$,204,316,"Amber","G_PITAYA_Y",1;
+	monster 'map_lost$,199,315,"Joysite",20656,1;
+	monster 'map_lost$,193,315,"Obsidian",20656,1;
+	end;
+}

@@ -1,0 +1,618 @@
+//===== rAthena Script =======================================
+//= Episode 17.1 - Illusion Enchants
+//===== Description: =========================================
+//= [Walkthrough Conversion]
+//= Illusion related merchants and enchanters
+//===== Changelog: ===========================================
+//= 1.0 Initial release [crazyarashi]
+//= 1.1 Optimizations and cleanup [Everade]
+//= 1.2 iRO conversion for 2 NPCs [Capuche, Everade]
+//============================================================
+
+sp_cor,152,158,4	script	蝴蝶商人#sp_cor	4_M_ORIENT01,{
+	mes "[蝴蝶商人]";
+	mes "嘿，很高兴见到你。";
+	mes "我在卖" + getitemname(100903) + "，你要买吗？";	// Teleport_Ep17_01
+	close2;
+	callshop "shop_sp_cor";
+	end;
+}
+
+sp_cor,136,156,3	script	恩典装备兑换员#ext162	4_M_REPAIR,{
+	mes "[恩典装备兑换员]";
+	mes "Hello.";
+	mes "我们有可用^4d4dff恩典^000000装备兑换的" + mesitemlink( 25723 ) + ".";
+	mes "我会根据你的职业引导你兑换物品。";
+	close2;
+	switch( eaclass() & EAJ_THIRDMASK ) {
+	case EAJ_RUNE_KNIGHT:
+		.@str$ = "JOB_RUNE_KNIGHT";
+		break;
+	case EAJ_WARLOCK:
+		.@str$ = "JOB_WARLOCK";
+		break;
+	case EAJ_RANGER:
+		.@str$ = "JOB_RANGER";
+		break;
+	case EAJ_ARCH_BISHOP:
+		.@str$ = "JOB_ARCH_BISHOP";
+		break;
+	case EAJ_MECHANIC:
+		.@str$ = "JOB_MECHANIC";
+		break;
+	case EAJ_GUILLOTINE_CROSS:
+		.@str$ = "JOB_GUILLOTINE_CROSS";
+		break;
+	case EAJ_ROYAL_GUARD:
+		.@str$ = "JOB_ROYAL_GUARD";
+		break;
+	case EAJ_SORCERER:
+		.@str$ = "JOB_SORCERER";
+		break;
+	case EAJ_MINSTRELWANDERER:
+		.@str$ = "JOB_MINSTREL";
+		break;
+	case EAJ_SURA:
+		.@str$ = "JOB_SURA";
+		break;
+	case EAJ_GENETIC:
+		.@str$ = "JOB_GENETIC";
+		break;
+	case EAJ_SHADOW_CHASER:
+		.@str$ = "JOB_SHADOW_CHASER";
+		break;
+	default:
+		switch( Class ) {
+		case JOB_SUPER_NOVICE_E:
+		case JOB_SUPER_BABY_E:
+		case JOB_HYPER_NOVICE:
+			.@str$ = "JOB_SUPER_NOVICE_E";
+			break;
+		case JOB_KAGEROU:
+		case JOB_OBORO:
+		case JOB_BABY_KAGEROU:
+		case JOB_BABY_OBORO:
+		case JOB_SHINKIRO:
+		case JOB_SHIRANUI:
+			.@str$ = "JOB_KAGEROU";
+			break;
+		case JOB_REBELLION:
+		case JOB_BABY_REBELLION:
+		case JOB_NIGHT_WATCH:
+			.@str$ = "JOB_REBELLION";
+			break;
+		case JOB_SUMMONER:
+		case JOB_BABY_SUMMONER:
+		case JOB_SPIRIT_HANDLER:
+			.@str$ = "JOB_SUMMONER";
+			break;
+		case JOB_STAR_EMPEROR:
+		case JOB_BABY_STAR_EMPEROR:
+		case JOB_STAR_EMPEROR2:
+		case JOB_BABY_STAR_EMPEROR2:
+		case JOB_SKY_EMPEROR:
+		case JOB_SKY_EMPEROR2:
+			.@str$ = "JOB_STAR_EMPEROR";
+			break;
+		case JOB_SOUL_REAPER:
+		case JOB_BABY_SOUL_REAPER:
+		case JOB_SOUL_ASCETIC:
+			.@str$ = "JOB_SOUL_REAPER";
+			break;
+		default:
+			end;
+		}
+		break;
+	}
+	callshop "shop_ext171_" + .@str$;
+	end;
+}
+
+// Enchanting Supply Exchange NPC - Official iRO Conversion
+sp_cor,108,130,5	script	反叛者#rm171_7	4_F_REBELLION3,{
+	if (isbegin_quest(17019) == 0) {
+		mes "[反叛者]";
+		mes "反叛者目前正在使用这栋建筑。";
+		mes "还有周围的几处地方。";
+		next;
+		mes "[反叛者]";
+		mes "我们很久没这么忙过了。";
+		mes "我不喜欢和总统以及公司合作，但有事可忙的感觉还是不错。";
+		close;
+	}
+	if (isbegin_quest(16353) < 2) {
+		mes "[反叛者]";
+		mes "看来你收到消息了。队长们正在里面开会。应该是艾莲娜·沃尔科娃队长叫你来的。";
+		mes "... I was going to call her, but she's already here.";
+		cloakoffnpcself( "Elena Volkova#rm171_0" );
+		npctalk "艾莲娜·沃尔科娃：啊，我一直在找你，冒险家。", "Elena Volkova#rm171_0", bc_self;
+		if (isbegin_quest(16352) == 0)
+			setquest 16352;
+		close;
+	}
+	if (isbegin_quest(16360) < 2) {
+		mes "[反叛者]";
+		mes "反叛者目前正在使用这栋建筑。";
+		mes "还有周围的几处地方。";
+		next;
+		mes "[反叛者]";
+		mes "我们很久没这么忙过了。";
+		mes "我不喜欢和总统以及公司合作，但有事可忙的感觉还是不错。";
+		close2;
+		if (isbegin_quest(16352) == 1)
+			erasequest 16352;
+		end;
+	}
+	mes "[反叛者]";
+	mes "你带破损武器来了吗？想见那个科学罪犯吗？他就在里面。要我帮你叫他出来吗？";
+	mes "还是说你找我有事？我可以兑换武器改造装置和防具改造模块。";
+	cloakoffnpcself( "Elyumina#rm171_4" );
+	npctalk "反叛者：喂，罪犯。有人找你。", "Rebellion#rm171_7", bc_self;
+	npctalk "艾露米娜：好，好！我来了！你们真是没用，没有我，你们只能拿豆袋打仗。", "Elyumina#rm171_4", bc_self;
+	next;
+	switch (select("见艾露米娜。", "领取武器改造装置。", "领取防具改造模块。")) {
+	case 1:
+		mes "[反叛者]";
+		mes "好，你们慢慢聊。";
+		mes "费了好大劲才说服他，他最终答应改造我们的武器和防具。他手艺也相当不错，每天都从早干到晚。";
+		close;
+	case 2:
+		npctalk "艾露米娜：什么？既然只是让我像雕像一样站在这里，那干嘛还叫我过来？你们这些混蛋！", "Elyumina#rm171_4", bc_self;
+		if (checkweight(1201,3) == 0) {
+			mes "[反叛者]";
+			mes "你要武器改造装置吗？需要5个" + mesitemlink( 25723 ) + "或100万Zeny。";
+			mes "你的背包满了。请先整理出空间。";
+			close;
+		}
+		mes "[反叛者]";
+		mes "你要武器改造装置吗？需要5个" + mesitemlink( 25723 ) + "或100万Zeny。";
+		mes "如果你想要武器，可以去找艾露米娜谈。";
+		next;
+		if (select("领取武器改造装置（物理）。", "领取武器改造装置（魔法）。") == 1) {
+			// .@item_id = 23773;	// EP17_1_SPC02
+			.@group = IG_EP17_1_SPC02;
+			setarray .@ids[0],23776,23777,23778;
+		} else {
+			// .@item_id = 23774;	// EP17_1_SPC03
+			.@group = IG_EP17_1_SPC03;	// EP17_1_SPC03
+			setarray .@ids[0],23779,23780,23781;
+		}
+		mes "[反叛者]";
+		mes "我可以随机给你" + mesitemlink( .@ids[0] ) + "、";
+		mes mesitemlink( .@ids[1] ) + "、";
+		mes "或" + mesitemlink( .@ids[2] ) + ".";
+		mes "你手上有哪一种，5个核心元件还是100万Zeny？";
+		next;
+		disable_items;
+		switch (select("5个核心元件", "100万Zeny")) {
+		case 1:
+			if (checkweight(1201,3) == 0) {
+				mes "[反叛者]";
+				mes "好像出了问题。请确认背包是否有足够的空位，以及兑换材料是否齐全。";
+				close;
+			}
+			if (countitem(25723) < 5) {
+				mes "[反叛者]";
+				mes "你的核心元件不够。请再检查一下背包。";
+				close;
+			}
+			delitem 25723,5;	// EP17_1_EVT39
+			break;
+		case 2:
+			if (checkweight(1201,3) == 0) {
+				mes "[反叛者]";
+				mes "好像出了问题。请确认背包是否有足够的空位，以及兑换材料是否齐全。";
+				close;
+			}
+			if (Zeny < 1000000) {
+				mes "[反叛者]";
+				mes "你的Zeny不够。请再检查一下钱包。";
+				close;
+			}
+			Zeny -= 1000000;
+		}
+		// consumeitem .@item_id;
+		getgroupitem(.@group);
+		mes "[反叛者]";
+		mes "我把手头最好的给你了。";
+		mes "如果你想精炼它，我旁边的<NAVI>[铁罐]<INFO>sp_cor,106,136,0,101,0</INFO></NAVI>会好好照顾你。";
+		close;
+	case 3:
+		npctalk "艾露米娜：什么？既然只是让我像雕像一样站在这里，那干嘛还叫我过来？你们这些野蛮人！", "Elyumina#rm171_4", bc_self;
+		mes "[反叛者]";
+		mes "你要防具改造模块吗？需要30个" + mesitemlink( 25669 ) + "和5个" + mesitemlink( 25723 ) + ".";
+		if (checkweight(1201,3) == 0) {
+			mes "你的背包满了。请先整理出空间。";
+			close;
+		}
+		mes "你得到的种类是随机决定的。";
+		next;
+		if (select("领取防具改造模块。", "Cancel.") == 2) {
+			mes "[反叛者]";
+			mes "想要防具改造模块的话，随时来找我。";
+			close;
+		}
+		disable_items;
+		if (countitem(25669) < 30 || countitem(25723) < 5) {
+			mes "[反叛者]";
+			mes "每个模块需要30个神秘零件和5个核心元件。你并不齐全，请检查。";
+			close;
+		}
+		if (checkweight(1201,3) == 0) {
+			mes "[反叛者]";
+			mes "好像出了问题。请确认背包是否有足够的空位，以及兑换材料是否齐全。";
+			close;
+		}
+		mes "[反叛者]";
+		mes "我给你一个防具改造模块。";
+		mes "如果你想精炼它，我旁边的<NAVI>[铁罐]<INFO>sp_cor,106,136,0,101,0</INFO></NAVI>会好好照顾你。";
+		delitem 25669,30;	// EP17_1_EVT02
+		delitem 25723,5;	// EP17_1_EVT39
+		// consumeitem 23775;	// EP17_1_SPC04
+		getgroupitem(IG_EP17_1_SPC04);
+		close;
+	}
+	end;
+
+OnInit:
+	questinfo (QTYPE_QUEST, QMARK_YELLOW, " isbegin_quest(17019) == 1 && isbegin_quest(16352) == 0 ");
+	end;
+}
+
+// Equipment Exchange NPC - Official iRO Conversion
+sp_cor,111,130,3	script	艾露米娜#rm171_4	4_EP17_ELYUMINA,{
+	if (isbegin_quest(16360) < 2) {
+		cutin "ep171_elyumina02",0;
+		mes "[艾露米娜]";
+		mes "啊！我正专心研究，你为什么老叫我？我很忙，明白吗？要是闲得慌，就多给我带些破损武器来！";
+		close2;
+		cloakonnpcself( "爱鲁梅纳#rm171_3" );
+		cutin "",255;
+		end;
+	}
+	if (checkweight(28136,2) == 0) {
+		cutin "ep171_elyumina03",0;
+		mes "[艾露米娜]";
+		mes "你不是来拿武器或防具的吗？你的背包满了。我可没时间等你翻背包，晚点再来。";
+		next;
+		mes "- 你的背包满了。请整理出空间后再来找我。 -";
+		close3;
+	}
+	cutin "ep171_elyumina01",0;
+	mes "[艾露米娜]";
+	mes "有什么事重要到要打断我的研究？最好真的重要。";
+	next;
+	cutin "",255;
+	switch (select("领取OS武器。", "领取幻影铠甲。")) {
+	case 1:
+		cutin "ep171_elyumina01",0;
+		mes "[艾露米娜]";
+		mes "OS武器？只要你带来1个" + mesitemlink( 25668 ) + " and 50 " + mesitemlink( 25669 ) + ".";
+		mes "我有什么就给你什么，凭什么让你挑？";
+		next;
+		cutin "",255;
+		if (select("兑换OS武器。", "查看可兑换列表。") == 2) {
+			cutin "ep171_elyumina03",0;
+			mes "[艾露米娜]";
+			mes "啧啧。我说过我做的都是好东西。非得挑吗？好吧，那听好了。";
+			next;
+			mes "[艾露米娜]";
+			mes "单手剑：" + mesitemlink( 13493 );
+			mes "双手剑：" + mesitemlink( 21047 );
+			mes "法杖：" + mesitemlink( 26151 );
+			mes "书：" + mesitemlink( 28629 );
+			mes "斧头：" + mesitemlink( 28136 );
+			mes "钝器：" + mesitemlink( 16088 );
+			mes "弓：" + mesitemlink( 18178 );
+			mes "十字弓：" + mesitemlink( 18179 );
+			mes "拳刃：" + mesitemlink( 28038 );
+			mes "拳套：" + mesitemlink( 1862 );
+			mes "狙击步枪：" + mesitemlink( 28253 );
+			mes "短剑：" + mesitemlink( 28755 );
+			mes "弓：" + mesitemlink( 18180 );
+			mes "长枪：" + mesitemlink( 32019 );
+			mes "钝器：" + mesitemlink( 16089 );
+			close3;
+		}
+		disable_items;
+		if (countitem(25668) < 1 || countitem(25669) < 50) {
+			cutin "ep171_elyumina03",0;
+			mes "[艾露米娜]";
+			mes "我说过，给我带1把破损武器和50个神秘零件。别人说话时你该好好听。";
+			close3;
+		}
+		if (checkweight(28136,2) == 0) {
+			cutin "ep171_elyumina03",0;
+			mes "[艾露米娜]";
+			mes "... What the? There's a problem.";
+			mes "当然不是我这边的问题，是你的问题。检查你的背包是不是满了，或者材料是不是齐全。";
+			close3;
+		}
+		cutin "ep171_elyumina04",0;
+		mes "[艾露米娜]";
+		mes "给你。还想要的话，就再带些破损武器和神秘零件来。";
+		mes "就是因为你，我才被关在这里修玩具。你能处理好这事吧？";
+		delitem 25668,1;	// EP17_1_EVT01
+		delitem 25669,50;	// EP17_1_EVT02
+		// consumeitem 23772;	// EP17_1_SPC01
+		getgroupitem(IG_EP17_1_SPC01);
+		close3;
+	case 2:
+		cutin "ep171_elyumina04",0;
+		mes "[艾露米娜]";
+		mes "想要幻影防具的话，给我带50个" + mesitemlink( 25723 ) + ". I'll give you a piece.";
+		mes "让我看看……哦，我什么时候做了这么多种？好吧，我今天心情好。你要哪个？";
+		next;
+		cutin "",255;
+		switch (select("幻影铠甲", "幻影引擎翅膀", "幻影护腿", "幻影推进器", "幻影战斗芯片")) {
+		case 1:
+			setarray .@item[0],15376,15377;
+			break;
+		case 2:
+			setarray .@item[0],20933,20934;
+			break;
+		case 3:
+			setarray .@item[0],22196,22197;
+			break;
+		case 4:
+			setarray .@item[0],32207,32208;
+			break;
+		case 5:
+			setarray .@item[0],32209,32210;
+			break;
+		}
+		cutin "ep171_elyumina01",0;
+		mes "[艾露米娜]";
+		mes mesitemlink( .@item[0] );
+		mes mesitemlink( .@item[1] );
+		mes "哪一个？";
+		next;
+		cutin "",255;
+		.@id = .@item[ select( getitemname(.@item[0]), getitemname(.@item[1]) ) -1 ];
+		cutin "ep171_elyumina04",0;
+		mes "[艾露米娜]";
+		mes "好，" + getitemname(.@id) + "，对吧？你真的要用50个核心元件换它吗？";
+		next;
+		cutin "",255;
+		if (select( "Exchange.", "不兑换。" ) == 2) {
+			cutin "ep171_elyumina03",0;
+			mes "[艾露米娜]";
+			mes "喂，你在开玩笑吗？喂，我本来想对你好的！";
+			close3;
+		}
+		disable_items;
+		if (countitem(25723) < 50) {
+			cutin "ep171_elyumina02",0;
+			mes "[艾露米娜]";
+			mes "喂，你在开玩笑吗？你的核心元件不够！喂，我本来想对你好的！";
+			enable_items;
+			close3;
+		}
+		cutin "ep171_elyumina04",0;
+		mes "[艾露米娜]";
+		mes "来，拿着这个" + getitemname(.@id) + ". I bet it's probably the best armor you've ever had. You really ought to be grateful.";
+		delitem 25723,50;	// EP17_1_EVT390
+		getitem .@id,1;
+		enable_items;
+		close3;
+	}
+	end;
+
+OnInit:
+	cloakonnpc();
+	end;
+}
+
+// Illusion Enchanter - Walkthrough Conversion
+sp_cor,106,136,3	script	RS26#illusion_enchant	4_SYS_MSG,{
+	if(!checkweight(1201,1) || (MaxWeight - Weight) < 1000){
+		mes "因为你持有的物品数量过多，无法继续对话。";
+		mes "请整理物品后再试。";
+		close;
+	}
+	disable_items;
+	mes "[RS26]";
+	mes strcharinfo(0)+".";
+	mes "欢迎，欢迎！";
+	next;
+	switch (select("探索装置。:附魔幻影铠甲。:附魔幻影引擎翅膀。:附魔幻影护腿。:附魔幻影饰品[R]。:附魔幻影饰品[L]。")) {
+	case 1:
+		mes "^0000FF# 我是最新的全息投影技术，能完美呈现自然的反应与动作。 #^000000";
+		next;
+		mes "[RS26]";
+		mes "我的技术只存在于未来的城市。我是RS26，雷根希姆公司的机械装置。";
+		npctalk "反叛者：哦，那台机器没有模块就没用。","Rebellion#171_cor_merchant",bc_self;
+		next;
+		mes "[RS26]";
+		mes "如果你带来装有强化模块的幻影装备，我会按你的意愿进行强化。";
+		next;
+		mes "[RS26]";
+		mes "这些模块适用于标准装备，不会损坏物品。不过可强化的次数会因装备而异。";
+		next;
+		mes "[RS26]";
+		mes "需要我的帮助时请再来~";
+		close;
+	case 2:
+		.@part = EQI_ARMOR;
+		.@index = 0;
+		setarray .@id,15376,15377;
+		break;
+	case 3:
+		.@part = EQI_GARMENT;
+		.@index = 1;
+		setarray .@id,20933,20934;
+		break;
+	case 4:
+		.@part = EQI_SHOES;
+		.@index = 3;
+		setarray .@id,22196,22197;
+		break;
+	case 5:
+		.@part = EQI_ACC_R;
+		.@index = 2;
+		setarray .@id,32207,32209;
+		break;
+	case 6:
+		.@part = EQI_ACC_L;
+		.@index = 2;
+		setarray .@id,32208,32210;
+		break;
+	}
+	switch (select("取消。:普通级。:稀有级。:独特级。:传说级。")) {
+	case 1:
+		mes "[RS26]";
+		mes "我就到这里。";
+		close;
+		
+	case 2:
+		.@min = 25670;
+		.@max = 25677;
+		break;
+		
+	case 3:
+		.@min = 25678;
+		.@max = 25692;
+		break;
+		
+	case 4:
+		.@min = 25693;
+		.@max = 25699;
+		break;
+		
+	case 5:
+		.@min = 25700;
+		.@max = 25705;
+		break;
+	}
+	.@menu$ = "Cancel.:";
+	for(.@i = .@min; .@i < (.@max + 1); .@i++){
+		.@module_id[getarraysize(.@module_id)] = .@i;
+		.@item_name$ = getitemname(.@i);
+		.@item_name$ = replacestr(.@item_name$,"Modification Module (","");
+		.@item_name$ = replacestr(.@item_name$,")","");
+		.@menu$ += (!countitem(.@i) ? "^AAAAAA":"") + .@item_name$ + (!countitem(.@i) ? "^000000:":":");
+	}
+	.@s = select(.@menu$);
+	switch( .@s ) {
+	case 1:
+		mes "[RS26]";
+		mes "我就到这里。";
+		close;
+		
+	default:
+		function module_check;
+		.@s -= 2;
+		.@equip_id = getequipid(.@part);
+		.@refine = getequiprefinerycnt(.@part);
+		for (.@i = 0; .@i < 4; .@i++)
+			.@card[.@i] = getequipcardid(.@part,.@i);
+		copyarray .@check[0],.@card[0],4;
+		if (!.@equip_id || .@id[0] != .@equip_id && .@id[1] != .@equip_id) {
+			mes "[RS26]";
+			mes "需要检查装备。那件东西不是本装置能处理的。";
+			close;
+		}
+		.@var$ = module_check(.@module_id[.@s],.@part,.@index);
+		explode(.@s$,.@var$,",");
+		switch (atoi(.@s$[0])) {
+			case 1:
+				mes "[RS26]";
+				mes "需要检查模块。本装置无法识别它。";
+				close;
+			case 2:
+				mes "[RS26]";
+				mes "看来你要强化的装备已经达到极限了。";
+				close;
+			case 3:
+				mes "[RS26]";
+				mes "你需要持有与效果相匹配的模块才能进行强化。";
+				close;
+			case 4:
+				mes "[RS26]";
+				mes "该模块的能力最多可附魔" + .@s$[1] + " " + (atoi(.@s$[1]) > 1 ? "次":"次") +". It seems that the module threshold is already at it's limit.";
+				close;
+			case 5:
+				.@item_name$ = getitemname(.@module_id[.@s]);
+				.@item_name$ = replacestr(.@item_name$,"Modification Module (","");
+				.@item_name$ = replacestr(.@item_name$,")","");
+				mes "[RS26]";
+				mes "^0000FF你选择了" + getitemname(.@equip_id) + " " + .@item_name$ + "^000000";
+				mes "------------------";
+				mes "所选模块在装备上最多可附魔至^0000FF" + .@s$[2] + " " +  (atoi(.@s$[2]) > 1 ? "次":"次") +  "^000000次。该装备目前已被此模块附魔^0000FF" + .@s$[1] + ".";
+				mes "要开始吗？";
+				next;
+				if (select("我再考虑一下……:开始吧。") == 1) {
+					mes "[RS26]";
+					mes "那么，需要我的帮助时请再来找我~";
+					close;
+				}
+				for (.@i = 1; .@i < 4; .@i++) {
+					if (.@card[.@i] == 0) {
+						.@augment_slot = .@i;
+						break;
+					}
+				}
+				.@card[.@augment_slot] = atoi(.@s$[3]);
+				delitem .@module_id[.@s],1;
+				if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) || callfunc("F_IsEquipRefineHack", .@part, .@refine) || callfunc("F_IsEquipCardHack", .@part, .@check[0], .@check[1], .@check[2], .@check[3]))
+					end;
+				specialeffect2 EF_REPAIRWEAPON;
+				delequip .@part;
+				getitem2 .@equip_id,1,1,.@refine,0,.@card[0],.@card[1],.@card[2],.@card[3];
+				mes "[RS26]";
+				mes "正在尝试强化装备的第^990000" + .@augment_slot + "^000000个插槽。";
+				close;
+		}
+	}
+	
+OnInit:
+	setarray .module$,
+	"25670:29527:3,25671:29528:3,25687:29534:2,25688:29535:2,25689:29536:2,25693:29540:1",
+	"25670:29527:3,25671:29528:3,25690:29537:2,25691:29538:2,25692:29539:2,25695:29542:1",
+	"25672:4742:3,25673:4752:3,25674:4702:3,25675:4732:3,25676:4712:3,25677:4722:3,25678:29529:2,25679:29532:2,25680:4826:1,25681:4881:1,25682:4866:1,25683:4836:1,25696:29543:1,25697:29544:1,25698:29545:1,25699:29546:1",
+	"25670:29527:3,25671:29528:3,25684:29531:2,25685:29530:2,25686:29533:2,25694:29541:1",
+	"25700:29547,25701:29548,25702:29549,25703:29550,25704:29551,25705:29552";
+	end;
+	
+	function	module_check	{
+		if(!countitem(getarg(0)))
+			return "1";
+		for (.@i = 0; .@i < 4; .@i++)
+			.@card[.@i] = getequipcardid(getarg(1),.@i);
+		if(.@card[3]) return "2";
+		explode(.@T$,.module$[getarg(2)],",");
+		if(getarg(0) >= 25700 && getarg(0) <= 25705){
+			explode(.@TT$,.module$[4],",");
+			for (.@i = 0; .@i < getarraysize(.@TT$); .@i++) {
+				explode(.@module$,.@TT$[.@i],":");
+				if(getarg(0) == atoi(.@module$[0]))
+					.@enchant_id = atoi(.@module$[1]);
+				.@module = atoi(.@module$[0]);
+				.@enchant = atoi(.@module$[1]);
+				for (.@j = 1; .@j < 4; .@j++) {
+					if (.@card[.@j] == .@enchant)
+						return "4,1";
+				}
+			}
+			.@max = 1;
+		} else {
+			for (.@i = 0; .@i < getarraysize(.@T$); .@i++) {
+				explode(.@module$,.@T$[.@i],":");
+				if(getarg(0) == atoi(.@module$[0])){
+					.@enchant_id = atoi(.@module$[1]);
+					.@max = atoi(.@module$[2]);
+					break;
+				}
+			}
+		}
+		if(!.@enchant_id)
+			return "3";
+		for (.@j = 1; .@j < 4; .@j++) {
+			if (.@card[.@j] == .@enchant_id)
+				.@count++;
+		}
+		if (.@count == .@max)
+			return "4," + .@max;
+		return "5," + .@count + "," + .@max + "," + .@enchant_id;
+	}
+}

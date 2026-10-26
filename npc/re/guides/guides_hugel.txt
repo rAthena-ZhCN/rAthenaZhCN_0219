@@ -1,0 +1,301 @@
+//===== rAthena Script ======================================= 
+//= Hugel Guides
+//===== By: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Guides for the city of Hugel.
+//===== Additional Comments: ================================= 
+//= 1.0 First version, Renewal guide.
+//= 1.1 Optimized. [Euphy]
+//= 1.2 Navigation system update. [Euphy]
+//============================================================ 
+
+hugel,98,56,3	script	休格尔向导婆婆#hugel	863,{
+	mes "[休格尔向导婆婆]";
+	mes "哦，你好~ 你真是个精力充沛的冒险者。";
+	mes "欢迎来到^8B4513休格尔^000000。很荣幸能为你介绍这座美丽的村庄。";
+	mes "如果你是第一次使用向导服务，就该多问些问题。";
+	F_Navi("[Hugel Guide Granny]");
+	next;
+	set .@str$,"Would you like to know more locations?";
+	while (1) {
+		switch(select("[ 主要设施 ]:[ 商人与助手 ]:清除小地图标记:取消")) {
+		case 1:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ 教堂 ]:[ 旅馆 ]:[ 酒吧 ]:[ 机场 ]:[ 武器店 ]:[ 工具店 ]:[ 宾果游戏室 ]:[ ^3131FF猎人公会^000000 ]:[ 派对用品店 ]:[ ^3131FF神殿探险队^000000 ]:上一页")) {
+				case 1:
+					mes "[休格尔向导婆婆]";
+					mes "这个嘛，对我来说，这座"+F_Navi("教堂","hugel,159,113")+"更像是像我这样的老人家待的地方，你懂吧……";
+					mes .@str$;
+					viewpoint 1,159,113,0,0xFF0000;
+					next;
+					break;
+				case 2:
+					mes "[休格尔向导婆婆]";
+					mes "光说好话不如来点布丁。";
+					mes "你最好先在"+F_Navi("旅馆","hugel,101,77")+"安顿好行李，再开始逛这座村庄。";
+					mes .@str$;
+					viewpoint 1,101,77,1,0x8B4513;
+					next;
+					break;
+				case 3:
+					mes "[休格尔向导婆婆]";
+					mes "是啊，旅行途中总想找家"+F_Navi("酒吧","hugel,126,65")+"坐坐，结交新朋友。";
+					mes "从这里往东走，就能到达酒吧。";
+					mes .@str$;
+					viewpoint 1,126,65,2,0xDAA520;
+					next;
+					break;
+				case 4:
+					mes "[休格尔向导婆婆]";
+					mes "不久前，一群外地人来到村里，建起了那个奇怪的"+F_Navi("Airport","hugel,178,146")+" kind of thing...";
+					mes "他们管它叫什么来着？飞空艇？";
+					mes .@str$;
+					viewpoint 1,178,146,3,0xD7567F;
+					next;
+					break;
+				case 5:
+					mes "[休格尔向导婆婆]";
+					mes "这个嘛，村子中心有一家"+F_Navi("武器店","hugel,88,167")+"。";
+					mes "不过我不知道有没有你觉得好用的武器。";
+					mes .@str$;
+					viewpoint 1,88,167,4,0xCD5C5C;
+					next;
+					break;
+				case 6:
+					mes "[休格尔向导婆婆]";
+					mes "是啊，我最喜欢休格尔牌红色药水了。其他牌子的红色药水我还没尝过呢……呵呵呵。";
+					mes "这家"+F_Navi("工具店","hugel,92,163")+"位于村子中心。";
+					mes .@str$;
+					viewpoint 1,92,163,5,0x000080;
+					next;
+					break;
+				case 7:
+					mes "[休格尔向导婆婆]";
+					mes "我会在地图上标出";
+					mes "该地点的位置："+F_Navi("宾果游戏室","hugel,58,206","^800080");
+					mes "，就在你的小地图上。";
+					mes .@str$;
+					viewpoint 1,58,206,6,0x800080;
+					next;
+					break;
+				case 8:
+					mes "[休格尔向导婆婆]";
+					mes "哦，你想成为猎人吗？";
+					mes "那就沿着海滩往东北走，你会找到"+F_Navi("猎人公会","hugel,209,224")+".";
+					mes .@str$;
+					viewpoint 1,209,224,7,0xFF1493;
+					next;
+					break;
+				case 9:
+					mes "[休格尔向导婆婆]";
+					mes "我会在地图上标出";
+					mes "该地点的位置："+F_Navi("派对用品店","hugel,95,103","^483D8B");
+					mes "，就在你的小地图上。";
+					mes .@str$;
+					viewpoint 1,95,103,8,0x483D8B;
+					next;
+					break;
+				case 10:
+					mes "[休格尔向导婆婆]";
+					mes "我听说";
+					mes F_Navi("神殿探险队","hugel,52,95")+"住在西边的一栋房子里。";
+					mes "他们在村子中间立了块告示牌，我猜他们是在招人做些什么……";
+					mes "不知道他们在这里做什么……嗯。";
+					mes .@str$;
+					viewpoint 1,52,95,9,0x834683;
+					next;
+					break;
+				case 11:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ 怪物赛跑场 ]:[ 酷活动公司职员 ]:上一页")) {
+				case 1:
+					mes "[休格尔向导婆婆]";
+					mes "我也喜欢玩怪物赛跑游戏。挺有意思的，你知道吗？";
+					mes "哦，你还没试过吗？不行~ 你一定要试试。相信我，你会喜欢的。";
+					mes .@str$;
+					viewpoint 1,60,71,10,0xFF1493;
+					next;
+					break;
+				case 2:
+					mes "[休格尔向导婆婆]";
+					mes "我会在地图上标出";
+					mes "以下地点的位置：^DA70D6酷活动公司职员^000000";
+					mes "，就在你的小地图上。";
+					mes .@str$;
+					viewpoint 1,88,168,11,0xDA70D6;
+					next;
+					break;
+				case 3:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 3:
+			mes "[休格尔向导婆婆]";
+			mes "我会清除你小地图上的标记。";
+			mes "还有什么需要我帮忙的吗？";
+			viewpoint 2,159,113,0,0xFFFFFF;
+			viewpoint 2,101,77,1,0xFFFFFF;
+			viewpoint 2,126,65,2,0xFFFFFF;
+			viewpoint 2,178,146,3,0xFFFFFF;
+			viewpoint 2,88,167,4,0xFFFFFF;
+			viewpoint 2,92,163,5,0xFFFFFF;
+			viewpoint 2,58,206,6,0xFFFFFF;
+			viewpoint 2,209,224,7,0xFFFFFF;
+			viewpoint 2,95,103,8,0xFFFFFF;
+			viewpoint 2,52,95,9,0xFFFFFF;
+			viewpoint 2,60,71,10,0xFFFFFF;
+			viewpoint 2,88,168,11,0xFFFFFF;
+			next;
+			break;
+		case 4:
+			mes "[休格尔向导婆婆]";
+			mes "呵呵呵~！";
+			mes "当向导真有意思。";
+			close;
+		}
+	}
+}
+
+hugel,187,172,6	script	向导富豪王#hugel	414,{
+	mes "[富豪王]";
+	mes "你来这个";
+	mes "乡间小村有何贵干？";
+	next;
+	mes "[富豪王]";
+	mes "这里是^8B4513休格尔^000000";
+	mes "属于修瓦尔兹共和国。";
+	mes "能得到我这样伟大人物的指引，你真是荣幸。";
+	F_Navi("[Rich King]");
+	next;
+	while (1) {
+		switch(select("[ 主要设施 ]:[ 商人与助手 ]:清除小地图标记:取消")) {
+		case 1:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ 教堂 ]:[ 旅馆 ]:[ 酒吧 ]:[ 机场 ]:[ 武器店 ]:[ 工具店 ]:[ 宾果游戏室 ]:[ 猎人公会 ]:[ 派对用品店 ]:[ 神殿探险队 ]:上一页")) {
+				case 1:
+					callsub L_Mark, F_Navi("Church","hugel,159,113","^FF0000");
+					viewpoint 1,159,113,0,0xFF0000;
+					next;
+					break;
+				case 2:
+					callsub L_Mark, F_Navi("Inn","hugel,101,77","^8B4513");
+					viewpoint 1,101,77,1,0x8B4513;
+					next;
+					break;
+				case 3:
+					callsub L_Mark, F_Navi("Pub","hugel,126,65","^DAA520");
+					viewpoint 1,126,65,2,0xDAA520;
+					next;
+					break;
+				case 4:
+					callsub L_Mark, F_Navi("Airport","hugel,178,146","^D7567F");
+					viewpoint 1,178,146,3,0xD7567F;
+					next;
+					break;
+				case 5:
+					callsub L_Mark, F_Navi("Weapon Shop","hugel,88,167","^CD5C5C");
+					viewpoint 1,88,167,4,0xCD5C5C;
+					next;
+					break;
+				case 6:
+					callsub L_Mark, F_Navi("Tool Shop","hugel,92,163","^000080");
+					viewpoint 1,92,163,5,0x000080;
+					next;
+					break;
+				case 7:
+					callsub L_Mark, F_Navi("Bingo Game Room","hugel,58,206","^800080");
+					viewpoint 1,58,206,6,0x800080;
+					next;
+					break;
+				case 8:
+					callsub L_Mark, F_Navi("Hunter Guild","hugel,209,224","^FF1493");
+					viewpoint 1,209,224,7,0xFF1493;
+					next;
+					break;
+				case 9:
+					callsub L_Mark, F_Navi("Party Supplies Shop","hugel,95,103","^483D8B");
+					viewpoint 1,95,103,8,0x483D8B;
+					next;
+					break;
+				case 10:
+					callsub L_Mark, F_Navi("Shrine Expedition","hugel,52,95","^834683");
+					viewpoint 1,52,95,9,0x834683;
+					next;
+					break;
+				case 11:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ 怪物赛跑场 ]:[ 酷活动公司职员 ]:上一页")) {
+				case 1:
+					callsub L_Mark, "^FF1493Monster Race Arena^000000";
+					viewpoint 1,60,71,10,0xFF1493;
+					next;
+					break;
+				case 2:
+					callsub L_Mark, "^DA70D6Cool Event Corp. Staff^000000";
+					viewpoint 1,88,168,11,0xDA70D6;
+					next;
+					break;
+				case 3:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 3:
+			mes "[富豪王]";
+			mes "我会清除你小地图上的标记。";
+			mes "我知道你好奇，但别再烦我了。";
+			viewpoint 2,159,113,0,0xFFFFFF;
+			viewpoint 2,101,77,1,0xFFFFFF;
+			viewpoint 2,126,65,2,0xFFFFFF;
+			viewpoint 2,178,146,3,0xFFFFFF;
+			viewpoint 2,88,167,4,0xFFFFFF;
+			viewpoint 2,92,163,5,0xFFFFFF;
+			viewpoint 2,58,206,6,0xFFFFFF;
+			viewpoint 2,209,224,7,0xFFFFFF;
+			viewpoint 2,95,103,8,0xFFFFFF;
+			viewpoint 2,52,95,9,0xFFFFFF;
+			viewpoint 2,60,71,10,0xFFFFFF;
+			viewpoint 2,88,168,11,0xFFFFFF;
+			next;
+			break;
+		case 4:
+			mes "[富豪王]";
+			mes "这么辛苦工作之后，我有点饿了……";
+			mes "我很想吃点东西！";
+			close;
+		}
+	}
+	end;
+L_Mark:
+	mes "[富豪王]";
+	mes "我会标记";
+	mes "以下地点的位置："+getarg(0)+".";
+	mes "还想知道更多地点吗？";
+	mes "你还要继续烦我，惹我生气吗？";
+	return;
+}

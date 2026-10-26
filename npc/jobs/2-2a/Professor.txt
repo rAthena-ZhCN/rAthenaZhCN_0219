@@ -1,0 +1,93 @@
+//===== rAthena Script ======================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== By: ==================================================
+//= Nana
+//= finished, optimized and tested by Lupus
+//===== Current Version: ===================================== 
+//= 1.3
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Advance Class jobchanger after kRO Normals.
+//===== Additional Comments: ================================= 
+//= 1.1 Made all into functions, additional checks, etc. [Lupus]
+//= 1.2 Made numbers into constants. [Vicious]
+//= 1.3 Now saves/restores all the quest skills [Lupus]
+//============================================================ 
+
+valkyrie,53,47,3	script	智者#Valkyrie	743,{
+	if (ADVJOB == 0 || Upper != 1) {
+		set .@karma_d,rand(1,10);
+		if (.@karma_d > 4) {
+			mes "[智者]";
+			mes "Congratulations.";
+			mes "荣耀归于战士们！";
+			close;
+		}
+		mes "[智者]";
+		mes "需要一生……";
+		mes "的确是一生";
+		mes "才能积累起";
+		mes "成为智者所必需的";
+		mes "知识……";
+		next;
+		mes "[智者]";
+		mes "令人不知所措。";
+		mes "学得越多，";
+		mes "就越会发现";
+		mes "自己还有多少不懂。";
+		mes "学习的历程";
+		mes "永无止境……";
+		close;
+	}
+	else if (ADVJOB == Job_Professor && Class == Job_Mage_High && JobLevel > 39) {
+		mes "[智者]";
+		mes "米德加尔特";
+		mes "没有足够的智者";
+		mes "来引领一个";
+		mes "繁荣的新时代。这个";
+		mes "世界需要你……";
+		next;
+		mes "[智者]";
+		mes "你愿意承担";
+		mes "这份重大的责任吗？";
+		mes "你愿意以智者的身份";
+		mes "为米德加尔特效力吗？";
+		next;
+		if (select("否:是") == 1) {
+			mes "[智者]";
+			mes "等你准备好，";
+			mes "随时回来。";
+			mes "荣耀归于战士们！";
+			close;
+		}
+		if (SkillPoint) {
+			mes "[智者]";
+			mes "你仍可以学习更多技能。请用完";
+			mes "所有剩余的技能点，再来找我。";
+			close;
+		}
+		jobchange Job_Professor;
+		set ADVJOB,0;
+		mes "[智者]";
+		mes "恭喜！";
+		mes "作为智者，我希望";
+		mes "你能积极";
+		mes "参与，将知识";
+		mes "之光带到";
+		mes "黑暗之处。";
+		close;
+	}
+	mes "[智者]";
+	mes "欢迎";
+	mes "前往巴哈拉宫，";
+	mes "荣誉殿堂。";
+	next;
+	mes "[智者]";
+	mes "请在这里";
+	mes "放松一下";
+	mes "不必拘束。";
+	mes "荣耀归于战士们！";
+	close;
+}
+

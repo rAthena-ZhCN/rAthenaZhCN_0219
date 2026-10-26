@@ -1,0 +1,430 @@
+//===== rAthena Script =======================================
+//= In Memory of Heroes
+//===== By: ==================================================
+//= Kisuka
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= iRO Memorial Day (2008)
+//===== Additional Comments: =================================
+//= 1.0 First version. [Kisuka]
+//= 1.1 Many Many Fixes. [Kisuka]
+//= 1.2 Some changes. [Kisuka]
+//============================================================
+
+// Lauds
+//============================================================
+prontera,182,214,4	script	劳兹#Memorial	58,{
+	if (Memorial08 < 1) {
+		mes "[疯狂的萨戈·劳兹]";
+		mes "喂，你好啊！";
+		mes "你在那儿干什么！？";
+		next;
+		mes "[疯狂的萨戈·劳兹]";
+		mes "你知道今天是什么日子吗！？";
+		mes "这是非常重要的日子！";
+		mes "一个必须记住的重要日子！";
+		next;
+		mes "[疯狂的萨戈·劳兹]";
+		mes "这是什么！？";
+		emotion ET_SURPRISE;
+		next;
+		mes "[疯狂的萨戈·劳兹]";
+		mes "你的毛巾呢！？";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "我的什么？";
+		next;
+		mes "[疯狂的萨戈·劳兹]";
+		mes "没有毛巾，你怎么去旅行！？";
+		next;
+		mes "[疯狂的萨戈·劳兹]";
+		mes "如果你以为这不过是又一个节日，那我就懒得浪费口舌了。";
+		mes "但如果你想向伟大的士兵们致敬，我可以帮你做好准备。";
+		next;
+		if (select("算是吧……:你疯了吗？") == 2) {
+			mes "[疯狂的萨戈·劳兹]";
+			mes "好，那就毫无准备地去吧！";
+			next;
+			mes "[疯狂的萨戈·劳兹]";
+			mes "^FF0000你总有一天会后悔的！^000000";
+			close;
+		}
+		mes "[疯狂的萨戈·劳兹]";
+		mes "太好了！";
+		mes "那就仔细听我说。";
+		next;
+		mes "[疯狂的萨戈·劳兹]";
+		mes "在向阵亡的士兵们致敬之前，你必须装备妥当。";
+		mes "没有毛巾，你会迷失的！";
+		mes "如果你把材料带来，我就能为你做一条毛巾。";
+		next;
+		mes "[疯狂的萨戈·劳兹]";
+		mes "仔细听好。";
+		mes "给我带来 ^FF000030 块透明之布和 20 个柔毛^000000。";
+		set Memorial08,1;
+		close;
+	}
+
+	else if (Memorial08 == 1) {
+		if (countitem(1059) < 30 || countitem(914) < 20) {
+			mes "[疯狂的萨戈·劳兹]";
+			mes "这些是什么？还不够吗？！";
+			mes "*叹气* 我真得再说一遍吗？！";
+			mes "给我带来 ^FF000030 块透明之布和 20 个柔毛^000000。";
+			close;
+		} else {
+			mes "***疯狂的萨戈·劳兹似乎在自言自语***";
+			next;
+			mes "[疯狂的萨戈·劳兹]";
+			mes "那么，毛巾的材料带来了吗？";
+			next;
+			mes "[疯狂的萨戈·劳兹]";
+			mes "太好了，你全都带来了。";
+			mes "那我就照约定为你制作一条记忆之巾。";
+			mes "稍等一下。";
+			next;
+			mes "[疯狂的萨戈·劳兹]";
+			mes "给你！";
+			delitem 1059,30;
+			delitem 914,20;
+			getitem 6025,1;
+			getnameditem 6025,strcharinfo(0);
+			set Memorial08,2;
+			close;
+		}
+	}
+	
+	else if (Memorial08 == 2) {
+		mes "[疯狂的萨戈·劳兹]";
+		mes "啊，你现在有蓬松的新毛巾了，我甚至把你的名字绣上去了";
+		next;
+		mes "[疯狂的萨戈·劳兹]";
+		mes "话说，你愿意踏上旅程，为纪念日献上敬意吗？";
+		next;
+		if (select("乐意。:不，我很忙。") == 2) {
+			mes "[疯狂的萨戈·劳兹]";
+			mes "如果哪天有人决定在你家上方修高速公路，别哭着来找我！";
+			close;
+		}
+		mes "[疯狂的萨戈·劳兹]";
+		mes "好。顺便问一句，你知道毛巾是做什么用的吗？";
+		next;
+		mes "[疯狂的萨戈·劳兹]";
+		mes "看来你只是带着它，却不明白它的意义。";
+		mes "真可惜！你该去^FF0000普隆德拉找格拉斯^000000谈谈。";
+		set Memorial08,3;
+		close;
+	}
+
+	else if (Memorial08 == 3) {
+		mes "[疯狂的萨戈·劳兹]";
+		mes "你还在这里做什么？";
+		mes "我说过让你去普隆德拉找格拉斯！";
+		close;
+	}
+
+	else if (Memorial08 == 4 || Memorial08 == 5 || Memorial08 == 6) {
+		mes "[疯狂的萨戈·劳兹]";
+		mes "去帮格拉斯，然后再回来。";
+		close;
+	}
+
+	else if (Memorial08 == 7) {
+		mes "[疯狂的萨戈·劳兹]";
+		mes "哦，你全都带来了。";
+		mes "哈哈哈！";
+		mes "哈哈哈哈哈哈！！！！咳咳";
+		next;
+		mes "[疯狂的萨戈·劳兹]";
+		mes "请交给我吧。顺便说一句，辛苦你了。";
+		mes "话说，你从这趟旅程中学到了什么吗？";
+		mes "现在去普隆德拉 12 点方向看看那块牌匾吧。";
+		next;
+		mes "[疯狂的萨戈·劳兹]";
+		mes "你说你刚刚就在那儿，是什么意思？";
+		next;
+		mes "[疯狂的萨戈·劳兹]";
+		mes "什么？你为什么把你的垃圾给我！";
+		mes "那些东西对我毫无用处。";
+		mes "你应该去那块牌匾那里！";
+		set Memorial08,8;
+		close;
+	}
+
+	else if (Memorial08 == 8) {
+		mes "[疯狂的萨戈·劳兹]";
+		mes "别再把你那些垃圾塞给我了！";
+		mes "去普隆德拉 12 点方向的牌匾那里继续你的旅程！";
+		close;
+	}
+	
+	else if (Memorial08 >= 9) {
+		set .@RandomMsg, rand(1,5);
+		if (.@RandomMsg == 1) {
+			mes "[疯狂的萨戈·劳兹]";
+			mes "别慌！";
+			emotion ET_SURPRISE;
+			close;
+		}
+		else if (.@RandomMsg == 2) {
+			mes "[疯狂的萨戈·劳兹]";
+			mes "人生……就像一颗葡萄柚。";
+			mes "它是橙色的、软乎乎的，里面还有几颗籽，有些人早餐只吃半个。";
+			close;
+		}
+		else if (.@RandomMsg == 3) {
+			mes "[疯狂的萨戈·劳兹]";
+			mes "这个故事本来是有个寓意的，不过记录者一时想不起来了。";
+			close;
+		}
+		else if (.@RandomMsg == 4) {
+			mes "[疯狂的萨戈·劳兹]";
+			mes "42！";
+			close;
+		}
+		else if (.@RandomMsg == 5) {
+			mes "[疯狂的萨戈·劳兹]";
+			mes "以为光靠马铃薯就能解决任何重大问题，那是个错误。";
+			close;
+		}
+	}
+}
+		
+// Memorial Plaque
+//============================================================
+prontera,153,286,4	script	纪念牌#Memorial	857,{
+	if (Memorial08 < 8) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "- 这是一块落满灰尘的旧牌匾。-";
+		close;
+	}
+	
+	else if (Memorial08 == 8) {
+		mes "[" + strcharinfo(0) + "]";
+		mes "- 这是一块落满灰尘的旧牌匾。-";
+		mes "'这一定就是劳兹说的东西。'";
+		mes "'用毛巾把它擦干净吧。'";
+		next;
+		set Memorial08,9;
+		getexp 93750,43750;
+		goto L_CleanPlaque;
+	}
+	
+	else if (Memorial08 >= 9) {
+		goto L_CleanPlaque;
+	}
+	
+	L_CleanPlaque:
+		mes "- 你看到擦净后的牌匾上有一段文字。-";
+		next;
+		mes "-尽管不需要雕刻的大理石来纪念他们，-";
+		mes "-也不需要用刻石记载他们的事迹，-";
+		mes "-但他们的英名将与他们所捍卫的土地一样长存。-";
+		mes "-丹尼尔·韦伯斯特-";
+		if (Memorial08 == 9) {
+			getexp 93750,43750;
+		}
+		next;
+		mes "-还有另一段文字。-";
+		next;
+		mes "-我或许没有去到我原定要去的地方，-";
+		mes "-但我想，我最终来到了我该在的地方。-";
+		mes "- 道格拉斯·亚当斯.-";
+		if (Memorial08 == 9) { 
+			getexp 93750,43750;
+		}
+		next;
+		mes "-这是最后一段文字。-";
+		next;
+		mes "-真正的英雄主义异常朴素，毫不起眼。-";
+		mes "-它不是不惜一切代价超越他人的冲动，-";
+		mes "- 而是不惜一切代价服务他人的愿望。 -";
+		mes "- 阿瑟·阿什 -";
+		if (Memorial08 == 9) { 
+			getexp 93750,43750;
+			set Memorial08,10;
+		}
+		close;
+}
+
+// Grast
+//============================================================
+prontera,150,270,4	script	格拉斯#Memorial	900,{
+	if (Memorial08 < 3) {
+		mes "[格拉斯]";
+		mes "纪念日是一个悲伤而光荣的日子。";
+		mes "不知道还有多少人记得他们……";
+		close;
+	}
+	
+	else if (Memorial08 == 3) {
+		mes "[格拉斯]";
+		mes "哦，那不就是记忆之巾吗？";
+		mes "很高兴能遇到理解纪念日意义的人。";
+		next;
+		mes "[格拉斯]";
+		mes "知道我们今天在纪念什么非常重要，你不觉得吗？";
+		next;
+		mes "[格拉斯]";
+		mes "如果你想踏上旅程为纪念日献上敬意，就该把我要求的材料带来。";
+		next;
+		mes "[格拉斯]";
+		mes "请给我带来 ^FF0000红色药水、绿色药水、觉醒药水、蝴蝶翅膀各一个^000000。";
+		mes "我会等你回来。";
+		set Memorial08,4;
+		close;
+	}
+
+	else if (Memorial08 == 4) {
+		if (countitem(501) < 1 || countitem(506) < 1 || countitem(656) < 1 || countitem(602) < 1) {
+			mes "[格拉斯]";
+			mes "哎呀，你还没有带齐所有材料。";
+			mes "请务必带给我";
+			mes "^FF0000红色药水、绿色药水、觉醒药水、蝴蝶翅膀各一个^000000。";
+			next;
+			mes "[格拉斯]";
+			mes "之后你还得再给我带更多材料。";
+			mes "如果你觉得收集全部材料负担太重，";
+			mes "我可以把全部材料都提供给你。";
+			next;
+			if (select("剩下的我自己收集。:把材料给我。") == 2) {
+				goto L_GiveUp;
+			}
+			goto L_Continue;
+		} else {
+			mes "[格拉斯]";
+			mes "哦，你把我要求的材料带来了。";
+			next;
+			mes "[格拉斯]";
+			mes "嗯，你还得再准备一些东西……";
+			next;
+			mes "[格拉斯]";
+			mes "请给我带来 ^FF0000陷阱、世界树之叶、蓝色魔力矿石、水晶镜子、肉、胡萝卜各一个。^000000";
+			mes "我会等你回来。";
+			set Memorial08,5;
+			close;
+		}
+	}
+	
+	else if (Memorial08 == 5) {
+		if (countitem(1065) < 1 || countitem(610) < 1 || countitem(717) < 1 || countitem(747) < 1 || countitem(517) < 1 || countitem(515) < 1) {
+			mes "[格拉斯]";
+			mes "哎呀，你还没有带齐所有材料。";
+			mes "请务必带给我";
+			mes "^FF0000陷阱、世界树之叶、蓝色魔力矿石、水晶镜子、肉、胡萝卜各一个^000000。";
+			next;
+			mes "[格拉斯]";
+			mes "之后你还得再给我带更多材料。";
+			mes "如果你觉得收集全部材料负担太重，我可以把全部材料都提供给你。";
+			next;
+			if (select("剩下的我自己收集。:把材料给我。") == 2) {
+				goto L_GiveUp;
+			}
+			goto L_Continue;
+		} else {
+			mes "[格拉斯]";
+			mes "哦，你把我要求的东西全都带来了。";
+			mes "嗯，我想你还需要再多一点。";
+			next;
+			mes "[格拉斯]";
+			mes "请给我带来 ^FF0000携带用孵蛋器、鞭炮、波利娃娃、花束各一个^000000。";
+			set Memorial08,6;
+			close;
+		}
+	}
+	
+	else if (Memorial08 == 6) {
+		if (countitem(643) < 1 || countitem(12018) < 1 || countitem(741) < 1 || countitem(745) < 1) {
+			mes "[格拉斯]";
+			mes "哎呀，你还没有带齐所有材料。";
+			mes "请务必带给我";
+			mes "^FF0000携带用孵蛋器、鞭炮、波利娃娃、花束各一个";
+			next;
+			mes "[格拉斯]";
+			mes "这是最后一批材料。";
+			mes "如果你觉得收集全部材料负担太重，我可以把全部材料都提供给你。";
+			next;
+			mes "[格拉斯]";
+			mes "不过，如果我提供全部材料，就不必为你的付出道谢了。";
+			mes "由你决定，" + strcharinfo(0) + ".";
+			next;
+			if (select("剩下的我自己收集。:把材料给我。") == 2) {
+				goto L_GiveUp;
+			}
+			goto L_Continue;
+		} else {
+			mes "[格拉斯]";
+			mes "我要求的材料带来了吗？";
+			mes "啊，辛苦你了，你全都带来了。";
+			next;
+			mes "[格拉斯]";
+			mes "希望你在收集这些材料的过程中学到宝贵的一课。";
+			mes "我想为你的付出送你一份小礼物。";
+			next;
+			mes "[格拉斯]";
+			mes "你看，我两只手里各有一份不同的礼物。";
+			mes "最好的做法是把两份都给你，可是……";
+			mes "想不想试试你的运气，" + strcharinfo(0) + "？";
+			next;
+			mes "[格拉斯]";
+			mes "好，你想选哪只手？";
+			next;
+			if (select("左手。:右手。") == 2) {
+				mes "[格拉斯]";
+				mes "你选了我的右手。";
+				mes "这是给你的礼物。";
+				mes "现在，请把这些材料全都带给劳兹。";
+				set Memorial08, 7;
+				getitem 617,1;
+				close;
+			}
+			mes "[格拉斯]";
+			mes "你选了我的左手。";
+			mes "这是给你的礼物。";
+			mes "现在，请把这些材料全都带给劳兹。";
+			set Memorial08, 7;
+			getitem 12109,1;
+			close;
+		}
+	}
+	
+	else if (Memorial08 == 7) {
+		mes "[格拉斯]";
+		mes "你见过劳兹了吗？";
+		mes "希望你能记住，你的自由与幸福建立在战争中牺牲的成千上万条生命之上。";
+		close;
+	}
+
+	else if (Memorial08 >= 8) {
+		mes "[格拉斯]";
+		mes "毛巾大概是冒险者能拥有的最有用的东西了。";
+		close;
+	}
+
+	L_GiveUp:
+		mes "[格拉斯]";
+		mes "哦，我明白了。看来你最近挺忙的，是吧？";
+		mes "没问题，我把所有补给都给你……";
+		next;
+		mes "[格拉斯]";
+		mes "给你。";
+		mes "我把所有物品都压在一起，给你弄成了更紧凑的形态。";
+		mes "这额外服务，你以后再来谢我吧。";
+		mes "请把它们带给劳兹。";
+		set Memorial08,7;
+		getitem 7126,1;
+		next;
+		mes "[格拉斯]";
+		mes "顺便说一句，他出了场不幸的意外，脑子有点不正常了。";
+		mes "就算他开始胡言乱语，也请不要惊慌。";
+		close;
+	
+	L_Continue:
+		mes "[格拉斯]";
+		mes "这主意不错。";
+		mes "那我就等你回来。";
+		close;
+}

@@ -1,0 +1,1326 @@
+//===== rAthena Script ======================================= 
+//= Quest NPCs related to Umbala
+//===== By: ================================================== 
+//= sabernet09 & rAthena Team
+//===== Current Version: ===================================== 
+//= 2.2a
+//===== Compatible With: ===================================== 
+//= rAthena Project; 7.15 +
+//===== Description: ========================================= 
+//= [Official Conversion]
+//= Umbalian Language Quest, Umbala Skeletal Gate Quest,
+//= Umbala Event, Create Essence/Dismantle Stone
+//	Phase 1. Learning the Language
+//	  (Elder) First discussion
+//	  (Elder) Asking about learning the language
+//	  (Elder) Final step (understanding NPC speech)
+//	------------------------------------------
+//	Phase 2. Create Essence/Dismantle Stone
+//	 (Shaman) Get permission to speak with her from the chief
+//	  (Elder) Ask about conditions needed to be fulfilled to get permission
+//	  (Elder) Get permission
+//	 (Shaman) Use the shaman to create essences and dismantle elemental stones.
+//= Umbala Domestic Dispute?
+//= - This quest is only avaliable if you have not done language quest.
+//= - Variables in use: um_wind, MISC_QUEST (Bit 32768)
+//===== Additional Comments: ================================= 
+//= fixed by x[tsk], Lupus, PoW
+//= Quest completion is now registered
+//= 1.1 fixed Poporing Egg ID -> Poring Egg, fixed condition
+//= 1.2-1.6 fixed some Umbalian Language quests [Lupus]
+//= 1.7 Moved Umbala Event, Create Essence/Dismantle Stone, and Skeletal Gate from npc/cities/umbala.txt [Evera]
+//= 1.7a Removed all custom quests to custom folder [Lupus]
+//= 1.8 Added official chance of failure to Create Essence/Dismantle Stone [Lupus]
+//= 1.9 Added functionality to allow players to dismantle more
+//=     than a stone at once, up to 10. [SinSloth]
+//= 2.0 Updated hack check and added a weight check to dismantling. [SinSloth]
+//= 2.1 Rescripted to Aegis 10.3 standards. Added strange quest. [L0ne_W0lf]
+//= 2.2 Readded the ability to dismantle multiple stones at once. [L0ne_W0lf]
+//= 2.2a Fixed weight check from previous update. [L0ne_w0lf]
+//============================================================ 
+
+// Umbalian Language Quest :: um_trans
+//============================================================
+um_in,39,122,5	script	乌坦酋长	784,{
+	if (event_umbala == 0) {
+		mes "[卡卡坦]";
+		mes "呵呵，一个卢恩-米德加尔特人。";
+		mes "我猜这是你第一次";
+		mes "来我们村子吧？";
+		next;
+		mes "[卡卡坦]";
+		mes "我见过的每个";
+		mes "卢恩-米德加尔特人";
+		mes "脸上都是同样的";
+		mes "表情，跟你现在";
+		mes "初次来时一模一样。";
+		next;
+		mes "[卡卡坦]";
+		mes "也许是因为他们无法";
+		mes "与我们交流，因为";
+		mes "语言不通，所以";
+		mes "他们完全不知道";
+		mes "发生了什么。是啊，我明白……";
+		mes "总之，欢迎来到我的村子。";
+		next;
+		mes "[卡卡坦]";
+		mes "我叫卡卡坦，";
+		mes "是伍坦族的族长。";
+		mes "你一定在想，";
+		mes "我怎么会说你们的语言。";
+		next;
+		mes "[卡卡坦]";
+		mes "很久以前，一位来自";
+		mes "你们那片土地的冒险者";
+		mes "教会了我。已经过了很久，";
+		mes "我不知道他后来";
+		mes "怎么样了……";
+		next;
+		mes "[卡卡坦]";
+		mes "总之，我学到了很多";
+		mes "关于卢恩-米德加尔特的文化";
+		mes "和语言。";
+		next;
+		mes "[卡卡坦]";
+		mes "有时，我会教人伍坦";
+		mes "语，但我不会把";
+		mes "这种特权给所有人。";
+		mes "如果让无良的外人";
+		mes "学会了伍坦语，他们";
+		mes "可能会给我的族人带来伤害。";
+		next;
+		mes "[卡卡坦]";
+		mes "在你学习伍坦";
+		mes "语之前，先试着";
+		mes "通过探索我们的村子来了解伍坦文化";
+		mes "village.";
+		next;
+		mes "[卡卡坦]";
+		mes "虽然你现在还无法";
+		mes "与我的族人交流，";
+		mes "但也请试着去理解";
+		mes "我们的生活方式。";
+		mes "observations.";
+		next;
+		mes "[卡卡坦]";
+		mes "注意当地人的";
+		mes "衣着、外貌和";
+		mes "生活方式。当你觉得";
+		mes "自己对伍坦文化了解得";
+		mes "够多了，就回来找我，让我看看你学到了什么。";
+		set event_umbala,1;
+		close;
+	}
+	else if (event_umbala == 1) {
+		mes "[卡卡坦]";
+		mes "哦，又是你。那么……";
+		mes "你了解伍坦";
+		mes "文化了吗？我想听听你的";
+		mes "看法和感想。";
+		next;
+		mes "[卡卡坦]";
+		mes "还有些村民";
+		mes "对卢恩-米德加尔特人非常天真。";
+		mes "通常，他们害怕";
+		mes "遇到你们这些人，会";
+		mes "躲起来。";
+		next;
+		mes "[卡卡坦]";
+		mes "So...";
+		mes "有什么我能帮你的吗？";
+		mes "我想你在村子里";
+		mes "四处看看应该";
+		mes "没什么困难，不过看起来你有事想问我。";
+		next;
+		switch(select("我想学伍坦语。:温巴巴 温巴巴？:没什么。")) {
+		case 1:
+			if (isequipped(2278) || isequipped(2297) || isequipped(2288) || isequipped(2292) || isequipped(5005) || isequipped(2281) || isequipped(5043)) {
+				mes "[卡卡坦]";
+				mes "嗯……你戴的这张面具";
+				mes "真不错。我们伍坦族喜欢";
+				mes "戴面具，以免";
+				mes "露出脸上的表情。";
+				next;
+				mes "[卡卡坦]";
+				mes "所以我们一直戴着面具。";
+				mes "我们认为，与他人的";
+				mes "交往和对待方式";
+				mes "不应该取决于外貌。";
+				next;
+				mes "[卡卡坦]";
+				mes "好吧。我相信你";
+				mes "有资格学习伍坦";
+				mes "语了。从今往后，";
+				mes "我会教你如何用伍坦语";
+				mes "说话和阅读。";
+				next;
+				mes "[卡卡坦]";
+				mes "不过，我需要你准备";
+				mes "一些物品，这样我们才能";
+				mes "开始上课。首先，我们需要";
+				mes "两种不同的纸。";
+				mes "^3377FF10 油纸^000000和";
+				mes "^3377FF5 光滑的纸^000000。";
+				next;
+				mes "[卡卡坦]";
+				mes "我们还需要能";
+				mes "写字的东西。就用";
+				mes "^3377FF1 墨汁^000000和";
+				mes "^3377FF1 羽毛^000000吧。";
+				mes "请把这些带来给我，";
+				mes "等你准备好，我就教你。";
+				set event_umbala,2;
+				close;
+			}
+			else {
+				mes "[卡卡坦]";
+				mes "你似乎还不了解";
+				mes "我们的文化。不了解文化，";
+				mes "就无法学习";
+				mes "另一种语言。";
+				next;
+				mes "[卡卡坦]";
+				mes "当你脸上露出";
+				mes "那种表情时，伍坦人会";
+				mes "感到害怕……因为我们";
+				mes "不向他人露出面容，";
+				mes "所以其实非常";
+				mes "容易被表情影响。";
+				next;
+				mes "[卡卡坦]";
+				mes "再去村子里";
+				mes "多逛逛吧。等你觉得";
+				mes "准备好了，随时可以回来。";
+				next;
+				mes "[卡卡坦]";
+				mes "话说回来，你觉得";
+				mes "我的面具怎么样？这可是";
+				mes "我们伍坦族现在最流行的……你";
+				mes "不觉得很棒吗？";
+				close;
+			}
+		case 2:
+			mes "[卡卡坦]";
+			mes "哈哈～如果只是模仿";
+			mes "声音，是没有";
+			mes "意义的。语言是彼此";
+			mes "交流思想和感情的系统。";
+			next;
+			mes "[卡卡坦]";
+			mes "很遗憾，如今";
+			mes "各个民族似乎都";
+			mes "不再对异文化敏感，";
+			mes "在这方面也是如此。";
+			next;
+			mes "[卡卡坦]";
+			mes "我看到有人蔑视或";
+			mes "嘲笑那些不了解";
+			mes "他们的人。这种偏见";
+			mes "至今仍存在，真令人难过……";
+			next;
+			mes "[卡卡坦]";
+			mes "如果你对伍坦";
+			mes "语感兴趣，就试着更好地";
+			mes "理解我们的文化，然后";
+			mes "在准备好时回来。我会";
+			mes "教你那些声音的含义。";
+			close;
+		case 3:
+			mes "[卡卡坦]";
+			mes "有时漫无目的地";
+			mes "游荡也不错。但若想";
+			mes "从经历中学到东西，";
+			mes "最好还是为旅程";
+			mes "设定一个目标，";
+			mes "这样更好。";
+			close;
+		}
+	}
+	else if (event_umbala == 2) {
+		if ((countitem(7151) > 9) && (countitem(7111) > 4) && (countitem(1024) > 0) && (countitem(916) > 0)) {
+			mes "[卡卡坦]";
+			mes "好，我想我们可以开始了。";
+			mes "开始上课吧。";
+			mes "希望课程结束后，";
+			mes "你能更好地与伍坦人交流。";
+			next;
+			mes "[卡卡坦]";
+			mes "..............";
+			next;
+			mes "[卡卡坦]";
+			mes "..............";
+			mes ".....................";
+			next;
+			mes "[卡卡坦]";
+			mes "..............";
+			mes ".....................";
+			mes "............................";
+			next;
+			mes "[卡卡坦]";
+			mes "好，就这些。忘了你";
+			mes "在学会这门语言之前";
+			mes "对伍坦人的那些感受吧。";
+			mes "现在去试着和伍坦人交谈吧。";
+			mes "交谈是理解他人的重要方式。";
+			delitem 7151,10; //Oil_Paper
+			delitem 7111,5; //Smooth_Paper
+			delitem 1024,1; //Chinese_Ink
+			delitem 916,1; //Feather_Of_Birds
+			set event_umbala,3;
+			next;
+			mes "[卡卡坦]";
+			mes "好，以后若在我们村子里";
+			mes "有事，尽管";
+			mes "来找我。我会尽力";
+			mes "帮助你。";
+			close;
+		}
+		else {
+			mes "[卡卡坦]";
+			mes "我想你还没准备好……";
+			mes "你忘了需要";
+			mes "哪些物品吗？我再";
+			mes "告诉你一遍，请把它们带来，";
+			mes "这样我们就能开始上课了。";
+			next;
+			mes "[卡卡坦]";
+			mes "^3377FF10 油纸^000000，";
+			mes "^3377FF5 光滑的纸^000000，";
+			mes "^3377FF1 墨汁^000000，";
+			mes "^3377FF1 羽毛^000000。";
+			mes "等你把这些都带来，";
+			mes "我就教你我们的语言。";
+			close;
+		}
+	}
+	else if (event_umbala >= 3) {
+		if (event_umbala == 4) {
+			mes "[卡卡坦]";
+			mes "一定是普丘查坦让你";
+			mes "来找我的。我得看看你";
+			mes "是否有资格请求";
+			mes "她的帮助……我们伍坦族不想";
+			mes "帮助邪恶之人。";
+			next;
+			mes "[卡卡坦]";
+			mes "Hmmmm....";
+			mes "最好能有一张";
+			mes "在卢恩-米德加尔特制作的面具……";
+			next;
+			mes "[卡卡坦]";
+			mes "我想要^3377FF1微笑先生^000000。";
+			mes "对伍坦族来说，收到面具";
+			mes "作为礼物是一种";
+			mes "荣誉。也许普丘查坦";
+			mes "是想让你借此表达对我们的敬意。";
+			set event_umbala,5;
+			close;
+		}
+		else if (event_umbala == 5) {
+			if (countitem(2278) > 0) {
+				mes "[卡卡坦]";
+				mes "哦，你带来了！没错，我";
+				mes "一直希望能拥有";
+				mes "这张面具！这真是";
+				mes "莫大的荣誉！谢谢你，来自";
+				mes "卢恩-米德加尔特的冒险者。";
+				next;
+				mes "[卡卡坦]";
+				mes "我会告诉普丘查坦，";
+				mes "我已经确认了你的资格。";
+				mes "去找她谈谈吧。虽然我";
+				mes "不确定她能给你什么帮助，";
+				mes "但我希望我们能报答这份恩情。";
+				delitem 2278,1; //Mr_Smile
+				set event_umbala,6;
+				close;
+			}
+			else {
+				mes "[卡卡坦]";
+				mes "我告诉过你需要";
+				mes "^3377FF1微笑先生^000000吗？";
+				mes "请把它带来，作为你";
+				mes "善意的证明，";
+				mes "也是你荣誉感的证明。";
+				close;
+			}
+		}
+		else {
+			mes "[卡卡坦]";
+			mes "进展如何？";
+			mes "我本想带你";
+			mes "在村里四处走走，但我不能";
+			mes "疏忽身为族长的职责。";
+			next;
+			mes "[卡卡坦]";
+			mes "领导一个部族并不像";
+			mes "看起来那么容易。如果你";
+			mes "处在我的位置，就会";
+			mes "明白。总之，希望你在我们村子里过得愉快。";
+			close;
+		}
+	}
+}
+
+// Create Essence/Dismantle Stone Quest :: um_npc
+//============================================================
+um_in,44,71,2	script	乌坦萨满	782,{
+	if (checkweight(908,600) == 0) {
+		mes "^3355FF等一下！";
+		mes "你现在随身携带的";
+		mes "东西太多了。";
+		mes "请先用卡普拉服务";
+		mes "寄存一些物品，";
+		mes "然后再回来。^000000";
+		close;
+	}
+	switch(event_umbala) {
+	default:
+		mes "[??????????]";
+		mes "温巴 温巴 温巴巴 伍坦 温巴";
+		mes "温巴 穆卡拉 温巴巴……";
+		mes "温巴巴姆巴 温巴巴";
+		mes "温巴巴 温巴巴 温包姆巴 温巴";
+		mes "嗯 温巴 温巴。";
+		close2;
+		warp "umbala",217,186;
+		end;
+	case 3:
+		mes "[普丘查坦]";
+		mes "我没想到，还会有";
+		mes "更多卢恩-米德加尔特人";
+		mes "找到我的村子。我担心";
+		mes "大地母亲会因此";
+		mes "遭受痛苦，";
+		mes "都是因为这件事……";
+		next;
+		mes "[普丘查坦]";
+		mes "你们卢恩-米德加尔特人";
+		mes "是非常邪恶的种族……总是为达目的";
+		mes "不择手段，";
+		mes "毫不犹豫地";
+		mes "毁掉他人的财产，只为得到";
+		mes "自己想要的东西。";
+		next;
+		mes "[普丘查坦]";
+		mes "我担心与外界";
+		mes "持续接触";
+		mes "会影响我们的未来……";
+		next;
+		mes "[普丘查坦]";
+		mes "从来没有卢恩-米德加尔特人";
+		mes "毫无目的地来拜访我，";
+		mes "我也不认为你会是";
+		mes "例外。";
+		next;
+		mes "[普丘查坦]";
+		mes "我只为我的族人";
+		mes "使用力量，不会";
+		mes "帮助陌生人。如果你";
+		mes "真的需要我的帮助，就去征得";
+		mes "族长的许可。";
+		next;
+		mes "[普丘查坦]";
+		mes "另外，我不赞成";
+		mes "外人与族人交谈";
+		mes "超过必要的程度……";
+		mes "我们想过平静的生活，请不要打扰我们。";
+		set event_umbala,4;
+		close;
+	case 4:
+	case 5:
+		mes "[普丘查坦]";
+		mes "我已经告诉过你，";
+		mes "要先得到族长的许可。而且我";
+		mes "还有自己的事要处理。";
+		next;
+		mes "[普丘查坦]";
+		mes "我知道你历经";
+		mes "许多困难才来到这里，";
+		mes "但你现在必须离开。";
+		close;
+	case 6:
+		mes "[普丘查坦]";
+		mes "我听族长说，他";
+		mes "已经给了你许可……";
+		mes "虽然我不喜欢这样，";
+		mes "但我会遵守承诺。不过，";
+		mes "你是否真的需要我的帮助，由你自己决定。";
+		next;
+		mes "[普丘查坦]";
+		mes "我的力量可以创造粗糙的";
+		mes "属性石，也能把";
+		mes "纯净的属性石分解成";
+		mes "粗糙的属性石。所以也许我能";
+		mes "用这种方式帮你。";
+		next;
+		mes "[普丘查坦]";
+		mes "所以，当你觉得";
+		mes "我的力量对你有用的时候，";
+		mes "就来和我谈吧。";
+		set event_umbala,7;
+		close;
+	case 7:
+		mes "[普茨奇里坦]";
+		mes "我不知道我的才能";
+		mes "对你是否有用，但我会";
+		mes "尽力帮你。";
+		next;
+		mes "[普茨奇里坦]";
+		mes "我能从自然之物中制造元素精华，";
+		mes "或者把元素石分解成组成它们的精华。";
+		mes "你想做哪一种？";
+	}
+	next;
+	mes "[普丘查坦]";
+	mes "前来请求我帮助的";
+	mes "卢恩-米德加尔特人……虽然我不确定";
+	mes "你是否真的需要我的力量，";
+	mes "我还是会尽力协助你。";
+	next;
+	if (checkweight(1101,10) == 0) {
+		mes "[普丘查坦]";
+		mes "等等——！";
+		mes "你身上有什么东西";
+		mes "扰乱了我的心神，";
+		mes "这样可不行……";
+		next;
+		mes "[普丘查坦]";
+		mes "去把随身物品";
+		mes "放到别处，只带来";
+		mes "你现在需要的物品。";
+		next;
+		mes "[普丘查坦]";
+		mes "如果你拒绝，";
+		mes "我就什么也帮不了你。";
+		mes "做好准备后";
+		mes "再回来。";
+		close;
+	}
+	mes "[普丘查坦]";
+	mes "那么，你想做什么？";
+	mes "我的力量可以创造粗糙的";
+	mes "属性石，也能把";
+	mes "纯净的属性石分解成粗糙的属性石。";
+	next;
+	switch (select("制作粗糙的属性石:分解纯净的属性石:退出")) {
+	case 1:
+		mes "[普丘查坦]";
+		mes "你想制作粗糙的";
+		mes "属性石吗？想制作";
+		mes "哪种属性？";
+		mes "地、水、火、风……";
+		mes "...choose one.";
+		next;
+		switch (select("地:水:火:风")) {
+		case 1:
+			set .@consume,947; //Horn
+			set .@amount,15; 
+			set .@success,993; //Yellow_Live
+			break;
+		case 2:
+			set .@consume,946; //Snail's_Shell
+			set .@amount,20; 
+			set .@success,991; //Crystal_Blue
+			break;
+		case 3:
+			set .@consume,904; //Scorpion's_Tail
+			set .@amount,20; 
+			set .@success,990; //Boody_Red
+			break;
+		case 4:
+			set .@consume,1013; //Colorful_Shell
+			set .@amount,25; 
+			set .@success,992; //Wind_Of_Verdure
+			break;
+		}
+		if (countitem(.@consume) >= .@amount) {
+			mes "[普丘查坦]";
+			mes "我会试着增幅";
+			mes "自然之物中隐藏的力量，";
+			mes "借此创造粗糙的";
+			mes "属性石。请从";
+			mes "“1”到“9”中选择一个数字。如果想取消";
+			mes "这次请求，请输入“0”。";
+			next;
+			while(1) {
+				input .@input,0,10;
+				if (.@input == 0) {
+					mes "[普丘查坦]";
+					mes "我明白了。由你决定。";
+					mes "需要我时再来。";
+					close;
+				}
+				else if (.@input > 9) {
+					mes "[普丘查坦]";
+					mes "记得从1到9中";
+					mes "选择一个数字。";
+					next;
+				}
+				else {
+					break;
+				}
+			}
+			mes "[普丘查坦]";
+			switch(.@success) {
+			case 990:
+				mes "我把这些尾巴放进"; break;
+			case 991:
+				mes "我把这些外壳放进"; break;
+			case 992:
+				mes "我把这些外壳放进"; break;
+			case 993:
+				mes "我把这些角放进"; break;
+			}
+			mes "沸腾的锅里，并念起";
+			mes "神圣的咒语。记住";
+			mes "你输入的数字。";
+			next;
+			mes "[普丘查坦]";
+			mes "安巴 翁巴 扎通巴！温巴！提！";
+			mes "温普陶恩 尤卢卡巴！温巴！哈！";
+			mes "朱卢 洪巴 鲁拉拉！温巴！拉！";
+			mes "达图哈 翁巴巴拉卡！温巴！西！";
+			mes "苏努塔巴 阿布伦巴！温巴！西！";
+			next;
+			if (rand(1,10) == 1) {
+				mes "[普丘查坦]";
+				mes "看来我的力量还不够。";
+				mes "我用咒语聚集的";
+				mes "自然之力失去了控制，消散了……";
+				delitem .@consume,.@amount;
+				getitem 910,1; //Garlet
+				next;
+				mes "[普丘查坦]";
+				mes "看来自然之灵";
+				mes "当时并不和谐。";
+				mes "不过，如果你稍后再来，";
+				mes "我会试着帮你。当然，";
+				mes "仍然有可能失败。";
+				close;
+			}
+			else {
+				mes "[普丘查坦]";
+				mes "这是你想要的";
+				mes "属性石。我费了很大";
+				mes "力气才做出来，";
+				mes "好好使用吧。";
+				delitem .@consume,.@amount;
+				getitem .@success,1;
+				close;
+			}
+		}
+		else {
+			mes "[普丘查坦]";
+			switch (.@success) {
+			case 990:
+				mes "火属性……";
+				mes "我需要充满";
+				mes "火之精灵的";
+				mes "自然之物。";
+				next;
+				mes "[普丘查坦]";
+				mes "在沙漠酷热中";
+				mes "生存的蝎子，";
+				mes "体内充满了火之能量。";
+				mes "我需要^3377FF20蝎子尾巴^000000。";
+				break;
+			case 991:
+				mes "水属性……";
+				mes "我需要充满";
+				mes "水之精灵的";
+				mes "自然之物。";
+				next;
+				mes "[普丘查坦]";
+				mes "蜗牛……水之精灵";
+				mes "就蕴含在它的";
+				mes "保护壳中……";
+				mes "我需要^3377FF20蜗牛壳。^000000";
+				break;
+			case 992:
+				mes "风属性……";
+				mes "我需要充满";
+				mes "风之精灵的";
+				mes "自然之物。";
+				next;
+				mes "[普丘查坦]";
+				mes "瓢虫……那只";
+				mes "在天空中飞翔的甲虫，";
+				mes "拥有风之精灵。";
+				mes "我需要^3377FF25彩色昆虫外壳^000000。";
+				break;
+			case 993:
+				mes "地属性……我需要充满";
+				mes "大地精灵的";
+				mes "自然之物。";
+				next;
+				mes "[普丘查坦]";
+				mes "硬角……栖息在森林里的";
+				mes "充满了大地与";
+				mes "树木的精灵……硬角……";
+				mes "我需要从硬角身上取得的^3377FF15硬角^000000。";
+				break;
+			}
+			mes "[普丘查坦]";
+			mes "我需要的就这些……";
+			mes "等你准备好";
+			mes "再来吧。";
+			mes "我会在这里。";
+			close;
+		}
+	case 2:
+		mes "[普丘查坦]";
+		mes "你想把纯净的";
+		mes "属性石分解成粗糙的属性石吗？";
+		mes "你想分解";
+		mes "哪种属性？地、水、火、风……";
+		mes "请选择一个。";
+		next;
+		switch(select("地:水:火:风")) {
+		case 1:
+			set .@divide,997; //Great_Nature
+			break;
+		case 2:
+			set .@divide,995; //Mistic_Frozen
+			break;
+		case 3:
+			set .@divide,994; //Flame_Heart
+			break;
+		case 4:
+			set .@divide,996; //Rough_Wind
+			break;
+		}
+		mes "[普丘查坦]";
+		mes "请输入";
+		mes "想要分解的";
+		mes "魔法石数量";
+		mes "是多少。但我每次";
+		mes "最多只能分解10个。";
+		next;
+		input .@input,0,11;
+		if ((.@input > 0) && (.@input < 11)) {
+			if (countitem(.@divide) >= .@input) {
+				if (checkweight(908,(.@input * 30)) == 0) {
+					mes "[普丘查坦]";
+					mes "你现在携带的";
+					mes "物品太多了。";
+					mes "把部分东西";
+					mes "放进卡普拉仓库，然后";
+					mes "再回来找我，好吗？";
+					close;
+				}
+				mes "[普丘查坦]";
+				mes "我会试着把这些";
+				mes "魔法石还原成";
+				mes "原石。请输入1到9";
+				mes "之间的数字，若要";
+				mes "取消请输入0。";
+				next;
+				while(1) {
+					input .@input2,0,10;
+					if (.@input2 == 0) {
+						mes "[普丘查坦]";
+						mes "你想取消吗？";
+						mes "好吧，如果你改变";
+						mes "主意，随时可以来";
+						mes "找我帮忙。";
+						close;
+					}
+					else if (.@input2 > 9) {
+						mes "[普丘查坦]";
+						mes "嗯？你需要输入";
+						mes "1到9之间的数字。";
+						next;
+					}
+					else {
+						break;
+					}
+				}
+				mes "[普丘查坦]";
+				mes "我现在要念诵";
+				mes "神圣的咒语。记住";
+				mes "你输入的数字！";
+				next;
+				mes "[普丘查坦]";
+				mes "温巴 温巴 卡拉普姆！温巴！塔！";
+				mes "卢库拉 乌库莱莱 乌姆！温巴！卡！";
+				mes "阿布拉卡 塔布拉坎！温巴！拉！";
+				mes "翁巴鲁杜 赞 库努！温巴！库！";
+				mes "库姆 图姆 拉库拉昆！温巴！哈！";
+				next;
+				mes "[普丘查坦]";
+				mes "这是你想要的原石。";
+				mes "我费了很大功夫";
+				mes "才做成，请好好";
+				mes "使用。";
+				while(1) {
+					if (.@sha_man == .@input) {
+						break;
+					}
+					else {
+						set .@shaman_max,.@shaman_max + rand(6,10);
+						set .@sha_man,.@sha_man + 1;
+					}
+				}
+				switch(.@divide) {
+				case 994:
+					getitem 990,.@shaman_max; //Boody_Red
+					break;
+				case 995:
+					getitem 991,.@shaman_max; //Crystal_Blue
+					break;
+				case 996:
+					getitem 992,.@shaman_max; //Wind_Of_Verdure
+					break;
+				case 997: 
+					getitem 993,.@shaman_max; //Yellow_Live
+				}
+				delitem .@divide,.@input;
+				close;
+			}
+			else {
+				mes "[普丘查坦]";
+				mes "那么，你想要";
+				switch(.@divide) {
+				case 994:
+					mes "火原石？那我需要";
+					mes "你带来"+input_want+"个纯净的火之石。";
+					break;
+				case 995:
+					mes "水原石？那我需要";
+					mes "你带来"+input_want+"个纯净的水之石。";
+					break;
+				case 996:
+					mes "风原石？那我需要";
+					mes "你带来"+input_want+"个纯净的风之石。";
+					break;
+				case 997: 
+					mes "地原石？那我需要";
+					mes "你带来"+.@input+" pure earth stone.";
+					break;
+				}
+				mes "^3377FF"+.@input+" "+getitemname(.@divide)+"^000000.";
+				next;
+				mes "[普丘查坦]";
+				mes "我要的就是这些……";
+				mes "等你准备好";
+				mes "再回来吧。";
+				mes "我会在这里。";
+				close;
+			}
+		}
+		else {
+			mes "[普丘查坦]";
+			mes "嗯？你需要输入";
+			mes "1到10之间的数字。";
+			close;
+		}
+	case 3:
+		mes "[普丘查坦]";
+		mes "我明白了。由你决定。";
+		mes "需要我时再来找我。";
+		close;
+	}
+}
+
+umbala,221,193,1	script	#Skulldoor	111,{
+	if (event_umbala >= 7) {
+		warp "um_in",32,71;
+		end;
+	}
+	else {
+		mes "^3355FF一个人类头骨诡异";
+		mes "地挂在门旁。门锁得";
+		mes "很紧，你无法进入。";
+		mes "你透过钥匙孔往里看，";
+		mes "能看到屋里有人正在走动。^000000";
+		next;
+		if (select("查看头骨。:离开。") == 1) {
+			mes "^3355FF你看到头骨的眼窝";
+			mes "是空的。";
+			mes "真是奇怪……";
+			mes "似乎宝石";
+			mes "正好可以嵌进";
+			mes "里面。^000000";
+			next;
+			mes "^3355FF你看到这个头骨的";
+			mes "左眼窝。你想怎么做？^000000";
+			next;
+			switch(select("保持原样。:放入蓝色宝石。:放入黄色宝石。:放入红色宝石。")) {
+			case 1:
+				mes "^3355FF你让眼窝保持原样。^000000";
+				next;
+				break;
+			case 2:
+				set .@insert,717;
+				break;
+			case 3:
+				set .@insert,715;
+				break;
+			case 4:
+				set .@insert,716;
+				break;
+			}
+			if (.@insert) {
+				if (countitem(.@insert) > 0) {
+					mes "^3355FF你将"+getitemname(.@insert)+"";
+					mes "放入了眼窝。^000000";
+					next;
+					mes "^3355FF宝石又从";
+					mes "头骨的嘴里滚了出来。^000000";
+					set .@skulldoor,.@skulldoor+1;
+					switch (.@insert) {
+					case 715: set .@skull,2; break;
+					case 716: set .@skull,3; break;
+					case 717: set .@skull,1; break;
+					}
+					delitem .@insert,1;
+					getitem .@insert,1;
+					next;
+				}
+				else {
+					mes "^3355FF你忘了携带"+getitemname(.@insert)+"";
+					mes "，所以没能做成";
+					mes "你想做的事。^000000";
+					next;
+				}
+			}
+			mes "^3355FF你看到这个头骨的";
+			mes "右眼窝。你想怎么做？^000000";
+			next;
+			switch(select("保持原样。:放入蓝色宝石。:放入黄色宝石。:放入红色宝石。")) {
+			case 1:
+				mes "^3355FF你让眼窝保持原样。^000000";
+				next;
+				break;
+			case 2:
+				set .@insert2,717;
+				break;
+			case 3:
+				set .@insert2,715;
+				break;
+			case 4:
+				set .@insert2,716;
+				break;
+			}
+			if (.@insert2) {
+				if (countitem(.@insert2) > 0) {
+					mes "^3355FF你将"+getitemname(.@insert2)+"";
+					mes "放入了眼窝。^000000";
+					next;
+					mes "^3355FF宝石又从";
+					mes "头骨的嘴里滚了出来。^000000";
+					if (.@insert2 == .@insert) {
+						set .@skulldoor,.@skulldoor+1;
+					}
+					else {
+						set .@skulldoor,.@skulldoor+2;
+					}
+					delitem .@insert2,1;
+					getitem .@insert2,1;
+					next;
+				}
+				else {
+					mes "^3355FF你忘了携带"+getitemname(.@insert2)+"";
+					mes "，所以没能做成";
+					mes "你想做的事。^000000";
+					next;
+				}
+			}
+			mes "^3355FF..............................^000000";
+			next;
+			mes "^3355FF..............................";
+			mes "..............................^000000";
+			next;
+			mes "^3355FF..............................";
+			mes "..............................";
+			mes "..............................^000000";
+			next;
+			switch(.@skulldoor) {
+			case 3:
+				if (rand(1,4) != 1) {
+					set .@skullopen,1;
+				}
+				break;
+			case 2:
+				if (rand(1,2) == 2) {
+					set .@skullopen,1;
+				}
+				break;
+			case 1:
+				if (rand(1,4) == 1) {
+					set .@skullopen,1;
+				}
+				break;
+			default:
+				break;
+			}
+			if (.@skullopen == 0) {
+				mes "^3355FF什么也没发生。";
+				mes "你感觉那个头骨";
+				mes "正对着你咧嘴笑。不过……";
+				mes "大概只是光线造成的错觉。^000000";
+				close;
+			}
+			else {
+				mes "^3355FF突然，头骨的眼窝里";
+				mes "传来咔哒声，接着";
+				mes "门开了。回过神来，";
+				mes "你已经像被某种无形的";
+				mes "力量引导着走了进去……^000000";
+				close2;
+				warp "um_in",32,71;
+				end;
+			}
+		}
+		mes "^3355FF你决定不去开那扇门。";
+		mes "看来它很难打开。^000000";
+		close;
+	}
+}
+
+// Umbala Domestic Dispute Quest :: um_npc_ryu
+//============================================================ 
+um_in,139,48,5	script	芙蕾妮坦	783,{
+	if (event_umbala >= 3) {
+		mes "[芙蕾妮坦]";
+		mes "我真是受够";
+		mes "我丈夫了！！他简直";
+		mes "跟村里的每个女孩";
+		mes "都在调情！";
+		next;
+		mes "[芙蕾妮坦]";
+		mes "要是再让我看见他";
+		mes "跟女人调情……我发誓……";
+		mes "我一定让他下地狱！！";
+		close;
+	}
+	if (BaseJob == Job_Novice && Upper != 2) {
+		mes "[芙蕾妮坦]";
+		mes "温巴～温巴温巴！";
+		mes "温巴 乌姆姆姆！";
+		mes "温巴 乌姆姆 温巴巴！";
+		close;
+	}
+	if (um_wind <= 3 && (MISC_QUEST & 32768) == 0) {
+		if (um_wind == 0) set um_wind,1;
+		emotion ET_FRET;
+		mes "[芙蕾妮坦]";
+		mes "温巴温巴 乌加 乌加";
+		mes "温巴温巴巴 巴巴巴巴！";
+		mes "温鲍姆！";
+		next;
+		emotion ET_O;
+		mes "[芙蕾妮坦]";
+		mes "温巴 温巴温巴 温巴";
+		mes "温巴巴巴巴 乌加 乌！";
+		mes "乌加 乌加 温巴巴 温鲍姆！";
+		next;
+		emotion ET_GO;
+		close;
+	}
+	else if (um_wind == 6 || (MISC_QUEST & 32768)) {
+		emotion ET_FRET;
+		mes "[芙蕾妮坦]";
+		mes "温巴巴！温巴温巴……";
+		mes "温鲍姆 温鲍姆 乌加 乌加！";
+		mes "乌加 乌姆姆姆 乌姆巴巴巴普！！！！！";
+		next;
+		emotion ET_SWEAT;
+		close;
+	}
+	end;
+}
+
+um_in,144,45,5	script	乌姆波科里奥坦	789,{
+	if (event_umbala >= 3) {
+		if(rand(1,3) == 2) {
+			mes "[乌姆波科里奥坦]";
+			mes "嘿，小帅哥。";
+			mes "别在意我老婆……";
+			mes "我虽然很爱她，";
+			mes "但也知道自己的责任，懂吗？";
+			next;
+			mes "[乌姆波科里奥坦]";
+			mes "男人要是富足，就";
+			mes "该把它分给那些";
+			mes "一无所有的人。";
+			next;
+			mes "[乌姆波科里奥坦]";
+			mes "男人的手要是";
+			mes "擅长治疗，就该用";
+			mes "这双手帮人们活下去。";
+			next;
+			mes "[乌姆波科里奥坦]";
+			mes "男人的嘴要是";
+			mes "擅长歌唱，就该哼唱";
+			mes "我们最爱听的歌。";
+			next;
+			mes "[乌姆波科里奥坦]";
+			mes "可要是甜蜜的爱是金子，";
+			mes "那宝贝……我就有点石成金的手。";
+			next;
+			mes "[乌姆波科里奥坦]";
+			mes "哦……！";
+			mes "...........";
+			mes "我的背——！";
+			mes "别急，宝贝，马上就轮到你了～";
+			emotion ET_ROCK, getnpcid(0, "芙蕾妮坦");
+			emotion ET_SWEAT;
+			close;
+		}
+		else {
+			mes "[乌姆波科里奥坦]";
+			mes "唉……我老婆有时候";
+			mes "是有点太粗暴了，也许";
+			mes "甚至有点伤人。不过没关系……";
+			mes "那只是说明她很有火气。";
+			next;
+			mes "[乌姆波科里奥坦]";
+			mes "但总有一天，她得";
+			mes "明白我必须把";
+			mes "我这颗心分给那些";
+			mes "真正需要一剂";
+			mes "维生素爱意的女士，懂吗？这是我的责任。";
+			next;
+			mes "[乌姆波科里奥坦]";
+			mes "瓦伊纳坦、贝尔茨坦、查比马坦……";
+			mes "那些漂亮的姑娘";
+			mes "等太久了。别担心，";
+			mes "老爹马上就到。";
+			next;
+			mes "[乌姆波科里奥坦]";
+			mes "哦～！芙蕾妮坦！";
+			mes "宝贝，你为什么要这么粗暴？";
+			mes "轻点打我，懂吗？？";
+			mes "我不是故意要伤你的～";
+			emotion ET_HUK, getnpcid(0, "芙蕾妮坦");
+			emotion ET_KEK;
+			close;
+		}
+	}
+	emotion ET_SMILE;
+	mes "[乌姆波科里奥坦]";
+	mes "Umbaumbah...........";
+	mes "温巴乌加 乌加乌！";
+	mes "温巴 乌姆巴巴 温巴乌 加加。";
+	next;
+	emotion ET_FRET;
+	close;
+
+OnInit:
+	disablenpc "乌姆波科里奥坦";
+	end;
+}
+
+um_in,101,73,3	script	瓦伊纳坦	783,{
+	if (event_umbala >= 3) {
+		mes "[瓦伊纳坦]";
+		mes "我真是受够这家伙了，";
+		mes "他总在夜里出现，把我烦得要死……";
+		next;
+		mes "[瓦伊纳坦]";
+		mes "‘能把手头事办成的";
+		mes "高手’？我的天啊……！";
+		mes "我恨死他了！";
+		mes "我真希望乌姆波科里奥坦";
+		mes "干脆去死。";
+		close;
+	}
+	if (um_wind == 1) {
+		if (gettime(DT_HOUR) > 18) {
+			set um_wind,2;
+			emotion ET_FRET;
+			mes "[瓦伊纳坦]";
+			mes "温巴温巴 温加加加。";
+			mes "温巴温巴乌加乌 加巴巴。";
+			mes "温巴温巴巴 加乌。";
+			next;
+			emotion ET_O;
+			mes "[瓦伊纳坦]";
+			mes "乌加 乌加 乌加加加";
+			mes "乌加加加 乌加加加";
+			mes "加乌 加乌 加。";
+			close;
+		}
+		else {
+			mes "[瓦伊纳坦]";
+			mes "温巴巴！温巴温巴 乌加";
+			mes "乌加乌加 温巴乌加 乌姆姆。";
+			mes "Umbabababababababababah.";
+			close;
+		}
+	}
+	else {
+		mes "[瓦伊纳坦]";
+		mes "温巴温巴 温巴温巴 温巴";
+		mes "乌加 乌加 乌加乌加 乌加";
+		mes "乌姆姆姆 乌姆姆姆 乌姆。";
+		close;
+	}
+}
+
+um_in,94,123,5	script	贝尔茨坦	783,{
+	if (event_umbala >= 3) {
+		mes "[贝尔茨坦]";
+		mes "...*Sigh* That sicko";
+		mes "乌姆波什么的！我跟他说过";
+		mes "我不喜欢他，可他";
+		mes "就是不听！";
+		mes "我希望……我希望他";
+		mes "干脆消失！";
+		close;
+	}
+	if (um_wind == 2) {
+		if (gettime(DT_HOUR) > 18) {
+			set um_wind,3;
+			emotion ET_FRET;
+			mes "[贝尔茨坦]";
+			mes "温巴温巴 温加加加。";
+			mes "温巴温巴乌加乌 加巴巴。";
+			mes "温巴温巴巴 加乌。";
+			next;
+			emotion ET_O;
+			mes "[贝尔茨坦]";
+			mes "乌加 温巴尔 温巴尔 温巴！";
+			mes "温巴尔 乌加加加 乌！乌！乌！";
+			mes "乌加～乌加～乌 乌 乌 温巴尔。";
+			close;
+		}
+		else {
+			mes "[贝尔茨坦]";
+			mes "温巴尔 乌加温巴伦巴 乌姆！";
+			mes "乌姆～乌加 乌加 温巴伦。";
+			mes "Umbah...wooum.";
+			close;
+		}
+	}
+	else {
+		mes "[贝尔茨坦]";
+		mes "温巴尔 乌加 温巴尔 温巴 乌姆！";
+		mes "乌姆～乌加乌加 温巴尔 乌姆。";
+		mes "Umbah...wooum.";
+		close;
+	}
+}
+
+umbala,145,217,3	script	查比马坦	783,{
+	if (event_umbala >= 3) {
+		mes "[查比马坦]";
+		mes "...*Sigh* Umpokoriohtan seems";
+		mes "结婚的。我不明白";
+		mes "他为什么还跟";
+		mes "其他女人调情。也许他";
+		mes "不太成熟，或者他";
+		mes "irresponsible...";
+		next;
+		mes "[查比马坦]";
+		mes "算了，不管他是什么样，";
+		mes "他肯定不是";
+		mes "个浪漫的人。他那些";
+		mes "搭讪的话，也许";
+		mes "有点用处，也许";
+		mes "还能收拾一下。";
+		close;
+	}
+	if (um_wind == 3) {
+		if (gettime(DT_HOUR) > 18) {
+			set um_wind,4;
+			emotion ET_FRET;
+			mes "[查比马坦]";
+			mes "温巴巴 温巴巴尔 乌加乌加 乌姆";
+			mes "温巴巴 温巴巴尔 乌加乌加 温巴";
+			mes "乌姆姆姆！乌加！";
+			next;
+			emotion ET_O;
+			mes "[查比马坦]";
+			mes "温巴巴~~~~~~~";
+			mes "乌加乌加 温巴尔 温巴尔 乌！";
+			mes "乌加 温巴尔 乌加乌加加。";
+			enablenpc "乌姆波科里奥坦";
+			enablenpc "#!@#$%";
+			close;
+		}
+		else {
+			mes "[查比马坦]";
+			mes "温巴巴~~~~~~~";
+			mes "乌加乌加 温巴尔 温巴尔 乌";
+			mes "乌 乌！努克 努克～";
+			mes "乌加 温巴尔 乌加 温巴尔";
+			mes "乌加 乌加加。";
+			close;
+		}
+	}
+	else {
+		mes "[查比马坦]";
+		mes "温巴巴~~~~~~~";
+		mes "乌加乌加 温巴尔 温巴尔";
+		mes "乌 乌 乌 努克 努克。";
+		mes "乌加 温巴尔 乌加 温巴尔";
+		mes "乌加 乌加加。";
+		close;
+	}
+}
+
+um_in,141,46,0	script	#!@#$%	-1,8,8,{
+OnInit:
+	disablenpc "#!@#$%";
+	end;
+
+OnTouch_:
+	if (um_wind == 4) {
+		set um_wind,5;
+		mes "^3355FF你走进屋子，";
+		mes "恰好看到";
+		mes "芙蕾妮坦正在狠狠地";
+		mes "揍一个男人。^000000";
+		next;
+		emotion ET_FRET;
+		mes "[芙蕾妮坦]";
+		mes "温巴温巴温巴温巴！";
+		mes "温巴温巴温巴！！";
+		mes "温巴温巴温巴！！！！！！";
+		next;
+		mes "^3355FF你被芙蕾妮坦";
+		mes "赶出了屋子。^000000";
+		next;
+		enablenpc "#unpc";
+		disablenpc "#!@#$%";
+		warp "umbala",94,181;
+	}
+	end;
+}
+
+umbala,94,181,0	script	#unpc	-1,1,1,{
+OnInit:
+	disablenpc "#unpc";
+	end;
+
+OnTouch_:
+	if (um_wind == 5) {
+		mes "^3355FF你弄清自己被";
+		mes "赶出屋子后发生了什么，";
+		mes "发现脚下的地上";
+		mes "有一片叶子。^000000";
+		next;
+		if (select("拿走。:离开。") == 1) {
+			close2;
+			set um_wind,0;
+			set MISC_QUEST,MISC_QUEST | 32768;
+			getitem 610,1; //Leaf_Of_Yggdrasil
+			disablenpc "#unpc";
+			end;
+		}
+		set um_wind,0;
+		set MISC_QUEST,MISC_QUEST | 32768;
+		mes "[" + strcharinfo(0) + "]";
+		mes "我不该拿走";
+		mes "可能属于别人的东西。";
+		next;
+		mes "[" + strcharinfo(0) + "]";
+		mes "是啊，我真是个大好人。";
+		close2;
+		disablenpc "#unpc";
+	}
+	end;
+}

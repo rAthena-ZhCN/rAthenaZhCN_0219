@@ -1,0 +1,1538 @@
+//===== rAthena Script ======================================= 
+//= Guild dungeon event, Schwarzwald.
+//===== By: ================================================== 
+//= L0ne_W0lf
+//===== Current Version: ===================================== 
+//= 1.2
+//===== Compatible With: ===================================== 
+//= rAthena Project
+//===== Description: ========================================= 
+//= Guild dungeon event, Schwarzwald. Retrieve Morestone's
+//= pickaxe from Kublin.
+//===== Additional Comments: =================================
+//= 1.0 First version
+//= 1.1 Changed spawn timer to 1 hour. [L0ne_w0lf]
+//= 1.2 Added GM management function. [Euphy]
+//============================================================
+
+schg_dun01,1,1,1	script	怪物控制员#sch_gd	81,{
+OnInit:
+	donpcevent "怪物控制员1#sch::OnKill";
+	initnpctimer;
+	end;
+
+OnTimer3600000:
+	donpcevent "怪物控制员1#sch::OnEnable";
+	mapannounce "schg_dun01", "库布林：啊！",bc_map,"0x99CC00";
+	mapannounce "schg_dun01", "摩尔斯通：站住！你这小偷！",bc_map,"0x99CC00";
+	stopnpctimer;
+	end;
+}
+
+schg_dun01,1,2,1	script	怪物控制员1#sch	81,{
+OnEnable:
+	set .@callwhere,rand(1,4);
+	if (.@callwhere == 1) {
+		monster "schg_dun01",164,236,"Kublin",1980,1,"怪物控制员1#sch::OnMyMobDead";
+	}
+	else if (.@callwhere == 2) {
+		monster "schg_dun01",172,122,"Kublin",1980,1,"怪物控制员1#sch::OnMyMobDead";
+	}
+	else if (.@callwhere == 3) {
+		monster "schg_dun01",247,159,"Kublin",1980,1,"怪物控制员1#sch::OnMyMobDead";
+	}
+	else {
+		monster "schg_dun01",250,224,"Kublin",1980,1,"怪物控制员1#sch::OnMyMobDead";
+	}
+	end;
+
+OnKill:
+	killmonster "schg_dun01","怪物控制员1#sch::OnMyMObDead";
+	end;
+
+OnMyMobDead:
+	if (mobcount("schg_dun01","Monster Controler1#sch::OnMyMObDead") == 0) {
+		mapannounce "schg_dun01", "库布林：啊！",bc_map,"0x99CC00";
+		mapannounce "schg_dun01", "摩尔斯通：我好像听到库布林在惨叫！！谁在那儿？库布林怎么了？喂，你！",bc_map,"0x99CC00";
+		donpcevent "矮人#sch_gd::OnEnable";
+	}
+	end;
+}
+
+schg_dun01,194,148,5	script	矮人#sch_gd	826,{
+	if (getcharid(2) == 0) {
+		mes "[矮人]";
+		mes "喂，你有没有看到一只丑陋的哥布林经过？它偷了我的东西！";
+		close;
+	}
+	set .@chk_urquest,checkquest(2143,PLAYTIME);
+	set .@chk_yourgdname$,getguildname(getcharid(2));
+	if ($@gdeventv_s1 == 0) {
+		if ($@gdevents_s$ == "") {
+			set $@gdeventv_s1,1;
+			set $@gdevents_s$,.@chk_yourgdname$;
+			mes "[矮人]";
+			mes "帮帮我！";
+			mes "求求你，帮帮我！";
+			next;
+			switch(select("发生什么事了？:算了。")) {
+			case 1:
+				mes "[矮人]";
+				mes "我是摩尔斯通，专门收集稀有的宝石。";
+				next;
+				mes "[摩尔斯通]";
+				mes "旅途中我听说瓦尔弗雷雅和尼德霍格有很多宝石，所以就来到了这里。";
+				mes "但这里的土非常硬，很难挖。幸好我的^3131FF十字镐^000000从没让我失望过！";
+				next;
+				select("十字镐！");
+				mes "[摩尔斯通]";
+				mes "没错，我心爱的十字镐！";
+				mes "你知道吗，我总是随身带着它。";
+				next;
+				mes "[摩尔斯通]";
+				mes "我们开始在这里一起干活。";
+				mes "过了几天，我们终于挖到了东西！";
+				next;
+				select("奇怪的东西？？");
+				mes "[摩尔斯通]";
+				mes "不算奇怪，但相当值钱。";
+				mes "但我们没多少时间庆祝。突然出现了一只怪物，偷走了我的十字镐。";
+				mes "它叫^3131FF库布林^000000！";
+				next;
+				mes "[摩尔斯通]";
+				mes "它偷走了我的十字镐！";
+				mes "没有它我可活不下去……";
+				next;
+				if (countitem(6010) > 0) {
+					mes "[" + strcharinfo(0) + "]";
+					mes "这是你一直在找的那把十字镐吗？";
+					next;
+					mes "[摩尔斯通]";
+					mes "你找到了我的十字镐？";
+					mes "让我看看，求你了！";
+					next;
+					mes "[摩尔斯通]";
+					mes "哦，天哪！你把它还给我了！";
+					mes "我珍贵的十字镐，我还以为永远失去你了。";
+					next;
+					mes "[摩尔斯通]";
+					mes "你太厉害了！你是哪个公会的？";
+					mes "难道是重力公会，还是水星公会？";
+					next;
+					mes "[" + strcharinfo(0) + "]";
+					mes "我是^3131FF"+.@chk_yourgdname$+"^.";
+					next;
+					mes "[摩尔斯通]";
+					mes "哦……那个公会会得到我最崇高的敬意。";
+					next;
+					mes "[摩尔斯通]";
+					mes "哦！我的朋友，非常感谢你的帮助。";
+					mes "作为报酬，我告诉你一处我最近发现的神秘区域。";
+					next;
+					select("神秘区域？");
+					mes "[摩尔斯通]";
+					mes "没错。我在这附近挖掘时发现的。";
+					mes "看起来像是为某种特殊用途建造的，但那里附近没有宝石，所以我没什么兴趣。";
+					next;
+					mes "[摩尔斯通]";
+					mes "与其一个人去，我觉得和朋友们一起去会更有趣……";
+					next;
+					mes "[摩尔斯通]";
+					mes "如果你愿意，我可以带^3131FF你和你的公会成员^000000去探索那片区域。";
+					mes "你现在想去吗？";
+					next;
+					switch(select("等等！我还没准备好。:走吧！")) {
+					case 1:
+						set $@gdeventv_s1,0;
+						set $@gdevents_s$,"";
+						mes "[摩尔斯通]";
+						mes "慢慢来，找个地方把朋友们召集起来。";
+						close;
+					case 2:
+						mes "[摩尔斯通]";
+						mes "好！我们走吧。";
+						mes "如果你的朋友以后再来找我，我会再带他们去那片区域。";
+						mes "别忘了，矮人可是知恩图报的！哈哈哈！";
+						delitem 6010,1; //Pickaxe
+						set $@gdeventv_s1,1;
+						set $@gdevents_s$,.@chk_yourgdname$;
+						close2;
+						setquest 2144;
+						warp "schg_que01",103,133;
+						end;
+					}
+				}
+				else {
+					set $@gdeventv_s1,0;
+					set $@gdevents_s$,"";
+					mes "[摩尔斯通]";
+					mes "我来告诉你怎么找到它。";
+					mes "库布林戴着一顶滑稽的金色帽子，凭这个应该很容易认出它。";
+					close;
+				}
+			case 2:
+				set $@gdeventv_s1,0;
+				set $@gdevents_s$,"";
+				emotion ET_CRY;
+				mes "[矮人]";
+				mes "Ahhh...";
+				close;
+			}
+		}
+		else if ($@gdevents_s$ == .@chk_yourgdname$) {
+			set .@chk_urquest1,checkquest(2144);
+			if ((.@chk_urquest1 == 0) || (.@chk_urquest1 == 1)) {
+				mes "[摩尔斯通]";
+				mes "我，摩尔斯通，已经与"+$@gdevents_s$+"公会结盟。";
+				mes "哦，你是成员。";
+				mes "你想去那片神秘区域吗？";
+				next;
+				switch(select("走吧。:不用了，谢谢。")) {
+				case 1:
+					mes "[摩尔斯通]";
+					mes "祝你玩得开心，我的朋友。";
+					close2;
+					warp "schg_que01",103,133;
+					end;
+				case 2:
+					mes "[摩尔斯通]";
+					mes "如果需要我帮忙，尽管开口。";
+					mes "啊！别忘了，我讨厌怪物！所以我不想见到它们。你最好换个请求。";
+					close;
+				}
+			}
+			else {
+				set $@gdeventv_s1,1;
+				set $@gdevents_s$,.@chk_yourgdname$;
+				mes "[矮人]";
+				mes "帮帮我！";
+				mes "求求你，帮帮我！";
+				next;
+				switch(select("发生什么事了？:算了。")) {
+				case 1:
+					mes "[矮人]";
+					mes "我是摩尔斯通，专门收集稀有的宝石。";
+					next;
+					mes "[摩尔斯通]";
+					mes "旅途中我听说瓦尔弗雷雅和尼德霍格有很多宝石，所以就来到了这里。";
+					mes "但这里的土非常硬，很难挖。幸好我的^3131FF十字镐^000000从没让我失望过！";
+					next;
+					select("十字镐！");
+					mes "[摩尔斯通]";
+					mes "没错，我心爱的十字镐！";
+					mes "你知道吗，我总是随身带着它。";
+					next;
+					mes "[摩尔斯通]";
+					mes "我们开始在这里一起干活。";
+					mes "过了几天，我们终于挖到了东西！";
+					next;
+					select("奇怪的东西？？");
+					mes "[摩尔斯通]";
+					mes "不算奇怪，但相当值钱。";
+					mes "但我们没多少时间庆祝。突然出现了一只怪物，偷走了我的十字镐。";
+					mes "它叫^3131FF库布林^000000！";
+					next;
+					mes "[摩尔斯通]";
+					mes "它偷走了我的十字镐！";
+					mes "没有它我可活不下去……";
+					next;
+					if (countitem(6010) > 0) {
+						mes "[" + strcharinfo(0) + "]";
+						mes "这是你一直在找的那把十字镐吗？";
+						next;
+						mes "[摩尔斯通]";
+						mes "你找到了我的十字镐？";
+						mes "让我看看，求你了！";
+						next;
+						mes "[摩尔斯通]";
+						mes "哦，天哪！你把它还给我了！";
+						mes "我珍贵的十字镐，我还以为永远失去你了。";
+						next;
+						mes "[摩尔斯通]";
+						mes "你太厉害了！你是哪个公会的？";
+						mes "难道是重力公会，还是水星公会？";
+						next;
+						mes "[" + strcharinfo(0) + "]";
+						mes "我是^3131FF"+.@chk_yourgdname$+"^.";
+						next;
+						mes "[摩尔斯通]";
+						mes "哦……那个公会会得到我最崇高的敬意。";
+						next;
+						mes "[摩尔斯通]";
+						mes "哦！我的朋友，非常感谢你的帮助。";
+						mes "作为报酬，我告诉你一处我最近发现的神秘区域。";
+						next;
+						select("神秘区域？");
+						mes "[摩尔斯通]";
+						mes "没错。我在这附近挖掘时发现的。";
+						mes "看起来像是为某种特殊用途建造的，但那里附近没有宝石，所以我没什么兴趣。";
+						next;
+						mes "[摩尔斯通]";
+						mes "与其一个人去，我觉得和朋友们一起去会更有趣……";
+						next;
+						mes "[摩尔斯通]";
+						mes "如果你愿意，我可以带^3131FF你和你的公会成员^000000去探索那片区域。";
+						mes "你现在想去吗？";
+						next;
+						switch(select("等等！我还没准备好。:走吧！")) {
+						case 1:
+							set $@gdeventv_s1,0;
+							set $@gdevents_s$,"";
+							mes "[摩尔斯通]";
+							mes "慢慢来，找个地方把朋友们召集起来。";
+							close;
+						case 2:
+							mes "[摩尔斯通]";
+							mes "好！我们走吧。";
+							mes "如果你的朋友以后再来找我，我会再带他们去那片区域。";
+							mes "别忘了，矮人可是知恩图报的！哈哈哈！";
+							delitem 6010,1; //Pickaxe
+							set $@gdeventv_s1,1;
+							set $@gdevents_s$,.@chk_yourgdname$;
+							close2;
+							setquest 2144;
+							warp "schg_que01",103,133;
+							end;
+						}
+					}
+					else {
+						set $@gdeventv_s1,0;
+						set $@gdevents_s$,"";
+						mes "[摩尔斯通]";
+						mes "我来告诉你怎么找到它。";
+						mes "库布林戴着一顶滑稽的金色帽子，凭这个应该很容易认出它。";
+						close;
+					}
+				case 2:
+					set $@gdeventv_s1,0;
+					set $@gdevents_s$,"";
+					emotion ET_CRY;
+					mes "[矮人]";
+					mes "Ah....";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[摩尔斯通]";
+			mes "我，摩尔斯通，已经与"+$@gdevents_s$+"公会结盟。";
+			mes "嗯，你不是成员。";
+			mes "可以替我向他们问好吗？";
+			close;
+		}
+	}
+	else {
+		if ($@gdevents_s$ == .@chk_yourgdname$) {
+			set .@chk_urquest1,checkquest(2144);
+			if ((.@chk_urquest1 == 0) || (.@chk_urquest1 == 1)) {
+				mes "[摩尔斯通]";
+				mes "我，摩尔斯通，已经与"+$@gdevents_s$+"公会结盟。";
+				mes "哦，你是成员。";
+				mes "你想去那片神秘区域吗？";
+				next;
+				switch(select("走吧。:不用了，谢谢。")) {
+				case 1:
+					mes "[摩尔斯通]";
+					mes "祝你玩得开心，我的朋友。";
+					close2;
+					warp "schg_que01",103,133;
+					end;
+				case 2:
+					mes "[摩尔斯通]";
+					mes "如果需要我帮忙，尽管开口。";
+					mes "啊！别忘了，我讨厌怪物！所以我不想见到它们。你最好换个请求。";
+					close;
+				}
+			}
+			else {
+				set $@gdeventv_s1,1;
+				set $@gdevents_s$,.@chk_yourgdname$;
+				mes "[矮人]";
+				mes "帮帮我！";
+				mes "求求你，帮帮我！";
+				next;
+				switch(select("发生什么事了？:算了。")) {
+				case 1:
+					mes "[矮人]";
+					mes "我是摩尔斯通，专门收集稀有的宝石。";
+					next;
+					mes "[摩尔斯通]";
+					mes "旅途中我听说瓦尔弗雷雅和尼德霍格有很多宝石，所以就来到了这里。";
+					mes "但这里的土非常硬，很难挖。幸好我的^3131FF十字镐^000000从没让我失望过！";
+					next;
+					select("十字镐！");
+					mes "[摩尔斯通]";
+					mes "没错，我心爱的十字镐！";
+					mes "你知道吗，我总是随身带着它。";
+					next;
+					mes "[摩尔斯通]";
+					mes "我们开始在这里一起干活。";
+					mes "过了几天，我们终于挖到了东西！";
+					next;
+					select("奇怪的东西？？");
+					mes "[摩尔斯通]";
+					mes "不算奇怪，但相当值钱。";
+					mes "但我们没多少时间庆祝。突然出现了一只怪物，偷走了我的十字镐。";
+					mes "它叫^3131FF库布林^000000！";
+					next;
+					mes "[摩尔斯通]";
+					mes "它偷走了我的十字镐！";
+					mes "没有它我可活不下去……";
+					next;
+					if (countitem(6010) > 0) {
+						mes "[" + strcharinfo(0) + "]";
+						mes "这是你一直在找的那把十字镐吗？";
+						next;
+						mes "[摩尔斯通]";
+						mes "你找到了我的十字镐？";
+						mes "让我看看，求你了！";
+						next;
+						mes "[摩尔斯通]";
+						mes "哦，天哪！你把它还给我了！";
+						mes "我珍贵的十字镐，我还以为永远失去你了。";
+						next;
+						mes "[摩尔斯通]";
+						mes "你太厉害了！你是哪个公会的？";
+						mes "难道是重力公会，还是水星公会？";
+						next;
+						mes "[" + strcharinfo(0) + "]";
+						mes "我是^3131FF"+.@chk_yourgdname$+"^.";
+						next;
+						mes "[摩尔斯通]";
+						mes "哦……那个公会会得到我最崇高的敬意。";
+						next;
+						mes "[摩尔斯通]";
+						mes "哦！我的朋友，非常感谢你的帮助。";
+						mes "作为报酬，我告诉你一处我最近发现的神秘区域。";
+						next;
+						select("神秘区域？");
+						mes "[摩尔斯通]";
+						mes "没错。我在这附近挖掘时发现的。";
+						mes "看起来像是为某种特殊用途建造的，但那里附近没有宝石，所以我没什么兴趣。";
+						next;
+						mes "[摩尔斯通]";
+						mes "与其一个人去，我觉得和朋友们一起去会更有趣……";
+						next;
+						mes "[摩尔斯通]";
+						mes "如果你愿意，我可以带^3131FF你和你的公会成员^000000去探索那片区域。";
+						mes "你现在想去吗？";
+						next;
+						switch(select("等等！我还没准备好。:走吧！")) {
+						case 1:
+							set $@gdeventv_s1,0;
+							set $@gdevents_s$,"";
+							mes "[摩尔斯通]";
+							mes "慢慢来，找个地方把朋友们召集起来。";
+							close;
+						case 2:
+							mes "[摩尔斯通]";
+							mes "好！我们走吧。";
+							mes "如果你的朋友以后再来找我，我会再带他们去那片区域。";
+							mes "别忘了，矮人可是知恩图报的！哈哈哈！";
+							delitem 6010,1; //Pickaxe
+							set $@gdeventv_s1,1;
+							set $@gdevents_s$,.@chk_yourgdname$;
+							close2;
+							setquest 2144;
+							warp "schg_que01",103,133;
+							end;
+						}
+					}
+					else {
+						set $@gdeventv_s1,0;
+						set $@gdevents_s$,"";
+						mes "[摩尔斯通]";
+						mes "我来告诉你怎么找到它。";
+						mes "库布林戴着一顶滑稽的金色帽子，凭这个应该很容易认出它。";
+						close;
+					}
+				case 2:
+					set $@gdeventv_s1,0;
+					set $@gdevents_s$,"";
+					emotion ET_CRY;
+					mes "[矮人]";
+					mes "Ah....";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[摩尔斯通]";
+			mes "我，摩尔斯通，已经与"+$@gdevents_s$+"公会结盟。";
+			mes "嗯，你不是成员。";
+			mes "可以替我向他们问好吗？";
+			close;
+		}
+	}
+	end;
+
+OnInit:
+	disablenpc "矮人#sch_gd";
+	set $@gdeventv_s1,0;
+	set $@gdevents_s$,"";
+	end;
+
+OnEnable:
+	enablenpc "矮人#sch_gd";
+	end;
+}
+
+schg_que01,100,81,3	script	皮埃罗·皮尔#sch_gd	715,{
+	specialeffect EF_POISONHIT;
+	set .@sprchg_gd,rand(1,5);
+	if (.@sprchg_gd == 1) {
+		setnpcdisplay "皮埃罗·皮尔#sch_gd",950;
+	}
+	else if (.@sprchg_gd == 2) {
+		setnpcdisplay "皮埃罗·皮尔#sch_gd",715;
+	}
+	else if (.@sprchg_gd == 3) {
+		setnpcdisplay "皮埃罗·皮尔#sch_gd",714;
+	}
+	else if (.@sprchg_gd == 4) {
+		setnpcdisplay "皮埃罗·皮尔#sch_gd",785;
+	}
+	else {
+		setnpcdisplay "皮埃罗·皮尔#sch_gd",876;
+	}
+	if (checkweight(1201,1) == 0) {
+		mes "- 等等！！ -";
+		mes "- 你携带的东西太多了， -";
+		mes "- 无法获得这些材料。 -";
+		mes "- 请使用卡普拉服务， -";
+		mes "- 稍后再回来。 -";
+		close;
+	}
+	if (is_guild_leader() == true) {
+		if ($@gdeventv_s2 == 0) {
+			set .@que_2143,checkquest(2143,PLAYTIME);
+			if (.@que_2143 == -1) {
+				setnpcdisplay "皮埃罗·皮尔#sch_gd",715;
+				mes "一个孤独的小丑正在耍杂技。";
+				next;
+				mes "仔细一看，那小丑只是个外形像人的木偶。";
+				next;
+				mes "小丑停了下来，随后随着你的动作开始移动，嘴里发出声响。";
+				next;
+				mes "[皮耶罗·皮耶]";
+				mes "哔哔哔。";
+				mes "你们好，我的朋友们！";
+				mapannounce "schg_que01", "皮耶罗·皮耶：哔哔哔！你们好，我的朋友们！",bc_map,"0x99CC00";
+				next;
+				mes "[皮耶罗·皮耶]";
+				mes "我是格加斯的忠诚仆人，我终于接到了命令。";
+				mes "听到这么多笑声我很开心，但没有主人的许可，我什么也做不了。";
+				mapannounce "schg_que01", "皮耶罗·皮耶：听到这么多笑声我很开心，但没有主人的许可，我什么也做不了。",bc_map,"0x99CC00";
+				next;
+				mes "[皮耶罗·皮耶]";
+				mes "你得到格加斯的许可了吗？";
+				mapannounce "schg_que01", "皮耶罗·皮耶：你得到格加斯的许可了吗？",bc_map,"0x99CC00";
+				next;
+				switch(select("我得确认一下。:没有。")) {
+				case 1:
+					mes "[皮耶罗·皮耶]";
+					mes "请把您的手掌伸出来。";
+					mapannounce "schg_que01", "皮耶罗·皮耶：请把您的手掌伸出来。",bc_map,"0x99CC00";
+					next;
+					mes "[皮耶罗·皮耶]";
+					mes "让我看看……";
+					mapannounce "schg_que01", "皮耶罗·皮耶：让我看看……",bc_map,"0x99CC00";
+					next;
+					emotion ET_THINK;
+					mes "[皮耶罗·皮耶]";
+					mes "Hm...";
+					mapannounce "schg_que01", "皮耶罗·皮耶：嗯……",bc_map,"0x99CC00";
+					next;
+					emotion ET_THINK;
+					mes "[皮耶罗·皮耶]";
+					mes "好，我明白了……";
+					mapannounce "schg_que01", "皮耶罗·皮耶：好，我明白了……",bc_map,"0x99CC00";
+					next;
+					emotion ET_THINK;
+					mes "[皮耶罗·皮耶]";
+					mes "Indeed...";
+					mapannounce "schg_que01", "皮耶罗·皮耶：确实如此……",bc_map,"0x99CC00";
+					next;
+					emotion ET_STARE;
+					mes "[皮耶罗·皮耶]";
+					mes "验证完成！";
+					mapannounce "schg_que01", "皮耶罗·皮耶：验证完成！",bc_map,"0x99CC00";
+					next;
+					break;
+				case 2:
+					mes "[皮耶罗·皮耶]";
+					mes "嗯？没错。";
+					mes "那个人什么时候来？我无聊死了～！";
+					close;
+				}
+				mes "[皮耶罗·皮耶]";
+				mes "^3131FF<你这个人每天只会胡思乱想，一点专注力都没有。>^000000";
+				mapannounce "schg_que01", "皮耶罗·皮耶：<你这个人每天只会胡思乱想，一点专注力都没有。>",bc_map,"0x99CC00";
+				next;
+				emotion ET_DELIGHT;
+				mes "[皮耶罗·皮耶]";
+				mes "嗯？你不这么认为？";
+				mapannounce "schg_que01", "皮耶罗·皮耶：嗯？你不这么认为？",bc_map,"0x99CC00";
+				next;
+				emotion ET_SMILE;
+				mes "[皮耶罗·皮耶]";
+				mes "哈哈，我开玩笑的。哔哔。";
+				mes "啊，你就是主人提到的那个人。";
+				mapannounce "schg_que01", "皮耶罗·皮耶：哈哈，我开玩笑的。哔哔。你就是主人提到的那个人。",bc_map,"0x99CC00";
+				next;
+				mes "[皮耶罗·皮耶]";
+				mes "来吧，格加斯给你留了口信。";
+				mes "有点旧了，但应该还看得清。";
+				next;
+				mes "[皮耶罗·皮耶]";
+				mes "好，我们开始吧！";
+				setquest 2143;
+				donpcevent "格加斯#sch_gd::OnEnable";
+				close;
+			}
+			else if ((.@que_2143 == 0) || (.@que_2143 == 1)) {
+				mes "[皮耶罗·皮耶]";
+				mes "等我读完主人的留言再聊。哔哔。";
+				close;
+			}
+			else {
+				mes "[皮耶罗·皮耶]";
+				mes "我的主人格加斯衷心祝愿你和家人每天都充满欢乐。";
+				next;
+				mes "[皮耶罗·皮耶]";
+				mes "好，你想玩格加斯为你准备的那个游戏吗？";
+				next;
+				switch(select("游戏说明。:跳过说明。:拒绝游戏。")) {
+				case 1:
+					mes "[皮耶罗·皮耶]";
+					mes "我主人准备的游戏非常独特，却又简单有趣！";
+					mapannounce "schg_que01", "皮耶罗·皮耶：我主人准备的游戏非常独特，却又简单有趣！",bc_map,"0x99CC00";
+					next;
+					mes "[皮耶罗·皮耶]";
+					mes "它叫做 “寻找藏宝图”！！";
+					mapannounce "schg_que01", "皮耶罗·皮耶：它叫做 “寻找藏宝图”！！",bc_map,"0x99CC00";
+					next;
+					mes "[皮耶罗·皮耶]";
+					mes "你看到这片宽阔的绿色田野了吗？哔哔？";
+					mes "我要在这里给你们展示最不可思议的魔法。";
+					mes "我要把这里变得非常白。非常非常白！";
+					mapannounce "schg_que01", "皮耶罗·皮耶：我要把这里变得非常白。非常非常白！",bc_map,"0x99CC00";
+					next;
+					mes "[皮耶罗·皮耶]";
+					mes "游戏规则就是在限定时间内找到藏宝图。";
+					mes "听起来很简单，对吧？";
+					mapannounce "schg_que01", "皮耶罗·皮耶：游戏规则就是在限定时间内找到藏宝图。听起来很简单，对吧？",bc_map,"0x99CC00";
+					next;
+					break;
+				case 2:
+					break;
+				case 3:
+					emotion ET_CRY;
+					mes "[皮耶罗·皮耶]";
+					mes "哦，你不想玩吗？";
+					close;
+				}
+				mes "[皮耶罗·皮耶]";
+				mes "好，我准备好开始了。";
+				mes "我们开始吧？哔哔？";
+				next;
+				switch(select("不要。:开始。")) {
+				case 1:
+					mes "[皮耶罗·皮耶]";
+					mes "准备好了就告诉我。";
+					close;
+				case 2:
+					mes "[皮耶罗·皮耶]";
+					mes "好！我们开始吧！";
+					next;
+					mes "[皮耶罗·皮耶]";
+					mes "女士们，先生们。";
+					mapannounce "schg_que01", "皮耶罗·皮耶：女士们，先生们。",bc_map,"0x99CC00";
+					next;
+					mes "[皮耶罗·皮耶]";
+					mes "谁将在这片纯白的世界里找到藏宝图？";
+					mapannounce "schg_que01", "皮耶罗·皮耶：谁将在这片纯白的世界里找到藏宝图？",bc_map,"0x99CC00";
+					next;
+					mes "[皮耶罗·皮耶]";
+					mes "你们之中，谁会是那个幸运儿？";
+					mapannounce "schg_que01", "皮耶罗·皮耶：你们之中，谁会是那个幸运儿？",bc_map,"0x99CC00";
+					next;
+					mes "[皮耶罗·皮耶]";
+					mes "游戏……开始！";
+					mapannounce "schg_que01", "皮耶罗·皮耶：游戏……开始！",bc_map,"0x99CC00";
+					set $@gdeventv_s2,1;
+					donpcevent "控制员#gdevent_s::Ongame_start";
+					erasequest 2143;
+					close;
+				}
+			}
+		}
+		else if ($@gdeventv_s2 == 1) {
+			mes "[皮耶罗·皮耶]";
+			mes "你找到藏宝图了吗？";
+			mes "让我看看你手里拿着什么！哔哔！";
+			next;
+			mes "[皮耶罗·皮耶]";
+			mes "让我看看……";
+			next;
+			if (countitem(6031) > 0) {
+				donpcevent "控制员#gdevent_s::OnStop";
+				set $@gdeventv_s2,3;
+				donpcevent "eff_mvp#sch_gd::Onmvp";
+				mes "[皮耶罗·皮耶]";
+				mes "哇～～！！";
+				mes "成功～！！";
+				mes "真是大成功～！！";
+				mapannounce "schg_que01", "皮耶罗·皮耶：哇～～！！成功～！！真是大成功～！！",bc_map,"0x99CC00";
+				delitem 6031,1; //Glitering_PaperB
+				close;
+			}
+			else {
+				if (countitem(6030) > 0) {
+					mes "[皮耶罗·皮耶]";
+					mes "唉，真可惜，看来你还没找到藏宝图。";
+					mes "快！你的时间不多了！快点！";
+					close;
+				}
+				else {
+					mes "[皮耶罗·皮耶]";
+					mes "我什么都没看到。你到底开始了没有？哔？";
+					mes "嘿嘿，你在和我说话的时候，时间正一点点流逝～";
+					close;
+				}
+			}
+		}
+		else if ($@gdeventv_s2 == 2) {
+			mes "[皮耶罗·皮耶]";
+			mes "哇，怎么会这样～！！";
+			mes "不够吗？但这样游戏才有意思，不是吗？哈哈哈！";
+			next;
+			mes "[皮耶罗·皮耶]";
+			mes "你觉得怎么样？";
+			next;
+			switch(select("挺难的。:我本来应该能成功的……")) {
+			case 1:
+				mes "[皮耶罗·皮耶]";
+				mes "简直就像大海捞针！";
+				mes "确实很难，但只要找到，就值得付出十倍的努力。哔哔。";
+				next;
+				break;
+			case 2:
+				mes "[皮耶罗·皮耶]";
+				mes "啊啊～！时间就是金钱。";
+				mes "宝贵的时光流逝得真快。";
+				next;
+				break;
+			}
+			mes "[皮耶罗·皮耶]";
+			mes "我皮耶罗·皮耶可不是没心没肺的小丑！哔哔。";
+			mapannounce "schg_que01", "皮耶罗·皮耶：我皮耶罗·皮耶可不是没心没肺的小丑！哔哔。",bc_map,"0x99CC00";
+			next;
+			mes "[皮耶罗·皮耶]";
+			mes "你的成功就是我的快乐！";
+			mes "我再给你一次机会。怎么样？哔？";
+			mapannounce "schg_que01", "皮耶罗·皮耶：我再给你一次机会。怎么样？哔？",bc_map,"0x99CC00";
+			next;
+			mes "[皮耶罗·皮耶]";
+			mes "好，我准备好开始了。";
+			mes "我们开始吧？哔哔？";
+			mapannounce "schg_que01", "皮耶罗·皮耶：好，我准备好开始了。我们开始吧？哔哔？",bc_map,"0x99CC00";
+			next;
+			switch(select("不要。:开始。")) {
+			case 1:
+				mes "[皮耶罗·皮耶]";
+				mes "准备好了就告诉我。";
+				close;
+			case 2:
+				mes "[皮耶罗·皮耶]";
+				mes "好！我们开始吧！";
+				next;
+				mes "[皮耶罗·皮耶]";
+				mes "女士们，先生们。";
+				mapannounce "schg_que01", "皮耶罗·皮耶：女士们，先生们。",bc_map,"0x99CC00";
+				next;
+				mes "[皮耶罗·皮耶]";
+				mes "谁将在这片纯白的世界里找到藏宝图？";
+				mapannounce "schg_que01", "皮耶罗·皮耶：谁将在这片纯白的世界里找到藏宝图？",bc_map,"0x99CC00";
+				next;
+				mes "[皮耶罗·皮耶]";
+				mes "你们之中，谁会是那个幸运儿？";
+				mapannounce "schg_que01", "皮耶罗·皮耶：你们之中，谁会是那个幸运儿？",bc_map,"0x99CC00";
+				next;
+				mes "[皮耶罗·皮耶]";
+				mes "游戏……开始！";
+				mapannounce "schg_que01", "皮耶罗·皮耶：游戏……开始！",bc_map,"0x99CC00";
+				set $@gdeventv_s2,10;
+				donpcevent "控制员#gdevent_s::Ongame_start";
+				close;
+			}
+		}
+		else if ($@gdeventv_s2 == 3) {
+			set .@que_2143,checkquest(2143);
+			if (.@que_2143 == 3) {
+				erasequest 2143;
+			}
+			mes "[皮耶罗·皮耶]";
+			mes "你是怎么做到的？";
+			mapannounce "schg_que01", "皮耶罗·皮耶：你是怎么做到的？",bc_map,"0x99CC00";
+			next;
+			mes "[皮耶罗·皮耶]";
+			mes "你竟然真的在大海里捞到了针！";
+			mes "太厉害了！";
+			mapannounce "schg_que01", "皮耶罗·皮耶：你竟然真的在大海里捞到了针！太厉害了！！",bc_map,"0x99CC00";
+			next;
+			mes "[皮耶罗·皮耶]";
+			mes "你完成了一项难以置信的任务，我要把主人准备的绝妙礼物送给你！！哈！";
+			mapannounce "schg_que01", "皮耶罗·皮耶：你完成了一项难以置信的任务，我要把主人准备的绝妙礼物送给你！！哈！",bc_map,"0x99CC00";
+			mapannounce "schg_que01", "皮耶罗·皮耶：来，收下皮耶的宝箱吧。",bc_map,"0x99CC00";
+			donpcevent "eff_mvp#sch_gd::Onmvp";
+			set $@gdeventv_s2,5;
+			getitem 14596,10; //Pierre_Treasurebox
+			close;
+		}
+		else if ($@gdeventv_s2 == 4) {
+			mes "[皮耶罗·皮耶]";
+			mes "不可思议！难以置信！哔哔！";
+			close;
+		}
+		else if ($@gdeventv_s2 == 5) {
+			mapannounce "schg_que01", "皮耶罗·皮耶：看到你们的笑容，皮耶罗感到非常开心～下次再见！",bc_map,"0x99CC00";
+			mes "[皮耶罗·皮耶]";
+			mes "玩得开心吗？";
+			next;
+			mes "[皮耶罗·皮耶]";
+			mes "看到你们的笑容，皮耶罗感到非常开心～";
+			next;
+			mes "[皮耶罗·皮耶]";
+			mes "希望能很快再见到你，我现在必须变回木偶了。";
+			mes "下次再见！";
+			erasequest 2144;
+			close;
+		}
+		else {
+			mes "[皮埃罗·皮尔]";
+			mes "你找到藏宝图了吗？";
+			mes "让我看看你手里拿的是什么！哔，哔！";
+			next;
+			mes "[皮埃罗·皮尔]";
+			mes "让我看看。";
+			next;
+			if (countitem(6031) > 0) {
+				donpcevent "控制员#gdevent_s::OnStop";
+				set $@gdeventv_s2,3;
+				donpcevent "eff_mvp#sch_gd::Onmvp";
+				mes "[皮埃罗·皮尔]";
+				mes "哇~~！！";
+				mes "成功~！！";
+				mes "太成功了~！！";
+				delitem 6031,1; //Glitering_PaperB
+				close;
+			}
+			else {
+				if (countitem(6030) > 0) {
+					mes "[皮埃罗·皮尔]";
+					mes "唉，真可惜，看来你还没找到藏宝图。";
+					mes "快！时间快到了！抓紧！";
+					close;
+				}
+				else {
+					mes "[皮埃罗·皮尔]";
+					mes "我什么都没看到。你开始了吗？哔？";
+					mes "呵呵，你跟我说话的这会儿，时间也在慢慢流逝呢～";
+					close;
+				}
+			}
+		}
+	}
+	else {
+		if ($@gdeventv_s2 == 0) {
+			setnpcdisplay "皮埃罗·皮尔#sch_gd",715;
+			mes "一个孤独的小丑正在耍杂技。";
+			next;
+			mes "仔细一看，那小丑不过是个人偶，只是做得像人。";
+			next;
+			mes "小丑停了下来，接着便随着你的动作动了起来，口中开始发出声响。";
+			next;
+			mes "[皮埃罗·皮尔]";
+			mes "哔哔哔。";
+			mes "朋友们，你们好！";
+			mapannounce "schg_que01", "皮埃罗·皮尔：哔哔哔！朋友们，你们好！",bc_map,"0x99CC00";
+			next;
+			mes "[皮埃罗·皮尔]";
+			mes "我是格尔加斯忠实的仆人，终于接到了命令。";
+			mes "听到这些笑声我很高兴，但没有主人的允许，我什么也做不了。";
+			mapannounce "schg_que01", "皮埃罗·皮尔：听到这些笑声我很高兴，但没有主人的允许，我什么也做不了。",bc_map,"0x99CC00";
+			next;
+			mes "[皮埃罗·皮尔]";
+			mes "你得到格尔加斯的允许了吗？";
+			mapannounce "schg_que01", "皮埃罗·皮尔：你得到格尔加斯的允许了吗？",bc_map,"0x99CC00";
+			next;
+			switch(select("我得确认一下。:不。")) {
+			case 1:
+				mes "[皮埃罗·皮尔]";
+				mes "请把你的手掌伸过来。";
+				mapannounce "schg_que01", "皮埃罗·皮尔：请把你的手掌伸过来。",bc_map,"0x99CC00";
+				next;
+				mes "[皮埃罗·皮尔]";
+				mes "让我看看……";
+				mapannounce "schg_que01", "皮埃罗·皮尔：让我看看……",bc_map,"0x99CC00";
+				next;
+				emotion ET_THINK;
+				mes "[皮埃罗·皮尔]";
+				mes "Hm...";
+				mapannounce "schg_que01", "皮埃罗·皮尔：嗯……",bc_map,"0x99CC00";
+				next;
+				emotion ET_THINK;
+				mes "[皮埃罗·皮尔]";
+				mes "好，我明白了……";
+				mapannounce "schg_que01", "皮埃罗·皮尔：好，我明白了……",bc_map,"0x99CC00";
+				next;
+				emotion ET_THINK;
+				mes "[皮埃罗·皮尔]";
+				mes "Indeed...";
+				mapannounce "schg_que01", "皮埃罗·皮尔：确实如此……",bc_map,"0x99CC00";
+				next;
+				emotion ET_STARE;
+				mes "[皮埃罗·皮尔]";
+				mes "验证完成！";
+				mapannounce "schg_que01", "皮埃罗·皮尔：验证完成！",bc_map,"0x99CC00";
+				next;
+				break;
+			case 2:
+				mes "[皮埃罗·皮尔]";
+				mes "嗯？没错。";
+				mes "那个人什么时候来？我无聊死了～！";
+				close;
+			}
+			emotion ET_SMILE;
+			mes "[皮埃罗·皮尔]";
+			mes "^3131FF<虽然你是个怪人，但看起来非常用心>^000000。哔哔。";
+			next;
+			emotion ET_PROFUSELY_SWEAT;
+			mes "[皮埃罗·皮尔]";
+			mes "嗯？你不这么认为吗？";
+			next;
+			mes "[皮埃罗·皮尔]";
+			mes "主人任命的那位，是^3131FF< 一位统领众多民众的人 >^000000。哔。";
+			next;
+			mes "[皮埃罗·皮尔]";
+			mes "皮埃罗也想成为那样的人。哔。";
+			close;
+		}
+		else if ($@gdeventv_s2 == 1) {
+			mes "[皮埃罗·皮尔]";
+			mes "你找到藏宝图了吗？";
+			mes "让我看看你手里拿的是什么！哔，哔！";
+			next;
+			mes "[皮埃罗·皮尔]";
+			mes "让我看看……";
+			next;
+			if (countitem(6031) > 0) {
+				donpcevent "控制员#gdevent_s::OnStop";
+				set $@gdeventv_s2,3;
+				donpcevent "eff_mvp#sch_gd::Onmvp";
+				mes "[皮埃罗·皮尔]";
+				mes "哇~~！！";
+				mes "成功~！！";
+				mes "太成功了~！！";
+				mapannounce "schg_que01", "皮埃罗·皮尔：哇~~！！成功~！！太成功了~！！",bc_map,"0x99CC00";
+				delitem 6031,1; //Glitering_PaperB
+				close;
+			}
+			else {
+				if (countitem(6030) > 0) {
+					mes "[皮埃罗·皮尔]";
+					mes "唉，真可惜，看来你还没找到藏宝图。";
+					mes "快！时间快到了！抓紧！";
+					close;
+				}
+				else {
+					mes "[皮埃罗·皮尔]";
+					mes "我什么都没看到。你开始了吗？哔？";
+					mes "呵呵，你跟我说话的这会儿，时间也在慢慢流逝呢～";
+					close;
+				}
+			}
+		}
+		else if ($@gdeventv_s2 == 2) {
+			mes "[皮埃罗·皮尔]";
+			mes "哎呀，怎么会这样~！！";
+			mes "还不够？可这样游戏才有意思，不是吗？哈哈哈！";
+			close;
+		}
+		else if ($@gdeventv_s2 == 3) {
+			mes "[皮埃罗·皮尔]";
+			mes "恭喜，你成功了！";
+			mes "其他细节我会和你们的首领谈。";
+			close;
+		}
+		else if ($@gdeventv_s2 == 4) {
+			mes "[皮埃罗·皮尔]";
+			mes "难以置信！简直不敢相信！哔哔！";
+			close;
+		}
+		else if ($@gdeventv_s2 == 5) {
+			mes "[皮埃罗·皮尔]";
+			mes "玩得开心吗？";
+			next;
+			mes "[皮埃罗·皮尔]";
+			mes "看到你们的笑容，皮埃罗觉得非常开心～";
+			next;
+			mes "[皮埃罗·皮尔]";
+			mes "希望能很快再见到你们，我现在得变回人偶了。";
+			mes "下次再见！";
+			close;
+		}
+		else {
+			mes "[皮埃罗·皮尔]";
+			mes "你找到宝藏了吗？";
+			mes "马上把你手里的东西给我看看！";
+			next;
+			mes "[皮埃罗·皮尔]";
+			mes "让我看看……";
+			next;
+			if (countitem(6031) > 0) {
+				donpcevent "控制员#gdevent_s::OnStop";
+				set $@gdeventv_s2,3;
+				donpcevent "eff_mvp#sch_gd::Onmvp";
+				mes "[皮埃罗·皮尔]";
+				mes "哇~~！！";
+				mes "成功~！！";
+				mes "太成功了~！！";
+				delitem 6031,1; //Glitering_PaperB
+				close;
+			}
+			else {
+				if (countitem(6030) > 0) {
+					mes "[皮埃罗·皮尔]";
+					mes "唉，真可惜，看来你还没找到藏宝图。";
+					mes "快！时间快到了！抓紧！";
+					close;
+				}
+				else {
+					mes "[皮埃罗·皮尔]";
+					mes "我什么都没看到。你开始了吗？哔？";
+					mes "呵呵，你跟我说话的这会儿，时间也在慢慢流逝呢～";
+					close;
+				}
+			}
+		}
+	}
+}
+
+schg_que01,10,10,3	script	控制员#gdevent_s	81,{
+OnInit:
+	set $@gdeventv_s2,0;
+	end;
+
+Onwin:
+	donpcevent "treg#sch_gd::OnEnable";
+	end;
+
+Ongame_start:
+	initnpctimer;
+	donpcevent "paper_sp_1_s::OnEnable";
+	donpcevent "paper_sp_2_s::OnEnable";
+	donpcevent "paper_sp_3_s::OnEnable";
+	donpcevent "paper_sp_4_s::OnEnable";
+	donpcevent "paper_sp_5_s::OnEnable";
+	donpcevent "paper_sp_6_s::OnEnable";
+	donpcevent "paper_sp_7_s::OnEnable";
+	donpcevent "paper_sp_8_s::OnEnable";
+	donpcevent "paper_sp_9_s::OnEnable";
+	set .@roulette_where,rand(1,9);
+	if (.@roulette_where == 1) {
+		donpcevent "paper_sp_1_s::OnBingo";
+	}
+	else if (.@roulette_where == 2) {
+		donpcevent "paper_sp_2_s::OnBingo";
+	}
+	else if (.@roulette_where == 3) {
+		donpcevent "paper_sp_3_s::OnBingo";
+	}
+	else if (.@roulette_where == 4) {
+		donpcevent "paper_sp_4_s::OnBingo";
+	}
+	else if (.@roulette_where == 5) {
+		donpcevent "paper_sp_5_s::OnBingo";
+	}
+	else if (.@roulette_where == 6) {
+		donpcevent "paper_sp_6_s::OnBingo";
+	}
+	else if (.@roulette_where == 7) {
+		donpcevent "paper_sp_7_s::OnBingo";
+	}
+	else if (.@roulette_where == 8) {
+		donpcevent "paper_sp_8_s::OnBingo";
+	}
+	else {
+		donpcevent "paper_sp_9_s::OnBingo";
+	}
+	end;
+
+OnStop:
+	stopnpctimer;
+	end;
+
+OnTimer40000:
+	mapannounce "schg_que01", "皮埃罗·皮尔：时间快到了，抓紧！",bc_map,"0x99CC00";
+	end;
+
+OnTimer60000:
+	mapannounce "schg_que01", "皮埃罗·皮尔：时间到了！",bc_map,"0x99CC00";
+	mapwarp "schg_que01","schg_que01",100,79;
+	enablenpc "removepp_sch_gd";
+	set $@gdeventv_s2,2;
+	end;
+
+OnTimer63000:
+	stopnpctimer;
+	end;
+}
+
+schg_que01,87,93,0	script	paper_sp_1_s	139,{
+	end;
+
+OnEnable:
+	set .@paper_while1,0;
+	while(1) {
+		if (.@paper_while1 == 100) {
+			break;
+		}
+		else {
+			set .@paper_while1,.@paper_while1+1;
+			set .@paper_x1,rand(81,95);
+			set .@paper_y1,rand(87,100);
+			makeitem 6030,1,"schg_que01",.@paper_x1,.@paper_y1; //Glitering_PaperA
+		}
+	}
+	end;
+
+OnBingo:
+	set .@paper_x1,rand(81,95);
+	set .@paper_y1,rand(87,100);
+	makeitem 6031,1,"schg_que01",.@paper_x1,.@paper_y1; //Glitering_PaperB
+	end;
+}
+
+schg_que01,102,93,0	script	paper_sp_2_s	139,{
+	end;
+
+OnEnable:
+	set .@paper_while2,0;
+	while(1) {
+		if (.@paper_while2 == 100) {
+			break;
+		}
+		else {
+			set .@paper_while2,.@paper_while2+1;
+			set .@paper_x2,rand(96,110);
+			set .@paper_y2,rand(87,100);
+			makeitem 6030,1,"schg_que01",.@paper_x2,.@paper_y2; //Glitering_PaperA
+		}
+	}
+	end;
+
+OnBingo:
+	set .@paper_x2,rand(96,110);
+	set .@paper_y2,rand(87,100);
+	makeitem 6031,1,"schg_que01",.@paper_x2,.@paper_y2; //Glitering_PaperB
+	end;
+}
+
+schg_que01,117,93,0	script	paper_sp_3_s	139,{
+	end;
+
+OnEnable:
+	set .@paper_while3,0;
+	while(1) {
+		if (.@paper_while3 == 100) {
+			break;
+		}
+		else {
+			set .@paper_while3,.@paper_while3+1;
+			set .@paper_x3,rand(111,124);
+			set .@paper_y3,rand(87,100);
+			makeitem 6030,1,"schg_que01",.@paper_x3,.@paper_y3; //Glitering_PaperA
+		}
+	}
+	end;
+
+OnBingo:
+	set .@paper_x3,rand(111,124);
+	set .@paper_y3,rand(87,100);
+	makeitem 6031,1,"schg_que01",.@paper_x3,.@paper_y3; //Glitering_PaperB
+	end;
+}
+
+schg_que01,87,80,0	script	paper_sp_4_s	139,{
+	end;
+
+OnEnable:
+	set .@paper_while4,0;
+	while(1) {
+		if (.@paper_while4 == 100) {
+			break;
+		}
+		else {
+			set .@paper_while4,.@paper_while4+1;
+			set .@paper_x4,rand(81,95);
+			set .@paper_y4,rand(73,86);
+			makeitem 6030,1,"schg_que01",.@paper_x4,.@paper_y4; //Glitering_PaperA
+		}
+	}
+	end;
+
+OnBingo:
+	set .@paper_x4,rand(81,95);
+	set .@paper_y4,rand(73,86);
+	makeitem 6031,1,"schg_que01",.@paper_x4,.@paper_y4; //Glitering_PaperB
+	end;
+}
+
+schg_que01,102,80,0	script	paper_sp_5_s	139,{
+	end;
+
+OnEnable:
+	set .@paper_while5,0;
+	while(1) {
+		if (.@paper_while5 == 100) {
+			break;
+		}
+		else {
+			set .@paper_while5,.@paper_while5+1;
+			set .@paper_x5,rand(96,110);
+			set .@paper_y5,rand(73,86);
+			makeitem 6030,1,"schg_que01",.@paper_x5,.@paper_y5; //Glitering_PaperA
+		}
+	}
+	end;
+
+OnBingo:
+	set .@paper_x5,rand(96,110);
+	set .@paper_y5,rand(73,86);
+	makeitem 6031,1,"schg_que01",.@paper_x5,.@paper_y5; //Glitering_PaperB
+	end;
+}
+
+schg_que01,117,80,0	script	paper_sp_6_s	139,{
+	end;
+
+OnEnable:
+	set .@paper_while6,0;
+	while(1) {
+		if (.@paper_while6 == 100) {
+			break;
+		}
+		else {
+			set .@paper_while6,.@paper_while6+1;
+			set .@paper_x6,rand(111,124);
+			set .@paper_y6,rand(73,86);
+			makeitem 6030,1,"schg_que01",.@paper_x6,.@paper_y6; //Glitering_PaperA
+		}
+	}
+	end;
+
+OnBingo:
+	set .@paper_x6,rand(111,124);
+	set .@paper_y6,rand(73,86);
+	makeitem 6031,1,"schg_que01",.@paper_x6,.@paper_y6; //Glitering_PaperB
+	end;
+}
+
+schg_que01,87,65,0	script	paper_sp_7_s	139,{
+	end;
+
+OnEnable:
+	set .@paper_while7,0;
+	while(1) {
+		if (.@paper_while7 == 100) {
+			break;
+		}
+		else {
+			set .@paper_while7,.@paper_while7+1;
+			set .@paper_x7,rand(81,95);
+			set .@paper_y7,rand(59,72);
+			makeitem 6030,1,"schg_que01",.@paper_x7,.@paper_y7; //Glitering_PaperA
+		}
+	}
+	end;
+
+OnBingo:
+	set .@paper_x7,rand(81,95);
+	set .@paper_y7,rand(59,72);
+	makeitem 6031,1,"schg_que01",.@paper_x7,.@paper_y7; //Glitering_PaperB
+	end;
+}
+
+schg_que01,102,65,0	script	paper_sp_8_s	139,{
+	end;
+
+OnEnable:
+	set .@paper_while8,0;
+	while(1) {
+		if (.@paper_while8 == 100) {
+			break;
+		}
+		else {
+			set .@paper_while8,.@paper_while8+1;
+			set .@paper_x8,rand(96,110);
+			set .@paper_y8,rand(59,72);
+			makeitem 6030,1,"schg_que01",.@paper_x8,.@paper_y8; //Glitering_PaperA
+		}
+	}
+	end;
+
+OnBingo:
+	set .@paper_x8,rand(96,110);
+	set .@paper_y8,rand(59,72);
+	makeitem 6031,1,"schg_que01",.@paper_x8,.@paper_y8; //Glitering_PaperB
+	end;
+}
+
+schg_que01,117,65,0	script	paper_sp_9_s	139,{
+	end;
+
+OnEnable:
+	set .@paper_while9,0;
+	while(1) {
+		if (.@paper_while9 == 100) {
+			break;
+		}
+		else {
+			set .@paper_while9,.@paper_while9+1;
+			set .@paper_x9,rand(111,124);
+			set .@paper_y9,rand(59,72);
+			makeitem 6030,1,"schg_que01",.@paper_x9,.@paper_y9; //Glitering_PaperA
+		}
+	}
+	end;
+
+OnBingo:
+	set .@paper_x9,rand(111,124);
+	set .@paper_y9,rand(59,72);
+	makeitem 6031,1,"schg_que01",.@paper_x9,.@paper_y9; //Glitering_PaperB
+	end;
+}
+
+schg_que01,100,80,0	script	removepp_sch_gd	-1,5,5,{
+	end;
+
+OnInit:
+	disablenpc "removepp_sch_gd";
+	end;
+
+OnTouch:
+	set .@paper_sch_gd,countitem(6030);
+	set .@spaper_sch_gd,countitem(6031);
+	if ((.@paper_sch_gd > 0) || (.@spaper_sch_gd > 0)) {
+		delitem 6030,.@paper_sch_gd; //Glitering_PaperA
+		delitem 6031,.@spaper_sch_gd; //Glitering_PaperB
+	}
+	end;
+}
+
+schg_que01,6,6,1	script	eff_mvp#sch_gd	844,{
+	end;
+
+Onmvp:
+	initnpctimer;
+	end;
+
+OnTimer1000:
+	specialeffect EF_MVP,AREA,"paper_sp_1_s";
+	specialeffect EF_MVP,AREA,"paper_sp_3_s";
+	specialeffect EF_MVP,AREA,"paper_sp_5_s";
+	specialeffect EF_MVP,AREA,"paper_sp_7_s";
+	specialeffect EF_MVP,AREA,"paper_sp_9_s";
+	end;
+
+OnTimer2000:
+	specialeffect EF_MVP,AREA,"paper_sp_2_s";
+	specialeffect EF_MVP,AREA,"paper_sp_4_s";
+	specialeffect EF_MVP,AREA,"paper_sp_6_s";
+	specialeffect EF_MVP,AREA,"paper_sp_8_s";
+	end;
+
+OnTimer3000:
+	specialeffect EF_MVP,AREA,"paper_sp_1_s";
+	specialeffect EF_MVP,AREA,"paper_sp_3_s";
+	specialeffect EF_MVP,AREA,"paper_sp_5_s";
+	specialeffect EF_MVP,AREA,"paper_sp_7_s";
+	specialeffect EF_MVP,AREA,"paper_sp_9_s";
+	end;
+
+OnTimer4000:
+	specialeffect EF_MVP,AREA,"paper_sp_2_s";
+	specialeffect EF_MVP,AREA,"paper_sp_4_s";
+	specialeffect EF_MVP,AREA,"paper_sp_6_s";
+	specialeffect EF_MVP,AREA,"paper_sp_8_s";
+	stopnpctimer;
+	end;
+}
+
+schg_que01,100,75,5	script	格加斯#sch_gd	412,{
+	end;
+
+OnInit:
+	disablenpc "格加斯#sch_gd";
+	end;
+
+OnEnable:
+	enablenpc "格加斯#sch_gd";
+	specialeffect EF_FORESTLIGHT;
+	initnpctimer;
+	end;
+
+OnTimer5000:
+	mapannounce "schg_que01", "格尔加斯：亲爱的朋友，你过得还好吗？这是我为你准备的东西。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer10000:
+	mapannounce "schg_que01", "格尔加斯：你还记得我们年轻的时候吗？我们每天像死对头一样争斗。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer15000:
+	mapannounce "schg_que01", "格尔加斯：不管大人们怎么努力，我们都不打算改变。哈哈。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer20000:
+	mapannounce "schg_que01", "格尔加斯：但我相信，在内心深处，我们都珍视彼此的友谊。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer25000:
+	mapannounce "schg_que01", "格尔加斯：我在妙勒尼山脉弄丢母亲的遗物后，你来找我。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer30000:
+	mapannounce "schg_que01", "格尔加斯：你把母亲的遗物交给我时，我连一句谢谢都没能说出口。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer35000:
+	mapannounce "schg_que01", "格尔加斯：直到我变成老人，也一直没能说出口。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer40000:
+	mapannounce "schg_que01", "格尔加斯：不久前我才得知你的下落。听说你在照顾孤儿？",bc_map,"0xFFFF00";
+	end;
+
+OnTimer45000:
+	mapannounce "schg_que01", "格尔加斯：请收下这个，这是一个没用的朋友送给你和你可爱的孩子们的礼物。希望你们喜欢，哈哈。",bc_map,"0xFFFF00";
+	end;
+
+OnTimer50000:
+	mapannounce "schg_que01", "格尔加斯：皮埃罗·皮尔会帮助你。希望你能借这次机会回到过去，和孩子们一起开心玩耍。",bc_map,"0xFFFF00";
+	disablenpc "格加斯#sch_gd";
+	stopnpctimer;
+	end;
+}
+
+schg_que01,104,140,0	warp	back#sch_gd	1,1,schg_dun01,199,192
+
+/*
+schg_que01,104,140,1	script	treg#sch_gd	844,{
+	end;
+
+OnEnable:
+	monster "schg_que01",87,93,"Poporing",1031,1,"treg#sch_gd::OnMyMobDead";
+	monster "schg_que01",102,93,"Poporing",1031,1,"treg#sch_gd::OnMyMobDead";
+	monster "schg_que01",117,93,"Poporing",1031,1,"treg#sch_gd::OnMyMobDead";
+	monster "schg_que01",87,80,"Poporing",1031,1,"treg#sch_gd::OnMyMobDead";
+	monster "schg_que01",102,80,"Poporing",1031,1,"treg#sch_gd::OnMyMobDead";
+	monster "schg_que01",117,80,"Poporing",1031,1,"treg#sch_gd::OnMyMobDead";
+	monster "schg_que01",87,65,"Poporing",1031,1,"treg#sch_gd::OnMyMobDead";
+	monster "schg_que01",102,65,"Poporing",1031,1,"treg#sch_gd::OnMyMobDead";
+	monster "schg_que01",117,65,"Poporing",1031,1,"treg#sch_gd::OnMyMobDead";
+	end;
+
+OnMyMobDead:
+	if (mobcount("schg_que01","treg#sch_gd::OnMyMobDead") == 0) {
+		mapannounce "schg_que01", "Pierrot Pier: Beep! Oh, you already opened the gift? You sure are fast now, beep!",bc_map,"0x99CC00";
+		set $@gdeventv_s2,5;
+	}
+	end;
+}
+*/
+
+schg_que01,98,105,3	script	#sch_flower_01::GD_Ev_Flower2	978,{
+	end;
+}
+
+schg_que01,94,105,3	duplicate(GD_Ev_Flower2)	#sch_flower_02	977
+schg_que01,90,105,3	duplicate(GD_Ev_Flower2)	#sch_flower_03	978
+schg_que01,86,105,3	duplicate(GD_Ev_Flower2)	#sch_flower_04	977
+schg_que01,82,105,3	duplicate(GD_Ev_Flower2)	#sch_flower_05	978
+schg_que01,79,103,3	duplicate(GD_Ev_Flower2)	#sch_flower_06	977
+schg_que01,79,100,3	duplicate(GD_Ev_Flower2)	#sch_flower_07	978
+schg_que01,79,97,3	duplicate(GD_Ev_Flower2)	#sch_flower_08	977
+schg_que01,79,97,3	duplicate(GD_Ev_Flower2)	#sch_flower_09	978
+schg_que01,79,94,3	duplicate(GD_Ev_Flower2)	#sch_flower_10	977
+schg_que01,79,91,3	duplicate(GD_Ev_Flower2)	#sch_flower_11	978
+schg_que01,79,88,3	duplicate(GD_Ev_Flower2)	#sch_flower_12	977
+schg_que01,79,85,3	duplicate(GD_Ev_Flower2)	#sch_flower_13	978
+schg_que01,79,82,3	duplicate(GD_Ev_Flower2)	#sch_flower_14	977
+schg_que01,79,79,3	duplicate(GD_Ev_Flower2)	#sch_flower_15	978
+schg_que01,79,76,3	duplicate(GD_Ev_Flower2)	#sch_flower_16	977
+schg_que01,79,73,3	duplicate(GD_Ev_Flower2)	#sch_flower_17	978
+schg_que01,79,70,3	duplicate(GD_Ev_Flower2)	#sch_flower_18	977
+schg_que01,79,67,3	duplicate(GD_Ev_Flower2)	#sch_flower_19	978
+schg_que01,79,64,3	duplicate(GD_Ev_Flower2)	#sch_flower_20	977
+schg_que01,79,61,3	duplicate(GD_Ev_Flower2)	#sch_flower_21	978
+schg_que01,79,58,3	duplicate(GD_Ev_Flower2)	#sch_flower_22	977
+schg_que01,84,58,3	duplicate(GD_Ev_Flower2)	#sch_flower_23	978
+schg_que01,89,58,3	duplicate(GD_Ev_Flower2)	#sch_flower_24	977
+schg_que01,94,58,3	duplicate(GD_Ev_Flower2)	#sch_flower_25	978
+schg_que01,99,58,3	duplicate(GD_Ev_Flower2)	#sch_flower_26	977
+schg_que01,104,58,3	duplicate(GD_Ev_Flower2)	#sch_flower_27	978
+schg_que01,109,58,3	duplicate(GD_Ev_Flower2)	#sch_flower_28	977
+schg_que01,114,58,3	duplicate(GD_Ev_Flower2)	#sch_flower_29	978
+schg_que01,119,58,3	duplicate(GD_Ev_Flower2)	#sch_flower_30	977
+schg_que01,124,58,3	duplicate(GD_Ev_Flower2)	#sch_flower_31	978
+schg_que01,129,58,3	duplicate(GD_Ev_Flower2)	#sch_flower_32	977
+schg_que01,129,105,3	duplicate(GD_Ev_Flower2)	#sch_flower_33	978
+schg_que01,129,103,3	duplicate(GD_Ev_Flower2)	#sch_flower_34	977
+schg_que01,129,100,3	duplicate(GD_Ev_Flower2)	#sch_flower_35	978
+schg_que01,129,97,3	duplicate(GD_Ev_Flower2)	#sch_flower_36	977
+schg_que01,129,97,3	duplicate(GD_Ev_Flower2)	#sch_flower_37	978
+schg_que01,129,94,3	duplicate(GD_Ev_Flower2)	#sch_flower_38	977
+schg_que01,129,91,3	duplicate(GD_Ev_Flower2)	#sch_flower_39	978
+schg_que01,129,88,3	duplicate(GD_Ev_Flower2)	#sch_flower_40	977
+schg_que01,129,85,3	duplicate(GD_Ev_Flower2)	#sch_flower_41	978
+schg_que01,129,82,3	duplicate(GD_Ev_Flower2)	#sch_flower_42	977
+schg_que01,129,79,3	duplicate(GD_Ev_Flower2)	#sch_flower_43	978
+schg_que01,129,76,3	duplicate(GD_Ev_Flower2)	#sch_flower_44	977
+schg_que01,129,73,3	duplicate(GD_Ev_Flower2)	#sch_flower_45	978
+schg_que01,129,70,3	duplicate(GD_Ev_Flower2)	#sch_flower_46	977
+schg_que01,129,67,3	duplicate(GD_Ev_Flower2)	#sch_flower_47	978
+schg_que01,129,64,3	duplicate(GD_Ev_Flower2)	#sch_flower_48	977
+schg_que01,129,61,3	duplicate(GD_Ev_Flower2)	#sch_flower_49	978
+schg_que01,129,58,3	duplicate(GD_Ev_Flower2)	#sch_flower_50	977
+schg_que01,124,105,3	duplicate(GD_Ev_Flower2)	#sch_flower_51	978
+schg_que01,119,105,3	duplicate(GD_Ev_Flower2)	#sch_flower_52	977
+schg_que01,114,105,3	duplicate(GD_Ev_Flower2)	#sch_flower_53	978
+schg_que01,109,105,3	duplicate(GD_Ev_Flower2)	#sch_flower_54	977
+schg_que01,104,105,3	duplicate(GD_Ev_Flower2)	#sch_flower_55	976
+
+schg_dun01,5,5,1	script	活动控制员#sch_gd	81,{
+	if (callfunc("F_GM_NPC",1854,0) < 1) {
+		mes "密码错误。";
+		close;
+	} else {
+		mes "有什么能帮你的吗？";
+		next;
+		switch(select("重置。:不用了，谢谢。")) {
+		case 1:
+			mes "Completed.";
+			donpcevent "怪物控制员1#sch::OnControler1#sch_gd";
+			donpcevent "怪物控制员1#sch::OnControler1#sch_gd";
+			disablenpc "矮人#sch_gd";
+			set $@gdeventv_s1,0;
+			set $@gdeventv_s2,0;
+			set $@gdevents_s$,"";
+			close;
+		case 2:
+			mes "再见～";
+			close;
+		}
+	}
+}

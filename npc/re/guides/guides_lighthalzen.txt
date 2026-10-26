@@ -1,0 +1,181 @@
+//===== rAthena Script =======================================
+//= Lighthalzen Guides
+//===== Description: =========================================
+//= Guides for the city of Lighthalzen.
+//===== Changelogs: ==========================================
+//= 1.0 Initial release for Renewal [L0ne_W0lf]
+//= 1.1 Optimized. [Euphy]
+//= 1.2 Navigation system update. [Euphy]
+//============================================================
+
+lighthalzen,207,310,5	script	里希塔乐镇向导#lhz01::GuideLighthalzen	852,{
+	cutin "ein_soldier",2;
+	mes "[里希塔乐镇向导]";
+	mes "欢迎来到^8B4513里希塔乐镇^000000，";
+	mes "这座企业城邦。";
+	mes "如果你需要任何指引";
+	mes "在城里，尽管";
+	mes "来问我，我会";
+	mes "尽力帮助你。";
+	next;
+	mes "[里希塔乐镇向导]";
+	mes "请注意，我负责";
+	mes "提供";
+	mes "西区的信息";
+	mes "。这里说的是^8B4513里希塔乐镇^000000。现在，请";
+	mes "选择你想";
+	mes "进一步了解的地点。";
+	F_Navi("[Lighthalzen Guide]");
+	next;
+	while (1) {
+		switch(select("[ 主要设施 ]:[ 商人与帮手 ]:移除迷你地图标记:取消")) {
+		case 1:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ 旅馆 ]:[ 银行 ]:[ 机场 ]:[ 武器店 ]:[ 百货商店 ]:[ 警察局 ]:[ 珠宝店 ]:[ 凉爽活动公司 ]:[ 体质学研究所 ]:[ 炼金术士协会 ]:上一页菜单")) {
+				case 1:
+					callsub L_Mark, F_Navi("Hotel","lighthalzen,159,133","^FF0000");
+					viewpoint 1,160,217,0,0xFF0000;
+					next;
+					break;
+				case 2:
+					callsub L_Mark, F_Navi("Bank","lighthalzen,203,257","^FF4500");
+					viewpoint 1,203,257,1,0xFF4500;
+					next;
+					break;
+				case 3:
+					callsub L_Mark, F_Navi("Airport","lighthalzen,262,75","^DAA520");
+					viewpoint 1,262,75,2,0xDAA520;
+					next;
+					break;
+				case 4:
+					callsub L_Mark, F_Navi("Weapon Shop","lighthalzen,194,35","^7B68EE");
+					viewpoint 1,194,35,3,0x7B68EE;
+					next;
+					break;
+				case 5:
+					callsub L_Mark, F_Navi("Department Store","lighthalzen,199,164","^B91A4D");
+					viewpoint 1,202,106,4,0xB91A4D;
+					next;
+					break;
+				case 6:
+					callsub L_Mark, F_Navi("Police Station","lighthalzen,234,276","^008000");
+					viewpoint 1,234,276,5,0x008000;
+					next;
+					break;
+				case 7:
+					callsub L_Mark, F_Navi("Jewelry Store","lighthalzen,96,110","^0000FF");
+					viewpoint 1,96,110,6,0x0000FF;
+					next;
+					break;
+				case 8:
+					callsub L_Mark, F_Navi("Cool Event Corp.","lighthalzen,238,217","^000080");
+					viewpoint 1,238,217,7,0x000080;
+					next;
+					break;
+				case 9:
+					callsub L_Mark, F_Navi("Somatology Laboratory","lighthalzen,101,243","^800080");
+					viewpoint 1,101,243,8,0x800080;
+					next;
+					break;
+				case 10:
+					callsub L_Mark, F_Navi("Alchemist Association","lighthalzen,54,132","^0A9696");
+					viewpoint 1,54,132,9,0x0A9696;
+					next;
+					break;
+				case 11:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 2:
+			set .@loop,1;
+			while (.@loop) {
+				switch(select("[ 武器匠 ]:[ 塞伊亚布莱姆 ]:[ 宠物美容师 ]:[ 卡普拉职员 ]:[ 凉爽活动公司职员 ]:上一页菜单")) {
+				case 1:
+					mes "[里希塔乐镇向导]";
+					mes "你可以去找富勒，";
+					mes "那位^0A9696武器匠^000000";
+					mes "就在武器店一楼。";
+					viewpoint 1,194,35,10,0x0A9696;
+					next;
+					callsub L_Mark, "^0A9696Armsmith^000000";
+					next;
+					break;
+				case 2:
+					mes "[里希塔乐镇向导]";
+					mes "^4B0082塞伊亚布莱姆^000000能为你";
+					mes "在装备上打洞";
+					mes "，地点在";
+					mes "武器店一楼。";
+					viewpoint 1,194,35,11,0x4B0082;
+					next;
+					callsub L_Mark, "^4B0082赛亚布勒姆^000000",1;
+					next;
+					break;
+				case 3:
+					callsub L_Mark, F_Navi("Pet Groomer","lighthalzen,222,191","^FF4500");
+					viewpoint 1,222,191,12,0xFF4500;
+					next;
+					break;
+				case 4:
+					callsub L_Mark, "^008080卡普拉职员s^000000";
+					viewpoint 1,164,99,13,0x008080;
+					viewpoint 1,164,99,14,0x008080;
+					next;
+					break;
+				case 5:
+					callsub L_Mark, F_Navi("Cool Event Corp. Staff","lighthalzen,94,247","^FF1493");
+					viewpoint 1,94,247,15,0xFF1493;
+					next;
+					break;
+				case 6:
+					set .@loop,0;
+					break;
+				}
+			}
+			break;
+		case 3:
+			mes "[里希塔乐镇向导]";
+			mes "好的，我会清除你迷你地图上的所有标记。";
+			mes "还有什么需要我帮忙的吗？";
+			viewpoint 2,160,217,0,0xFFFFFF;
+			viewpoint 2,203,257,1,0xFFFFFF;
+			viewpoint 2,262,75,2,0xFFFFFF;
+			viewpoint 2,194,35,3,0xFFFFFF;
+			viewpoint 2,202,106,4,0xFFFFFF;
+			viewpoint 2,234,276,5,0xFFFFFF;
+			viewpoint 2,96,110,6,0xFFFFFF;
+			viewpoint 2,238,217,7,0xFFFFFF;
+			viewpoint 2,101,243,8,0xFFFFFF;
+			viewpoint 2,54,132,9,0xFFFFFF;
+			viewpoint 2,194,35,10,0xFFFFFF;
+			viewpoint 2,194,35,11,0xFFFFFF;
+			viewpoint 2,222,191,12,0xFFFFFF;
+			viewpoint 2,164,99,13,0xFFFFFF;
+			viewpoint 2,164,99,14,0xFFFFFF;
+			viewpoint 2,94,247,15,0xFFFFFF;
+			next;
+			break;
+		case 4:
+			mes "[里希塔乐镇向导]";
+			mes "祝你冒险愉快！";
+			close2;
+			cutin "ein_soldier",255;
+			end;
+		}
+	}
+	end;
+L_Mark:
+	mes "[里希塔乐镇向导]";
+	mes "我会在地图上";
+	mes "标出"+((getarg(1,0))?"":"该")+getarg(0);
+	mes "的位置。";
+	mes "还想查看其他地点吗？";
+	return;
+}
+lighthalzen,220,310,3	duplicate(GuideLighthalzen)	里希塔乐镇向导#lhz02	852
+lighthalzen,154,100,5	duplicate(GuideLighthalzen)	里希塔乐镇向导#lhz03	852
+lighthalzen,307,224,3	duplicate(GuideLighthalzen)	里希塔乐镇向导#lhz04	852
+lighthalzen,247,82,3	duplicate(GuideLighthalzen)	里希塔乐镇向导#lhz05	852

@@ -1,0 +1,242 @@
+//===== rAthena Script =======================================
+//= iRO Repeatable EXP Quests.
+//===== By: ==================================================
+//= L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.0
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Added Monster Killing quests.
+//= Repeatable EXP Quest (Sharp Leaves)
+//===== Additional Comments: =================================
+//= 1.0 First version.
+//============================================================
+
+um_fild01,34,281,5	script	莉拉#Dryad_Hunt	724,{
+	if (checkquest(60131) != -1) {
+		if (checkquest(60131,HUNTING) != 2 ) {
+			mes "[莉拉]";
+			mes "你猎杀完50只森林妖姬了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[莉拉]";
+				mes "唔，我觉得你还没猎杀到50只……";
+				close;
+			case 2:
+				mes "[莉拉]";
+				mes "记住，我需要人帮忙猎杀森林妖姬，去猎杀50只吧。";
+				close;
+			case 3:
+				mes "[莉拉]";
+				mes "你确定要停止猎杀吗？";
+				mes "你目前的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[莉拉]";
+					mes "那好吧，如果你改变主意，就回到这里来。";
+					erasequest 60131;
+					close;
+				case 2:
+					mes "[莉拉]";
+					mes "请猎杀50只森林妖姬。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[莉拉]";
+			mes "了不起，你做得真快。";
+			getexp 262485,141835;
+			erasequest 60131;
+			close;
+		}
+	}
+	if (checkquest(60132) != -1) {
+		if (checkquest(60132,HUNTING) != 2 ) {
+			mes "[莉拉]";
+			mes "你猎杀完50只森林妖姬了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[莉拉]";
+				mes "唔，我觉得你还没猎杀到100只……";
+				close;
+			case 2:
+				mes "[莉拉]";
+				mes "记住，我需要人帮忙猎杀森林妖姬，去猎杀100只吧。";
+				close;
+			case 3:
+				mes "[莉拉]";
+				mes "你确定要停止猎杀吗？";
+				mes "你目前的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[莉拉]";
+					mes "那好吧，如果你改变主意，就回到这里来。";
+					erasequest 60132;
+					close;
+				case 2:
+					mes "[莉拉]";
+					mes "请猎杀100只森林妖姬。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[莉拉]";
+			mes "了不起，你做得真快。";
+			getexp 262485,141835;
+			getexp 262485,141835;
+			erasequest 60132;
+			close;
+		}
+	}
+	if (checkquest(60133) != -1) {
+		if (checkquest(60133,HUNTING) != 2 ) {
+			mes "[莉拉]";
+			mes "你猎杀完150只森林妖姬了吗？";
+			next;
+			switch(select("是:否:我想放弃")) {
+			case 1:
+				mes "[莉拉]";
+				mes "唔，我觉得你还没猎杀到150只……";
+				close;
+			case 2:
+				mes "[莉拉]";
+				mes "记住，我需要人帮忙猎杀森林妖姬，去猎杀150只吧。";
+				close;
+			case 3:
+				mes "[莉拉]";
+				mes "你确定要停止猎杀吗？";
+				mes "你目前的进度将会被清除";
+				next;
+				switch(select("是:否")) {
+				case 1:
+					mes "[莉拉]";
+					mes "那好吧，如果你改变主意，就回到这里来。";
+					erasequest 60133;
+					close;
+				case 2:
+					mes "[莉拉]";
+					mes "请猎杀150只森林妖姬。";
+					close;
+				}
+			}
+		}
+		else {
+			mes "[莉拉]";
+			mes "了不起，你做得真快。";
+			getexp 262485,141835;
+			getexp 262485,141835;
+			getexp 262485,141835;
+			erasequest 60133;
+			close;
+		}
+	}
+	//for minimum level
+	if (BaseLevel > 59) {
+		//for maximum level
+		if (BaseLevel < 86) {
+			mes "[莉拉]";
+			mes "哎呀，你好！";
+			mes "你看起来像是个愿意帮我这样的小家伙的人。";
+			next;
+			switch(select("当然:不")) {
+			case 1:
+				mes "[莉拉]";
+				mes "真的吗？！";
+				mes "那太好了！";
+				next;
+				switch(select("收集物品:猎杀森林妖姬:取消")) {
+				case 1:
+					// Item turn in
+					mes "[莉拉]";
+					mes "为了我的花园茶会，我真的需要收集^00CE0050锐叶^000000。";
+					mes "你有吗？";
+					next;
+					switch(select("我有一些锐叶:你需要什么？")) {
+					case 1:
+						/*
+						if (checkweight(504,10) == 0) {
+							mes "[Lilla]";
+							mes "Hey, it looks like that the weight on";
+							mes "your back will crush you. Come back";
+							mes "after you have lost some weight.";
+							close;
+						}
+						*/
+						if (countitem(7100) > 49) {
+							mes "[莉拉]";
+							mes "嘿，你真是个可爱的小家伙。";
+							mes "非常感谢你帮我！";
+							next;
+							mes "[莉拉]";
+							mes "哦，我差点忘了。我有东西要给你 ^_^";
+							mes "再次非常感谢你的帮助。";
+							delitem 7100,50; //Sharp_Leaf
+							getexp 262485,141835;
+							//getitem 504,10; //White_Potion
+							close;
+						}
+						else {
+							mes "[莉拉]";
+							mes "哎呀，我虽然看起来又可爱又傻气，但请别跟我开玩笑。";
+							close;
+						}
+					case 2:
+						mes "[莉拉]";
+						mes "我需要^00CE0050锐叶^000000。";
+						close;
+					}
+				case 2:
+					// Kill Count Quest
+					mes "[莉拉]";
+					mes "啊，好，我想你可以帮我猎杀一些森林妖姬。";
+					mes "你想猎杀多少只？";
+					next;
+					switch(select("50只森林妖姬:100只森林妖姬:150只森林妖姬")) {
+					case 1:
+						mes "[莉拉]";
+						mes "完成任务后回来，我会给你一点小奖励。";
+						setquest 60131;
+						close;
+					case 2:
+						mes "[莉拉]";
+						mes "完成任务后回来，我会给你一点小奖励。";
+						setquest 60132;
+						close;
+					case 3:
+						mes "[莉拉]";
+						mes "完成任务后回来，我会给你一点小奖励。";
+						setquest 60133;
+						close;
+					}
+				case 3:
+					mes "[莉拉]";
+					mes "如果你改变主意，请回来。";
+					close;
+				}
+			case 2:
+				mes "[莉拉]";
+				mes "如果你改变主意，请回来。";
+				close;
+			}
+		}
+		else {
+			mes "[莉拉]";
+			mes "抱歉，你有点太老又太吓人，我不想跟你说话！";
+			close;
+		}
+	}
+	else {
+		mes "[莉拉]";
+		mes "你太小了，帮不了我。";
+		mes "不过还是谢谢你的好意。";
+		close;
+	}
+}

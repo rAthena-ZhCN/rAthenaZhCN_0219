@@ -1,0 +1,128 @@
+//===== rAthena Script =======================================
+//= Magazine Dealers
+//===== Description: =========================================
+//= Turns bullets into magazines/packs.
+//===== Changelogs: ==========================================
+//= 1.0 First version. [SinSloth]
+//= 1.1 Optimized version - Reduced to only one function [SinSloth]
+//= 1.2 Optimized^2, corrected npc's name [ultramage]
+//= 1.2a Optimized. Please, ommit extra NPC names [Lupus]
+//= 1.3 Updated to match AEGIS script. [Kisuka]
+//= 1.4 Updated to match AEGIS script again. [Masao]
+//= 1.5 Moved Izlude duplicate to pre-re/re paths. [Euphy]
+//= 2.0 Clean-up. [Capuche]
+//= 2.1 Fixes Issue #1482, where Rebellion jobs cannot use this npc. [Limestone]
+//============================================================
+
+que_ng,187,149,3	script	弹匣商人 肯尼::mdk	4_M_01,{
+	mes "[肯尼]";
+	if (BaseClass == Job_Gunslinger) {
+		mes "欢迎光临我的弹匣商店。";
+		mes "您也知道，大量";
+		mes "子弹装在弹匣里";
+		mes "会更容易携带。那么，您想看看";
+		mes "些什么呢？";
+		next;
+		switch(select("风之弹匣:暗影弹匣:毒物弹匣:水之弹匣:火焰弹匣:子弹盒:血色子弹盒:银色子弹盒:取消")) {
+		case 1: callsub S_Casing,13204,12144;// <bullet id>, <pack id>
+		case 2: callsub S_Casing,13206,12145;
+		case 3: callsub S_Casing,13205,12146;
+		case 4: callsub S_Casing,13207,12147;
+		case 5: callsub S_Casing,13203,12148;
+		case 6: callsub S_Casing,13200,12149;
+		case 7: callsub S_Casing,13202,12150;
+		case 8: callsub S_Casing,13201,12151;
+		case 9:
+			mes "[肯尼]";
+			mes "那么，如果您觉得";
+			mes "自己的子弹太多";
+			mes "就来找我吧。";
+			mes "把子弹存进弹匣";
+			mes "是个聪明的主意。";
+			close;
+		}
+	}
+	mes "欢迎光临本店。";
+	mes "本店提供弹匣";
+	mes "以及给神枪手的子弹盒。";
+	mes "抱歉，看来";
+	mes "我的服务对您";
+	mes "没什么用处，冒险者。";
+	next;
+	mes "[肯尼]";
+	mes "不过，如果您认识";
+	mes "什么神枪手，请";
+	mes "介绍给我。子弹";
+	mes "永远不嫌多。";
+	close;
+
+S_Casing:
+	.@bullet_id = getarg(0);
+	.@pack_id = getarg(1);
+
+	mes "[肯尼]";
+	mes "现在，您可以用";
+	mes callfunc("F_InsertPlural",500,getitemname(.@bullet_id));
+	mes "以及 500 Zeny 换取 1 个"+getitemname(.@pack_id)+", so make sure";
+	mes "请确保您有足够的子弹";
+	mes "和 Zeny 来完成这次兑换。";
+	next;
+	mes "[肯尼]";
+	mes "您可以用"+callfunc("F_InsertPlural",500,getitemname(.@bullet_id))+" and 500 zeny";
+	mes "换取 1 个"+getitemname(.@pack_id)+".";
+	next;
+	mes "[肯尼]";
+	mes "请记住，我一次最多";
+	mes "只给您 50 个弹匣。";
+	mes "现在请输入";
+	mes "您想领取的弹匣数量。";
+	mes "如果想取消，请输入 ''0.''";
+	next;
+	input .@amount;
+	mes "[肯尼]";
+	if (.@amount > 50 || .@amount == 0) {
+		mes "喂，我不能给您";
+		mes "那么多弹匣。";
+		mes "请再试一次，";
+		mes "输入一个不超过";
+		mes "50 的数字。";
+	}
+	else if (countitem(.@bullet_id) >= (500*.@amount)) {
+		if (Zeny >= (500*.@amount)) {
+			if (checkweight(.@pack_id,.@amount) == 0) {
+				mes "喂，您的物品栏里";
+				mes "塞满了乱七八糟的";
+				mes "东西。腾出一些";
+				mes "空间，然后再回来";
+				mes "用子弹换取";
+				mes "一些弹匣，好吗？";
+			} else {
+				mes "好，这是您的";
+				mes "弹匣。感谢";
+				mes "光临本店，";
+				mes "希望您能善加使用";
+				mes "所有的弹药。";
+				Zeny = Zeny -500*.@amount;
+				delitem .@bullet_id,(500*.@amount);
+				getitem .@pack_id,.@amount;
+			}
+		} else {
+			mes "抱歉，您的 Zeny";
+			mes "不足以进行";
+			mes "这次弹匣兑换。";
+			mes "等您攒够";
+			mes "更多的钱，";
+			mes "再来本店吧。";
+		}
+	} else {
+		mes "抱歉，您的子弹";
+		mes "不足以进行";
+		mes "这次弹匣兑换。";
+		mes "也许您该再仔细";
+		mes "检查一下物品栏，";
+		mes "然后再来找我。";
+	}
+	close;
+}
+
+izlude,171,127,3	duplicate(mdk)	弹匣商人 肯尼#iz	4_M_01

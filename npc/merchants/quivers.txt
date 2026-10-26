@@ -1,0 +1,175 @@
+//===== rAthena Script =======================================
+//= Arrow Quiver Event
+//===== By: ==================================================
+//= Muad_Dib (Prometheus Project); L0ne_W0lf
+//===== Current Version: =====================================
+//= 1.2
+//===== Compatible With: =====================================
+//= rAthena Project
+//===== Description: =========================================
+//= [Official Conversion]
+//= Turns arrows into Arrow Quivers.
+//= Breakdown of Subroutine "S_BuyQuiver"
+//= arg(0): Type of Arrow to be packaged (item ID).
+//= arg(1): How many of each 'getarg(0)' arrow per quiver.
+//= arg(2): The cost of making a 'getarg(0)' quiver.
+//= arg(3): The quiver given by the NPC (item ID).
+//===== Additional Comments: =================================
+//= 07/06/05 : Added 1st Version. [Muad_Dib]
+//= Converted to rAthena format by Dr.Evil
+//= added prize to quest - 500 Zeny
+//= Fixed a few spelling errors. [Nexon]
+//= 1.1 Added Holy Arrow Quivers [Playtester]
+//= 1.2 Rescripted to Aegis 10.3 standards. [L0ne_W0lf]
+//=     Removed "Holy Arrows" from the list.
+//============================================================
+
+payon_in01,5,134,5	script	发明家贾克斯	89,{
+	if (checkweight(1201,1) == 0 || MaxWeight - Weight < 2000) {
+		mes "[发明家贾克斯]";
+		mes "喂，你带的东西";
+		mes "也太多了吧。怎么不先存进卡普拉仓库？存好之后我们再谈，好吗？";
+		close;
+	}
+	mes "[发明家贾克斯]";
+	mes "我叫贾克斯。";
+	mes "可以毫不自夸地说，";
+	mes "我或许是这个时代";
+	mes "^663300最伟大的发明家^000000。";
+	next;
+	mes "[发明家贾克斯]";
+	mes "这一次，我";
+	mes "创造出了";
+	mes "真正非凡的东西。我称之为……^663300魔法箭矢筒^000000！！这将被载入史册，成为一场";
+	mes "箭矢革命！";
+	emotion ET_BEST;
+	next;
+	mes "[发明家贾克斯]";
+	mes "多年来我一直在研究魔法与箭矢筒，日夜不停，直到终于弄明白如何用魔法压缩箭矢！有了魔法箭矢筒，你就能携带更多箭矢，而重量更轻！";
+	next;
+	mes "[发明家贾克斯]";
+	mes "要不要试用一下我的箭矢筒？我相信像你这样的人，一定能欣赏我的天才之处！";
+	next;
+	switch(select("箭矢筒:铁箭矢筒:钢铁箭矢筒:神之金属箭矢筒:火箭矢筒:银箭矢筒:风灵箭矢筒:地灵箭矢筒:水灵箭矢筒:影子箭矢筒:无形箭矢筒:铁锈箭矢筒")) {
+	case 1: callsub S_BuyQuiver,1750,500,500,12004;
+	case 2: callsub S_BuyQuiver,1770,500,500,12005;
+	case 3: callsub S_BuyQuiver,1753,500,500,12006;
+	case 4: callsub S_BuyQuiver,1765,500,500,12007;
+	case 5: callsub S_BuyQuiver,1752,500,500,12008;
+	case 6: callsub S_BuyQuiver,1751,500,500,12009;
+	case 7: callsub S_BuyQuiver,1755,500,500,12010;
+	case 8: callsub S_BuyQuiver,1756,500,500,12011;
+	case 9: callsub S_BuyQuiver,1754,500,500,12012;
+	case 10: callsub S_BuyQuiver,1767,500,500,12013;
+	case 11: callsub S_BuyQuiver,1757,500,500,12014;
+	case 12: callsub S_BuyQuiver,1762,500,500,12015;
+	}
+	//This doesn't seem to be accessable...
+	//mes "[Inventor Jaax]";
+	//mes "Is there";
+	//mes "anything you want?";
+	//close;
+
+S_BuyQuiver:
+	.@item_id = getarg(0);
+	.@amount = getarg(1);
+	.@zeny_req = getarg(2);
+
+	if (countitem(.@item_id) >= .@amount) {
+		mes "[发明家贾克斯]";
+		mes "太好了！";
+		mes "你身上带着箭矢吗？我可以给你一个能装下"+ .@amount +"支"+ getitemname(.@item_id) +"，只需 ^FF3131"+ .@zeny_req +" Zeny^000000.";
+		next;
+		switch(select("尽可能多装箭矢:购买1个箭矢筒:取消")) {
+		case 1:
+			.@arrows = countitem(.@item_id);
+			set .@quiver,.@arrows / .@amount;
+			set .@arrows_used,.@quiver * .@amount;
+			.@arrow_zeny01 = .@quiver * .@zeny_req;
+			mes "持有的";
+			mes "箭矢：^3131FF"+.@arrows+"^000000";
+			mes "最多可购买";
+			mes "的箭矢筒";
+			mes "数量：^3131FF"+.@quiver+"^000000";
+			mes "所需 Zeny：^3131FF"+.@arrow_zeny01+"Zeny^000000";
+			next;
+			mes "[发明家贾克斯]";
+			mes "您想搭乘";
+			mes "你想";
+			mes "用你身上现有的箭矢";
+			mes "尽可能多地购买箭矢筒吗？";
+			next;
+			if (select("是:取消") == 1) {
+				if (.@arrow_zeny01 < Zeny) {
+					mes "[发明家贾克斯]";
+					mes "给你！";
+					mes "记住，^FF0000当你的负重达到最大负重的90%时，将无法使用箭矢筒^000000。";
+					set Zeny, Zeny-.@arrow_zeny01;
+					delitem .@item_id,.@arrows_used;// Arrow
+					getitem getarg(3),.@quiver; //Quiver
+					next;
+					mes "[发明家贾克斯]";
+					mes "So...";
+					mes "只要随时";
+					mes "留意自己";
+					mes "身上携带的重量，";
+					mes "应该就";
+					mes "不会有事了。";
+					close;
+				}
+				else {
+					mes "[发明家贾克斯]";
+					mes "抱歉，你的 Zeny 不足。我花了多年心血";
+					mes "才开发出这项革命性技术，总不能白送给你！";
+					close;
+				}
+			}
+			mes "[发明家贾克斯]";
+			mes "你改变主意了？";
+			mes "拥有箭矢筒的荣耀";
+			mes "就近在眼前？";
+			close;
+		case 2:
+			if (Zeny > .@zeny_req) {
+				mes "[发明家贾克斯]";
+				mes "给你！";
+				mes "记住，^FF0000当你的负重达到最大负重的90%时，将无法使用箭矢筒^000000。";
+				Zeny = Zeny -.@zeny_req;
+				delitem .@item_id,.@amount;// Arrow
+				getitem getarg(3),1; //Quiver
+				next;
+				mes "[发明家贾克斯]";
+				mes "So...";
+				mes "只要随时";
+				mes "留意自己";
+				mes "身上携带的重量，";
+				mes "应该就";
+				mes "不会有事了。";
+				close;
+			}
+			else {
+				mes "[发明家贾克斯]";
+				mes "你竟然";
+				mes "连"+ .@zeny_req +"Zeny 都没有吗？";
+				mes "真是太抱歉了。我完全没";
+				mes "想到你竟然这么……";
+				mes "^333333穷困潦倒^000000。";
+				close;
+			}
+		case 3:
+			mes "[发明家贾克斯]";
+			mes "什么……？";
+			mes "你难道看不出这项发明能永远改变箭矢的携带方式吗？！未来已至！";
+			close;
+		}
+	}
+	else {
+		mes "[发明家贾克斯]";
+		mes "这个箭矢筒最多能装下"+ .@amount +"支箭矢。它用我的秘密方法制成，";
+		mes "所以箭矢和箭矢筒的总重量比单独携带箭矢更轻。";
+		next;
+		mes "[发明家贾克斯]";
+		mes "这是科学的奇迹！只要你带至少"+ .@amount +" Arrows and "+ .@zeny_req +" Zeny for each Quiver.";
+		close;
+	}
+}
