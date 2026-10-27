@@ -17383,7 +17383,8 @@ void clif_cashshop_list( map_session_data& sd ){
 #ifdef ENABLE_CASHSHOP_PREVIEW_PATCH
 			struct item_data* id = itemdb_search( item->nameid );
 
-			if( id == nullptr ){
+			if( id == nullptr || ( id->type != IT_WEAPON && id->type != IT_ARMOR ) ){
+				// Non-equipment items do not have a meaningful preview.
 				p->items[p->count].location = 0;
 				p->items[p->count].viewSprite = 0;
 			}else{
