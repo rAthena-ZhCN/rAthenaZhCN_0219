@@ -2415,6 +2415,8 @@ morocc,240,72,3	script	汉斯	86,{
 // Bankley
 //============================================================
 morocc_in,12,156,3	script	班克利	97,{
+	if (tu_swordman >= 19)
+		setnpcdisplay "班克利", JT_4_VR_SWORDMAN_DEAD;
 	if(tu_swordman > 19){
 		mes "^3355FF班克利露出";
 		mes "一副可怜的神情。^000000";
@@ -2495,13 +2497,8 @@ morocc_in,12,156,3	script	班克利	97,{
 	mes "总有一天，我一定能有机会让梦想";
 	mes "成真。但眼下，我只能尽力活下去。";
 	close;
-}
-
--	script	#BancleyDeadState	-1,{
-OnPCLoginEvent:
-	if (tu_swordman == 19 || tu_swordman > 19)
+OnInit:
+	if (tu_swordman >= 19)
 		setnpcdisplay "班克利", JT_4_VR_SWORDMAN_DEAD;
-	else
-		setnpcdisplay "班克利", 97;
 	end;
 }
