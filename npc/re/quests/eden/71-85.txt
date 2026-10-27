@@ -85,65 +85,65 @@ moc_para01,44,38,3	script	任务 [71 - 85]	857,{
 		mes "- 与史芬克斯地下城 -";
 		mes "- 相关的委托。 -";
 		next;
-		set .@str1$,"The villagers of Morocc are worried by the increasing number of monsters in the Sphinx Dungeon. ";
-		set .@str2$,"- Meidi from Morocc -";
+		set .@str1$,"梦罗克的村民们因史芬克斯地下城里不断增多的魔物而忧心忡忡。 ";
+		set .@str2$,"- 梦罗克的梅迪 -";
 		switch(select("猎杀诺可伊:猎杀马尔杜克:猎杀帕莎纳")) {
-			case 1: callsub L_Quest,10107,.@str1$+"Hunt 10 Requiems.",.@str2$;
-			case 2: callsub L_Quest,10108,.@str1$+"Hunt 10 Marduks.",.@str2$;
-			case 3: callsub L_Quest,10109,.@str1$+"Hunt 10 Pasanas.",.@str2$;
+			case 1: callsub L_Quest,10107,.@str1$+"猎杀10只诺可伊。",.@str2$;
+			case 2: callsub L_Quest,10108,.@str1$+"猎杀10只马尔杜克。",.@str2$;
+			case 3: callsub L_Quest,10109,.@str1$+"猎杀10只帕莎纳。",.@str2$;
 		}
 	case 2:
 		mes "- 这里有几项 -";
 		mes "- 与克雷斯特汉姆古城 -";
 		mes "- 相关的委托。 -";
 		next;
-		set .@str1$,"I am very afraid that the monsters from Glast Heim will attack us. ";
-		set .@str2$,"- Ancellia from Geffen -";
+		set .@str1$,"我很害怕克雷斯特汉姆古城的魔物会来袭击我们。 ";
+		set .@str2$,"- 吉芬的安塞莉亚 -";
 		switch(select("猎杀深渊镜妖:猎杀暗神官:猎杀恶灵:猎杀幽灵弓箭手")) {
-			case 1: callsub L_Quest,10110,.@str1$+"Hunt 10 Dark Frames.",.@str2$;
-			case 2: callsub L_Quest,10111,.@str1$+"Hunt 10 Evil Druids.",.@str2$;
-			case 3: callsub L_Quest,10112,.@str1$+"Hunt 10 Wraiths.",.@str2$;
-			case 4: callsub L_Quest,10113,.@str1$+"Hunt 10 Raydric Archers.",.@str2$;
+			case 1: callsub L_Quest,10110,.@str1$+"猎杀10只镜妖。",.@str2$;
+			case 2: callsub L_Quest,10111,.@str1$+"猎杀10只暗神官。",.@str2$;
+			case 3: callsub L_Quest,10112,.@str1$+"猎杀10只恶灵。",.@str2$;
+			case 4: callsub L_Quest,10113,.@str1$+"猎杀10只幽灵弓箭手。",.@str2$;
 		}
 	case 3:
 		mes "- 这里有几项 -";
 		mes "- 与朱诺周边地区 -";
 		mes "- 相关的委托。 -";
 		next;
-		set .@str1$,"Those who can't fight, like me, find it much more difficult to travel due to the large number of monsters. ";
-		set .@str2$,"- Jeanbai, traveler -";
+		set .@str1$,"像我这样不会战斗的人，因为魔物数量太多，出行变得困难许多。 ";
+		set .@str2$,"- 旅行者让拜 -";
 		switch(select("猎杀七彩大嘴鸟:猎杀沙妖:猎杀魔羌:猎杀鸟人哈比")) {
-			case 1: callsub L_Quest,10114,.@str1$+"Hunt 20 Grand Pecos.",.@str2$;
-			case 2: callsub L_Quest,10115,.@str1$+"Hunt 20 Sleepers.",.@str2$;
-			case 3: callsub L_Quest,10116,.@str1$+"Hunt 20 Goats.",.@str2$;
-			case 4: callsub L_Quest,10117,.@str1$+"Hunt 20 Harpies.",.@str2$;
+			case 1: callsub L_Quest,10114,.@str1$+"猎杀20只七彩大嘴鸟。",.@str2$;
+			case 2: callsub L_Quest,10115,.@str1$+"猎杀20只沙妖。",.@str2$;
+			case 3: callsub L_Quest,10116,.@str1$+"猎杀20只魔羌。",.@str2$;
+			case 4: callsub L_Quest,10117,.@str1$+"猎杀20只鸟人哈比。",.@str2$;
 		}
 	case 4:
 		mes "- 这里有几项 -";
 		mes "- 与钟塔 -";
 		mes "- 相关的委托。 -";
 		next;
-		set .@str1$,"I used to love listening to the sweet melody of the Al De Baran Clock Tower but I can't hear anything anymore because of all the noises the monsters are making. ";
-		set .@str2$,"- Rizingsetter, President of the Love Clock community -";
+		set .@str1$,"我以前很喜欢聆听艾尔帕兰钟塔那悦耳的旋律，但现在魔物吵闹不停，我什么都听不见了。 ";
+		set .@str2$,"- 钟表同好会会长里辛塞特 -";
 		switch(select("猎杀古钟魔:猎杀朽魔:猎杀飞行魔书")) {
-			case 1: callsub L_Quest,10118,.@str1$+"Hunt 15 Clocks before it breaks.",.@str2$;
-			case 2: callsub L_Quest,10119,.@str1$+"Hunt 15 Punks before it breaks.",.@str2$;
-			case 3: callsub L_Quest,10120,.@str1$+"Hunt 15 Ridewords before it breaks.",.@str2$;
+			case 1: callsub L_Quest,10118,.@str1$+"趁钟塔还没倒塌，猎杀15只古钟魔。",.@str2$;
+			case 2: callsub L_Quest,10119,.@str1$+"趁钟塔还没倒塌，猎杀15只朽魔。",.@str2$;
+			case 3: callsub L_Quest,10120,.@str1$+"趁钟塔还没倒塌，猎杀15只飞行魔书。",.@str2$;
 		}
 	case 5:
 		mes "- 这里有几项 -";
 		mes "- 与本地岛屿 -";
 		mes "- 相关的委托。 -";
 		next;
-		set .@str1$,"I want to go on an adventure but there are so many things I have to deal with. If I can't, then others can't either! ";
-		set .@str2$,"- Funfy, who wants to go on an adventure -";
+		set .@str1$,"我想去冒险，可手头要处理的事情实在太多了。我若不行，别人也肯定不行！ ";
+		set .@str2$,"- 想去冒险的芬菲 -";
 		switch(select("猎杀树林女巫:猎杀米雅毕:猎杀米糕:猎杀无头骡:猎杀塔噜安:为庆典收集庆典面具")) {
-			case 1: callsub L_Quest,10121,.@str1$+"Hunt 15 Kikimoras in Moscovia!",.@str2$;
-			case 2: callsub L_Quest,10122,.@str1$+"Hunt 15 Miyabi Dolls in Amatsu!",.@str2$;
-			case 3: callsub L_Quest,10123,.@str1$+"Hunt 15 Mi Gaos in Luoyang!",.@str2$;
-			case 4: callsub L_Quest,5055,"I know there are many terrifying monsters outside the city, but what terrifies me are these Headless Mules lurking around. I hope they will never venture into town. Hunt 15 Headless Mules!","- Mariana from Brasilis -";
-			case 5: callsub L_Quest,5056,"Tamruans make a lot of noise. I don't mind in the morning but they keep me from falling asleep at night. I want to sleep. Hunt 15 Tamruans!","- Shaman Pumo from Ayothaya -";
-			case 6: callsub L_Quest,5057,"The Dumpling Childs stole all the masks that I had prepared for the festival. Try to get a hold of 30 masks! I'll owe you~","- SaYumMoon Chief of Kunlun -";
+			case 1: callsub L_Quest,10121,.@str1$+"在莫斯科比亚猎杀15只树林女巫！",.@str2$;
+			case 2: callsub L_Quest,10122,.@str1$+"在天津町猎杀15只米雅毕！",.@str2$;
+			case 3: callsub L_Quest,10123,.@str1$+"在洛阳猎杀15只米糕！",.@str2$;
+			case 4: callsub L_Quest,5055,"我知道城外有许多可怕的魔物，但让我害怕的却是这些在附近徘徊的无头骡。希望它们永远不要闯进城里。猎杀15只无头骡！","- 巴西的玛丽安娜 -";
+			case 5: callsub L_Quest,5056,"塔噜安太吵了。早上我还能忍受，可到了晚上它们吵得我睡不着。我想睡觉。猎杀15只塔噜安！","- 哎哟泰雅的萨满普莫 -";
+			case 6: callsub L_Quest,5057,"元宵童子把我为庆典准备的所有^i[7187]庆典面具都偷走了。请设法弄到30个面具！这份人情我记下了~","- 昆仑族长萨尤姆 -";
 		}
 	}
 	end;
@@ -152,26 +152,26 @@ moc_para01,44,38,3	script	任务 [71 - 85]	857,{
 L_Quest:
 	set .@quest, getarg(0);
 	switch(.@quest) {
-		case 10107: set .@name$,"Hunt Requiem"; set .@exp,15000; break;
-		case 10108: set .@name$,"Hunt Marduk"; set .@exp,15000; break;
-		case 10109: set .@name$,"Hunt Pasana"; set .@exp,15000; break;
-		case 10110: set .@name$,"Hunt Dark Frame"; set .@exp,20000; break;
-		case 10111: set .@name$,"Hunt Evil Druid"; set .@exp,20000; break;
-		case 10112: set .@name$,"Hunt Wraith"; set .@exp,20000; break;
-		case 10113: set .@name$,"Hunt Raydric Archer"; set .@exp,20000; break;
-		case 10114: set .@name$,"Hunt Grand Peco"; set .@exp,30000; break;
-		case 10115: set .@name$,"Hunt Sleeper"; set .@exp,30000; break;
-		case 10116: set .@name$,"Hunt Goat"; set .@exp,30000; break;
-		case 10117: set .@name$,"Hunt Harpy"; set .@exp,30000; break;
-		case 10118: set .@name$,"Hunt Clock"; set .@exp,25000; break;
-		case 10119: set .@name$,"Hunt Punk"; set .@exp,25000; break;
-		case 10120: set .@name$,"Hunt Rideword"; set .@exp,25000; break;
-		case 10121: set .@name$,"Hunt Kikimora"; set .@exp,30000; break;
-		case 10122: set .@name$,"Hunt Miyabi Doll"; set .@exp,30000; break;
-		case 10123: set .@name$,"Hunt Mi Gao"; set .@exp,30000; break;
-		case 5055: set .@name$,"Hunt Headless Mule"; set .@exp,30000; break;
-		case 5056: set .@name$,"Hunt Tamruan"; set .@exp,30000; break;
-		case 5057: set .@name$,"Gather Festival Masks for the Festival"; set .@exp,30000; break;
+		case 10107: set .@name$,"猎杀诺可伊"; set .@exp,15000; break;
+		case 10108: set .@name$,"猎杀马尔杜克"; set .@exp,15000; break;
+		case 10109: set .@name$,"猎杀帕莎纳"; set .@exp,15000; break;
+		case 10110: set .@name$,"猎杀镜妖"; set .@exp,20000; break;
+		case 10111: set .@name$,"猎杀暗神官"; set .@exp,20000; break;
+		case 10112: set .@name$,"猎杀恶灵"; set .@exp,20000; break;
+		case 10113: set .@name$,"猎杀幽灵弓箭手"; set .@exp,20000; break;
+		case 10114: set .@name$,"猎杀七彩大嘴鸟"; set .@exp,30000; break;
+		case 10115: set .@name$,"猎杀沙妖"; set .@exp,30000; break;
+		case 10116: set .@name$,"猎杀魔羌"; set .@exp,30000; break;
+		case 10117: set .@name$,"猎杀鸟人哈比"; set .@exp,30000; break;
+		case 10118: set .@name$,"猎杀古钟魔"; set .@exp,25000; break;
+		case 10119: set .@name$,"猎杀朽魔"; set .@exp,25000; break;
+		case 10120: set .@name$,"猎杀飞行魔书"; set .@exp,25000; break;
+		case 10121: set .@name$,"猎杀树林女巫"; set .@exp,30000; break;
+		case 10122: set .@name$,"猎杀米雅毕"; set .@exp,30000; break;
+		case 10123: set .@name$,"猎杀米糕"; set .@exp,30000; break;
+		case 5055: set .@name$,"猎杀无头骡"; set .@exp,30000; break;
+		case 5056: set .@name$,"猎杀塔噜安"; set .@exp,30000; break;
+		case 5057: set .@name$,"为庆典收集^i[7187]庆典面具"; set .@exp,30000; break;
 	}
 	if (getargcount() == 1) {
 		mes "'"+.@name$+"'已完成。要提交并领取奖励吗？";
@@ -211,7 +211,7 @@ L_Quest:
 		}/* else if (.@hunting == 3) {
 //			recall_completequest .@quest
 			erasequest .@quest;
-			mes "You have re-accepted the quest '"+.@name$+"'.";
+			mes "你已重新接取任务 '"+.@name$+"'.";
 		}*/ else {
 			mes getarg(1);
 			mes getarg(2);

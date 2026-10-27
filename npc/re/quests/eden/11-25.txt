@@ -62,16 +62,16 @@ moc_para01,36,38,3	script	ÈÎÎñ [11 - 25]#Tuto	4_BOARD3,{
 	mes "- ¾­Àí£ºË¹ÅÉ¿Ë -";
 	next;
 	switch(select("·ä±øá÷ÁÔ:ÍºÓ¥á÷ÁÔ:»È³æºóÍÈ:òÇò¾Î²°Íá÷ÁÔ:Ä¢¹½á÷ÁÔ:º¦³æÇý³ý:Ä¦¿¨á÷ÁÔ:ÎüÑªòùòðá÷ÁÔ:ÊÕ¼¯ÈáÃ«:ÊÕ¼¯¶¾Ä§¹½æß×Ó:È¡Ïû")) {
-		case 1: callsub L_Quest,11114,"Hornet Hunting"," - Hunt 10 ^4d4dff'Hornets'^000000 - "," - northwest of Prontera. - ";
-		case 2: callsub L_Quest,11115,"Condor Hunting"," - Hunt 20 ^4d4dff'Condors'^000000 - "," - south of Morocc. - ";
-		case 3: callsub L_Quest,11116,"Grasshopper's Leg"," - Hunt 10 ^4d4dff'Rockers'^000000 - "," - southwest of Prontera and - "," - bring 10 ^4d4dffGrasshopper's Legs^000000. - ";
-		case 4: callsub L_Quest,11117,"Worm Tail Hunting"," - Hunt 20 ^4d4dff'Worm Tails'^000000 - "," - southeast of Payon.- ";
-		case 5: callsub L_Quest,11118,"Spore Hunting"," - Hunt 30 ^4d4dff'Spores'^000000 - "," - around Payon. - ";
-		case 6: callsub L_Quest,11119,"Pest Control"," - Hunt 20 ^4d4dffThief Bug Eggs^000000 - "," - in the Prontera Culvert - "," - and bring 10 ^4d4dffChrysalis^000000. - ";
-		case 7: callsub L_Quest,11120,"Muka Hunting"," - Hunt 20 ^4d4dff'Muka'^000000 - "," - south of Prontera. - ";
-		case 8: callsub L_Quest,11121,"Familiar Hunting"," - Hunt 20 ^4d4dffFamiliar^000000 - "," - in the Culvert Sewers - "," - west of Prontera. - ";
-		case 9: callsub L_Quest,11122,"Collect Feathers"," - Hunt 30 ^4d4dff'Peco Pecos'^000000 - "," - south of Prontera. - ";
-		case 10: callsub L_Quest,11123,"Collect Poison Spores"," - Hunt 30 ^4d4dffPoison Spores^000000 - "," - inside the Geffen Tower and - "," - bring 5 ^4d4dffPoison Spores^000000. - ";
+		case 1: callsub L_Quest,11114,"·ä±øÁÔá÷"," - á÷ÁÔ10Ö»^4d4dff'·ä±ø'^000000 - "," - ÆÕÂ¡µÂÀ­Î÷±±·½¡£ - ";
+		case 2: callsub L_Quest,11115,"ÍºÓ¥ÁÔá÷"," - á÷ÁÔ20Ö»^4d4dff'ÍºÓ¥'^000000 - "," - ÃÎÂÞ¿ËÄÏ·½¡£ - ";
+		case 3: callsub L_Quest,11116,"^i[940]»È³æºóÍÈ"," - á÷ÁÔ10Ö»^4d4dff'»È³æ'^000000 - "," - ÆÕÂ¡µÂÀ­Î÷ÄÏ·½£¬ÒÔ¼° - "," - ´øÀ´10¸ö^4d4dff^i[940]»È³æºóÍÈ^000000¡£ - ";
+		case 4: callsub L_Quest,11117,"É­ÁéÁÔá÷"," - á÷ÁÔ20Ö»^4d4dff'É­Áé'^000000 - "," - ÅáÑï¶«ÄÏ·½¡£- ";
+		case 5: callsub L_Quest,11118,"Ä§¹½ÁÔá÷"," - á÷ÁÔ30Ö»^4d4dff'Ä§¹½'^000000 - "," - ÅáÑï¸½½ü¡£ - ";
+		case 6: callsub L_Quest,11119,"º¦³æÇý³ý"," - á÷ÁÔ20Ö»^4d4dffµÁ³æÂÑ^000000 - "," - ÆÕÂ¡µÂÀ­µØÏÂË®µÀÄÚ - "," - ²¢´øÀ´10¸ö^4d4dff^i[915]Ó¼¿Ç^000000¡£ - ";
+		case 7: callsub L_Quest,11120,"Ä¦¿¨ÁÔá÷"," - á÷ÁÔ20Ö»^4d4dff'Ä¦¿¨'^000000 - "," - ÆÕÂ¡µÂÀ­ÄÏ·½¡£ - ";
+		case 8: callsub L_Quest,11121,"ÀêÃ¨ÁÔá÷"," - á÷ÁÔ20Ö»^4d4dffÀêÃ¨^000000 - "," - µØÏÂË®µÀÄÚ - "," - ÆÕÂ¡µÂÀ­Î÷·½¡£ - ";
+		case 9: callsub L_Quest,11122,"ÊÕ¼¯ÓðÃ«"," - á÷ÁÔ30Ö»^4d4dff'Æß²Ê´ó×ìÄñ'^000000 - "," - ÆÕÂ¡µÂÀ­ÄÏ·½¡£ - ";
+		case 10: callsub L_Quest,11123,"ÊÕ¼¯^i[7033]¶¾Ä§¹½Ñ¿æß"," - á÷ÁÔ30Ö»^4d4dff¶¾Ä§¹½^000000 - "," - ¼ª·ÒËþÄÚ£¬ÒÔ¼° - "," - ´øÀ´5¸ö^4d4dff^i[7033]¶¾Ä§¹½Ñ¿æß^000000¡£ - ";
 		case 11:
 			mes "- Í£Ö¹ÔÄ¶Á¹«¸æ°å¡£ -";
 			close;
@@ -108,16 +108,16 @@ moc_para01,32,30,6	script	Ë¹ÅÉ¿Ë	4_F_CHILD,{
 		.@j = checkquest(.@i,HUNTING);
 		if (.@j == 2) {
 			switch(.@i) {
-				case 11114: callsub L_Quest,.@i,"Hornet Hunting",900;
-				case 11115: callsub L_Quest,.@i,"Condor Hunting",1800;
-				case 11116: callsub L_Quest,.@i,"Grasshopper's Leg",1400,940,10;
-				case 11117: callsub L_Quest,.@i,"Worm Tail Hunting",2600;
-				case 11118: callsub L_Quest,.@i,"Spore Hunting",3900;
-				case 11119: callsub L_Quest,.@i,"Extirpate Insects",2900,915,10;
-				case 11120: callsub L_Quest,.@i,"Muka Hunting",3200;
-				case 11121: callsub L_Quest,.@i,"Familiar Hunting",3200;
-				case 11122: callsub L_Quest,.@i,"Collect Feathers",5400;
-				case 11123: callsub L_Quest,.@i,"Collect Poison Spores",6000,7033,5;
+				case 11114: callsub L_Quest,.@i,"·ä±øÁÔá÷",900;
+				case 11115: callsub L_Quest,.@i,"ÍºÓ¥ÁÔá÷",1800;
+				case 11116: callsub L_Quest,.@i,"^i[940]»È³æºóÍÈ",1400,940,10;
+				case 11117: callsub L_Quest,.@i,"É­ÁéÁÔá÷",2600;
+				case 11118: callsub L_Quest,.@i,"Ä§¹½ÁÔá÷",3900;
+				case 11119: callsub L_Quest,.@i,"ÏûÃðº¦³æ",2900,915,10;
+				case 11120: callsub L_Quest,.@i,"Ä¦¿¨ÁÔá÷",3200;
+				case 11121: callsub L_Quest,.@i,"ÀêÃ¨ÁÔá÷",3200;
+				case 11122: callsub L_Quest,.@i,"ÊÕ¼¯ÓðÃ«",5400;
+				case 11123: callsub L_Quest,.@i,"ÊÕ¼¯^i[7033]¶¾Ä§¹½Ñ¿æß",6000,7033,5;
 			}
 		}
 		else if (.@j >= 0) {
