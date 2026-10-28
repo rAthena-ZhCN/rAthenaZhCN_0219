@@ -101,7 +101,7 @@ prt_in,88,101,4	script	赫尔曼队长#knt	56,{
 		next;
 		if (select("我想转职为骑士。:只是路过。") == 1) {
 			mes "[赫尔曼队长]";
-			mes "Ohh...";
+			mes "哦……";
 			mes "一位年轻的"+((Sex==SEX_MALE)?"少年":"少女")+"，希望";
 			mes "成为骑士！";
 			mes "我们普隆德拉骑士团";
@@ -225,13 +225,13 @@ prt_in,88,101,4	script	赫尔曼队长#knt	56,{
 		next;
 		mes "[赫尔曼队长]";
 		mes "去";
-		mes "温莎·贝内迪克特爵士那里参加你的下一项考验。仔细听负责测试的骑士们的话，免得迷路，好吗？";
+		mes "温莎爵士那里参加你的下一项考验。仔细听负责测试的骑士们的话，免得迷路，好吗？";
 		close;
 	}
 	else if (KNIGHT_Q == 7) callsub L_Mission,0;
 	else if (KNIGHT_Q == 8) {
 		callsub L_Mission,1;
-		mes "温多爵士……？";
+		mes "温莎爵士……？";
 		mes "这位";
 		mes "剑士该去拜访";
 		mes "谁？";
@@ -244,7 +244,7 @@ prt_in,88,101,4	script	赫尔曼队长#knt	56,{
 		mes "......";
 		next;
 		mes "[温莎爵士]";
-		mes "...Amy Beatrice.";
+		mes "……艾咪·贝亚特丽丝。";
 		next;
 		mes "[赫尔曼队长]";
 		mes "啊，去拜访";
@@ -260,7 +260,7 @@ prt_in,88,101,4	script	赫尔曼队长#knt	56,{
 		mes "谁？";
 		next;
 		mes "[艾咪小姐]";
-		mes "Oh...";
+		mes "哦……";
 		mes "我说过要去拜访";
 		mes "艾德蒙爵士！";
 		mes "嘻嘻～";
@@ -317,7 +317,7 @@ prt_in,88,101,4	script	赫尔曼队长#knt	56,{
 		mes "在这个过程中，我也观察了你的行动。我们七人的意见都将反映在转职的决定中。";
 		next;
 		mes "[赫尔曼队长]";
-		mes "Then...";
+		mes "那么……";
 		mes "我们来听听";
 		mes "每个人的想法！";
 		mes "安德鲁，你怎么想？";
@@ -340,7 +340,7 @@ prt_in,88,101,4	script	赫尔曼队长#knt	56,{
 		}
 		next;
 		mes "[赫尔曼队长]";
-		mes "Hmm.";
+		mes "嗯。";
 		mes "真是好评。";
 		mes "希拉库斯，你有什么想法？";
 		next;
@@ -352,7 +352,7 @@ prt_in,88,101,4	script	赫尔曼队长#knt	56,{
 		mes "成为骑士后，你必须以荣誉建立良好的名声。呃……我同意。";
 		next;
 		mes "[赫尔曼队长]";
-		mes "Okay...";
+		mes "好……";
 		mes "温莎，";
 		mes "你呢？";
 		next;
@@ -364,7 +364,7 @@ prt_in,88,101,4	script	赫尔曼队长#knt	56,{
 		mes "......";
 		next;
 		mes "[温莎爵士]";
-		mes "....Approved.";
+		mes "……我同意。";
 		next;
 		mes "[赫尔曼队长]";
 		mes "我想我们";
@@ -384,7 +384,7 @@ prt_in,88,101,4	script	赫尔曼队长#knt	56,{
 		}
 		next;
 		mes "[赫尔曼队长]";
-		mes "Well...";
+		mes "嗯……";
 		mes "真是个奇怪的评价，";
 		mes "但我相信";
 		mes "她同意了。";
@@ -402,7 +402,7 @@ prt_in,88,101,4	script	赫尔曼队长#knt	56,{
 		}
 		next;
 		mes "[赫尔曼队长]";
-		mes "Lastly...";
+		mes "最后……";
 		mes "格雷。我想";
 		mes "听听你的想法。";
 		next;
@@ -438,7 +438,7 @@ prt_in,88,101,4	script	赫尔曼队长#knt	56,{
 		next;
 		getitem 656,7; //Awakening_Potion
 		mes "[赫尔曼队长]";
-		mes "Oh...";
+		mes "哦……";
 		mes "我们准备了一份小礼物，祝贺你转职。请在你光荣地保护他人、投身战斗时使用它。";
 		next;
 		mes "[赫尔曼队长]";
@@ -526,7 +526,7 @@ prt_in,75,107,4	script	安德鲁爵士#knt	65,{
 		next;
 		if (select("我想接受考验。:哦，没什么。") == 1) {
 			mes "[安德鲁爵士]";
-			mes "Ah...";
+			mes "啊……";
 			mes "你希望";
 			mes "成为骑士。";
 			mes "你的名字是";
@@ -767,11 +767,11 @@ prt_in,71,91,0	script	希拉库斯爵士#knt	65,{
 		}
 		mes "[希拉库斯爵士]";
 		mes "嗯……？";
-		mes "Alright.";
+		mes "好吧。";
 		mes "只是……";
 		mes "你刚才那副";
 		mes "表情……";
-		mes "face.";
+		mes "让我有点在意。";
 		close;
 	}
 	else if (KNIGHT_Q == 2 || KNIGHT_Q == 3) {
@@ -792,11 +792,11 @@ prt_in,71,91,0	script	希拉库斯爵士#knt	65,{
 		}
 		mes "[希拉库斯爵士]";
 		mes "嗯……？";
-		mes "Alright.";
+		mes "好吧。";
 		mes "只是……";
 		mes "你刚才那副";
 		mes "表情……";
-		mes "face.";
+		mes "让我有点在意。";
 		close;
 	}
 	else if (KNIGHT_Q == 4 || KNIGHT_Q == 5) {
@@ -819,23 +819,22 @@ prt_in,71,91,0	script	希拉库斯爵士#knt	65,{
 				mes "[希拉库斯爵士]";
 				mes "那么，";
 				mes "开始吧。";
-				mes "请尽快";
-				mes "promptly.";
+				mes "请尽快开始作答吧。";
 				next;
 			}
 			else {
 				mes "[希拉库斯爵士]";
 				mes "嗯……？";
-				mes "Alright.";
+				mes "好吧。";
 				mes "只是……";
 				mes "你刚才那副";
 				mes "表情……";
-				mes "face.";
+				mes "让我有点在意。";
 				close;
 			}
 		}
 		else if (KNIGHT_Q == 5) {
-			mes "What...";
+			mes "什么……";
 			mes "又是你？";
 			next;
 			if (select("我想再考一次。:哦，没什么。") == 1) {
@@ -852,11 +851,11 @@ prt_in,71,91,0	script	希拉库斯爵士#knt	65,{
 			else {
 				mes "[希拉库斯爵士]";
 				mes "嗯……？";
-				mes "Alright.";
+				mes "好吧。";
 				mes "只是……";
 				mes "你刚才那副";
 				mes "表情……";
-				mes "face.";
+				mes "让我有点在意。";
 				close;
 			}
 		}
@@ -950,7 +949,7 @@ prt_in,71,91,0	script	希拉库斯爵士#knt	65,{
 			close;
 		}
 		mes "[希拉库斯爵士]";
-		mes "Alright...";
+		mes "好吧……";
 		mes "那么，在队伍中";
 		mes "你该以怎样的";
 		mes "方式行动？";
@@ -974,7 +973,7 @@ prt_in,71,91,0	script	希拉库斯爵士#knt	65,{
 			close;
 		}
 		mes "[希拉库斯爵士]";
-		mes "Lastly...";
+		mes "最后……";
 		mes "对骑士来说，";
 		mes "最重要的价值";
 		mes "是什么？";
@@ -1020,17 +1019,17 @@ prt_in,71,91,0	script	希拉库斯爵士#knt	65,{
 		next;
 		if (select("我想参加转职考试。:哦，没什么。") == 1) {
 			mes "[希拉库斯爵士]";
-			mes "Hey...";
+			mes "嘿……";
 			mes "你已经考过我的试了吧？这里没你的事了。现在你该去见温莎爵士了……";
 			close;
 		}
 		mes "[希拉库斯爵士]";
 		mes "嗯……？";
-		mes "Alright.";
+		mes "好吧。";
 		mes "只是……";
 		mes "你刚才那副";
 		mes "表情……";
-		mes "face.";
+		mes "让我有点在意。";
 		close;
 	}
 	else if (KNIGHT_Q == 14) {
@@ -1065,20 +1064,20 @@ prt_in,79,94,4	script	温莎爵士#knt	733,{
 	next;
 	mes "[温莎爵士]";
 	if (BaseJob != Job_Swordman) {
-		if (BaseJob == Job_Knight) mes "Protect.";
+		if (BaseJob == Job_Knight) mes "保护。";
 		else if (BaseClass == Job_Novice) {
-			mes "...Go play";
-			mes "outside.";
+			mes "……去外面";
+			mes "玩吧。";
 		}
-		else mes "...Hmpf.";
+		else mes "……哼。";
 		close;
 	}
 	if (KNIGHT_Q == 0) {
-		mes "...What?";
+		mes "……什么？";
 		close;
 	}
 	else if (KNIGHT_Q >= 1 && KNIGHT_Q <= 5) {
-		mes "...What?";
+		mes "……什么？";
 		next;
 		if (select("我想参加转职考试。:哦，没什么。") == 1) {
 			mes "[温莎爵士]";
@@ -1089,7 +1088,7 @@ prt_in,79,94,4	script	温莎爵士#knt	733,{
 			mes "......";
 			next;
 			mes "[温莎爵士]";
-			mes "...It's not my turn.";
+			mes "……还没轮到我。";
 			close;
 		}
 		mes "[温莎爵士]";
@@ -1099,7 +1098,7 @@ prt_in,79,94,4	script	温莎爵士#knt	733,{
 	else if (KNIGHT_Q == 6 || KNIGHT_Q == 7) {
 		if (KNIGHT_Q == 6) {
 			set .@mes$,"希拉库斯爵士让我来的。:哦，没什么。";
-			mes ".....What?";
+			mes "……什么？";
 			next;
 		}
 		else {
@@ -1120,12 +1119,12 @@ prt_in,79,94,4	script	温莎爵士#knt	733,{
 			next;
 			mes "[温莎爵士]";
 			if (KNIGHT_Q == 6) 
-				mes "...Follow me.";
+				mes "……跟我来。";
 			else {
-				mes "...Fine.";
+				mes "……好吧。";
 				next;
 				mes "[温莎爵士]";
-				mes "...This way.";
+				mes "……这边走。";
 			}
 			close2;
 			if(checkquest(9006) == -1) changequest 9005,9006;
@@ -1137,13 +1136,13 @@ prt_in,79,94,4	script	温莎爵士#knt	733,{
 		close;
 	}
 	else if (KNIGHT_Q == 14) {
-		mes "...Talk to";
-		mes "队长。";
+		mes "……去和";
+		mes "队长谈谈。";
 		close;
 	}
 	else {
-		mes "...You're";
-		mes "结束了。";
+		mes "……你";
+		mes "已经结束了。";
 		close;
 	}
 }
@@ -1159,7 +1158,7 @@ job_knt,89,106,4	script	温莎爵士#knt_job	733,{
 	mes "......";
 	next;
 	mes "[温莎爵士]";
-	mes "...Question?";
+	mes "……有问题？";
 	next;
 	set .@i, select("这是什么考试？:要怎么参加考试？:我想离开。:不。");
 	mes "[温莎爵士]";
@@ -1173,21 +1172,21 @@ job_knt,89,106,4	script	温莎爵士#knt_job	733,{
 	case 1:
 		next;
 		mes "[温莎爵士]";
-		mes "...You fight monsters.";
+		mes "……你要和魔物战斗。";
 		next;
 		mes "[温莎爵士]";
-		mes "...Kill them all.";
+		mes "……把它们全部打倒。";
 		next;
 		mes "[温莎爵士]";
 		mes "...";
 		next;
 		mes "[温莎爵士]";
-		mes "...Three stages.";
+		mes "……三个阶段。";
 		mes "把它们全部打倒。";
 		next;
 		mes "[温莎爵士]";
-		mes "......3 minutes";
-		mes "每个阶段。";
+		mes "……每个阶段";
+		mes "3分钟。";
 		next;
 		mes "[温莎爵士]";
 		mes "..........";
@@ -1195,23 +1194,23 @@ job_knt,89,106,4	script	温莎爵士#knt_job	733,{
 	case 2:
 		next;
 		mes "[温莎爵士]";
-		mes "...Go in the";
+		mes "……进入";
 		mes "等候室。";
 		next;
 		mes "[温莎爵士]";
-		mes "...Then it";
+		mes "……然后";
 		mes "就会开始。";
 		next;
 		mes "[温莎爵士]";
 		mes "...";
 		next;
 		mes "[温莎爵士]";
-		mes "...You have to wait";
-		mes "如果有人正在应试。";
+		mes "……如果有人正在应试，";
+		mes "你必须等待。";
 		next;
 		mes "[温莎爵士]";
-		mes "...You can go in";
-		mes "等那个人结束之后。";
+		mes "……等那个人";
+		mes "结束之后才能进去。";
 		next;
 		mes "[温莎爵士]";
 		mes "...";
@@ -1229,7 +1228,7 @@ job_knt,89,106,4	script	温莎·本尼迪克特#knt	733,{
 OnInit:
 	//disablenpc  "温莎·本尼迪克特#knt";
 	hideonnpc "温莎·本尼迪克特#knt";
-	waitingroom "Waiting Room",20,"Windsor Benedict#knt::OnStartArena",1;
+	waitingroom "等候室",20,"Windsor Benedict#knt::OnStartArena",1;
 	enablewaitingroomevent;
 	end;
 
@@ -1286,7 +1285,7 @@ OnMyMobDead:
 		mes "...";
 		next;
 		mes "[温莎爵士]";
-		mes "...On to";
+		mes "……前往";
 		mes "下一层。";
 		close2;
 		warp "job_knt",43,52;
@@ -1349,10 +1348,10 @@ OnMyMobDead:
 	set .MyMobs,.MyMobs-1;
 	if (.MyMobs < 1) {
 		mes "[温莎爵士]";
-		mes "...Hmm.";
+		mes "……嗯。";
 		next;
 		mes "[温莎爵士]";
-		mes "...One stage left.";
+		mes "……还剩一个阶段。";
 		close2;
 		warp "job_knt",143,152;
 		donpcevent "Knight2::OnDisable";
@@ -1412,11 +1411,11 @@ OnMyMobDead:
 		mes "...";
 		next;
 		mes "[温莎爵士]";
-		mes "...Very good.";
+		mes "……很好。";
 		next;
 		mes "[温莎爵士]";
-		mes "...Go talk to";
-		mes "艾咪·贝亚特丽丝吧。";
+		mes "……去和";
+		mes "艾咪·贝亚特丽丝谈谈吧。";
 		close2;
 		set KNIGHT_Q,8;
 		if(checkquest(9007) == -1) {
@@ -1523,8 +1522,8 @@ prt_in,69,107,6	script	艾咪小姐#knt	728,{
 			mes "你报名转职了！好哦！有这份决心，你很快就能成为骑士的！";
 			next;
 			mes "[艾咪小姐]";
-			mes "But...";
-			mes "不过在找艾咪之前，";
+			mes "但是……";
+			mes "在找我之前，";
 			mes "你得先去找";
 			mes "其他骑士才行。";
 			next;
@@ -1537,7 +1536,7 @@ prt_in,69,107,6	script	艾咪小姐#knt	728,{
 		}
 		mes "[艾咪小姐]";
 		mes "哎呀～";
-		mes "Alright...";
+		mes "好吧……";
 		close;
 	}
 	else if ((KNIGHT_Q == 8) || (KNIGHT_Q == 9)){
@@ -1575,7 +1574,7 @@ prt_in,69,107,6	script	艾咪小姐#knt	728,{
 			}
 			else {
 				mes "[艾咪小姐]";
-				mes "Aww...";
+				mes "哎呀……";
 				mes "好的～";
 				close;
 			}
@@ -1608,7 +1607,7 @@ prt_in,69,107,6	script	艾咪小姐#knt	728,{
 			}
 			else {
 				mes "[艾咪小姐]";
-				mes "Aww...";
+				mes "哎呀……";
 				mes "好的～";
 				close;
 			}
@@ -1737,7 +1736,7 @@ prt_in,69,107,6	script	艾咪小姐#knt	728,{
 			close;
 		}
 		set KNIGHT_Q,9;
-		mes "Mmm...";
+		mes "嗯……";
 		mes "说实话，我觉得你的态度还不足以成为一名骑士。";
 		next;
 		mes "[艾咪小姐]";
@@ -1852,7 +1851,7 @@ prt_in,70,99,6	script	艾德蒙爵士#knt	734,{
 		mes "出现在眼前。";
 		mes "一切都会";
 		mes "以完美的";
-		mes "order.";
+		mes "秩序。";
 		close;
 	}
 	else if (KNIGHT_Q == 10) {
@@ -1883,7 +1882,7 @@ prt_in,70,99,6	script	艾德蒙爵士#knt	734,{
 			mes "开始测试吧。";
 			mes "请牢记";
 			mes "何谓";
-			mes "reverence.";
+			mes "敬畏。";
 			close2;
 			set KNIGHT_Q,11;
 			changequest 9009,9010;
@@ -1911,7 +1910,7 @@ prt_in,70,99,6	script	艾德蒙爵士#knt	734,{
 			mes "测试";
 			mes "开始吧。";
 			mes "让我看看你的";
-			mes "patience...";
+			mes "耐心……";
 			close2;
 			warp "job_knt",143,57;
 			end;
@@ -1922,7 +1921,7 @@ prt_in,70,99,6	script	艾德蒙爵士#knt	734,{
 		mes "出现在眼前。";
 		mes "一切都会";
 		mes "以完美的";
-		mes "order.";
+		mes "秩序。";
 		close;
 	}
 	else if (KNIGHT_Q == 12 || KNIGHT_Q == 13) {
@@ -1936,7 +1935,7 @@ prt_in,70,99,6	script	艾德蒙爵士#knt	734,{
 		mes "时候到了，";
 		mes "我们大家将";
 		mes "来评价你的";
-		mes "performance.";
+		mes "表现。";
 		close;
 	}
 }
@@ -2011,7 +2010,7 @@ prt_in,87,92,4	script	格雷爵士#knt	119,{
 			mes "自剑身迸发而出，难以言喻。这是每位骑士都必须拥有的武器。";
 			next;
 			mes "[格雷爵士]";
-			mes "Yes...";
+			mes "是的……";
 			mes "^3355FF阔剑^000000！";
 			mes "每位骑士";
 			mes "都会想要一把！";
@@ -2077,7 +2076,7 @@ prt_in,87,92,4	script	格雷爵士#knt	119,{
 					mes "等你把";
 					mes "一切都准备";
 					mes "妥当再来。我会";
-					mes "waiting...";
+					mes "等待……";
 					close;
 				}
 			case 3:
@@ -2098,7 +2097,7 @@ prt_in,87,92,4	script	格雷爵士#knt	119,{
 		}
 		mes "年轻人，";
 		mes "好好运用你的";
-		mes "wisely.";
+		mes "智慧。";
 		next;
 		mes "[格雷爵士]";
 		mes "时光流逝之后";
@@ -2109,7 +2108,7 @@ prt_in,87,92,4	script	格雷爵士#knt	119,{
 	if (KNIGHT_Q == 0) {
 		mes "年轻人，";
 		mes "好好运用你的";
-		mes "wisely.";
+		mes "智慧。";
 		next;
 		mes "[格雷爵士]";
 		mes "时光流逝之后";
@@ -2119,7 +2118,7 @@ prt_in,87,92,4	script	格雷爵士#knt	119,{
 	}
 	else if ((KNIGHT_Q == 12) || (KNIGHT_Q == 13)) {
 		if (KNIGHT_Q == 12) {
-			mes "Oh...";
+			mes "哦……";
 			mes "年轻的剑士。";
 			mes "是的，有什么";
 			mes "我可以帮你的吗？";
@@ -2143,7 +2142,7 @@ prt_in,87,92,4	script	格雷爵士#knt	119,{
 				mes "好吗？";
 				next;
 				mes "[格雷爵士]";
-				mes "First...";
+				mes "首先……";
 				mes "你为什么";
 				mes "决定成为";
 				mes "骑士？";
@@ -2167,12 +2166,12 @@ prt_in,87,92,4	script	格雷爵士#knt	119,{
 				mes "是否真的……";
 				next;
 				mes "[格雷爵士]";
-				mes "Then...";
+				mes "那么……";
 				mes "和上次一样，";
 				mes "我再问一次……";
 				next;
 				mes "[格雷爵士]";
-				mes "First...";
+				mes "首先……";
 				mes "你为什么";
 				mes "决定成为";
 				mes "骑士？";
@@ -2268,7 +2267,7 @@ prt_in,87,92,4	script	格雷爵士#knt	119,{
 			mes "剑士如何，但骑士不允许放纵自己。有些人太执着于变强，以至于无法自控。";
 			next;
 			mes "[格雷爵士]";
-			mes "So...";
+			mes "那么……";
 			mes "现在的你，";
 			mes "对自己哪一点";
 			mes "不满意？";
@@ -2364,7 +2363,7 @@ prt_in,87,92,4	script	格雷爵士#knt	119,{
 				mes "自己的性命！";
 				next;
 				mes "[格雷爵士]";
-				mes "Also...";
+				mes "还有……";
 				mes "永远爱他们。";
 				mes "真挚的感情";
 				mes "难以寻觅。";
@@ -2479,7 +2478,7 @@ prt_in,87,92,4	script	格雷爵士#knt	119,{
 		close;
 	}
 	else {
-		mes "Oh...";
+		mes "哦……";
 		mes "年轻的剑士。";
 		mes "有什么我能帮你的吗？";
 		next;
