@@ -1228,7 +1228,7 @@ job_knt,89,106,4	script	温莎·本尼迪克特#knt	733,{
 OnInit:
 	//disablenpc  "温莎·本尼迪克特#knt";
 	hideonnpc "温莎·本尼迪克特#knt";
-	waitingroom "等候室",20,"Windsor Benedict#knt::OnStartArena",1;
+	waitingroom "等候室",20,"温莎·本尼迪克特#knt::OnStartArena",1;
 	enablewaitingroomevent;
 	end;
 
