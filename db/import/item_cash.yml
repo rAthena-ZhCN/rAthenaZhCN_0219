@@ -45,6 +45,9 @@ Body:
       # 健身房会员券
       - Item: Max_Weight_Up_Scroll
         Price: 1
+      # 背包扩张券10入箱子
+      - Item: Inventory_Ex_10Box
+        Price: 100
 
   # 传送 / 移动类
   - Tab: Scrolls
