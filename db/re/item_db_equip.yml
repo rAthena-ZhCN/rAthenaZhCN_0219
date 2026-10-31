@@ -35819,7 +35819,7 @@ Body:
       bonus2 bAddDamageClass,1917,10;
   - Id: 2730
     AegisName: Morroc_Seal
-    Name: 装饰品
+    Name: 皇家卫士的徽章
     Type: Armor
     Buy: 20
     Weight: 50
@@ -35844,7 +35844,7 @@ Body:
       bonus bAspdRate,3;
   - Id: 2731
     AegisName: Morroc_Charm_Stone
-    Name: 装饰品
+    Name: 咒语符文石
     Type: Armor
     Buy: 20
     Weight: 50
@@ -35869,7 +35869,7 @@ Body:
       bonus bVariableCastrate,-1;
   - Id: 2732
     AegisName: Morroc_Ring
-    Name: 装饰品
+    Name: 死亡挂坠
     Type: Armor
     Buy: 20
     Weight: 50

@@ -57,7 +57,7 @@ moc_fild16,124,381,4	duplicate(Continental Guard#man)	´óÂ½ÊØÎÀ#man7	852
 moc_fild16,333,380,4	duplicate(Continental Guard#man)	´óÂ½ÊØÎÀ#man8	852
 moc_fild01,84,19,1	duplicate(Continental Guard#man)	´óÂ½ÊØÎÀ#man9	852
 
-morocc,176,101,3	duplicate(Continental Official)	Continental Official#mor	754
+morocc,176,101,3	duplicate(Continental Official)	´óÂ½ÊØÎÀ¹ÙÔ±#mor	754
 
 // Pyramids Nightmare Mode :: nightmare_pry
 //============================================================
