@@ -297,7 +297,7 @@ lasa_fild01,60,322,3	script	护卫队阿利奥#doram02	4_DR_AGLIO,{
 		mes "这附近到处都是，对新手喵族来说正好用来试试身手。";
 		next;
 		mes "[护卫队阿利奥]";
-		mes "去清理几只^4d4dff蛋黄波利^000000吧。^4d4dff三只^000000暂时就够了。";
+		mes "去清理几只^4d4dff蛋黄波利^000000吧。^4d4dff三只^000000暂时就够了。<NAVI>[蛋黄波利]<INFO>lasa_fild01,100,330,0,101,0</INFO></NAVI>";
 		if (isbegin_quest(7712) == 0)
 			setquest 7712;// Where am I? Who am I??
 		completequest 7712;
@@ -335,7 +335,7 @@ lasa_fild01,60,322,3	script	护卫队阿利奥#doram02	4_DR_AGLIO,{
 			next;
 			mes "[护卫队阿利奥]";
 			mes "我给你带了些点心。";
-			mes "是冰凉的苹果汁！";
+			mes "是冰凉的<ITEM>苹果汁<INFO>531</INFO></ITEM>！";
 			completequest 7713;// First Battle!
 			getexp 70,70;
 			setquest 7714;// Refreshing Apple Juice
@@ -379,7 +379,7 @@ lasa_fild01,60,322,3	script	护卫队阿利奥#doram02	4_DR_AGLIO,{
 				next;
 				cutin "",255;
 				mes "[护卫队阿利奥]";
-				mes "那么，^4d4dff去把我给你的苹果汁喝了吧。^000000";
+				mes "那么，^4d4dff去把我给你的<ITEM>苹果汁<INFO>531</INFO></ITEM>喝了吧。^000000";
 				close;
 			}
 			mes "[护卫队阿利奥]";
@@ -460,7 +460,7 @@ lasa_fild01,60,322,3	script	护卫队阿利奥#doram02	4_DR_AGLIO,{
 		mes "我猜那箱子肯定是^4d4dff被蛋黄波利吃掉了^000000。";
 		next;
 		mes "[护卫队阿利奥]";
-		mes "继续猎杀蛋黄波利，直到找到那个箱子……";
+		mes "继续猎杀蛋黄波利，直到找到那个<ITEM>送货的木箱子<INFO>1081</INFO></ITEM>……<NAVI>[蛋黄波利]<INFO>lasa_fild01,100,330,0,101,0</INFO></NAVI>";
 		mes "出发吧！";
 		setquest 7715;// Midding Box
 		lasagna_quest[0] = 4;
@@ -491,7 +491,7 @@ lasa_fild01,60,322,3	script	护卫队阿利奥#doram02	4_DR_AGLIO,{
 		mes "你去村子的时候可以把它带上！";
 		next;
 		mes "[护卫队阿利奥]";
-		mes "^4d4dff到了村子后，先找到工具店，把这个箱子送过去。^000000";
+		mes "^4d4dff到了村子后，先找到工具店，把这个<ITEM>送货的木箱子<INFO>1081</INFO></ITEM>送过去。<NAVI>[小屁孩]<INFO>lasagna,168,125,0,101,0</INFO></NAVI>^000000";
 		next;
 		mes "[护卫队阿利奥]";
 		mes "我来告诉你怎么去村子。";
@@ -574,7 +574,7 @@ lasa_fild01,132,374,3	script	斯洛斯#doram	4_DR_KID_01,3,3,{
 		switch( select( "我帮你拔红草。", "起来啦，你这懒猫！" ) ) {
 		case 1:
 			mes "[斯洛斯]";
-			mes "在这附近^4d4dff拔 3 株红草，然后收集 2 个红药草^000000！";
+			mes "在这附近^4d4dff拔 3 株红草，然后收集 2 个<ITEM>红色药草<INFO>507</INFO></ITEM>^000000！<NAVI>[红草]<INFO>lasa_fild01,140,365,0,101,0</INFO></NAVI>";
 			next;
 			mes "[斯洛斯]";
 			mes "这对你也许大有帮助！";
@@ -594,7 +594,7 @@ lasa_fild01,132,374,3	script	斯洛斯#doram	4_DR_KID_01,3,3,{
 		if (checkquest(7719,HUNTING) != 2) {
 			mes "[斯洛斯]";
 			mes "我要的并不多。";
-			mes "只要在这附近^4d4dff拔红草，收集 2 个红药草^000000就行了。";
+			mes "只要在这附近^4d4dff拔红草，收集 2 个<ITEM>红色药草<INFO>507</INFO></ITEM>^000000就行了。<NAVI>[红草]<INFO>lasa_fild01,140,365,0,101,0</INFO></NAVI>";
 			next;
 			mes "[斯洛斯]";
 			mes "它们长得太快了，拔多少次都还在长。我真是受够了……";
@@ -603,12 +603,12 @@ lasa_fild01,132,374,3	script	斯洛斯#doram	4_DR_KID_01,3,3,{
 		if (countitem(507) < 2) {
 			mes "[斯洛斯]";
 			mes "我要的并不多。";
-			mes "只要在这附近^4d4dff拔红草，收集 2 个红药草^000000就行了。";
+			mes "只要在这附近^4d4dff拔红草，收集 2 个<ITEM>红色药草<INFO>507</INFO></ITEM>^000000就行了。<NAVI>[红草]<INFO>lasa_fild01,140,365,0,101,0</INFO></NAVI>";
 			close;
 		}
 		mes "[斯洛斯]";
 		mes "哦……这香味！";
-		mes "你采的红药草正合适。";
+		mes "你采的红色药草正合适。";
 		next;
 		mes "[斯洛斯]";
 		mes "我就把它们当小树枝一样嚼一嚼，立刻消化掉。喵！";
@@ -659,38 +659,38 @@ lasa_fild01,103,344,3	script	有名的捣蛋鬼	4_DR_KID_01,3,3,{
 	}
 	switch( isbegin_quest(7721) ) {
 	case 0:
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "喂，伙计！";
 		mes "喵呵呵！喵呵呵！你看起来好匆忙，要去哪儿？";
 		mes "在我看来，你就像个刚翻过山脊的新手冒险家，喵。";
 		next;
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "你这么弱，应付得了罗札纳的喵族吗？";
 		next;
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "你会用技能吗？";
 		mes "在我看来，你就是个只会虚张声势的菜鸟。";
 		next;
 		select( "我比你更能打！", "哇，是吗？" );
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "喵呵！喵呵！竟敢对我不敬？";
 		mes "要不要跟我打个赌？";
 		next;
-		mes "[有名的琪蒂]";
-		mes "我给你整整 10 分钟，在这附近猎杀^4d4dff 3 只树叶疯兔和 2 只草法布^000000！";
+		mes "[有名的捣蛋鬼]";
+		mes "我给你整整 10 分钟，在这附近猎杀^4d4dff 3 只群叶疯兔和 2 只草地绿棉虫^000000！<NAVI>[群叶疯兔]<INFO>lasa_fild01,100,330,0,101,0</INFO></NAVI>";
 		next;
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "让我看看你的本事，我就给你让路。";
 		next;
 		switch( select( "接受。", "拒绝。" ) ) {
 		case 1:
-			mes "[有名的琪蒂]";
+			mes "[有名的捣蛋鬼]";
 			mes "你有 10 分钟，不多不少！";
-			mes "^4d4dff3 只树叶疯兔和 2 只草法布！^000000";
+			mes "^4d4dff3 只群叶疯兔和 2 只草地绿棉虫！^000000";
 			setquest 7721;// Cat showoff contest
 			close;
 		case 2:
-			mes "[有名的琪蒂]";
+			mes "[有名的捣蛋鬼]";
 			mes "你要逃跑吗？！";
 			mes "胆小的冒险家在新大陆可活不下去！";
 			close;
@@ -699,77 +699,77 @@ lasa_fild01,103,344,3	script	有名的捣蛋鬼	4_DR_KID_01,3,3,{
 		.@quest_hunting = checkquest(7721,HUNTING);
 		.@quest_playtime = checkquest(7721,PLAYTIME);
 		if (.@quest_playtime < 2 && .@quest_hunting < 2) {
-			mes "[有名的琪蒂]";
-			mes "在^4d4dff 10 分钟^000000内消灭这附近成群出没的^4d4dff 3 只树叶疯兔和 2 只草法布^000000！";
+			mes "[有名的捣蛋鬼]";
+			mes "在^4d4dff 10 分钟^000000内消灭这附近成群出没的^4d4dff 3 只群叶疯兔和 2 只草地绿棉虫^000000！<NAVI>[群叶疯兔]<INFO>lasa_fild01,100,330,0,101,0</INFO></NAVI>";
 			close;
 		}
 		if (.@quest_playtime == 2 && .@quest_hunting < 2) {
-			mes "[有名的琪蒂]";
+			mes "[有名的捣蛋鬼]";
 			mes "喵呵呵！！喵呵呵！！";
 			mes "是不是太难应付了？";
 			mes "怎么样？想再试一次吗？";
 			next;
-			mes "[有名的琪蒂]";
+			mes "[有名的捣蛋鬼]";
 			mes "对你来说太难了吗？";
 			mes "狩猎时有没有好好运用^4d4dff技能^000000？";
 			next;
-			mes "[有名的琪蒂]";
+			mes "[有名的捣蛋鬼]";
 			mes "按 [Alt+S] 快捷键或点击相应的技能图标即可^4d4dff打开技能树^000000。";
 			next;
-			mes "[有名的琪蒂]";
+			mes "[有名的捣蛋鬼]";
 			mes "把想用的技能设置好，这样战斗中就能使用。";
 			next;
-			mes "[有名的琪蒂]";
+			mes "[有名的捣蛋鬼]";
 			mes "^4d4dff需要手动发动的技能^000000可以^4d4dff放到快捷栏^000000，方便快速使用。";
 			next;
-			mes "[有名的琪蒂]";
+			mes "[有名的捣蛋鬼]";
 			mes "……现在你知道怎么使用技能了。";
 			mes "那么，你打算怎么办？";
 			next;
 			switch( select( "再试一次。", "我现在就放弃！" ) ) {
 			case 1:
-				mes "[有名的琪蒂]";
+				mes "[有名的捣蛋鬼]";
 				mes "有胆量，我喜欢！";
 				mes "好，那就再试一次！";
 				erasequest 7721;
 				setquest 7721;// Cat showoff contest
 				close;
 			case 2:
-				mes "[有名的琪蒂]";
+				mes "[有名的捣蛋鬼]";
 				mes "抱着这种软弱的心态，怎么能在新大陆活下去？";
 				mes "喵呵呵！喵呵呵！我可是这一带最强的喵族！";
 				close;
 			}
 		}
 		if (.@quest_playtime < 2 && .@quest_hunting == 2) {
-			mes "[有名的琪蒂]";
+			mes "[有名的捣蛋鬼]";
 			mes "嗯……你很厉害。";
 			mes "每次遇到像你这样能干的喵族，我都觉得受到了挑战。";
 		}
 		else {
-			mes "[有名的琪蒂]";
+			mes "[有名的捣蛋鬼]";
 			mes "时间已经到了！喵呵呵！！";
 			mes "这再次证明我才是这一带最强的！";
 		}
 		next;
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "你干得漂亮，所以我也想回报你一下。";
 		next;
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "对了，你知道什么是^4d4dff技能树^000000吗？";
 		mes "我教过你这个吗？";
 		mes "你还记得什么吗？";
 		next;
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "按 [Alt+S] 快捷键或点击相应的技能图标即可^4d4dff打开技能树^000000。";
 		next;
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "把想用的技能设置好，这样战斗中就能使用。";
 		next;
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "^4d4dff需要手动发动的技能^000000可以^4d4dff放到快捷栏^000000，方便快速使用。";
 		next;
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "……现在你知道怎么使用技能了。";
 		mes "你该谢谢我才是。喵呵呵！";
 		completequest 7721;// Cat showoff contest
@@ -796,14 +796,14 @@ lasa_fild01,103,344,3	script	有名的捣蛋鬼	4_DR_KID_01,3,3,{
 		setpcblock PCBLOCK_NPC, false;
 		end;
 	case 2:
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "还需要我再指点你一次吗？";
 		next;
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "这个世界的生存之道没什么特别的。";
 		mes "你最好先熟悉一下技能树，点击技能图标就能打开。";
 		next;
-		mes "[有名的琪蒂]";
+		mes "[有名的捣蛋鬼]";
 		mes "战斗型喵族擅长召唤。";
 		mes "专注于使用召唤技能，才能赢下战斗。";
 		close;
@@ -1114,12 +1114,12 @@ lasagna,224,126,5	script	治疗师哈鲁#doram07t	4_DR_M_02,{
 			mes "每种药草都是加工成各种药物的好材料。";
 			next;
 			mes "[治疗师哈鲁]";
-			mes "红药草快用完了。";
+			mes "红色药草快用完了。";
 			mes "我想你现在该去采一些回来。";
 			next;
 			mes "[治疗师哈鲁]";
 			mes "村子入口处长着药草，你看到了吗？";
-			mes "^4d4dff去村子入口采集 1 个红药草。^000000这正好可以练练手。";
+			mes "^4d4dff去村子入口采集 1 个红色药草。^000000这正好可以练练手。";
 			if (isbegin_quest(7717) == 1)
 				erasequest 7717;
 			if (isbegin_quest(7718) == 0)
@@ -1155,7 +1155,7 @@ lasagna,224,126,5	script	治疗师哈鲁#doram07t	4_DR_M_02,{
 				next;
 				mes "[治疗师哈鲁]";
 				mes "还有别的吗？";
-				mes "那么，红药草起效后，你的 HP 正在恢复。";
+				mes "那么，红色药草起效后，你的 HP 正在恢复。";
 				mes "把它榨成汁装进瓶子里……";
 				next;
 				mes "[治疗师哈鲁]";
@@ -1170,7 +1170,7 @@ lasagna,224,126,5	script	治疗师哈鲁#doram07t	4_DR_M_02,{
 				mes "除了药水，你还可以用采集到的材料制作各种其他道具，好好利用吧。";
 				next;
 				mes "[治疗师哈鲁]";
-				mes "我给了你红药草和苹果。";
+				mes "我给了你红色药草和苹果。";
 				mes "那就试试用组合工具制作点什么吧。";
 				next;
 				mes "[治疗师哈鲁]";
@@ -1195,7 +1195,7 @@ lasagna,224,126,5	script	治疗师哈鲁#doram07t	4_DR_M_02,{
 			else {
 				mes "[治疗师哈鲁]";
 				mes "村子入口附近有长着药草的地方。";
-				mes "^4d4dff敲打红草，获得 1 个红药草^000000。";
+				mes "^4d4dff敲打红草，获得 1 个<ITEM>红色药草<INFO>507</INFO></ITEM>^000000。<NAVI>[红草]<INFO>lasa_fild01,140,365,0,101,0</INFO></NAVI>";
 				next;
 				mes "[治疗师哈鲁]";
 				mes "你应该知道药草长什么样吧。";
@@ -2490,7 +2490,7 @@ lasa_fild01,353,370,5	script	牧羊人#dorcon	4_DR_KID_01,{
 			mes "哦，厨师没告诉你吗？抱歉，大多数人都是从他那里听完详情才来的。";
 			next;
 			mes "[牧羊人]";
-			mes "那些草法布瑞和叶疯虫快把整片草吃光了。它们不该这样，因为我的可爱牛儿们会没东西吃。";
+			mes "那些草地绿棉虫和群叶疯兔快把整片草吃光了。它们不该这样，因为我的可爱牛儿们会没东西吃。";
 			next;
 			mes "[牧羊人]";
 			mes "那样我们的牛就没东西吃了。";
@@ -2502,13 +2502,13 @@ lasa_fild01,353,370,5	script	牧羊人#dorcon	4_DR_KID_01,{
 			mes "然后……哦，之后的事我连想都不敢想。";
 			next;
 			mes "[牧羊人]";
-			mes "所以我需要你抓住草法布瑞和叶疯虫。各五只。好，那么开始吧！";
+			mes "所以我需要你抓住草地绿棉虫和群叶疯兔。各五只。好，那么开始吧！";
 			setquest 14546;// Take care of grass thief
 			close;
 		case 0:
 		case 1:
 			mes "[牧羊人]";
-			mes "你还没完成。请抓五只草法布瑞和五只叶疯虫。";
+			mes "你还没完成。请抓五只草地绿棉虫和五只群叶疯兔。";
 			close;
 		case 2:
 			mes "[牧羊人]";
@@ -2531,7 +2531,7 @@ lasa_fild01,353,370,5	script	牧羊人#dorcon	4_DR_KID_01,{
 		close;
 	case 2:
 		mes "[牧羊人]";
-		mes "冒险者，请帮帮忙！一群草法布瑞和叶疯虫正往这边来！";
+		mes "冒险者，请帮帮忙！一群草地绿棉虫和群叶疯兔正往这边来！";
 		next;
 		mes "[牧羊人]";
 		mes "请从每群里抓五只！剩下的我来想办法！";
@@ -3285,7 +3285,7 @@ lasagna,222,187,3	script	厨师#dorcon	4_CAT_CHEF,{
 				mes "我们的牛就在那里吃草。那里的草新鲜干净，所以奶味特别好。";
 				next;
 				mes "[厨师长]";
-				mes "可草叶法布尔和叶疯兔正在把草吃光。";
+				mes "可草地绿棉虫和群叶疯兔正在把草吃光。";
 				next;
 				mes "[厨师长]";
 				mes "所以请去把它们清理掉。两种各五只就够了。";
@@ -3428,7 +3428,7 @@ lasagna,222,187,3	script	厨师#dorcon	4_CAT_CHEF,{
 			switch(.@quest_id) {
 			case 14546:
 				mes "[厨师长]";
-				mes "我们的牛……得多吃些好吃的……请去收拾五只叶疯兔和五只草叶法布尔。";
+				mes "我们的牛……得多吃些好吃的……请去收拾五只群叶疯兔和五只草地绿棉虫。";
 				close;
 			case 14588:
 				mes "[厨师长]";
@@ -3557,10 +3557,10 @@ lasagna,222,187,3	script	厨师#dorcon	4_CAT_CHEF,{
 		switch(.@quest_id) {
 		case 14546:
 			mes "[厨师长]";
-			mes "请守住草地，别让草叶法布尔和叶疯兔糟蹋。那是我们牛的食物。";
+			mes "请守住草地，别让草地绿棉虫和群叶疯兔糟蹋。那是我们牛的食物。";
 			next;
 			mes "[厨师长]";
-			mes "草叶法布尔和叶疯兔，各五只。这样应该能吓住附近剩下的，让它们不敢靠近。";
+			mes "草地绿棉虫和群叶疯兔，各五只。这样应该能吓住附近剩下的，让它们不敢靠近。";
 			next;
 			mes "[厨师长]";
 			mes "过了南桥，你会看到十字路口。走下面那条路一直往前，就能到牧羊人所在的罗比奥平原。";
@@ -7313,11 +7313,11 @@ conch_in,186,57,3	script	副主厨#dorcon	4_CAT_CHEF,{
 				next;
 				cutin "风唱平墨靛.bmp",3;
 				mes "[副主厨]";
-				mes "三叶草和红色药草可以从外面野地的叶疯兔或草法布尔那里取得。";
+				mes "三叶草和红色药草可以从外面野地的群叶疯兔或草地绿棉虫那里取得。";
 				next;
 				cutin "颇宏福墨靛.bmp",3;
 				mes "[副主厨]";
-				mes "绿色药草可以从草法布尔那里取得。";
+				mes "绿色药草可以从草地绿棉虫那里取得。";
 				next;
 				cutin "",255;
 				mes "[副主厨]";
@@ -7340,7 +7340,7 @@ conch_in,186,57,3	script	副主厨#dorcon	4_CAT_CHEF,{
 				next;
 				cutin "府橇风唱平墨靛.bmp",3;
 				mes "[副主厨]";
-				mes "胡萝卜可以从叶疯兔那里取得。";
+				mes "胡萝卜可以从群叶疯兔那里取得。";
 				next;
 				cutin "",255;
 				mes "[副主厨]";
@@ -7360,11 +7360,11 @@ conch_in,186,57,3	script	副主厨#dorcon	4_CAT_CHEF,{
 				next;
 				cutin "弊贰胶颇宏福墨靛.bmp",3;
 				mes "[副主厨]";
-				mes "绒毛可以从草法布尔或叶疯兔那里取得。";
+				mes "绒毛可以从草地绿棉虫或群叶疯兔那里取得。";
 				next;
 				cutin "府橇风唱平墨靛.bmp",3;
 				mes "[副主厨]";
-				mes "羽毛可以从草法布尔或叶疯兔那里取得。";
+				mes "羽毛可以从草地绿棉虫或群叶疯兔那里取得。";
 				next;
 				cutin "",255;
 				mes "[副主厨]";
@@ -7387,7 +7387,7 @@ conch_in,186,57,3	script	副主厨#dorcon	4_CAT_CHEF,{
 				next;
 				cutin "弊贰胶颇宏福墨靛.bmp",3;
 				mes "[副主厨]";
-				mes "三叶草可以从草法布尔或叶疯兔那里取得。";
+				mes "三叶草可以从草地绿棉虫或群叶疯兔那里取得。";
 				next;
 				cutin "",255;
 				mes "[副主厨]";
@@ -7691,7 +7691,7 @@ lasagna,298,84,5	script	义警#dorcon01	4_DR_SOLDIER,{
 			npctalk "你真的要亲自去那儿吗？万一出了什么事怎么办？不会引起外交问题吧……？哦……罗札纳要完了……不行！", "", bc_self;
 			next;
 			mes "[护卫队]";
-			mes "那就跟我来吧。<NAVI>^4D4DFF[龙巢穴]^000000<INFO>lasa_fild02,340,244,000,1,</INFO></NAVI>就在村外原野最右侧的洞窟里。";
+			mes "那就跟我来吧。<NAVI>^4D4DFF[龙巢穴]^000000<INFO>lasa_fild02,348,244,0,101,0</INFO></NAVI>就在村外原野最右侧的洞窟里。";
 			erasequest 14548;// Crazy Dragon
 			setquest 14549;// No news is not a good news
 			lasagna_quest[1] = 22;
@@ -7720,7 +7720,7 @@ lasagna,298,84,5	script	义警#dorcon01	4_DR_SOLDIER,{
 		mes "在哪儿？";
 		next;
 		mes "[护卫队]";
-		mes "你知道的，就是<NAVI>^4D4DFF[龙巢穴]^000000<INFO>lasa_fild02,340,244,000,1,</INFO></NAVI>。它在村外原野最右侧的洞窟里。你先去吧。我准备一下就随后跟上。";
+		mes "你知道的，就是<NAVI>^4D4DFF[龙巢穴]^000000<INFO>lasa_fild02,348,244,0,101,0</INFO></NAVI>。它在村外原野最右侧的洞窟里。你先去吧。我准备一下就随后跟上。";
 		erasequest 14539;// Crazy Dragon
 		setquest 14541;// No news is not a good news
 		lasagna_quest[1] = 22;
@@ -7729,9 +7729,9 @@ lasagna,298,84,5	script	义警#dorcon01	4_DR_SOLDIER,{
 	if (lasagna_quest[1] == 22) {
 		mes "[护卫队]";
 		if (Class != Job_Summoner)
-			mes "<NAVI>^4D4DFF[龙巢穴]^000000<INFO>lasa_fild02,340,244,000,1,</INFO></NAVI>在右侧的洞窟里。那就跟我来吧。";
+			mes "<NAVI>^4D4DFF[龙巢穴]^000000<INFO>lasa_fild02,348,244,0,101,0</INFO></NAVI>在右侧的洞窟里。那就跟我来吧。";
 		else
-			mes "我随后就来。<NAVI>^4D4DFF[龙巢穴]^000000<INFO>lasa_fild02,340,244,000,1,</INFO></NAVI>在村外原野最右侧的洞窟里。";
+			mes "我随后就来。<NAVI>^4D4DFF[龙巢穴]^000000<INFO>lasa_fild02,348,244,0,101,0</INFO></NAVI>在村外原野最右侧的洞窟里。";
 		close;
 	}
 	mes "[护卫队]";
