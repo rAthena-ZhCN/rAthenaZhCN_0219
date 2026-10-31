@@ -1345,28 +1345,10 @@ mal_in01,20,107,3	script	蕾丝·拉·扎德#cos_ect	4_FROG,{
 		close;
 	}
 
-	// costume garment list allowed (incomplete)
-	switch(.@equip_id) {
-	case 20502:	// C_Devil_Wing
-	case 20504:	// C_Cupid_Wing_Pink
-	case 20505:	// C_Cupid_Wing_Skyblue
-	case 20506:	// C_Invisible_Manteau
-	case 20507:	// C_Poring_Bag
-	case 20509:	// C_Wings_of_Uriel
-	case 20510:	// C_SwordWing
-	case 20511:	// C_Blue_Fairy_Wing
-	case 20727:	// Brilliant_Golden_Wings
-	case 20737:	// C_Kirin_Wing
-	case 20746:	// C_Rudra_Wing
-	case 20761:	// C_Wing_Of_Happiness
-	case 20762:	// C_GreatDevilWing
-	case 20763:	// C_Amistr_Bag
-	case 20764:	// C_Fallen_Angel_Wing
-	case 20765:	// C_Archangel_Wing
-		break;
-	default:
+	// 所有时装披肩都可以附魔；不再使用不完整的硬编码白名单
+	if (!(getiteminfo(.@equip_id, ITEMINFO_LOCATIONS) & EQP_COSTUME_GARMENT)) {
 		mes "[蕾丝·拉·扎德]";
-		mes "我得先看看，确认它是否能升级..";// custom
+		mes "我得先看看，确认它是否能升级..";
 		close;
 	}
 
