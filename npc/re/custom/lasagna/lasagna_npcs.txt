@@ -1313,38 +1313,38 @@ izlude,117,165,3	script	猫爪虾商人#iz	4_M_MERCAT1,{
 	}
 }
 
-alberta,111,159,3	猫爪虾商人#iz)	猫爪虾商人#alb	4_M_MERCAT1
-aldeba_in,89,56,3	猫爪虾商人#iz)	猫爪虾商人#ald	4_M_MERCAT1
-amatsu,102,122,5	猫爪虾商人#iz)	猫爪虾商人#ama	4_M_MERCAT1
+alberta,111,159,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#alb	4_M_MERCAT1
+aldeba_in,89,56,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#ald	4_M_MERCAT1
+amatsu,102,122,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#ama	4_M_MERCAT1
 // ayo_in01,15,177
-brasilis,249,257,3	猫爪虾商人#iz)	猫爪虾商人#bra	4_M_MERCAT1
-comodo,103,136,3	猫爪虾商人#iz)	猫爪虾商人#com	4_M_MERCAT1
-dewata,193,169,5	猫爪虾商人#iz)	猫爪虾商人#dew	4_M_MERCAT1
-einbroch,164,316,3	猫爪虾商人#iz)	猫爪虾商人#ein	4_M_MERCAT1
-ein_in01,194,22,3	猫爪虾商人#iz)	猫爪虾商人#ein1	4_M_MERCAT1
-dic_in01,242,119,5	猫爪虾商人#iz)	猫爪虾商人#dic	4_M_MERCAT1
-ecl_in01,72,86,3	猫爪虾商人#iz)	猫爪虾商人#ecl	4_M_MERCAT1
-geffen_in,75,140,3	猫爪虾商人#iz)	猫爪虾商人#gef	4_M_MERCAT1
-gonryun,147,88,5	猫爪虾商人#iz)	猫爪虾商人#gon	4_M_MERCAT1
-hugel,76,165,5	猫爪虾商人#iz)	猫爪虾商人#hug	4_M_MERCAT1
-izlude_a,117,165,3	猫爪虾商人#iz)	猫爪虾商人#iz_a	4_M_MERCAT1
-izlude_b,117,165,3	猫爪虾商人#iz)	猫爪虾商人#iz_b	4_M_MERCAT1
-izlude_c,117,165,3	猫爪虾商人#iz)	猫爪虾商人#iz_c	4_M_MERCAT1
-izlude_d,117,165,3	猫爪虾商人#iz)	猫爪虾商人#iz_d	4_M_MERCAT1
-lasagna,166,117,6	猫爪虾商人#iz)	猫爪虾商人#las	4_M_MERCAT1
-lhz_in02,29,219,5	猫爪虾商人#iz)	猫爪虾商人#lhz	4_M_MERCAT1
-lou_in02,241,168,5	猫爪虾商人#iz)	猫爪虾商人#lou	4_M_MERCAT1
-malaya,286,175,3	猫爪虾商人#iz)	猫爪虾商人#mal	4_M_MERCAT1
-mora,110,118,3	猫爪虾商人#iz)	猫爪虾商人#mora	4_M_MERCAT1
-morocc,169,105,3	猫爪虾商人#iz)	猫爪虾商人#moro	4_M_MERCAT1
-mosk_in,30,246,3	猫爪虾商人#iz)	猫爪虾商人#mosk	4_M_MERCAT1
-payon,155,96,5	猫爪虾商人#iz)	猫爪虾商人#pay	4_M_MERCAT1
-prontera,137,223,5	猫爪虾商人#iz)	猫爪虾商人#prt	4_M_MERCAT1
-ra_in01,243,272,5	猫爪虾商人#iz)	猫爪虾商人#ra	4_M_MERCAT1
-um_in,104,118,3	猫爪虾商人#iz)	猫爪虾商人#um	4_M_MERCAT1
-ve_in,263,303,3	猫爪虾商人#iz)	猫爪虾商人#ve	4_M_MERCAT1
-xmas_in,32,38,5	猫爪虾商人#iz)	猫爪虾商人#xma	4_M_MERCAT1
-yuno,205,116,5	猫爪虾商人#iz)	猫爪虾商人#yu	4_M_MERCAT1
+brasilis,249,257,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#bra	4_M_MERCAT1
+comodo,103,136,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#com	4_M_MERCAT1
+dewata,193,169,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#dew	4_M_MERCAT1
+einbroch,164,316,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#ein	4_M_MERCAT1
+ein_in01,194,22,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#ein1	4_M_MERCAT1
+dic_in01,242,119,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#dic	4_M_MERCAT1
+ecl_in01,72,86,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#ecl	4_M_MERCAT1
+geffen_in,75,140,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#gef	4_M_MERCAT1
+gonryun,147,88,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#gon	4_M_MERCAT1
+hugel,76,165,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#hug	4_M_MERCAT1
+izlude_a,117,165,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#iz_a	4_M_MERCAT1
+izlude_b,117,165,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#iz_b	4_M_MERCAT1
+izlude_c,117,165,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#iz_c	4_M_MERCAT1
+izlude_d,117,165,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#iz_d	4_M_MERCAT1
+lasagna,166,117,6	duplicate(猫爪虾商人#iz)	猫爪虾商人#las	4_M_MERCAT1
+lhz_in02,29,219,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#lhz	4_M_MERCAT1
+lou_in02,241,168,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#lou	4_M_MERCAT1
+malaya,286,175,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#mal	4_M_MERCAT1
+mora,110,118,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#mora	4_M_MERCAT1
+morocc,169,105,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#moro	4_M_MERCAT1
+mosk_in,30,246,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#mosk	4_M_MERCAT1
+payon,155,96,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#pay	4_M_MERCAT1
+prontera,137,223,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#prt	4_M_MERCAT1
+ra_in01,243,272,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#ra	4_M_MERCAT1
+um_in,104,118,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#um	4_M_MERCAT1
+ve_in,263,303,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#ve	4_M_MERCAT1
+xmas_in,32,38,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#xma	4_M_MERCAT1
+yuno,205,116,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#yu	4_M_MERCAT1
 
 izlude,195,213,5	script	康-奇丽娜号船员#doi	4_M_MERCAT1,{
 	mes "[康-奇丽娜号船员]";
@@ -1371,13 +1371,13 @@ izlude,195,213,5	script	康-奇丽娜号船员#doi	4_M_MERCAT1,{
 	warp "lasagna",206,297;
 	end;
 }
-malangdo,218,81,5	康-奇丽娜号船员#doi)	康-奇丽娜号船员#dom	4_M_MERCAT1
-izlude_a,195,213,5	康-奇丽娜号船员#doi)	康-奇丽娜号船员#doia	4_M_MERCAT1
-izlude_b,195,213,5	康-奇丽娜号船员#doi)	康-奇丽娜号船员#doib	4_M_MERCAT1
-izlude_c,195,213,5	康-奇丽娜号船员#doi)	康-奇丽娜号船员#doic	4_M_MERCAT1
-izlude_d,195,213,5	康-奇丽娜号船员#doi)	康-奇丽娜号船员#doid	4_M_MERCAT1
+malangdo,218,81,5	duplicate(康-奇丽娜号船员#doi)	康-奇丽娜号船员#dom	4_M_MERCAT1
+izlude_a,195,213,5	duplicate(康-奇丽娜号船员#doi)	康-奇丽娜号船员#doia	4_M_MERCAT1
+izlude_b,195,213,5	duplicate(康-奇丽娜号船员#doi)	康-奇丽娜号船员#doib	4_M_MERCAT1
+izlude_c,195,213,5	duplicate(康-奇丽娜号船员#doi)	康-奇丽娜号船员#doic	4_M_MERCAT1
+izlude_d,195,213,5	duplicate(康-奇丽娜号船员#doi)	康-奇丽娜号船员#doid	4_M_MERCAT1
 
-izlude,138,183,3	script	巡逻队员 巡逻队员 佩内#doect01	4_DR_SOLDIER,{
+izlude,138,183,3	script	巡逻队员 佩内#doect01	4_DR_SOLDIER,{
 	if (Class == Job_Summoner) {
 		mes "[巡逻队员佩内]";
 		mes "嗨呀！在这种地方也能见到法尔法雷卫队，是不是很让人高兴？";
