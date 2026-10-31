@@ -5066,37 +5066,37 @@ Body:
     Title: Nillem Is Not Almighty
     TimeLimit: 4h
   - Id: 7711
-    Title: Beginning
+    Title: 开始
   - Id: 7712
-    Title: Where am I? Who am I??
+    Title: 这是哪里？我是谁？
   - Id: 7713
-    Title: First Battle!
+    Title: 初次战斗！
     Targets:
       - Mob: DR_EGGRING
         Count: 3
   - Id: 7714
-    Title: Refreshing Apple Juice
+    Title: 清爽的苹果汁
   - Id: 7715
-    Title: Midding Box
+    Title: 消失的箱子
     Drops:
       - Mob: DR_EGGRING
         Item: Merchant_Box_1
         Rate: 5000
   - Id: 7716
-    Title: To the Village!
+    Title: 终于抵达村落！
   - Id: 7717
-    Title: Merchant's Kindness
+    Title: 商人的亲切
   - Id: 7718
-    Title: I'm used to this
+    Title: 并不陌生
   - Id: 7719
-    Title: Time to Digest
+    Title: 进行消化的时间
     Targets:
       - Mob: RED_PLANT
         Count: 3
   - Id: 7720
-    Title: Service Manual
+    Title: 服务介绍
   - Id: 7721
-    Title: Cat showoff contest
+    Title: 帅气猫咪的对决
     TimeLimit: +10mn
     Targets:
       - Mob: DR_LUNATIC
@@ -5104,15 +5104,15 @@ Body:
       - Mob: DR_FABRE
         Count: 2
   - Id: 7722
-    Title: EMT
+    Title: 紧急治疗
   - Id: 7723
-    Title: The potential within
+    Title: 我体内的潜力
   - Id: 7731
-    Title: Secret Action
+    Title: 隐秘的行动
   - Id: 7732
-    Title: Searching the suspect
+    Title: 搜索嫌疑犯
   - Id: 7733
-    Title: Pursuit!
+    Title: 追缉！
   - Id: 7734
     Title: Arrest
   - Id: 7735
@@ -10652,20 +10652,24 @@ Body:
   - Id: 14573
     Title: I need the time on my own
   - Id: 14574
-    Title: Meal Box Delivery
+    Title: 配送便当
   - Id: 14575
-    Title: Delivery Complete Report
+    Title: 完成配送报告
   - Id: 14576
-    Title: Meal Box Delivery Time
+    Title: 配送便当时间
     TimeLimit: 4h
+  - Id: 14577
+    Title: 配送便当
+  - Id: 14578
+    Title: 完成配送报告
   - Id: 14579
-    Title: Interview with Captain
+    Title: 采访船长
   - Id: 14580
-    Title: To Recorder
+    Title: 去找记录员
   - Id: 14581
-    Title: Interview with the Chief
+    Title: 采访队长
   - Id: 14582
-    Title: To Recorder
+    Title: 去找记录员
   - Id: 14583
     Title: To Granma
   - Id: 14584

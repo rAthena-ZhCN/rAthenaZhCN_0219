@@ -27,7 +27,7 @@ OnTouch:
 	end;
 }
 
-lasa_fild01,49,304,3	script	Vigilante Ajegna#doram0	4_DR_SOLDIER,{
+lasa_fild01,49,304,3	script	护卫队阿杰尼亚#doram0	4_DR_SOLDIER,{
 	if (Class != Job_Summoner) {
 		mes "[护卫队阿杰尼亚]";
 		mes "嗯？我看你不像是远星大陆来的。";
@@ -59,14 +59,14 @@ lasa_fild01,49,304,3	script	Vigilante Ajegna#doram0	4_DR_SOLDIER,{
 		mes "我做梦也没想到，除了我们居住的^4d4dff米德加尔特^000000和^4d4dff远星大陆^000000之外，还有别的大陆。";
 		next;
 		mes "[护卫队阿杰尼亚]";
-		mes "难怪^4d4dff千层面^000000这个原本只是边境渔村的地方，会有一大群四处闲逛的多兰族。";
+		mes "难怪^4d4dff罗札纳^000000这个原本只是边境渔村的地方，会有一大群四处闲逛的喵族。";
 		next;
 		mes "[护卫队阿杰尼亚]";
-		mes "更糟的是，从千层面以外来的多兰族经常惹麻烦，这让护卫队头痛不已。";
-		mes "护卫队的职责除了维持治安，还要协助参加新大陆远征的多兰族，所以请你帮帮忙。";
+		mes "更糟的是，从罗札纳以外来的喵族经常惹麻烦，这让护卫队头痛不已。";
+		mes "护卫队的职责除了维持治安，还要协助参加新大陆远征的喵族，所以请你帮帮忙。";
 		next;
 		mes "[护卫队阿杰尼亚]";
-		mes "看到那边的多兰族了吗？他就是^4d4dff阿利奥^000000，会告诉你一些有用的东西。去找他吧。";
+		mes "看到那边的喵族了吗？他就是^4d4dff阿利奥^000000，会告诉你一些有用的东西。去找他吧。";
 		if (isbegin_quest(7711) == 0)
 			setquest 7711;
 		completequest 7711;// Beginning
@@ -74,11 +74,11 @@ lasa_fild01,49,304,3	script	Vigilante Ajegna#doram0	4_DR_SOLDIER,{
 		close;
 	case 1:
 		mes "[护卫队阿杰尼亚]";
-		mes "我该去欢迎新来的多兰族了。";
+		mes "我该去欢迎新来的喵族了。";
 		mes "^4d4dff阿利奥^000000会告诉你更多细节，他就在那边。";
 		next;
 		mes "[护卫队阿杰尼亚]";
-		mes "阿利奥可是法尔法莱护卫队里非常、非常优秀的多兰族，好好学着点！";
+		mes "阿利奥可是法尔法雷护卫队里非常、非常优秀的喵族，好好学着点！";
 		close;
 	case 2:
 		mes "[护卫队阿杰尼亚]";
@@ -86,7 +86,7 @@ lasa_fild01,49,304,3	script	Vigilante Ajegna#doram0	4_DR_SOLDIER,{
 		mes "到了新大陆也别忘了我们啊！";
 		next;
 		mes "[护卫队阿杰尼亚]";
-		mes "千层面港就在那边！";
+		mes "罗札纳港就在那边！";
 		mes "别告诉我你是不知道才来这儿的。";
 		close;
 	}
@@ -95,7 +95,7 @@ OnInit:
 	end;
 }
 
-lasa_fild01,53,322,3	script	Applicant Paul#doramt13	4_M_MERCAT1,4,4,{
+lasa_fild01,53,322,3	script	保罗#doramt13	4_M_MERCAT1,4,4,{
 	if (Class != Job_Summoner) {
 		mes "[保罗]";
 		mes "~尖叫~ 你吓死我了！";
@@ -105,7 +105,7 @@ lasa_fild01,53,322,3	script	Applicant Paul#doramt13	4_M_MERCAT1,4,4,{
 	switch( isbegin_quest(7723) ) {
 	case 0:
 		mes "[保罗]";
-		mes "那么，你就是那个冒险者多兰族？";
+		mes "那么，你就是那个冒险者喵族？";
 		mes "喂，你觉得呢？";
 		mes "你也同意伤害最重要吧？STR优先！";
 		next;
@@ -136,7 +136,7 @@ lasa_fild01,53,322,3	script	Applicant Paul#doramt13	4_M_MERCAT1,4,4,{
 		mes "...Stop fighting, you two!";
 		mes "嘿，这边，新来的。";
 		mes "有什么想知道的都可以问我。";
-		npctalk "有什么想知道的都可以问我。", "[保罗]", bc_self;
+		npctalk "有什么想知道的都可以问我。", "保罗#doramt13", bc_self;
 		setquest 7723;// The potential within
 		close;
 	case 1:
@@ -156,23 +156,23 @@ lasa_fild01,53,322,3	script	Applicant Paul#doramt13	4_M_MERCAT1,4,4,{
 OnTouch:
 	if (Class == Job_Summoner && isbegin_quest(7723) == 0) {
 		setpcblock PCBLOCK_NPC, true;
-		npctalk "申请人保罗#doramt13", "你才不懂！想让攻击命中，就得DEX优先！！", bc_self;
+		npctalk "你才不懂！想让攻击命中，就得DEX优先！！", "保罗#doramt13", bc_self;
 		sleep2 2000;
-		npctalk "[护卫队尼奥基]", "咳哼！这里就像是通往远星大陆的门户。", bc_self;
+		npctalk "咳哼！这里就像是通往远星大陆的门户。", "护卫队尼奥基#doramt13", bc_self;
 		sleep2 1000;
 		setpcblock PCBLOCK_NPC, false;
-		emotion ET_STARE, getnpcid(0, "Applicant Paul#doramt13");
-		emotion ET_OHNO, getnpcid(0, "Applicant MacCarnie#doramt13");
+		emotion ET_STARE, getnpcid(0, "保罗#doramt13");
+		emotion ET_OHNO, getnpcid(0, "麦克卡尼#doramt13");
 	}
 	end;
 OnInit:
-	if (strnpcinfo(0) == "Applicant Paul#doramt13")
+	if (strnpcinfo(0) == "保罗#doramt13")
 		questinfo( QTYPE_QUEST, QMARK_YELLOW, "!isbegin_quest(7723)" );
 	end;
 }
-lasa_fild01,50,321,6	duplicate(Applicant Paul#doramt13)	Applicant MacCarnie#doramt13	4_M_MERCAT1
+lasa_fild01,50,321,6	duplicate(保罗#doramt13)	麦克卡尼#doramt13	4_M_MERCAT1
 
-lasa_fild01,54,325,3	script	Vigilante Gnocchi#doramt13	4_DR_SOLDIER,{
+lasa_fild01,54,325,3	script	护卫队尼奥基#doramt13	4_DR_SOLDIER,{
 	if (Class != Job_Summoner) {
 		mes "不准再有更多人类进来！";
 		mes "你知道他们为什么吵得这么厉害吗？";
@@ -242,9 +242,9 @@ OnInit:
 	end;
 }
 
-lasa_fild01,60,322,3	script	Vigilante Aglio#doram02	4_DR_AGLIO,{
+lasa_fild01,60,322,3	script	护卫队阿利奥#doram02	4_DR_AGLIO,{
 	if (Class != Job_Summoner) {
-		mes "这地方外来的多兰族已经够多了，我可不想再来更多。";
+		mes "这地方外来的喵族已经够多了，我可不想再来更多。";
 		mes "[护卫队阿利奥]";
 		mes "他们看到你们难道不会吃惊吗？";
 		next;
@@ -265,7 +265,7 @@ lasa_fild01,60,322,3	script	Vigilante Aglio#doram02	4_DR_AGLIO,{
 	if (lasagna_quest[0] == 0) {
 		mes "我是阿利奥。从现在起由我来接待你。";
 		mes "你把这当成一种荣幸吧。";
-		mes "因为我是法尔法莱护卫队的王牌成员之一。";
+		mes "因为我是法尔法雷护卫队的王牌成员之一。";
 		mes "[护卫队阿利奥]";
 		mes "不管什么事，我大概都能帮上忙。";
 		next;
@@ -292,7 +292,7 @@ lasa_fild01,60,322,3	script	Vigilante Aglio#doram02	4_DR_AGLIO,{
 		mes "[护卫队阿利奥]";
 		mes "它们看着傻乎乎的，其实很让人头疼，见到什么都会捡起来吃掉。";
 		next;
-		mes "这附近到处都是，对新手多兰族来说正是试试身手的好目标。";
+		mes "这附近到处都是，对新手喵族来说正是试试身手的好目标。";
 		mes "[护卫队阿利奥]";
 		mes "去清理几只^4d4dff蛋黄波利^000000吧？^4d4dff三只^000000就够了。";
 		next;
@@ -397,12 +397,12 @@ lasa_fild01,60,322,3	script	Vigilante Aglio#doram02	4_DR_AGLIO,{
 			erasequest 7714;// Refreshing Apple Juice
 			getitem 569,30;// Novice Potion
 			getitem 1687,1;// Beginner Foxtail Staff [1]
+			mes "获得了<ITEM>新手狐尾草魔杖<INFO>1687</INFO></ITEM>。";
 			getexp 70,70;
 			lasagna_quest[0] = 3;
 		}
 		next;
-		classchange( 4_DR_KID_01, "Kid#doram03t", bc_self );
-		mes "小孩#doram03t";
+		classchange( 4_DR_KID_01, "小屁孩#doram03t", bc_self );
 		mes "我的天哪！你吓我一跳！";
 		npctalk "....Aglioooooo!!", "[护卫队阿利奥]", bc_self;
 		next;
@@ -435,16 +435,15 @@ lasa_fild01,60,322,3	script	Vigilante Aglio#doram02	4_DR_AGLIO,{
 		mes "还有一件事，别再有在外人面前装天真的毛病了！";
 		next;
 		mes "[工具商家最小的猫咪]";
-		mes "拜托……我可是千层面最可爱、最小的猫咪！";
+		mes "拜托……我可是罗札纳最可爱、最小的猫咪！";
 		next;
 		mes "总之，希望你能帮我找到那个箱子，拜托了。";
 		mes "你知道我最喜欢你了，对吧？";
-		mes "小孩#doram03t";
 		next;
 		npctalk "快走吧！", "[护卫队阿利奥]", bc_self;
 		sleep2 1000;
 		npctalk "[护卫队阿利奥]", "", bc_self;
-		classchange( HIDDEN_WARP_NPC, "Kid#doram03t", bc_self );
+		classchange( HIDDEN_WARP_NPC, "小屁孩#doram03t", bc_self );
 		mes "那就没办法了。";
 		mes ".....";
 		mes "........~Sighs deeply~...";
@@ -452,7 +451,7 @@ lasa_fild01,60,322,3	script	Vigilante Aglio#doram02	4_DR_AGLIO,{
 		mes "这次我觉得你可以出面处理。";
 		mes "[护卫队阿利奥]";
 		mes "" + strcharinfo(0) + "";
-		mes "身边有个能干的多兰族真是让人安心。";
+		mes "身边有个能干的喵族真是让人安心。";
 		next;
 		mes "我猜那个箱子肯定是被^4d4dff蛋黄波利^000000吃掉了。";
 		mes "[护卫队阿利奥]";
@@ -508,7 +507,7 @@ lasa_fild01,60,322,3	script	Vigilante Aglio#doram02	4_DR_AGLIO,{
 		mes "搜索目标、设定目的地，然后点击寻路。";
 		mes "会生成指向目标位置的箭头。^000000";
 		mes "[护卫队阿利奥]";
-		mes "你眼前就是港口村庄千层面。";
+		mes "你眼前就是港口村庄罗札纳。";
 		cutin "navi02.bmp",4;
 		navigateto "lasagna",168,124;
 		close3;
@@ -537,9 +536,9 @@ OnInit:
 	end;
 }
 
-lasa_fild01,62,321,3	script	Kid#doram03t	HIDDEN_WARP_NPC,{ end; }
+lasa_fild01,62,321,3	script	小屁孩#doram03t	HIDDEN_WARP_NPC,{ end; }
 
-lasa_fild01,132,374,3	script	Sloth#doram	4_DR_KID_01,3,3,{
+lasa_fild01,132,374,3	script	斯洛斯#doram	4_DR_KID_01,3,3,{
 	if (checkweight(1001,3) == 0) {
 		mes "- 这意味着你无法再获得任何道具。 -";
 		mes "- 请腾出一些空间 -";
@@ -646,7 +645,7 @@ OnInit:
 	end;
 }
 
-lasa_fild01,103,344,3	script	Well-known Troublemaker	4_DR_KID_01,3,3,{
+lasa_fild01,103,344,3	script	有名的捣蛋鬼	4_DR_KID_01,3,3,{
 	if (Class != Job_Summoner) {
 		mes "[有名的捣蛋鬼]";
 		mes "这里可是门户，绝不能被人类玷污！";
@@ -660,7 +659,7 @@ lasa_fild01,103,344,3	script	Well-known Troublemaker	4_DR_KID_01,3,3,{
 	case 0:
 		mes "在我看来，你就像个刚翻过山脊的新手冒险者，喵。";
 		mes "[有名的猫咪]";
-		mes "你这么弱，应付得了千层面的多兰族吗？";
+		mes "你这么弱，应付得了罗札纳的喵族吗？";
 		mes "[有名的猫咪]";
 		next;
 		mes "你连技能怎么用都不知道吧？";
@@ -768,20 +767,19 @@ lasa_fild01,103,344,3	script	Well-known Troublemaker	4_DR_KID_01,3,3,{
 		mes "你该好好谢谢我。喵呵呵！";
 		mes "你！你又在找无辜路人的麻烦？";
 		next;
-		mes "巡逻队员 阿利奥#doram12";
 		mes "...Now you know how to use skills.";
 		mes "找麻烦？我们这叫训练！";
 		completequest 7721;// Cat showoff contest
 		getexp 120,120;
 		close2;
 		setpcblock PCBLOCK_NPC, true;
-		classchange( 4_DR_AGLIO, "Vigilante Aglio#doram12", bc_self );
+		classchange( 4_DR_AGLIO, "护卫队阿利奥#doram12", bc_self );
 		sleep2 1000;
-		npctalk "有名的捣蛋鬼", "闭嘴！你一回到村里就加入巡逻队，听明白了？", bc_self;
+		npctalk "闭嘴！你一回到村里就加入巡逻队，听明白了？", "有名的捣蛋鬼", bc_self;
 		sleep2 2000;
-		npctalk "巡逻队员 阿利奥#doram12", "呃……我……呃……我只是热爱自由！就这样！", bc_self;
+		npctalk "呃……我……呃……我只是热爱自由！就这样！", "巡逻队员 阿利奥#doram12", bc_self;
 		sleep2 2000;
-		npctalk "有名的捣蛋鬼", "够了。", bc_self;
+		npctalk "够了。", "有名的捣蛋鬼", bc_self;
 		sleep2 2000;
 		npctalk "下一个目的地是村里的工具店。我再告诉你一遍它在哪儿。", "巡逻队员 阿利奥#doram12", bc_self;
 		sleep2 2000;
@@ -791,7 +789,7 @@ lasa_fild01,103,344,3	script	Well-known Troublemaker	4_DR_KID_01,3,3,{
 		navigateto "lasagna",168,124;
 		sleep2 2000;
 		npctalk "还需要我再指点你一次吗？", "[知名猫猫]", bc_self;
-		classchange( HIDDEN_WARP_NPC, "Vigilante Aglio#doram12", bc_self );
+		classchange( HIDDEN_WARP_NPC, "护卫队阿利奥#doram12", bc_self );
 		setpcblock PCBLOCK_NPC, false;
 		end;
 	case 2:
@@ -818,11 +816,11 @@ OnInit:
 	end;
 }
 
-lasa_fild01,102,342,7	script	Vigilante Aglio#doram12	HIDDEN_WARP_NPC,{ end; }
+lasa_fild01,102,342,7	script	护卫队阿利奥#doram12	HIDDEN_WARP_NPC,{ end; }
 
--	shop	Cat Paw Shrimp Merchant#shop::doram_shrimp	-1,515:-1,567:-1,11602:-1
+-	shop	猫爪虾商人#shop::doram_shrimp	-1,515:-1,567:-1,11602:-1
 
-lasagna,168,125,3	script	Kid#doram04t	4_DR_KID_01,{
+lasagna,168,125,3	script	小屁孩#doram04t	4_DR_KID_01,{
 	if (lasagna_quest[0] == 5) {
 		if (countitem(1081) > 0) {
 			mes "[工具商人]";
@@ -835,7 +833,6 @@ lasagna,168,125,3	script	Kid#doram04t	4_DR_KID_01,{
 			mes "我走了！马上就走！";
 			next;
 			mes "谢谢你找到这个箱子！";
-			mes "工具商人#doram05t";
 			mes "[工具商人]";
 			mes "总之，谢谢你找到这个箱子。";
 			delitem 1081, countitem(1081);// Delivery Box
@@ -865,7 +862,6 @@ lasagna,168,125,3	script	Kid#doram04t	4_DR_KID_01,{
 		close;
 	}
 	mes "你太年轻了！还是先加入巡逻队吧。";
-	mes "工具商人#doram05t";
 	mes "[小猫]";
 	close2;
 	npctalk "就是这个！！", "小猫高高举起得到的箱子，高兴地叫了起来", bc_self;
@@ -875,7 +871,7 @@ OnInit:
 	end;
 }
 
-lasagna,165,125,5	script	Tool Merchant#doram05t	4_DR_M_01,{
+lasagna,165,125,5	script	工具商人#doram05t	4_DR_M_01,{
 	if (lasagna_quest[0] == 5) {
 		if (countitem(1081) > 0) {
 			mes "[工具商人]";
@@ -894,7 +890,7 @@ lasagna,165,125,5	script	Tool Merchant#doram05t	4_DR_M_01,{
 			delitem 1081, countitem(1081);// Delivery Box
 			completequest 7716;// To the Village!
 			getexp 70,70;
-			classchange( HIDDEN_WARP_NPC, "Kid#doram04t", bc_self );
+			classchange( HIDDEN_WARP_NPC, "小屁孩#doram04t", bc_self );
 			lasagna_quest[0] = 6;
 			next;
 			npctalk "...Wow, that was fast.", "", bc_self;
@@ -936,6 +932,7 @@ lasagna,165,125,5	script	Tool Merchant#doram05t	4_DR_M_01,{
 		getitem 7059,10;// Free Ticket for Kafra Storage
 		getitem 12849,5;// Combination Kit
 		getitem 15150,1;// White Shirt [1]
+		mes "获得了<ITEM>白色衬衫<INFO>15150</INFO></ITEM>。";
 		getexp 50,50;
 		lasagna_quest[0] = 7;
 		next;
@@ -999,7 +996,7 @@ OnInit:
 -	shop	tool_shop_lasagna	-1,1750:-1,611:-1,501:-1,502:-1,503:-1,504:-1,645:-1,656:-1,713:-1,601:-1,602:-1,1065:-1
 -	shop	tool_shop_lasagna#Extended	-1,611:-1,602:-1,601:-1,23280:-1,23288:-1,645:-1,656:-1,657:-1,501:-1,502:-1,503:-1,504:-1,506:-1,610:-1,713:-1,717:-1,1771:-1
 
-lasagna,224,126,5	script	Healer Haru#doram07t	4_DR_M_02,{
+lasagna,224,126,5	script	治疗师哈鲁#doram07t	4_DR_M_02,{
 	if (lasagna_quest[0] == 7) {
 		mes "把组合专用工具给她看。";
 		mes "[治疗师哈鲁]";
@@ -1125,7 +1122,6 @@ lasagna,224,126,5	script	Healer Haru#doram07t	4_DR_M_02,{
 			if (lasagna_quest[0] == 7)
 				lasagna_quest[0] = 8;
 			next;
-			mes "催眠师#doram08t";
 			mes "- 等一下！！ -";
 			close2;
 			if (lasagna_quest[0] == 7 && Class == Job_Summoner)
@@ -1172,7 +1168,6 @@ lasagna,224,126,5	script	Healer Haru#doram07t	4_DR_M_02,{
 				mes "^4d4dff右键点击卷轴，^000000然后点击说明窗口中的^4d4dff书本形状图标^000000。";
 				next;
 				mes "哦！你在这里！";
-				mes "巡逻队员 阿利奥#doram09";
 				mes "[治疗师哈鲁]";
 				if (isbegin_quest(7717) > 0)
 					erasequest 7717;
@@ -1186,7 +1181,7 @@ lasagna,224,126,5	script	Healer Haru#doram07t	4_DR_M_02,{
 				getitem 507,1;// Red Herb
 				getitem 512,1;// Apple
 				npctalk "村口附近有个长着药草的地方。", "^4d4dff打掉红草，获得1个红色药草^000000。", bc_self;
-				classchange( 4_DR_AGLIO, "Vigilante Aglio#doram09", bc_self );
+				classchange( 4_DR_AGLIO, "护卫队阿利奥#doram09", bc_self );
 				lasagna_quest[0] = 9;
 				close;
 			}
@@ -1223,7 +1218,7 @@ OnInit:
 	end;
 }
 
-lasagna,222,123,5	script	Hypnotist#doram08t	4_CAT_MERMASTER,{
+lasagna,222,123,5	script	催眠师#doram08t	4_CAT_MERMASTER,{
 	if (Class != Job_Summoner) {
 		mes "[催眠师]";
 		mes "你是得了什么皮肤病吗？";
@@ -1280,7 +1275,7 @@ lasagna,222,123,5	script	Hypnotist#doram08t	4_CAT_MERMASTER,{
 	close;
 }
 
-lasagna,230,127,3	script	Vigilante Aglio#doram09	HIDDEN_WARP_NPC,{
+lasagna,230,127,3	script	护卫队阿利奥#doram09	HIDDEN_WARP_NPC,{
 	if (lasagna_quest[0] == 9) {
 		mes "首先，我们得去见队长，商量一下日程安排。";
 		mes "我们最好去广场。";
@@ -1296,9 +1291,9 @@ lasagna,230,127,3	script	Vigilante Aglio#doram09	HIDDEN_WARP_NPC,{
 	}
 }
 
-izlude,117,165,3	script	Cat Paw Shrimp Merchant#iz	4_M_MERCAT1,{
+izlude,117,165,3	script	猫爪虾商人#iz	4_M_MERCAT1,{
 	npctalk "取消", "", bc_self;
-	switch( select( "欢迎下次再来！", "[康奇利纳号船员]", "从中庭大陆前往远方之星！" ) ) {
+	switch( select( "欢迎下次再来！", "[康-奇丽娜号船员]", "从中庭大陆前往远方之星！" ) ) {
 	case 1:
 		callshop "doram_shrimp",1;
 		end;
@@ -1306,62 +1301,62 @@ izlude,117,165,3	script	Cat Paw Shrimp Merchant#iz	4_M_MERCAT1,{
 		callshop "doram_shrimp",2;
 		end;
 	case 3:
-		npctalk "[康奇利纳号船员]", "", bc_self;
+		npctalk "[康-奇丽娜号船员]", "", bc_self;
 		end;
 	}
 }
 
-alberta,111,159,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#alb	4_M_MERCAT1
-aldeba_in,89,56,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#ald	4_M_MERCAT1
-amatsu,102,122,5	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#ama	4_M_MERCAT1
+alberta,111,159,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#alb	4_M_MERCAT1
+aldeba_in,89,56,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#ald	4_M_MERCAT1
+amatsu,102,122,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#ama	4_M_MERCAT1
 // ayo_in01,15,177
-brasilis,249,257,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#bra	4_M_MERCAT1
-comodo,103,136,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#com	4_M_MERCAT1
-dewata,193,169,5	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#dew	4_M_MERCAT1
-einbroch,164,316,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#ein	4_M_MERCAT1
-ein_in01,194,22,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#ein1	4_M_MERCAT1
-dic_in01,242,119,5	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#dic	4_M_MERCAT1
-ecl_in01,72,86,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#ecl	4_M_MERCAT1
-geffen_in,75,140,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#gef	4_M_MERCAT1
-gonryun,147,88,5	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#gon	4_M_MERCAT1
-hugel,76,165,5	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#hug	4_M_MERCAT1
-izlude_a,117,165,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#iz_a	4_M_MERCAT1
-izlude_b,117,165,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#iz_b	4_M_MERCAT1
-izlude_c,117,165,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#iz_c	4_M_MERCAT1
-izlude_d,117,165,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#iz_d	4_M_MERCAT1
-lasagna,166,117,6	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#las	4_M_MERCAT1
-lhz_in02,29,219,5	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#lhz	4_M_MERCAT1
-lou_in02,241,168,5	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#lou	4_M_MERCAT1
-malaya,286,175,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#mal	4_M_MERCAT1
-mora,110,118,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#mora	4_M_MERCAT1
-morocc,169,105,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#moro	4_M_MERCAT1
-mosk_in,30,246,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#mosk	4_M_MERCAT1
-payon,155,96,5	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#pay	4_M_MERCAT1
-prontera,137,223,5	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#prt	4_M_MERCAT1
-ra_in01,243,272,5	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#ra	4_M_MERCAT1
-um_in,104,118,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#um	4_M_MERCAT1
-ve_in,263,303,3	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#ve	4_M_MERCAT1
-xmas_in,32,38,5	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#xma	4_M_MERCAT1
-yuno,205,116,5	duplicate(Cat Paw Shrimp Merchant#iz)	Cat Paw Shrimp Merchant#yu	4_M_MERCAT1
+brasilis,249,257,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#bra	4_M_MERCAT1
+comodo,103,136,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#com	4_M_MERCAT1
+dewata,193,169,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#dew	4_M_MERCAT1
+einbroch,164,316,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#ein	4_M_MERCAT1
+ein_in01,194,22,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#ein1	4_M_MERCAT1
+dic_in01,242,119,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#dic	4_M_MERCAT1
+ecl_in01,72,86,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#ecl	4_M_MERCAT1
+geffen_in,75,140,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#gef	4_M_MERCAT1
+gonryun,147,88,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#gon	4_M_MERCAT1
+hugel,76,165,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#hug	4_M_MERCAT1
+izlude_a,117,165,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#iz_a	4_M_MERCAT1
+izlude_b,117,165,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#iz_b	4_M_MERCAT1
+izlude_c,117,165,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#iz_c	4_M_MERCAT1
+izlude_d,117,165,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#iz_d	4_M_MERCAT1
+lasagna,166,117,6	duplicate(猫爪虾商人#iz)	猫爪虾商人#las	4_M_MERCAT1
+lhz_in02,29,219,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#lhz	4_M_MERCAT1
+lou_in02,241,168,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#lou	4_M_MERCAT1
+malaya,286,175,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#mal	4_M_MERCAT1
+mora,110,118,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#mora	4_M_MERCAT1
+morocc,169,105,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#moro	4_M_MERCAT1
+mosk_in,30,246,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#mosk	4_M_MERCAT1
+payon,155,96,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#pay	4_M_MERCAT1
+prontera,137,223,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#prt	4_M_MERCAT1
+ra_in01,243,272,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#ra	4_M_MERCAT1
+um_in,104,118,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#um	4_M_MERCAT1
+ve_in,263,303,3	duplicate(猫爪虾商人#iz)	猫爪虾商人#ve	4_M_MERCAT1
+xmas_in,32,38,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#xma	4_M_MERCAT1
+yuno,205,116,5	duplicate(猫爪虾商人#iz)	猫爪虾商人#yu	4_M_MERCAT1
 
-izlude,195,213,5	script	Con-Chliina Crewman#doi	4_M_MERCAT1,{
+izlude,195,213,5	script	康-奇丽娜号船员#doi	4_M_MERCAT1,{
 	mes "只需^0000cd";
-	mes "Zeny^000000即可前往港城千层面。";
+	mes "Zeny^000000即可前往港城罗札纳。";
 	next;
-	mes "前往千层面 -";
+	mes "前往罗札纳 -";
 	if (Class == Job_Summoner)
 		.@cost = 200;
 	else
 		.@cost = 2000;
 	mes "z" + .@cost + "取消";
 	next;
-	if (select( "[康奇利纳号船员]" + .@cost + "原来如此。", "[康奇利纳号船员]" ) == 2) {
+	if (select( "[康-奇丽娜号船员]" + .@cost + "原来如此。", "[康-奇丽娜号船员]" ) == 2) {
 		mes "不够吗？要不要看看他有多少？";
 		mes "[巡逻队员 佩内]";
 		close;
 	}
 	if (Zeny < .@cost) {
-		mes "嗨呀！在这里也能见到法法雷巡逻队，真让人高兴！";
+		mes "嗨呀！在这里也能见到法尔法雷巡逻队，真让人高兴！";
 		mes "[巡逻队员 佩内]";
 		close;
 	}
@@ -1369,13 +1364,13 @@ izlude,195,213,5	script	Con-Chliina Crewman#doi	4_M_MERCAT1,{
 	warp "lasagna",206,297;
 	end;
 }
-malangdo,218,81,5	duplicate(Con-Chliina Crewman#doi)	Con-Chliina Crewman#dom	4_M_MERCAT1
-izlude_a,195,213,5	duplicate(Con-Chliina Crewman#doi)	Con-Chliina Crewman#doia	4_M_MERCAT1
-izlude_b,195,213,5	duplicate(Con-Chliina Crewman#doi)	Con-Chliina Crewman#doib	4_M_MERCAT1
-izlude_c,195,213,5	duplicate(Con-Chliina Crewman#doi)	Con-Chliina Crewman#doic	4_M_MERCAT1
-izlude_d,195,213,5	duplicate(Con-Chliina Crewman#doi)	Con-Chliina Crewman#doid	4_M_MERCAT1
+malangdo,218,81,5	duplicate(康-奇丽娜号船员#doi)	康-奇丽娜号船员#dom	4_M_MERCAT1
+izlude_a,195,213,5	duplicate(康-奇丽娜号船员#doi)	康-奇丽娜号船员#doia	4_M_MERCAT1
+izlude_b,195,213,5	duplicate(康-奇丽娜号船员#doi)	康-奇丽娜号船员#doib	4_M_MERCAT1
+izlude_c,195,213,5	duplicate(康-奇丽娜号船员#doi)	康-奇丽娜号船员#doic	4_M_MERCAT1
+izlude_d,195,213,5	duplicate(康-奇丽娜号船员#doi)	康-奇丽娜号船员#doid	4_M_MERCAT1
 
-izlude,138,183,3	script	Vigilante Penne#doect01	4_DR_SOLDIER,{
+izlude,138,183,3	script	巡逻队员 佩内#doect01	4_DR_SOLDIER,{
 	if (Class == Job_Summoner) {
 		mes "对了，你在这片土地上的安顿还顺利吗？";
 		mes "你去过这附近的^4d4dff普隆德拉^000000或^4d4dff斐扬^000000吗？";
@@ -1390,10 +1385,10 @@ izlude,138,183,3	script	Vigilante Penne#doect01	4_DR_SOLDIER,{
 		close;
 	}
 	mes "[巡逻队员 佩内]";
-	mes "我？听我解释。我是来自伟大远方之星大陆的法法雷巡逻队的骄傲成员。";
+	mes "我？听我解释。我是来自伟大远方之星大陆的法尔法雷巡逻队的骄傲成员。";
 	mes "远方之星大陆？";
 	next;
-	mes "法法雷巡逻队？";
+	mes "法尔法雷巡逻队？";
 	mes "你是猫爪商会的人吗？";
 	next;
 	switch( select( "[巡逻队员 佩内]", "除了中庭大陆，还有别的大陆。", "我们渡海而来的那片土地叫远方之星。" ) ) {
@@ -1408,16 +1403,16 @@ izlude,138,183,3	script	Vigilante Penne#doect01	4_DR_SOLDIER,{
 		close;
 	case 2:
 		mes "[巡逻队员 佩内]";
-		mes "这是我们法法雷巡逻队的标志。";
-		mes "我们就是守护千层面的传说巡逻队！";
+		mes "这是我们法尔法雷巡逻队的标志。";
+		mes "我们就是守护罗札纳的传说巡逻队！";
 		next;
 		mes "[巡逻队员 佩内]";
-		mes "你根本不知道我们的队长佩佩罗奇诺有多酷……";
+		mes "你根本不知道我们的队长佩佩隆奇诺有多酷……";
 		mes "从对付港口的捣蛋鬼到维持村子治安，各种杂活都由我们来做。";
 		next;
 		mes "[巡逻队员 佩内]";
 		mes "而且，你能来到这个……中……中庭……中庭……";
-		mes "总之！只有法法雷巡逻队同意，你才能来这里。";
+		mes "总之！只有法尔法雷巡逻队同意，你才能来这里。";
 		next;
 		mes "这只骄傲的猫话真多……";
 		mes "嗯？你只是路过吗？";
@@ -1429,18 +1424,18 @@ izlude,138,183,3	script	Vigilante Penne#doect01	4_DR_SOLDIER,{
 		end;
 	case 3:
 		mes "[巡逻队员 佩内]";
-		mes "我属于佩佩罗奇诺队长指挥的法法雷巡逻队！";
+		mes "我属于佩佩隆奇诺队长指挥的法尔法雷巡逻队！";
 		mes "[巡逻队员 佩内]";
 		next;
-		mes "哎呀呀！你连千层面都没去过，是吧？";
+		mes "哎呀呀！你连罗札纳都没去过，是吧？";
 		mes "我们伟大的甘贝里船长还亲自冒险来到这里！";
 		next;
 		mes "[巡逻队员 佩内]";
-		mes "我们很仁慈，愿意给你这样的人类一个前往千层面之地的机会。";
+		mes "我们很仁慈，愿意给你这样的人类一个前往罗札纳之地的机会。";
 		mes "用不了多久，这个中庭……中庭……？？这片土地很快就会由我们喵族掌控！";
 		next;
 		mes "[巡逻队员 佩内]";
-		mes "你最好讨得我们的欢心。这样一来，我们或许会给你一份在千层面清理凤尾鱼的工作！";
+		mes "你最好讨得我们的欢心。这样一来，我们或许会给你一份在罗札纳清理凤尾鱼的工作！";
 		mes "[穆斯塔奇]";
 		next;
 		mes "我们为你修剪胡须，梳理尾巴。出发前往新世界之前，一定要先打理好自己。";
@@ -1449,21 +1444,21 @@ izlude,138,183,3	script	Vigilante Penne#doect01	4_DR_SOLDIER,{
 	}
 }
 
-lasagna,209,301,3	script	Mustachi#dorcon01	4_DR_KID_01,{
+lasagna,209,301,3	script	穆斯塔奇#dorcon01	4_DR_KID_01,{
 	mes "[琳格娜]";
 	mes "这里既是酒馆，也是冒险者时常光顾的冒险者俱乐部。他们从各地而来，分享彼此的见闻，也在这里寻找冒险的同伴。";
 	mes "[琳格娜]";
 	close;
 }
 
-lasagna,232,181,5	script	Linguina#dorcon01	4_CAT_ADV1,{
+lasagna,232,181,5	script	琳格娜#dorcon01	4_CAT_ADV1,{
 	mes "最近有很多人来这里打听消息，然后再动身前往新世界。";
 	mes "[琳格娜]";
 	next;
 	mes "大约十年前，这里曾是用来教化喵族混混、并招募他们加入义警队的调停之所。再往前，粗犷的水手们会在辛苦一天后来这里放松。";
 	mes "[琳格娜]";
 	next;
-	mes "佩佩罗奇诺村长和甘贝里船长也是在这里初次相识的。三人结为生死之交，后来事业有成，成了传奇人物。";
+	mes "佩佩隆奇诺村长和甘贝里船长也是在这里初次相识的。三人结为生死之交，后来事业有成，成了传奇人物。";
 	mes "[琳格娜]";
 	next;
 	mes "所以，想成功的人、想成为他们那样的人的冒险者，常常来这里。";
@@ -1474,8 +1469,8 @@ lasagna,232,181,5	script	Linguina#dorcon01	4_CAT_ADV1,{
 	close;
 }
 
-lasagna,227,187,1	script	Vongolo#dorcon01	4_CAT_SAILOR1,{
-	mes "因为佩佩罗奇诺、甘贝里和托马斯立下的烤箱誓约，这里的人都会点卡露娜奶。但烤箱酒馆真正的招牌其实是鱼糕。";
+lasagna,227,187,1	script	冯戈洛#dorcon01	4_CAT_SAILOR1,{
+	mes "因为佩佩隆奇诺、甘贝里和托马斯立下的烤箱誓约，这里的人都会点卡鲁哇奶。但烤箱酒馆真正的招牌其实是鱼糕。";
 	mes "[冯戈洛]";
 	next;
 	mes "鱼糕是把白鱼肉与煮熟的豆子捣碎，塑形后油炸而成的。非常好吃，但没人点。";
@@ -1492,14 +1487,14 @@ lasagna,227,187,1	script	Vongolo#dorcon01	4_CAT_SAILOR1,{
 	close;
 }
 
-lasagna,220,172,6	script	Master of Property#do_h	4_M_BABYCAT,{
+lasagna,220,172,6	script	属性猫#do_h	4_M_BABYCAT,{
 	.@r = rand(0,4);
 	if (.@r == 0)
 		npctalk "火属性克制地属性。", "", bc_self;
 	else if (.@r == 1)
 		npctalk "圣属性与暗属性彼此截然对立。", "", bc_self;
 	else if (.@r == 2)
-		npctalk "[属性猫]", "", bc_self;
+		npctalk "属性猫#do_h", "", bc_self;
 	else if (.@r == 3)
 		npctalk "这世上的每个生命都带有属性。", "", bc_self;
 	else
@@ -1537,7 +1532,7 @@ lasagna,220,172,6	script	Master of Property#do_h	4_M_BABYCAT,{
 	close;
 }
 
-lasagna,208,188,3	script	Cat Paw Service#lasagna	4_M_MERCAT1,4,4,{
+lasagna,208,188,3	script	猫爪商会#lasagna	4_M_MERCAT1,4,4,{
 	if (Class == Job_Summoner && isbegin_quest(7720) == 0) {
 		if (checkweight(1001,2) == 0) {
 			mes "- 请腾出一些空间 -";
@@ -1683,16 +1678,16 @@ OnInit:
 	end;
 }
 
-lasagna,171,105,5	script	Emergency Patient#dorco	4_M_DIEMAN,5,5,{
+lasagna,171,105,5	script	急诊患者#dorco	4_M_DIEMAN,5,5,{
 	emotion ET_HELP;
-	npctalk "[戈梅]", "", bc_self;
+	npctalk "戈梅#dorcon01", "", bc_self;
 	end;
 OnTouch:
 	emotion ET_HELP;
 	end;
 }
 
-lasagna,200,278,5	script	Recruiter#dorcon01	4_CAT_ADV2,{
+lasagna,200,278,5	script	招募员#dorcon01	4_CAT_ADV2,{
 	mes "义警队！这边！有人在这里骗人上船！";
 	mes "[招募员]";
 	next;
@@ -1700,30 +1695,30 @@ lasagna,200,278,5	script	Recruiter#dorcon01	4_CAT_ADV2,{
 	mes "听说最近有非法的鳀鱼船骗人上船。这世道真可怕。义警队正睁大眼睛抓他们呢。";
 	next;
 	mes "[乘务员]";
-	mes "祝您在康奇利纳号上度过愉快的一天！";
+	mes "祝您在康-奇丽娜号上度过愉快的一天！";
 	close;
 }
 
-lasagna,202,276,5	script	Gomae#dorcon01	4_DR_F_01,{
-	npctalk "[乘务员]", "", bc_self;
+lasagna,202,276,5	script	戈梅#dorcon01	4_DR_F_01,{
+	npctalk "乘务员#dorc", "", bc_self;
 	end;
 }
 
-lasagna,211,186,5	script	Boarding Attendant#dorc	4_CAT_ADV1,5,5,{
+lasagna,211,186,5	script	乘务员#dorc	4_CAT_ADV1,5,5,{
 	if (lasagna_quest[1] < 12) {
 		mes "你好，冒险者！";
 		mes "[乘务员]";
 		close;
 	}
 	if (lasagna_quest[1] == 12) {
-		mes "我为从法尔法雷义警队训练毕业的人办理康奇利纳号的登船手续。";
+		mes "我为从法尔法雷义警队训练毕业的人办理康-奇丽娜号的登船手续。";
 		mes "[乘务员]";
 		next;
 		mes "前往新世界的人请顺着红线走，前往^0000cd码头^000000。";
 		mes "[乘务员]";
 		next;
 		mes "登船前请确认是否随身携带了船票！";
-		mes "请不要错过关于康奇利纳号详情的最新公告！";
+		mes "请不要错过关于康-奇丽娜号详情的最新公告！";
 		next;
 		mes "哞——";
 		mes "哞——哞——";
@@ -1740,20 +1735,20 @@ OnInit:
 	end;
 }
 
-lasa_fild01,356,374,7	script	Cow#dorcon01	4_BULL,{
+lasa_fild01,356,374,7	script	奶牛#dorcon01	4_BULL,{
 	npctalk "F12！F12！", "", bc_self;
 	end;
 }
-lasa_fild01,352,376,5	script	Cow#dorcon02	4_WHITE_COW,{
+lasa_fild01,352,376,5	script	奶牛#dorcon02	4_WHITE_COW,{
 	npctalk "[琪蒂]", "", bc_self;
 	end;
 }
-lasa_fild01,361,372,3	script	Cow#dorcon03	4_BULL,{
+lasa_fild01,361,372,3	script	奶牛#dorcon03	4_BULL,{
 	npctalk "^4d4dff按F12键，就会打开快捷键栏。^000000", "", bc_self;
 	end;
 }
 
-lasagna,217,192,5	script	Kittie#do_hint01	4_CAT_SAILOR1,{
+lasagna,217,192,5	script	琪蒂#do_hint01	4_CAT_SAILOR1,{
 	npctalk "！- 提示 -！", "", bc_self;
 	mes "^4d4dff想把要用的道具或技能图标准备好，就把它拖到快捷键栏里。";
 	mes "！- 提示 -！";
@@ -1774,83 +1769,83 @@ lasagna,217,192,5	script	Kittie#do_hint01	4_CAT_SAILOR1,{
 	close;
 }
 
-lasagna,260,134,3	script	Rasmus#dorcon01	4_CAT_SAILOR3,{
+lasagna,260,134,3	script	拉斯穆斯#dorcon01	4_CAT_SAILOR3,{
 	npctalk "呼，你们这些小屁孩……对我而言太嫩了。", "", bc_self;
 	end;
 }
 
-lasagna,244,231,3	script	Crewman of Anchovy Fish	4_CAT_SAILOR1,{
+lasagna,244,231,3	script	凤尾鱼号船员	4_CAT_SAILOR1,{
 	npctalk "一团十团二十团三十团毛线球……好多啊！", "", bc_self;
 	end;
 }
 
-lasagna,190,239,5	script	Youngster meow#dorcon01	4_CAT_ADV1,{
+lasagna,190,239,5	script	年轻喵族#dorcon01	4_CAT_ADV1,{
 	npctalk "想玩跷跷板的人——过来——", "", bc_self;
 	end;
 }
 
-lasagna,180,230,7	script	Youngster meow#dorcon02	4_CAT_ADV2,{
+lasagna,180,230,7	script	年轻喵族#dorcon02	4_CAT_ADV2,{
 	npctalk "这个怎么不滚——让它滚起来——", "", bc_self;
 	end;
 }
 
-lasagna,192,245,7	script	Youngster meow#dorcon03	4_CAT_REST,{
+lasagna,192,245,7	script	年轻喵族#dorcon03	4_CAT_REST,{
 	npctalk "这就是那间有名的烤箱酒馆？", "", bc_self;
 	end;
 }
 
-lasagna,184,234,5	script	Youngster meow#dorcon04	4_M_BABYCAT,{
-	npctalk "Tos#dorcon01", "", bc_self;
+lasagna,184,234,5	script	年轻喵族#dorcon04	4_M_BABYCAT,{
+	npctalk "", "托斯#dorcon01", bc_self;
 	end;
 }
 
-lasagna,186,231,3	script	Youngster meow#dorcon05	4_DR_KID_01,{
+lasagna,186,231,3	script	年轻喵族#dorcon05	4_DR_KID_01,{
 	emotion ET_CRY;
 	npctalk "别像个乡巴佬一样东张西望！", "", bc_self;
 	end;
 }
 
-lasagna,226,196,5	script	Aram#dorcon01	4_DR_F_02,{
+lasagna,226,196,5	script	阿拉姆#dorcon01	4_DR_F_02,{
 	setpcblock PCBLOCK_NPC, true;
-	npctalk "哇！你看这个！这里就是他们三人坐过的地方吗？", "Porto#dorcon01", bc_self;
+	npctalk "哇！你看这个！这里就是他们三人坐过的地方吗？", "波尔图#dorcon01", bc_self;
 	sleep2 2000;
 	npctalk "唉！你这不就等于大喊自己是乡巴佬吗！", "", bc_self;
 	sleep2 2000;
-	npctalk "既然来了，就立个烤箱誓约吧！", "Tos#dorcon01", bc_self;
+	npctalk "既然来了，就立个烤箱誓约吧！", "托斯#dorcon01", bc_self;
 	sleep2 2000;
-	npctalk "我们就是特意为了这个才来的！我们要像佩佩罗奇诺、托马斯和甘贝里那样，团结一致，干出一番事业！", "", bc_self;
+	npctalk "我们就是特意为了这个才来的！我们要像佩佩隆奇诺、托马斯和甘贝里那样，团结一致，干出一番事业！", "", bc_self;
 	sleep2 2000;
-	npctalk "Porto#dorcon01", "老板！三杯卡露娜奶，用力摇匀！上面再加蛋黄！", bc_self;
+	npctalk "老板！三杯卡鲁哇奶，用力摇匀！上面再加蛋黄！", "波尔图#dorcon01", bc_self;
 	sleep2 2000;
-	npctalk "Tos#dorcon01", "哦，真丢人！我要说多少次，这里的人都是搅拌着喝的？！", bc_self;
+	npctalk "哦，真丢人！我要说多少次，这里的人都是搅拌着喝的？！", "托斯#dorcon01", bc_self;
 	sleep2 2000;
-	npctalk "搅拌还是摇匀，好喝不就行了？", "Porto#dorcon01", bc_self;
+	npctalk "搅拌还是摇匀，好喝不就行了？", "波尔图#dorcon01", bc_self;
 	sleep2 2000;
 	npctalk "别让人发现你是外地来的！", "", bc_self;
 	sleep2 2000;
-	npctalk "看出来又怎样？！这里本来就没几个千层面本地人。", "是啊，既然来了就好好享受吧。我尽量别表现得太明显。", bc_self;
+	npctalk "看出来又怎样？！这里本来就没几个罗札纳本地人。", "是啊，既然来了就好好享受吧。我尽量别表现得太明显。", bc_self;
 	sleep2 1000;
-	npctalk "Porto#dorcon01", "", bc_self;
+	npctalk "", "波尔图#dorcon01", bc_self;
 	sleep2 2000;
-	npctalk "是是，我不会露馅的。", "Tos#dorcon01", bc_self;
+	npctalk "是是，我不会露馅的。", "托斯#dorcon01", bc_self;
 	sleep2 2000;
-	npctalk "三杯卡露娜奶，来了。", "Employee#dorcon01", bc_self;
+	npctalk "三杯卡鲁哇奶，来了。", "员工#dorcon01", bc_self;
 	sleep2 2000;
-	npctalk "终于来了！", "Porto#dorcon01", bc_self;
+	npctalk "终于来了！", "波尔图#dorcon01", bc_self;
 	sleep2 2000;
-	classchange( 4_CAT_SAILOR3, "Employee#dorcon01", bc_self );
-	npctalk "大家一起干杯吧。把杯子举高！", "Tos#dorcon01", bc_self;
+	classchange( 4_CAT_SAILOR3, "员工#dorcon01", bc_self );
+	npctalk "大家一起干杯吧。把杯子举高！", "托斯#dorcon01", bc_self;
 	sleep2 2000;
-	classchange( HIDDEN_WARP_NPC, "Employee#dorcon01", bc_self );
+	classchange( HIDDEN_WARP_NPC, "员工#dorcon01", bc_self );
 	npctalk "我们虽非同日生，但求同日死！", "干嘛提死啊？", bc_self;
 	sleep2 2000;
-	npctalk "Tos#dorcon01", "那么，一人为众！众为一人！", bc_self;
+	npctalk "那么，一人为众！众为一人！", "托斯#dorcon01", bc_self;
 	sleep2 2000;
 	npctalk "真是肉麻……", "", bc_self;
 	sleep2 2000;
-	npctalk "既然都来了，就该尝尝卡露娜奶！", "别这么大声！大家都在看！", bc_self;
+	npctalk "既然都来了，就该尝尝卡鲁哇奶！", "别这么大声！大家都在看！", bc_self;
 	sleep2 2000;
-	npctalk "Aram#dorcon01", "说起来，你才是最大声的那个。", bc_self;
+	npctalk "说起来，你才是最大声的那个。", "阿拉姆#dorcon01", bc_self;
 	sleep2 1000;
 	npctalk "......", "", bc_self;
 	sleep2 2000;
@@ -1859,20 +1854,20 @@ lasagna,226,196,5	script	Aram#dorcon01	4_DR_F_02,{
 	end;
 }
 
-lasagna,228,193,5	script	Porto#dorcon01	4_DR_M_01,{
+lasagna,228,193,5	script	波尔图#dorcon01	4_DR_M_01,{
 	setpcblock PCBLOCK_NPC, true;
-	npctalk "Tos#dorcon01", "", bc_self;
+	npctalk "", "托斯#dorcon01", bc_self;
 	sleep2 2000;
 	npctalk "果然名不虚传，这里挤满了人。", "别像个乡巴佬一样东张西望！", bc_self;
 	sleep2 2000;
-	npctalk "Aram#dorcon01", "", bc_self;
+	npctalk "", "阿拉姆#dorcon01", bc_self;
 	sleep2 2000;
 	npctalk "想了解信息，永远记得右键！右键点击人类、道具和猫，就能知道更多！", "想了解信息，永远记得右键！右键点击人类、道具和猫，就能知道更多！", bc_self;
 	setpcblock PCBLOCK_NPC, false;
 	end;
 }
 
-lasagna,229,197,5	script	Tos#dorcon01	4_DR_M_02,{
+lasagna,229,197,5	script	托斯#dorcon01	4_DR_M_02,{
 	setpcblock PCBLOCK_NPC, true;
 	npctalk "幸——福——", "", bc_self;
 	sleep2 2000;
@@ -1881,14 +1876,14 @@ lasagna,229,197,5	script	Tos#dorcon01	4_DR_M_02,{
 	end;
 }
 
-lasagna,226,199,5	script	Employee#dorcon01	HIDDEN_WARP_NPC,{ end; }
+lasagna,226,199,5	script	员工#dorcon01	HIDDEN_WARP_NPC,{ end; }
 
-lasagna,230,192,3	script	Perky Doram#do_hint03	4_CAT_ADV2,{
+lasagna,230,192,3	script	活泼的喵族#do_hint03	4_CAT_ADV2,{
 	npctalk "人类说他们的武器通过精炼会变强。精炼到底是什么？", "", bc_self;
 	end;
 }
 
-lasagna,235,193,3	script	Customer#dorcon02	4_DR_TORTEL,{
+lasagna,235,193,3	script	顾客#dorcon02	4_DR_TORTEL,{
 	setpcblock PCBLOCK_NPC, true;
 	npctalk "DEX（灵巧）关系到命中和施法速度。", "", bc_self;
 	sleep2 1000;
@@ -1901,30 +1896,30 @@ lasagna,235,193,3	script	Customer#dorcon02	4_DR_TORTEL,{
 	end;
 }
 
-lasagna,220,190,5	script	Customer#dorcon01	4_CAT_ADV1,{
-	npctalk "卡露娜奶应该搅拌着喝。最近来了很多流浪者，摇匀喝的人也变多了。不过那是小孩的喝法，不是吗？", "", bc_self;
+lasagna,220,190,5	script	顾客#dorcon01	4_CAT_ADV1,{
+	npctalk "卡鲁哇奶应该搅拌着喝。最近来了很多流浪者，摇匀喝的人也变多了。不过那是小孩的喝法，不是吗？", "", bc_self;
 	end;
 }
 
-lasagna,220,194,3	script	Serious Doram#do_hint08	4_M_MERCAT1,{
-	npctalk "卡露娜奶应该摇匀喝。充分发酵的卡露娜与牛奶混合后会产生细腻的风味，必须摇匀才能品尝到。", "", bc_self;
+lasagna,220,194,3	script	认真的喵族#do_hint08	4_M_MERCAT1,{
+	npctalk "卡鲁哇奶应该摇匀喝。充分发酵的卡鲁哇与牛奶混合后会产生细腻的风味，必须摇匀才能品尝到。", "", bc_self;
 	end;
 }
 
 
-lasagna,221,175,5	script	Smart Doram#do_hint06	4_CAT_SAILOR2,{
+lasagna,221,175,5	script	聪明的喵族#do_hint06	4_CAT_SAILOR2,{
 	npctalk "[喵混混]", "", bc_self;
 	end;
 }
 
-lasagna,219,178,3	script	Kittie#do_hint02	4_CAT_SAILOR3,{
+lasagna,219,178,3	script	琪蒂#do_hint02	4_CAT_SAILOR3,{
 	npctalk "遇到麻烦就找他们帮忙。你知道的，义警队里的那对双胞胎。阿利奥……阿里……奥利……", "", bc_self;
 	end;
 }
 
 // Intended ?
 /*
-lasagna,208,179,3	script	Kittie the Eraser#do_hi	4_M_MERCAT1,{
+lasagna,208,179,3	script	橡皮擦琪蒂#do_hi	4_M_MERCAT1,{
 	npctalk "I'm deleting all the rows from 7711 through 7720.", "", bc_self;
 	lasagna_quest[0] = 0;
 	for ( .@quest_id = 7711; .@quest_id < 7721; .@quest_id++ ) {
@@ -1935,17 +1930,17 @@ lasagna,208,179,3	script	Kittie the Eraser#do_hi	4_M_MERCAT1,{
 }
 */
 
-lasagna,225,174,3	script	Doram On The Journey#do	4_CAT_3COLOR,{
+lasagna,225,174,3	script	旅行中的喵族#do	4_CAT_3COLOR,{
 	npctalk "[喵混混]", "", bc_self;
 	end;
 }
 
-lasagna,233,174,5	script	Boozer#dorcon01	4_CAT_SAILOR5,{
+lasagna,233,174,5	script	酒鬼#dorcon01	4_CAT_SAILOR5,{
 	npctalk "对！他们是阿利奥和奥利戈！", "", bc_self;
 	end;
 }
 
-lasagna,236,173,3	script	Boozer#dorcon02	4_CAT_SAILOR5,{
+lasagna,236,173,3	script	酒鬼#dorcon02	4_CAT_SAILOR5,{
 	npctalk "阿利奥和奥利戈！", "", bc_self;
 	end;
 }
@@ -1962,7 +1957,6 @@ lasagna,236,179,5	script	喵咕#dorcon01	4_DR_M_01,{
 	mes "是阿利奥和奥利奥，不是阿利奥和奥利戈。你念得像个甜点名字。";
 	mes "是阿利奥和奥利奥。";
 	next;
-	mes "咕喵#dorcon01";
 	mes "[喵混混]";
 	next;
 	mes "随便吧。";
@@ -1976,7 +1970,6 @@ lasagna,236,179,5	script	喵咕#dorcon01	4_DR_M_01,{
 
 lasagna,235,178,5	script	咕喵#dorcon01	4_DR_M_02,{
 	mes "大家快躲开！我很危险。";
-	mes "喵咕#dorcon01";
 	npctalk "[混混喵]", "", bc_self;
 	next;
 	mes "我……不行了……你先走吧……";
@@ -1986,18 +1979,17 @@ lasagna,235,178,5	script	咕喵#dorcon01	4_DR_M_02,{
 	mes "好！这样到了新世界应该不会被人小瞧了。";
 	mes "我们准备得可真是万全！";
 	next;
-	mes "喵咕#dorcon01";
 	mes "[费图奇娜]";
 	next;
 	emotion ET_BEST;
 	emotion ET_BEST, getnpcid(0, "喵咕#dorcon01");
 	mes "我在这里工作有一阵子了，但还是最年轻的，所以碗全归我洗。";
 	mes "[费图奇娜]";
-	npctalk "出海前一杯，远航归来上岸一杯，为从外地来立烤箱誓约的人一杯，为每位常客一杯，为看别人喝才跟着喝的人一杯……", "[费图奇娜]";
+	npctalk "出海前一杯，远航归来上岸一杯，为从外地来立烤箱誓约的人一杯，为每位常客一杯，为看别人喝才跟着喝的人一杯……", "费图奇娜#dorcon01";
 	close;
 }
 
-lasagna,232,187,6	script	Fettuccina#dorcon01	4_CAT_SAILOR2,{
+lasagna,232,187,6	script	费图奇娜#dorcon01	4_CAT_SAILOR2,{
 	mes "所以基本上，我每天要洗多少杯子你根本想象不到。不光如此，还要听义警队和商会里低阶喵族们发牢骚，还要给新手冒险者出主意。";
 	mes "[费图奇娜]";
 	next;
@@ -2012,7 +2004,7 @@ lasagna,232,187,6	script	Fettuccina#dorcon01	4_CAT_SAILOR2,{
 	close;
 }
 
-lasagna,131,245,5	script	The diligent second son	4_CAT_3COLOR,{
+lasagna,131,245,5	script	勤奋的次子	4_CAT_3COLOR,{
 	if (checkweight(1001,1) == 0) {
 		mes "[约塔·恰拉]";
 		mes "爸爸，妈妈。请一定要平安回家。";
@@ -2036,21 +2028,21 @@ lasagna,131,245,5	script	The diligent second son	4_CAT_3COLOR,{
 		mes "那好吧。我来当你们的爸爸！！";
 		mes "[丹迪·恰拉]";
 		next;
-		emotion ET_CRY, getnpcid(0, "The skittish fourth#wea");
+		emotion ET_CRY, getnpcid(0, "胆小的四子#wea");
 		mes "～哭得停不下来～不要！！妈妈！！爸爸！！";
 		mes "[戈玛·恰拉]";
 		next;
-		emotion ET_BEST, getnpcid(0, "The brave third#weapon");
+		emotion ET_BEST, getnpcid(0, "勇敢的三子#weapon");
 		mes "他们俩都会没事的，很快就会回来。所以别哭了！你非得把他弄哭吗，啊？！";
 		mes "- 约塔灰心丧气，默默地又开始做另一个护符。 -";
 		next;
-		emotion ET_CRY, getnpcid(0, "The skittish fourth#wea");
+		emotion ET_CRY, getnpcid(0, "胆小的四子#wea");
 		emotion ET_PROFUSELY_SWEAT;
 		mes "[约塔·恰拉]";
 		mes "想要护符的话，可以用喵族信物来换。我这儿有一堆护符。";
 		next;
 		mes "下级竹荚鱼护符";
-		emotion ET_FRET, getnpcid(0, "The sensitive-minded ela");
+		emotion ET_FRET, getnpcid(0, "敏感的艾拉");
 		emotion ET_PROFUSELY_SWEAT;
 		mes "下级树叶护符";
 		next;
@@ -2112,10 +2104,10 @@ lasagna,131,245,5	script	The diligent second son	4_CAT_3COLOR,{
 	close;
 }
 
-lasagna,131,250,5	script	The brave third#weapon	4_DR_M_02,{
+lasagna,131,250,5	script	勇敢的三子#weapon	4_DR_M_02,{
 	if (checkweight(1001,1) == 0) {
 		mes "～嗡嗡～";
-		mes "千层面来的爆破手乔吉在此！";
+		mes "罗札纳来的爆破手乔吉在此！";
 		mes "放下武器，投降吧！";
 		mes "假装投降。";
 		mes "[乔吉·恰拉]";
@@ -2156,7 +2148,7 @@ lasagna,131,250,5	script	The brave third#weapon	4_DR_M_02,{
 		mes "取消";
 		mes "[乔吉·恰拉]";
 		next;
-		emotion ET_CRY, getnpcid(0, "The skittish fourth#wea");
+		emotion ET_CRY, getnpcid(0, "胆小的四子#wea");
 		mes "就这样？";
 		mes "再找找。";
 		close;
@@ -2214,7 +2206,7 @@ lasagna,131,250,5	script	The brave third#weapon	4_DR_M_02,{
 	close;
 }
 
-lasagna,140,250,3	script	The skittish fourth#wea	4_DR_F_01,{
+lasagna,140,250,3	script	胆小的四子#wea	4_DR_F_01,{
 	if (checkweight(1001,1) == 0) {
 		mes "她很容易生气，但会给我做新衣服，说我就该穿得漂漂亮亮的。";
 		mes "我喜欢她……";
@@ -2319,7 +2311,7 @@ lasagna,140,250,3	script	The skittish fourth#wea	4_DR_F_01,{
 	close;
 }
 
-lasagna,140,245,3	script	The sensitive-minded ela	4_CAT_SAILOR3,{
+lasagna,140,245,3	script	敏感的艾拉	4_CAT_SAILOR3,{
 	if (checkweight(1001,1) == 0) {
 		mes "我父亲天生就是个水手，很久以前就出海了，说要去捕世界上最大的金枪鱼。";
 		mes "[戈玛·查拉]";
@@ -2411,7 +2403,7 @@ lasagna,140,245,3	script	The sensitive-minded ela	4_CAT_SAILOR3,{
 }
 
 // Daily Quests
-lasa_fild01,353,370,5	script	Shepherd#dorcon	4_DR_KID_01,{
+lasa_fild01,353,370,5	script	牧羊人#dorcon	4_DR_KID_01,{
 	if (BaseLevel < 6 || BaseLevel > 9) {
 		if (BaseLevel > 9) {
 			if (checkquest(14592,PLAYTIME) == 2)
@@ -2477,7 +2469,7 @@ lasa_fild01,353,370,5	script	Shepherd#dorcon	4_DR_KID_01,{
 			mes "那些草叶法布雷斯和树叶疯兔把整片草地都啃光了。这可不行，我可爱的牛都没东西吃了。";
 			next;
 			if (select( "[牧羊人]", "这样我们的牛就没得吃了。" ) == 2) {
-				mes "[牧羊人]" + strcharinfo(0) + "牛吃不上草，我们就挤不了奶。没有新鲜牛奶，就做不成卡露娜奶。";
+				mes "[牧羊人]" + strcharinfo(0) + "牛吃不上草，我们就挤不了奶。没有新鲜牛奶，就做不成卡鲁哇奶。";
 				mes "[牧羊人]";
 				close;
 			}
@@ -2542,7 +2534,7 @@ OnInit:
 	end;
 }
 
-lasa_fild02,102,372,5	script	Florin#dorcon	4_DR_F_01,{
+lasa_fild02,102,372,5	script	弗洛林#dorcon	4_DR_F_01,{
 	if (BaseLevel < 10 || BaseLevel > 13) {
 		if (BaseLevel > 13) {
 			if (checkquest(14592,PLAYTIME) == 2)
@@ -2607,10 +2599,10 @@ lasa_fild02,102,372,5	script	Florin#dorcon	4_DR_F_01,{
 			mes "真的……你愿意帮我？就算我刚才打了你？那真是太感激了，我现在正需要人帮忙。";
 			next;
 			mes "[弗洛林]";
-			mes "我从这里盛开的花中采集用来发酵卡露娜的蜂蜜，但我们最大的对手——大黄蜂，总在我们动手之前就把蜜全抢走了。";
+			mes "我从这里盛开的花中采集用来发酵卡鲁哇的蜂蜜，但我们最大的对手——大黄蜂，总在我们动手之前就把蜜全抢走了。";
 			next;
-			if (select( "[弗洛林]", "照这样下去，蜂蜜不够，就做不成卡露娜奶。要是大家喝不上卡露娜奶，就会闹起来，然后……" ) == 2) {
-				mes "[弗洛林]" + strcharinfo(0) + "冒险者，我求你了。我们必须阻止千层面退回黑暗时代。一切都靠你了！";
+			if (select( "[弗洛林]", "照这样下去，蜂蜜不够，就做不成卡鲁哇奶。要是大家喝不上卡鲁哇奶，就会闹起来，然后……" ) == 2) {
+				mes "[弗洛林]" + strcharinfo(0) + "冒险者，我求你了。我们必须阻止罗札纳退回黑暗时代。一切都靠你了！";
 				mes "[弗洛林]";
 				close;
 			}
@@ -2689,7 +2681,7 @@ OnInit:
 	end;
 }
 
-lasa_fild02,177,241,5	script	Prok#dorcon	4_DR_M_02,{
+lasa_fild02,177,241,5	script	普罗克#dorcon	4_DR_M_02,{
 	if (BaseLevel < 14 || BaseLevel > 15) {
 		if (BaseLevel > 15) {
 			if (checkquest(14592,PLAYTIME) == 2)
@@ -2831,7 +2823,7 @@ OnInit:
 	end;
 }
 
-lasa_fild02,326,170,5	script	Fisher#dorcon	4_CAT_ADV2,{
+lasa_fild02,326,170,5	script	渔夫#dorcon	4_CAT_ADV2,{
 	if (BaseLevel < 16 || BaseLevel > 19) {
 		if (BaseLevel > 19) {
 			if (checkquest(14592,PLAYTIME) == 2)
@@ -2957,7 +2949,7 @@ OnInit:
 	end;
 }
 
-lasa_fild02,331,251,5	script	Sleepy meow#dorcon	4_CAT_REST,{
+lasa_fild02,331,251,5	script	困倦喵#dorcon	4_CAT_REST,{
 	if (BaseLevel != 20) {
 		if (checkquest(14592,PLAYTIME) == 2)
 			erasequest 14592;
@@ -2981,7 +2973,7 @@ lasa_fild02,331,251,5	script	Sleepy meow#dorcon	4_CAT_REST,{
 		case 2:
 			if (countitem(921) < 5) {
 				mes "[瞌睡喵]";
-				mes "你去千层面的话，那里有个 ^4D4DFF[码头]^000000。从那儿搭船就能去新世界。无论你去哪里，都祝你一切顺利。谢谢你所做的一切喵。";
+				mes "你去罗札纳的话，那里有个 ^4D4DFF[码头]^000000。从那儿搭船就能去新世界。无论你去哪里，都祝你一切顺利。谢谢你所做的一切喵。";
 				next;
 				mes "[瞌睡喵]";
 				mes "冒险者……救救我……";
@@ -3001,7 +2993,7 @@ lasa_fild02,331,251,5	script	Sleepy meow#dorcon	4_CAT_REST,{
 			mes "[瞌睡喵]";
 			next;
 			mes "照这样下去我快要死了……";
-			mes "你去千层面的话，那里有个 ^4D4DFF[码头]^000000。从那儿搭船就能去新世界。无论你去哪里，都祝你一切顺利。谢谢你所做的一切喵。";
+			mes "你去罗札纳的话，那里有个 ^4D4DFF[码头]^000000。从那儿搭船就能去新世界。无论你去哪里，都祝你一切顺利。谢谢你所做的一切喵。";
 			erasequest 14591;// Secret Ingredient
 			delitem 921,5;// Mushroom Spore
 			getexp 500,1000;
@@ -3144,7 +3136,7 @@ OnInit:
 	end;
 }
 
-lasagna,222,187,3	script	Chef#dorcon	4_CAT_CHEF,{
+lasagna,222,187,3	script	厨师#dorcon	4_CAT_CHEF,{
 	if (BaseLevel < 6 || BaseLevel > 20) {
 		if (checkquest(14592,PLAYTIME) == 2)
 			erasequest 14592;
@@ -3251,11 +3243,11 @@ lasagna,222,187,3	script	Chef#dorcon	4_CAT_CHEF,{
 			mes "那就直说吧。";
 			mes "[厨师]";
 			next;
-			mes "千层面的居民都爱喝卡鲁纳牛奶，可你知道它是怎么做出来的吗？卡鲁纳是用充分发酵的卡鲁纳克和新鲜牛奶制成的。";
+			mes "罗札纳的居民都爱喝卡鲁哇牛奶，可你知道它是怎么做出来的吗？卡鲁哇是用充分发酵的卡鲁哇克和新鲜牛奶制成的。";
 			mes "[厨师]";
 			next;
 			if (select( "配方很简单，所以要用好食材才能做出最好的味道。因此我们用自己养的牛产的奶。", "[厨师]" ) == 2) {
-				mes "你一定去过拉维奥尔平原吧。你肯定是从那儿来的。" + strcharinfo(0) + "[厨师]";
+				mes "你一定去过罗比奥平原吧。你肯定是从那儿来的。" + strcharinfo(0) + "[厨师]";
 				mes "你要去的地方不是哨所。往南一直走，会看到岔路口，然后从下面那条路一直往前走。";
 				close;
 			}
@@ -3276,13 +3268,13 @@ lasagna,222,187,3	script	Chef#dorcon	4_CAT_CHEF,{
 				mes "[厨师]";
 				mes "报酬到哪儿都一样。准备好了吗？";
 				next;
-				mes "你知道做卡鲁纳牛奶最重要的是什么吗？是充分发酵的卡鲁纳和新鲜牛奶。";
+				mes "你知道做卡鲁哇牛奶最重要的是什么吗？是充分发酵的卡鲁哇和新鲜牛奶。";
 				mes "[厨师]";
 				next;
-				mes "卡鲁纳是南边桥附近的卡鲁纳大师做的。具体加了什么我不能说，那是商业机密，但我可以告诉你一件事。";
+				mes "卡鲁哇是南边桥附近的卡鲁哇大师做的。具体加了什么我不能说，那是商业机密，但我可以告诉你一件事。";
 				mes "[厨师]";
 				next;
-				mes "是蜂蜜。千层面的田野开满香甜的花，所以能采到很多优质蜂蜜。";
+				mes "是蜂蜜。罗札纳的田野开满香甜的花，所以能采到很多优质蜂蜜。";
 				mes "[厨师]";
 				next;
 				mes "但你知道采蜜时最大的敌人是谁吗？是野生大黄蜂。";
@@ -3340,7 +3332,7 @@ lasagna,222,187,3	script	Chef#dorcon	4_CAT_CHEF,{
 				mes "[厨师]";
 				mes "喂，冒险者，怎么样？你愿意去收拾那些狼，救救我们的鱼串吗？";
 				next;
-				mes "卡鲁纳牛奶？" + strcharinfo(0) + "[厨师]";
+				mes "卡鲁哇牛奶？" + strcharinfo(0) + "[厨师]";
 				mes "不不。那是人气最高的菜。我说的是……对了！我是说厨师的招牌菜。";
 				next;
 				mes "[厨师]";
@@ -3365,7 +3357,7 @@ lasagna,222,187,3	script	Chef#dorcon	4_CAT_CHEF,{
 				mes "发生什么事了？";
 				mes "[厨师]";
 				next;
-				mes "你一定听说过拉维奥尔森林里的那个洞窟。那里有说不清的东西，也有能做美味食材的生物。";
+				mes "你一定听说过罗比奥森林里的那个洞窟。那里有说不清的东西，也有能做美味食材的生物。";
 				mes "[厨师]";
 				next;
 				mes "你知道变异蘑菇吧？它们的「蘑菇孢子」是我们做鱼饼必不可少的材料。";
@@ -3381,7 +3373,7 @@ lasagna,222,187,3	script	Chef#dorcon	4_CAT_CHEF,{
 				mes "我本不想找那个瞌睡虫帮忙，可当时只有他有空。";
 				next;
 				mes "[厨师]";
-				mes "你一定听说过拉维奥尔森林里的那个洞窟。那里有说不清的东西，也有能做美味食材的生物。";
+				mes "你一定听说过罗比奥森林里的那个洞窟。那里有说不清的东西，也有能做美味食材的生物。";
 				next;
 				mes "所以你是想让我去弄些蘑菇孢子，对吧？";
 				mes "[厨师]";
@@ -3544,10 +3536,10 @@ lasagna,222,187,3	script	Chef#dorcon	4_CAT_CHEF,{
 		mes "草地绿棉虫和树叶疯兔各五只。这样就能吓住附近其余的，让它们不敢靠近。";
 		mes "[厨师]";
 		next;
-		mes "过了南边的桥会看到岔路口。走下面那条路，一直往前就是牧羊人所在的拉维奥尔平原。";
+		mes "过了南边的桥会看到岔路口。走下面那条路，一直往前就是牧羊人所在的罗比奥平原。";
 		mes "[厨师]";
 		next;
-		if (select( "全都抓完后可以来找我，也可以去找那边的<NAVI>^4D4DFF[牧羊人]^000000<INFO>lasa_fild01,353,370,000,1,</INFO></NAVI>。", "[厨师]" ) == 2) {
+		if (select( "全都抓完后可以来找我，也可以去找那边的<NAVI>^4D4DFF[牧羊人]^000000<INFO>lasa_fild01,353,370,0,101,0</INFO></NAVI>。", "[厨师]" ) == 2) {
 			mes "报酬到哪儿都一样。准备好了吗？" + strcharinfo(0) + "[厨师]";
 			mes "新的一天刚开始，野生大黄蜂也开始活动了。";
 			close;
@@ -3558,13 +3550,13 @@ lasagna,222,187,3	script	Chef#dorcon	4_CAT_CHEF,{
 			mes "我们的蜂蜜有危险了！";
 			next;
 			mes "[厨师]";
-			mes "请去拉维奥尔森林抓十只野生大黄蜂。";
+			mes "请去罗比奥森林抓十只野生大黄蜂。";
 			next;
 			mes "[厨师]";
-			mes "办完后可以来找我，也可以向在那儿采蜜的<NAVI>^4D4DFF[弗洛林]^000000<INFO>lasa_fild02,102,372,000,1,</INFO></NAVI>汇报。";
+			mes "办完后可以来找我，也可以向在那儿采蜜的<NAVI>^4D4DFF[弗洛林]^000000<INFO>lasa_fild02,102,372,0,101,0</INFO></NAVI>汇报。";
 			next;
 			mes "[厨师]";
-			mes "你该去拉维奥尔森林。请带五个黏糊蛙蹼来。";
+			mes "你该去罗比奥森林。请带五个黏糊蛙蹼来。";
 			next;
 			mes "[厨师]";
 			mes "到了那儿，顺便抓十只甜罗达蛙。它们最近数量增加得太多了。";
@@ -3573,7 +3565,7 @@ lasagna,222,187,3	script	Chef#dorcon	4_CAT_CHEF,{
 			close;
 		case 14588:
 			mes "[厨师]";
-			mes "拿到黏糊蛙蹼后可以交给我，也可以交给<NAVI>^4D4DFF[普罗克]^000000<INFO>lasa_fild02,177,241,000,1,</INFO></NAVI>。反正他说好会送过来的。";
+			mes "拿到黏糊蛙蹼后可以交给我，也可以交给<NAVI>^4D4DFF[普罗克]^000000<INFO>lasa_fild02,177,241,0,101,0</INFO></NAVI>。反正他说好会送过来的。";
 			next;
 			mes "[厨师]";
 			mes "仔细听好，因为这是最重要的请求。";
@@ -3582,7 +3574,7 @@ lasagna,222,187,3	script	Chef#dorcon	4_CAT_CHEF,{
 			mes "请让猎手沙漠狼远离我的鱼串。抓十只狼，它们就不会再打我鱼串的主意了。";
 			next;
 			mes "[厨师]";
-			mes "办完后可以来找我，也可以向在拉维奥尔森林晒鱼的<NAVI>^4D4DFF[渔夫]^000000<INFO>lasa_fild02,326,170,000,1,</INFO></NAVI>汇报。";
+			mes "办完后可以来找我，也可以向在罗比奥森林晒鱼的<NAVI>^4D4DFF[渔夫]^000000<INFO>lasa_fild02,326,170,0,101,0</INFO></NAVI>汇报。";
 			erasequest 14592;// Resting Time
 			setquest 14588;// The Competition
 			close;
@@ -3603,7 +3595,7 @@ lasagna,222,187,3	script	Chef#dorcon	4_CAT_CHEF,{
 			mes "请带五个蘑菇孢子来，再抓十只变异蘑菇。";
 			next;
 			mes "[厨师]";
-			mes "办完后可以来找我，也可以向在森林里打盹的<NAVI>^4D4DFF[困倦喵]^000000<INFO>lasa_fild02,331,251,000,1,</INFO></NAVI>汇报。";
+			mes "办完后可以来找我，也可以向在森林里打盹的<NAVI>^4D4DFF[困倦喵]^000000<INFO>lasa_fild02,331,251,0,101,0</INFO></NAVI>汇报。";
 			next;
 			mes "[萨满喵]";
 			mes "今天不会无聊吧？不知道谁会来看我。是谁呀？";
@@ -3623,7 +3615,7 @@ lasagna,222,187,3	script	Chef#dorcon	4_CAT_CHEF,{
 			mes "[厨师]";
 			mes "请带五个蘑菇孢子来，再抓十只变异蘑菇。";
 			next;
-			mes "老奶奶？她看起来可不像。倒像个非常……年轻的多兰族。";
+			mes "老奶奶？她看起来可不像。倒像个非常……年轻的喵族。";
 			mes "[萨满喵]";
 			erasequest 14592;// Resting Time
 			setquest 14591;// Secret Ingredient
@@ -3638,7 +3630,7 @@ OnInit:
 	end;
 }
 
-lasagna,85,93,5	script	Shaman meow#dorcon	4_DR_KID_01,{
+lasagna,85,93,5	script	萨满喵#dorcon	4_DR_KID_01,{
 	if (conch_in_boatswain == 1) {
 		mes "不是我！";
 		mes "喵喵";
@@ -3650,7 +3642,7 @@ lasagna,85,93,5	script	Shaman meow#dorcon	4_DR_KID_01,{
 		mes "奶奶听到会伤心的。这世上充满了存在却看不见的东西。比如说，就聊聊你的事吧。";
 		mes "[萨满喵]";
 		next;
-		mes "在新世界被发现之前，我们多兰族以为千层面就是世界的尽头。新世界是看不见的，住在那里的无数人也一样。" + strcharinfo(0) + "[萨满喵]";
+		mes "在新世界被发现之前，我们喵族以为罗札纳就是世界的尽头。新世界是看不见的，住在那里的无数人也一样。" + strcharinfo(0) + "[萨满喵]";
 		mes "可新世界和人类不都真实存在吗？";
 		next;
 		mes "[萨满喵]";
@@ -3717,7 +3709,7 @@ lasagna,85,93,5	script	Shaman meow#dorcon	4_DR_KID_01,{
 		next;
 		mes "[萨满喵]";
 		mes "但成为萨满喵在很多方面都会更好。恶灵会越来越严重地消耗他，好夺取他的身体。";
-		npctalk "[萨满喵]", "", bc_self;
+		npctalk "萨满喵#dorcon", "", bc_self;
 		next;
 		mes "听说过去水手长曾和甘贝里船长一起拜访过前一任萨满喵。可他听到一半就冲了出去，再也没回来。";
 		mes "[萨满喵]";
@@ -3727,7 +3719,7 @@ lasagna,85,93,5	script	Shaman meow#dorcon	4_DR_KID_01,{
 		next;
 		mes "[萨满喵]";
 		mes "也不见得。他看起来精神得很。";
-		npctalk "[萨满喵]", "", bc_self;
+		npctalk "萨满喵#dorcon", "", bc_self;
 		next;
 		mes "看来不是谁都能当孔克利纳的水手长。他是怎么撑到现在的？";
 		mes "如果他选择不当萨满喵，那他就得每天^0000cd依赖新的符咒^000000。但如果他选择当萨满喵，就让他来见我。";
@@ -3776,9 +3768,9 @@ lasagna,85,93,5	script	Shaman meow#dorcon	4_DR_KID_01,{
 		next;
 		mes "今天的护符是^0000cd5个罗勒锁和1瓶圣水^000000。在新世界里，圣水能驱走恶灵。水手长接触新世界的人时，它一定起了作用。";
 		mes "今天的护符是^0000cd20个罗勒锁^000000。今天你的手会弄得很脏。抱歉。但奶奶已经发话了，就是这么回事。";
-		npctalk "[萨满喵]", "", bc_self;
+		npctalk "萨满喵#dorcon", "", bc_self;
 		next;
-		mes "缠着水手长的那个东西也是朵拉姆。它特别讨厌罗勒锁。这就是要用罗勒锁的原因。" + strcharinfo(0) + "今天的护符是^0000cd20个罗勒和5个罗勒锁^000000。和第一次一样。最基础的才最有用。";
+		mes "缠着水手长的那个东西也是喵族。它特别讨厌罗勒锁。这就是要用罗勒锁的原因。" + strcharinfo(0) + "今天的护符是^0000cd20个罗勒和5个罗勒锁^000000。和第一次一样。最基础的才最有用。";
 		mes "[萨满喵]";
 		next;
 		mes "愿你平安顺遂。告诉水手长，他什么时候改变主意都可以回来。";
@@ -3810,7 +3802,7 @@ lasagna,85,93,5	script	Shaman meow#dorcon	4_DR_KID_01,{
 				mes "^0000cd20个罗勒锁^000000。今天你的手会弄得很脏。抱歉。但奶奶已经发话了，就是这么回事。";
 			next;
 			mes "[萨满喵]";
-			mes "缠着水手长的那个东西也是朵拉姆。它特别讨厌罗勒锁。这就是要用罗勒锁的原因。";
+			mes "缠着水手长的那个东西也是喵族。它特别讨厌罗勒锁。这就是要用罗勒锁的原因。";
 			close;
 		case 0:
 		case 1:
@@ -3844,7 +3836,7 @@ lasagna,85,93,5	script	Shaman meow#dorcon	4_DR_KID_01,{
 				break;
 			}
 			next;
-			mes "打听千层面。";
+			mes "打听罗札纳。";
 			mes "结束对话。";
 			erasequest 14559;// Charm Effect Duration
 			setquest .@quest_id;
@@ -3852,14 +3844,14 @@ lasagna,85,93,5	script	Shaman meow#dorcon	4_DR_KID_01,{
 		}
 	}
 	mes "[治安队向导]";
-	mes "在千层面，清新的海风总会轻拂你的胡须。";
+	mes "在罗札纳，清新的海风总会轻拂你的胡须。";
 	next;
 	mes "多亏了这湿润的空气，我们的奶酪才熟成得那么美味。";
 	mes "[治安队向导]";
 	close;
 }
 
-lasagna,174,160,3	script	Vigilante Guide#lasa	4_DR_SOLDIER,5,5,{
+lasagna,174,160,3	script	治安队向导#lasa	4_DR_SOLDIER,5,5,{
 	mes "哦！你还没见过我们的队长吗？";
 	mes "[治安队向导]";
 	mes "嗯……";
@@ -3874,13 +3866,13 @@ lasagna,174,160,3	script	Vigilante Guide#lasa	4_DR_SOLDIER,5,5,{
 	case 2:
 		if (lasagna_quest[1] < 2) {
 			if (lasagna_quest[1] == 0) {
-				mes "千层面是位于远星大陆尽头的港口城镇。";
+				mes "罗札纳是位于远星大陆尽头的港口城镇。";
 				mes "多亏了佩佩隆奇诺队长、甘贝里船长和托马托马斯船长的努力，它才成为一个小而繁荣的城镇！";
 				next;
 			}
 			mes "[治安队向导]";
 			mes "再见。";
-			mes "治安队向导：欢迎来到港口城镇千层面。";
+			mes "治安队向导：欢迎来到港口城镇罗札纳。";
 			next;
 			mes "治安队向导：如果你需要帮助，随时欢迎到治安队来。";
 			mes "哟！";
@@ -3913,9 +3905,9 @@ OnInit:
 	questinfo( QTYPE_QUEST, QMARK_YELLOW, "!isbegin_quest(11435)" );
 	end;
 }
-lasagna,202,291,3	duplicate(Vigilante Guide#lasa)	Vigilante Guide#lasa2	4_DR_SOLDIER,5,5
+lasagna,202,291,3	duplicate(治安队向导#lasa)	治安队向导#lasa2	4_DR_SOLDIER,5,5
 
-lasagna,233,197,5	script	Vigilante Olio#lasa	4_DR_OLIO,{
+lasagna,233,197,5	script	治安队员奥利奥#lasa	4_DR_OLIO,{
 	if (lasagna_quest[1] == 0) {
 		mes "我会尽我所能帮你！";
 		mes "打听治安队。";
@@ -3929,9 +3921,9 @@ lasagna,233,197,5	script	Vigilante Olio#lasa	4_DR_OLIO,{
 	if (lasagna_quest[1] == 2) {
 		if (checkweight(1001,1) == 0) {
 			mes "可以说，我们在这座镇上起着关键作用！";
-			mes "所有年轻的朵拉姆也都想加入我们！";
+			mes "所有年轻的喵族也都想加入我们！";
 			mes "[治安队员奥利奥]";
-			mes "治安队成立没多久，但在我们出现之前，千层面是个衰败的镇子，多亏了我们，镇子才有今天的繁荣！";
+			mes "治安队成立没多久，但在我们出现之前，罗札纳是个衰败的镇子，多亏了我们，镇子才有今天的繁荣！";
 			mes "[治安队员奥利奥]";
 			close;
 		}
@@ -3946,7 +3938,7 @@ lasagna,233,197,5	script	Vigilante Olio#lasa	4_DR_OLIO,{
 		mes "总之！别提这些丧气事了！";
 		mes "[治安队员奥利奥]";
 		next;
-		mes "千层面的前景一度黯淡，但他们商议后决定，由佩佩隆奇诺队长掌管治安队保卫城镇，甘贝里船长和托马托马斯船长则带领商队。";
+		mes "罗札纳的前景一度黯淡，但他们商议后决定，由佩佩隆奇诺队长掌管治安队保卫城镇，甘贝里船长和托马托马斯船长则带领商队。";
 		mes "打听商队。";
 		next;
 		mes "[治安队员奥利奥]";
@@ -3993,7 +3985,7 @@ lasagna,233,197,5	script	Vigilante Olio#lasa	4_DR_OLIO,{
 		mes "[治安队员奥利奥]";
 		next;
 		mes "这不奇怪！";
-		mes "朵拉姆别的没有，就是好奇心强！";
+		mes "喵族别的没有，就是好奇心强！";
 		next;
 		select("[治安队员奥利奥]");
 		mes "加入治安队需要队长的许可，你最好去问他。";
@@ -4062,7 +4054,7 @@ lasagna,233,197,5	script	Vigilante Olio#lasa	4_DR_OLIO,{
 	close;
 }
 
-lasagna,235,198,3	script	Chief Peperoncino#lasa	4_DR_PEPE,{
+lasagna,235,198,3	script	佩佩隆奇诺队长#lasa	4_DR_PEPE,{
 	if (lasagna_quest[1] < 2) {
 		mes "[佩佩隆奇诺队长]";
 		mes "奥利奥！";
@@ -4115,7 +4107,7 @@ lasagna,235,198,3	script	Chief Peperoncino#lasa	4_DR_PEPE,{
 		mes "我们直接进行下一项测试。";
 		mes "[佩佩隆奇诺队长]";
 		next;
-		mes "这次，千层面西北角的塔莉会帮助你。";
+		mes "这次，罗札纳西北角的塔莉会帮助你。";
 		mes "去找她吧。";
 		mes "[佩佩隆奇诺队长]";
 		next;
@@ -4136,11 +4128,11 @@ lasagna,235,198,3	script	Chief Peperoncino#lasa	4_DR_PEPE,{
 		end;
 	}
 	if (lasagna_quest[1] == 8) {
-		mes "这次，千层面西北角的塔莉会帮助你。";
+		mes "这次，罗札纳西北角的塔莉会帮助你。";
 		mes "去找她吧。";
 		next;
 		mes "[佩佩隆奇诺队长]";
-		mes "这次，千层面西北角的塔莉会帮助你。";
+		mes "这次，罗札纳西北角的塔莉会帮助你。";
 		next;
 		mes "去找她吧。";
 		mes "- 等一下！！ -";
@@ -4220,7 +4212,7 @@ lasagna,235,198,3	script	Chief Peperoncino#lasa	4_DR_PEPE,{
 	}
 }
 
-lasa_in01,61,91,5	script	Basilisk Prisoner#lasai	4_BASIL_SLAVE,{
+lasa_in01,61,91,5	script	巴西利斯克囚犯#lasai	4_BASIL_SLAVE,{
 	if (lasagna_quest[1] < 5) {
 		mes "你一插手，就不能叫测试了吧？";
 		mes "............";
@@ -4314,7 +4306,7 @@ lasa_in01,61,91,5	script	Basilisk Prisoner#lasai	4_BASIL_SLAVE,{
 		mes "嘶!!!!!!!!!!!!!!!";
 		next;
 		select("[巴西利斯克囚犯]");
-		if (select( "嘶！", "我绝不会告诉你，我们盯上的不是千层面，而是住在洞穴里的那个黄色东西！！！" ) == 1) {
+		if (select( "嘶！", "我绝不会告诉你，我们盯上的不是罗札纳，而是住在洞穴里的那个黄色东西！！！" ) == 1) {
 			mes "噗哔—噗哔—噗哔—噗哔———";
 			mes "[佩佩隆奇诺队长]";
 			close;
@@ -4382,7 +4374,7 @@ lasa_in01,61,91,5	script	Basilisk Prisoner#lasai	4_BASIL_SLAVE,{
 	}
 }
 
-lasa_in01,64,92,3	script	Jindou#lasain	4_DOU_JINDO,{
+lasa_in01,64,92,3	script	金杜#lasain	4_DOU_JINDO,{
 	if (lasagna_quest[1] < 6) {
 		mes "你回来后我们再继续。";
 		mes "[金杜]";
@@ -4406,7 +4398,7 @@ lasa_in01,64,92,3	script	Jindou#lasain	4_DOU_JINDO,{
 		mes "不知道你清不清楚，这家伙是巴西利斯克，一个就住在附近的种族。";
 		mes "[佩佩隆奇诺队长]";
 		next;
-		mes "我们本来相处得不错，但最近他们开始在千层面一带惹事。";
+		mes "我们本来相处得不错，但最近他们开始在罗札纳一带惹事。";
 		mes "[佩佩隆奇诺队长]";
 		next;
 		mes "尤其是这个，昨天还闯进镇里大肆破坏。我们只好把他扣下，可他就是不肯说为什么这么做。";
@@ -4426,7 +4418,7 @@ lasa_in01,64,92,3	script	Jindou#lasain	4_DOU_JINDO,{
 	}
 }
 
-lasa_in01,59,90,5	script	Chief Peperoncino#lasai	4_DR_PEPE,{
+lasa_in01,59,90,5	script	佩佩隆奇诺队长#lasai	4_DR_PEPE,{
 	if (lasagna_quest[1] == 4) {
 		mes "[佩佩隆奇诺队长]";
 		mes "这是你的第一项测试。";
@@ -4474,7 +4466,7 @@ lasa_in01,59,90,5	script	Chief Peperoncino#lasai	4_DR_PEPE,{
 	}
 }
 
-lasa_fild02,340,251,3	script	Thorny Vine's Thorn#las	HIDDEN_NPC,4,4,{
+lasa_fild02,340,251,3	script	荆棘藤刺#las	HIDDEN_NPC,4,4,{
 	if (checkweight(1001,1) == 0) {
 		mes "哇啊！";
 		mes "[塔莉]";
@@ -4504,7 +4496,7 @@ OnTouch:
 }
 
 // Tali's quest
-lasagna,77,263,5	script	Tali#lasa	4_DR_F_02,{
+lasagna,77,263,5	script	塔莉#lasa	4_DR_F_02,{
 	if (lasagna_quest[1] < 9 || lasagna_quest[1] > 11) {
 		mes "[塔莉]";
 		mes "你去过饺子森林吧？";
@@ -4602,7 +4594,7 @@ lasagna,77,263,5	script	Tali#lasa	4_DR_F_02,{
 	}
 }
 
-lasagna,205,325,5	script	Eggling#dorcon	4_M_MERCAT1,2,2,{
+lasagna,205,325,5	script	艾格林#dorcon	4_M_MERCAT1,2,2,{
 	if (checkweight(1001,1) == 0) {
 		mes "船票。";
 		mes "[艾格林]";
@@ -4638,7 +4630,7 @@ lasagna,205,325,5	script	Eggling#dorcon	4_M_MERCAT1,2,2,{
 				close;
 			}
 			mes "[艾格林]";
-			mes "嗯，可别给多兰族丢脸，好吗？不过你既然在这里受过训练，无论到哪里都能发挥作用。祝你好运。";
+			mes "嗯，可别给喵族丢脸，好吗？不过你既然在这里受过训练，无论到哪里都能发挥作用。祝你好运。";
 			delitem 25046,1;// Boarding Pass
 			setquest 14545;// To Purser
 			completequest 14545;
@@ -4661,7 +4653,7 @@ lasagna,205,325,5	script	Eggling#dorcon	4_M_MERCAT1,2,2,{
 		mes "哎呀呀。看来你很懂这里的规矩。你可以把它带给副主厨。不过副主厨有点古怪，交东西给他的时候得说句话。";
 		next;
 		mes "[艾格林]";
-		mes "你要一边扔给他一边说：“^0000cd[新人来啦！]^000000”他相信多兰族第一次出海时说这句话能带来好运。总之，他似乎认定这样才是正确的做法。";
+		mes "你要一边扔给他一边说：“^0000cd[新人来啦！]^000000”他相信喵族第一次出海时说这句话能带来好运。总之，他似乎认定这样才是正确的做法。";
 		next;
 		mes "[艾格林]" + strcharinfo(0) + "你明白我的意思吧？";
 		mes "谢谢。";
@@ -4725,7 +4717,7 @@ lasagna,205,325,5	script	Eggling#dorcon	4_M_MERCAT1,2,2,{
 	if (lasagna_quest[1] == 27) {
 		if (Class != Job_Summoner) {
 			mes "[艾格林]";
-			mes "真笨……我说了要带^0000cd3个^000000。3个！你可以从^0000cd蛇蜥^000000那里弄到。要我说多少遍？我大概已经说了100遍了！";
+			mes "真笨……我说了要带^0000cd3个^000000。3个！你可以从^0000cd巴西利斯克^000000那里弄到。要我说多少遍？我大概已经说了100遍了！";
 			lasagna_quest[1] = 28;
 			next;
 			// warp in
@@ -4735,7 +4727,7 @@ lasagna,205,325,5	script	Eggling#dorcon	4_M_MERCAT1,2,2,{
 			mes "不把东西带来给我，你就别想上船！";
 			next;
 			mes "[" + strcharinfo(0) + "]";
-			mes "给你，蛇蜥石。";
+			mes "给你，蛤蜊。";
 			next;
 			mes "[艾格林]";
 			mes "哈。你还挺能干。不如从冒险者这行退休，来当我的徒弟吧？我会对你好的。";
@@ -4745,7 +4737,7 @@ lasagna,205,325,5	script	Eggling#dorcon	4_M_MERCAT1,2,2,{
 				mes "恕我拒绝。我可不想一辈子当个水手小子。";
 				next;
 				mes "[艾格林]";
-				mes "什么？你说什么？水手小子？喂！我可不止是个水手，我是负责康奇利纳号各种杂务的重要人物！没有我，这船根本开不了！";
+				mes "什么？你说什么？水手小子？喂！我可不止是个水手，我是负责康-奇丽娜号各种杂务的重要人物！没有我，这船根本开不了！";
 				next;
 				mes "[艾格林]";
 				mes "不把东西带来给我，你就别想上船！";
@@ -4761,10 +4753,10 @@ lasagna,205,325,5	script	Eggling#dorcon	4_M_MERCAT1,2,2,{
 			mes "算了，还是谢谢你。我本来也没指望你真能带来。我也没什么别的东西能给你。外面的世界很危险，拿着这个吧。";
 			next;
 			mes "[艾格林]";
-			mes "什么？你说什么？水手小子？喂！我可不止是个水手，我是负责康奇利纳号各种杂务的重要人物！没有我，这船根本开不了！";
+			mes "什么？你说什么？水手小子？喂！我可不止是个水手，我是负责康-奇丽娜号各种杂务的重要人物！没有我，这船根本开不了！";
 			next;
 			mes "鳀鱼？" + strcharinfo(0) + "[艾格林]";
-			mes "你知道吗，千层面的鳀鱼是最好的。在外面你有钱也买不到。我给你的就收下吧。还有，把你手上的蛇蜥石全都给我。";
+			mes "你知道吗，罗札纳的鳀鱼是最好的。在外面你有钱也买不到。我给你的就收下吧。还有，把你手上的蛤蜊全都给我。";
 			next;
 			mes "[艾格林]";
 			mes "你差点把我惹火了。";
@@ -4864,7 +4856,7 @@ lasagna,205,325,5	script	Eggling#dorcon	4_M_MERCAT1,2,2,{
 		end;
 	case 3:
 		if (Zeny < .@cost) {
-			mes "行了。看你好像挺抱歉的，只要你带一块^0000cd蛇蜥石^000000来，我就原谅你。我可是个相当宽宏大量的人。";
+			mes "行了。看你好像挺抱歉的，只要你带一块^0000cd蛤蜊^000000来，我就原谅你。我可是个相当宽宏大量的人。";
 			mes "你的钱不够。再确认一下吧。";
 			close;
 		}
@@ -4882,26 +4874,26 @@ S_quest21:
 		mes "你真想让自己登上这辈子最糟的一趟航程吗？";
 		next;
 		mes "[" + strcharinfo(0) + "]";
-		mes "蛇蜥石是什么？";
+		mes "蛤蜊是什么？";
 		next;
 		mes "这才像话。";
 		mes "[艾格林]";
 		next;
 		mes "没人知道那是什么。不过所有水手都有。你就别问了。现在去弄来，我给你10秒。";
-		mes "行了。看你好像挺抱歉的，只要你带一块^0000cd蛇蜥石^000000来，我就原谅你。我可是个相当宽宏大量的人。";
+		mes "行了。看你好像挺抱歉的，只要你带一块^0000cd蛤蜊^000000来，我就原谅你。我可是个相当宽宏大量的人。";
 		next;
 		mes "[" + strcharinfo(0) + "既然要带，总该知道在哪儿弄到吧。哪里能弄到？";
 		mes "[艾格林]";
 		next;
-		mes "出了村子，田野右端有个洞穴，里面住着叫^0000cd蛇蜥^000000的恶心蛇类。你可以从它们那里弄到。";
+		mes "出了村子，田野右端有个洞穴，里面住着叫^0000cd巴西利斯克^000000的恶心蛇类。你可以从它们那里弄到。";
 		mes "你真想让自己登上这辈子最糟的一趟航程吗？";
 		next;
 		mes "[" + strcharinfo(0) + "我正好要往那边去，能弄到的话就帮你带些回来。不过我的任务优先。你总不会指望我在船长交代的任务之前先办这个吧？";
 		mes "[艾格林]";
-		npctalk "呃……我不是那个意思……嗯……好了，10秒已经过了。给我带^0000cd3块蛇蜥石^000000来，一块都不能少。别让任何人知道。要是你敢告诉别人，我会让你后悔。", "", bc_self;
+		npctalk "呃……我不是那个意思……嗯……好了，10秒已经过了。给我带^0000cd3块蛤蜊^000000来，一块都不能少。别让任何人知道。要是你敢告诉别人，我会让你后悔。", "", bc_self;
 		next;
 		mes "[事务长]";
-		mes "欢迎登船。欢迎来到^0000cd康奇利纳号^000000。我们会将您安全送达目的地。不过，我们现在还不能启航。";
+		mes "欢迎登船。欢迎来到^0000cd康-奇丽娜号^000000。我们会将您安全送达目的地。不过，我们现在还不能启航。";
 		next;
 		mes "不过，我们现在还不能启航。" + strcharinfo(0) + "]";
 		mes "既然要带，总该知道在哪儿弄到吧。哪里能弄到？";
@@ -4909,7 +4901,7 @@ S_quest21:
 		mes "发生什么事了？";
 		mes "[事务长]";
 		next;
-		mes "看看外面的千层面吧。" + strcharinfo(0) + "那里。就在那边。";
+		mes "看看外面的罗札纳吧。" + strcharinfo(0) + "那里。就在那边。";
 		mes "我正好要往那边去，能弄到的话就帮你带些回来。不过我的任务优先。你总不会指望我在船长交代的任务之前先办这个吧？";
 		next;
 		mes "[艾格林]";
@@ -4929,7 +4921,7 @@ OnInit:
 }
 
 // hall
-conch_in,65,58,3	script	Purser#dorcon	4_CAT_ADV1,{
+conch_in,65,58,3	script	事务长#dorcon	4_CAT_ADV1,{
 	if (lasagna_quest[1] == 13) {
 		if (Class != Job_Summoner) {
 			mes "[事务长]";
@@ -4964,9 +4956,9 @@ conch_in,65,58,3	script	Purser#dorcon	4_CAT_ADV1,{
 		mes "[事务长]";
 		mes "不用紧张。我相信你在外面已经受过足够的训练，现在没什么要你做的。不如去和船员们熟悉一下，记记他们的名字？";
 		mes "我感觉以后会经常见到你。";
-		npctalk "[事务长]", "", bc_self;
+		npctalk "事务长#dorcon", "", bc_self;
 		next;
-		mes "当你去到一个人生地不熟的地方，同乡的多兰族可能就是你最好的朋友。所以我建议你现在尽可能多认识一些。" + strcharinfo(0) + "同乡的多兰族可能就是你最好的朋友。";
+		mes "当你去到一个人生地不熟的地方，同乡的喵族可能就是你最好的朋友。所以我建议你现在尽可能多认识一些。" + strcharinfo(0) + "同乡的喵族可能就是你最好的朋友。";
 		mes "[事务长]" + strcharinfo(0) + ".";
 		next;
 		mes "除了船长，这艘船上还有12位组长，另外还有很多船员。你不必全都认识，见见重要的人就行。";
@@ -5003,7 +4995,7 @@ conch_in,65,58,3	script	Purser#dorcon	4_CAT_ADV1,{
 		if (Class != Job_Summoner)
 			mes "[事务长]";
 		else
-			mes "我想也是。他们肯定在哪儿喝着卡鲁格纳牛奶打呼噜。到出发的时候他们自然会回来，到时候再见吧……";
+			mes "我想也是。他们肯定在哪儿喝着卡鲁哇牛奶打呼噜。到出发的时候他们自然会回来，到时候再见吧……";
 		close;
 	}
 	if (lasagna_quest[1] == 15) {
@@ -5012,21 +5004,21 @@ conch_in,65,58,3	script	Purser#dorcon	4_CAT_ADV1,{
 		close;
 	}
 	if (lasagna_quest[1] == 16) {
-		mes "你手上拿的不就是^0000cd卡鲁格纳格^000000吗？可不是谁都能有的哦。";
+		mes "你手上拿的不就是^0000cd卡鲁哇格^000000吗？可不是谁都能有的哦。";
 		mes "你见过记录员了吗？要不要去见见主厨？";
 		close;
 	}
 	if (lasagna_quest[1] == 17) {
 		mes "[事务长]";
 		mes "入口检票的人让我把它交给主厨。";
-		npctalk "[事务长]", "", bc_self;
+		npctalk "事务长#dorcon", "", bc_self;
 		next;
 		mes "那你怎么不交给主厨？快送去给他！" + strcharinfo(0) + "快送去给主厨！";
 		mes "还没全见。我没办法把他们都找齐。";
 		next;
 		mes "[事务长]";
 		mes "好，好！";
-		npctalk "[事务长]", "", bc_self;
+		npctalk "事务长#dorcon", "", bc_self;
 		next;
 		mes "东西交给主厨了吗？食材要趁新鲜送去！厨房在走廊尽头。";
 		mes "[事务长]";
@@ -5036,7 +5028,7 @@ conch_in,65,58,3	script	Purser#dorcon	4_CAT_ADV1,{
 		next;
 		mes "[事务长]";
 		mes "我已经交过去了。还有，水手长想知道^0000cd启航信号^000000什么时候发出。";
-		npctalk "[事务长]", "", bc_self;
+		npctalk "事务长#dorcon", "", bc_self;
 		next;
 		mes "我刚刚正在想这事。对了，你的冒险训练做得够扎实了吗？在那之前，不想^0000cd测试一下自己的实力^000000吗？" + strcharinfo(0) + "出发冒险前测试实力是很重要的。";
 		mes "好，好！";
@@ -5052,7 +5044,7 @@ conch_in,65,58,3	script	Purser#dorcon	4_CAT_ADV1,{
 	}
 	if (lasagna_quest[1] == 19) {
 		mes "[事务长]";
-		mes "看看千层面。你觉得怎么样？";
+		mes "看看罗札纳。你觉得怎么样？";
 		npctalk "喵喵喵……有个问题。", "", bc_self;
 		next;
 		mes "[" + strcharinfo(0) + "我觉得这是个热闹又快乐的小村庄！";
@@ -5066,7 +5058,7 @@ conch_in,65,58,3	script	Purser#dorcon	4_CAT_ADV1,{
 		mes "[事务长]";
 		next;
 		mes "对。海上的^0000cd雾^000000。海雾。";
-		mes "看看千层面。你觉得怎么样？";
+		mes "看看罗札纳。你觉得怎么样？";
 		next;
 		mes "[" + strcharinfo(0) + "就算有怪物从雾里冲出来，我也不会惊讶。我还闻到一股烟味。这附近最近有火山喷发吗？";
 		mes "[事务长]";
@@ -5078,7 +5070,7 @@ conch_in,65,58,3	script	Purser#dorcon	4_CAT_ADV1,{
 		mes "[" + strcharinfo(0) + "什么？我昨天就完成训练了。";
 		mes "[事务长]";
 		next;
-		mes "我们这里可不是做慈善的。我们训练有前途的多兰族，把他们送往新大陆，为多兰族争光。所以才训练你们。";
+		mes "我们这里可不是做慈善的。我们训练有前途的喵族，把他们送往新大陆，为喵族争光。所以才训练你们。";
 		mes "[事务长]";
 		next;
 		mes "就当是为在新大陆会遇到的各种困难热热身吧。" + strcharinfo(0) + "大副就在那边的船长室里。";
@@ -5086,7 +5078,7 @@ conch_in,65,58,3	script	Purser#dorcon	4_CAT_ADV1,{
 		next;
 		mes "[事务长]";
 		mes "是！";
-		npctalk "[事务长]", "", bc_self;
+		npctalk "事务长#dorcon", "", bc_self;
 		next;
 		mes "大副在船长室。去问问他，因为大雾，航行日程会不会有变化！" + strcharinfo(0) + "[事务长]";
 		mes "看来因为这场雾，我们没法出发了。";
@@ -5098,7 +5090,7 @@ conch_in,65,58,3	script	Purser#dorcon	4_CAT_ADV1,{
 		mes "[事务长]";
 		npctalk "祝您旅途顺利。", "", bc_self;
 		next;
-		mes "很高兴看到你像个真正的多兰族一样做事。" + strcharinfo(0) + "[事务长]";
+		mes "很高兴看到你像个真正的喵族一样做事。" + strcharinfo(0) + "[事务长]";
 		mes "出发前我得检查一下货物。";
 		erasequest 14537;// When do we take off?
 		setquest 14538;// Can we take off?
@@ -5128,7 +5120,7 @@ conch_in,65,58,3	script	Purser#dorcon	4_CAT_ADV1,{
 		if (Class != Job_Summoner)
 			mes "记住这一点。和这艘船的船员打交道时，要注意你的礼数。";
 		else
-			mes "很高兴看到你像个真正的多兰族一样做事。";
+			mes "很高兴看到你像个真正的喵族一样做事。";
 		close;
 	}
 	mes "[事务长]";
@@ -5144,12 +5136,12 @@ conch_in,52,60,0	script	#dorcon95	HIDDEN_WARP_NPC,1,1,{
 	end;
 OnTouch:
 	if (lasagna_quest[1] != 14)
-		npctalk "[斯特洛]", "", bc_self;
+		npctalk "斯特洛#dorcon", "", bc_self;
 	end;
 }
 
 // in A_B
-conch_in,24,62,5	script	Stello#dorcon	4_DR_STELO,{
+conch_in,24,62,5	script	斯特洛#dorcon	4_DR_STELO,{
 	if (checkweight(1001,4) == 0) {
 		mes "发生什么事了？";
 		mes "看起来又大又多。要不要减少一些？";
@@ -5162,7 +5154,6 @@ conch_in,24,62,5	script	Stello#dorcon	4_DR_STELO,{
 	}
 	if (lasagna_quest[1] == 14) {
 		mes "雾！";
-		mes "甘贝里船长#dorcon0";
 		close;
 	}
 	if (lasagna_quest[1] < 20) {
@@ -5180,7 +5171,7 @@ conch_in,24,62,5	script	Stello#dorcon	4_DR_STELO,{
 		mes "真麻烦。" + strcharinfo(0) + "[甘贝里船长]";
 		mes "斯特洛，我看你得亲自下去一趟。";
 		npctalk "也没别的办法了。", "甘贝里船长#dorcon0", bc_self;
-		npctalk "[斯特洛]", "", bc_self;
+		npctalk "斯特洛#dorcon", "", bc_self;
 		next;
 		mes "让艾格林去吧。";
 		mes "[甘贝里船长]";
@@ -5207,7 +5198,7 @@ conch_in,24,62,5	script	Stello#dorcon	4_DR_STELO,{
 		npctalk "一位训练有素的。", "", bc_self;
 		next;
 		mes "[斯特洛]";
-		mes "多兰族。";
+		mes "喵族。";
 		npctalk "[甘贝里船长]", "", bc_self;
 		npctalk "就在我们面前。", "是的，有。", bc_self;
 		next;
@@ -5215,8 +5206,8 @@ conch_in,24,62,5	script	Stello#dorcon	4_DR_STELO,{
 		mes "[甘贝里船长]";
 		next;
 		emotion ET_SURPRISE;
-		emotion ET_SURPRISE, getnpcid(0, "Captain Gamberi#dorcon0");
-		mes "斯特洛。面对一个已经完成冒险训练的多兰族，叫它最后一次训练说不通。这应该叫第一次实践。";
+		emotion ET_SURPRISE, getnpcid(0, "甘贝里船长#dorcon0");
+		mes "斯特洛。面对一个已经完成冒险训练的喵族，叫它最后一次训练说不通。这应该叫第一次实践。";
 		mes "[斯特洛]";
 		next;
 		mes "随便叫什么吧。好，那就把你的第一个任务当作第一次实践。";
@@ -5257,7 +5248,7 @@ conch_in,24,62,5	script	Stello#dorcon	4_DR_STELO,{
 		next;
 		mes "[斯特洛]";
 		mes "等等，把这个带上。紧急时能派上用场。请小心！";
-		npctalk "[斯特洛]", "", bc_self;
+		npctalk "斯特洛#dorcon", "", bc_self;
 		next;
 		mes "去问治安队员龙的情况，如果有问题，就和治安队一起解决。" + strcharinfo(0) + "]";
 		mes "难怪这雾闻起来像烟。";
@@ -5293,7 +5284,6 @@ conch_in,24,62,5	script	Stello#dorcon	4_DR_STELO,{
 		mes "[甘贝里船长]";
 		next;
 		mes "斯特洛，这叫玩笑。" + strcharinfo(0) + "绅士就该有幽默感。";
-		mes "甘贝里船长#dorcon0";
 		next;
 		mes "[斯特洛]";
 		mes "玩笑应该让双方都开心。这纯粹是诅咒。";
@@ -5316,7 +5306,6 @@ conch_in,24,62,5	script	Stello#dorcon	4_DR_STELO,{
 		npctalk "哇哦。啪啪啪。", "", bc_self;
 		next;
 		mes "斯特洛？你得真心一点。";
-		mes "甘贝里船长#dorcon0";
 		next;
 		mes "[斯特洛]";
 		mes "好了，那事以后再说。我一直在想您什么时候回来。雾散之后，我们才知道您成功了，亲爱的冒险家。感谢您的付出。";
@@ -5330,9 +5319,9 @@ conch_in,24,62,5	script	Stello#dorcon	4_DR_STELO,{
 		mes "[嘘——]";
 		mes "[甘贝里船长]";
 		npctalk "斯特洛，把^0000cd那个^000000交给冒险家。", "", bc_self;
-		npctalk "[斯特洛]", "那个？您指的是什么？", bc_self;
+		npctalk "那个？您指的是什么？", "斯特洛#dorcon", bc_self;
 		next;
-		mes "[甘贝里船长]" + strcharinfo(0) + "是离开千层面之后就再也用钱买不到的东西。";
+		mes "[甘贝里船长]" + strcharinfo(0) + "是离开罗札纳之后就再也用钱买不到的东西。";
 		mes "哦，那个！我一定是放在这附近了……";
 		next;
 		if (Class != Job_Summoner) {
@@ -5353,11 +5342,11 @@ conch_in,24,62,5	script	Stello#dorcon	4_DR_STELO,{
 			mes "[斯特洛]";
 			next;
 			mes "真的吗？那这个您大概也不需要了。真遗憾。我可是特意为您准备的。看来它现在要归别人了。";
-			mes "是离开千层面之后就再也用钱买不到的东西。";
+			mes "是离开罗札纳之后就再也用钱买不到的东西。";
 			npctalk "哦，那个！我一定是放在这附近了……", "", bc_self;
 			next;
 			mes "什么……这是什么？" + strcharinfo(0) + "[斯特洛]";
-			mes "这是法法雷自警团团长和康奇利纳号船长为了庆祝您完成首次任务，为新手冒险家准备的小礼物。";
+			mes "这是法尔法雷自警团团长和康-奇丽娜号船长为了庆祝您完成首次任务，为新手冒险家准备的小礼物。";
 			next;
 			mes "[斯特洛]";
 			mes "哦！您怎么知道？";
@@ -5376,7 +5365,7 @@ conch_in,24,62,5	script	Stello#dorcon	4_DR_STELO,{
 			mes "[斯特洛]";
 			next;
 			mes "哦，我该给您一个放大镜。拿到未鉴定的武器或装备时，就用它来鉴定。" + strcharinfo(0) + "[斯特洛]";
-			mes "我会给您一些^0000cd卡鲁格纳牛奶^000000，凡是来过千层面的喵族都对它念念不忘。非常感谢您的付出。";
+			mes "我会给您一些^0000cd卡鲁哇牛奶^000000，凡是来过罗札纳的喵族都对它念念不忘。非常感谢您的付出。";
 			next;
 			mes "[甘贝里船长]";
 			mes "那么。是时候发出出航信号了。";
@@ -5434,7 +5423,7 @@ conch_in,24,62,5	script	Stello#dorcon	4_DR_STELO,{
 	}
 }
 
-conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
+conch_in,26,64,5	script	甘贝里船长#dorcon0	4_DR_GAMBERI,{
 	if (lasagna_quest[1] < 14) {
 		mes "是的，长官。";
 		mes "他非得每次都听到回答吗？";
@@ -5442,7 +5431,6 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 	}
 	if (lasagna_quest[1] == 14) {
 		if (Class != Job_Summoner) {
-			mes "斯特洛#dorcon";
 			mes "斯特洛？";
 			next;
 			mes "[斯特洛]";
@@ -5471,7 +5459,6 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 			mes "这样根本没法出航。";
 			next;
 			mes "绝不会。";
-			mes "斯特洛#dorcon";
 			next;
 			mes "[甘贝里船长]";
 			mes "看来是这样。";
@@ -5485,10 +5472,9 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 			next;
 			mes "[斯特洛]";
 			mes "那不是自然形成的雾吗？";
-			npctalk "[斯特洛]", "不是。这雾是^0000cd住在洞里的龙^000000烦躁时喷出的烟。请等到^0000cd自警团^000000处理妥当。", bc_self;
+			npctalk "不是。这雾是^0000cd住在洞里的龙^000000烦躁时喷出的烟。请等到^0000cd自警团^000000处理妥当。", "斯特洛#dorcon", bc_self;
 			next;
 			mes "他们是专业的。很快就会处理好的！";
-			mes "斯特洛#dorcon";
 			next;
 			mes "[" + strcharinfo(0) + "]";
 			mes "那我们什么时候才能出发？";
@@ -5514,12 +5500,12 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 			next;
 			mes "斯特洛。这位冒险家似乎很有经验。这也可以算是一次新的冒险。或许能帮上我们。";
 			mes "我想也是。这位冒险家看起来确实很厉害。";
-			npctalk "斯特洛#dorcon", "你怎么看，斯特洛？", bc_self;
+			npctalk "你怎么看，斯特洛？", "斯特洛#dorcon", bc_self;
 			next;
 			mes "[斯特洛]";
 			mes "嗯……好。请去见^0000cd守在村子南桥的自警团员^000000，查看龙的情况。";
 			next;
-			mes "[斯特洛]" + strcharinfo(0) + "因为在千层面，龙的状态非常重要，所以自警团随时都在查看。";
+			mes "[斯特洛]" + strcharinfo(0) + "因为在罗札纳，龙的状态非常重要，所以自警团随时都在查看。";
 			mes "[斯特洛]";
 			next;
 			mes "向自警团员询问龙的情况，若有问题，就与自警团一同解决。";
@@ -5547,7 +5533,6 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 			lasagna_quest[1] = 21;// jump to 21
 			close;
 		}
-		mes "斯特洛#dorcon";
 		mes "斯特洛？";
 		next;
 		mes "[斯特洛]";
@@ -5556,7 +5541,7 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 		mes "呃，这是……";
 		mes "[斯特洛]";
 		next;
-		emotion ET_OK, getnpcid(0, "Stello#dorcon");
+		emotion ET_OK, getnpcid(0, "斯特洛#dorcon");
 		mes "你是谁？未经允许不得进入这里。请离开。";
 		mes "斯特洛，再说一遍。";
 		npctalk "斯特洛？", "", bc_self;
@@ -5570,7 +5555,6 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 		mes "我是负责这艘船的^0000cd甘贝里^000000船长。欢迎登船。";
 		next;
 		mes "我是负责这艘船的甘贝里船长。";
-		mes "斯特洛#dorcon";
 		next;
 		mes "斯特洛？" + strcharinfo(0) + "啊！抱歉。";
 		mes "斯特洛#dorcon" + strcharinfo(0) + "[斯特洛]";
@@ -5579,11 +5563,10 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 		mes "[斯特洛]";
 		npctalk "哦，我不是在怪你。我会尽力让你拥有最棒的航海冒险。我是^0000cd斯特洛^000000。", "大副。", bc_self;
 		next;
-		mes "斯特洛#dorcon";
 		mes "[甘贝里船长]";
-		npctalk "在船上四处走走，也许能让你放松些。只要注意礼貌，大家都会欢迎你的。", "[斯特洛]", bc_self;
+		npctalk "在船上四处走走，也许能让你放松些。只要注意礼貌，大家都会欢迎你的。", "斯特洛#dorcon", bc_self;
 		npctalk "特别是要整理好你的衣装。合适的衣着才能有端正的仪态，而端正的仪态是成为绅士的第一步。", "", bc_self;
-		npctalk "说得对。", "[斯特洛]", bc_self;
+		npctalk "说得对。", "斯特洛#dorcon", bc_self;
 		next;
 		mes "船员们都是这样的绅士，但对无礼之举绝不宽容。这点你可得当心。";
 		mes "肯定是事务长又放了个不相干的人上来。他一定又跟你说了什么同乡就该互相照应之类的话。";
@@ -5632,51 +5615,48 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 	}
 
 	if (conch_in_recorder == 1) {
-		mes "除了踏上冒险之旅，我也会收集别人的冒险故事。听说甘贝里船长在千层面待了很久。" + strcharinfo(0) + "]";
+		mes "除了踏上冒险之旅，我也会收集别人的冒险故事。听说甘贝里船长在罗札纳待了很久。" + strcharinfo(0) + "]";
 		mes "打扰一下，船长。";
 		next;
-		mes "大家都说能从您这里听到关于千层面和康奇利纳号的冒险故事。";
+		mes "大家都说能从您这里听到关于罗札纳和康-奇丽娜号的冒险故事。";
 		mes "[甘贝里船长]";
 		next;
 		mes "哼！那你可找对人了。给冒险家讲冒险故事，对我来说也是一场冒险。你现在想听哪个故事？" + strcharinfo(0) + "好久没有像你这样的访客了。";
-		mes "斯特洛#dorcon";
 		next;
 		mes "[甘贝里船长]";
 		mes "冒险家的职责？";
 		next;
 		mes "我最感兴趣的是关于您的故事。" + strcharinfo(0) + "[甘贝里]";
-		mes "我来自千层面。我出生在体面的家庭，父母都很温和。我从小就是个好奇又爱冒险的孩子。";
+		mes "我来自罗札纳。我出生在体面的家庭，父母都很温和。我从小就是个好奇又爱冒险的孩子。";
 		next;
 		mes "村里没有不认识我的人。" + strcharinfo(0) + "斯特洛#dorcon";
 		mes "[甘贝里]";
 		next;
-		mes "我想挣脱家族的声名。我跑了出去，在千层面四处游荡。";
+		mes "我想挣脱家族的声名。我跑了出去，在罗札纳四处游荡。";
 		mes "我的家就是困住我的无形牢笼，而我是一只渴望自由的鸟……";
-		npctalk "[斯特洛]", "哦，奇怪。这跟您母亲讲的可不一样，船长。她说您不愿意帮忙打理肉铺的生意，一大早就跑出去了。", bc_self;
+		npctalk "哦，奇怪。这跟您母亲讲的可不一样，船长。她说您不愿意帮忙打理肉铺的生意，一大早就跑出去了。", "斯特洛#dorcon", bc_self;
 		next;
 		mes "谁在撒谎？" + strcharinfo(0) + "斯特洛#dorcon";
 		mes "斯特洛？";
 		next;
 		mes "[甘贝里]";
-		mes "斯特洛，打断别人是不礼貌的。我正义感很强，不能任由那些坏喵族扰乱千层面的安宁。我必须^0000cd把他们引回正道^000000。";
+		mes "斯特洛，打断别人是不礼貌的。我正义感很强，不能任由那些坏喵族扰乱罗札纳的安宁。我必须^0000cd把他们引回正道^000000。";
 		npctalk "[甘贝里]", "后来我遇见了佩佩隆奇诺。", bc_self;
 		next;
 		mes "[斯特洛]";
 		mes "我听过那个故事。所以您才被叫做疯……";
 		npctalk "斯特洛？", "不，没什么。", bc_self;
 		next;
-		mes "斯特洛#dorcon";
 		mes "[甘贝里]";
-		npctalk "我对渔业很感兴趣，就和佩佩隆奇诺一起做起了^0000cd鳀鱼加工^000000生意。我们赚了一大笔。还想着这么多钱该怎么花……", "[斯特洛]", bc_self;
+		npctalk "我对渔业很感兴趣，就和佩佩隆奇诺一起做起了^0000cd鳀鱼加工^000000生意。我们赚了一大笔。还想着这么多钱该怎么花……", "斯特洛#dorcon", bc_self;
 		npctalk "真的……", "", bc_self;
 		next;
 		mes "真的是？";
 		mes "不，当我没说……";
 		next;
-		mes "斯特洛#dorcon";
 		mes "[甘贝里]";
 		next;
-		mes "现在你可能看不出来，但千层面曾经是个很黑暗的地方。街上到处是坏喵族，斗殴不断。";
+		mes "现在你可能看不出来，但罗札纳曾经是个很黑暗的地方。街上到处是坏喵族，斗殴不断。";
 		mes "[甘贝里]";
 		npctalk "把那些坏喵族^0000cd引回正道^000000是我的职责。", "", bc_self;
 		npctalk "[甘贝里]", "那是十年前，佩佩隆奇诺和托马斯齐心协力，为这座小镇带来了和平……", bc_self;
@@ -5684,10 +5664,9 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 		mes "[斯特洛]";
 		mes "您需要一些人手……";
 		next;
-		mes "斯特洛#dorcon";
 		mes "[甘贝里]";
 		npctalk "那时我遇见了斯特洛。我^0000cd纠正了当时还是扒手的斯特洛^000000。他如今已当上了大副。", "", bc_self;
-		npctalk "[斯特洛]", "嗯，别说这个了。都是很久以前的事了。", bc_self;
+		npctalk "嗯，别说这个了。都是很久以前的事了。", "斯特洛#dorcon", bc_self;
 		next;
 		mes "你在跟客人说什么呢？";
 		mes "[甘贝里]";
@@ -5695,28 +5674,27 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 		mes "我、佩佩隆奇诺和托马斯想干一票大的。真正的大事业。跟以前做的完全不能比。我是说，做生意。";
 		mes "[甘贝里]";
 		next;
-		mes "我们开始做的生意是^0000cd把千层面的特产卖到其他城市^000000。生意很顺利，我们又雇了更多人，扩大了规模。";
+		mes "我们开始做的生意是^0000cd把罗札纳的特产卖到其他城市^000000。生意很顺利，我们又雇了更多人，扩大了规模。";
 		mes "[甘贝里]";
 		next;
-		mes "同时，我们还组建了^0000cd自警团^000000来整顿千层面的街道。许多人为了我们的事业加入进来。";
+		mes "同时，我们还组建了^0000cd自警团^000000来整顿罗札纳的街道。许多人为了我们的事业加入进来。";
 		mes "我组建自警团时，许多人都被我的品格吸引，加入了进来。";
 		npctalk "......", "", bc_self;
-		npctalk "....... Huh...", "[斯特洛]", bc_self;
+		npctalk "....... Huh...", "斯特洛#dorcon", bc_self;
 		next;
 		mes "你是要加入我，还是想挨揍？你还想继续在贫民窟里混吗？听到这种威胁，谁还敢不加入自警团……";
 		mes "[甘贝里]";
 		next;
 		mes "斯特洛？";
 		mes "真的吗？您是被逼加入的？";
-		npctalk "[斯特洛]", "", bc_self;
+		npctalk "斯特洛#dorcon", "", bc_self;
 		next;
 		mes "不是！我是真心想加入的！";
 		mes "不是！我是真心想加入的！";
 		next;
-		mes "斯特洛#dorcon";
 		mes "[甘贝里]";
 		next;
-		mes "我纠正了那些坏喵族，组建了商会和自警团，开始^0000cd经商^000000。生意蒸蒸日上，附近所有城市都摆满了千层面的货物。";
+		mes "我纠正了那些坏喵族，组建了商会和自警团，开始^0000cd经商^000000。生意蒸蒸日上，附近所有城市都摆满了罗札纳的货物。";
 		mes "[甘贝里]";
 		npctalk "总之，我们决定把舞台扩展到^0000cd海上^000000。这个决定正是出于我的冒险精神。", "", bc_self;
 		next;
@@ -5725,7 +5703,7 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 		next;
 		mes "是因为佩佩隆奇诺。";
 		mes "嗯，他大概也有点影响……";
-		npctalk "斯特洛#dorcon", "", bc_self;
+		npctalk "", "斯特洛#dorcon", bc_self;
 		next;
 		mes "[甘贝里]";
 		mes "后来我们遇上暴风雨，和^0000cd托马斯的船“纳维号”^000000失散了。我们一直在寻找纳维号。";
@@ -5734,7 +5712,7 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 		mes "咳咳，那部分请详细讲讲！";
 		mes "[甘贝里]";
 		next;
-		mes "从那以后，我们不仅主导着与新大陆的贸易，也连接着两块大陆。两地冒险家都乘坐^0000cd康奇利纳号^000000，我们为此自豪。";
+		mes "从那以后，我们不仅主导着与新大陆的贸易，也连接着两块大陆。两地冒险家都乘坐^0000cd康-奇丽娜号^000000，我们为此自豪。";
 		mes "[甘贝里]";
 		next;
 		mes "这些够了吗？";
@@ -5749,7 +5727,6 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 		mes "以后请回来，给我讲讲你的故事。";
 		npctalk "我也想听。", "", bc_self;
 		next;
-		mes "斯特洛#dorcon";
 		mes "[甘贝里船长]";
 		next;
 		mes "有什么问题就来找我。";
@@ -5763,7 +5740,7 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 		next;
 		mes "[甘贝里船长]";
 		mes "以后请回来，给我讲讲你的故事。";
-		npctalk "打扰一下。", "[记录员]", bc_self;
+		npctalk "打扰一下。", "记录员#dorcon", bc_self;
 		erasequest 14579;// Interview with Captain
 		setquest 14580;// To Recorder
 		conch_in_recorder = 2;
@@ -5783,7 +5760,7 @@ conch_in,26,64,5	script	Captain Gamberi#dorcon0	4_DR_GAMBERI,{
 }
 
 // in G_H
-conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
+conch_in,96,29,5	script	记录员#dorcon	4_CAT_MERMASTER,{
 	if (checkweight(1001,1) == 0) {
 		mes "哦，我明白了。";
 		mes "[记录员]";
@@ -5798,12 +5775,12 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 		mes "现在让我记录一下你的资料。哦，你什么都不用做。就站在那里就好。" + strcharinfo(0) + "[记录员]";
 		mes "你的名字是……";
 		next;
-		mes "而你来到千层面是为了……";
+		mes "而你来到罗札纳是为了……";
 		mes "[记录员]";
 		next;
 		mes "你脚上的泥土和草屑……你可不是个爱整洁的人……哦，算了。我不会记下你的缺点……这样就行了。" + strcharinfo(0) + "]";
 		mes "您好，我是" + strcharinfo(0) + "您怎么会知道得这么详细？";
-		npctalk "[记录员]", "", bc_self;
+		npctalk "记录员#dorcon", "", bc_self;
 		next;
 		mes "只要稍微留意就行。这只是我长期观察别人学来的一点技巧。";
 		mes "[记录员]";
@@ -5813,7 +5790,7 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 		next;
 		mes "[记录员]";
 		mes "没错！" + strcharinfo(0) + "... The height must be... and the color is... like this... The accent of yours... You must have lived in Pane and moved to Bongola.";
-		npctalk "[记录员]", "", bc_self;
+		npctalk "记录员#dorcon", "", bc_self;
 		next;
 		mes "现在该去见^0000cd主厨、舵手和水手长^000000了。他们一定在走廊尽头的^0000cd餐厅^000000。祝你旅途平安。";
 		mes "你脚上的泥土和草屑……你可不是个爱整洁的人……哦，算了。我不会记下你的缺点……这样就行了。";
@@ -5908,7 +5885,7 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 		next;
 		mes "[记录员]";
 		mes "是吗？好吧，硬留住忙人可不礼貌。";
-		npctalk "[记录员]", "", bc_self;
+		npctalk "记录员#dorcon", "", bc_self;
 		next;
 		mes "不过，如果你改变主意，随时回来。我会等着你。" + strcharinfo(0) + "]";
 		mes "我有种预感，现在必须离开这里。";
@@ -5924,7 +5901,7 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 			mes "它们看着像书，其实不是。这些是船上发生过的所有事情的记录。";
 			next;
 			mes "[记录员]";
-			mes "里面不仅记着船上发生的事，还记着几乎所有与康克利纳号有关之人的经历。";
+			mes "里面不仅记着船上发生的事，还记着几乎所有与康-奇丽娜号有关之人的经历。";
 			close;
 		}
 		mes "[记录员]" + strcharinfo(0) + "透过过去，可以看见未来。";
@@ -5956,26 +5933,26 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 		mes "那些缺掉的书页写的是什么？";
 		mes "[记录员]";
 		next;
-		mes "可惜那些书页上正是^0000cd关于加姆贝里船长的记录^000000。加姆贝里是我们的船长，所以那份记录我花了很多心思。" + strcharinfo(0) + "那是最长的一份，花了我很长时间和精力。";
+		mes "可惜那些书页上正是^0000cd关于甘贝里船长的记录^000000。甘贝里是我们的船长，所以那份记录我花了很多心思。" + strcharinfo(0) + "那是最长的一份，花了我很长时间和精力。";
 		mes "[记录员]";
 		next;
-		mes "每本书里也都写着加姆贝里船长的故事，而全部都被烧成了灰。";
+		mes "每本书里也都写着甘贝里船长的故事，而全部都被烧成了灰。";
 		mes "[记录员]";
-		npctalk "丢失的那份记录写的是加姆贝里船长成为康克利纳号船长之前的故事，那样的记录非常罕见。", "", bc_self;
+		npctalk "丢失的那份记录写的是甘贝里船长成为康-奇丽娜号船长之前的故事，那样的记录非常罕见。", "", bc_self;
 		next;
 		mes "[记录员]";
 		mes "可惜大部分书页都被火烧掉了，剩下的部分几乎辨不出原样。";
 		npctalk "为什么？", "", bc_self;
 		next;
-		mes "[记录员]" + strcharinfo(0) + "这是因为千层面的人口构成。这里大多是来自其他地区的人，出自千层面的大概只有加姆贝里船长和纳维号的托马斯船长。";
+		mes "[记录员]" + strcharinfo(0) + "这是因为罗札纳的人口构成。这里大多是来自其他地区的人，出自罗札纳的大概只有甘贝里船长和纳维号的托马斯船长。";
 		mes "[记录员]";
 		next;
-		mes "了解加姆贝里船长过去的人大多已经离开千层面了，现在这里几乎没人知道那段往事。";
+		mes "了解甘贝里船长过去的人大多已经离开罗札纳了，现在这里几乎没人知道那段往事。";
 		mes "[记录员]";
 		npctalk "所以查证和整理这份记录才花了那么久。", "", bc_self;
 		next;
 		mes "[记录员]";
-		mes "每本书里也都写着加姆贝里船长的故事，而全部都被烧成了灰。";
+		mes "每本书里也都写着甘贝里船长的故事，而全部都被烧成了灰。";
 		next;
 		mes "那要我帮你找出小偷吗？";
 		mes "[记录员]";
@@ -5987,19 +5964,19 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 		mes "那你需要新视角做什么？";
 		next;
 		mes "[记录员]";
-		mes "既然找不回来，我就该把它重写出来。我试着去采访加姆贝里船长，好补上缺掉的书页，可他并没有回应。";
+		mes "既然找不回来，我就该把它重写出来。我试着去采访甘贝里船长，好补上缺掉的书页，可他并没有回应。";
 		next;
 		mes "[记录员]";
-		mes "我也派过许多人去，都没用。他不会向康克利纳号上的任何人谈起自己的过去，所以我需要一个^0000cd新视角^000000。";
+		mes "我也派过许多人去，都没用。他不会向康-奇丽娜号上的任何人谈起自己的过去，所以我需要一个^0000cd新视角^000000。";
 		next;
-		mes "[记录员]" + strcharinfo(0) + "他有时会把^0000cd自己的故事和千层面发展至今的经过^000000当作冒险故事讲给外乡人或新人听。这次我想派你去听听。";
+		mes "[记录员]" + strcharinfo(0) + "他有时会把^0000cd自己的故事和罗札纳发展至今的经过^000000当作冒险故事讲给外乡人或新人听。这次我想派你去听听。";
 		mes "那要我帮你找出小偷吗？";
 		next;
 		mes "[记录员]";
 		mes "你的意思是，让我去问他过去发生的事，但别让他觉得是受你所托。";
-		npctalk "[记录员]", "", bc_self;
+		npctalk "记录员#dorcon", "", bc_self;
 		next;
-		mes "没错，就是这样。这件事必须保密。要是被加姆贝里船长发现，你我都逃不掉。" + strcharinfo(0) + "一切就靠你了。";
+		mes "没错，就是这样。这件事必须保密。要是被甘贝里船长发现，你我都逃不掉。" + strcharinfo(0) + "一切就靠你了。";
 		mes "那你需要新视角做什么？";
 		next;
 		mes "[记录员]";
@@ -6009,17 +5986,17 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 		mes "那么，一路平安。";
 		next;
 		mes "[记录员]";
-		mes "你可以去采访加姆贝里船长，再把故事告诉我。";
+		mes "你可以去采访甘贝里船长，再把故事告诉我。";
 		next;
 		mes "[记录员]" + strcharinfo(0) + "你来了。";
 		mes "你的意思是，让我去问他过去发生的事，但别让他觉得是受你所托。";
 		next;
 		mes "[记录员]";
-		mes "我听加姆贝里船长讲过那个故事了，但我很困惑。";
+		mes "我听甘贝里船长讲过那个故事了，但我很困惑。";
 		npctalk "请把故事讲给我听！", "", bc_self;
 		next;
-		mes "[你把从加姆贝里船长那里听来的故事，以及斯泰洛如何打断的事讲了出来，记录员开始记录下来。]" + strcharinfo(0) + "[记录员]";
-		mes "真奇怪。记录我没法全记住，但加姆贝里船长讲的故事，和我记得的那部分记录^0000cd并不一样^000000。";
+		mes "[你把从甘贝里船长那里听来的故事，以及斯特洛如何打断的事讲了出来，记录员开始记录下来。]" + strcharinfo(0) + "[记录员]";
+		mes "真奇怪。记录我没法全记住，但甘贝里船长讲的故事，和我记得的那部分记录^0000cd并不一样^000000。";
 		next;
 		mes "本来不该这么长的。";
 		mes "那么，一路平安。";
@@ -6034,17 +6011,17 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 	}
 	if (conch_in_recorder == 2) {
 		mes "[记录员]";
-		mes "嗯，我也不确定。得拿别的版本比对一下。既然有出入，我就不能只凭加姆贝里船长的话来写记录。";
+		mes "嗯，我也不确定。得拿别的版本比对一下。既然有出入，我就不能只凭甘贝里船长的话来写记录。";
 		next;
-		mes "[记录员]" + strcharinfo(0) + "还好除了加姆贝里船长，还有别人可以打听这个故事。";
-		mes "我听加姆贝里船长讲过那个故事了，但我很困惑。";
+		mes "[记录员]" + strcharinfo(0) + "还好除了甘贝里船长，还有别人可以打听这个故事。";
+		mes "我听甘贝里船长讲过那个故事了，但我很困惑。";
 		npctalk "请把故事讲给我听！", "", bc_self;
 		next;
 		mes "还有谁？";
 		next;
 		emotion ET_SCRATCH;
 		mes "[记录员]";
-		mes "这个人虽然不是千层面出身，却和加姆贝里船长相处过很长一段时间。你可以去找他谈谈，把他讲的跟加姆贝里船长说的对照一下。";
+		mes "这个人虽然不是罗札纳出身，却和甘贝里船长相处过很长一段时间。你可以去找他谈谈，把他讲的跟甘贝里船长说的对照一下。";
 		npctalk "我早该这么做了。", "", bc_self;
 		next;
 		mes "[记录员]" + strcharinfo(0) + "又要麻烦你了，真抱歉。";
@@ -6054,38 +6031,38 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 		mes "那人是谁？";
 		next;
 		mes "[记录员]";
-		mes "我说的是^0000cd治安队队长佩佩罗奇诺^000000。他现在应该正在新开的冒险者俱乐部吃早午饭。";
+		mes "我说的是^0000cd治安队队长佩佩隆奇诺^000000。他现在应该正在新开的冒险者俱乐部吃早午饭。";
 		next;
 		mes "他应该在桌边。" + strcharinfo(0) + "[记录员]";
-		mes "你往<NAVI>^4D4DFF[冒险者俱乐部]^000000<INFO>lasagna,56,186,000,1,</INFO></NAVI>的南门走，就能进餐厅了。";
+		mes "你往<NAVI>^4D4DFF[冒险者俱乐部]^000000<INFO>lasagna,56,186,0,101,0</INFO></NAVI>的南门走，就能进餐厅了。";
 		next;
 		mes "你可以顺着这条红毛线走，红毛线总能带你找到正确的路。";
 		mes "[记录员]";
-		npctalk "你可以去采访佩佩罗奇诺，再把故事告诉我。", "", bc_self;
+		npctalk "你可以去采访佩佩隆奇诺，再把故事告诉我。", "", bc_self;
 		next;
 		mes "[记录员]";
-		mes "他现在应该正在新建的<NAVI>^4D4DFF[冒险者俱乐部]^000000<INFO>lasagna,56,186,000,1,</INFO></NAVI>吃早午饭。你往南门走，就能进餐厅了。";
+		mes "他现在应该正在新建的<NAVI>^4D4DFF[冒险者俱乐部]^000000<INFO>lasagna,56,186,0,101,0</INFO></NAVI>吃早午饭。你往南门走，就能进餐厅了。";
 		next;
 		mes "[记录员]" + strcharinfo(0) + "这回你应该听到真正的故事了吧。";
 		mes "那人是谁？";
 		next;
 		mes "[记录员]";
-		mes "佩佩罗奇诺那边的说法让我更糊涂了。你自己听听吧。";
-		npctalk "[你把从佩佩罗奇诺那里听来的故事，以及奥利欧如何打断的事讲了出来，记录员开始记录下来。]", "", bc_self;
+		mes "佩佩隆奇诺那边的说法让我更糊涂了。你自己听听吧。";
+		npctalk "[你把从佩佩隆奇诺那里听来的故事，以及奥利奥如何打断的事讲了出来，记录员开始记录下来。]", "", bc_self;
 		next;
 		mes "[记录员]";
-		mes "佩佩罗奇诺讲的故事也说不通。我可以拿记录来核对他的话。";
-		npctalk "[记录员]", "", bc_self;
+		mes "佩佩隆奇诺讲的故事也说不通。我可以拿记录来核对他的话。";
+		npctalk "记录员#dorcon", "", bc_self;
 		erasequest 14580;// To Recorder
 		setquest 14581;// Interview with the Chief
 		conch_in_recorder = 3;
 		close;
 	}
 	if (conch_in_recorder == 3) {
-		mes "我看看。唔，你听到的故事和佩佩罗奇诺的记录不一样。";
+		mes "我看看。唔，你听到的故事和佩佩隆奇诺的记录不一样。";
 		mes "[记录员]";
 		next;
-		mes "看来我们没法完全相信佩佩罗奇诺讲的故事。不能相信的故事，我不能记下来。";
+		mes "看来我们没法完全相信佩佩隆奇诺讲的故事。不能相信的故事，我不能记下来。";
 		mes "真不敢相信我们的船长和队长竟这么自负！";
 		close;
 	}
@@ -6099,20 +6076,20 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 		mes "托马斯船长？";
 		next;
 		mes "[记录员]";
-		mes "你也看到了，加姆贝里船长和佩佩罗奇诺只讲他们想讲的故事。托马斯船长的话我们同样不能信。";
+		mes "你也看到了，甘贝里船长和佩佩隆奇诺只讲他们想讲的故事。托马斯船长的话我们同样不能信。";
 		next;
 		mes "[记录员]";
-		mes "我看看。唔，你听到的故事和佩佩罗奇诺的记录不一样。";
+		mes "我看看。唔，你听到的故事和佩佩隆奇诺的记录不一样。";
 		next;
-		mes "那千层面最年长的人讲的版本呢？";
+		mes "那罗札纳最年长的人讲的版本呢？";
 		mes "[记录员]";
-		npctalk "千层面这地方，人们年轻时只是来挣点钱，待一阵就走。大多数人最后都离开了……", "", bc_self;
+		npctalk "罗札纳这地方，人们年轻时只是来挣点钱，待一阵就走。大多数人最后都离开了……", "", bc_self;
 		next;
 		mes "[记录员]";
 		mes "哦，你说得对。还有^0000cd这么一个人^000000。";
 		next;
-		mes "千层面的活历史。" + strcharinfo(0) + "[记录员]";
-		mes "现在冒险者俱乐部所在的地方，以前是^0000cd烤炉酒馆^000000，那里过去卖卡露娜牛奶。你可以去见见那地方的^0000cd第一任老板^000000。不过……";
+		mes "罗札纳的活历史。" + strcharinfo(0) + "[记录员]";
+		mes "现在冒险者俱乐部所在的地方，以前是^0000cd烤炉酒馆^000000，那里过去卖卡鲁哇牛奶。你可以去见见那地方的^0000cd第一任老板^000000。不过……";
 		npctalk "托马斯船长？", "", bc_self;
 		next;
 		mes "[记录员]";
@@ -6122,26 +6099,26 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 		mes "[记录员]";
 		next;
 		mes "去见见^0000cd烤炉酒馆的老老板娘^000000吧。她住在^0000cd冒险者俱乐部附近的一间小屋里^000000。";
-		mes "千层面这地方，人们年轻时只是来挣点钱，待一阵就走。大多数人最后都离开了……";
+		mes "罗札纳这地方，人们年轻时只是来挣点钱，待一阵就走。大多数人最后都离开了……";
 		next;
 		mes "[记录员]";
 		mes "好，我很快回来。";
-		npctalk "[记录员]", "", bc_self;
+		npctalk "记录员#dorcon", "", bc_self;
 		next;
 		mes "去见见烤炉酒馆的第一任老板那位老太太。她住的应该就是附近的那间房子。";
 		mes "[记录员]";
 		next;
-		mes "欢迎回来。辛苦你了，请把情况汇报一下吧。" + strcharinfo(0) + "[你把从老太太那里听来的加姆贝里船长的故事讲了出来，记录员开始记录下来。]";
+		mes "欢迎回来。辛苦你了，请把情况汇报一下吧。" + strcharinfo(0) + "[你把从老太太那里听来的甘贝里船长的故事讲了出来，记录员开始记录下来。]";
 		mes "[记录员]";
 		next;
 		mes "干得好。这故事和我记得的一些细节对得上。他真是活历史啊。看来我该照这个故事把记录补上。";
-		mes "千层面的活历史。";
+		mes "罗札纳的活历史。";
 		next;
 		mes "[记录员]";
 		mes "这次补上的内容会比之前那份记录更加详尽。";
 		next;
 		mes "[记录员]" + strcharinfo(0) + "船长，您在这里做什么？";
-		mes "[加姆贝里船长]";
+		mes "[甘贝里船长]";
 		erasequest 14582;// To Recorder
 		setquest 14583;// To Granma
 		conch_in_recorder = 5;
@@ -6153,44 +6130,42 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 		close;
 	}
 	if (conch_in_recorder == 6) {
-		mes "加姆贝里船长#dorcon0_2";
 		mes "[记录员]";
 		next;
 		mes "从什么时候起，检查这些成了您的职责？还这么悄无声息，连门都不敲？";
 		next;
-		mes "[加姆贝里船长]";
-		mes "作为康克利纳号的老船员，无论何时都得应付得了任何情况。";
-		npctalk "[记录员]", "", bc_self;
+		mes "[甘贝里船长]";
+		mes "作为康-奇丽娜号的老船员，无论何时都得应付得了任何情况。";
+		npctalk "记录员#dorcon", "", bc_self;
 		next;
 		mes "原来如此。那^0000cd撕毁并烧掉文件，想必也是船长的职责^000000吧。";
 		mes "你真以为我不会发现吗？你身后留下的痕迹可长得很。";
 		next;
-		classchange( 4_DR_GAMBERI, "Captain Gamberi#dorcon0_2", bc_self );
+		classchange( 4_DR_GAMBERI, "甘贝里船长#dorcon0_2", bc_self );
 		mes "我不知道你在说什么。";
-		mes "加姆贝里船长#dorcon0_2";
 		next;
-		emotion ET_HUK, getnpcid(0, "Captain Gamberi#dorcon0");
-		mes "[加姆贝里船长]";
+		emotion ET_HUK, getnpcid(0, "甘贝里船长#dorcon0");
+		mes "[甘贝里船长]";
 		mes "哦，咳。我该去看看水手长在不在该在的地方。";
-		npctalk "我还有好多地方要跑。", "加姆贝里船长#dorcon0_2", bc_self;
+		npctalk "我还有好多地方要跑。", "甘贝里船长#dorcon0_2", bc_self;
 		next;
 		mes "[记录员]";
 		mes "从今往后想都别想！";
 		next;
-		mes "[加姆贝里船长]";
-		mes "作为康克利纳号的老船员，无论何时都得应付得了任何情况。";
+		mes "[甘贝里船长]";
+		mes "作为康-奇丽娜号的老船员，无论何时都得应付得了任何情况。";
 		next;
 		emotion ET_HUK, playerattached();
 		mes "那么，船长他一定是……？";
 		mes "[记录员]";
 		npctalk "随着越来越多人使用这艘船、翻看这些记录，那份写满他不太光彩过往的记录一定让他觉得难堪。", "", bc_self;
-		npctalk "在千层面，这种事没什么好难堪的。", "[记录员]", bc_self;
+		npctalk "在罗札纳，这种事没什么好难堪的。", "记录员#dorcon", bc_self;
 		next;
 		mes "我就知道他会再来。他肯定听说我在重新整理记录，我想他会回来再毁掉它一次。看来我得更加小心，别再让它丢了。";
 		mes "最好多抄几份，藏到各处去。";
-		npctalk "[记录员]", "亲爱的冒险者，既然你完成了任务，这是给你的报酬。从今往后，你可以自由查阅记录室里的所有文件了。那么，再会。", bc_self;
+		npctalk "亲爱的冒险者，既然你完成了任务，这是给你的报酬。从今往后，你可以自由查阅记录室里的所有文件了。那么，再会。", "记录员#dorcon", bc_self;
 		next;
-		classchange( HIDDEN_WARP_NPC, "Captain Gamberi#dorcon0_2", bc_self );
+		classchange( HIDDEN_WARP_NPC, "甘贝里船长#dorcon0_2", bc_self );
 		mes "[记录员]";
 		mes "你可以自由查阅记录室里的所有文件。";
 		next;
@@ -6219,9 +6194,9 @@ conch_in,96,29,5	script	Recorder#dorcon	4_CAT_MERMASTER,{
 	}
 }
 
-conch_in,101,31,3	script	Captain Gamberi#dorcon0_2	HIDDEN_WARP_NPC,{ end; }
+conch_in,101,31,3	script	甘贝里船长#dorcon0_2	HIDDEN_WARP_NPC,{ end; }
 
-conch_in,98,33,5	script	Con-Chliina Ship's Log#	HIDDEN_NPC,{
+conch_in,98,33,5	script	康-奇丽娜号航海日志#	HIDDEN_NPC,{
 	if (conch_in_recorder < 7) {
 		mes "3年前";
 		mes "你合上了书。";
@@ -6230,15 +6205,15 @@ conch_in,98,33,5	script	Con-Chliina Ship's Log#	HIDDEN_NPC,{
 	mes "X月X日" + strcharinfo(0) + "期待已久的首次航行。卸完所有货物后，但愿我们能再次满载而归……";
 	mes "X月X日";
 	next;
-	switch( select( "所到之处生意都不错。佩佩罗奇诺船长和船员们的眼光真让我佩服。", "X月X日", "离开里乔利港已经三天。遇上了风暴。大自然无常我们不是第一次领教，可清点损失时还是难免沮丧。", "重伤1人，轻伤13人，上等鳀鱼23箱，卡露娜7罐，胡须梳1箱，细布200匹。" ) ) {
+	switch( select( "所到之处生意都不错。佩佩隆奇诺船长和船员们的眼光真让我佩服。", "X月X日", "离开里乔利港已经三天。遇上了风暴。大自然无常我们不是第一次领教，可清点损失时还是难免沮丧。", "重伤1人，轻伤13人，上等鳀鱼23箱，卡鲁哇7罐，胡须梳1箱，细布200匹。" ) ) {
 	case 1:
 		switch( select( "X月X日", "几天前才遇过一场风暴，怎么又来一场？！这个季节这种时候，是谁定的航线？算了，反正是第一次，就不追究了。", "X月X日", "没什么事，一片平静。满月照着的海面上，一群飞鱼掠过，景色壮观极了。", "X月X日", "把货卸空、再装满新货返航的感觉真好。我很自豪，就像收割后把粮食四处散播出去的那种感觉。" ) ) {
 		case 1:
 			mes "X月X日";
-			mes "领了薪水后在酒馆喝上一杯卡露娜牛奶，是世上最甜美的滋味。";
+			mes "领了薪水后在酒馆喝上一杯卡鲁哇牛奶，是世上最甜美的滋味。";
 			next;
 			mes "X月X日";
-			mes "加姆贝里船长和托马斯船长真怪。他们总要让船队排成直线、保持同样速度前进，就像让小孩子齐步走一样。";
+			mes "甘贝里船长和托马斯船长真怪。他们总要让船队排成直线、保持同样速度前进，就像让小孩子齐步走一样。";
 			next;
 			mes "X月X日";
 			mes "我们碰上风暴太频繁了，我都在想要不要改航线。谢天谢地，我们在里乔利港躲过了一场风暴。";
@@ -6247,7 +6222,7 @@ conch_in,98,33,5	script	Con-Chliina Ship's Log#	HIDDEN_NPC,{
 			mes "我们从里乔利港招来的副厨真是太棒了。";
 			mes "X月X日";
 			next;
-			mes "离开里乔利港的第二天，我们遇上风暴，失去了蝴蝶号。我们伤心欲绝，回到千层面时谁都说不出话来。";
+			mes "离开里乔利港的第二天，我们遇上风暴，失去了蝴蝶号。我们伤心欲绝，回到罗札纳时谁都说不出话来。";
 			mes "X月X日";
 			next;
 			mes "暂时不出海了。";
@@ -6297,7 +6272,7 @@ conch_in,98,33,5	script	Con-Chliina Ship's Log#	HIDDEN_NPC,{
 			mes "风暴。真是受够风暴了。我们都习惯了，几乎能踏着浪过去。";
 			mes "X月X日";
 			next;
-			mes "斯泰洛说昨晚看见了奇怪的东西，于是我们改变了航向。那是一条我们从没走过的航线。大家意见不一，但既然能找的地方都找遍了，我们决定试一试。";
+			mes "斯特洛说昨晚看见了奇怪的东西，于是我们改变了航向。那是一条我们从没走过的航线。大家意见不一，但既然能找的地方都找遍了，我们决定试一试。";
 			mes "X月X日";
 			next;
 			mes "我做了一个奇怪的梦。";
@@ -6313,10 +6288,10 @@ conch_in,98,33,5	script	Con-Chliina Ship's Log#	HIDDEN_NPC,{
 			mes "蝴蝶号以柔软岛为据点，已经在新世界站稳脚跟并赚到了钱。他们天生就是商人。";
 			mes "X月X日";
 			next;
-			mes "我们正在返回千层面的路上。加姆贝里船长和托马斯船长谈了很久。";
+			mes "我们正在返回罗札纳的路上。甘贝里船长和托马斯船长谈了很久。";
 			mes "X月X日";
 			next;
-			mes "抵达千层面。喝了五杯卡露娜牛奶。";
+			mes "抵达罗札纳。喝了五杯卡鲁哇牛奶。";
 			mes "3年前：决定出海";
 			next;
 			mes "X月X日";
@@ -6329,9 +6304,9 @@ conch_in,98,33,5	script	Con-Chliina Ship's Log#	HIDDEN_NPC,{
 			mes "抵达柔软岛。不知道我们是怎么在茫茫大海上找到路的，但还是觉得不可思议。";
 			next;
 			mes "X月X日";
-			mes "加姆贝里船长和托马斯船长正式公布了向新世界扩张的计划。康克利纳号将负责招募并输送冒险者前往新世界。";
+			mes "甘贝里船长和托马斯船长正式公布了向新世界扩张的计划。康-奇丽娜号将负责招募并输送冒险者前往新世界。";
 			next;
-			mes "法法雷治安队负责训练他们。蝴蝶号同意以柔软岛为据点支援冒险者。准备期为三年。";
+			mes "法尔法雷治安队负责训练他们。蝴蝶号同意以柔软岛为据点支援冒险者。准备期为三年。";
 			mes "X月X日";
 			next;
 			mes "我想出了几种可以在新世界与远星之间贩卖的商品。两地口味差别之大让我吃惊。听到伊格德拉西尔果实的价钱时更是吓了一跳。";
@@ -6343,89 +6318,89 @@ conch_in,98,33,5	script	Con-Chliina Ship's Log#	HIDDEN_NPC,{
 			mes "我们载着补给驶向新世界。我一直想仔细看看，这可是个好机会。";
 			next;
 			mes "没什么可看的。";
-			mes "加姆贝里";
+			mes "甘贝里";
 			next;
-			mes "佩佩罗奇诺";
+			mes "佩佩隆奇诺";
 			mes "托梅·托马斯";
 			next;
 			mes "你合上了书。";
-			mes "- 加姆贝里 -";
-			mes "康克利纳号船长。";
+			mes "- 甘贝里 -";
+			mes "康-奇丽娜号船长。";
 			next;
 			mes "绰号是贝里。";
-			mes "卡露娜牛奶应该搅拌。";
+			mes "卡鲁哇牛奶应该搅拌。";
 			next;
-			mes "- 加姆贝里 -";
-			mes "他的父母在千层面经营一家肉铺。";
+			mes "- 甘贝里 -";
+			mes "他的父母在罗札纳经营一家肉铺。";
 			close;
 		case 6:
-			mes "- 加姆贝里 -" + strcharinfo(0) + "他年轻时总忍不住用拳头来管教混混多兰族，因此被称为千层面的疯狗。";
-			mes "- 加姆贝里 -";
+			mes "- 甘贝里 -" + strcharinfo(0) + "他年轻时总忍不住用拳头来管教混混喵族，因此被称为罗札纳的疯狗。";
+			mes "- 甘贝里 -";
 			close;
 		}
 	case 2:
-		switch( select( "他在烤炉酒馆遇见佩佩罗奇诺（现任法法雷治安队队长），两人为卡露娜牛奶该怎么喝起了争执。", "- 加姆贝里 -", "因为那次欠下的债，他最后和佩佩罗奇诺一起在鳀鱼工坊干活。加姆贝里凭本事得到认可，当上了工坊管事。", "- 加姆贝里 -" ) ) {
+		switch( select( "他在烤炉酒馆遇见佩佩隆奇诺（现任法尔法雷治安队队长），两人为卡鲁哇牛奶该怎么喝起了争执。", "- 甘贝里 -", "因为那次欠下的债，他最后和佩佩隆奇诺一起在鳀鱼工坊干活。甘贝里凭本事得到认可，当上了工坊管事。", "- 甘贝里 -" ) ) {
 		case 1:
 			mes "他们和后来加入的托马斯（现任蝴蝶号船长）一起做起了买卖。";
-			mes "- 加姆贝里 -";
-			mes "加姆贝里和托马斯决定向海上拓展，便集结船队出海，可托马斯船长在一场风暴中失踪了。";
-			mes "- 加姆贝里 -";
+			mes "- 甘贝里 -";
+			mes "甘贝里和托马斯决定向海上拓展，便集结船队出海，可托马斯船长在一场风暴中失踪了。";
+			mes "- 甘贝里 -";
 			next;
-			mes "康克利纳号的大副斯泰洛发现了航线，终于找到了已平安抵达新世界柔软岛的蝴蝶号。";
-			mes "- 加姆贝里 -";
+			mes "康-奇丽娜号的大副斯特洛发现了航线，终于找到了已平安抵达新世界柔软岛的蝴蝶号。";
+			mes "- 甘贝里 -";
 			next;
-			mes "目前航行于连接千层面与新世界的定期客船上。";
-			mes "- 佩佩罗奇诺 -";
+			mes "目前航行于连接罗札纳与新世界的定期客船上。";
+			mes "- 佩佩隆奇诺 -";
 			next;
-			mes "法法雷治安队队长。";
+			mes "法尔法雷治安队队长。";
 			mes "绰号是佩佩。";
 			next;
-			mes "卡露娜牛奶应该摇匀。";
-			mes "- 佩佩罗奇诺 -";
+			mes "卡鲁哇牛奶应该摇匀。";
+			mes "- 佩佩隆奇诺 -";
 			next;
 			mes "除了他小时候在富西利穷苦长大，他的早年经历无从得知。";
-			mes "- 佩佩罗奇诺 -";
+			mes "- 佩佩隆奇诺 -";
 			next;
-			mes "他怀着在鳀鱼捕捞船上发大财的宏大计划来到千层面，却因晕船放弃了。";
-			mes "- 佩佩罗奇诺 -";
+			mes "他怀着在鳀鱼捕捞船上发大财的宏大计划来到罗札纳，却因晕船放弃了。";
+			mes "- 佩佩隆奇诺 -";
 			next;
 			mes "后来，他开始在鳀鱼工坊做事。";
-			mes "- 佩佩罗奇诺 -";
+			mes "- 佩佩隆奇诺 -";
 			next;
-			mes "他在烤炉酒馆遇见加姆贝里（现任康克利纳号船长），两人为卡露娜牛奶该怎么喝起了争执。";
-			mes "- 佩佩罗奇诺 -";
+			mes "他在烤炉酒馆遇见甘贝里（现任康-奇丽娜号船长），两人为卡鲁哇牛奶该怎么喝起了争执。";
+			mes "- 佩佩隆奇诺 -";
 			close;
 		case 2:
-			mes "因为那次欠下的债，他最后和加姆贝里一起在鳀鱼工坊干活。";
-			mes "- 佩佩罗奇诺 -";
+			mes "因为那次欠下的债，他最后和甘贝里一起在鳀鱼工坊干活。";
+			mes "- 佩佩隆奇诺 -";
 			mes "他们和后来加入的托马斯（现任蝴蝶号船长）一起做起了买卖。";
-			mes "- 佩佩罗奇诺 -";
+			mes "- 佩佩隆奇诺 -";
 			next;
-			mes "加姆贝里和托马斯集结船队出海时，佩佩罗奇诺组建了法法雷治安队，至今仍由他管理，以维持千层面的治安。";
+			mes "甘贝里和托马斯集结船队出海时，佩佩隆奇诺组建了法尔法雷治安队，至今仍由他管理，以维持罗札纳的治安。";
 			mes "- 托梅·托马斯 -";
 			next;
 			mes "蝴蝶号船长。";
 			mes "绰号是托托。";
 			next;
-			mes "卡露娜牛奶应该摇匀。";
+			mes "卡鲁哇牛奶应该摇匀。";
 			mes "- 托梅·托马斯 -";
 			next;
 			mes "本名托梅·托马斯，后来简称为托马斯。";
 			mes "- 托梅·托马斯 -";
 			next;
-			mes "千层面本地人，因父母富有而过着优裕的生活长大。";
+			mes "罗札纳本地人，因父母富有而过着优裕的生活长大。";
 			mes "- 托梅·托马斯 -";
 			next;
-			mes "与加姆贝里（现任康克利纳号船长）是自幼一起长大的好友。";
+			mes "与甘贝里（现任康-奇丽娜号船长）是自幼一起长大的好友。";
 			mes "- 托梅·托马斯 -";
 			next;
-			mes "出于兴趣，他和加姆贝里、佩佩罗奇诺（现任法法雷治安队队长）一起在鳀鱼工坊干活。";
+			mes "出于兴趣，他和甘贝里、佩佩隆奇诺（现任法尔法雷治安队队长）一起在鳀鱼工坊干活。";
 			mes "- 托梅·托马斯 -";
 			close;
 		case 3:
 			mes "那两人把挣的钱都拿去还债，托马斯却攒下了工钱，这笔钱成了做买卖的本钱。";
 			mes "- 托梅·托马斯 -";
-			mes "加姆贝里和托马斯决定向海上拓展，便集结船队出海，可托马斯船长在一场风暴中失踪了。";
+			mes "甘贝里和托马斯决定向海上拓展，便集结船队出海，可托马斯船长在一场风暴中失踪了。";
 			mes "- 托梅·托马斯 -";
 			next;
 			mes "后来他平安抵达，在新世界的柔软岛安顿下来，势力正稳步扩张。";
@@ -6435,22 +6410,22 @@ conch_in,98,33,5	script	Con-Chliina Ship's Log#	HIDDEN_NPC,{
 			mes "没什么可看的。";
 			next;
 			mes "^0000cd[烤炉酒馆]^000000";
-			mes "托马斯、佩佩罗奇诺和加姆贝里碰面商议事情的地方。";
+			mes "托马斯、佩佩隆奇诺和甘贝里碰面商议事情的地方。";
 			next;
 			mes "^0000cd[烤炉酒馆]^000000";
-			mes "如今这里既是冒险者俱乐部，也是纪念地，是多兰族踏上冒险时必去的地方。";
+			mes "如今这里既是冒险者俱乐部，也是纪念地，是喵族踏上冒险时必去的地方。";
 			next;
-			mes "^0000cd[卡露娜牛奶]^000000";
-			mes "三个多兰族聚会时喝的、用卡露娜和牛奶调成的饮品。在他们的记忆里，如今它已是节庆饮品。";
+			mes "^0000cd[卡鲁哇牛奶]^000000";
+			mes "三个喵族聚会时喝的、用卡鲁哇和牛奶调成的饮品。在他们的记忆里，如今它已是节庆饮品。";
 			next;
-			mes "^0000cd[卡露娜牛奶]^000000";
+			mes "^0000cd[卡鲁哇牛奶]^000000";
 			mes "调和时通常是搅拌或摇匀，而关于这两种方法孰优孰劣的争论从未停过。";
 			next;
-			mes "^0000cd[卡露娜牛奶]^000000";
+			mes "^0000cd[卡鲁哇牛奶]^000000";
 			mes "可依个人口味加入一到三颗醋栗。";
 			close;
 		case 4:
-			mes "^0000cd[烤炉盟约]^000000" + strcharinfo(0) + "指托马斯、佩佩罗奇诺和加姆贝里结下的兄弟情谊。";
+			mes "^0000cd[烤炉盟约]^000000" + strcharinfo(0) + "指托马斯、佩佩隆奇诺和甘贝里结下的兄弟情谊。";
 			mes "^0000cd[蝴蝶号]^000000";
 			close;
 		}
@@ -6458,13 +6433,13 @@ conch_in,98,33,5	script	Con-Chliina Ship's Log#	HIDDEN_NPC,{
 		mes "据说曾在风暴中失踪，后来却被发现已平安抵达新世界并在此扎根。消息传开后，蝴蝶号便成了冒险与英雄的象征，广为人知。";
 		mes "^0000cd[L日]^000000";
 		next;
-		mes "千层面纪念日的缩写。正是在这一天，人们在历经32次搜寻后发现新航路，找到了平安抵达新世界的蝴蝶号。";
+		mes "罗札纳纪念日的缩写。正是在这一天，人们在历经32次搜寻后发现新航路，找到了平安抵达新世界的蝴蝶号。";
 		mes "^0000cd[L日]^000000";
 		next;
-		mes "千层面每年都会用盛大的烟花和庆典来庆祝这一天。";
-		mes "三个多兰族聚会时喝的、用卡露娜和牛奶调成的饮品。在他们的记忆里，如今它已是节庆饮品。";
+		mes "罗札纳每年都会用盛大的烟花和庆典来庆祝这一天。";
+		mes "三个喵族聚会时喝的、用卡鲁哇和牛奶调成的饮品。在他们的记忆里，如今它已是节庆饮品。";
 		next;
-		mes "^0000cd[卡露娜牛奶]^000000";
+		mes "^0000cd[卡鲁哇牛奶]^000000";
 		mes "没什么好看的。";
 		next;
 		mes "[水手长]";
@@ -6489,7 +6464,7 @@ conch_in,98,33,5	script	Con-Chliina Ship's Log#	HIDDEN_NPC,{
 	}
 }
 
-conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
+conch_in,181,61,5	script	水手长#dorcon	4_M_BOSSCAT,{
 	if (checkweight(1001,1) == 0) {
 		mes "，这次又要踏上新的冒险。很高兴见到你。";
 		mes "[副主厨]";
@@ -6498,7 +6473,6 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 	if (lasagna_quest[1] < 16) {
 		mes "你太冷淡了。";
 		mes "他大概没听见吧。";
-		mes "舵手#dorcon";
 		mes "[水手长]";
 		mes "哦，你就是那位刚受完训练、要动身前往新大陆冒险的冒险者吧。我很欣赏冒险精神。我年轻时也曾到处游历。";
 		mes "[舵手]";
@@ -6513,7 +6487,7 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		next;
 		mes "呸，胡说八道。";
 		mes "......";
-		npctalk "[副主厨]", "", bc_self;
+		npctalk "副主厨#dorcon", "", bc_self;
 		npctalk "喂，我知道了。那边太吵了。你可以走了。", "舵手#dorcon", bc_self;
 		next;
 		mes "[水手长]";
@@ -6522,10 +6496,9 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		mes "副主厨在出海前总是这么急躁。别往心里去。";
 		mes "这不代表他讨厌你。";
 		next;
-		mes "舵手#dorcon";
 		mes "[舵手]";
 		next;
-		mes "成熟的多兰族不会把这些放在心上。你走吧，我们就要出发了。";
+		mes "成熟的喵族不会把这些放在心上。你走吧，我们就要出发了。";
 		mes "[水手长]";
 		next;
 		mes "我们快要出海了。你该回去了。";
@@ -6557,7 +6530,6 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 	if (lasagna_quest[1] < 29) {
 		mes "什么！是谁把这根猫柳枝弄断的！";
 		mes "哦，又来了。";
-		mes "舵手#dorcon";
 		mes "星百合干，确认。";
 		mes "绳子打了33个结，确认。";
 		mes "你好像遇到麻烦了。怎么了？";
@@ -6570,11 +6542,10 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		mes "[水手长]";
 		mes "我们随时都要出发，可出航的准备却还没做好。";
 		mes "哦！你这位冒险者！别那么当真地跟他计较……！";
-		mes "舵手#dorcon";
 		next;
 		mes "[水手长]";
 		mes "什么！是谁把这根猫柳枝弄断的！";
-		npctalk "我对航海不太了解，但那些听起来都跟船没关系。", "[水手长]", bc_self;
+		npctalk "我对航海不太了解，但那些听起来都跟船没关系。", "水手长#dorcon", bc_self;
 		next;
 		mes "这不关你的事……不过，^0000cd来自新地方的陌生人应该能解决这个问题^000000。" + strcharinfo(0) + "而现在，一位来自新地方的陌生人就站在我面前。";
 		mes "[水手长]";
@@ -6586,7 +6557,7 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		}
 		mes "那样你就会知道水手能有多可怕。";
 		mes "什么事？";
-		npctalk "我不听。", "[水手长]", bc_self;
+		npctalk "我不听。", "水手长#dorcon", bc_self;
 		next;
 		mes "那就回你的位置去。从今往后别再指望我帮你什么。" + strcharinfo(0) + "[水手长]";
 		mes "很好。我喜欢你这种不向威胁屈服的态度。我也是这样。嗯，曾经也是。";
@@ -6602,7 +6573,7 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		mes "那样你就会知道水手能有多可怕。";
 		next;
 		if (select( "哦，是亡灵。", "[水手长]" ) == 2) {
-			mes "你说得对。我以前天不怕地不怕。我喜欢冒险之类的事情。就这样，我来到了千层面，遇见甘贝里船长后，当上了康奇利纳号的水手长。";
+			mes "你说得对。我以前天不怕地不怕。我喜欢冒险之类的事情。就这样，我来到了罗札纳，遇见甘贝里船长后，当上了康-奇丽娜号的水手长。";
 			mes "那是我一生中最珍贵的时刻。";
 			close;
 		}
@@ -6616,13 +6587,13 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		mes "我当初就该把它留在那里，转身走开。";
 		next;
 		mes "[水手长]" + strcharinfo(0) + "我摇了摇它，却没有任何声响。我纳闷的是，封得这么严实，里面究竟装着什么才一点声音都没有。";
-		mes "人们说，好奇心会害死多兰族……";
+		mes "人们说，好奇心会害死喵族……";
 		next;
 		mes "[水手长]";
 		mes "赶来的甘贝里想阻止我，但我还是打开了封印。^0000cd罐子^000000里什么也没有，也什么都没发生。";
-		npctalk "[水手长]", "", bc_self;
+		npctalk "水手长#dorcon", "", bc_self;
 		next;
-		mes "我把罐子扔了，登上康奇利纳号。就在那天晚上，事情发生了。";
+		mes "我把罐子扔了，登上康-奇丽娜号。就在那天晚上，事情发生了。";
 		mes "我什么地方都去过了。而有一天，我找到了它。";
 		next;
 		mes "[水手长]";
@@ -6630,11 +6601,11 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		next;
 		mes "[水手长]";
 		mes "哦，那天晚上，我听到了那首歌。无论在哪里都能听见。我能从掌心的纹路里、耳边，还有银色的浪花间听见它。";
-		npctalk "[水手长]", "", bc_self;
+		npctalk "水手长#dorcon", "", bc_self;
 		next;
 		mes "那旋律仿佛伸手就能抓住。我循着声音走去时，有人狠狠摇了我一下。等我回过神，才发现就在我快要跳下船时，船员们把我拉住了。";
 		mes "我摇了摇它，却没有任何声响。我纳闷的是，封得这么严实，里面究竟装着什么才一点声音都没有。";
-		npctalk "人们说，好奇心会害死多兰族……", "", bc_self;
+		npctalk "人们说，好奇心会害死喵族……", "", bc_self;
 		next;
 		mes "被那首歌迷住了？";
 		mes "[水手长]";
@@ -6665,7 +6636,7 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		npctalk "迷信？不，这些可都是纯粹的科学。", "", bc_self;
 		next;
 		mes "[水手长]";
-		mes "除了甘贝里船长和我，康奇利纳号上没有别的船员知道这件事。";
+		mes "除了甘贝里船长和我，康-奇丽娜号上没有别的船员知道这件事。";
 		next;
 		mes "[水手长]" + strcharinfo(0) + "^0000cd萨满喵^000000告诉过我一个谜语：来自新地方的陌生人会解决这个问题。我们的相遇并非偶然。";
 		mes "[水手长]";
@@ -6676,7 +6647,7 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		mes "[水手长]";
 		mes "什么都愿意？你保证？";
 		next;
-		mes "[水手长]" + strcharinfo(0) + "康奇利纳号的水手长不会撒谎。如果你不信我，那就信甘贝里吧——是他雇我做了康奇利纳号的水手长。";
+		mes "[水手长]" + strcharinfo(0) + "康-奇丽娜号的水手长不会撒谎。如果你不信我，那就信甘贝里吧——是他雇我做了康-奇丽娜号的水手长。";
 		mes "我绝不会背叛甘贝里。";
 		npctalk "迷信？不，这些可都是纯粹的科学。", "", bc_self;
 		next;
@@ -6687,7 +6658,7 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		mes "萨满喵住在村口附近一个僻静的地方。";
 		next;
 		mes "[水手长]";
-		mes "萨满喵住在千层面入口附近一个僻静的地方。希望像你这样来自新地方的陌生人能帮我解决这个难题。";
+		mes "萨满喵住在罗札纳入口附近一个僻静的地方。希望像你这样来自新地方的陌生人能帮我解决这个难题。";
 		next;
 		mes "[水手长]" + strcharinfo(0) + "亲爱的冒险者，你见到萨满喵了吗？";
 		mes "[你把从萨满喵那里听来的故事告诉了水手长。]";
@@ -6761,7 +6732,7 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		next;
 		mes "[水手长]";
 		mes "这是罗勒和罗勒锁。";
-		npctalk "[水手长]", "", bc_self;
+		npctalk "水手长#dorcon", "", bc_self;
 		next;
 		mes "呃……给我吧。不，不，不是那样。稍微包一下，别让人看见。对，就这样。把你有的都给我。" + strcharinfo(0) + "真不敢相信我得整天把这东西带在身上……";
 		mes "...Well, just as I heard from Shaman meow. I was told that the Boatswain would make me do it.";
@@ -6770,7 +6741,6 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		mes "那位萨满喵果然有先见之明。我现在信了。我相信护符真的有效。请现在就去给我弄一个来。拜托了。";
 		next;
 		mes "这可真难办。" + strcharinfo(0) + "喂，你看起来很可疑啊。";
-		mes "舵手#dorcon";
 		erasequest 14557;// Truth is alway harsh
 		setquest 14558;// Dirty Creatures
 		conch_in_boatswain = 3;
@@ -6791,7 +6761,7 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		next;
 		mes "[水手长]" + strcharinfo(0) + "这么有效的方法我到现在才知道，太不公平了！";
 		mes "什么不公平？";
-		npctalk "舵手#dorcon", "没什么！你就没别的事要做吗？", bc_self;
+		npctalk "没什么！你就没别的事要做吗？", "舵手#dorcon", bc_self;
 		npctalk "不，没什么！", "", bc_self;
 		next;
 		mes "[水手长]";
@@ -6816,7 +6786,6 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		mes "不，绝不。我可没打算跟萨满喵交朋友，也没打算自己去猎杀巴西利斯克。";
 		next;
 		mes "这不公平。" + strcharinfo(0) + "这水手长有点狡猾。";
-		mes "舵手#dorcon";
 		next;
 		mes "[水手长]";
 		mes "我会重重赏你的。明天请再帮我一次。";
@@ -6831,7 +6800,7 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "我很确定，那是恶鬼在跟你说话。";
-		npctalk "[水手长]", "看在你帮过我的份上，这次就算了。明天见。", bc_self;
+		npctalk "看在你帮过我的份上，这次就算了。明天见。", "水手长#dorcon", bc_self;
 		next;
 		mes "[水手长]";
 		mes "今天的护符带来了吗？你看起来两手空空。出什么事了吗？";
@@ -6914,10 +6883,9 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 		case 2:
 			mes "你好，我是";
 			mes "，这次又要踏上新的冒险。很高兴见到你。";
-			npctalk "[副主厨]", "", bc_self;
+			npctalk "副主厨#dorcon", "", bc_self;
 			next;
 			mes "你太冷淡了。";
-			mes "水手长#dorcon";
 			next;
 			mes "他大概没听见吧。";
 			mes "[水手长]";
@@ -6926,7 +6894,7 @@ conch_in,181,61,5	script	Boatswain#dorcon	4_M_BOSSCAT,{
 	}
 }
 
-conch_in,181,58,3	script	Helmsman#dorcon	4_CAT_SAILOR5,{
+conch_in,181,58,3	script	舵手#dorcon	4_CAT_SAILOR5,{
 	if (checkweight(1001,1) == 0) {
 		mes "哦，你就是那位刚受完训练、要动身前往新大陆冒险的冒险者吧。我很欣赏冒险精神。我年轻时也曾到处游历。";
 		mes "[舵手]";
@@ -6943,7 +6911,7 @@ conch_in,181,58,3	script	Helmsman#dorcon	4_CAT_SAILOR5,{
 		next;
 		mes "呸，胡说八道。";
 		mes "......";
-		npctalk "[副主厨]", "喂，我知道了。那边太吵了。你可以走了。", bc_self;
+		npctalk "喂，我知道了。那边太吵了。你可以走了。", "副主厨#dorcon", bc_self;
 		npctalk "他大概没听见吧。", "", bc_self;
 		next;
 		mes "[水手长]";
@@ -6953,7 +6921,7 @@ conch_in,181,58,3	script	Helmsman#dorcon	4_CAT_SAILOR5,{
 		mes "这不代表他讨厌你。";
 		next;
 		mes "[舵手]";
-		mes "成熟的多兰族不会把这些放在心上。你走吧，我们就要出发了。";
+		mes "成熟的喵族不会把这些放在心上。你走吧，我们就要出发了。";
 		next;
 		mes "[舵手]";
 		mes "副主厨认为做饭时有陌生人在场会带来霉运。你现在该走了。";
@@ -6985,13 +6953,12 @@ conch_in,181,58,3	script	Helmsman#dorcon	4_CAT_SAILOR5,{
 		close;
 	}
 	if (lasagna_quest[1] > 17) {
-		mes "水手长#dorcon";
 		mes "只要有风有帆，我们哪里都能去。";
 		close;
 	}
 }
 
-conch_in,179,64,5	script	Cow#dorcon01_bis	4_WHITE_COW,{
+conch_in,179,64,5	script	奶牛#dorcon01_bis	4_WHITE_COW,{
 	mes "[奶牛]";
 	mes "话说回来，这船上怎么会有头牛？";
 	next;
@@ -7003,16 +6970,15 @@ conch_in,179,64,5	script	Cow#dorcon01_bis	4_WHITE_COW,{
 	next;
 	mes "你为了喝鲜奶就把牛带上船？";
 	mes "[舵手]";
-	npctalk "水手长一刻也离不开她，因为她是他的幸运女神。托她的福，我们每天都能喝到卡露娜牛奶。", "", bc_self;
+	npctalk "水手长一刻也离不开她，因为她是他的幸运女神。托她的福，我们每天都能喝到卡鲁哇牛奶。", "", bc_self;
 	emotion ET_BIGTHROB;
-	npctalk "谁能想到在船上每天都能喝到卡露娜牛奶呢？", "舵手#dorcon", bc_self;
+	npctalk "谁能想到在船上每天都能喝到卡鲁哇牛奶呢？", "舵手#dorcon", bc_self;
 	emotion ET_THROB;
 	next;
 	mes "[水手长]" + strcharinfo(0) + "喂！再说下去可就要招霉运了！";
 	mes "哞————";
 	next;
 	mes "不，不——那个人不会伤害你的——";
-	mes "水手长#dorcon";
 	npctalk "[厨师长]", "", bc_self;
 	next;
 	mes "*鼾声*" + strcharinfo(0) + "*鼾声*";
@@ -7025,19 +6991,18 @@ conch_in,179,64,5	script	Cow#dorcon01_bis	4_WHITE_COW,{
 	mes "[水手长]";
 	mes "你好，我是";
 	npctalk "，这次又要踏上新的冒险。很高兴见到你。", "", bc_self;
-	npctalk "[副主厨]", "你太冷淡了。", bc_self;
+	npctalk "你太冷淡了。", "副主厨#dorcon", bc_self;
 	close;
 }
 
-conch_in,189,63,3	script	Head Chef#dorcon	4_DR_TORTEL,{
+conch_in,189,63,3	script	主厨#dorcon	4_DR_TORTEL,{
 	emotion ET_SLEEPY;
-	mes "水手长#dorcon";
 	mes "他大概没听见吧。";
-	npctalk "舵手#dorcon", "", bc_self;
+	npctalk "", "舵手#dorcon", bc_self;
 	close;
 }
 
-conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
+conch_in,186,57,3	script	副主厨#dorcon	4_CAT_CHEF,{
 	if (checkweight(1001,1) == 0) {
 		mes "[水手长]";
 		mes "哦，你就是那位刚受完训练、要动身前往新大陆冒险的冒险者吧。我很欣赏冒险精神。我年轻时也曾到处游历。";
@@ -7054,7 +7019,7 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		next;
 		mes "[水手长]";
 		mes "......";
-		npctalk "呸，胡说八道。", "[副主厨]", bc_self;
+		npctalk "呸，胡说八道。", "副主厨#dorcon", bc_self;
 		npctalk "喂，我知道了。那边太吵了。你可以走了。", "舵手#dorcon", bc_self;
 		next;
 		mes "[水手长]";
@@ -7063,10 +7028,9 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		mes "副主厨在出海前总是这么急躁。别往心里去。";
 		mes "这不代表他讨厌你。";
 		next;
-		mes "舵手#dorcon";
 		mes "[舵手]";
 		next;
-		mes "成熟的多兰族不会把这些放在心上。你走吧，我们就要出发了。";
+		mes "成熟的喵族不会把这些放在心上。你走吧，我们就要出发了。";
 		mes "[副主厨]";
 		next;
 		mes "去问事务长出航许可什么时候签发。看时间，我们要么更换食材，要么补充食材。";
@@ -7080,7 +7044,7 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		next;
 		mes "[水手长]";
 		mes "副主厨在出海前总是这么急躁。别往心里去。";
-		npctalk "我是说，^0000cd新人来啦！^000000", "[副主厨]", bc_self;
+		npctalk "我是说，^0000cd新人来啦！^000000", "副主厨#dorcon", bc_self;
 		next;
 		mes "你干什么？这是你新想出来的找死法子吗？我不怕挑战。拔武器吧。";
 		mes "你也听到刚才那句了吗？";
@@ -7091,7 +7055,6 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		close;
 	}
 	if (lasagna_quest[1] == 17) {
-		mes "水手长#dorcon";
 		mes "听见了。现在的年轻人……真是不要命……";
 		close;
 	}
@@ -7104,20 +7067,17 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		next;
 		mes "你这小耗子！快说。像你这样的新手不可能自己想出这一套。是谁派你来的？" + strcharinfo(0) + "这背后肯定有人指使！";
 		mes "副主厨是怎么看出来的？";
-		emotion ET_HUK, getnpcid(0, "Boatswain#dorcon");
-		emotion ET_HUK, getnpcid(0, "Helmsman#dorcon");
+		emotion ET_HUK, getnpcid(0, "水手长#dorcon");
+		emotion ET_HUK, getnpcid(0, "舵手#dorcon");
 		next;
-		mes "舵手#dorcon";
 		mes "等等，那家伙手里拿着……";
-		npctalk "水手长#dorcon", "[舵手]", bc_self;
-		npctalk "副主厨！我觉得这家伙说的是实话。是您吩咐的吧？", "[副主厨]", bc_self;
+		npctalk "舵手#dorcon", "水手长#dorcon", bc_self;
+		npctalk "副主厨！我觉得这家伙说的是实话。是您吩咐的吧？", "副主厨#dorcon", bc_self;
 		next;
 		mes "^0000cd卡鲁哇^000000？那个蛋黄波利！居然让这新人来搞这种恶作剧！喂，对不起。请接受我的道歉。" + strcharinfo(0) + "道歉要快，也要干脆。";
-		mes "水手长#dorcon";
 		next;
 		mes "这才是绅士的做法。";
-		mes "舵手#dorcon";
-		npctalk "[副主厨]", "我一定会让他来向你道歉。他真是个麻烦精。他永远都只是个水手小子。", bc_self;
+		npctalk "我一定会让他来向你道歉。他真是个麻烦精。他永远都只是个水手小子。", "副主厨#dorcon", bc_self;
 		npctalk "愿蛋黄波利安息吧。", "水手长#dorcon", bc_self;
 		npctalk "等等，那家伙手里拿着……", "水手长#dorcon", bc_self;
 		next;
@@ -7127,14 +7087,13 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		mes "你喜欢^0000cd烹饪^000000吗？";
 		mes "^0000cd卡鲁哇^000000？那个蛋黄波利！居然让这新人来搞这种恶作剧！喂，对不起。请接受我的道歉。";
 		npctalk "道歉要快，也要干脆。", "是的！我喜欢！", bc_self;
-		npctalk "[副主厨]", "我是说做菜，不是吃。", bc_self;
+		npctalk "我是说做菜，不是吃。", "副主厨#dorcon", bc_self;
 		next;
 		mes "[副主厨]";
 		mes "我一定会让他来向你道歉。他真是个麻烦精。他永远都只是个水手小子。";
-		npctalk "呃，我还没试过，不过我想我会喜欢的。", "[副主厨]", bc_self;
+		npctalk "呃，我还没试过，不过我想我会喜欢的。", "副主厨#dorcon", bc_self;
 		next;
 		mes "等你以后回来，^0000cd我会教你怎么做菜^000000。就当是我赔礼了。好了，你可以走了。" + strcharinfo(0) + "教做菜？这算什么啊！";
-		mes "水手长#dorcon";
 		next;
 		mes "[水手长]";
 		mes "喂，新人！你走的时候顺便问问事务长我们什么时候出航。到现在还没有消息，我觉得是出什么问题了。";
@@ -7150,7 +7109,7 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		next;
 		mes "不是。";
 		mes "[副主厨]";
-		npctalk "想学做菜的话，随时来找我。", "[副主厨]", bc_self;
+		npctalk "想学做菜的话，随时来找我。", "副主厨#dorcon", bc_self;
 		next;
 		mes "你看起来已经不再是新手了。我太忙了，没法再教你了。如果想进一步探索料理的世界，就去找别人吧。";
 		mes "[副主厨]";
@@ -7374,18 +7333,15 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 				mes "我不是说过不要那样进厨房吗……哦……你是从新大陆来的吗？";
 				next;
 				mes "新大陆！新大陆！";
-				mes "主厨#dorcon";
 				next;
 				mes "[副主厨]";
 				mes "这些天经常看到你。你长得真奇怪。脸上没有胡子，屁股上也没有尾巴。";
 				next;
 				cutin "俊弊傅墨靛.bmp",3;
 				mes "当着人家的面议论长相可不礼貌！";
-				mes "水手长#dorcon";
 				next;
 				cutin "弊贰胶颇宏福墨靛.bmp",3;
 				mes "真没礼貌！";
-				mes "舵手#dorcon";
 				next;
 				cutin "",255;
 				mes "[副主厨]";
@@ -7407,12 +7363,12 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		if (Class != Job_Summoner) {
 			mes "你好。我是";
 			mes "[副主厨]";
-			npctalk "你的名字也很奇怪。", "[副主厨]", bc_self;
+			npctalk "你的名字也很奇怪。", "副主厨#dorcon", bc_self;
 			next;
 			mes "我不是说过不要那样进厨房吗……哦……你看起来很面熟……";
 			mes "这些天经常看到你。你长得真奇怪。脸上没有胡子，屁股上也没有尾巴。";
 			npctalk "当着人家的面议论长相可不礼貌！", "你好。我是一名冒险者", bc_self;
-			npctalk "，正在Con-Killina上展开冒险。", "[副主厨]", bc_self;
+			npctalk "，正在Con-Killina上展开冒险。", "副主厨#dorcon", bc_self;
 			next;
 			mes "是吗？我来介绍一下自己。我是负责这间厨房的副主厨。";
 			mes "失礼了。我是负责这间厨房的副主厨。";
@@ -7420,11 +7376,9 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 			mes "[" + strcharinfo(0) + "主厨呢？为什么是副主厨在管厨房？";
 			mes "唉，你不该说这个的！" + strcharinfo(0) + ".";
 			next;
-			mes "水手长#dorcon";
 			mes "又开始了。那套长篇大论。";
 		}
 		else {
-			mes "舵手#dorcon";
 			mes "[副主厨]";
 			next;
 			mes "看那边。那个睡在地板上、一点也不像绅士的男人。^0000cd他就是我们的主厨^000000。船长总是说做事要全力以赴。但没什么用。" + strcharinfo(0) + "*鼾声*";
@@ -7441,8 +7395,8 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		next;
 		mes "[副主厨]";
 		mes "从那以后，主厨就把一切都交给我了。";
-		emotion ET_SLEEPY, getnpcid(0, "Head Chef#dorcon");
-		npctalk "[副主厨]","我想新大陆的人们吃的食物和我们不同。在新大陆，人们觉得什么好吃呢？", bc_self;
+		emotion ET_SLEEPY, getnpcid(0, "主厨#dorcon");
+		npctalk "我想新大陆的人们吃的食物和我们不同。在新大陆，人们觉得什么好吃呢？", "副主厨#dorcon", bc_self;
 		next;
 		mes "[副主厨]";
 		mes "我想出去把每道菜都尝一遍。可是如果我去，这艘船的船员们就要饿死了。";
@@ -7450,7 +7404,7 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		next;
 		mes "[副主厨]";
 		mes "不过他很擅长在短时间内做出足够多人吃的份量。所以他当上了主厨。但当人们开始抱怨味道时，就把我叫来了。";
-		npctalk "嗯，食物有很多种。我们也会猎取食材来烹饪。肯定有很多东西……", "[副主厨]", bc_self;
+		npctalk "嗯，食物有很多种。我们也会猎取食材来烹饪。肯定有很多东西……", "副主厨#dorcon", bc_self;
 		npctalk "我正好有一本^0000cd新大陆料理书^000000。你现在有那些食物所需的食材吗？", "舵手#dorcon", bc_self;
 		next;
 		mes "[副主厨]";
@@ -7461,12 +7415,11 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		next;
 		mes "[副主厨]";
 		mes "另外，也请帮我带些^0000cdNavi主厨做的猫硬饼干^000000。我听说味道不怎么样，但很有营养，也容易保存。";
-		npctalk "[副主厨]", "请给我带来^0000cd4个玛丝黛拉果实和1个猫硬饼干^000000。", bc_self;
+		npctalk "请给我带来^0000cd4个玛丝黛拉果实和1个猫硬饼干^000000。", "副主厨#dorcon", bc_self;
 		next;
 		mes "[副主厨]" + strcharinfo(0) + "你把它们带来，我会好好酬谢你。";
 		mes "我也很兴奋。新食物。";
 		next;
-		mes "水手长#dorcon";
 		mes "你需要的不过是填饱肚子的食物吧？";
 		next;
 		mes "舵手#dorcon" + strcharinfo(0) + "[副主厨]";
@@ -7482,7 +7435,6 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		mes "下次还能再麻烦你吗？就是那些食材。";
 		next;
 		mes "剥削警报！";
-		mes "水手长#dorcon";
 		npctalk "他拜托起人来真是顺溜！", "水手长#dorcon", bc_self;
 		npctalk "你需要的不过是填饱肚子的食物吧？", "有空我会再来的。", bc_self;
 		next;
@@ -7504,7 +7456,7 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		npctalk "给我一个。只要一个就够我饱一整天了。", "水手长#dorcon", bc_self;
 		npctalk "是啊，没错。", "水手长#dorcon", bc_self;
 		next;
-		mes "[副主厨]" + strcharinfo(0) + "谢谢你带来这些。多亏了你，千层面的料理又能向前迈进一步了。";
+		mes "[副主厨]" + strcharinfo(0) + "谢谢你带来这些。多亏了你，罗札纳的料理又能向前迈进一步了。";
 		mes "[副主厨]";
 		next;
 		mes "你才刚走没多久。已经拿到了吗？还是忘了我拜托你的事？";
@@ -7529,10 +7481,9 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 					mes "我可以留给孙子们吃。";
 					close;
 				}
-				mes "水手长#dorcon";
 				mes "如果轮得到的话。";
-				npctalk "舵手#dorcon", "[副主厨]", bc_self;
-				npctalk "谢谢你帮我弄到这些。现在Con-Chliina也能想出自己长期保存食物的办法了。", "[副主厨]", bc_self;
+				npctalk "副主厨#dorcon", "舵手#dorcon", bc_self;
+				npctalk "谢谢你帮我弄到这些。现在Con-Chliina也能想出自己长期保存食物的办法了。", "副主厨#dorcon", bc_self;
 				next;
 				mes "你才刚走没多久。已经拿到了吗？还是忘了我拜托你的事？";
 				mes "[副主厨]";
@@ -7549,10 +7500,9 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 					mes "冰镇的Kahlugna牛奶最棒了。";
 					close;
 				}
-				mes "水手长#dorcon";
 				mes "随时都能喝到新鲜牛奶！";
-				npctalk "舵手#dorcon", "[副主厨]", bc_self;
-				npctalk "谢谢你带来这些。多亏了你，Con-Chliina的船员们能吃到新鲜食物了。", "[副主厨]", bc_self;
+				npctalk "副主厨#dorcon", "舵手#dorcon", bc_self;
+				npctalk "谢谢你带来这些。多亏了你，Con-Chliina的船员们能吃到新鲜食物了。", "副主厨#dorcon", bc_self;
 				next;
 				mes "你怎么来了？是为了昨天拜托的事吗？";
 				mes "[副主厨]";
@@ -7566,17 +7516,14 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 					mes "我正在当班，没法进行个人的料理研究。天亮之后再来吧。";
 					mes "年纪轻轻，何必这么急躁。";
 					next;
-					mes "水手长#dorcon";
 					mes "年轻才急躁嘛。";
 					close;
 				}
-				mes "舵手#dorcon";
 				mes "做菜的时候，再急也没用。";
-				npctalk "[副主厨]", "来得正好。我刚好有点空闲，想继续研究新大陆的料理。你能帮我弄些食材来吗？", bc_self;
-				npctalk "[副主厨]", "我今天需要的是^0000cd面包^000000。千层面这边也有类似的东西，但做法完全不同。", bc_self;
+				npctalk "来得正好。我刚好有点空闲，想继续研究新大陆的料理。你能帮我弄些食材来吗？", "副主厨#dorcon", bc_self;
+				npctalk "我今天需要的是^0000cd面包^000000。罗札纳这边也有类似的东西，但做法完全不同。", "副主厨#dorcon", bc_self;
 				next;
 				mes "面包听起来超级好吃。";
-				mes "舵手#dorcon";
 				delitem 7066,20;// Ice Cubic
 				erasequest 14566;// Brilliant idea
 				setquest 14563;// Free time
@@ -7586,35 +7533,32 @@ conch_in,186,57,3	script	Sous Chef#dorcon	4_CAT_CHEF,{
 		case 0:
 		case 1:
 			mes "还有你觉得不好吃的东西吗？";
-			mes "水手长#dorcon";
 			next;
 			mes "[副主厨]";
 			mes "我想知道它是怎么做的。请帮我带一些来。^0000cd20个面包^000000就够了。";
 			npctalk "我今天需要的是^0000cd猫硬饼干和绵绵岛罐头^000000。我很好奇Navi的船员们是怎么熬过那么长的航程的。", "听起来很可爱，但不太像好吃的样子。", bc_self;
-			npctalk "水手长#dorcon", "但你还是会吃吧？", bc_self;
-			npctalk "舵手#dorcon", "", bc_self;
+			npctalk "但你还是会吃吧？", "水手长#dorcon", bc_self;
+			npctalk "", "舵手#dorcon", bc_self;
 			close;
 		case 2:
 			mes "是的。";
-			mes "水手长#dorcon";
 			next;
 			mes "[副主厨]";
 			switch( rand(3) ) {
 			case 0:
 				mes "我想知道它们是怎么做的。请帮我带一些来。^0000cd5个猫硬饼干和5个绵绵岛罐头^000000就够了。";
 				npctalk "我今天需要^0000cd冰块^000000。听说某个洞穴里的冰块即使在盛夏也不会融化。", "什么！为什么不会融化？", bc_self;
-				npctalk "舵手#dorcon", "我怎么知道。这世界充满了谜团。", bc_self;
+				npctalk "我怎么知道。这世界充满了谜团。", "舵手#dorcon", bc_self;
 				next;
-				mes "水手长#dorcon";
 				mes "[副主厨]";
 				erasequest 14563;// Free time
 				setquest 14564;// I love buns, too
 				close;
 			case 1:
 				mes "有了这些，我们就能保持食物新鲜，还能随时喝到冰镇的Kahlugna牛奶。^0000cd20个冰块^000000就够了，谢谢。";
-				npctalk "没有食材，你想让我怎么做？", "[副主厨]", bc_self;
+				npctalk "没有食材，你想让我怎么做？", "副主厨#dorcon", bc_self;
 				npctalk "快给我带来", "，马上！", bc_self;
-				npctalk "哦，你全带来了！我这就给你做。", "[副主厨]", bc_self;
+				npctalk "哦，你全带来了！我这就给你做。", "副主厨#dorcon", bc_self;
 				next;
 				mes "[副主厨]";
 				mes "我想知道它们是怎么做的。请帮我带一些来。^0000cd5个猫硬饼干和5个绵绵岛罐头^000000就够了。";
@@ -7662,16 +7606,16 @@ S_Check:
 	return;
 }
 
-lasagna,298,84,5	script	Vigilante#dorcon01	4_DR_SOLDIER,{
+lasagna,298,84,5	script	义警#dorcon01	4_DR_SOLDIER,{
 	if (lasagna_quest[1] == 21) {
 		if (Class != Job_Summoner) {
 			mes "浓雾笼罩着天空。^0000cd巡逻队^000000还没回来，可能要等一阵子。" + strcharinfo(0) + "]";
 			mes "你好。我是";
 			next;
 			mes "请告诉我龙住在哪里。";
-			mes "你要亲自去那里吗？万一出了什么事怎么办？不会引起外交问题吗……哦……千层面要完了……不会吧！";
+			mes "你要亲自去那里吗？万一出了什么事怎么办？不会引起外交问题吗……哦……罗札纳要完了……不会吧！";
 			next;
-			mes "[义警]" + strcharinfo(0) + "那就跟我来吧。<NAVI>^4D4DFF[龙巢]^000000<INFO>lasa_fild02,340,244,000,1,</INFO></NAVI>就在村外原野最右端的洞穴里。";
+			mes "[义警]" + strcharinfo(0) + "那就跟我来吧。<NAVI>^4D4DFF[龙巢]^000000<INFO>lasa_fild02,340,244,0,101,0</INFO></NAVI>就在村外原野最右端的洞穴里。";
 			mes "我听说因为浓雾无法出航。我来这里查看洞穴里龙的情况。";
 			next;
 			mes "[义警]";
@@ -7701,10 +7645,10 @@ lasagna,298,84,5	script	Vigilante#dorcon01	4_DR_SOLDIER,{
 		mes "哪里？";
 		mes "[义警]";
 		next;
-		mes "你知道的，<NAVI>^4D4DFF[龙巢]^000000<INFO>lasa_fild02,340,244,000,1,</INFO></NAVI>。它就在村外原野最右端的洞穴里。你先去吧。我稍作准备就跟着来。" + strcharinfo(0) + "[义警]";
-		mes "<NAVI>^4D4DFF[龙巢]^000000<INFO>lasa_fild02,340,244,000,1,</INFO></NAVI>在右边的洞穴里。那就跟我来吧。";
+		mes "你知道的，<NAVI>^4D4DFF[龙巢]^000000<INFO>lasa_fild02,340,244,0,101,0</INFO></NAVI>。它就在村外原野最右端的洞穴里。你先去吧。我稍作准备就跟着来。" + strcharinfo(0) + "[义警]";
+		mes "<NAVI>^4D4DFF[龙巢]^000000<INFO>lasa_fild02,340,244,0,101,0</INFO></NAVI>在右边的洞穴里。那就跟我来吧。";
 		next;
-		mes "我跟着你。<NAVI>^4D4DFF[龙巢]^000000<INFO>lasa_fild02,340,244,000,1,</INFO></NAVI>就在村外原野最右端的洞穴里。";
+		mes "我跟着你。<NAVI>^4D4DFF[龙巢]^000000<INFO>lasa_fild02,340,244,0,101,0</INFO></NAVI>就在村外原野最右端的洞穴里。";
 		mes "[义警]";
 		next;
 		mes "今天的风很不平静。" + strcharinfo(0) + "[义警]";
@@ -7712,13 +7656,13 @@ lasagna,298,84,5	script	Vigilante#dorcon01	4_DR_SOLDIER,{
 		next;
 		mes "这附近没看到它。我们得再往里走！";
 		mes "[马奇]";
-		npctalk "[马奇]", "", bc_self;
+		npctalk "马奇#dorcon01", "", bc_self;
 		next;
 		mes "我虽然装了死，但我不是胆小鬼。那家伙真的又大又吓人。不过现在这都不重要了。去塔图菲那儿吧。告诉他我今天去不了了，很抱歉。" + strcharinfo(0) + "[马奇]";
 		mes "已经解决了吗？你真快。我现在要休息了。你可以走了！";
 		next;
 		mes "[马奇]";
-		mes "今天的蛇蜥都很反常。";
+		mes "今天的巴西利斯克都很反常。";
 		erasequest 14539;// Crazy Dragon
 		setquest 14541;// No news is not a good news
 		lasagna_quest[1] = 22;
@@ -7740,7 +7684,7 @@ OnInit:
 	end;
 }
 
-lasa_dun01,29,146,5	script	Vigilante#dorcon03	HIDDEN_WARP_NPC,5,5,{
+lasa_dun01,29,146,5	script	义警#dorcon03	HIDDEN_WARP_NPC,5,5,{
 	end;
 OnTouch:
 	if (lasagna_quest[1] == 22) {// summoner
@@ -7755,7 +7699,7 @@ OnTouch:
 	end;
 }
 
-lasa_dun01,151,102,5	script	Machie#dorcon01	4_CAT_SAILOR4,{
+lasa_dun01,151,102,5	script	马奇#dorcon01	4_CAT_SAILOR4,{
 	if (lasagna_quest[1] == 22) {
 		mes "喂，兄弟！马奇！别丢下我死掉啊！";
 		mes "......";
@@ -7776,17 +7720,16 @@ lasa_dun01,151,102,5	script	Machie#dorcon01	4_CAT_SAILOR4,{
 	close;
 }
 
-lasa_dun01,153,103,3	script	Vigilante#dorcon02	4_DR_SOLDIER,{
+lasa_dun01,153,103,3	script	义警#dorcon02	4_DR_SOLDIER,{
 	if (lasagna_quest[1] == 22) {
 		mes "走了。真是松了口气！";
-		mes "马奇#dorcon01";
 		next;
 		mes "[义警]";
 		if (Class == Job_Summoner) {
 			mes "什么？";
 			next;
 			mes "[马奇]";
-			mes "那是最凶残、最恶劣、最残暴的蛇蜥。那东西很危险。是我见过最可怕的蛇蜥。我吓得脚都扭了。";
+			mes "那是最凶残、最恶劣、最残暴的巴西利斯克。那东西很危险。是我见过最可怕的巴西利斯克。我吓得脚都扭了。";
 		}
 		else {
 			mes "要不是我会演戏，早就死了。";
@@ -7796,7 +7739,6 @@ lasa_dun01,153,103,3	script	Vigilante#dorcon02	4_DR_SOLDIER,{
 		}
 		next;
 		mes "耍小聪明你倒是最在行。";
-		mes "马奇#dorcon01";
 		next;
 		mes "[义警]";
 		mes "马奇？";
@@ -7810,7 +7752,7 @@ lasa_dun01,153,103,3	script	Vigilante#dorcon02	4_DR_SOLDIER,{
 		next;
 		mes "不是，是等着出航的冒险者。船大概是因为浓雾没能出发。这家伙是来查看情况的。";
 		mes "[马奇]";
-		npctalk "原来如此。又是塔图菲在惹麻烦。今天的蛇蜥都发狂了。", "[义警]", bc_self;
+		npctalk "原来如此。又是塔图菲在惹麻烦。今天的巴西利斯克都发狂了。", "[义警]", bc_self;
 		next;
 		mes "也许是好天气让它们不安分。也可能是听到了笛子之类的曲调。";
 		mes "[马奇]";
@@ -7821,7 +7763,6 @@ lasa_dun01,153,103,3	script	Vigilante#dorcon02	4_DR_SOLDIER,{
 		next;
 		mes "他只是个孩子。";
 		if (Class == Job_Summoner)
-			mes "马奇#dorcon01";
 		else {
 			mes "是谁？新大陆来的人？义警队的新人？";
 			npctalk "我们现在也收新大陆的人了吗？", "", bc_self;
@@ -7837,7 +7778,6 @@ lasa_dun01,153,103,3	script	Vigilante#dorcon02	4_DR_SOLDIER,{
 			mes "听起来压力很大。";
 			mes "你真坏。";
 			next;
-			mes "马奇#dorcon01";
 			mes "[义警]";
 			next;
 			mes "是吗？我只是想让你别着急。好了，进去吧。记住，塔图菲的安宁就是海洋的安宁。那意味着希望。";
@@ -7959,7 +7899,7 @@ OnInit:
 	end;
 }
 
-lasa_dun_q,162,158,3	script	Tartufi#dorcon01	4_TARUTUPI,{
+lasa_dun_q,162,158,3	script	塔鲁土皮#dorcon01	4_TARUTUPI,{
 	if (lasagna_quest[1] == 23) {
 		mes "麦芝在巡逻时受了伤，回去了。";
 		mes "[塔鲁土皮]";
@@ -8050,7 +7990,7 @@ lasa_dun_q,162,158,3	script	Tartufi#dorcon01	4_TARUTUPI,{
 		npctalk "它们每天都这样，看来完全不长记性。", "", bc_self;
 		next;
 		mes "哦，对。谢谢。" + strcharinfo(0) + "[塔鲁土皮]";
-		mes "等他能再到处跑的时候，麦芝就会来了。多谢你。你说你要去新世界冒险？以后偶尔来千层面的时候，跟我讲讲新世界的事吧。";
+		mes "等他能再到处跑的时候，麦芝就会来了。多谢你。你说你要去新世界冒险？以后偶尔来罗札纳的时候，跟我讲讲新世界的事吧。";
 		erasequest 14542;// How is the Dragon
 		setquest 14543;// Basilisk Hunt
 		lasagna_quest[1] = 24;
@@ -8101,7 +8041,7 @@ lasa_dun_q,162,158,3	script	Tartufi#dorcon01	4_TARUTUPI,{
 	}
 }
 
-lasa_dun03,161,292,5	script	Lord Imuk#dorcon	4_NFWISP,{
+lasa_dun03,161,292,5	script	伊穆克领主#dorcon	4_NFWISP,{
 	if (Class == Job_Summoner)
 		end;
 	if (lasagna_quest[1] == 24) {
@@ -8174,7 +8114,7 @@ lasa_dun03,161,292,5	script	Lord Imuk#dorcon	4_NFWISP,{
 	}
 }
 
-lasa_dun03,162,158,3	script	Tartufi#dorcon02	4_TARUTUPI,{
+lasa_dun03,162,158,3	script	塔鲁土皮#dorcon02	4_TARUTUPI,{
 	if (Class == Job_Summoner)
 		end;
 	if (lasagna_quest[1] == 23) {
@@ -8331,7 +8271,7 @@ lasa_dun03,162,158,3	script	Tartufi#dorcon02	4_TARUTUPI,{
 		mes "[" + strcharinfo(0) + "]";
 		mes "你好。";
 		next;
-		mes "[佩佩罗奇诺队长]";
+		mes "[佩佩隆奇诺队长]";
 		mes "你来自新世界？新世界的人找我有什么事？";
 		next;
 		mes "你是我们冒险者公会的" + strcharinfo(0) + "没错吧？";
@@ -8345,7 +8285,7 @@ lasa_dun03,162,158,3	script	Tartufi#dorcon02	4_TARUTUPI,{
 		close;
 	}
 	if (lasagna_quest[1] == 27) {
-		mes "[佩佩罗奇诺队长]";
+		mes "[佩佩隆奇诺队长]";
 		mes "跟我有过交集的人，我都记得。";
 		close;
 	}
@@ -8355,8 +8295,8 @@ lasa_dun03,162,158,3	script	Tartufi#dorcon02	4_TARUTUPI,{
 }
 
 // recorder quest
-lasa_in01,186,57,3	script	Vigilante Chef#dorcon99	4_CAT_CHEF,{
-	mes "除了寻找新的冒险，倾听他人的故事也是冒险者的职责。据我所知，你在千层面待的时间比大多数人都长。";
+lasa_in01,186,57,3	script	治安队厨师#dorcon99	4_CAT_CHEF,{
+	mes "除了寻找新的冒险，倾听他人的故事也是冒险者的职责。据我所知，你在罗札纳待的时间比大多数人都长。";
 	mes "这里只有治安队员才能用餐。";
 	close;
 }
@@ -8369,42 +8309,42 @@ OnTouch:
 	end;
 }
 
-lasa_in01,179,60,5	script	Chief Peperoncino#dorco	4_DR_PEPE,{
+lasa_in01,179,60,5	script	佩佩隆奇诺队长#dorco	4_DR_PEPE,{
 	if (conch_in_recorder == 3) {
-		mes "[" + strcharinfo(0) + "大家都推荐我来找您打听千层面和法法雷治安队的故事。";
-		mes "[佩佩罗奇诺队长]";
+		mes "[" + strcharinfo(0) + "大家都推荐我来找您打听罗札纳和法尔法雷治安队的故事。";
+		mes "[佩佩隆奇诺队长]";
 		next;
 		mes "倾听他人的冒险故事是冒险者的美德之一。若能用心倾听，从他人身上学到些什么，那都会是宝贵的人生经验。";
 		if (Class != Job_Summoner)
 			mes "像你这样的年轻人，如今可不多见了。";
 		else {
-			mes "[佩佩罗奇诺队长]" + strcharinfo(0) + "那么，你想知道什么？";
+			mes "[佩佩隆奇诺队长]" + strcharinfo(0) + "那么，你想知道什么？";
 			next;
 			mes "[" + strcharinfo(0) + "]";
 			mes "我想听听您的故事。";
 			next;
-			mes "[佩佩罗奇诺]";
-			mes "我的故事……你为什么好奇这个？不过既然你问了，我就说说吧。我出生在千层面郊外一个叫^0000cd富西里^000000的地方。那时候，只要提到佩佩罗奇诺这个名字，富西里无人不知。";
+			mes "[佩佩隆奇诺]";
+			mes "我的故事……你为什么好奇这个？不过既然你问了，我就说说吧。我出生在罗札纳郊外一个叫^0000cd富西里^000000的地方。那时候，只要提到佩佩隆奇诺这个名字，富西里无人不知。";
 		}
 		next;
 		mes "我离开的那天，整个富西里都在流泪。" + strcharinfo(0) + "[治安队员]";
 		mes "队长，上次我们一起喝酒时您可不是这么说的。您说您离开是因为受不了因为贫穷被人看不起。";
 		next;
 		mes "您还说总有一天要拿一沓钞票甩在他们脸上。" + strcharinfo(0) + "治安队厨师#dorcon99";
-		mes "[佩佩罗奇诺]";
+		mes "[佩佩隆奇诺]";
 		next;
 		mes "你在说什么？那天你一定是喝多了。在辽阔的大海上能经历那么多事，冒险者还能奢求什么？";
-		mes "[佩佩罗奇诺]";
+		mes "[佩佩隆奇诺]";
 		npctalk "但遗憾的是，^0000cd我后来没法再坐船了^000000。原因我不能说，这是机密。", "", bc_self;
 		next;
 		mes "治安队厨师";
 		mes "晕船。";
 		next;
-		mes "你不忙吗？" + strcharinfo(0) + "[佩佩罗奇诺]";
+		mes "你不忙吗？" + strcharinfo(0) + "[佩佩隆奇诺]";
 		mes "后来我看到了渔业的无限潜力，更准确地说，是鳀鱼加工业。于是我投身^0000cd鳀鱼加工业^000000。也就在那时，我遇见了甘贝里。";
 		next;
 		mes "没错，甘贝里……";
-		mes "[佩佩罗奇诺]";
+		mes "[佩佩隆奇诺]";
 		npctalk "^0000cd甘贝里是个让我想起地痞流氓的混混^000000。他很快就被我的话打动，跟我一起做起了生意。", "", bc_self;
 		next;
 		mes "治安队厨师";
@@ -8412,96 +8352,92 @@ lasa_in01,179,60,5	script	Chief Peperoncino#dorco	4_DR_PEPE,{
 		npctalk "差点把一家店整个砸了。", "治安队厨师#dorcon99", bc_self;
 		next;
 		mes "你是用嘴做菜的吗？";
-		mes "[佩佩罗奇诺]";
+		mes "[佩佩隆奇诺]";
 		next;
 		mes "当然也有过小摩擦，但甘贝里被我的领导力打动，受到了感化。在鳀鱼加工业积累了足够的经验和诀窍后，我们决定描绘更大的蓝图。";
-		mes "[佩佩罗奇诺]";
+		mes "[佩佩隆奇诺]";
 		next;
-		mes "那就是^0000cd贩卖特产^000000。甘贝里的朋友^0000cd托马斯^000000也加入了这项事业，我们决定在千层面开始做生意。但问题在于^0000cd那些差劲的喵族^000000。";
-		mes "[佩佩罗奇诺]";
+		mes "那就是^0000cd贩卖特产^000000。甘贝里的朋友^0000cd托马斯^000000也加入了这项事业，我们决定在罗札纳开始做生意。但问题在于^0000cd那些差劲的喵族^000000。";
+		mes "[佩佩隆奇诺]";
 		npctalk "他们什么事都要挑刺，所以我决定把他们抓来干活。", "", bc_self;
 		next;
 		mes "治安队厨师";
 		mes "这说法对不上啊。";
 		npctalk "跟我听过的版本不一样。", "", bc_self;
 		next;
-		mes "治安队厨师#dorcon99";
-		mes "[佩佩罗奇诺]";
+		mes "[佩佩隆奇诺]";
 		next;
 		mes "总之，甘贝里船长是个好人。他从还是混混的时候就被我感化了，现在已经成了喵族。";
 		mes "我听说你们打过架。";
-		npctalk "差点把一家店整个砸了。", "过去的千层面是什么样的？", bc_self;
-		npctalk "[佩佩罗奇诺]", "", bc_self;
+		npctalk "差点把一家店整个砸了。", "过去的罗札纳是什么样的？", bc_self;
+		npctalk "[佩佩隆奇诺]", "", bc_self;
 		next;
-		mes "我刚来的时候，千层面简直糟透了。你喘口气都会有人找茬，你走两步就会打起来。甘贝里船长到处去制止那些人群，但我对他的第一印象跟那些人没什么两样。";
-		mes "[佩佩罗奇诺]";
+		mes "我刚来的时候，罗札纳简直糟透了。你喘口气都会有人找茬，你走两步就会打起来。甘贝里船长到处去制止那些人群，但我对他的第一印象跟那些人没什么两样。";
+		mes "[佩佩隆奇诺]";
 		next;
-		mes "以暴制暴，那暴力又由谁来制止？总之，千层面就像个腐烂的垃圾桶。相比之下，富西里才是个住着完全纯良之人的城镇！";
+		mes "以暴制暴，那暴力又由谁来制止？总之，罗札纳就像个腐烂的垃圾桶。相比之下，富西里才是个住着完全纯良之人的城镇！";
 		mes "那个该死的富西里，真是没完没了。";
 		next;
-		mes "治安队厨师#dorcon99";
 		mes "治安队厨师";
 		next;
 		mes "我问过那些新来的人富西里在哪，没一个知道。那地方肯定是在什么穷乡僻壤吧。";
 		mes "不许侮辱富西里！";
-		npctalk "[佩佩罗奇诺]", "总之，我们开始做生意时最大的障碍就是千层面那些差劲的喵族。他们扑上来就要打架。住在海边的人都这么好斗吗？", bc_self;
+		npctalk "[佩佩隆奇诺]", "总之，我们开始做生意时最大的障碍就是罗札纳那些差劲的喵族。他们扑上来就要打架。住在海边的人都这么好斗吗？", bc_self;
 		next;
 		mes "治安队厨师";
 		mes "不，别侮辱他们。是这地方不正常。";
 		next;
 		mes "我的家乡可不是这样。" + strcharinfo(0) + "治安队厨师#dorcon99";
-		mes "[佩佩罗奇诺]";
+		mes "[佩佩隆奇诺]";
 		next;
 		mes "起初我试着靠谈话说服那些差劲的喵族。我想当个绅士，可他们根本不听。就在这时，甘贝里把事情揽了过去。";
-		mes "[佩佩罗奇诺]";
+		mes "[佩佩隆奇诺]";
 		next;
 		mes "我不是刚说过吗？他彻底搞定了。我把那些差劲的喵族召集起来训了话。他们被我的演讲深深打动，自愿加入了治安队。";
 		mes "你威胁他们要么加入，要么滚蛋。";
-		npctalk "治安队厨师#dorcon99", "[佩佩罗奇诺]", bc_self;
+		npctalk "[佩佩隆奇诺]", "治安队厨师#dorcon99", bc_self;
 		next;
-		mes "哼！总之，在治安队和商人们的努力下，千层面才重生成如今的模样。";
+		mes "哼！总之，在治安队和商人们的努力下，罗札纳才重生成如今的模样。";
 		mes "我问过那些新来的人富西里在哪，没一个知道。那地方肯定是在什么穷乡僻壤吧。";
 		npctalk "不许侮辱富西里！", "", bc_self;
 		next;
 		mes "治安队和商人们怎么样了？";
-		mes "[佩佩罗奇诺]";
+		mes "[佩佩隆奇诺]";
 		next;
-		mes "^0000cd治安队和商人们^000000……嗯……在管理千层面的几个组织中，可以说是这两方造就了今天的千层面。而甘贝里、托马斯和我正处于核心。";
-		mes "[佩佩罗奇诺]";
-		npctalk "当我们投身特产买卖时，许多被我们感动的喵族都想帮忙。", "治安队厨师", bc_self;
+		mes "^0000cd治安队和商人们^000000……嗯……在管理罗札纳的几个组织中，可以说是这两方造就了今天的罗札纳。而甘贝里、托马斯和我正处于核心。";
+		mes "[佩佩隆奇诺]";
+		npctalk "当我们投身特产买卖时，许多被我们感动的喵族都想帮忙。", "治安队厨师#dorcon99", bc_self;
 		next;
 		mes "明白我的意思了吧？跟上次的版本又不一样。";
-		mes "我在考虑明天把康奇利纳号的船员全请来，办一场宴会。";
+		mes "我在考虑明天把康-奇丽娜号的船员全请来，办一场宴会。";
 		next;
 		mes "不，没事。我现在闭嘴。";
-		mes "治安队厨师#dorcon99";
-		npctalk "[佩佩罗奇诺]", "我们把那些差劲的喵族集合起来，送进了治安队和商会。千层面的^0000cd治安由治安队负责^000000，^0000cd商品相关的一切则由商人打理^000000。", bc_self;
+		npctalk "[佩佩隆奇诺]", "我们把那些差劲的喵族集合起来，送进了治安队和商会。罗札纳的^0000cd治安由治安队负责^000000，^0000cd商品相关的一切则由商人打理^000000。", bc_self;
 		next;
-		mes "[佩佩罗奇诺]";
+		mes "[佩佩隆奇诺]";
 		mes "为了扩展兴旺的生意，我们^0000cd开始海上贸易^000000。但就在那时，^0000cd托马斯的船“蝴蝶号”在台风中失踪了^000000。";
 		next;
-		mes "[佩佩罗奇诺]" + strcharinfo(0) + "我^0000cd坚持不懈地说服康奇利纳号的船长和船员去寻找蝴蝶号^000000。我的努力终于有了回报，我们在^0000cd新世界的一座偏远岛屿^000000上找到了他们。";
+		mes "[佩佩隆奇诺]" + strcharinfo(0) + "我^0000cd坚持不懈地说服康-奇丽娜号的船长和船员去寻找蝴蝶号^000000。我的努力终于有了回报，我们在^0000cd新世界的一座偏远岛屿^000000上找到了他们。";
 		mes "治安队厨师";
 		next;
-		mes "那个嘛，是康奇利纳号的斯泰罗……";
+		mes "那个嘛，是康-奇丽娜号的斯泰罗……";
 		mes "宴会？";
 		next;
 		mes "不要。";
-		mes "治安队厨师#dorcon99";
 		next;
-		mes "[佩佩罗奇诺]";
+		mes "[佩佩隆奇诺]";
 		mes "还有别的想知道的吗？";
-		npctalk "我在考虑明天把康奇利纳号的船员全请来，办一场宴会。", "", bc_self;
+		npctalk "我在考虑明天把康-奇丽娜号的船员全请来，办一场宴会。", "", bc_self;
 		npctalk "不，没事。我现在闭嘴。", "那真是……多么精彩的冒险。谢谢您分享故事。我现在很清楚您那份威严从何而来了。", bc_self;
 		next;
-		mes "[佩佩罗奇诺]";
-		mes "我们把那些差劲的喵族集合起来，送进了治安队和商会。千层面的^0000cd治安由治安队负责^000000，^0000cd商品相关的一切则由商人打理^000000。";
+		mes "[佩佩隆奇诺]";
+		mes "我们把那些差劲的喵族集合起来，送进了治安队和商会。罗札纳的^0000cd治安由治安队负责^000000，^0000cd商品相关的一切则由商人打理^000000。";
 		next;
 		mes "感谢您抽出时间。";
-		mes "[佩佩罗奇诺队长]";
+		mes "[佩佩隆奇诺队长]";
 		next;
 		mes "希望有一天能听听你的故事。";
-		mes "[佩佩罗奇诺队长]";
+		mes "[佩佩隆奇诺队长]";
 		next;
 		mes "希望有一天能听听你的故事。";
 		mes "[奶奶]";
@@ -8511,13 +8447,13 @@ lasa_in01,179,60,5	script	Chief Peperoncino#dorco	4_DR_PEPE,{
 		mes "哇，您的感知力真厉害。";
 		mes "[奶奶]";
 		next;
-		mes "一个人住久了，再小的动静都会很敏感。那么，你来这里有什么事？卡鲁纳牛奶现在卖完了。要不要点些别的？" + strcharinfo(0) + "可是我把盘子全打碎了，所以什么都没有。";
+		mes "一个人住久了，再小的动静都会很敏感。那么，你来这里有什么事？卡鲁哇牛奶现在卖完了。要不要点些别的？" + strcharinfo(0) + "可是我把盘子全打碎了，所以什么都没有。";
 		mes "那真是……多么精彩的冒险。谢谢您分享故事。我现在很清楚您那份威严从何而来了。";
 		next;
 		mes "[" + strcharinfo(0) + "我有件事想问你。你还记得甘贝里队长和佩佩龙奇诺首领吗？";
 		mes "[奶奶]";
 		next;
-		mes "哦，那些蛋壳小子啊。说起来，最近很少见到他们。他们是放弃后离开千层面了吗？";
+		mes "哦，那些蛋壳小子啊。说起来，最近很少见到他们。他们是放弃后离开罗札纳了吗？";
 		mes "希望有一天能听听你的故事。";
 		erasequest 14581;// Interview with the Chief
 		setquest 14582;// To Recorder
@@ -8525,13 +8461,13 @@ lasa_in01,179,60,5	script	Chief Peperoncino#dorco	4_DR_PEPE,{
 		close;
 	}
 	if (conch_in_recorder == 4) {
-		mes "[佩佩罗奇诺队长]";
-		mes "不，他们两个都好好的，还在千层面。我来是因为想打听甘贝里队长的事。";
+		mes "[佩佩隆奇诺队长]";
+		mes "不，他们两个都好好的，还在罗札纳。我来是因为想打听甘贝里队长的事。";
 		close;
 	}
 }
 
-lasagna,263,156,5	script	Grandma#dorcon01	4_CAT_REST,{
+lasagna,263,156,5	script	老奶奶#dorcon01	4_CAT_REST,{
 	if (conch_in_recorder == 5) {
 		mes "[奶奶]";
 		mes "队长？什么队长？甘贝里？那个蛋壳小子？哦，你说得对。他确实当上队长了。我还记得他带着佩佩走进我酒馆的样子。";
@@ -8541,20 +8477,20 @@ lasagna,263,156,5	script	Grandma#dorcon01	4_CAT_REST,{
 		next;
 		mes "佩佩？";
 		mes "[奶奶]";
-		npctalk "^0000cd佩佩。佩佩龙奇诺。甘贝里就是贝里，托梅·托马斯就是托托^000000。也难怪年轻人不知道。总之，他们当年就像野生的蛇蜥一样。", "", bc_self;
+		npctalk "^0000cd佩佩。佩佩龙奇诺。甘贝里就是贝里，托梅·托马斯就是托托^000000。也难怪年轻人不知道。总之，他们当年就像野生的巴西利斯克一样。", "", bc_self;
 		next;
-		mes "[奶奶]" + strcharinfo(0) + "洞里还有蛇蜥吗？我们年轻的时候，连洞边都不敢靠近。";
+		mes "[奶奶]" + strcharinfo(0) + "洞里还有巴西利斯克吗？我们年轻的时候，连洞边都不敢靠近。";
 		mes "我有件事想问你。你还记得甘贝里队长和佩佩龙奇诺首领吗？";
 		next;
 		mes "[奶奶]";
 		mes "那后来呢？他们来了酒馆，然后做了什么？";
 		next;
-		mes "[奶奶]" + strcharinfo(0) + "哦，对了。佩佩一副流浪汉的样子，却点了卡鲁纳奶。贝里就在那时挑起架来，说只有小孩子才喝摇的。";
+		mes "[奶奶]" + strcharinfo(0) + "哦，对了。佩佩一副流浪汉的样子，却点了卡鲁哇奶。贝里就在那时挑起架来，说只有小孩子才喝摇的。";
 		mes "[奶奶]";
 		next;
 		mes "于是他们就^0000cd打了起来^000000。我的^0000cd店被砸了^000000。所以我提出了^0000cd损害赔偿^000000，包括损坏的家具和酒馆恢复营业前的营业损失。";
 		mes "[奶奶]";
-		npctalk "你提到佩佩。看来他那时也过得很穷。他听说在鳀鱼渔船上能赚大钱，就跑来了千层面，结果因为晕船辞了工。", "", bc_self;
+		npctalk "你提到佩佩。看来他那时也过得很穷。他听说在鳀鱼渔船上能赚大钱，就跑来了罗札纳，结果因为晕船辞了工。", "", bc_self;
 		next;
 		mes "[奶奶]" + strcharinfo(0) + "从那以后，他再也上不了船了。哈哈。他因为^0000cd违约金^000000欠了一屁股债，走也走不了。最后只能在鳀鱼工坊里摘鳀鱼的头和内脏……";
 		mes "那些应该是拿去做肥料的。";
@@ -8563,26 +8499,26 @@ lasagna,263,156,5	script	Grandma#dorcon01	4_CAT_REST,{
 		mes "总之，他因为船和酒馆的事欠了一大笔债。两个人商量来商量去，最后去了^0000cd鳀鱼工坊^000000。几年后，^0000cd甘贝里当上了工坊主管^000000。那活儿正适合他。";
 		next;
 		mes "[奶奶]";
-		mes "洞里还有蛇蜥吗？我们年轻的时候，连洞边都不敢靠近。";
+		mes "洞里还有巴西利斯克吗？我们年轻的时候，连洞边都不敢靠近。";
 		next;
-		mes "千层面以前是什么样子？" + strcharinfo(0) + "[奶奶]";
+		mes "罗札纳以前是什么样子？" + strcharinfo(0) + "[奶奶]";
 		mes "别提了。那时候一团糟。路烂透了。人也烂透了。过去之所以叫黑暗时代，是有原因的。";
 		next;
 		mes "[奶奶]";
-		mes "你有过在路上一脚踩到鱼内脏的经历吗？当年的千层面就是那样。";
+		mes "你有过在路上一脚踩到鱼内脏的经历吗？当年的罗札纳就是那样。";
 		next;
 		mes "[奶奶]";
-		mes "后来有一天，两个混混跟着商人和警备队来了，开始打千层面的小子们。";
+		mes "后来有一天，两个混混跟着商人和警备队来了，开始打罗札纳的小子们。";
 		next;
 		mes "有意思的是，这两个流氓居然在管教别的流氓。";
 		mes "[奶奶]";
 		next;
 		mes "看来棍棒真能把多兰教好。那两个人把那些混混交给了商人和警备队。嗯……我记得那些小家伙，胡子被剃了，尾巴也破烂不堪。";
 		mes "[奶奶]";
-		npctalk "那些像老鼠一样的多兰都离开了千层面，只有想过正经日子的留了下来。是他们造就了现在的千层面。", "", bc_self;
+		npctalk "那些像老鼠一样的多兰都离开了罗札纳，只有想过正经日子的留了下来。是他们造就了现在的罗札纳。", "", bc_self;
 		next;
 		mes "[奶奶]";
-		mes "可你是谁？你是来点卡鲁纳奶的吗？搅的还是摇的？我的员工都跑哪去了？";
+		mes "可你是谁？你是来点卡鲁哇奶的吗？搅的还是摇的？我的员工都跑哪去了？";
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "那我先走了……";
@@ -8595,21 +8531,21 @@ lasagna,263,156,5	script	Grandma#dorcon01	4_CAT_REST,{
 		next;
 		mes "[奶奶]";
 		mes "呼……呼……";
-		npctalk "[卡鲁]", "", bc_self;
+		npctalk "卡鲁#dorcon", "", bc_self;
 		next;
 		mes "看起来又大又沉。去卸掉一些吧。";
 		mes "[卡鲁]";
 		next;
 		mes "想跟我说话，你最好再去多历练历练。";
-		mes "那些像老鼠一样的多兰都离开了千层面，只有想过正经日子的留了下来。是他们造就了现在的千层面。";
+		mes "那些像老鼠一样的多兰都离开了罗札纳，只有想过正经日子的留了下来。是他们造就了现在的罗札纳。";
 		next;
 		mes "[奶奶]";
-		mes "请给我一杯卡鲁纳奶。";
+		mes "请给我一杯卡鲁哇奶。";
 		next;
 		mes "搅匀的。" + strcharinfo(0) + "摇匀的。";
 		mes "[卡鲁]";
 		next;
-		mes "想喝卡鲁纳奶就去找隔壁那位。不过你最好快点。用不了多久，搅的还是摇的就都没区别了。";
+		mes "想喝卡鲁哇奶就去找隔壁那位。不过你最好快点。用不了多久，搅的还是摇的就都没区别了。";
 		mes "再没有客人，我的酒馆很快就要关门了。";
 		erasequest 14583;// To Granma
 		setquest 14584;// Back to Recorder
@@ -8622,142 +8558,133 @@ lasagna,263,156,5	script	Grandma#dorcon01	4_CAT_REST,{
 		close;
 	}
 	mes "[卡鲁]";
-	mes "你知道卡鲁纳奶的主要原料是什么吗？是^0000cd卡鲁纳^000000——用一种叫^0000cd卡鲁尼亚克^000000的特殊贝类发酵而成的精华，还有新鲜牛奶。";
+	mes "你知道卡鲁哇奶的主要原料是什么吗？是^0000cd卡鲁哇^000000——用一种叫^0000cd卡鲁哇克^000000的特殊贝类发酵而成的精华，还有新鲜牛奶。";
 	close;
 }
 
-lasagna,226,181,3	script	Kalu#dorcon	4_CAT_CHEF,{
+lasagna,226,181,3	script	卡鲁#dorcon	4_CAT_CHEF,{
 	if (checkweight(1001,1) == 0) {
-		mes "卡鲁纳奶！摇的！";
-		mes "酒鬼#dorcon02";
+		mes "卡鲁哇奶！摇的！";
 		close;
 	}
 	if (BaseLevel < 140) {
-		mes "卡鲁纳奶，摇的！一杯！";
+		mes "卡鲁哇奶，摇的！一杯！";
 		mes "[卡鲁]";
 		close;
 	}
 	if (lasagna_quest[2] == 0) {
-		mes "以适中的温度搅匀，再放一颗醋栗做点缀。这样就能做出大家最爱的卡鲁纳奶了。" + strcharinfo(0) + "要是用现挤的牛奶，你就能尝到卡鲁纳奶的顶级版本。";
+		mes "以适中的温度搅匀，再放一颗醋栗做点缀。这样就能做出大家最爱的卡鲁哇奶了。" + strcharinfo(0) + "要是用现挤的牛奶，你就能尝到卡鲁哇奶的顶级版本。";
 		mes "[卡鲁]";
 		next;
-		select("可店里的卡鲁纳快用完了，给我们供货的人好几天没来了。连库存也快见底了。","[卡鲁]");
-		mes "没有卡鲁纳，就没有卡鲁纳奶。你明白这意味着什么吗？";
-		mes "想喝卡鲁纳奶就去找隔壁那位。不过你最好快点。用不了多久，搅的还是摇的就都没区别了。";
+		select("可店里的卡鲁哇快用完了，给我们供货的人好几天没来了。连库存也快见底了。","[卡鲁]");
+		mes "没有卡鲁哇，就没有卡鲁哇奶。你明白这意味着什么吗？";
+		mes "想喝卡鲁哇奶就去找隔壁那位。不过你最好快点。用不了多久，搅的还是摇的就都没区别了。";
 		next;
 		mes "[" + strcharinfo(0) + "意味着什么？";
 		mes "你说不知道是什么意思？！";
 		next;
 		mes "[卡鲁]";
-		mes "意思是专程来喝卡鲁纳奶的客人只能白跑一趟。";
-		npctalk "卡鲁纳奶！给那边那位先生来一杯！", "卡鲁纳奶，搅的！给那边那位先生来一杯！", bc_self;
+		mes "意思是专程来喝卡鲁哇奶的客人只能白跑一趟。";
+		npctalk "卡鲁哇奶！给那边那位先生来一杯！", "卡鲁哇奶，搅的！给那边那位先生来一杯！", bc_self;
 		npctalk "哦哦！", "", bc_self;
 		next;
-		mes "混混喵#dorcon01";
 		mes "[卡鲁]";
-		npctalk "没喝到卡鲁纳奶的愤怒客人很快就会引发^0000cd暴动^000000，而且很快就会蔓延到整个千层面。", "", bc_self;
+		npctalk "没喝到卡鲁哇奶的愤怒客人很快就会引发^0000cd暴动^000000，而且很快就会蔓延到整个罗札纳。", "", bc_self;
 		next;
 		mes "[卡鲁]";
-		mes "然后千层面就会回到从前那种肮脏又危险的样子。我不能让这事发生。我们好不容易才过上像样的日子，怎么能再回到那个黑暗时代……";
+		mes "然后罗札纳就会回到从前那种肮脏又危险的样子。我不能让这事发生。我们好不容易才过上像样的日子，怎么能再回到那个黑暗时代……";
 		next;
-		mes "那我就毫不犹豫地离开千层面。";
-		mes "没有卡鲁纳，就没有卡鲁纳奶。你明白这意味着什么吗？";
+		mes "那我就毫不犹豫地离开罗札纳。";
+		mes "没有卡鲁哇，就没有卡鲁哇奶。你明白这意味着什么吗？";
 		next;
-		mes "[" + strcharinfo(0) + "我相信不会只为一杯卡鲁纳奶就闹成那样。";
+		mes "[" + strcharinfo(0) + "我相信不会只为一杯卡鲁哇奶就闹成那样。";
 		mes "[卡鲁]";
-		npctalk "你不懂卡鲁纳奶对千层面的人意味着什么。对他们来说，那可不只是让身子放松的饮料。", "", bc_self;
+		npctalk "你不懂卡鲁哇奶对罗札纳的人意味着什么。对他们来说，那可不只是让身子放松的饮料。", "", bc_self;
 		next;
-		mes "卡鲁纳奶！";
-		mes "混混喵#dorcon01";
-		npctalk "卡鲁纳奶，搅的！一杯！", "你喝够了！", bc_self;
-		npctalk "喵混混#dorcon01", "", bc_self;
-		npctalk "[卡鲁]", "卡鲁纳奶还象征着^0000cd信任与友谊，以及节庆^000000。细节我在这里不方便说，但你要是好奇，就去找康-奇利纳的记账员吧。", bc_self;
+		mes "卡鲁哇奶！";
+		npctalk "卡鲁哇奶，搅的！一杯！", "你喝够了！", bc_self;
+		npctalk "", "喵混混#dorcon01", bc_self;
+		npctalk "卡鲁哇奶还象征着^0000cd信任与友谊，以及节庆^000000。细节我在这里不方便说，但你要是好奇，就去找康-奇利纳的记账员吧。", "卡鲁#dorcon", bc_self;
 		next;
 		mes "[卡鲁]";
 		mes "他是个记录狂，什么都爱记下来。";
 		next;
 		mes "随便翻翻关于我的那些报道就知道了。";
-		mes "然后千层面就会回到从前那种肮脏又危险的样子。我不能让这事发生。我们好不容易才过上像样的日子，怎么能再回到那个黑暗时代……";
-		npctalk "那我就毫不犹豫地离开千层面。", "", bc_self;
+		mes "然后罗札纳就会回到从前那种肮脏又危险的样子。我不能让这事发生。我们好不容易才过上像样的日子，怎么能再回到那个黑暗时代……";
+		npctalk "那我就毫不犹豫地离开罗札纳。", "", bc_self;
 		next;
 		mes "我不太确定，但我能看出来，这对这里的人非常重要。" + strcharinfo(0) + "[卡鲁]";
-		mes "对。我说的就是这个。这里的人每天开始和结束时都要喝卡鲁纳奶。可那卡鲁纳快没了！";
+		mes "对。我说的就是这个。这里的人每天开始和结束时都要喝卡鲁哇奶。可那卡鲁哇快没了！";
 		next;
-		mes "卡鲁纳奶！";
-		mes "喵混混#dorcon01";
-		npctalk "卡鲁纳奶，搅的！一杯！", "混混喵#dorcon01", bc_self;
-		npctalk "卡鲁纳奶，搅的！一杯！", "", bc_self;
-		npctalk "你为什么不派个人去看看情况？", "[卡鲁]", bc_self;
+		mes "卡鲁哇奶！";
+		npctalk "卡鲁哇奶，搅的！一杯！", "混混喵#dorcon01", bc_self;
+		npctalk "卡鲁哇奶，搅的！一杯！", "", bc_self;
+		npctalk "你为什么不派个人去看看情况？", "卡鲁#dorcon", bc_self;
 		next;
 		mes "我又不傻。可没人可派啊！你看，大家都忙得很。";
-		mes "卡鲁纳奶！";
+		mes "卡鲁哇奶！";
 		next;
-		mes "酒鬼#dorcon01";
-		mes "卡鲁纳奶，搅的！";
+		mes "卡鲁哇奶，搅的！";
 		npctalk "我来帮你。", "", bc_self;
 		next;
 		mes "啊，抱歉。" + strcharinfo(0) + "[卡鲁]";
-		mes "是啊，我忙着呢，你该走了。想喝卡鲁纳奶的话，去隔壁吧。";
+		mes "是啊，我忙着呢，你该走了。想喝卡鲁哇奶的话，去隔壁吧。";
 		next;
 		mes "[卡鲁]";
 		mes "什么？你刚才说什么？我没听错的话，你说你要帮我。";
 		npctalk "哎呀，这简直是天上掉下来的金铃铛！", "喵混混#dorcon01", bc_self;
-		npctalk "卡鲁纳奶，搅的！一杯！", "", bc_self;
+		npctalk "卡鲁哇奶，搅的！一杯！", "", bc_self;
 		next;
 		mes "你没听错。" + strcharinfo(0) + "[卡鲁]";
 		mes "老天爷啊，谢谢你。看来我平时做的好事终于有回报了。";
 		next;
-		mes "卡鲁纳奶！";
-		mes "喵混混#dorcon01";
-		npctalk "卡鲁纳奶，搅的！一杯！哎，管他呢！两杯！", "太好了！！！", bc_self;
-		npctalk "喵混混#dorcon01", "", bc_self;
+		mes "卡鲁哇奶！";
+		npctalk "卡鲁哇奶，搅的！一杯！哎，管他呢！两杯！", "太好了！！！", bc_self;
+		npctalk "", "喵混混#dorcon01", bc_self;
 		next;
 		if (select( "我来帮你。", "啊，抱歉。" ) == 2) {
 			mes "说要帮你的人是我，怎么谢的却是老天爷？";
 			mes "怎么没人来招呼我们？！";
 			close;
 		}
-		mes "酒鬼#dorcon01";
 		mes "你是在歧视我们吗？！";
-		npctalk "酒鬼#dorcon02", "", bc_self;
+		npctalk "", "酒鬼#dorcon02", bc_self;
 		next;
-		mes "[卡鲁]" + strcharinfo(0) + "哦，怎么会。我也很感谢你们。总之，你去^0000cd南桥附近的钓鱼点^000000，会见到拄着拐杖的^0000cd莱加拉斯^000000。他就是给我们供卡鲁纳的人。";
+		mes "[卡鲁]" + strcharinfo(0) + "哦，怎么会。我也很感谢你们。总之，你去^0000cd南桥附近的钓鱼点^000000，会见到拄着拐杖的^0000cd莱加拉斯^000000。他就是给我们供卡鲁哇的人。";
 		mes "我们可以一起喝！";
 		next;
-		mes "喵混混#dorcon01";
 		mes "[卡鲁]";
-		npctalk "千层面的大多数人都在义勇队或商会做事，所以镇上总是缺人手。", "我正来劲儿呢，稍等一会儿！要是顺利的话，不止一杯，我请两杯！", bc_self;
+		npctalk "罗札纳的大多数人都在义勇队或商会做事，所以镇上总是缺人手。", "我正来劲儿呢，稍等一会儿！要是顺利的话，不止一杯，我请两杯！", bc_self;
 		npctalk "太棒了！", "", bc_self;
-		npctalk "酒鬼#dorcon01", "好啊！", bc_self;
+		npctalk "好啊！", "酒鬼#dorcon01", bc_self;
 		next;
 		mes "酒鬼#dorcon02" + strcharinfo(0) + "我等！我等！";
-		mes "喵混混#dorcon01";
-		npctalk "[卡鲁]", "所以我们有个特殊优待政策，会雇想找活干的外人，而莱加拉斯负责发酵卡鲁纳。", bc_self;
-		npctalk "[卡鲁]", "他捕、洗、发酵卡鲁尼亚克的手艺很好，所以千层面的卡鲁纳奶被公认为这一带最好的。啊，这不是重点。", bc_self;
+		npctalk "所以我们有个特殊优待政策，会雇想找活干的外人，而莱加拉斯负责发酵卡鲁哇。", "卡鲁#dorcon", bc_self;
+		npctalk "他捕、洗、发酵卡鲁哇克的手艺很好，所以罗札纳的卡鲁哇奶被公认为这一带最好的。啊，这不是重点。", "卡鲁#dorcon", bc_self;
 		next;
 		mes "[卡鲁]";
 		mes "去找莱加拉斯，看看出了什么事。还有，让他尽快送货过来。照这样下去，今天过后我们就断货了。";
-		npctalk "卡鲁纳奶！", "酒鬼#dorcon01", bc_self;
+		npctalk "卡鲁哇奶！", "酒鬼#dorcon01", bc_self;
 		next;
-		mes "卡鲁纳奶，搅的！";
-		mes "千层面的大多数人都在义勇队或商会做事，所以镇上总是缺人手。";
+		mes "卡鲁哇奶，搅的！";
+		mes "罗札纳的大多数人都在义勇队或商会做事，所以镇上总是缺人手。";
 		npctalk "我正来劲儿呢，稍等一会儿！要是顺利的话，不止一杯，我请两杯！", "", bc_self;
-		npctalk "好，我去看看。", "[卡鲁]", bc_self;
-		npctalk "太感谢你了！", "[卡鲁]", bc_self;
-		npctalk "你不是说要查清莱加拉斯为什么没能送货吗？", "[卡鲁]", bc_self;
+		npctalk "好，我去看看。", "卡鲁#dorcon", bc_self;
+		npctalk "太感谢你了！", "卡鲁#dorcon", bc_self;
+		npctalk "你不是说要查清莱加拉斯为什么没能送货吗？", "卡鲁#dorcon", bc_self;
 		next;
 		mes "求你了。我真的很担心，这些天连觉都睡不着。";
 		mes "连我的胡子都变稀了……帮帮我……";
 		next;
 		mes "[卡鲁]";
-		mes "冒险家，莱加拉斯怎么说？他说能送卡鲁纳过来吗？";
+		mes "冒险家，莱加拉斯怎么说？他说能送卡鲁哇过来吗？";
 		next;
 		mes "我真希望他说能。不然我就完了！";
 		mes "去找莱加拉斯，看看出了什么事。还有，让他尽快送货过来。照这样下去，今天过后我们就断货了。";
-		npctalk "卡鲁纳奶！", "嗯。好在他快凑够送货的量了。", bc_self;
-		npctalk "[卡鲁]", "", bc_self;
+		npctalk "卡鲁哇奶！", "嗯。好在他快凑够送货的量了。", bc_self;
+		npctalk "卡鲁#dorcon", "", bc_self;
 		next;
-		mes "那就好！可他有没有告诉你是什么耽误了他？" + strcharinfo(0) + "[你向卡鲁讲述了达达尔和戈帕拉的事。]";
+		mes "那就好！可他有没有告诉你是什么耽误了他？" + strcharinfo(0) + "[你向卡鲁讲述了达尔达尔和戈帕拉的事。]";
 		mes "[卡鲁]";
 		next;
 		mes "你的意思是，莱加拉斯干活的时候，我得把那两个家伙带得离工坊远远的。";
@@ -8778,7 +8705,7 @@ lasagna,226,181,3	script	Kalu#dorcon	4_CAT_CHEF,{
 	if (lasagna_quest[2] == 7) {
 		mes "[戈帕拉]";
 		mes "山洞？不错啊。我一直想亲自去那儿看看。";
-		npctalk "[达达尔]", "", bc_self;
+		npctalk "[达尔达尔]", "", bc_self;
 		next;
 		mes "不管怎样，只要能吃到好吃的我就开心。" + strcharinfo(0) + "[卡鲁]";
 		mes "好，那就马上开始吧！把这个便当送给^0000cd洞里的义勇队员。他叫潘娜。^000000";
@@ -8788,7 +8715,7 @@ lasagna,226,181,3	script	Kalu#dorcon	4_CAT_CHEF,{
 		next;
 		mes "走吧。";
 		next;
-		mes "[达达尔]";
+		mes "[达尔达尔]";
 		mes "起来。";
 		next;
 		mes "队伍必须行动一致。";
@@ -8800,7 +8727,7 @@ lasagna,226,181,3	script	Kalu#dorcon	4_CAT_CHEF,{
 		npctalk "我们是一队的。", "", bc_self;
 		next;
 		mes "我们是一队的。";
-		mes "[达达尔]";
+		mes "[达尔达尔]";
 		next;
 		mes "队伍必须行动一致。";
 		mes "队伍必须行动一致。";
@@ -8812,24 +8739,22 @@ lasagna,226,181,3	script	Kalu#dorcon	4_CAT_CHEF,{
 		mes "[卡鲁]";
 		npctalk "把这个大便当送给正在洞里巡逻的潘娜。", "", bc_self;
 		next;
-		mes "[达达尔]";
+		mes "[达尔达尔]";
 		mes "起来。";
 		npctalk "我回来了。", "", bc_self;
 		next;
 		mes "[戈帕拉]" + strcharinfo(0) + "我说我回来了。";
 		mes "我累坏了。";
 		next;
-		mes "戈帕拉#dorcon05";
-		mes "[达达尔]";
+		mes "[达尔达尔]";
 		npctalk "我回来了。", "", bc_self;
 		next;
 		mes "我累死了。";
-		mes "达达尔#dorcon05";
-		npctalk "[卡鲁]", "", bc_self;
-		classchange( HIDDEN_WARP_NPC, "Daldal#dorcon05", bc_self );
-		classchange( HIDDEN_WARP_NPC, "Gopara#dorcon05", bc_self );
+		npctalk "卡鲁#dorcon", "", bc_self;
+		classchange( HIDDEN_WARP_NPC, "达尔达尔#dorcon05", bc_self );
+		classchange( HIDDEN_WARP_NPC, "戈帕拉#dorcon05", bc_self );
 		next;
-		mes "辛苦了。你们三个去洞里的时候，莱加拉斯带着卡鲁纳来过了。要是每天都能这样，供货就完全没问题了。" + strcharinfo(0) + "[戈帕拉]";
+		mes "辛苦了。你们三个去洞里的时候，莱加拉斯带着卡鲁哇来过了。要是每天都能这样，供货就完全没问题了。" + strcharinfo(0) + "[戈帕拉]";
 		mes "冒险家，明天也拜托你了。";
 		getitem 25048,1;// Hearty Lunchbox
 		erasequest 14573;// I need the time on my own
@@ -8838,7 +8763,7 @@ lasagna,226,181,3	script	Kalu#dorcon	4_CAT_CHEF,{
 		close;
 	}
 	if (lasagna_quest[2] == 8) {
-		mes "[达达尔]";
+		mes "[达尔达尔]";
 		mes "时间允许的话，我会早点出来等。";
 		if (countitem(25048) < 1)
 			getitem 25048,1;// Hearty Lunchbox
@@ -8850,23 +8775,21 @@ lasagna,226,181,3	script	Kalu#dorcon	4_CAT_CHEF,{
 		next;
 		mes "[戈帕拉]";
 		mes "我们以前叫什么来着？";
-		npctalk "[达达尔]", "一！", bc_self;
+		npctalk "[达尔达尔]", "一！", bc_self;
 		next;
 		mes "[戈帕拉]";
 		mes "队！";
-		npctalk "我累死了。", "达达尔#dorcon05", bc_self;
+		npctalk "我累死了。", "达尔达尔#dorcon05", bc_self;
 		next;
 		mes "一队。要是我不去，他们大概又要去缠莱加拉斯了。好吧。";
-		mes "[达达尔]";
+		mes "[达尔达尔]";
 		next;
 		mes "好，现在给我饭。";
 		mes "我饿了。";
 		next;
-		mes "达达尔#dorcon05";
 		mes "[戈帕拉]";
 		next;
-		mes "我不用了。卡鲁尼亚克吃太多，还在消化。" + strcharinfo(0) + "现在一口都不想吃。";
-		mes "戈帕拉#dorcon05";
+		mes "我不用了。卡鲁哇克吃太多，还在消化。" + strcharinfo(0) + "现在一口都不想吃。";
 		next;
 		mes "[卡鲁]";
 		mes "这个你收下。干得不错。";
@@ -8882,13 +8805,13 @@ lasagna,226,181,3	script	Kalu#dorcon	4_CAT_CHEF,{
 		next;
 		mes "对啊。时间不对。";
 		mes "对啊。时间不对。";
-		npctalk "戈帕拉#dorcon05", "[达达尔]", bc_self;
+		npctalk "[达尔达尔]", "戈帕拉#dorcon05", bc_self;
 		next;
 		mes "时间不对！";
 		mes "时间不对！";
-		npctalk "达达尔#dorcon05", "[卡鲁]", bc_self;
-		classchange( HIDDEN_WARP_NPC, "Daldal#dorcon05", bc_self );
-		classchange( HIDDEN_WARP_NPC, "Gopara#dorcon05", bc_self );
+		npctalk "卡鲁#dorcon", "达尔达尔#dorcon05", bc_self;
+		classchange( HIDDEN_WARP_NPC, "达尔达尔#dorcon05", bc_self );
+		classchange( HIDDEN_WARP_NPC, "戈帕拉#dorcon05", bc_self );
 		next;
 		mes "天亮后再来吧。";
 		mes "[戈帕拉]";
@@ -8902,7 +8825,7 @@ lasagna,226,181,3	script	Kalu#dorcon	4_CAT_CHEF,{
 		case -1:
 			if (isbegin_quest(14578) == 1) {
 				mes "回头见。";
-				mes "[达达尔]";
+				mes "[达尔达尔]";
 				erasequest 14578;// Delivery Complete Report
 				setquest 14576;// Meal Box Delivery Time
 				close;
@@ -8914,23 +8837,23 @@ lasagna,226,181,3	script	Kalu#dorcon	4_CAT_CHEF,{
 			close;
 		case 0:
 		case 1:
-			classchange( 4_SEA_OTTER, "Daldal#dorcon05", bc_self );
-			classchange( 4_GALAPAGO, "Gopara#dorcon05", bc_self );
+			classchange( 4_SEA_OTTER, "达尔达尔#dorcon05", bc_self );
+			classchange( 4_GALAPAGO, "戈帕拉#dorcon05", bc_self );
 			mes "来得正好。两个人已经在这儿等着了。";
 			mes "[戈帕拉]";
 			next;
 			mes "是啊，我们一直在等。";
 			mes "是啊，我们一直在等。";
-			npctalk "达达尔#dorcon06", "[达达尔]", bc_self;
+			npctalk "[达尔达尔]", "达尔达尔#dorcon06", bc_self;
 			next;
 			mes "等了好久。差点等死了。";
 			mes "等了好久。差点等死了。";
-			npctalk "[卡鲁]", "那今天就再麻烦你^0000cd把便当送给洞里的潘娜^000000。去的时候快一点，回来的路上慢慢走。", bc_self;
+			npctalk "那今天就再麻烦你^0000cd把便当送给洞里的潘娜^000000。去的时候快一点，回来的路上慢慢走。", "卡鲁#dorcon", bc_self;
 			next;
 			mes "[戈帕拉]";
 			mes "走吧。";
 			next;
-			mes "[达达尔]";
+			mes "[达尔达尔]";
 			mes "那就走吧！";
 			next;
 			mes "[莱加拉斯]";
@@ -8940,24 +8863,24 @@ lasagna,226,181,3	script	Kalu#dorcon	4_CAT_CHEF,{
 			mes "[莱加拉斯]";
 			mes "够了！你们一天比一天过分！你们不觉得太过分了吗？你们还有没有良心？！";
 			next;
-			mes "[达达尔]";
+			mes "[达尔达尔]";
 			mes "良心？嗯……抱歉，我不知道，因为我压根不知道我的良心在哪儿。";
-			npctalk "我不知道我的良心在哪儿。", "达达尔#dorcon01", bc_self;
+			npctalk "我不知道我的良心在哪儿。", "达尔达尔#dorcon01", bc_self;
 			next;
 			mes "[戈帕拉]";
 			mes "大概在胸口里吧？可那玩意儿能拿来干嘛？";
 			npctalk "那玩意儿能拿来干嘛？", "戈帕拉#dorcon01", bc_self;
 			next;
 			mes "[莱加拉斯]";
-			mes "我刚抓到卡鲁尼亚克，你们俩就狼吞虎咽吃光！连我洗好的也被你们吃了！";
+			mes "我刚抓到卡鲁哇克，你们俩就狼吞虎咽吃光！连我洗好的也被你们吃了！";
 			next;
 			mes "[莱加拉斯]";
 			mes "我不是跟你们说过好几次，那些要发酵后送出去吗？而且期限早就过了！";
 			next;
-			mes "[达达尔]";
+			mes "[达尔达尔]";
 			mes "真的？我不知道。";
-			classchange( HIDDEN_WARP_NPC, "Daldal#dorcon05", bc_self );
-			classchange( HIDDEN_WARP_NPC, "Gopara#dorcon05", bc_self );
+			classchange( HIDDEN_WARP_NPC, "达尔达尔#dorcon05", bc_self );
+			classchange( HIDDEN_WARP_NPC, "戈帕拉#dorcon05", bc_self );
 			erasequest 14576;// Meal Box Delivery Time
 			setquest 14577;// Meal Box Delivery
 			getitem 25048,1;// Hearty Lunchbox
@@ -8971,10 +8894,9 @@ OnInit:
 	end;
 }
 
-lasagna,248,105,5	script	Legalas#dorcon	4_RAGGLER,{
+lasagna,248,105,5	script	莱加拉斯#dorcon	4_RAGGLER,{
 	if (lasagna_quest[2] == 0) {
 		mes "你知道吗？";
-		mes "达达尔#dorcon01";
 		close;
 	}
 	if (lasagna_quest[2] == 1) {
@@ -8982,10 +8904,9 @@ lasagna,248,105,5	script	Legalas#dorcon	4_RAGGLER,{
 		mes "我知道。可我忍不住。";
 		next;
 		mes "好无聊。";
-		mes "戈帕拉#dorcon01";
-		npctalk "我不知道我的良心在哪儿。", "达达尔#dorcon01", bc_self;
+		npctalk "我不知道我的良心在哪儿。", "达尔达尔#dorcon01", bc_self;
 		next;
-		mes "呃，你就是供应卡鲁纳的莱加拉斯吗？";
+		mes "呃，你就是供应卡鲁哇的莱加拉斯吗？";
 		mes "[莱加拉斯]";
 		npctalk "你看！就因为我没能送货，人都找上门了！我完了！我要饿死了！", "戈帕拉#dorcon01", bc_self;
 		next;
@@ -8995,18 +8916,18 @@ lasagna,248,105,5	script	Legalas#dorcon	4_RAGGLER,{
 		mes "[莱加拉斯]";
 		mes "我不明白你的意思。请解释一下。";
 		next;
-		mes "[达达尔]";
+		mes "[达尔达尔]";
 		mes "真的？我不知道。";
-		npctalk "冒险家公会的卡鲁想知道送货为什么迟了。他今天要卖的还够，所以你只要今天之内送到就没问题。", "[莱加拉斯]", bc_self;
+		npctalk "冒险家公会的卡鲁想知道送货为什么迟了。他今天要卖的还够，所以你只要今天之内送到就没问题。", "莱加拉斯#dorcon", bc_self;
 		next;
-		mes "哈！哼！哈！我也想啊。可那两头猪在拼命吃卡鲁尼亚克！一开始还只吃一两个，现在我一抓上来他们就抢着吃。我根本没机会清洗发酵！";
+		mes "哈！哼！哈！我也想啊。可那两头猪在拼命吃卡鲁哇克！一开始还只吃一两个，现在我一抓上来他们就抢着吃。我根本没机会清洗发酵！";
 		mes "[莱加拉斯]";
-		npctalk "想要卡鲁纳的话，就去管管^0000cd那边那两个家伙^000000！我快疯了，他们不但赖着我，现在还毁了我的活儿。也许我还是回战场比较好！", "戈帕拉#dorcon01", bc_self;
+		npctalk "想要卡鲁哇的话，就去管管^0000cd那边那两个家伙^000000！我快疯了，他们不但赖着我，现在还毁了我的活儿。也许我还是回战场比较好！", "戈帕拉#dorcon01", bc_self;
 		next;
 		mes "[" + strcharinfo(0) + "请冷静。我去跟他们说。";
 		mes "[莱加拉斯]";
 		next;
-		mes "跟他们说什么都没用。看看那肚子，都是吃卡鲁尼亚克和卡鲁纳吃出来的。";
+		mes "跟他们说什么都没用。看看那肚子，都是吃卡鲁哇克和卡鲁哇吃出来的。";
 		mes "[莱加拉斯]";
 		next;
 		mes "谁知道那两头猪突然跑哪儿去了，但愿别太早回来。我正干得顺手呢！再多一点，就差一点点了……！" + strcharinfo(0) + "]";
@@ -9015,24 +8936,21 @@ lasagna,248,105,5	script	Legalas#dorcon	4_RAGGLER,{
 		mes "莱加拉斯，我想尽办法让他们干活，可他们既没本事也没干劲儿。";
 		mes "我不明白你的意思。请解释一下。";
 		next;
-		mes "[" + strcharinfo(0) + "不过他们保证不吃卡鲁尼亚克了，所以你的送货不会再有问题了。";
+		mes "[" + strcharinfo(0) + "不过他们保证不吃卡鲁哇克了，所以你的送货不会再有问题了。";
 		mes "他在说什么？";
 		next;
-		mes "达达尔#dorcon01";
 		mes "你这是怎么了？";
 		next;
-		mes "戈帕拉#dorcon01";
 		mes "[戈帕拉]";
 		next;
 		mes "你好像对我们有意见。等莱加拉斯来了，我就全告诉他。" + strcharinfo(0) + "你就会告我们的状。";
-		mes "戈帕拉#dorcon01";
 		completequest 14567;// Kaluna milk is in Danger!
 		setquest 14568;// Time to persuade
 		lasagna_quest[2] = 2;
 		close;
 	}
 	if (lasagna_quest[2] == 2) {
-		mes "[达达尔]";
+		mes "[达尔达尔]";
 		mes "我们到底做错什么了？";
 		close;
 	}
@@ -9042,38 +8960,35 @@ lasagna,248,105,5	script	Legalas#dorcon	4_RAGGLER,{
 		close;
 	}
 	if (lasagna_quest[2] == 6) {
-		mes "[莱加拉斯]" + strcharinfo(0) + "多亏你的牺牲，我需要的^0000cd卡鲁纳^000000大部分都做出来了。真是太感谢你了。";
+		mes "[莱加拉斯]" + strcharinfo(0) + "多亏你的牺牲，我需要的^0000cd卡鲁哇^000000大部分都做出来了。真是太感谢你了。";
 		mes "[戈帕拉]";
 		next;
-		mes "你们就这么明目张胆地欺负我们。" + strcharinfo(0) + "[达达尔]";
-		mes "卡鲁尼亚克绝对是最棒的。";
+		mes "你们就这么明目张胆地欺负我们。" + strcharinfo(0) + "[达尔达尔]";
+		mes "卡鲁哇克绝对是最棒的。";
 		npctalk "又在吃？", "戈帕拉#dorcon01", bc_self;
-		npctalk "[莱加拉斯]", "哎呀！那头猪又在吃卡鲁尼亚克了！", bc_self;
+		npctalk "哎呀！那头猪又在吃卡鲁哇克了！", "莱加拉斯#dorcon", bc_self;
 		next;
-		mes "[达达尔]";
-		mes "我饿了。鳀鱼我已经吃不下了，现在只吃得下卡鲁尼亚克。";
+		mes "[达尔达尔]";
+		mes "我饿了。鳀鱼我已经吃不下了，现在只吃得下卡鲁哇克。";
 		npctalk "我也是。", "戈帕拉#dorcon01", bc_self;
 		next;
 		mes "[戈帕拉]";
 		mes "我没活儿干，那就再吃点。";
 		next;
 		mes "这个我自己吃完。";
-		mes "达达尔#dorcon01";
 		next;
 		mes "[莱加拉斯]";
-		mes "冒险家，我有件事想拜托你。我还没凑够送货的量，可那两个家伙把我的卡鲁尼亚克全吃了！你看到的就是我今天全部的收获，照这样下去我根本交不了货。";
+		mes "冒险家，我有件事想拜托你。我还没凑够送货的量，可那两个家伙把我的卡鲁哇克全吃了！你看到的就是我今天全部的收获，照这样下去我根本交不了货。";
 		next;
 		mes "[莱加拉斯]";
 		mes "请再把他们带走吧，哪怕只是一会儿！";
 		next;
-		mes "[达达尔]";
-		mes "卡鲁尼亚克绝对是最棒的。";
+		mes "[达尔达尔]";
+		mes "卡鲁哇克绝对是最棒的。";
 		npctalk "反正我也要给卡鲁带个口信，就带他们俩一起走吧。", "去哪儿？", bc_self;
 		next;
-		mes "戈帕拉#dorcon01";
 		mes "不吃完这些我不走。";
 		next;
-		mes "达达尔#dorcon01";
 		mes "[莱加拉斯]";
 		npctalk "求你了，拜托了！", "戈帕拉#dorcon01", bc_self;
 		next;
@@ -9081,7 +8996,7 @@ lasagna,248,105,5	script	Legalas#dorcon	4_RAGGLER,{
 		mes "各位，我们去^0000cd烤箱酒馆^000000怎么样？";
 		npctalk "[戈帕拉]", "行。只要不无聊，去哪儿都行。", bc_self;
 		next;
-		mes "[达达尔]";
+		mes "[达尔达尔]";
 		mes "那儿有很多好吃的吗？有的话我就去。";
 		next;
 		mes "[莱加拉斯]";
@@ -9090,7 +9005,7 @@ lasagna,248,105,5	script	Legalas#dorcon	4_RAGGLER,{
 		mes "那就走吧。" + strcharinfo(0) + "[莱加拉斯]";
 		mes "谢谢你帮我看着这两头猪。多亏你，我的活儿轻松多了！";
 		npctalk "去哪儿？", "戈帕拉#dorcon01", bc_self;
-		npctalk "各位，我有件事想跟你们说说。", "[达达尔]", bc_self;
+		npctalk "各位，我有件事想跟你们说说。", "[达尔达尔]", bc_self;
 		next;
 		mes "我现在吃腻了。可也没别的能吃。";
 		mes "[戈帕拉]";
@@ -9099,12 +9014,12 @@ lasagna,248,105,5	script	Legalas#dorcon	4_RAGGLER,{
 		mes "各位，我们去^0000cd烤箱酒馆^000000怎么样？";
 		next;
 		mes "各位？";
-		mes "[达达尔]";
+		mes "[达尔达尔]";
 		next;
 		mes "什么事？你带吃的来了吗？";
 		mes "什么事？你带吃的来了吗？";
 		next;
-		mes "达达尔#dorcon01" + strcharinfo(0) + "[戈帕拉]";
+		mes "达尔达尔#dorcon01" + strcharinfo(0) + "[戈帕拉]";
 		mes "你要陪我们玩吗？";
 		erasequest 14572;// Helpless...
 		setquest 14573;// I need the time on my own
@@ -9118,10 +9033,10 @@ lasagna,248,105,5	script	Legalas#dorcon	4_RAGGLER,{
 	}
 }
 
-lasagna,246,103,5	script	Gopara#dorcon01	4_GALAPAGO,3,3,{
+lasagna,246,103,5	script	戈帕拉#dorcon01	4_GALAPAGO,3,3,{
 	if (lasagna_quest[2] == 2) {
-		mes "[" + strcharinfo(0) + "我听说，莱加拉斯洗好的卡鲁尼亚克全被你们吃了。现在用那些卡鲁尼亚克做的卡鲁纳快没了。你们能不能稍微克制一点？";
-		mes "[达达尔]";
+		mes "[" + strcharinfo(0) + "我听说，莱加拉斯洗好的卡鲁哇克全被你们吃了。现在用那些卡鲁哇克做的卡鲁哇快没了。你们能不能稍微克制一点？";
+		mes "[达尔达尔]";
 		next;
 		mes "凭什么？";
 		mes "是啊。";
@@ -9129,40 +9044,39 @@ lasagna,246,103,5	script	Gopara#dorcon01	4_GALAPAGO,3,3,{
 		mes "[戈帕拉]";
 		mes "我们哪次是因为想吃才吃的？更像是有什么就吃什么。";
 		next;
-		mes "因为没有卡鲁纳就做不了卡鲁纳奶。本来该从莱加拉斯那里收卡鲁纳的人，现在正为难呢。" + strcharinfo(0) + "[戈帕拉]";
+		mes "因为没有卡鲁哇就做不了卡鲁哇奶。本来该从莱加拉斯那里收卡鲁哇的人，现在正为难呢。" + strcharinfo(0) + "[戈帕拉]";
 		mes "那跟我们有什么关系？";
 		next;
 		mes "对。";
 		mes "什么事？你带吃的来了吗？";
-		npctalk "什么事？你带吃的来了吗？", "你看，卡鲁真的很需要卡鲁纳。没有卡鲁纳，他的生意就做不下去。", bc_self;
+		npctalk "什么事？你带吃的来了吗？", "你看，卡鲁真的很需要卡鲁哇。没有卡鲁哇，他的生意就做不下去。", bc_self;
 		next;
-		mes "[达达尔]";
+		mes "[达尔达尔]";
 		mes "那跟我没关系。";
 		npctalk "我连他是谁都不知道。", "", bc_self;
 		next;
 		mes "[" + strcharinfo(0) + "]";
-		mes "这跟雷加拉斯有很大关系。你知道雷加拉斯会把卡鲁尼亚克发酵成的卡鲁纳供应给卡鲁吧？";
+		mes "这跟雷加拉斯有很大关系。你知道雷加拉斯会把卡鲁哇克发酵成的卡鲁哇供应给卡鲁吧？";
 		next;
-		mes "[达达尔]";
+		mes "[达尔达尔]";
 		mes "凭什么？";
 		npctalk "如果他赶不上期限或交不够货，他的工作就会被别人抢走。", "", bc_self;
 		next;
 		mes "[戈帕拉]" + strcharinfo(0) + "那跟我们有什么关系？";
 		mes "我只要填饱肚子就行。";
 		next;
-		mes "达尔达尔#dorcon01";
 		mes "那跟我们有什么关系？";
 		npctalk "对。", "", bc_self;
 		next;
 		mes "如果雷加拉斯丢了工作，他就赚不到钱了。他赚不到钱，你们不也就不好过了吗？" + strcharinfo(0) + "]";
-		mes "你看，卡鲁真的很需要卡鲁纳。没有卡鲁纳，他的生意就做不下去。";
+		mes "你看，卡鲁真的很需要卡鲁哇。没有卡鲁哇，他的生意就做不下去。";
 		next;
 		mes "据我所知，雷加拉斯供你们吃、供你们穿，还给你们地方住。";
 		mes "[达尔达尔]";
 		npctalk "我们又不穿衣服。", "", bc_self;
 		next;
 		mes "[戈帕拉]" + strcharinfo(0) + "那雷加拉斯可以再找别的工作。";
-		mes "这跟雷加拉斯有很大关系。你知道雷加拉斯会把卡鲁尼亚克发酵成的卡鲁纳供应给卡鲁吧？";
+		mes "这跟雷加拉斯有很大关系。你知道雷加拉斯会把卡鲁哇克发酵成的卡鲁哇供应给卡鲁吧？";
 		next;
 		mes "[" + strcharinfo(0) + "你们现在就把他的活儿搞砸了，凭什么觉得雷加拉斯以后什么都不做？他多半会把你们俩甩掉，去找别的门路。";
 		mes "如果他赶不上期限或交不够货，他的工作就会被别人抢走。";
@@ -9174,16 +9088,15 @@ lasagna,246,103,5	script	Gopara#dorcon01	4_GALAPAGO,3,3,{
 		mes "[戈帕拉]" + strcharinfo(0) + "这、这也太狠了吧！";
 		mes "如果雷加拉斯丢了工作，他就赚不到钱了。他赚不到钱，你们不也就不好过了吗？";
 		next;
-		mes "[" + strcharinfo(0) + "那你们现在就不该碍事，对吧？还要再吃卡鲁尼亚克吗？";
+		mes "[" + strcharinfo(0) + "那你们现在就不该碍事，对吧？还要再吃卡鲁哇克吗？";
 		mes "[达尔达尔]";
 		next;
 		mes "不！不吃了！";
 		mes "不！不吃了！";
 		next;
-		mes "达尔达尔#dorcon01";
 		mes "[戈帕拉]";
 		next;
-		mes "光是不吃卡鲁尼亚克还不够。我从没想过雷加拉斯可能会离开我们。我们得做点什么。" + strcharinfo(0) + "我们也得做点什么。";
+		mes "光是不吃卡鲁哇克还不够。我从没想过雷加拉斯可能会离开我们。我们得做点什么。" + strcharinfo(0) + "我们也得做点什么。";
 		mes "你们现在就把他的活儿搞砸了，凭什么觉得雷加拉斯以后什么都不做？他多半会把你们俩甩掉，去找别的门路。";
 		next;
 		mes "[" + strcharinfo(0) + "态度不错！这样雷加拉斯就……";
@@ -9203,7 +9116,6 @@ lasagna,246,103,5	script	Gopara#dorcon01	4_GALAPAGO,3,3,{
 		npctalk "多拉姆当中有些东西叫多拉姆垃圾。可惜你们不是多拉姆，用不了。就这样吧。行。", "多拉姆垃圾？什么鬼？你怎么能这么说话？！", bc_self;
 		next;
 		mes "那是什么意思？";
-		mes "达尔达尔#dorcon01";
 		npctalk "你还是不知道为好。", "", bc_self;
 		next;
 		mes "[" + strcharinfo(0) + "]";
@@ -9227,13 +9139,13 @@ lasagna,246,103,5	script	Gopara#dorcon01	4_GALAPAGO,3,3,{
 		npctalk "那是什么意思？", "达尔达尔#dorcon01", bc_self;
 		npctalk "好吧。我看看这附近有没有小宝宝。酒馆上面好像有个^0000cd游乐场^000000。我去那儿看看。", "", bc_self;
 		next;
-		mes "[戈帕拉]" + strcharinfo(0) + "嗯，这地方最棒了。味道不怎么样，但喝卡鲁纳好像就是我的命。";
+		mes "[戈帕拉]" + strcharinfo(0) + "嗯，这地方最棒了。味道不怎么样，但喝卡鲁哇好像就是我的命。";
 		mes "[戈帕拉]";
 		next;
 		mes "我说了要去见卡鲁。反正我也无聊，正好。走吧，你带路。";
 		mes "[戈帕拉]";
 		next;
-		mes "我现在喝卡鲁纳，不是因为好喝，而是因为那儿就有。";
+		mes "我现在喝卡鲁哇，不是因为好喝，而是因为那儿就有。";
 		mes "你应该雇我们。";
 		next;
 		mes "[" + strcharinfo(0) + "各位，我有件事想跟你们说。";
@@ -9255,7 +9167,6 @@ lasagna,246,103,5	script	Gopara#dorcon01	4_GALAPAGO,3,3,{
 	}
 	if (lasagna_quest[2] == 6) {
 		mes "怎么了？你带吃的来了吗？";
-		mes "达尔达尔#dorcon01";
 		close;
 	}
 	if (lasagna_quest[2] == 7) {
@@ -9264,19 +9175,19 @@ lasagna,246,103,5	script	Gopara#dorcon01	4_GALAPAGO,3,3,{
 		close;
 	}
 	mes "你要陪我们玩吗？";
-	mes "我现在喝卡鲁纳，不是因为好喝，而是因为那儿就有。";
+	mes "我现在喝卡鲁哇，不是因为好喝，而是因为那儿就有。";
 	close;
 OnTouch:
 	if (lasagna_quest[2] == 3) {
-		classchange( HIDDEN_WARP_NPC, "Daldal#dorcon01", bc_self );
-		classchange( HIDDEN_WARP_NPC, "Gopara#dorcon01", bc_self );
+		classchange( HIDDEN_WARP_NPC, "达尔达尔#dorcon01", bc_self );
+		classchange( HIDDEN_WARP_NPC, "戈帕拉#dorcon01", bc_self );
 	}
 	end;
 }
 
-lasagna,247,101,7	script	Daldal#dorcon01	4_SEA_OTTER,{
+lasagna,247,101,7	script	达尔达尔#dorcon01	4_SEA_OTTER,{
 	if (lasagna_quest[2] == 2) {
-		mes "[" + strcharinfo(0) + "我听说了，雷加拉斯清理的卡鲁尼亚克全被你们吃了。现在我们用那些卡鲁尼亚克做的卡鲁纳都快没了。你们能不能稍微克制一点？";
+		mes "[" + strcharinfo(0) + "我听说了，雷加拉斯清理的卡鲁哇克全被你们吃了。现在我们用那些卡鲁哇克做的卡鲁哇都快没了。你们能不能稍微克制一点？";
 		mes "[达尔达尔]";
 		next;
 		mes "凭什么？";
@@ -9285,19 +9196,19 @@ lasagna,247,101,7	script	Daldal#dorcon01	4_SEA_OTTER,{
 		mes "[戈帕拉]";
 		mes "我们什么时候是因为想吃才吃的？更像是有什么就吃什么。";
 		next;
-		mes "因为没有卡鲁纳就做不出卡鲁纳奶。本来该从雷加拉斯那里领卡鲁纳的人，现在正为难呢。" + strcharinfo(0) + "[戈帕拉]";
+		mes "因为没有卡鲁哇就做不出卡鲁哇奶。本来该从雷加拉斯那里领卡鲁哇的人，现在正为难呢。" + strcharinfo(0) + "[戈帕拉]";
 		mes "那跟我们有什么关系？";
 		next;
 		mes "没错。";
 		mes "怎么了？你带吃的来了吗？";
-		npctalk "怎么了？你带吃的来了吗？", "你看，卡鲁真的很需要卡鲁纳。没有卡鲁纳，他的生意就做不下去。", bc_self;
+		npctalk "怎么了？你带吃的来了吗？", "你看，卡鲁真的很需要卡鲁哇。没有卡鲁哇，他的生意就做不下去。", bc_self;
 		next;
 		mes "[达尔达尔]";
 		mes "那跟我没关系。";
 		npctalk "我根本不知道他是谁。", "", bc_self;
 		next;
 		mes "[" + strcharinfo(0) + "]";
-		mes "这跟雷加拉斯有很大关系。你知道雷加拉斯会把卡鲁尼亚克发酵成的卡鲁纳供应给卡鲁吧？";
+		mes "这跟雷加拉斯有很大关系。你知道雷加拉斯会把卡鲁哇克发酵成的卡鲁哇供应给卡鲁吧？";
 		next;
 		mes "[达尔达尔]";
 		mes "凭什么？";
@@ -9306,19 +9217,18 @@ lasagna,247,101,7	script	Daldal#dorcon01	4_SEA_OTTER,{
 		mes "[戈帕拉]" + strcharinfo(0) + "那跟我们有什么关系？";
 		mes "我只要填饱肚子就行。";
 		next;
-		mes "达尔达尔#dorcon01";
 		mes "那跟我们有什么关系？";
 		npctalk "没错。", "", bc_self;
 		next;
 		mes "如果雷加拉斯丢了工作，他就赚不到钱了。他赚不到钱，你们不也就不好过了吗？" + strcharinfo(0) + "]";
-		mes "你看，卡鲁真的很需要卡鲁纳。没有卡鲁纳，他的生意就做不下去。";
+		mes "你看，卡鲁真的很需要卡鲁哇。没有卡鲁哇，他的生意就做不下去。";
 		next;
 		mes "据我所知，雷加拉斯供你们吃、供你们穿，还给你们地方住。";
 		mes "[达尔达尔]";
 		npctalk "我们又不穿衣服。", "", bc_self;
 		next;
 		mes "[戈帕拉]" + strcharinfo(0) + "那雷加拉斯可以再找别的工作。";
-		mes "这跟雷加拉斯有很大关系。你知道雷加拉斯会把卡鲁尼亚克发酵成的卡鲁纳供应给卡鲁吧？";
+		mes "这跟雷加拉斯有很大关系。你知道雷加拉斯会把卡鲁哇克发酵成的卡鲁哇供应给卡鲁吧？";
 		next;
 		mes "[" + strcharinfo(0) + "你们现在就把他的活儿搞砸了，凭什么觉得雷加拉斯以后什么都不做？他多半会把你们俩甩掉，去找别的门路。";
 		mes "如果他赶不上期限或交不够货，他的工作就会被别人抢走。";
@@ -9330,16 +9240,15 @@ lasagna,247,101,7	script	Daldal#dorcon01	4_SEA_OTTER,{
 		mes "[戈帕拉]" + strcharinfo(0) + "这、这也太狠了吧！";
 		mes "如果雷加拉斯丢了工作，他就赚不到钱了。他赚不到钱，你们不也就不好过了吗？";
 		next;
-		mes "[" + strcharinfo(0) + "那你们现在就不该碍事，对吧？还要再吃卡鲁尼亚克吗？";
+		mes "[" + strcharinfo(0) + "那你们现在就不该碍事，对吧？还要再吃卡鲁哇克吗？";
 		mes "[达尔达尔]";
 		next;
 		mes "不！不吃了！";
 		mes "不！不吃了！";
 		next;
-		mes "达尔达尔#dorcon01";
 		mes "[戈帕拉]";
 		next;
-		mes "光是不吃卡鲁尼亚克还不够。我从没想过雷加拉斯可能会离开我们。我们得做点什么。" + strcharinfo(0) + "我们也得做点什么。";
+		mes "光是不吃卡鲁哇克还不够。我从没想过雷加拉斯可能会离开我们。我们得做点什么。" + strcharinfo(0) + "我们也得做点什么。";
 		mes "你们现在就把他的活儿搞砸了，凭什么觉得雷加拉斯以后什么都不做？他多半会把你们俩甩掉，去找别的门路。";
 		next;
 		mes "[" + strcharinfo(0) + "态度不错！这样雷加拉斯就……";
@@ -9359,7 +9268,6 @@ lasagna,247,101,7	script	Daldal#dorcon01	4_SEA_OTTER,{
 		npctalk "多拉姆当中有些东西叫多拉姆垃圾。可惜你们不是多拉姆，用不了。就这样吧。行。", "多拉姆垃圾？什么鬼？你怎么能这么说话？！", bc_self;
 		next;
 		mes "那是什么意思？";
-		mes "达尔达尔#dorcon01";
 		npctalk "你还是不知道为好。", "", bc_self;
 		next;
 		mes "[" + strcharinfo(0) + "]";
@@ -9383,16 +9291,16 @@ lasagna,247,101,7	script	Daldal#dorcon01	4_SEA_OTTER,{
 		npctalk "那是什么意思？", "达尔达尔#dorcon01", bc_self;
 		npctalk "好吧。我看看这附近有没有小宝宝。酒馆上面好像有个^0000cd游乐场^000000。我去那儿看看。", "", bc_self;
 		next;
-		mes "[达尔达尔]" + strcharinfo(0) + "真不敢相信我竟然想离开这么舒服的地方。我都忘了，吃卡鲁尼亚克是我人生最大的乐事。";
+		mes "[达尔达尔]" + strcharinfo(0) + "真不敢相信我竟然想离开这么舒服的地方。我都忘了，吃卡鲁哇克是我人生最大的乐事。";
 		mes "[达尔达尔]";
 		next;
 		mes "我们去见卡鲁吧。我想去吃点好吃的。";
 		mes "[达尔达尔]";
 		next;
-		mes "吃卡鲁尼亚克很简单。拿起硬壳的卡鲁尼亚克，然后交给雷加拉斯。";
+		mes "吃卡鲁哇克很简单。拿起硬壳的卡鲁哇克，然后交给雷加拉斯。";
 		mes "[达尔达尔]";
 		next;
-		mes "雷加拉斯把卡鲁尼亚克的壳去掉，放进容器里。然后你从容器里吃。简单吧？" + strcharinfo(0) + "[达尔达尔]";
+		mes "雷加拉斯把卡鲁哇克的壳去掉，放进容器里。然后你从容器里吃。简单吧？" + strcharinfo(0) + "[达尔达尔]";
 		mes "我喜欢宝宝！可爱！";
 		next;
 		mes "[戈帕拉]";
@@ -9403,7 +9311,6 @@ lasagna,247,101,7	script	Daldal#dorcon01	4_SEA_OTTER,{
 		mes "到了。";
 		next;
 		mes "达尔达尔#dorcon02" + strcharinfo(0) + "累了。";
-		mes "戈帕拉#dorcon02";
 		erasequest 14568;// Time to persuade
 		setquest 14569;// Babysitter
 		lasagna_quest[2] = 3;
@@ -9420,7 +9327,7 @@ lasagna,247,101,7	script	Daldal#dorcon01	4_SEA_OTTER,{
 		close;
 	}
 	mes "[达尔达尔]";
-	mes "吃卡鲁尼亚克很简单。拿起硬壳的卡鲁尼亚克，然后交给雷加拉斯。";
+	mes "吃卡鲁哇克很简单。拿起硬壳的卡鲁哇克，然后交给雷加拉斯。";
 	next;
 	mes "虽然很大，但确实是……宝宝。";
 	mes "哇——啊——喵";
@@ -9428,16 +9335,15 @@ lasagna,247,101,7	script	Daldal#dorcon01	4_SEA_OTTER,{
 }
 
 // baby
-lasagna,193,234,5	script	Daldal#dorcon02	HIDDEN_WARP_NPC,{
+lasagna,193,234,5	script	达尔达尔#dorcon02	HIDDEN_WARP_NPC,{
 	if (lasagna_quest[2] == 3) {
-		mes "可爱宝宝#dorcon";
 		mes "[戈帕拉]";
 		close;
 	}
 	end;
 }
 
-lasagna,192,236,5	script	Gopara#dorcon02	HIDDEN_WARP_NPC,5,5,{
+lasagna,192,236,5	script	戈帕拉#dorcon02	HIDDEN_WARP_NPC,5,5,{
 	if (lasagna_quest[2] == 3) {
 		mes "好，我坐下了。";
 		mes "坐下了。";
@@ -9446,27 +9352,24 @@ lasagna,192,236,5	script	Gopara#dorcon02	HIDDEN_WARP_NPC,5,5,{
 	end;
 OnTouch:
 	if (lasagna_quest[2] == 3) {
-		classchange( 4_SEA_OTTER, "Daldal#dorcon02", bc_self );
-		classchange( 4_GALAPAGO, "Gopara#dorcon02", bc_self );
+		classchange( 4_SEA_OTTER, "达尔达尔#dorcon02", bc_self );
+		classchange( 4_GALAPAGO, "戈帕拉#dorcon02", bc_self );
 	}
 	end;
 }
 
-lasagna,195,235,3	script	Cute Baby#dorcon	4_F_KR_TIGER,{
+lasagna,195,235,3	script	可爱宝宝#dorcon	4_F_KR_TIGER,{
 	if (lasagna_quest[2] == 3) {
-		mes "达尔达尔#dorcon02";
 		mes "[达尔达尔]";
 		npctalk "坐着。", "坐着。", bc_self;
-		npctalk "戈帕拉#dorcon02", "[戈帕拉]", bc_self;
+		npctalk "[戈帕拉]", "戈帕拉#dorcon02", bc_self;
 		next;
 		mes "耐心坐着。";
 		mes "耐心——";
 		next;
-		mes "达尔达尔#dorcon02";
 		mes "[达尔达尔]";
 		next;
 		mes "坐着。" + strcharinfo(0) + "坐着。";
-		mes "达尔达尔#dorcon02";
 		npctalk "[婴儿]", "哇。哇！", bc_self;
 		next;
 		mes "[戈帕拉]";
@@ -9476,7 +9379,7 @@ lasagna,195,235,3	script	Cute Baby#dorcon	4_F_KR_TIGER,{
 		emotion ET_QUESTION;
 		mes "所以我们这不就在做吗。我们正拼命坐着。";
 		mes "我已经尽力了。";
-		npctalk "达尔达尔#dorcon02", "[达尔达尔]", bc_self;
+		npctalk "[达尔达尔]", "达尔达尔#dorcon02", bc_self;
 		next;
 		emotion ET_QUESTION;
 		mes "我也是。";
@@ -9510,7 +9413,6 @@ lasagna,195,235,3	script	Cute Baby#dorcon	4_F_KR_TIGER,{
 		mes "说起来，我一直想做点和^0000cd鳀鱼^000000有关的事。鳀鱼很好吃。";
 		mes "鳀鱼听起来不错！";
 		next;
-		mes "戈帕拉#dorcon02";
 		mes "照看小孩原来是这个意思？我不知道。要早知道，我就不干了。";
 		next;
 		emotion ET_CRY;
@@ -9531,8 +9433,8 @@ lasagna,195,235,3	script	Cute Baby#dorcon	4_F_KR_TIGER,{
 		mes "[婴儿]";
 		mes "一闪一闪小星星——我多想知道你是什么——";
 		npctalk "[达尔达尔]", "老实说，来这里之前，我以为鳀鱼是从地里挖出来的。不过我一点也不觉得丢脸。", bc_self;
-		classchange( HIDDEN_WARP_NPC, "Daldal#dorcon02", bc_self );
-		classchange( HIDDEN_WARP_NPC, "Gopara#dorcon02", bc_self );
+		classchange( HIDDEN_WARP_NPC, "达尔达尔#dorcon02", bc_self );
+		classchange( HIDDEN_WARP_NPC, "戈帕拉#dorcon02", bc_self );
 		next;
 		mes "[戈帕拉]" + strcharinfo(0) + "我以前吃过鳀鱼，因为雷加拉斯时不时会买一些。";
 		mes "[工坊管理员]";
@@ -9562,7 +9464,7 @@ lasagna,195,235,3	script	Cute Baby#dorcon	4_F_KR_TIGER,{
 }
 
 // workshop Manager
-lasagna,223,288,5	script	Daldal#dorcon03	HIDDEN_WARP_NPC,5,5,{
+lasagna,223,288,5	script	达尔达尔#dorcon03	HIDDEN_WARP_NPC,5,5,{
 	if (lasagna_quest[2] == 4) {
 		mes "[达尔达尔]";
 		mes "鳀鱼啊。你说想做点和鳀鱼有关的事，我就带你们来了。";
@@ -9571,13 +9473,13 @@ lasagna,223,288,5	script	Daldal#dorcon03	HIDDEN_WARP_NPC,5,5,{
 	end;
 OnTouch:
 	if (lasagna_quest[2] == 4) {
-		classchange( 4_SEA_OTTER, "Daldal#dorcon03", bc_self );
-		classchange( 4_GALAPAGO, "Gopara#dorcon03", bc_self );
+		classchange( 4_SEA_OTTER, "达尔达尔#dorcon03", bc_self );
+		classchange( 4_GALAPAGO, "戈帕拉#dorcon03", bc_self );
 	}
 	end;
 }
 
-lasagna,222,290,5	script	Gopara#dorcon03	HIDDEN_WARP_NPC,{
+lasagna,222,290,5	script	戈帕拉#dorcon03	HIDDEN_WARP_NPC,{
 	if (lasagna_quest[2] == 4) {
 		mes "[戈帕拉]";
 		mes "鳀鱼不是又细又长、有点咸的零食吗？可这东西有头……还有眼睛！";
@@ -9586,10 +9488,9 @@ lasagna,222,290,5	script	Gopara#dorcon03	HIDDEN_WARP_NPC,{
 	end;
 }
 
-lasagna,225,290,5	script	Workshop Manager#dorcon	4_M_BOSSCAT,{
+lasagna,225,290,5	script	工坊管理员#dorcon	4_M_BOSSCAT,{
 	if (lasagna_quest[2] == 4) {
 		mes "你是在耍我们吗？";
-		mes "戈帕拉#dorcon03";
 		next;
 		mes "[工坊管理员]";
 		mes "来，跟着我做。抓一条鳀鱼，把头去掉，掏出内脏，放进容器里。";
@@ -9618,7 +9519,6 @@ lasagna,225,290,5	script	Workshop Manager#dorcon	4_M_BOSSCAT,{
 		mes "我觉得我这辈子再也吃不下鳀鱼了。刚才我们对上眼了。以后每次看到鳀鱼，那双眼睛都会跟着我。";
 		next;
 		mes "真不敢相信我一直都在吃它们。";
-		mes "达尔达尔#dorcon03";
 		next;
 		mes "[" + strcharinfo(0) + "]";
 		mes "哈……是吗？看来这活儿也不适合你们。那我们再去找别的。还有别的想试的工作吗？";
@@ -9626,19 +9526,18 @@ lasagna,225,290,5	script	Workshop Manager#dorcon	4_M_BOSSCAT,{
 		mes "[达尔达尔]";
 		mes "船。我想上^0000cd船^000000！";
 		next;
-		mes "[戈帕拉]" + strcharinfo(0) + "对。我一直住在千层面，却从没上过船。这是个上船的好机会。";
+		mes "[戈帕拉]" + strcharinfo(0) + "对。我一直住在罗札纳，却从没上过船。这是个上船的好机会。";
 		mes "我觉得那很适合我的性格。";
 		next;
-		mes "戈帕拉#dorcon03";
 		mes "你到底从哪儿找来这些白痴的？你觉得他们干得了这活儿吗？";
 		next;
 		mes "[戈帕拉]";
 		mes "是吗？那我们就去上面那艘^0000cd鳀鱼渔船^000000吧。";
-		npctalk "[工坊管理员]", "你不是说要去鳀鱼运输船吗？就算去了，我也不知道你们能干什么。", bc_self;
+		npctalk "你不是说要去鳀鱼运输船吗？就算去了，我也不知道你们能干什么。", "工坊管理员#dorcon", bc_self;
 		next;
 		mes "[工坊管理员]";
-		mes "千层面的鳀鱼很特别。顶级鳀鱼要蒸九次、晒九次，然后去掉头和内脏。这是需要精细工序的艺术品。";
-		npctalk "[工坊管理员]", "它们配酒最合适，也是备考学生的绝佳零食。尝一个吧。", bc_self;
+		mes "罗札纳的鳀鱼很特别。顶级鳀鱼要蒸九次、晒九次，然后去掉头和内脏。这是需要精细工序的艺术品。";
+		npctalk "它们配酒最合适，也是备考学生的绝佳零食。尝一个吧。", "工坊管理员#dorcon", bc_self;
 		next;
 		mes "[戈帕拉]" + strcharinfo(0) + "我一直想坐一次船……哈……真是怀念……";
 		mes "[达尔达尔]";
@@ -9647,10 +9546,10 @@ lasagna,225,290,5	script	Workshop Manager#dorcon	4_M_BOSSCAT,{
 		mes "鳀鱼渔船船长";
 		next;
 		mes "什么事？";
-		mes "对。我一直住在千层面，却从没上过船。这是个上船的好机会。";
+		mes "对。我一直住在罗札纳，却从没上过船。这是个上船的好机会。";
 		npctalk "我觉得那很适合我的性格。", "我想问问船上需不需要帮手。", bc_self;
-		classchange( HIDDEN_WARP_NPC, "Daldal#dorcon03", bc_self );
-		classchange( HIDDEN_WARP_NPC, "Gopara#dorcon03", bc_self );
+		classchange( HIDDEN_WARP_NPC, "达尔达尔#dorcon03", bc_self );
+		classchange( HIDDEN_WARP_NPC, "戈帕拉#dorcon03", bc_self );
 		next;
 		mes "鳀鱼渔船船长" + strcharinfo(0) + "鳀鱼生意确实大不如前了，可我总是缺人手。";
 		mes "是吗？那我们就去上面那艘^0000cd鳀鱼渔船^000000吧。";
@@ -9668,12 +9567,11 @@ lasagna,225,290,5	script	Workshop Manager#dorcon	4_M_BOSSCAT,{
 	mes "感觉我们像是在被卖掉。";
 	next;
 	mes "感觉我们像是在被卖掉。";
-	mes "戈帕拉#dorcon04";
 	close;
 }
 
 // anchovy shipping boat
-lasagna,136,299,5	script	Gopara#dorcon04	HIDDEN_WARP_NPC,5,5,{
+lasagna,136,299,5	script	戈帕拉#dorcon04	HIDDEN_WARP_NPC,5,5,{
 	if (lasagna_quest[2] == 5) {
 		mes "[达尔达尔]";
 		mes "大概只是错觉吧。他不会卖我们的。";
@@ -9682,22 +9580,21 @@ lasagna,136,299,5	script	Gopara#dorcon04	HIDDEN_WARP_NPC,5,5,{
 	end;
 OnTouch:
 	if (lasagna_quest[2] == 5) {
-		classchange( 4_SEA_OTTER, "Daldal#dorcon04", bc_self );
-		classchange( 4_GALAPAGO, "Gopara#dorcon04", bc_self );
+		classchange( 4_SEA_OTTER, "达尔达尔#dorcon04", bc_self );
+		classchange( 4_GALAPAGO, "戈帕拉#dorcon04", bc_self );
 	}
 	end;
 }
 
-lasagna,134,300,7	script	Daldal#dorcon04	HIDDEN_WARP_NPC,{
+lasagna,134,300,7	script	达尔达尔#dorcon04	HIDDEN_WARP_NPC,{
 	if (lasagna_quest[2] == 5) {
 		mes "大概只是错觉吧。";
-		mes "达尔达尔#dorcon04";
 		close;
 	}
 	end;
 }
 
-lasagna,139,299,3	script	Captain of Anchovy Fish	4_CAT_SAILOR5,{
+lasagna,139,299,3	script	凤尾鱼号船长	4_CAT_SAILOR5,{
 	if (lasagna_quest[2] == 5) {
 		mes "鳀鱼渔船船长";
 		mes "喂，那边那两位。你们坐过船吗？";
@@ -9728,14 +9625,14 @@ lasagna,139,299,3	script	Captain of Anchovy Fish	4_CAT_SAILOR5,{
 		mes "[达尔达尔]";
 		mes "没有。我妈妈牵着我的手，顺着潮水来到这里。她被浪卷走了，只有我一个人落到这儿。雷加拉斯发现了我，从那以后我们就一直像一家人一样住在一起。";
 		next;
-		mes "好啦好啦，冷静点。在船上感觉怎么样？这船把鳀鱼从渔船运到千层面，不过你们看不到，因为货物都存放在货舱里。";
+		mes "好啦好啦，冷静点。在船上感觉怎么样？这船把鳀鱼从渔船运到罗札纳，不过你们看不到，因为货物都存放在货舱里。";
 		mes "[达尔达尔]";
 		next;
-		emotion ET_CRY, getnpcid(0, "Daldal#dorcon04");
+		emotion ET_CRY, getnpcid(0, "达尔达尔#dorcon04");
 		mes "我难受的又不是这个。";
 		mes "[戈帕拉]";
 		next;
-		emotion ET_OK, getnpcid(0, "Gopara#dorcon04");
+		emotion ET_OK, getnpcid(0, "戈帕拉#dorcon04");
 		mes "为什么地板看起来这么让人恶心？";
 		mes "鳀鱼渔船船长";
 		next;
@@ -9749,15 +9646,13 @@ lasagna,139,299,3	script	Captain of Anchovy Fish	4_CAT_SAILOR5,{
 		mes "什么？船不是牢牢卡在水面上吗？！";
 		mes "别骗人了！";
 		next;
-		emotion ET_ANGER, getnpcid(0, "Gopara#dorcon04");
-		mes "戈帕拉#dorcon04";
+		emotion ET_ANGER, getnpcid(0, "戈帕拉#dorcon04");
 		mes "鳀鱼渔船船长";
 		next;
 		mes "它是浮在水上，不是卡在水上。船要是卡在水上，还怎么动？！" + strcharinfo(0) + "[达尔达尔]";
 		mes "真不敢相信！这么重的船，你怎么能说它浮在水上？！";
 		next;
 		mes "连我都知道，重东西会沉进水里！";
-		mes "达尔达尔#dorcon04";
 		next;
 		mes "鳀鱼渔船船长";
 		mes "喂，你，冒险者！";
@@ -9766,7 +9661,6 @@ lasagna,139,299,3	script	Captain of Anchovy Fish	4_CAT_SAILOR5,{
 		mes "把他们带回去吧。船上干活不需要多聪明，但这些白痴恐怕连打扫都做不好。不，打扫就算了。他们没先把我逼疯就算我走运了。";
 		next;
 		mes "你这话是什么意思？";
-		mes "达尔达尔#dorcon04";
 		next;
 		mes "鳀鱼渔船船长";
 		mes "那是因为船会随着波浪起伏。";
@@ -9795,7 +9689,7 @@ lasagna,139,299,3	script	Captain of Anchovy Fish	4_CAT_SAILOR5,{
 		mes "卡鲁！告诉卡鲁你把便当送到了，我们才能吃饭！";
 		mes "[达尔达尔]";
 		next;
-		mes "我也喜欢在这里放松。也不再馋卡鲁尼亚克了。";
+		mes "我也喜欢在这里放松。也不再馋卡鲁哇克了。";
 		mes "[戈帕拉]";
 		next;
 		mes "你不是说有话要跟卡鲁说吗？去吧。" + strcharinfo(0) + "[戈帕拉]";
@@ -9806,8 +9700,8 @@ lasagna,139,299,3	script	Captain of Anchovy Fish	4_CAT_SAILOR5,{
 		next;
 		mes "[戈帕拉]";
 		mes "快点，去送他的便当。他看起来快饿死了。";
-		classchange( HIDDEN_WARP_NPC, "Daldal#dorcon04", bc_self );
-		classchange( HIDDEN_WARP_NPC, "Gopara#dorcon04", bc_self );
+		classchange( HIDDEN_WARP_NPC, "达尔达尔#dorcon04", bc_self );
+		classchange( HIDDEN_WARP_NPC, "戈帕拉#dorcon04", bc_self );
 		erasequest 14571;// Anchovy fishing ship
 		setquest 14572;// Helpless...
 		lasagna_quest[2] = 6;
@@ -9824,7 +9718,7 @@ lasagna,139,299,3	script	Captain of Anchovy Fish	4_CAT_SAILOR5,{
 }
 
 // Kalu
-lasagna,222,180,7	script	Daldal#dorcon05	HIDDEN_WARP_NPC,5,5,{
+lasagna,222,180,7	script	达尔达尔#dorcon05	HIDDEN_WARP_NPC,5,5,{
 	if (lasagna_quest[2] == 7) {
 		mes "[达尔达尔]";
 		mes "怎么了？你不是说有事找的不是我，而是卡鲁吗？";
@@ -9837,19 +9731,19 @@ lasagna,222,180,7	script	Daldal#dorcon05	HIDDEN_WARP_NPC,5,5,{
 	}
 	if (lasagna_quest[2] == 10) {
 		mes "便当呢？我的那份呢？我这儿没有！你把它丢哪儿了？我的饭！我的饭！！！";
-		mes "我也喜欢在这里放松。也不再馋卡鲁尼亚克了。";
+		mes "我也喜欢在这里放松。也不再馋卡鲁哇克了。";
 		close;
 	}
 	end;
 OnTouch:
 	if (lasagna_quest[2] == 7 || lasagna_quest[2] > 8) {
-		classchange( 4_SEA_OTTER, "Daldal#dorcon05", bc_self );
-		classchange( 4_GALAPAGO, "Gopara#dorcon05", bc_self );
+		classchange( 4_SEA_OTTER, "达尔达尔#dorcon05", bc_self );
+		classchange( 4_GALAPAGO, "戈帕拉#dorcon05", bc_self );
 	}
 	end;
 }
 
-lasagna,224,178,7	script	Gopara#dorcon05	HIDDEN_WARP_NPC,{
+lasagna,224,178,7	script	戈帕拉#dorcon05	HIDDEN_WARP_NPC,{
 	if (lasagna_quest[2] == 7) {
 		mes "[戈帕拉]";
 		mes "冷静点。我这就去找。";
@@ -9868,7 +9762,7 @@ lasagna,224,178,7	script	Gopara#dorcon05	HIDDEN_WARP_NPC,{
 	end;
 }
 
-lasa_dun02,52,153,5	script	Gopara#dorcon06	HIDDEN_WARP_NPC,5,5,{
+lasa_dun02,52,153,5	script	戈帕拉#dorcon06	HIDDEN_WARP_NPC,5,5,{
 	if (lasagna_quest[2] == 8 || lasagna_quest[2] == 10) {
 		mes "帕娜？你的便当在这儿……";
 		mes "[帕娜]";
@@ -9877,13 +9771,13 @@ lasa_dun02,52,153,5	script	Gopara#dorcon06	HIDDEN_WARP_NPC,5,5,{
 	end;
 OnTouch:
 	if (lasagna_quest[2] == 8 || lasagna_quest[2] == 10) {
-		classchange( 4_SEA_OTTER, "Daldal#dorcon06", bc_self );
-		classchange( 4_GALAPAGO, "Gopara#dorcon06", bc_self );
+		classchange( 4_SEA_OTTER, "达尔达尔#dorcon06", bc_self );
+		classchange( 4_GALAPAGO, "戈帕拉#dorcon06", bc_self );
 	}
 	end;
 }
 
-lasa_dun02,53,150,7	script	Daldal#dorcon06	HIDDEN_WARP_NPC,{
+lasa_dun02,53,150,7	script	达尔达尔#dorcon06	HIDDEN_WARP_NPC,{
 	if (lasagna_quest[2] == 8 || lasagna_quest[2] == 10) {
 		mes "饭！！！";
 		mes "[戈帕拉]";
@@ -9892,7 +9786,7 @@ lasa_dun02,53,150,7	script	Daldal#dorcon06	HIDDEN_WARP_NPC,{
 	end;
 }
 
-lasa_dun02,55,153,3	script	Panna#dorcon	4_DR_SOLDIER,{
+lasa_dun02,55,153,3	script	帕娜#dorcon	4_DR_SOLDIER,{
 	if (isbegin_quest(14574) > 0 || isbegin_quest(14577) > 0) {
 		mes "真是个又无礼又不知感恩的多拉姆。";
 		mes "[达尔达尔]";
@@ -9907,14 +9801,13 @@ lasa_dun02,55,153,3	script	Panna#dorcon	4_DR_SOLDIER,{
 			mes "让我尝一口……" + strcharinfo(0) + "达尔达尔#dorcon06";
 			mes "你怎么能打他食物的主意？再忍耐一下吧。";
 			next;
-			mes "谷波拉#dorcon06";
 			mes "[巴纳]";
 			next;
 			mes "哈，我现在感觉好多了。我饿得差点把巴西利斯克都给吃了，你来得正是时候。我差点就成了一只没能守住喵族身份的喵族，退化成野兽了。";
 			mes "不过我能理解。我们去找便当吧。";
 			close2;
-			classchange( HIDDEN_WARP_NPC, "Daldal#dorcon06", bc_self );
-			classchange( HIDDEN_WARP_NPC, "Gopara#dorcon06", bc_self );
+			classchange( HIDDEN_WARP_NPC, "达尔达尔#dorcon06", bc_self );
+			classchange( HIDDEN_WARP_NPC, "戈帕拉#dorcon06", bc_self );
 			end;
 		}
 		mes "帕娜？你的便当在这儿……";
@@ -9933,25 +9826,25 @@ lasa_dun02,55,153,3	script	Panna#dorcon	4_DR_SOLDIER,{
 		next;
 		mes "多亏了你，我才能吃上一顿饱饭。请替我告诉卡鲁，我很感谢他美味的午餐。希望今天也能平安……";
 		mes "[巴纳]";
-		npctalk "啊，我好饿。饭什么时候来啊？饭。", "感谢您乘坐康-赫利纳号。祝您一路平安舒适，顺利抵达目的地！", bc_self;
+		npctalk "啊，我好饿。饭什么时候来啊？饭。", "感谢您乘坐康-奇丽娜号。祝您一路平安舒适，顺利抵达目的地！", bc_self;
 		npctalk "你是要前往新世界的冒险者吗？欢迎。你听说过我们这艘船是怎么驱动的吗？", ": 没有，我没听说过。", bc_self;
 		next;
 		mes "我们这艘船的动力系统和其他船不一样。而且知道这件事的人很少。";
 		mes "几百只仓鼠在这艘船底部的跑轮上奔跑。因为这片区域和引擎主体相连，船才能向前行驶。";
 		next;
 		mes ": 什么？？？" + strcharinfo(0) + "哦，等等。你不会当真了吧？开玩笑的，开玩笑的！";
-		mes "要去米德加尔特？我第一次来千层面，这里真的很棒！所以我打算干脆长住在这儿了。我连住处都找好了，文件也签了！";
+		mes "要去米德加尔特？我第一次来罗札纳，这里真的很棒！所以我打算干脆长住在这儿了。我连住处都找好了，文件也签了！";
 		next;
 		mes "我正要去米德加尔特收拾行李。这里真不错，真的。";
 		mes "看这一大包行李就明白了吧？我可不是新手冒险者。我是个四处奔走做买卖的商人。";
 		next;
 		mes "我听说新世界里伊格德拉西尔很稀罕，那边根本没有。所以我打算运过去卖卖看。";
 		mes "要是还有什么好卖的东西，我也买一些带过去卖。我就要成为百万富翁了。";
-		classchange( HIDDEN_WARP_NPC, "Gopara#dorcon06", bc_self );
+		classchange( HIDDEN_WARP_NPC, "戈帕拉#dorcon06", bc_self );
 		next;
 		mes "新世界的人找我有什么事吗？";
-		mes "你是第一次坐康-赫利纳号吗？我以前训练结束后，也坐这艘船去过新世界。那时候船上的饭菜真的很好吃，所以……";
-		classchange( HIDDEN_WARP_NPC, "Daldal#dorcon06", bc_self );
+		mes "你是第一次坐康-奇丽娜号吗？我以前训练结束后，也坐这艘船去过新世界。那时候船上的饭菜真的很好吃，所以……";
+		classchange( HIDDEN_WARP_NPC, "达尔达尔#dorcon06", bc_self );
 		delitem 25048,1;// Hearty Lunchbox
 		if (lasagna_quest[2] == 8) {
 			erasequest 14574;// Meal Box Delivery
@@ -9974,15 +9867,15 @@ lasa_dun02,55,153,3	script	Panna#dorcon	4_DR_SOLDIER,{
 	close;
 }
 
-conch_in,122,61,5	script	Crewman#dorcon01	4_CAT_ADV1,{
+conch_in,122,61,5	script	船员#dorcon01	4_CAT_ADV1,{
 	npctalk "你觉得有那样的地方吗？", "", bc_self;
 	end;
 }
 
 // in C_D
-conch_in,59,29,5	script	Engineer#dorcon01	4_CAT_SAILOR5,{
+conch_in,59,29,5	script	工程师#dorcon01	4_CAT_SAILOR5,{
 	setpcblock PCBLOCK_NPC, true;
-	npctalk "船员#dorcon03", "", bc_self;
+	npctalk "", "船员#dorcon03", bc_self;
 	sleep2 2000;
 	unittalk getcharid(3), "" + strcharinfo(0) + "在被发现之前，我们根本不知道米德加尔特的存在。我相信一定还有那样的地方，只是我们不知道而已。", bc_self;
 	sleep2 2000;
@@ -10000,9 +9893,9 @@ conch_in,59,29,5	script	Engineer#dorcon01	4_CAT_SAILOR5,{
 }
 
 // in E_F
-conch_in,59,91,5	script	Passenger#dorcon04	4_F_ALCHE_A,{
+conch_in,59,91,5	script	乘客#dorcon04	4_F_ALCHE_A,{
 	setpcblock PCBLOCK_NPC, true;
-	npctalk "我应该在康-赫利纳号上多待一阵，亲眼见证我们发现新航路的那一刻。", "", bc_self;
+	npctalk "我应该在康-奇丽娜号上多待一阵，亲眼见证我们发现新航路的那一刻。", "", bc_self;
 	sleep2 2000;
 	npctalk "我正要去米德加尔特收拾行李。这里真不错，真的。", "", bc_self;
 	setpcblock PCBLOCK_NPC, false;
@@ -10010,7 +9903,7 @@ conch_in,59,91,5	script	Passenger#dorcon04	4_F_ALCHE_A,{
 }
 
 // in_I_J
-conch_in,97,96,5	script	Merchant#dorcon01	4_M_MERCAT2,{
+conch_in,97,96,5	script	商人#dorcon01	4_M_MERCAT2,{
 	setpcblock PCBLOCK_NPC, true;
 	npctalk "看这一大包行李就明白了吧？我可不是新手冒险者。我是个四处奔走做买卖的商人。", "", bc_self;
 	sleep2 2000;
@@ -10022,19 +9915,19 @@ conch_in,97,96,5	script	Merchant#dorcon01	4_M_MERCAT2,{
 }
 
 // in_N_M
-conch_in,135,91,5	script	Passenger#dorcon01	4_CAT_ADV2,{
+conch_in,135,91,5	script	乘客#dorcon01	4_CAT_ADV2,{
 	npctalk "新世界的人找我有什么事吗？", "", bc_self;
 	end;
 }
-conch_in,135,93,5	script	Passenger#dorcon03	4_DR_TORTEL,{
+conch_in,135,93,5	script	乘客#dorcon03	4_DR_TORTEL,{
 	setpcblock PCBLOCK_NPC, true;
-	npctalk "你是第一次坐康-赫利纳号吗？我以前训练结束后，也坐这艘船去过新世界。那时候船上的饭菜真的很好吃，所以……", "", bc_self;
+	npctalk "你是第一次坐康-奇丽娜号吗？我以前训练结束后，也坐这艘船去过新世界。那时候船上的饭菜真的很好吃，所以……", "", bc_self;
 	sleep2 2000;
 	npctalk "我一到新世界，马上就回到船上了。就因为太喜欢那饭菜了……", "", bc_self;
 	setpcblock PCBLOCK_NPC, false;
 	end;
 }
-conch_in,137,98,3	script	Passenger#dorcon02	4_DR_F_01,{
+conch_in,137,98,3	script	乘客#dorcon02	4_DR_F_01,{
 	setpcblock PCBLOCK_NPC, true;
 	npctalk "我第一次去新世界，真的很激动。你决定到了之后先做什么了吗？我想先去妙勒尼山脉！", "", bc_self;
 	sleep2 2000;
@@ -10044,7 +9937,7 @@ conch_in,137,98,3	script	Passenger#dorcon02	4_DR_F_01,{
 }
 
 // in_P_O
-conch_in,169,70,3	script	Crewman#dorcon02	4_CAT_SAILOR2,{
+conch_in,169,70,3	script	船员#dorcon02	4_CAT_SAILOR2,{
 	setpcblock PCBLOCK_NPC, true;
 	npctalk "米德加尔特已经被发现了，所以我很好奇外面还有没有别的地方。我们从未去过、也不在地图上的地方。", "", bc_self;
 	sleep2 2000;
@@ -10052,19 +9945,19 @@ conch_in,169,70,3	script	Crewman#dorcon02	4_CAT_SAILOR2,{
 	sleep2 2000;
 	npctalk "在被发现之前，我们根本不知道米德加尔特的存在。我相信一定还有那样的地方，只是我们不知道而已。", "", bc_self;
 	sleep2 2000;
-	npctalk "你觉得它也在寻找我们吗？", "Crewman#dorcon03", bc_self;
+	npctalk "你觉得它也在寻找我们吗？", "船员#dorcon03", bc_self;
 	sleep2 2000;
 	npctalk "哦，光是想想我的心就怦怦直跳。", "", bc_self;
 	setpcblock PCBLOCK_NPC, false;
 	end;
 }
-conch_in,166,68,6	script	Crewman#dorcon03	4_CAT_SAILOR1,{
+conch_in,166,68,6	script	船员#dorcon03	4_CAT_SAILOR1,{
 	setpcblock PCBLOCK_NPC, true;
 	npctalk "你知道吗，我觉得斯泰罗副官也许能找到另一条通往新世界、不在地图上的航线。", "", bc_self;
 	sleep2 2000;
-	npctalk "是啊，如果它真的存在，我们总有一天能找到并航行过去！", "Crewman#dorcon02", bc_self;
+	npctalk "是啊，如果它真的存在，我们总有一天能找到并航行过去！", "船员#dorcon02", bc_self;
 	sleep2 2000;
-	npctalk "我应该在康-赫利纳号上多待一阵，亲眼见证我们发现新航路的那一刻。", "", bc_self;
+	npctalk "我应该在康-奇丽娜号上多待一阵，亲眼见证我们发现新航路的那一刻。", "", bc_self;
 	setpcblock PCBLOCK_NPC, false;
 	end;
 }

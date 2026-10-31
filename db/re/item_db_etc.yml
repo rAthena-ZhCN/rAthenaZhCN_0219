@@ -37751,22 +37751,22 @@ Body:
     Weight: 100
   - Id: 25859
     AegisName: DoramStone_Top
-    Name: Doram Stone (Upper)
+    Name: 喵族石(头上)
     Type: Etc
     Weight: 100
   - Id: 25860
     AegisName: DoramStone_Middle
-    Name: Doram Stone (Middle)
+    Name: 喵族石(头中)
     Type: Etc
     Weight: 100
   - Id: 25861
     AegisName: DoramStone_Bottom
-    Name: Doram Stone (Bottom)
+    Name: 喵族石(头下)
     Type: Etc
     Weight: 100
   - Id: 25862
     AegisName: DoramStone_Robe
-    Name: Doram Stone (Garment)
+    Name: 喵族石(披肩)
     Type: Etc
     Weight: 100
   - Id: 25863
@@ -47041,7 +47041,7 @@ Body:
       bonus2 bSkillAtk,"RL_R_TRIP",20;
   - Id: 29668
     AegisName: Doram_Top
-    Name: Doram Stone (Upper)
+    Name: 喵族石(头上)
     Type: Card
     SubType: Enchant
     Script: |
@@ -47050,21 +47050,21 @@ Body:
       bonus bMatk,.@lv;
   - Id: 29669
     AegisName: Doram_Middle
-    Name: Doram Stone (Middle)
+    Name: 喵族石(头中)
     Type: Card
     SubType: Enchant
     Script: |
       bonus2 bSkillAtk,"SU_LUNATICCARROTBEAT",20;
   - Id: 29670
     AegisName: Doram_Bottom
-    Name: Doram Stone (Bottom)
+    Name: 喵族石(头下)
     Type: Card
     SubType: Enchant
     Script: |
       bonus2 bSkillAtk,"SU_SV_STEMSPEAR",20;
   - Id: 29671
     AegisName: Doram_Robe
-    Name: Doram Stone (Garment)
+    Name: 喵族石(披肩)
     Type: Card
     SubType: Enchant
     Script: |

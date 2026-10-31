@@ -5885,7 +5885,7 @@ harboro1,229,64,3	script	罗斯玛丽·韦伯#rockn03	4_F_EINWOMAN,{
 	close;
 }
 
-harboro1,87,207,1	script	醉酒的朵拉姆#rockwn11	4_CAT_SAILOR5,{
+harboro1,87,207,1	script	醉酒的喵族#rockwn11	4_CAT_SAILOR5,{
 	mes "[利兰·温金斯]";
 	mes "我们是洛克里奇伟大的拓荒者！嘿，呵！";
 	next;
@@ -6389,7 +6389,7 @@ harboro1,156,215,5	script	旅店老板#rockridge	1_ETC_01,{
 	}
 }
 
-harboro1,228,170,3	script	流浪朵拉姆#rkrgtwn	4_DR_STELO,5,5,{
+harboro1,228,170,3	script	流浪喵族#rkrgtwn	4_DR_STELO,5,5,{
 	mes "[流浪多兰]";
 	mes "呜呜！治安官办公室到底在哪儿啊？我的钱！钱啊啊啊！";
 	next;
@@ -6397,7 +6397,7 @@ harboro1,228,170,3	script	流浪朵拉姆#rkrgtwn	4_DR_STELO,5,5,{
 	mes "大家都说洛基岭是机会之地！为什么没人告诉我这里还有可怕的水牛盗贼团？";
 	next;
 	mes "[流浪多兰]";
-	mes "*抽噎* 他们把我抢得干干净净。我连一杯卡露娜奶的钱都不剩了。";
+	mes "*抽噎* 他们把我抢得干干净净。我连一杯卡鲁哇奶的钱都不剩了。";
 	emotion ET_CRY;
 	close;
 

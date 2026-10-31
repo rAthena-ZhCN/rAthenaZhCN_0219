@@ -110964,7 +110964,7 @@ Body:
       TeleportBlock: true
   - Id: 21074
     AegisName: S_DUMMY_100_PLANT
-    Name: 训练假人(工厂)
+    Name: 训练假人(植物)
     Level: 100
     Hp: 2000000000
     Str: 0
@@ -111033,7 +111033,7 @@ Body:
       TeleportBlock: true
   - Id: 21077
     AegisName: S_DUMMY_100_NOTHING2
-    Name: 假人(中性1级)
+    Name: 训练假人(无属性)
     Level: 100
     Hp: 2000000000
     Str: 0
@@ -111102,7 +111102,7 @@ Body:
       TeleportBlock: true
   - Id: 21080
     AegisName: S_DUMMY_100_FIRE
-    Name: 假人(火力等级1)
+    Name: 训练假人(火属性)
     Level: 100
     Hp: 2000000000
     Str: 0
@@ -111283,7 +111283,7 @@ Body:
       TeleportBlock: true
   - Id: 21088
     AegisName: S_DUMMY_100_DORAMP
-    Name: 训练假人 (杜兰族)
+    Name: 训练假人 (喵族)
     Level: 100
     Hp: 2000000000
     Str: 0
