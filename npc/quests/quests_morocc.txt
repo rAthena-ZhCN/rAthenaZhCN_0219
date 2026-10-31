@@ -1110,7 +1110,7 @@ moc_fild20,200,21,7	duplicate(MocConGuard)	大陆守卫#06	707,3,3
 moc_fild20,203,336,5	duplicate(MocConGuard)	大陆守卫#07	707,3,3
 moc_fild20,215,336,3	duplicate(MocConGuard)	大陆守卫#08	707,3,3
 
--	script	Continental Messenger#00::ConMessenger	997,3,3,{
+-	script	大陆守卫传令兵#00::ConMessenger	997,3,3,{
 	set .@area$,strnpcinfo(2);
 	if (.@area$ == "01") { set .@area$,"Prontera"; }
 	else if (.@area$ == "02") { set .@area$,"Geffen"; }
@@ -1119,7 +1119,7 @@ moc_fild20,215,336,3	duplicate(MocConGuard)	大陆守卫#08	707,3,3
 	else if (.@area$ == "05") { set .@area$,"Al De Baran"; }
 	if (BaseLevel > 79) {
 		mes "[大陆守卫传令兵]";
-		mes "你好，"+ strcharinfo(0) +". We don't have the luxury of time in this dire situation so I'll try to make this quick.";
+		mes "你好，"+ strcharinfo(0) +"。现在情况危急，我们没有多余时间，我尽量长话短说。";
 		next;
 		mes "[大陆守卫传令兵]";
 		mes "我是从梦罗克大陆守卫总部派往" + .@area$ + "的传令兵。我的职责是把这条重要消息尽可能传达给更多有名的冒险者。很高兴我终于找到你了，"+ strcharinfo(0) +".";
@@ -1141,7 +1141,7 @@ moc_fild20,215,336,3	duplicate(MocConGuard)	大陆守卫#08	707,3,3
 		mes "梦罗克大陆守卫已立即组建，以对抗魔王梦罗克、解救这场危局。我来此是为了向卢恩-米德加尔特王国的所有人通报这场灾难。";
 		next;
 		mes "[大陆守卫传令兵]";
-		mes "我们需要你的帮助，"+ strcharinfo(0) +". We need reputable adventurers like you to seal away Satan Morocc once again.";
+		mes "我们需要你的帮助，"+ strcharinfo(0) +"。我们需要像你这样有名望的冒险者，再次将魔王梦罗克封印。";
 		next;
 		mes "[大陆守卫传令兵]";
 		mes "欲知更多详情，请去和梦罗克大陆守卫的队长谈谈。他正在等你，"+ strcharinfo(0) +".";
@@ -1195,19 +1195,19 @@ OnTouch_:
 	end;
 }
 
-prontera,164,304,3	duplicate(ConMessenger)	Continental Messenger#01	997,3,3
-geffen,128,90,3	duplicate(ConMessenger)	Continental Messenger#02	997,3,3
-payon,200,113,3	duplicate(ConMessenger)	Continental Messenger#03	997,3,3
-alberta,127,64,3	duplicate(ConMessenger)	Continental Messenger#04	998,3,3
-aldebaran,135,128,3	duplicate(ConMessenger)	Continental Messenger#05	998,3,3
+prontera,164,304,3	duplicate(大陆守卫传令兵#00)	大陆守卫传令兵#01	997,3,3
+geffen,128,90,3	duplicate(大陆守卫传令兵#00)	大陆守卫传令兵#02	997,3,3
+payon,200,113,3	duplicate(大陆守卫传令兵#00)	大陆守卫传令兵#03	997,3,3
+alberta,127,64,3	duplicate(大陆守卫传令兵#00)	大陆守卫传令兵#04	998,3,3
+aldebaran,135,128,3	duplicate(大陆守卫传令兵#00)	大陆守卫传令兵#05	998,3,3
 
--	script	Continental Official	-1,{
+-	script	大陆守卫官员	-1,{
 	if (rebirth_moc_edq > 3) {
 		mes "[大陆守卫官员]";
 		mes "我代表大陆守卫感谢你的付出。现在，让我看看总部是否送来了该让你知道的消息……";
 		next;
 		mes "[大陆守卫官员]";
-		mes "Hmm...";
+		mes "嗯……";
 		next;
 		mes "[大陆守卫官员]";
 		mes "暂时还没有。请继续执行当前任务。再次感谢你。";
@@ -1234,7 +1234,7 @@ aldebaran,135,128,3	duplicate(ConMessenger)	Continental Messenger#05	998,3,3
 		case 2:
 			if (BaseLevel > 79) {
 				mes "[大陆守卫官员]";
-				mes "欢迎，" + strcharinfo(0) + ". I've been waiting for you. I assume our messenger informed you of our situation.";
+				mes "欢迎，" + strcharinfo(0) + "。我一直在等你。我想传令兵已经把我们这里的情况告诉你了。";
 				next;
 				mes "[大陆守卫官员]";
 				mes "我马上为你办理申请。请稍候。";
@@ -1369,7 +1369,7 @@ morocc,159,113,3	script	巴洛格首领	752,{
 							mes "是的，为了加入大陆守卫，我什么都愿意做！";
 							next;
 							mes "[巴洛古队长]";
-							mes "Hmm...";
+							mes "嗯……";
 							next;
 							mes "[巴洛古队长]";
 							mes "有意思。你引起我的注意了。好吧，如果你能替我办成一件事，我承认你的实力也算公平。";
@@ -1577,7 +1577,7 @@ morocc,159,113,3	script	巴洛格首领	752,{
 		mes "怎么会？你有什么能证明胜利的东西吗？";
 		next;
 		mes "[巴罗格队长]";
-		mes "...No, I can't just accept and trust your verbal account. I mean, if you've completed such an important mission, you must bring me some evidence.";
+		mes "……不，我不能仅凭你的口头说明就相信你。我的意思是，如果你真的完成了这么重要的任务，就必须带一些证据回来。" ;
 		next;
 		mes "[巴罗格队长]";
 		mes "回去把胜利的证据带来，然后再回来。";
@@ -1717,7 +1717,7 @@ morocc,159,113,3	script	巴洛格首领	752,{
 		}
 		else {
 			mes "[巴罗格队长]";
-			mes "...No, I can't just accept and trust your verbal account. I mean, if you've completed such an important mission, you must bring me some evidence.";
+			mes "……不，我不能仅凭你的口头说明就相信你。我的意思是，如果你真的完成了这么重要的任务，就必须带一些证据回来。" ;
 			next;
 			mes "[巴罗格队长]";
 			mes "回去把胜利的证据带来，然后再回来。";
@@ -3909,7 +3909,7 @@ cave,82,97,3	script	洞窟居民#g1	996,3,3,{
 				next;
 				mes "[洞窟居民]";
 				mes "你刚才说伊娃？";
-				mes "Hmm...";
+				mes "嗯……";
 				mes "在这里等着。";
 				next;
 				emotion ET_COMEON;
@@ -3997,7 +3997,7 @@ OnTouch:
 				next;
 				mes "[洞窟居民]";
 				mes "你刚才说伊娃？";
-				mes "Hmm...";
+				mes "嗯……";
 				mes "在这里等着。";
 				next;
 				emotion ET_COMEON;
@@ -4181,7 +4181,7 @@ cave,22,186,3	script	怪物般的男子#zid	999,{
 			if (.@exitloop) break;
 		}
 		mes "[吉德]";
-		mes "Hmm...";
+		mes "嗯……";
 		mes "也许奥利佛就是伊娃的儿子……";
 		next;
 		mes "[吉德]";
