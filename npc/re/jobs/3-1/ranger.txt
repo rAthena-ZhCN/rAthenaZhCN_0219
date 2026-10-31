@@ -791,7 +791,7 @@ job3_rang01,30,44,3	script	测试等候室#jr_03	88,{
 	}
 	end;
 OnInit:
-	waitingroom "Practical Test Waiting Room",20,"Test Waiting Room#jr_03::OnStartArena",1;
+	waitingroom "游侠转职实战考试等候室",20,"测试等候室#jr_03::OnStartArena",1;
 	enablewaitingroomevent;
 	end;
 OnStartArena:
