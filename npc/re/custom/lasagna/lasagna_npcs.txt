@@ -9430,7 +9430,7 @@ lasagna,247,101,7	script	达尔达尔#dorcon01	4_SEA_OTTER,{
 }
 
 // baby
-lasagna,193,234,5	script	可爱宝宝#dorcon	HIDDEN_WARP_NPC,{
+lasagna,193,234,5	script	达尔达尔#dorcon02	HIDDEN_WARP_NPC,{
 	if (lasagna_quest[2] == 3) {
 		mes "[达尔达尔]";
 		mes "我喜欢小宝宝！好可爱！";
