@@ -10235,7 +10235,7 @@ bool status_change_start(block_list* src, block_list* bl, sc_type type, int32 ra
 			return false;
 	}
 
-	int32 tick = (int32)duration;
+	t_tick tick = duration;
 
 	// Type-specific checks that need to happen before the delay
 	switch (type) {
