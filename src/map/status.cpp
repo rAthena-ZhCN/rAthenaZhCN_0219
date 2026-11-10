@@ -121,7 +121,7 @@ static uint32 status_calc_maxhp_pc( map_session_data& sd, uint32 vit );
 static uint32 status_calc_maxsp_pc( map_session_data& sd, uint32 int_ );
 static uint32 status_calc_maxap_pc( map_session_data& sd );
 static int32 status_get_sc_interval(enum sc_type type);
-static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_type type, int32 val1, int32 val2, int32 val3, int32 val4, int32 tick, uint8 flag);
+static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_type type, int32 val1, int32 val2, int32 val3, int32 val4, t_tick tick, uint8 flag);
 
 static bool status_change_isDisabledOnMap_(sc_type type, bool mapIsVS, bool mapIsPVP, bool mapIsGVG, bool mapIsBG, uint32 mapZone, bool mapIsTE);
 #define status_change_isDisabledOnMap(type, m) ( status_change_isDisabledOnMap_((type), mapdata_flag_vs2((m)), m->getMapFlag(MF_PVP) != 0, mapdata_flag_gvg2_no_te((m)), m->getMapFlag(MF_BATTLEGROUND) != 0, (m->zone << 3) != 0, mapdata_flag_gvg2_te((m))) )
@@ -10299,7 +10299,7 @@ bool status_change_start(block_list* src, block_list* bl, sc_type type, int32 ra
 	entry->val4 = val4;
 #ifdef RENEWAL
 	// In renewal, the delay is substracted from the duration
-	entry->tick = std::max<int32>(1, tick - delay);
+	entry->tick = std::max<t_tick>(1, tick - delay);
 #else
 	entry->tick = tick;
 #endif
@@ -10325,7 +10325,7 @@ bool status_change_start(block_list* src, block_list* bl, sc_type type, int32 ra
  * @param flag: Value which determines what parts to calculate. See e_status_change_start_flags
  * @return Whether the status change was resisted (false) or applied (true)
  */
-static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_type type, int32 val1, int32 val2, int32 val3, int32 val4, int32 tick, uint8 flag)
+static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_type type, int32 val1, int32 val2, int32 val3, int32 val4, t_tick tick, uint8 flag)
 {
 	map_session_data* sd = BL_CAST(BL_PC, bl);
 	status_change* sc = status_get_sc(bl);
