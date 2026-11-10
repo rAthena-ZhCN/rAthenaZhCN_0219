@@ -15530,6 +15530,9 @@ static int32 status_natural_heal(block_list* bl, va_list args)
 	if (sc != nullptr && sc->empty())
 		sc = nullptr;
 	sd = BL_CAST(BL_PC,bl);
+	if (sd != nullptr && sc != nullptr && sc->getSCE(SC_HERO_SOUL) != nullptr && pc_checkskill(sd, NJ_NINPOU) > 0) {
+		status_heal(bl, max(1, status->max_hp / 200), max(1, status->max_sp / 200), 3);
+	}
 
 	flag = regen->flag;
 	if (flag&RGN_HP && (regen->state.block&1))
