@@ -12386,12 +12386,12 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			val4 = tick / tick_time;
 			break;
 		case SC_ZANGETSU:
-			if( status_get_hp(bl) % 2 == 0 )
+			if( (sc != nullptr && sc->getSCE(SC_HERO_SOUL)) || status_get_hp(bl) % 2 == 0 )
 				val2 = (status_get_lv(bl) / 3) + (20 * val1); //+Watk
 			else
 				val2 -= (status_get_lv(bl) / 3) + (30 * val1); //-Watk
 
-			if( status_get_sp(bl) % 2 == 0 )
+			if( (sc != nullptr && sc->getSCE(SC_HERO_SOUL)) || status_get_sp(bl) % 2 == 0 )
 				val3 = (status_get_lv(bl) / 3) + (20 * val1); //+Matk
 			else
 				val3 -= (status_get_lv(bl) / 3) + (30 * val1); //-Matk
