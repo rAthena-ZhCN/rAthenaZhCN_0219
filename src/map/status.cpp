@@ -11580,6 +11580,8 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 		}
 		case SC_KAAHI:
 			val2 = 200*val1; // HP heal
+			if (sc != nullptr && sc->getSCE(SC_HERO_SOUL))
+				val2 *= 5; // Hero Soul: 5x HP recovery
 			val3 = 5*val1; // SP cost
 			break;
 		case SC_BLESSING:
@@ -11749,6 +11751,11 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			val3= 20*val1; // Int increase
 			break;
 		case SC_SWOO:
+			if (src != nullptr) {
+				status_change *ssc = status_get_sc(src);
+				if (ssc != nullptr && ssc->getSCE(SC_HERO_SOUL))
+					tick *= 5; // Hero Soul: 5x duration
+			}
 			if(status_has_mode(status,MD_STATUSIMMUNE))
 				tick /= 5; // !TODO: Reduce skill's duration. But for how long?
 			break;
@@ -12796,11 +12803,26 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 			break;
 		case SC_SOULREAPER:
 			val2 = 10 + 5 * val1; // Chance of Getting A Soul Sphere.
+			if (sc != nullptr && sc->getSCE(SC_HERO_SOUL)) {
+				val2 = 20 + 10 * val1; // Hero Soul: double chance
+				tick *= 2; // Hero Soul: double duration
+			}
 			break;
 		case SC_SOULCOLLECT:
 			val2 = 5 + 3 * val2; // Max Soul Sphere's.
 			val3 = tick > 0 ? tick : 60000;
 			tick_time = tick;
+			if (sc != nullptr && sc->getSCE(SC_HERO_SOUL)) {
+				switch (val1) {
+					case 1: val3 = 30000; break;
+					case 2: val3 = 20000; break;
+					case 3: val3 = 10000; break;
+					case 4: val3 = 5000; break;
+					case 5: val3 = 3000; break;
+					default: break;
+				}
+				tick_time = val3;
+			}
 			tick = INFINITE_TICK; // Duration sent to the client should be infinite
 			break;
 		case SC_SP_SHA:
@@ -15116,7 +15138,20 @@ TIMER_FUNC(status_change_timer){
 			if (!unity_src || status_isdead(*unity_src) || unity_src->m != bl->m || !check_distance_bl(bl, unity_src, 11))
 				break;
 
-			status_heal(bl, 150 * sce->val1, 0, 2);
+			int32 heal = 150 * sce->val1;
+			if (sc != nullptr && sc->getSCE(SC_HERO_SOUL)) {
+				switch (sce->val1) {
+					case 1: heal = 300; break;
+					case 2: heal = 600; break;
+					case 3: heal = 900; break;
+					case 4: heal = 1500; break;
+					case 5: heal = 2500; break;
+					case 6: heal = 3000; break;
+					case 7: heal = 3888; break;
+					default: break;
+				}
+			}
+			status_heal(bl, heal, 0, 2);
 			sc_timer_next(3000 + tick);
 			return 0;
 		}
