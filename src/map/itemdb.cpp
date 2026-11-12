@@ -3317,7 +3317,7 @@ bool itemdb_is_unlimited_arsenal_item( t_itemid nameid ){
 		// Elemental change scrolls
 		case 12114: case 12115: case 12116: case 12117:
 		// Point merchant elemental items
-		case 100291: case 100292: case 100293: case 100294: case 100295:
+		case 1000291: case 1000292: case 1000293: case 1000294: case 1000295:
 			return true;
 	}
 
