@@ -3308,6 +3308,16 @@ bool itemdb_is_unlimited_arsenal_item( t_itemid nameid ){
 		case 13294:	// Explosive Kunai
 		// Soul Reaper (Taekwon 4th) talisman
 		case 1000563:	// Soa Charm
+		// Elemental ores (Fire/Water/Wind/Earth)
+		case 990: case 991: case 992: case 993:
+		// Elemental stones/fragments (Fire/Water/Wind/Earth)
+		case 994: case 995: case 996: case 997:
+		// Elemental fragments sold by point merchant
+		case 6360: case 6361: case 6362: case 6363:
+		// Elemental change scrolls
+		case 12114: case 12115: case 12116: case 12117:
+		// Point merchant elemental items
+		case 100291: case 100292: case 100293: case 100294: case 100295:
 			return true;
 	}
 
