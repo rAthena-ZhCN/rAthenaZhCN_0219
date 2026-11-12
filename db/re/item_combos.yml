@@ -59601,3 +59601,11 @@ Body:
     Script: |
       bonus3 bAutoSpell,"WL_RECOGNIZEDSPELL",1,100;
       bonus2 bMagicAddClass,Class_All,20;
+
+  - Combos:
+      - Combo:
+          - Arc_A_Ring
+          - Holy_Skogul_Card
+    Script: |
+      bonus bFlee2,8;
+      bonus bAllStats,4;

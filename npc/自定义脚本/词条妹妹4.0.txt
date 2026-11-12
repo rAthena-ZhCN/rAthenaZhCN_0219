@@ -52,4 +52,4 @@ function	script	F_RandOpt	{
 	set Zeny, Zeny - 10000;
 	close;
 }
-	prontera,165,88,2	duplicate(词条妹妹)	     词条妹妹#prt	604
+	prontera,164,106,3	duplicate(词条妹妹)	     词条祭司#prt	10646

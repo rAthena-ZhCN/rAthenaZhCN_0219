@@ -2358,7 +2358,7 @@ Body:
       sc_start2 SC_M_LIFEPOTION,600000,-4,3;
   - Id: 9785
     AegisName: Frozen_Box_IL
-    Name: Frozen Refine Box
+    Name: 极冻精炼箱
     Type: DelayConsume
     Weight: 10
     Script: |
@@ -2438,7 +2438,7 @@ Body:
       sc_start4 SC_LIMIT_POWER_BOOSTER,1800000,30,1,5,0;
   - Id: 9897
     AegisName: E_Glittering_Doll_B
-    Name: Shiny Doll Button
+    Name: 闪耀的玩具纽扣
     Type: Usable
     Weight: 10
     Script: |
@@ -4413,7 +4413,7 @@ Body:
       itemheal 0,180; /* average value */
   - Id: 11638
     AegisName: 24_A_Ev_Choco_C
-    Name: Symposium Choco Egg Cookie
+    Name: 学术节巧克蛋饼干
     Type: Healing
     Weight: 1
     EquipLevelMin: 100
@@ -4429,7 +4429,7 @@ Body:
       itemheal 2650,0; /* average value */
   - Id: 11639
     AegisName: 24_A_Ev_Egg_C
-    Name: Symposium Egg Cookie
+    Name: 学术节蛋型饼干
     Type: Healing
     Weight: 1
     EquipLevelMin: 100
@@ -4460,7 +4460,7 @@ Body:
       itemheal 1750,0; /* average value */
   - Id: 11641
     AegisName: E_Leather_Bottle
-    Name: Leather Water Bottle
+    Name: 皮水壶
     Type: Healing
     Weight: 1
     EquipLevelMin: 70
@@ -9084,7 +9084,7 @@ Body:
       itemskill "PR_GLORIA",2;
   - Id: 12377
     AegisName: Mysterious_PET_Bottle2
-    Name: Mysterious PET Bottle2
+    Name: 神奇塑料水瓶大海味
     Type: DelayConsume
     Buy: 10
     Weight: 100
@@ -10003,7 +10003,7 @@ Body:
       sc_start2 SC_S_LIFEPOTION,600000,-5,5;
   - Id: 12461
     AegisName: F_Regeneration_Potion
-    Name: F Regeneration Potion
+    Name: 恢复力提升药水[转蛋专用]
     Type: Usable
     Weight: 10
     Script: |
@@ -26396,7 +26396,7 @@ Body:
       getgroupitem(IG_F_REPAIR_SCROLL_BOX);
   - Id: 14038
     AegisName: F_Repair_Scroll_Box10
-    Name: Repair Weapon Scroll 10 Box
+    Name: 武器修理卷轴10个箱子
     Type: Cash
     Buy: 20
     Weight: 10
@@ -60052,7 +60052,7 @@ Body:
       getgroupitem(IG_SHADOW_CUBE_PENDANT);
   - Id: 22978
     AegisName: Shadow_Cube_Earing
-    Name: Shadow Cube (Earing)
+    Name: 初学者影子耳环箱
     Type: Usable
     Weight: 10
     Flags:
@@ -60185,7 +60185,7 @@ Body:
       callfunc "F_CashReset";
   - Id: 22997
     AegisName: C_Greed_Scroll
-    Name: Endless Greed Scroll
+    Name: 无限贪婪卷轴
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -62856,7 +62856,7 @@ Body:
       getgroupitem(IG_ADVANCED_TAIMING_ITEM);
   - Id: 23285
     AegisName: Candy_Box_Melee
-    Name: Candy Pouch Box(Physical)
+    Name: 糖果袋背包宝箱(物理)
     Type: Usable
     Weight: 10
     Flags:
@@ -62865,7 +62865,7 @@ Body:
       getgroupitem(IG_CANDY_BOX_MELEE);
   - Id: 23286
     AegisName: Candy_Box_Range
-    Name: Candy Pouch Box(Ranged)
+    Name: 糖果袋背包宝箱(远程)
     Type: Usable
     Weight: 10
     Flags:
@@ -62874,7 +62874,7 @@ Body:
       getgroupitem(IG_CANDY_BOX_RANGE);
   - Id: 23287
     AegisName: Candy_Box_Magic
-    Name: Candy Pouch Box(Magic)
+    Name: 糖果袋背包宝箱(魔法)
     Type: Usable
     Weight: 10
     Flags:
@@ -62891,21 +62891,21 @@ Body:
       itemskill "AL_TELEPORT",1;
   - Id: 23289
     AegisName: Candy_Bag_Scroll_Melee
-    Name: Candy Bag Blessing Scroll(Physical)
+    Name: 糖果袋祝福卷轴(物理)
     Type: DelayConsume
     Weight: 10
     Script: |
       laphine_synthesis();
   - Id: 23290
     AegisName: Candy_Bag_Scroll_Range
-    Name: Candy Bag Blessing Scroll(Ranged)
+    Name: 糖果袋祝福卷轴(远程)
     Type: DelayConsume
     Weight: 10
     Script: |
       laphine_synthesis();
   - Id: 23291
     AegisName: Candy_Bag_Scroll_Magic
-    Name: Candy Bag Blessing Scroll(Magic)
+    Name: 糖果袋祝福卷轴(魔法)
     Type: DelayConsume
     Weight: 10
     Script: |
@@ -64146,7 +64146,7 @@ Body:
       getitem 11570,20;
   - Id: 23504
     AegisName: Orange_Potion_B_20
-    Name: "[Not For Sale] Crate of 20 Orange Potions"
+    Name: "[非卖品]赤色药水20个箱子"
     Type: Usable
     Trade:
       NoDrop: true
@@ -65048,9 +65048,22 @@ Body:
     Script: |
       specialeffect2 EF_POTION_BERSERK;
       sc_start SC_2011RWC_SCROLL,1800000,0;
+  - Id: 23729
+    AegisName: E_Ayers_Blessing
+    Name: "[活动]埃尔的祝福"
+    Type: Usable
+    Weight: 10
+    Trade:
+      NoDrop: true
+      NoTrade: true
+      NoCart: true
+      NoGuildStorage: true
+      NoAuction: true
+    Script: |
+      sc_start SC_INCHEALRATE,1800000,20;
   - Id: 23732
     AegisName: E_Mimir_Spring_W
-    Name: "[Event] Mimir's Spring Water"
+    Name: "[活动]密米尔之泉"
     Type: Usable
     Weight: 10
     Trade:
@@ -66346,7 +66359,7 @@ Body:
       getgroupitem(IG_SEASON_EVT_REWARD);
   - Id: 23922
     AegisName: Candy_Box
-    Name: Candy Pouch Box
+    Name: 糖果袋背包宝箱
     Type: Usable
     Weight: 10
     Flags:
@@ -66904,7 +66917,7 @@ Body:
       getgroupitem(IG_BOOSTER_PACK_175);
   - Id: 100043
     AegisName: Boost_Up_1
-    Name: Booster Armor UpgradeBox
+    Name: 成长防具精炼箱
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -66932,7 +66945,7 @@ Body:
       laphine_upgrade();
   - Id: 100045
     AegisName: Stater_A_Box
-    Name: Starter Armor Crate
+    Name: 新手防具箱
     Type: Usable
     Flags:
       Container: true
@@ -68267,7 +68280,7 @@ Body:
       laphine_upgrade();
   - Id: 100272
     AegisName: Refine_Hero_Boots
-    Name: Ancient Hero Boots 9 Refine Permission
+    Name: 古代英雄战靴精炼+9券
     Type: DelayConsume
     Weight: 10
     Script: |
@@ -68973,14 +68986,14 @@ Body:
       laphine_synthesis();
   - Id: 100391
     AegisName: Moonlight_Box_IL
-    Name: Moonlight Refine Box
+    Name: 月光精炼箱
     Type: DelayConsume
     Weight: 10
     Script: |
       laphine_upgrade();
   - Id: 100392
     AegisName: S_Moonlight_Box_IL
-    Name: Special Moonlight Refine Box
+    Name: 高级月光精炼箱
     Type: DelayConsume
     Weight: 10
     Script: |
@@ -69131,7 +69144,7 @@ Body:
       laphine_upgrade();
   - Id: 100416
     AegisName: S_Frozen_Box_IL
-    Name: Special Frozen Refine Box
+    Name: 高级极冻精炼箱
     Type: DelayConsume
     Weight: 10
     Script: |
@@ -69180,28 +69193,28 @@ Body:
       laphine_upgrade();
   - Id: 100423
     AegisName: Labyrinth_Box_IL
-    Name: Labyrinth Refine Box
+    Name: 迷宫精炼箱
     Type: DelayConsume
     Weight: 10
     Script: |
       laphine_upgrade();
   - Id: 100424
     AegisName: S_Teddy_Labyrinth_IL
-    Name: Special Labyrinth Refine Box
+    Name: 高级迷宫精炼箱
     Type: DelayConsume
     Weight: 10
     Script: |
       laphine_upgrade();
   - Id: 100425
     AegisName: Underwater_Box_IL
-    Name: Underwater Refine Box
+    Name: 海底洞穴精炼箱
     Type: DelayConsume
     Weight: 10
     Script: |
       laphine_upgrade();
   - Id: 100426
     AegisName: S_Underwater_Box_IL
-    Name: Special Underwater Refine Box
+    Name: 高级海底洞穴精炼箱
     Type: DelayConsume
     Weight: 10
     Script: |
@@ -69389,7 +69402,7 @@ Body:
       laphine_upgrade();
   - Id: 100468
     AegisName: Egirnion_Box
-    Name: Aegirnian Box
+    Name: 埃吉尔尼安箱子
     Type: DelayConsume
     Weight: 10
     Script: |
@@ -70147,13 +70160,13 @@ Body:
       laphine_upgrade();
   - Id: 100648
     AegisName: Consecrate_Weapon_1
-    Name: Purification Ritual
+    Name: 净化仪式宝箱
     Type: DelayConsume
     Script: |
       item_reform();
   - Id: 100649
     AegisName: Consecrate_Weapon_2
-    Name: Advanced Purification Ritual
+    Name: 高级净化仪式宝箱
     Type: DelayConsume
     Script: |
       item_reform();
@@ -70199,7 +70212,7 @@ Body:
       laphine_upgrade();
   - Id: 100655
     AegisName: Blue_Prints_Scroll
-    Name: Cleansing Blueprint Bundle
+    Name: 净化蓝图秘笈
     Type: Usable
     Weight: 10
     Flags:
@@ -70258,21 +70271,21 @@ Body:
       item_reform();
   - Id: 100699
     AegisName: Twins_Box_IL
-    Name: Twins Refinement Box
+    Name: 双子精炼箱
     Type: DelayConsume
     Weight: 10
     Script: |
       laphine_upgrade();
   - Id: 100700
     AegisName: S_Twins_Box_IL
-    Name: Special Twins Refinement Box
+    Name: 高级双子精炼箱
     Type: DelayConsume
     Weight: 10
     Script: |
       laphine_upgrade();
   - Id: 100706
     AegisName: Ancient_Hero_Will
-    Name: Will of Ancient Hero
+    Name: 古代英雄的信念
     Type: Usable
     Weight: 10
     Flags:
@@ -70292,7 +70305,7 @@ Body:
       getgroupitem(IG_MAMMOTH_SHADOW_BOX);
   - Id: 100708
     AegisName: Shadow_R_M_Box
-    Name: Shadow Spellbook Box
+    Name: 影子魔法书箱子
     Type: Usable
     Weight: 10
     Flags:
@@ -70328,7 +70341,7 @@ Body:
       getgroupitem(IG_FLUFFY_SEMI_LONG_BOX);
   - Id: 100721
     AegisName: Enchant_Stone_Box23
-    Name: Costume Enchant Stone Box 23
+    Name: 时装附魔石箱子23
     Type: Usable
     Weight: 10
     Flags:
@@ -70524,7 +70537,7 @@ Body:
       getgroupitem(IG_KR_B_SPECIAL04);
   - Id: 100783
     AegisName: MajorAutoSpell_Mix
-    Name: Auto Spell Shadow Thump Box
+    Name: 影子娴熟自动念咒转换箱
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -70533,7 +70546,7 @@ Body:
       laphine_synthesis();
   - Id: 100784
     AegisName: Shadow_Changer_W_Shi
-    Name: Shadow Changer (Weapon鈫扴hield)
+    Name: 影子转换箱(武器→盾牌)
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -70640,7 +70653,7 @@ Body:
       laphine_upgrade();
   - Id: 100829
     AegisName: Farfalle
-    Name: Farfalle
+    Name: 美味蝴蝶面
     Type: Usable
     Trade:
       NoDrop: true
@@ -70652,7 +70665,7 @@ Body:
       NoAuction: true
   - Id: 100830
     AegisName: Cream_Noodle2
-    Name: Creamy Shrimp Pasta
+    Name: 奶油鲜虾意大利面
     Type: Usable
     Trade:
       NoDrop: true
@@ -70664,7 +70677,7 @@ Body:
       NoAuction: true
   - Id: 100831
     AegisName: Festival_Noodle2
-    Name: Feast Noodles
+    Name: 韩式宴会面
     Type: Usable
     Trade:
       NoDrop: true
@@ -70802,7 +70815,7 @@ Body:
       getgroupitem(IG_PHYMAG_SHADOW_BOX);
   - Id: 100887
     AegisName: MagicalShadow_Mix
-    Name: Clever Shadow Thump Box
+    Name: 影子智慧魔力转换箱
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -70811,7 +70824,7 @@ Body:
      laphine_synthesis();
   - Id: 100888
     AegisName: PhysicalShadow_Mix
-    Name: Durable Shadow Pick-Up Box
+    Name: 影子力量天然转换箱
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -71029,7 +71042,7 @@ Body:
       item_reform();
   - Id: 100920
     AegisName: Enchant_Stone_Box24
-    Name: Costume Enchant Stone Box 24
+    Name: 时装附魔石箱子24
     Type: Usable
     Weight: 10
     Flags:
@@ -72756,7 +72769,7 @@ Body:
       getgroupitem(IG_Blacksmith_Bless_Box_3);
   - Id: 101048
     AegisName: Shadow_Hammer_Box_3
-    Name: Holgren's Shadow Smelting Hammer Box 3
+    Name: 忽克连影子精炼锤3个箱子
     Type: Usable
     Weight: 0
     Flags:
@@ -72843,7 +72856,7 @@ Body:
       laphine_synthesis();
   - Id: 101077
     AegisName: Vivatus_Weapon_Hammer
-    Name: Vivatus Weapon Refinement Hammer
+    Name: 活力信念武器精炼锤
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -72869,7 +72882,7 @@ Body:
       sc_start SC_INFINITY_DRINK,1800000,0;
   - Id: 101099
     AegisName: ClockTower_Regulator
-    Name: Spring Regulator
+    Name: 发条调整器
     Type: Usable
     Weight: 10
     Script: |
@@ -72892,7 +72905,7 @@ Body:
       getgroupitem(IG_POENETENTIA_BOX3);
   - Id: 101101
     AegisName: Poenetentia_Box4
-    Name: Poenitentia Firearm Set Box
+    Name: 忏悔觉醒枪支套装箱
     Type: Usable
     Flags:
       Container: true
@@ -72908,7 +72921,7 @@ Body:
       getgroupitem(IG_POENETENTIA_BOX4);
   - Id: 101103
     AegisName: Enchant_Stone_Box25
-    Name: Costume Enchant Stone Box 25
+    Name: 时装附魔石箱子25
     Type: Usable
     Weight: 10
     Flags:
@@ -73291,7 +73304,7 @@ Body:
       getgroupitem(IG_KR_B_SPECIAL08);
   - Id: 101177
     AegisName: FullPenest_Shadow_Up
-    Name: Full Temperament Shadow Spellbook
+    Name: 影子天衣无缝魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73300,7 +73313,7 @@ Body:
       laphine_upgrade();
   - Id: 101178
     AegisName: Reload_Shadow_Up
-    Name: Reload Shadow Spellbook
+    Name: 影子独立改良魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73309,7 +73322,7 @@ Body:
       laphine_upgrade();
   - Id: 101179
     AegisName: SpellCaster_Shadow_Up
-    Name: Spell Caster Shadow Spellbook
+    Name: 影子精工咏唱魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73318,7 +73331,7 @@ Body:
       laphine_upgrade();
   - Id: 101180
     AegisName: Ex_Status_Shadow_Up
-    Name: Trait Status Shadow Spellbook
+    Name: 影子特性素质魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73327,7 +73340,7 @@ Body:
       laphine_upgrade();
   - Id: 101181
     AegisName: ReloadShadow_Mix
-    Name: Reload Shadow Thump Box
+    Name: 影子独立改良转换箱
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73336,7 +73349,7 @@ Body:
       laphine_synthesis();
   - Id: 101182
     AegisName: SpellCasterShadow_Mix
-    Name: Spell Caster Shadow Thump Box
+    Name: 影子精工咏唱转换箱
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73362,7 +73375,7 @@ Body:
       getgroupitem(IG_ICE_F_STONE_BOX);
   - Id: 101184
     AegisName: Ice_F_Stone_Box2
-    Name: Ice Magic Stone Box 2
+    Name: 冰花魔力提炼器
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -73634,7 +73647,7 @@ Body:
       laphine_synthesis();
   - Id: 101258
     AegisName: M_BlitzShadow_Mix
-    Name: Mega Blitz Shadow Thump Box
+    Name: 影子优越猎鹰转换箱
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73643,7 +73656,7 @@ Body:
       laphine_synthesis();
   - Id: 101259
     AegisName: Special_Hat_Hammer
-    Name: Refinement Hammer for Special Hats
+    Name: 特殊帽子精炼锤
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73661,7 +73674,7 @@ Body:
       laphine_upgrade();
   - Id: 101261
     AegisName: M_Blitz_Shadow_Up
-    Name: Mega Blitz Shadow Spellbook
+    Name: 影子优越猎鹰魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73670,7 +73683,7 @@ Body:
       laphine_upgrade();
   - Id: 101262
     AegisName: Absorb_Shadow_Up
-    Name: Absorb Shadow Spellbook
+    Name: 影子全力吸收魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73679,7 +73692,7 @@ Body:
       laphine_upgrade();
   - Id: 101264
     AegisName: Mammoth_Shadow_Up
-    Name: Maximum Mammoth Shadow Spellbook
+    Name: 影子神力猛犸魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73720,7 +73733,7 @@ Body:
       getgroupitem(IG_2021_WINTER_EVENT_BOX2);
   - Id: 101271
     AegisName: Enchant_Stone_Box26
-    Name: Costume Enchant Stone Box 26
+    Name: 时装附魔石箱子26
     Type: Usable
     Weight: 10
     Flags:
@@ -73758,7 +73771,7 @@ Body:
       getgroupitem(IG_2022_LUNARNEWYEARS_BOX);
   - Id: 101306
     AegisName: Poenitentia_Hammer
-    Name: Poenitentia Refining Hammer
+    Name: 忏悔武器精炼锤
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73767,7 +73780,7 @@ Body:
       item_reform();
   - Id: 101307
     AegisName: Barmund_Hammer
-    Name: Barmund Refining Hammer
+    Name: 霸肋门德防具精炼锤
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73785,7 +73798,7 @@ Body:
       laphine_synthesis();
   - Id: 101309
     AegisName: EXPShadow_Up
-    Name: Experience Shadow Spellbook
+    Name: 影子经验值倍增魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73794,7 +73807,7 @@ Body:
       laphine_synthesis();
   - Id: 101310
     AegisName: MagicalShadow_Up
-    Name: Clever Shadow Spellbook
+    Name: 影子智慧魔力魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73803,7 +73816,7 @@ Body:
       laphine_synthesis();
   - Id: 101311
     AegisName: InfinityShadow_Up
-    Name: Infinity Shadow Spellbook
+    Name: 影子无极魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73975,7 +73988,7 @@ Body:
       itemskill "AL_BLESSING",10;
   - Id: 101359
     AegisName: MajorAutoSpell_Up
-    Name: Major Auto Spell Shadow Spellbook
+    Name: 影子娴熟自动念咒魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -73993,7 +74006,7 @@ Body:
       laphine_upgrade();
   - Id: 101361
     AegisName: PhysicalShadow_Up
-    Name: Durable Shadow Spellbook
+    Name: 影子力量天然魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -74002,7 +74015,7 @@ Body:
       laphine_upgrade();
   - Id: 101362
     AegisName: PerfectSize_Up
-    Name: Perfect Size Shadow Spellbook
+    Name: 影子全然体型魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -74029,7 +74042,7 @@ Body:
       item_reform();
   - Id: 101389
     AegisName: Helm_Of_Faith_Hammer
-    Name: Helm of Faith Refine Hammer
+    Name: 信念意志头盔精炼锤
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -74038,7 +74051,7 @@ Body:
       item_reform();
   - Id: 101390
     AegisName: Clock_Tower_W_Hammer
-    Name: Clock Tower Basement Refine Hammer
+    Name: 钟塔神秘武器精炼锤
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -74047,7 +74060,7 @@ Body:
       item_reform();
   - Id: 101391
     AegisName: VR_Books001
-    Name: Scientist's Escape Log
+    Name: 某个科学家的逃生记录
     Type: Usable
     Trade:
       NoDrop: true
@@ -74088,7 +74101,7 @@ Body:
       getgroupitem(IG_ENCHANT_TICKET_3);
   - Id: 101404
     AegisName: Fantastic_Exp_Potion
-    Name: Fantasy Growth Potion
+    Name: 幻想成长药水
     Type: Usable
     Weight: 10
     Flags:
@@ -74097,7 +74110,7 @@ Body:
 #     /* TODO */
   - Id: 101406
     AegisName: Fantastic_JobExp_Potion
-    Name: Fantasy Job Growth Potion
+    Name: 幻想职业成长药水
     Type: Usable
     Weight: 10
     Flags:
@@ -74106,7 +74119,7 @@ Body:
 #     /* TODO */
   - Id: 101407
     AegisName: Normal_VR_Scroll
-    Name: Move Scroll(Convenience)
+    Name: 移动卷轴(便利)
     Type: Usable
     Weight: 10
     Flags:
@@ -74115,7 +74128,7 @@ Body:
 #     /* TODO */
   - Id: 101408
     AegisName: Danger_VR_Scroll
-    Name: Move Scroll(Danger Areas)
+    Name: 移动卷轴(危险区域)
     Type: Usable
     Weight: 10
     Flags:
@@ -74124,7 +74137,7 @@ Body:
 #     /* TODO */
   - Id: 101416
     AegisName: Enchant_Stone_Box27
-    Name: Costume Enchant Stone Box 27
+    Name: 时装附魔石箱子27
     Type: Usable
     Weight: 10
     Flags:
@@ -74133,7 +74146,7 @@ Body:
       getgroupitem(IG_Enchant_Stone_Box27);
   - Id: 101423
     AegisName: Boost_Armor_Box
-    Name: Boost Armor Box    # !todo check english name
+    Name: 成长防具箱
     Type: DelayConsume
     EquipLevelMin: 100
     Trade:
@@ -74172,7 +74185,7 @@ Body:
       NoAuction: true
   - Id: 101455
     AegisName: E_Auto_Up
-    Name: Automatic (bound) upgrade package    # !todo check english name
+    Name: 全自动(印记)精炼箱
     Type: DelayConsume
     EquipLevelMin: 160
     Trade:
@@ -74211,7 +74224,7 @@ Body:
       NoAuction: true
   - Id: 101458
     AegisName: Booster_Hat_Box
-    Name: Booster Costume Helmet Box    # !todo check english name
+    Name: 成长头饰选择箱
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -74223,7 +74236,7 @@ Body:
       NoAuction: true
   - Id: 101459
     AegisName: Booster_Back_Box
-    Name: Booster Costume Backpack Box    # !todo check english name
+    Name: 成长披肩选择箱
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -74251,7 +74264,7 @@ Body:
       getgroupitem(IG_P_BOOSTER230_GIFT);
   - Id: 101461
     AegisName: Fan_Greed_1Hour_Box
-    Name: Fantasy Series Greed Scroll Box
+    Name: 幻想丛书贪婪卷轴箱
     Type: Cash
     Weight: 10
     Flags:
@@ -74291,13 +74304,13 @@ Body:
       getitembound 23919,11,Bound_Account;
   - Id: 101470
     AegisName: Minus_Status_Box_
-    Name: Stats Soul Potion Selection Box
+    Name: 属性调整药水选择箱
     Type: DelayConsume
     Flags:
       BuyingStore: true
   - Id: 101471
     AegisName: Alchemist_Box_
-    Name: Alchemist Selection Box
+    Name: 炼金术师制品选择箱
     Type: DelayConsume
     Buy: 20
     Weight: 10
@@ -74335,7 +74348,7 @@ Body:
       sc_start SC_EXPBOOST,3600000,100;
   - Id: 101475
     AegisName: Booster_B_M_2
-    Name: Booster Advanced Combat Manual    # !todo check english name
+    Name: 成长高级经验书
     Type: Usable
     Trade:
       NoDrop: true
@@ -74367,7 +74380,7 @@ Body:
       getgroupitem(IG_BOOSTER230_GIFT);
   - Id: 101482
     AegisName: Freedom_Stick_Cube
-    Name: Freedom Stick Remodeling Cube
+    Name: 向往自由手杖改良箱
     Type: DelayConsume
     Weight: 10
     Script: |
@@ -74658,7 +74671,7 @@ Body:
       sc_start SC_MATKPOTION,600000,rand(11,111);
   - Id: 101522
     AegisName: F_VR_Book001
-    Name: Fantasy Series 001
+    Name: 幻想丛书001
     Type: Usable
     Trade:
       NoDrop: true
@@ -74673,7 +74686,7 @@ Body:
 #     /* TODO */
   - Id: 101523
     AegisName: F_VR_Book002
-    Name: Fantasy Series 002
+    Name: 幻想丛书002
     Type: Usable
     Trade:
       NoDrop: true
@@ -74688,7 +74701,7 @@ Body:
 #     /* TODO */
   - Id: 101524
     AegisName: F_VR_Book003
-    Name: Fantasy Series 003
+    Name: 幻想丛书003
     Type: Usable
     Trade:
       NoDrop: true
@@ -74703,7 +74716,7 @@ Body:
 #     /* TODO */
   - Id: 101525
     AegisName: F_VR_Book004
-    Name: Fantasy Series 004
+    Name: 幻想丛书004
     Type: Usable
     Trade:
       NoDrop: true
@@ -74735,14 +74748,14 @@ Body:
       getgroupitem(IG_BOOSTER_CALL_PACKAGE);
   - Id: 101542
     AegisName: FullPene_Select_Box
-    Name: Full Penetration Shadow Selection Box
+    Name: 影子天衣无缝贯穿选择箱
     Type: DelayConsume
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 101543
     AegisName: FullPene_Earring_Box
-    Name: Full Penetration Shadow Earring Box
+    Name: 影子天衣无缝贯穿耳环箱
     Type: Usable
     Weight: 10
     Flags:
@@ -74751,7 +74764,7 @@ Body:
       getgroupitem(IG_S_FULLPENE_EARRING,true);
   - Id: 101544
     AegisName: FullPene_Pendant_Box
-    Name: Full Penetration Shadow Pendant Box
+    Name: 影子天衣无缝贯穿坠子箱
     Type: Usable
     Weight: 10
     Flags:
@@ -74760,7 +74773,7 @@ Body:
       getgroupitem(IG_S_FULLPENE_PENDANT,true);
   - Id: 101545
     AegisName: FullPene_Armor_Box
-    Name: Full Penetration Shadow Armor Box
+    Name: 影子天衣无缝贯穿铠甲箱
     Type: Usable
     Weight: 10
     Flags:
@@ -74769,7 +74782,7 @@ Body:
       getgroupitem(IG_S_FULLPENE_ARMOR,true);
   - Id: 101546
     AegisName: FullPene_Shoes_Box
-    Name: Full Penetration Shadow Shoes Box
+    Name: 影子天衣无缝贯穿战靴箱
     Type: Usable
     Weight: 10
     Flags:
@@ -74778,14 +74791,14 @@ Body:
       getgroupitem(IG_S_FULLPENE_SHOES,true);
   - Id: 101547
     AegisName: FullTemp_Select_Box
-    Name: Full Tempest Shadow Selection Box
+    Name: 影子天衣无缝风暴选择箱
     Type: DelayConsume
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 101548
     AegisName: FullTemp_Earring_Box
-    Name: Full Tempest Shadow Earring Box
+    Name: 影子天衣无缝风暴耳环箱
     Type: Usable
     Weight: 10
     Flags:
@@ -74794,7 +74807,7 @@ Body:
       getgroupitem(IG_S_FULLTEMP_EARRING,true);
   - Id: 101549
     AegisName: FullTemp_Pendant_Box
-    Name: Full Tempest Shadow Pendant Box
+    Name: 影子天衣无缝风暴坠子箱
     Type: Usable
     Weight: 10
     Flags:
@@ -74803,7 +74816,7 @@ Body:
       getgroupitem(IG_S_FULLTEMP_PENDANT,true);
   - Id: 101550
     AegisName: FullTemp_Armor_Box
-    Name: Full Tempest Shadow Armor Box
+    Name: 影子天衣无缝风暴铠甲箱
     Type: Usable
     Weight: 10
     Flags:
@@ -74812,7 +74825,7 @@ Body:
       getgroupitem(IG_S_FULLTEMP_ARMOR,true);
   - Id: 101551
     AegisName: FullTemp_Shoes_Box
-    Name: Full Tempest Shadow Shoes Box
+    Name: 影子天衣无缝风暴战靴箱
     Type: Usable
     Weight: 10
     Flags:
@@ -74878,7 +74891,7 @@ Body:
       BuyingStore: true
   - Id: 101564
     AegisName: AllMighty_Up
-    Name: Almighty Shadow Spellbook
+    Name: 影子全能魔法书
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -74887,7 +74900,7 @@ Body:
       laphine_upgrade();
   - Id: 101565
     AegisName: Shadow_R_M_Box_
-    Name: Shadow Spellbook Selection Box
+    Name: 影子职业魔法书选择箱
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -75105,7 +75118,7 @@ Body:
 #     /* TODO */
   - Id: 101639
     AegisName: D_Gw_Extractor
-    Name: Dim Glacier Extractor    # !todo check english name
+    Name: 黯淡冰晶萃取机
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -75129,7 +75142,7 @@ Body:
       laphine_upgrade();
   - Id: 101649
     AegisName: Mjo_Ein_Enchant
-    Name: Upgrade Mining Equipment Enchantments    # !todo check english name
+    Name: 升级矿山装备附魔
     Type: Usable
 #   Script: |
 #     /* TODO */
@@ -75145,7 +75158,7 @@ Body:
       getgroupitem(IG_VIVA_ADUL_HAT_BOX_11,true);
   - Id: 101654
     AegisName: AllMighty_Select_Box
-    Name: Almighty Shadow Selection Box    # !todo check english name
+    Name: 影子全能选择箱
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -75170,14 +75183,14 @@ Body:
       getgroupitem(IG_S_ALLMIGHTY_PENDANT,true);
   - Id: 101657
     AegisName: TrueGem_Select_Box
-    Name: True Gemstone Shadow Selection Box    # !todo check english name
+    Name: 影子真魔力矿石选择箱
     Type: DelayConsume
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 101658
     AegisName: TrueGem_Earring_Box
-    Name: True Gemstone Shadow Earring Box    # !todo check english name
+    Name: 影子真魔力矿石耳环箱
     Type: Usable
     Weight: 10
     Flags:
@@ -75186,7 +75199,7 @@ Body:
       getgroupitem(IG_S_TRUEGEM_EARRING,true);
   - Id: 101659
     AegisName: TrueGem_Pendant_Box
-    Name: True Gemstone Shadow Pendant Box    # !todo check english name
+    Name: 影子真魔力矿石坠子箱
     Type: Usable
     Weight: 10
     Flags:
@@ -75195,7 +75208,7 @@ Body:
       getgroupitem(IG_S_TRUEGEM_PENDANT,true);
   - Id: 101660
     AegisName: TrueGem_Shoes_Box
-    Name: True Gemstone Shadow Shoes Box    # !todo check english name
+    Name: 影子真魔力矿石战靴箱
     Type: Usable
     Weight: 10
     Flags:
@@ -75204,7 +75217,7 @@ Body:
       getgroupitem(IG_S_TRUEGEM_SHOES,true);
   - Id: 101661
     AegisName: TrueGem_Armor_Box
-    Name: True Gemstone Shadow Armor Box    # !todo check english name
+    Name: 影子真魔力矿石铠甲箱
     Type: Usable
     Weight: 10
     Flags:
@@ -75257,7 +75270,7 @@ Body:
       getgroupitem(IG_SHADOW_UP_BOX);
   - Id: 101675
     AegisName: Enchant_Stone_Box28
-    Name: Costume Enchant Stone Box 28
+    Name: 时装附魔石箱子28
     Type: Usable
     Weight: 10
     Flags:
@@ -75266,7 +75279,7 @@ Body:
       getgroupitem(IG_Enchant_Stone_Box28);
   - Id: 101705
     AegisName: F_VR_Book006
-    Name: Fantasy Series 006    # !todo check english name
+    Name: 幻想丛书006
     Type: Usable
     Trade:
       NoDrop: true
@@ -75281,7 +75294,7 @@ Body:
 #     /* TODO */
   - Id: 101706
     AegisName: F_VR_Book007
-    Name: Fantasy Series 007    # !todo check english name
+    Name: 幻想丛书007
     Type: Usable
     Trade:
       NoDrop: true
@@ -75296,7 +75309,7 @@ Body:
 #     /* TODO */
   - Id: 101717
     AegisName: Mammoth_Earring_Box
-    Name: Maximum Mammoth Shadow Earring Box    # !todo check english name
+    Name: 影子神力猛玛之力耳环箱
     Type: Usable
     Weight: 10
     Flags:
@@ -75305,7 +75318,7 @@ Body:
       getgroupitem(IG_S_M_MAMMOTH_EARRING,true);
   - Id: 101718
     AegisName: Mammoth_Pendant_Box
-    Name: Maximum Mammoth Shadow Pendant Box    # !todo check english name
+    Name: 影子神力猛玛之力坠子箱
     Type: Usable
     Weight: 10
     Flags:
@@ -75314,7 +75327,7 @@ Body:
       getgroupitem(IG_S_M_MAMMOTH_PENDANT,true);
   - Id: 101719
     AegisName: Mammoth_Armor_Box
-    Name: Maximum Mammoth Shadow Armor Box    # !todo check english name
+    Name: 影子神力猛玛之力铠甲箱
     Type: Usable
     Weight: 10
     Flags:
@@ -75323,7 +75336,7 @@ Body:
       getgroupitem(IG_S_M_MAMMOTH_ARMOR,true);
   - Id: 101720
     AegisName: Mammoth_Shoes_Box
-    Name: Maximum Mammoth Shadow Shoes Box    # !todo check english name
+    Name: 影子神力猛玛之力战靴箱
     Type: Usable
     Weight: 10
     Flags:
@@ -75386,7 +75399,7 @@ Body:
       getgroupitem(IG_S_ABSORB_SHIELD,true);
   - Id: 101727
     AegisName: Mammoth_Select_Box
-    Name: Maximum Mammoth Shadow Selection Box    # !todo check english name
+    Name: 影子神力猛玛之力选择箱
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -75429,7 +75442,7 @@ Body:
       item_reform();
   - Id: 101746
     AegisName: Dimmen_A_Enchant
-    Name: Dimensional Enchantment Box    # !todo check english name
+    Name: 次元附魔箱
     Type: Usable
 #   Script: |
 #     /* TODO */
@@ -75506,7 +75519,7 @@ Body:
 #     /* TODO */
   - Id: 101759
     AegisName: Plain_Rune_Box5
-    Name: Plain Rune 5ea Box
+    Name: 草原符文5个箱子
     Type: Usable
     Flags:
       Container: true
@@ -75522,7 +75535,7 @@ Body:
       getgroupitem(IG_PLAIN_RUNE_BOX5);
   - Id: 101760
     AegisName: Flame_Rune_Box5
-    Name: Flame Rune 5ea Box
+    Name: 火焰符文5个箱子
     Type: Usable
     Flags:
       Container: true
@@ -75538,7 +75551,7 @@ Body:
       getgroupitem(IG_FLAME_RUNE_BOX5);
   - Id: 101761
     AegisName: Ice_Rune_Box5
-    Name: Ice Rune 5ea Box
+    Name: 冰冻符文5个箱子
     Type: Usable
     Flags:
       Container: true
@@ -75554,7 +75567,7 @@ Body:
       getgroupitem(IG_ICE_RUNE_BOX5);
   - Id: 101762
     AegisName: Death_Rune_Box5
-    Name: Death Rune 5ea Box
+    Name: 死灵符文5个箱子
     Type: Usable
     Flags:
       Container: true
@@ -75570,7 +75583,7 @@ Body:
       getgroupitem(IG_DEATH_RUNE_BOX5);
   - Id: 101765
     AegisName: Barmund_P_Enchant
-    Name: Meadow Rune Enchantment    # !todo check english name
+    Name: 草原符文附魔箱
     Type: Usable
     Trade:
       NoDrop: true
@@ -75585,7 +75598,7 @@ Body:
 #     /* TODO */
   - Id: 101766
     AegisName: Barmund_D_Enchant
-    Name: Death Rune Enchantment    # !todo check english name
+    Name: 死灵符文附魔箱
     Type: Usable
     Trade:
       NoDrop: true
@@ -75600,7 +75613,7 @@ Body:
 #     /* TODO */
   - Id: 101767
     AegisName: Barmund_F_Enchant
-    Name: Fire Rune Enchantment    # !todo check english name
+    Name: 火焰符文附魔箱
     Type: Usable
     Trade:
       NoDrop: true
@@ -75615,7 +75628,7 @@ Body:
 #     /* TODO */
   - Id: 101768
     AegisName: Barmund_I_Enchant
-    Name: Ice Rune Enchantment    # !todo check english name
+    Name: 冰冻符文附魔箱
     Type: Usable
     Trade:
       NoDrop: true
@@ -75630,7 +75643,7 @@ Body:
 #     /* TODO */
   - Id: 101769
     AegisName: Barmund_Plain_Reform
-    Name: Grass Rune Upgrade
+    Name: 草原符文升级箱
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -75645,7 +75658,7 @@ Body:
       item_reform();
   - Id: 101770
     AegisName: Barmund_Death_Reform
-    Name: Death Rune Upgrade
+    Name: 死灵符文升级箱
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -75660,7 +75673,7 @@ Body:
       item_reform();
   - Id: 101771
     AegisName: Barmund_Flame_Reform
-    Name: Fire Rune Upgrade
+    Name: 火焰符文升级箱
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -75675,7 +75688,7 @@ Body:
       item_reform();
   - Id: 101772
     AegisName: Barmund_Ice_Reform
-    Name: Ice Rune Upgrade
+    Name: 冰冻符文升级箱
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -75955,14 +75968,14 @@ Body:
       laphine_upgrade();
   - Id: 101801
     AegisName: R_Bearers_Select_Box
-    Name: Road Bearers Shadow Selection Box    # !todo check english name
+    Name: 影子君主送信者选择箱
     Type: DelayConsume
     Weight: 10
     Flags:
       BuyingStore: true
   - Id: 101802
     AegisName: R_Bearers_Earring_Box
-    Name: Rod Bearers Earring Shadow Box    # !todo check english name
+    Name: 影子君主送信者耳环箱
     Type: Usable
     Weight: 10
     Flags:
@@ -75971,7 +75984,7 @@ Body:
       getgroupitem(IG_R_BEARERS_EARRING_BOX,true);
   - Id: 101803
     AegisName: R_Bearers_Pendant_Box
-    Name: Rod Bearers Pendant Shadow Box    # !todo check english name
+    Name: 影子君主送信者坠子箱
     Type: Usable
     Weight: 10
     Flags:
@@ -75980,7 +75993,7 @@ Body:
       getgroupitem(IG_R_BEARERS_PENDANT_BOX,true);
   - Id: 101804
     AegisName: R_Bearers_Armor_Box
-    Name: Lord Bearers Armor Shadow Box    # !todo check english name
+    Name: 影子君主送信者铠甲箱
     Type: Usable
     Weight: 10
     Flags:
@@ -75989,7 +76002,7 @@ Body:
       getgroupitem(IG_R_BEARERS_ARMOR_BOX,true);
   - Id: 101805
     AegisName: R_Bearers_Shoes_Box
-    Name: Road Bearers Shoes Shadow Box    # !todo check english name
+    Name: 影子君主送信者战靴箱
     Type: Usable
     Weight: 10
     Flags:
@@ -76033,13 +76046,13 @@ Body:
       getgroupitem(IG_S_RELOAD_SHIELD_BOX,true);
   - Id: 101816
     AegisName: Dimmen_A_Refine
-    Name: Dimension Enhancer    # !todo check english name
+    Name: 次元强化箱
     Type: DelayConsume
     Script: |
       item_reform();
   - Id: 101834
     AegisName: F_VR_Book009
-    Name: Fantasy Series 009    # !todo check english name
+    Name: 幻想丛书009
     Type: Usable
     Trade:
       NoDrop: true
@@ -76054,7 +76067,7 @@ Body:
 #     /* TODO */
   - Id: 101835
     AegisName: F_VR_Book005
-    Name: Fantasy Series 005    # !todo check english name
+    Name: 幻想丛书005
     Type: Usable
     Trade:
       NoDrop: true
@@ -76069,7 +76082,7 @@ Body:
 #     /* TODO */
   - Id: 101837
     AegisName: F_VR_Book008
-    Name: Fantasy Series 008    # !todo check english name
+    Name: 幻想丛书008
     Type: Usable
     Trade:
       NoDrop: true
@@ -76194,7 +76207,7 @@ Body:
       getgroupitem(IG_LUXURIOUS_BLUE_BOX);
   - Id: 101876
     AegisName: Enchant_Stone_Box29
-    Name: Costume Enchant Stone Box 29
+    Name: 时装附魔石箱子29
     Type: Usable
     Weight: 10
     Flags:
@@ -76220,7 +76233,7 @@ Body:
       getgroupitem(IG_VR_BOOK_EVENT);
   - Id: 101912
     AegisName: Temple_Rune_Box5
-    Name: Holy Rune Box 5    # !todo check english name
+    Name: 圣殿符文5个箱子
     Type: Usable
     Flags:
       Container: true
@@ -76236,7 +76249,7 @@ Body:
       getgroupitem(IG_TEMPLE_RUNE_BOX5);
   - Id: 101913
     AegisName: Venom_Rune_Box5
-    Name: Poison Rune x5 Box    # !todo check english name
+    Name: 剧毒符文5个箱子
     Type: Usable
     Flags:
       Container: true
@@ -76252,7 +76265,7 @@ Body:
       getgroupitem(IG_VENOM_RUNE_BOX5);
   - Id: 101914
     AegisName: Soul_Rune_Box5
-    Name: Box of 5 Soul Runes    # !todo check english name
+    Name: 灵魂符文5个箱子
     Type: Usable
     Flags:
       Container: true
@@ -76327,25 +76340,25 @@ Body:
       getgroupitem(IG_CVT_WING_BOX,true);
   - Id: 101930
     AegisName: Barmund_S_Enchant
-    Name: Soul Rune Enchantment    # !todo check english name
+    Name: 灵魂符文附魔
     Type: Usable
 #   Script: |
 #     /* TODO */
   - Id: 101931
     AegisName: Barmund_V_Enchant
-    Name: Poison Rune Enchantment    # !todo check english name
+    Name: 剧毒符文附魔
     Type: Usable
 #   Script: |
 #     /* TODO */
   - Id: 101932
     AegisName: Barmund_T_Enchant
-    Name: Crusade Rune Enchantment    # !todo check english name
+    Name: 圣殿符文附魔
     Type: Usable
 #   Script: |
 #     /* TODO */
   - Id: 101933
     AegisName: Barmund_Soul_Reform
-    Name: Rune Soul Reform
+    Name: 灵魂符文升级
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -76360,7 +76373,7 @@ Body:
       item_reform();
   - Id: 101934
     AegisName: Barmund_Venom_Reform
-    Name: Rune Venom Reform
+    Name: 剧毒符文升级
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -76375,7 +76388,7 @@ Body:
       item_reform();
   - Id: 101935
     AegisName: Barmund_Temple_Reform
-    Name: Rune Temple Reform
+    Name: 圣殿符文升级
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -76390,7 +76403,7 @@ Body:
       item_reform();
   - Id: 101936
     AegisName: Barmund_S_Reform
-    Name: Varmundt Soul Reform
+    Name: 灵魂魔力升级
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -76405,7 +76418,7 @@ Body:
       item_reform();
   - Id: 101937
     AegisName: Barmund_V_Reform
-    Name: Varmundt Venom Reform
+    Name: 剧毒魔力升级
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -76420,7 +76433,7 @@ Body:
       item_reform();
   - Id: 101938
     AegisName: Barmund_T_Reform
-    Name: Varmundt Temple Reform
+    Name: 圣殿魔力升级
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -76477,13 +76490,13 @@ Body:
       getgroupitem(IG_Intake_Hair_Box);
   - Id: 102015
     AegisName: Mocadas_Enchant_Box
-    Name: Mocadas Equipment Enchantment    # !todo check english name
+    Name: 莫卡迪斯装备附魔
     Type: Usable
 #   Script: |
 #     /* TODO */
   - Id: 102016
     AegisName: F_Ein_1HDAGGER_Box
-    Name: Metal Detector Box    # !todo check english name
+    Name: 金属探测器宝箱
     Type: Usable
     Weight: 50
     Flags:
@@ -76492,293 +76505,293 @@ Body:
       getgroupitem(IG_F_EIN_1HDAGGER_BOX);
   - Id: 102017
     AegisName: Mocadas_Refine_Box
-    Name: Smelting Mocadas Equipment 9~10    # !todo check english name
+    Name: 莫卡迪斯装备精炼9~10
     Type: DelayConsume
     Script: |
       item_reform();
   - Id: 102018
     AegisName: Amp_Blueprint1
-    Name: Amplification Schematic (Metal Detector MK47)    # !todo check english name
+    Name: 增幅设计图(金属探测器Mk47)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102019
     AegisName: Amp_Blueprint3
-    Name: Amplification Blueprint (Safety Saver)    # !todo check english name
+    Name: 增幅设计图(庇佑光剑)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102020
     AegisName: Amp_Blueprint2
-    Name: Amplification Schematic (Gem Detector Mk47)    # !todo check english name
+    Name: 增幅设计图(宝石探测器Mk47)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102021
     AegisName: Amp_Blueprint4
-    Name: Amplification Schematic (Safety Foxtail)    # !todo check english name
+    Name: 增幅设计图(庇佑狐尾草)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102022
     AegisName: Amp_Blueprint6
-    Name: Amplification Blueprint (Crowsword)    # !todo check english name
+    Name: 增幅设计图(战神巨剑)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102023
     AegisName: Amp_Blueprint5
-    Name: Amplification Schematic (Blocking Spear)    # !todo check english name
+    Name: 增幅设计图(格挡枪矛)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102024
     AegisName: Amp_Blueprint7
-    Name: Amplification Schematic (Rubber Hammer)    # !todo check english name
+    Name: 增幅设计图(木柄橡胶锤)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102025
     AegisName: Amp_Blueprint8
-    Name: Amplification Blueprint (Saw Ax)    # !todo check english name
+    Name: 增幅设计图(颤栗锯斧)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102026
     AegisName: Amp_Blueprint9
-    Name: Amplification Schematic (Safety Knuckle)    # !todo check english name
+    Name: 增幅设计图(庇佑拳套)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102027
     AegisName: Amp_Blueprint10
-    Name: Amplification Schematic (Safety Manual)    # !todo check english name
+    Name: 增幅设计图(庇佑指南)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102028
     AegisName: Amp_Blueprint11
-    Name: Amplification Schematic (Welding Wand)    # !todo check english name
+    Name: 增幅设计图(焊接魔杖)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102029
     AegisName: Amp_Blueprint12
-    Name: Amplification Blueprint (Detecting Staff)    # !todo check english name
+    Name: 增幅设计图(感测魔杖)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102030
     AegisName: Amp_Blueprint13
-    Name: Amplification Blueprint (Grinder Fengma Shuriken)    # !todo check english name
+    Name: 增幅设计图(砂轮风魔飞镖)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102031
     AegisName: Amp_Blueprint14
-    Name: Amplification Schematic (Volt Shooter)    # !todo check english name
+    Name: 增幅设计图(霹雳十字弓)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102032
     AegisName: Amp_Blueprint15
-    Name: Amplified Blueprint (Bolt Crusher)    # !todo check english name
+    Name: 增幅设计图(霹雳夹碎器)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102033
     AegisName: Amp_Blueprint16
-    Name: Amplified Schematic (Volt Revolver)    # !todo check english name
+    Name: 增幅设计图(霹雳手枪)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102034
     AegisName: Amp_Blueprint17
-    Name: Amplified Schematic (Safety Whip)    # !todo check english name
+    Name: 增幅设计图(庇佑鞭子)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102035
     AegisName: Amp_Blueprint18
-    Name: Amplification Schematic (Safety Lute)    # !todo check english name
+    Name: 增幅设计图(庇佑鲁特琴)
     Type: DelayConsume
     Weight: 1250
     Script: |
       item_reform();
   - Id: 102040
     AegisName: Mocadas_Slabs1
-    Name: Mocadas Slate (Sashir)    # !todo check english name
+    Name: 莫卡迪斯石板(圣剑)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102041
     AegisName: Mocadas_Slabs2
-    Name: Mocadas Slate (Panjira)    # !todo check english name
+    Name: 莫卡迪斯石板(圣矛)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102042
     AegisName: Mocadas_Slabs3
-    Name: Mocadas Slate (Jedogar)    # !todo check english name
+    Name: 莫卡迪斯石板(圣杖)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102043
     AegisName: Mocadas_Slabs4
-    Name: Mocadas Slate (Kiteb)    # !todo check english name
+    Name: 莫卡迪斯石板(圣书)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102044
     AegisName: Mocadas_Slabs5
-    Name: Mocadas Slate (Tasiripati)    # !todo check english name
+    Name: 莫卡迪斯石板(圣魔剑)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102045
     AegisName: Mocadas_Slabs6
-    Name: Mocadas Slate (Dest)    # !todo check english name
+    Name: 莫卡迪斯石板(圣拳刃)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102046
     AegisName: Mocadas_Slabs7
-    Name: Mocadas Slate (Tavar)    # !todo check english name
+    Name: 莫卡迪斯石板(圣单手斧)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102047
     AegisName: Mocadas_Slabs8
-    Name: Mocadas Slate (Dawablunt)    # !todo check english name
+    Name: 莫卡迪斯石板(圣魔杖)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102048
     AegisName: Mocadas_Slabs9
-    Name: Mocadas Slate (Mesht)    # !todo check english name
+    Name: 莫卡迪斯石板(圣手套)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102049
     AegisName: Mocadas_Slabs10
-    Name: Mocadas Slate (Baru)    # !todo check english name
+    Name: 莫卡迪斯石板(魔杖)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102050
     AegisName: Mocadas_Slabs11
-    Name: Mocadas Slate (Blessing)    # !todo check english name
+    Name: 莫卡迪斯石板(圣弓)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102051
     AegisName: Mocadas_Slabs12
-    Name: Mocadas Slate (Saz)    # !todo check english name
+    Name: 莫卡迪斯石板(圣乐器)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102052
     AegisName: Mocadas_Slabs13
-    Name: Mocadas Slate (Sharrak)    # !todo check english name
+    Name: 莫卡迪斯石板(圣鞭)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102053
     AegisName: Mocadas_Slabs14
-    Name: Mocadas Slate (Tea Man)    # !todo check english name
+    Name: 莫卡迪斯石板(狐尾草)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102054
     AegisName: Mocadas_Slabs15
-    Name: Mocadas Slate (Gross)    # !todo check english name
+    Name: 莫卡迪斯石板(手杖)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102055
     AegisName: Mocadas_Slabs16
-    Name: Mocadas Slate (Kaguaz)    # !todo check english name
+    Name: 莫卡迪斯石板(圣魔书)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102056
     AegisName: Mocadas_Slabs17
-    Name: Mocadas Slate (Nazal)    # !todo check english name
+    Name: 莫卡迪斯石板(圣短剑)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102057
     AegisName: Mocadas_Slabs18
-    Name: Mocadas Slate (Kanjar)    # !todo check english name
+    Name: 莫卡迪斯石板(圣魔短剑)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102058
     AegisName: Mocadas_Slabs19
-    Name: Mocadas Slate (Eisa)    # !todo check english name
+    Name: 莫卡迪斯石板(圣魔十字锤)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102059
     AegisName: Mocadas_Slabs20
-    Name: Mocadas Slate (Naraenzac)    # !todo check english name
+    Name: 莫卡迪斯石板(圣发射器)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102060
     AegisName: Mocadas_Slabs21
-    Name: Mocadas Slate (Tapang)    # !todo check english name
+    Name: 莫卡迪斯石板(圣来复枪)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102061
     AegisName: Mocadas_Slabs22
-    Name: Mocadas Slate (Saka)    # !todo check english name
+    Name: 莫卡迪斯石板(圣霰弹枪)
     Type: DelayConsume
     Weight: 1250
     Script: |
       laphine_synthesis();
   - Id: 102062
     AegisName: Mocadas_Slabs23
-    Name: Mocadas Slate (Thelin)    # !todo check english name
+    Name: 莫卡迪斯石板(圣机关枪)
     Type: DelayConsume
     Weight: 1250
     Script: |
@@ -76851,7 +76864,7 @@ Body:
       getgroupitem(IG_INJUSTICE_WEAPON_BOX,true);
   - Id: 102072
     AegisName: Justice_Weapon_Hammer
-    Name: Good Weapon Smelting Hammer    # !todo check english name
+    Name: 善之武器精炼锤
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -76860,7 +76873,7 @@ Body:
       item_reform();
   - Id: 102073
     AegisName: Injustice_Weapon_Hammer
-    Name: Evil Weapon Forge Hammer    # !todo check english name
+    Name: 恶之武器精炼锤
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -76879,7 +76892,7 @@ Body:
       getgroupitem(IG_GOODNEVIL_HELM_BOX,true);
   - Id: 102075
     AegisName: GoodnEvil_Helm_Hammer
-    Name: Crown of Good and Evil Smelting Hammer    # !todo check english name
+    Name: 善恶冠冕精炼锤
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -76911,7 +76924,7 @@ Body:
       getgroupitem(IG_SHADOW_SELECT_BOX_SET);
   - Id: 102124
     AegisName: F_Ein_Weapon_Hammer
-    Name: Flush Weapon Smelting Hammer    # !todo check english name
+    Name: 波洛西武器精炼锤
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -76930,7 +76943,7 @@ Body:
       getgroupitem(IG_REFINE_HAMMER_BOX);
   - Id: 102126
     AegisName: Amp_Blueprint19
-    Name: Amplification Schematic (Metal Detector MK47-2)    # !todo check english name
+    Name: 增幅设计图(金属探测器Mk47-2)
     Type: DelayConsume
     Weight: 1250
     Script: |
@@ -76963,7 +76976,7 @@ Body:
       sc_start SC_SPEEDUP0,600000,25;
   - Id: 102193
     AegisName: Enchant_Stone_Box30
-    Name: Costume Enchant Stone Box 30
+    Name: 时装附魔石箱子30
     Type: Usable
     Weight: 10
     Flags:
@@ -76972,7 +76985,7 @@ Body:
       getgroupitem(IG_Enchant_Stone_Box30);
   - Id: 102202
     AegisName: Ep20_Fatty_Icegangu
-    Name: Chubby Ice Steel Ball    # !todo check english name
+    Name: 圆滚滚的冰锋球
     Type: Usable
     Weight: 50
     Trade:
@@ -77057,7 +77070,7 @@ Body:
       getgroupitem(IG_SLD_BOSS_CARD_ALBUM);
   - Id: 102227
     AegisName: Glacier_Armor_9Refine
-    Name: Glaceon Armor 9 refine cube    # !todo check english name
+    Name: 冰晶防具精炼+9宝箱
     Type: DelayConsume
     Weight: 10
     Trade:
@@ -77071,7 +77084,7 @@ Body:
       laphine_upgrade();
   - Id: 102228
     AegisName: EP20_DGA_Refine
-    Name: Dim Glaceon Armor Enhancer    # !todo check english name
+    Name: 黯淡冰晶防具强化装置
     Type: DelayConsume
     Weight: 200
     Flags:
@@ -77236,7 +77249,7 @@ Body:
       laphine_synthesis();
   - Id: 102332
     AegisName: Enchant_Stone_Box31
-    Name: Costume Enchant Stone Box 31
+    Name: 时装附魔石箱子31
     Type: Usable
     Weight: 10
     Flags:
@@ -77245,7 +77258,7 @@ Body:
       getgroupitem(IG_Enchant_Stone_Box31);
   - Id: 102333
     AegisName: Stone_Robe3_Box
-    Name: 3rd Expansion Stone III (Drapping) Box    # !todo check english name
+    Name: 时装附魔石箱子III(披肩)
     Type: Usable
     Weight: 10
     Flags:
@@ -77316,7 +77329,7 @@ Body:
       laphine_upgrade();
   - Id: 102344
     AegisName: Fan_Upgrade_Kit_EX
-    Name: Fan Modification Kit EX    # !todo check english name
+    Name: 电扇改造箱EX
     Type: DelayConsume
     Weight: 10
     Script: |
@@ -77348,13 +77361,13 @@ Body:
       getgroupitem(IG_CATPAW_1DAY_BOX);
   - Id: 102373
     AegisName: Bar_D_A_Seal
-    Name: Deep Runic Armor Inscription    # !todo check english name
+    Name: 深层符文防具烙印
     Type: DelayConsume
     Script: |
       item_reform();
   - Id: 102374
     AegisName: Bar_D_A_Unseal
-    Name: Depth Rune Armor Unengraved    # !todo check english name
+    Name: 深层符文防具烙印卸除
     Type: DelayConsume
     Script: |
       item_reform();
@@ -77405,14 +77418,14 @@ Body:
     Type: Usable
   - Id: 102420
     AegisName: Music_Box_191
-    Name: Dimensional Crystal Music Box    # !todo check english name
+    Name: 次元水晶音乐盒
     Type: Usable
     Weight: 50
 #   Script: |
 #     /* TODO */
   - Id: 102421
     AegisName: Season_Evt_Reward_8
-    Name: Night Market Blue Box    # !todo check english name
+    Name: 夜市蓝箱子
     Type: Usable
     Flags:
       Container: true
@@ -77444,7 +77457,7 @@ Body:
       item_reform();
   - Id: 102441
     AegisName: Enchant_Stone_Box32
-    Name: Costume Enchant Stone Box 32
+    Name: 时装附魔石箱子32
     Type: Usable
     Weight: 10
     Flags:
@@ -77540,7 +77553,7 @@ Body:
       getgroupitem(IG_21TH_COSTUME_COLLECTION,true);
   - Id: 102482
     AegisName: FateSin_Boots_Hammer
-    Name: Good and Evil Boots Refine Hammer
+    Name: 善恶战靴精炼锤
     Type: DelayConsume
     Weight: 10
     Flags:
@@ -77625,7 +77638,7 @@ Body:
       getgroupitem(IG_EIN_ORE_BOX);
   - Id: 102545
     AegisName: Fate_Fragment_Box
-    Name: Goodwill Box    # !todo check english name
+    Name: 善之碎片宝盒
     Type: Usable
     Flags:
       BuyingStore: true
@@ -77634,7 +77647,7 @@ Body:
       getgroupitem(IG_FATE_FRAGMENT_BOX);
   - Id: 102546
     AegisName: Sin_Fragment_Box
-    Name: Box of Sin    # !todo check english name
+    Name: 恶之碎片宝盒
     Type: Usable
     Flags:
       BuyingStore: true
@@ -78302,7 +78315,7 @@ Body:
       getgroupitem(IG_BLACK_DIA_3_BOX);
   - Id: 102767
     AegisName: R_Ep17_Album
-    Name: Episode 17-18 Card Album
+    Name: EP17-18收集册
     Type: Usable
     Flags:
       Container: true
@@ -78322,7 +78335,7 @@ Body:
       NoAuction: true
   - Id: 102780
     AegisName: 2401_ev_LinTteok
-    Name: Inverse Scale Glutinous Rice Cake
+    Name: 逆鳞糯米糕
     Type: Usable
     Weight: 10
     Trade:
@@ -78339,7 +78352,7 @@ Body:
       specialeffect2 EF_PROVIDENCE;
   - Id: 102781
     AegisName: 2401_ev_Galbi
-    Name: New Year Galbi-jjim
+    Name: 新年红烧牛小排
     Type: Usable
     Weight: 10
     Trade:
@@ -78356,7 +78369,7 @@ Body:
       specialeffect2 EF_SPELLBREAKER;
   - Id: 102782
     AegisName: 2401_ev_Rice_Soup
-    Name: New Year Rice Cake Soup
+    Name: 新年年糕汤
     Type: Usable
     Weight: 10
     Trade:
@@ -78373,7 +78386,7 @@ Body:
       specialeffect2 EF_HASTEUP;
   - Id: 102783
     AegisName: 2401_ev_Lunch_Box
-    Name: Sulki's Lunch Box
+    Name: 雪姬小姐的便当
     Type: Usable
     Weight: 50
     Flags:
@@ -78490,7 +78503,7 @@ Body:
 #     /* TODO */
   - Id: 102803
     AegisName: Force_Booster
-    Name: Force Booster
+    Name: 特性增强药剂
     Type: Usable
     Weight: 10
     Trade:
@@ -78526,7 +78539,7 @@ Body:
       BuyingStore: true
   - Id: 102813
     AegisName: R_Ep178_boss
-    Name: Episode 17-18 Boss Card Album
+    Name: EP17-18BOSS收集册
     Type: Usable
     Flags:
       Container: true
@@ -78667,7 +78680,7 @@ Body:
       percentheal 50,50;
   - Id: 102911
     AegisName: 2403_ev_Mont_Blanc
-    Name: Mont Blanc Cake    # !todo check english name
+    Name: 蒙布朗蛋糕
     Type: Usable
     Weight: 1
     Flags:
@@ -78718,7 +78731,7 @@ Body:
 #     /* TODO */
   - Id: 102924
     AegisName: 2403_ev_Crepe
-    Name: Sweet Crepe
+    Name: 甜甜可丽饼
     Type: Usable
     Weight: 1
     Flags:
@@ -78735,7 +78748,7 @@ Body:
 #     /* TODO */
   - Id: 102925
     AegisName: 2403_ev_Melon_Parfait
-    Name: Melon Parfait
+    Name: 哈密瓜芭菲
     Type: Usable
     Weight: 1
     Flags:
@@ -78796,7 +78809,7 @@ Body:
       NoAuction: true
   - Id: 102985
     AegisName: Speed_Booster
-    Name: Speed Booster
+    Name: 速度增强药剂
     Type: Usable
     Weight: 10
     Trade:
@@ -78955,7 +78968,7 @@ Body:
       getgroupitem(IG_ENCHANT_STONE_BOX35);
   - Id: 103065
     AegisName: 24_S_Ev_Noodle
-    Name: Summer Festival Noodle
+    Name: 夏季韩式宴会面
     Type: Usable
     Weight: 10
     Trade:
@@ -78972,7 +78985,7 @@ Body:
       sc_start SC_CONTENTS_15,900000,10;
   - Id: 103066
     AegisName: 24_S_Ev_Grilled
-    Name: Herb Calamari Barbecue
+    Name: 香料烤鱿鱼
     Type: Usable
     Weight: 10
     Trade:
@@ -79004,7 +79017,7 @@ Body:
       sc_start SC_CONTENTS_17,900000,10;
   - Id: 103068
     AegisName: 24_S_Ev_Juice
-    Name: Cool Watermelon Juice
+    Name: 冰凉西瓜汁
     Type: Usable
     Weight: 10
     Trade:
@@ -79346,7 +79359,7 @@ Body:
       getgroupitem(IG_2024SPORTS_BOX);
   - Id: 103307
     AegisName: CharSlot_Open_Card
-    Name: Character Slot Expansion Card
+    Name: 角色栏扩充卡片
     Type: Usable
     Trade:
       NoDrop: true
@@ -80091,7 +80104,7 @@ Body:
       getgroupitem(IG_RT_EP17_MALFUN_3);
   - Id: 103428
     AegisName: 24_A_Ev_Docu
-    Name: Confidential Document
+    Name: 秘密文件
     Type: Usable
     Weight: 10
     Trade:
@@ -80108,7 +80121,7 @@ Body:
       sc_start2 SC_CONTENTS_26,900000,30,10;
   - Id: 103429
     AegisName: 24_A_Ev_Rice
-    Name: Symposium Rice Cake
+    Name: 学术节米饼
     Type: Usable
     Weight: 10
     Trade:
@@ -80124,7 +80137,7 @@ Body:
       sc_start2 SC_CONTENTS_27,900000,15,10;
   - Id: 103430
     AegisName: 24_A_Ev_Butter
-    Name: Symposium Butter Cookie
+    Name: 学术节奶油饼干
     Type: Usable
     Weight: 10
     Trade:
@@ -80140,7 +80153,7 @@ Body:
       sc_start2 SC_CONTENTS_28,900000,15,12;
   - Id: 103431
     AegisName: 24_A_Ev_Coffee
-    Name: Symposium Coffee Stick
+    Name: 学术节即溶咖啡
     Type: Usable
     Weight: 10
     Trade:
@@ -80156,7 +80169,7 @@ Body:
       sc_start2 SC_CONTENTS_29,900000,15,-10;
   - Id: 103432
     AegisName: 24_A_Ev_Cookie
-    Name: Symposium Commemorative Cookie
+    Name: 学术节纪念饼干
     Type: Usable
     Weight: 50
     Delay:
@@ -80932,7 +80945,7 @@ Body:
       getgroupitem(IG_E_CARD_PACK);
   - Id: 103658
     AegisName: True_Hunting_Set
-    Name: True Hunting Equipment Box
+    Name: 特路亚狩猎防具箱子
     Type: Usable
     Weight: 2500
     Flags:
@@ -80950,7 +80963,7 @@ Body:
       getgroupitem(IG_TRUE_HUNTING_SET);
   - Id: 103659
     AegisName: Regia_Hunting_Set
-    Name: Regia Hunting Equipment Box
+    Name: 蕾吉亚狩猎防具箱子
     Type: Usable
     Weight: 2500
     Flags:
@@ -81152,7 +81165,7 @@ Body:
       NoAuction: true
   - Id: 103905
     AegisName: InkPainting_Select_Box
-    Name: Ink Painting Select Box
+    Name: 山水墨韵时装选择箱
     Type: DelayConsume
     Trade:
       NoDrop: true
@@ -86576,7 +86589,7 @@ Body:
       getgroupitem(IG_CLB_SS_EXP_PACK);
   - Id: 200463
     AegisName: C_CharSlot_Open_Box
-    Name: Character Slot Expansion Card Box
+    Name: 角色栏扩充卡片盒
     Type: Cash
     Flags:
       Container: true
@@ -88357,7 +88370,7 @@ Body:
       itemheal rand(2730,2750),0;
   - Id: 1100006
     AegisName: Ep19_Dry_Icegangu
-    Name: Dried Ice Gangu
+    Name: 干燥冰锋球
     Type: Healing
     Buy: 10
     Weight: 5
@@ -88402,7 +88415,7 @@ Body:
       itemskill "PR_KYRIE",0;
   - Id: 1100010
     AegisName: Poring_Kombucha
-    Name: Poring Kombucha
+    Name: 波利康普茶
     Type: Healing
     Weight: 5
     EquipLevelMin: 180
@@ -88447,7 +88460,7 @@ Body:
       itemheal 0,450; /* average value */
   - Id: 1100013
     AegisName: South_Pork_Slice
-    Name: Southern Style Pork Head Meat
+    Name: 南国猪头肉
     Type: Healing
     Weight: 20
     EquipLevelMin: 120
@@ -88478,7 +88491,7 @@ Body:
       itemheal 0,40; /* average value */
   - Id: 1100015
     AegisName: Grilled_Veg_Skewers_
-    Name: Fire-grilled Suspicious Skewers
+    Name: 烧烤串
     Type: Healing
     Weight: 10
     EquipLevelMin: 60
@@ -88508,7 +88521,7 @@ Body:
       itemheal 0,150; /* average value */
   - Id: 1100017
     AegisName: Night_M_Ice_Cream
-    Name: Night Market Ice Cream
+    Name: 夜市冰淇淋
     Type: Healing
     Weight: 2
     EquipLevelMin: 120
@@ -88523,7 +88536,7 @@ Body:
       itemheal 2500,0; /* average value */
   - Id: 1100018
     AegisName: Night_M_Cotton_Candy
-    Name: Night Market Cotton Candy
+    Name: 夜市棉花糖
     Type: Healing
     Weight: 2
     EquipLevelMin: 120
@@ -88585,7 +88598,7 @@ Body:
       itemheal 0,200; /* average value */
   - Id: 1100022
     AegisName: 2403_ev_Macaron
-    Name: Moist Macaron
+    Name: 甜心马卡龙
     Type: Healing
     Weight: 1
     EquipLevelMin: 60
@@ -88690,7 +88703,7 @@ Body:
       itemheal 2500,0; /* average value */
   - Id: 1100037
     AegisName: 25_A_Ev_Cookie
-    Name: Orleans' Handmade Cookies    # !todo check english name
+    Name: 奥尔里昂的手工饼干
     Type: Healing
     Weight: 10
     Trade:

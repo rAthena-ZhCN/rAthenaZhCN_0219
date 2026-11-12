@@ -2,7 +2,7 @@ malangdo,116,161,4	script	时装大赏[头上]	4_EP21_REINHARDT,{
 	mes "[时装大赏[头上]]";
 	mes "请选择要查看的分页。";
 	next;
-	switch(select("第1页（1-200）:第2页（201-400）:第3页（401-600）:第4页（601-800）:第5页（801-1000）:第6页（1001-1164）")) {
+	switch(select("第1页（1-200）:第2页（201-400）:第3页（401-600）:第4页（601-800）:第5页（801-1000）:第6页（1001-1200）:第7页（1201-1400）:第8页（1401-1437）")) {
 	case 1:
 		close2;
 		callshop "fashion_top_1";
@@ -27,13 +27,21 @@ malangdo,116,161,4	script	时装大赏[头上]	4_EP21_REINHARDT,{
 		close2;
 		callshop "fashion_top_6";
 		end;
+	case 7:
+		close2;
+		callshop "fashion_top_7";
+		end;
+	case 8:
+		close2;
+		callshop "fashion_top_8";
+		end;
 	}
 }
 malangdo,118,161,4	script	时装大赏[头中]	4_EP21_TRIS,{
 	mes "[时装大赏[头中]]";
 	mes "请选择要查看的分页。";
 	next;
-	switch(select("第1页（1-200）:第2页（201-392）")) {
+	switch(select("第1页（1-200）:第2页（201-400）:第3页（401-570）")) {
 	case 1:
 		close2;
 		callshop "fashion_mid_1";
@@ -42,13 +50,17 @@ malangdo,118,161,4	script	时装大赏[头中]	4_EP21_TRIS,{
 		close2;
 		callshop "fashion_mid_2";
 		end;
+	case 3:
+		close2;
+		callshop "fashion_mid_3";
+		end;
 	}
 }
 malangdo,120,161,4	script	时装大赏[头下]	4_EXJOB_HAPPY_CLOUD,{
 	mes "[时装大赏[头下]]";
 	mes "请选择要查看的分页。";
 	next;
-	switch(select("第1页（1-200）:第2页（201-400）:第3页（401-531）")) {
+	switch(select("第1页（1-200）:第2页（201-400）:第3页（401-600）:第4页（601-713）")) {
 	case 1:
 		close2;
 		callshop "fashion_low_1";
@@ -61,5 +73,32 @@ malangdo,120,161,4	script	时装大赏[头下]	4_EXJOB_HAPPY_CLOUD,{
 		close2;
 		callshop "fashion_low_3";
 		end;
+	case 4:
+		close2;
+		callshop "fashion_low_4";
+		end;
 	}
+}
+malangdo,122,161,4	script	时装大赏[披肩]	4_EXJOB_MASTER_J,{
+	mes "[时装大赏[披肩]]";
+	mes "请选择要查看的分页。";
+	next;
+	switch(select("第1页（1-200）:第2页（201-345）")) {
+	case 1:
+		close2;
+		callshop "fashion_robe_1";
+		end;
+	case 2:
+		close2;
+		callshop "fashion_robe_2";
+		end;
+	}
+}
+malangdo,124,161,4	script	时装大赏[其他]	4_EXJOB_MR_SEO,{
+	mes "[时装大赏[其他]]";
+	mes "请查看复合部位时装。";
+	next;
+	close2;
+	callshop "fashion_other_1";
+	end;
 }
