@@ -90,6 +90,7 @@ MagicMushroomDatabase magic_mushroom_db;
 
 struct s_skill_unit_layout skill_unit_layout[MAX_SKILL_UNIT_LAYOUT];
 int32 firewall_unit_pos;
+int32 firewall_mage_unit_pos;
 int32 icewall_unit_pos;
 int32 earthstrain_unit_pos;
 int32 firerain_unit_pos;
@@ -98,6 +99,10 @@ int32 wallofthorn_unit_pos;
 struct s_skill_nounit_layout skill_nounit_layout[MAX_SKILL_UNIT_LAYOUT2];
 
 char dir_ka = -1; // Holds temporary direction to the target for SR_KNUCKLEARROW
+
+static bool skill_is_hero_soul_mage_bolt(uint16 skill_id) {
+	return skill_id == MG_COLDBOLT || skill_id == MG_LIGHTNINGBOLT || skill_id == MG_FIREBOLT;
+}
 
 //Early declaration
 bool skill_strip_equip(block_list *src, block_list *target, uint16 skill_id, uint16 skill_lv);
@@ -1192,8 +1197,14 @@ struct s_skill_unit_layout *skill_get_unit_layout(uint16 skill_id, uint16 skill_
 
 	dir = (src->x == x && src->y == y) ? 6 : map_calc_dir(src,x,y); // 6 - default aegis direction
 
-	if (skill_id == MG_FIREWALL)
+	if (skill_id == MG_FIREWALL) {
+		if (src != nullptr && src->type == BL_PC) {
+			status_change* sc = status_get_sc(src);
+			if (sc != nullptr && sc->getSCE(SC_HERO_SOUL_MAGE) != nullptr)
+				return &skill_unit_layout[firewall_mage_unit_pos];
+		}
 		return &skill_unit_layout [firewall_unit_pos + dir];
+	}
 	else if (skill_id == WZ_ICEWALL)
 		return &skill_unit_layout [icewall_unit_pos + dir];
 	else if( skill_id == WL_EARTHSTRAIN )
@@ -2874,7 +2885,10 @@ int64 skill_attack (int32 attack_type, block_list* src, block_list *dsrc, block_
 					if (!status_charge(bl, 0, (10+5*per)*status->max_sp/1000))
 						status_change_end(bl, SC_ENERGYCOAT);
 					//Reduction: 6% + 6% every 20%
-					dmg.damage -= dmg.damage * (6 * (1+per)) / 100;
+					int32 reduction = 6 * (1 + per);
+					if (tsc->getSCE(SC_HERO_SOUL_MAGE))
+						reduction += 20; // Mage Hero Soul: additional 20% Energy Coat reduction
+					dmg.damage -= dmg.damage * reduction / 100;
 				}
 
 				int64 reduce = 0;
@@ -10234,6 +10248,12 @@ int32 skill_castfix(block_list *bl, uint16 skill_id, uint16 skill_lv) {
 		time = time * battle_config.cast_rate / 100;
 	// return final cast time
 	time = max((int32)time, 0);
+	if (bl->type == BL_PC) {
+		map_session_data* sd = BL_CAST(BL_PC, bl);
+		status_change* sc = status_get_sc(bl);
+		if (sd != nullptr && sc != nullptr && sc->getSCE(SC_HERO_SOUL_MAGE) != nullptr && skill_is_hero_soul_mage_bolt(skill_id))
+			time /= 2;
+	}
 	//ShowInfo("Castime castfix = %f\n",time);
 
 	return (int32)time;
@@ -10417,6 +10437,8 @@ int32 skill_vfcastfix(block_list *bl, double time, uint16 skill_id, uint16 skill
 		time = time * (1 - sqrt(((float)(status_get_dex(bl) * 2 + status_get_int(bl)) / battle_config.vcast_stat_scale)));
 
 	time = time * (1 - (float)min(reduce_cast_rate, 100) / 100);
+	if (sd != nullptr && sc != nullptr && sc->getSCE(SC_HERO_SOUL_MAGE) != nullptr && skill_is_hero_soul_mage_bolt(skill_id))
+		time /= 2; // Mage Hero Soul: variable cast time of bolts halved
 	time = max((int32)time, 0) + (1 - (float)min(fixcast_r, 100) / 100) * max(fixed, 0); //Underflow checking/capping
 
 	return (int32)time;
@@ -10531,6 +10553,13 @@ int32 skill_delayfix(block_list *bl, uint16 skill_id, uint16 skill_lv)
 
 	if (battle_config.delay_rate != 100)
 		time = time * battle_config.delay_rate / 100;
+
+	if (bl->type == BL_PC) {
+		map_session_data* sd = BL_CAST(BL_PC, bl);
+		status_change* sc = status_get_sc(bl);
+		if (sd != nullptr && sc != nullptr && sc->getSCE(SC_HERO_SOUL_MAGE) != nullptr && skill_is_hero_soul_mage_bolt(skill_id))
+			time /= 2; // Mage Hero Soul: common delay of bolts halved
+	}
 
 	//ShowInfo("Delay delayfix = %f\n",time);
 
@@ -10747,6 +10776,38 @@ void skill_weaponrefine( map_session_data& sd, int32 idx ){
 /*==========================================
  *
  *------------------------------------------*/
+void skill_autospell_mage_trigger(map_session_data& sd, block_list* target, uint16 skill_id, uint16 skill_lv) {
+	if (target == nullptr || sd.hero_soul_mage_autospell_busy || sd.hero_soul_mage_autospell_done)
+		return;
+	status_change& sc = sd.sc;
+	if (sc.getSCE(SC_HERO_SOUL_MAGE) == nullptr || sc.getSCE(SC_AUTOSPELL) == nullptr)
+		return;
+	if (!(skill_get_type(skill_id) & BF_MAGIC) || skill_id == SA_AUTOSPELL)
+		return;
+	// Only trigger once per skill cast; prevents multi-hit and ground spells from flooding autospells.
+	sd.hero_soul_mage_autospell_done = true;
+	t_tick now = gettick();
+	auto* autospell = sc.getSCE(SC_AUTOSPELL);
+	if (autospell->val2 == 0 || !skill_db.exists(autospell->val2))
+		return;
+	if (rnd() % 100 >= autospell->val4)
+		return;
+	sd.hero_soul_mage_autospell_tick = now;
+	sd.hero_soul_mage_autospell_busy = true;
+	switch (skill_get_casttype(autospell->val2)) {
+		case CAST_GROUND:
+			skill_castend_pos2(&sd, target->x, target->y, autospell->val2, autospell->val3, now, 0);
+			break;
+		case CAST_NODAMAGE:
+			skill_castend_nodamage_id(&sd, target, autospell->val2, autospell->val3, now, 0);
+			break;
+		case CAST_DAMAGE:
+			skill_castend_damage_id(&sd, target, autospell->val2, autospell->val3, now, 0);
+			break;
+	}
+	sd.hero_soul_mage_autospell_busy = false;
+}
+
 int32 skill_autospell(map_session_data *sd, uint16 skill_id)
 {
 	nullpo_ret(sd);
@@ -10761,14 +10822,18 @@ int32 skill_autospell(map_session_data *sd, uint16 skill_id)
 		return 0; // Player must learn the skill before doing auto-spell [Lance]
 
 #ifdef RENEWAL
-	if ((skill_id == MG_COLDBOLT || skill_id == MG_FIREBOLT || skill_id == MG_LIGHTNINGBOLT) && sd->sc.getSCE(SC_SPIRIT) && sd->sc.getSCE(SC_SPIRIT)->val2 == SL_SAGE)
+	if (sd->sc.getSCE(SC_HERO_SOUL_MAGE) != nullptr)
+		maxlv = skill_lv; // Mage Hero Soul: use full Autospell level
+	else if ((skill_id == MG_COLDBOLT || skill_id == MG_FIREBOLT || skill_id == MG_LIGHTNINGBOLT) && sd->sc.getSCE(SC_SPIRIT) && sd->sc.getSCE(SC_SPIRIT)->val2 == SL_SAGE)
 		maxlv = 10; //Soul Linker bonus. [Skotlex]
 	else
 		maxlv = skill_lv / 2; // Half of Autospell's level unless player learned a lower level (capped below)
 #else
 	if(skill_id==MG_NAPALMBEAT)	maxlv=3;
 	else if(skill_id==MG_COLDBOLT || skill_id==MG_FIREBOLT || skill_id==MG_LIGHTNINGBOLT){
-		if (sd->sc.getSCE(SC_SPIRIT) && sd->sc.getSCE(SC_SPIRIT)->val2 == SL_SAGE)
+		if (sd->sc.getSCE(SC_HERO_SOUL_MAGE) != nullptr)
+			maxlv = skill_lv; // Mage Hero Soul: use full Autospell level
+		else if (sd->sc.getSCE(SC_SPIRIT) && sd->sc.getSCE(SC_SPIRIT)->val2 == SL_SAGE)
 			maxlv = 10; //Soul Linker bonus. [Skotlex]
 		else if(skill_lv==2) maxlv=1;
 		else if(skill_lv==3) maxlv=2;
@@ -14387,6 +14452,16 @@ void skill_init_unit_layout (void) {
 		}
 		pos++;
 	}
+	// Fire Wall under Mage Hero Soul: 9-cell cross (5 cells horizontal + 5 cells vertical, sharing center)
+	firewall_mage_unit_pos = pos;
+	skill_unit_layout[pos].count = 9;
+	{
+		static const int32 dx[] = { 0,-1,-2, 1, 2, 0, 0, 0, 0 };
+		static const int32 dy[] = { 0, 0, 0, 0, 0,-1,-2, 1, 2 };
+		memcpy(skill_unit_layout[pos].dx,dx,sizeof(dx));
+		memcpy(skill_unit_layout[pos].dy,dy,sizeof(dy));
+	}
+	pos++;
 	icewall_unit_pos = pos;
 	for (i=0;i<8;i++) {
 		skill_unit_layout[pos].count = 5;

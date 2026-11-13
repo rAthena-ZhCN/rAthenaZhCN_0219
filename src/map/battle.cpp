@@ -1890,7 +1890,10 @@ int64 battle_calc_damage(block_list *src,block_list *bl,struct Damage *d,int64 d
 			//SP Cost: 1% + 0.5% per every 20% SP
 			if (!status_charge(bl, 0, (10+5*per)*status->max_sp/1000))
 				status_change_end(bl, SC_ENERGYCOAT);
-			damage -= damage * 6 * (1 + per) / 100; //Reduction: 6% + 6% every 20%
+			int32 reduction = 6 * (1 + per);
+			if (tsc->getSCE(SC_HERO_SOUL_MAGE))
+				reduction += 20; // Mage Hero Soul: additional 20% Energy Coat reduction
+			damage -= damage * reduction / 100; //Reduction: 6% + 6% every 20%
 		}
 
 		if(tsc->getSCE(SC_GRANITIC_ARMOR))
@@ -6276,6 +6279,9 @@ struct Damage battle_calc_magic_attack(block_list *src,block_list *target,uint16
 
 	battle_absorb_damage(target, &ad);
 
+	if (sd != nullptr && (skill_get_type(skill_id) & BF_MAGIC) != 0)
+		skill_autospell_mage_trigger(*sd, target, skill_id, skill_lv);
+
 	//battle_do_reflect(BF_MAGIC,&ad, src, target, skill_id, skill_lv); //WIP [lighta] Magic skill has own handler at skill_attack
 	return ad;
 }
@@ -7500,7 +7506,7 @@ enum damage_lv battle_weapon_attack(block_list* src, block_list* target, t_tick 
 		}
 		sp = skill_get_sp(skill_id,skill_lv) * 2 / 3;
 
-		if (status_charge(src, 0, sp)) {
+		if ((sd != nullptr && sd->sc.getSCE(SC_HERO_SOUL_MAGE) != nullptr) || status_charge(src, 0, sp)) {
 			struct unit_data *ud = unit_bl2ud(src);
 
 			switch (skill_get_casttype(skill_id)) {

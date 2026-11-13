@@ -610,6 +610,10 @@ public:
 	// zeroed arrays end here.
 
 	std::vector<s_autospell> autospell, autospell2, autospell3;
+	t_tick hero_soul_mage_autospell_tick = 0; ///< Last tick a Mage Hero Soul magic autospell was triggered
+	t_tick hero_soul_mage_zen_tick = 0; ///< Accumulator for Mage Hero Soul Zen recovery
+	bool hero_soul_mage_autospell_busy = false; ///< Prevent recursive Mage Hero Soul autospells
+	bool hero_soul_mage_autospell_done = false; ///< Whether the current Mage Hero Soul magic cast already checked autospell
 	std::vector<s_addeffect> addeff, addeff_atked;
 	std::vector<s_addeffectonskill> addeff_onskill;
 	std::vector<s_item_bonus> skillatk, skillusesprate, skillusesp, skillheal, skillheal2, skillblown, skillcastrate, skillfixcastrate, subskill, skillcooldown, skillfixcast,

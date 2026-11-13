@@ -29,10 +29,12 @@ void SkillStoneCurse::castendNoDamageId(block_list *src, block_list *target, uin
 
 	if (sd && sd->sc.getSCE(SC_PETROLOGY_OPTION))
 		brate = sd->sc.getSCE(SC_PETROLOGY_OPTION)->val3;
+	if (sd && sd->sc.getSCE(SC_HERO_SOUL_MAGE))
+		brate += 20; // Mage Hero Soul: Stone Curse success rate +20%
 
 	// Except for players, the skill animation shows even if the status change doesn't start
 	// Players get a skill has failed message instead
-	if (sc_start2(src, target, type, (skill_lv * 4 + 20) + brate, skill_lv, src->id, skill_get_time2(getSkillId(), skill_lv), skill_get_time(getSkillId(), skill_lv)) || sd == nullptr)
+	if (sc_start2(src, target, type, min((skill_lv * 4 + 20) + brate, 100), skill_lv, src->id, skill_get_time2(getSkillId(), skill_lv), skill_get_time(getSkillId(), skill_lv)) || sd == nullptr)
 		clif_skill_nodamage(src, *target, getSkillId(), skill_lv);
 	else {
 		clif_skill_fail( *sd, getSkillId() );

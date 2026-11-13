@@ -2471,6 +2471,9 @@ int32 unit_skilluse_id2(block_list *src, int32 target_id, uint16 skill_id, uint1
 	casttime = skill_vfcastfix(src, casttime, skill_id, skill_lv);
 #endif
 
+	if (sd != nullptr && (skill_get_type(skill_id) & BF_MAGIC) != 0)
+		sd->hero_soul_mage_autospell_done = false; // New magic cast: allow one Mage Hero Soul autospell check
+
 	// Need TK_RUN or WUGDASH handler to be done before that, see bugreport:6026
 	if(!ud->state.running){
 		// Even though this is not how official works but this will do the trick. bugreport:6829
@@ -2564,6 +2567,22 @@ int32 unit_skilluse_id2(block_list *src, int32 target_id, uint16 skill_id, uint1
 
 		if( sd && (pc_checkskill(sd,SA_FREECAST) > 0 || skill_id == LG_EXEEDBREAK) )
 			status_calc_bl(sd, { SCB_SPEED, SCB_ASPD });
+
+		// Mage Hero Soul: react to an offensive/debuff magic cast aimed at the buffed mage.
+		if (target != nullptr && target->type == BL_PC &&
+			(skill_get_type(skill_id) & BF_MAGIC) != 0 && (inf & INF_SUPPORT_SKILL) == 0) {
+			map_session_data* tsd = BL_CAST(BL_PC, target);
+			if (tsd != nullptr && tsd->sc.getSCE(SC_HERO_SOUL_MAGE) != nullptr &&
+				battle_check_target(target, src, BCT_ENEMY) > 0) {
+				int32 auto_lv = pc_checkskill(tsd, SA_SPELLBREAKER);
+				if (auto_lv > 0 && rnd() % 100 < 75) {
+					skill_castend_nodamage_id(target, src, SA_SPELLBREAKER, auto_lv, tick, 0);
+					unit_data* attack_ud = unit_bl2ud(src);
+					if (attack_ud != nullptr && attack_ud->skilltimer == INVALID_TIMER)
+						return 0; // Only abort the original cast if Spell Breaker actually interrupted it
+				}
+			}
+		}
 	} else
 		skill_castend_id(ud->skilltimer,tick,src->id,0);
 

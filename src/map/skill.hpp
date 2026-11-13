@@ -348,7 +348,7 @@ public:
 extern SkillDatabase skill_db;
 
 #define MAX_SQUARE_LAYOUT		7	// 15*15 unit placement maximum
-#define MAX_SKILL_UNIT_LAYOUT	(48+MAX_SQUARE_LAYOUT)	// 47 special ones + the square ones
+#define MAX_SKILL_UNIT_LAYOUT	(49+MAX_SQUARE_LAYOUT)	// 47 special ones + the square ones
 #define MAX_SKILL_UNIT_LAYOUT2	17
 #define MAX_SKILL_UNIT_COUNT	((MAX_SQUARE_LAYOUT*2+1)*(MAX_SQUARE_LAYOUT*2+1))
 struct s_skill_unit_layout {
@@ -640,6 +640,7 @@ void skill_repairweapon( map_session_data& sd, int32 idx );
 void skill_identify(map_session_data *sd,int32 idx);
 void skill_weaponrefine( map_session_data& sd, int32 idx ); // [Celest]
 int32 skill_autospell(map_session_data *md,uint16 skill_id);
+void skill_autospell_mage_trigger(map_session_data& sd, block_list* target, uint16 skill_id, uint16 skill_lv);
 
 int32 skill_calc_heal(block_list *src, block_list *target, uint16 skill_id, uint16 skill_lv, bool heal);
 

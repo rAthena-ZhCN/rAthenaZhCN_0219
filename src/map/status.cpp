@@ -8058,7 +8058,11 @@ static uint16 status_calc_speed(block_list *bl, status_change *sc, int32 speed)
 	}
 
 	if( sd && sd->ud.skilltimer != INVALID_TIMER && (pc_checkskill(sd,SA_FREECAST) > 0 || sd->ud.skill_id == LG_EXEEDBREAK) ) {
-		if( sd->ud.skill_id == LG_EXEEDBREAK )
+		if (pc_checkskill(sd,SA_FREECAST) > 0 && sc->getSCE(SC_HERO_SOUL_MAGE) != nullptr) {
+			// Mage Hero Soul: Free Cast movement speed is 50% at level 1 and 95% at level 10.
+			int32 freecast_lv = pc_checkskill(sd,SA_FREECAST);
+			speed_rate = 10000 / (45 + 5 * freecast_lv);
+		} else if( sd->ud.skill_id == LG_EXEEDBREAK )
 			speed_rate = 160 - 10 * sd->ud.skill_lv;
 		else
 			speed_rate = 175 - 5 * pc_checkskill(sd,SA_FREECAST);
@@ -11014,6 +11018,8 @@ static bool status_change_start_post_delay(block_list* src, block_list* bl, sc_t
 #else
 			val4 = 5 + val1*2; // Chance of casting
 #endif
+			if (src != nullptr && src->type == BL_PC && BL_CAST(BL_PC, src)->sc.getSCE(SC_HERO_SOUL_MAGE) != nullptr)
+				val4 *= 2; // Mage Hero Soul: double Autospell trigger chance
 			break;
 		case SC_VOLCANO:
 			{
@@ -15593,6 +15599,22 @@ static int32 status_natural_heal(block_list* bl, va_list args)
 					break;
 				}
 			}
+		}
+	}
+
+	int32 zen_skill = (sd != nullptr) ? pc_checkskill(sd, MG_SRECOVERY) : 0;
+	if (sd != nullptr && sc != nullptr && sc->getSCE(SC_HERO_SOUL_MAGE) != nullptr && zen_skill > 0 && !status_isdead(*bl)) {
+		// Mage Hero Soul: Zen always regenerates, and restores the same amount of HP as SP.
+		t_tick zen_interval = max((t_tick)battle_config.natural_heal_skill_interval, (t_tick)1);
+		sd->hero_soul_mage_zen_tick += natural_heal_diff_tick;
+		if (sd->hero_soul_mage_zen_tick >= zen_interval) {
+			sd->hero_soul_mage_zen_tick -= zen_interval;
+			int32 zen_sp = zen_skill * 3 + zen_skill * status->max_sp / 500;
+			view_data* zen_vd = status_get_viewdata(bl);
+			if (zen_vd != nullptr && zen_vd->dead_sit == 2)
+				status_heal(bl, zen_sp, 0, 3); // Sitting: original SP regen already applies; add equal HP
+			else
+				status_heal(bl, zen_sp, zen_sp, 3);
 		}
 	}
 

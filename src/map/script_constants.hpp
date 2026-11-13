@@ -2006,6 +2006,7 @@
 	export_constant(SC_VIP);
 	export_constant(SC_HERO_SOUL);
 	export_constant(SC_HERO_SOUL_NINJA);
+	export_constant(SC_HERO_SOUL_MAGE);
 
 /// Do not modify code below this, until the end of the API hook, since it will be automatically generated again
 /// @APIHOOK_START(EFST_CONST)
@@ -3362,6 +3363,7 @@
 	export_constant(EFST_BLESSING_OF_M_CREATURES);
 	export_constant(EFST_BLESSING_OF_M_C_DEBUFF);
 	export_constant(EFST_HERO_SOUL_NINJA);
+	export_constant(EFST_HERO_SOUL_MAGE);
 	export_constant(EFST_SHIELDCHAINRUSH);
 	export_constant(EFST_MISTYFROST);
 	export_constant(EFST_GROUNDGRAVITY);

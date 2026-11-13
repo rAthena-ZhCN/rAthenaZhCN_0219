@@ -30,7 +30,8 @@ void SkillSpellBreaker::castendNoDamageId(block_list *src, block_list *target, u
 			return; //Nothing to cancel.
 		int32 hp = 0;
 		if (status_has_mode(tstatus, MD_STATUSIMMUNE)) { //Only 10% success chance against status immune. [Skotlex]
-			if (rnd_chance(90, 100))
+			int32 fail_chance = (sd != nullptr && sd->sc.getSCE(SC_HERO_SOUL_MAGE) != nullptr) ? 50 : 90; // Mage Hero Soul: 50% success against bosses
+			if (rnd_chance(fail_chance, 100))
 			{
 				if (sd) clif_skill_fail( *sd, getSkillId() );
 				return;

@@ -16,6 +16,7 @@ void SkillEndowTornado::castendNoDamageId(block_list *src, block_list *target, u
 	sc_type type = skill_get_sc(getSkillId());
 	map_session_data* sd = BL_CAST( BL_PC, src );
 	map_session_data* dstsd = BL_CAST( BL_PC, target );
+	int32 endow_lv = (sd != nullptr && sd->sc.getSCE(SC_HERO_SOUL_MAGE) != nullptr) ? skill_lv * 2 : skill_lv;
 
 	if (dstsd && dstsd->status.weapon == W_FIST) {
 		if (sd)
@@ -24,10 +25,10 @@ void SkillEndowTornado::castendNoDamageId(block_list *src, block_list *target, u
 		return;
 	}
 #ifdef RENEWAL
-	clif_skill_nodamage(src, *target, getSkillId(), skill_lv, sc_start(src, target, type, 100, skill_lv, skill_get_time(getSkillId(), skill_lv)));
+	clif_skill_nodamage(src, *target, getSkillId(), skill_lv, sc_start(src, target, type, 100, endow_lv, skill_get_time(getSkillId(), skill_lv)));
 #else
 	// 100% success rate at lv4 & 5, but lasts longer at lv5
-	if(!clif_skill_nodamage(src,*target,getSkillId(),skill_lv, sc_start(src,target,type,(60+skill_lv*10),skill_lv, skill_get_time(getSkillId(),skill_lv)))) {
+	if(!clif_skill_nodamage(src,*target,getSkillId(),skill_lv, sc_start(src,target,type,(60+skill_lv*10),endow_lv, skill_get_time(getSkillId(),skill_lv)))) {
 		if (dstsd){
 			int16 index = dstsd->equip_index[EQI_HAND_R];
 			if (index != -1 && dstsd->inventory_data[index] && dstsd->inventory_data[index]->type == IT_WEAPON)
