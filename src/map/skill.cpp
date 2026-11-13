@@ -329,7 +329,7 @@ int32 skill_get_range2(const block_list* bl, uint16 skill_id, uint16 skill_lv, b
 
 	if (bl->type == BL_PC && skill_id == NJ_KAMAITACHI) {
 		const status_change* sc = status_get_sc(bl);
-		if (sc != nullptr && sc->getSCE(SC_HERO_SOUL) != nullptr)
+		if (sc != nullptr && sc->getSCE(SC_HERO_SOUL_NINJA) != nullptr)
 			range = 12;
 	}
 	if( range < 0 ) {
@@ -1165,7 +1165,7 @@ struct s_skill_unit_layout *skill_get_unit_layout(uint16 skill_id, uint16 skill_
 	int32 pos = skill_get_unit_layout_type(skill_id,skill_lv);
 	if (src != nullptr && src->type == BL_PC) {
 		const status_change* sc = status_get_sc(src);
-		if (sc != nullptr && sc->getSCE(SC_HERO_SOUL) != nullptr) {
+		if (sc != nullptr && sc->getSCE(SC_HERO_SOUL_NINJA) != nullptr) {
 			if (skill_id == NJ_BAKUENRYU)
 				pos = 3;
 			else if (skill_id == NJ_HYOUSYOURAKU)
