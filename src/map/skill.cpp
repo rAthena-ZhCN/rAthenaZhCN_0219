@@ -9602,6 +9602,8 @@ bool skill_check_condition_castend( map_session_data& sd, uint16 skill_id, uint1
 	for( i = 0; i < MAX_SKILL_ITEM_REQUIRE; ++i ) {
 		if( !require.itemid[i] )
 			continue;
+		if( pc_has_unlimited_arsenal(&sd) && itemdb_is_unlimited_arsenal_item(require.itemid[i]) )
+			continue; // Unlimited Arsenal also bypasses the cast requirement, not just the consumption
 		index[i] = pc_search_inventory(&sd,require.itemid[i]);
 		if( index[i] < 0 || sd.inventory.u.items_inventory[index[i]].amount < require.amount[i] ) {
 			if( require.itemid[i] == ITEMID_HOLY_WATER )
